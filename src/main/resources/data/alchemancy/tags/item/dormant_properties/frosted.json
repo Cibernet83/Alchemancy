@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:powder_snow_bucket",
+    "minecraft:packed_ice",
+    "minecraft:blue_ice"
+  ]
+}

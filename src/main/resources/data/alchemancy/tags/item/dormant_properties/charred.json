@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:coals",
+    "#minecraft:coal_ores",
+    "#c:storage_blocks/coal",
+    "minecraft:dried_kelp",
+    "minecraft:dried_kelp_block"
+  ]
+}

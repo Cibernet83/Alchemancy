@@ -1,0 +1,35 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.cibernet.alchemancy.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "alchemancy.refmap.json",
+  "mixins": [
+    "AbstractContainerMenuMixin",
+    "BlockMixin",
+    "BlockStateExtensionMixin",
+    "DataComponentHolderMixin",
+    "ItemMixin",
+    "ItemStackExtensionMixin",
+    "ItemStackMixin",
+    "LivingEntityMixin",
+    "MobMixin",
+    "PlayerMixin",
+    "ServerLevelMixin",
+    "SlotMixin",
+    "accessors.AbstractArrowAccessor",
+    "accessors.EntityAccessor",
+    "accessors.FallingBlockEntityAccessor",
+    "accessors.ProjectileAccessor",
+    "client.RenderTypeHelperMixin"
+  ],
+  "client": [
+    "client.CustomHeadLayerMixin",
+    "client.HumanoidArmorLayerMixin",
+    "client.ItemRendererMixin",
+    "client.LocalPlayerMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

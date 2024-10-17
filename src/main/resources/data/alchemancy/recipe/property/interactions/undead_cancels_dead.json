@@ -1,0 +1,11 @@
+{
+  "type": "alchemancy:property_interaction",
+  "properties": [
+    "alchemancy:undead",
+    "alchemancy:dead"
+  ],
+
+  "result": [
+    "alchemancy:undead"
+  ]
+}

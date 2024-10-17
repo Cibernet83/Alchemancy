@@ -1,0 +1,444 @@
+package net.cibernet.alchemancy.events.handler;
+
+import net.cibernet.alchemancy.entity.ai.ScareGoal;
+import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
+import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.properties.Property;
+import net.cibernet.alchemancy.registries.AlchemancyItems;
+import net.cibernet.alchemancy.registries.AlchemancyProperties;
+import net.cibernet.alchemancy.registries.AlchemancyTags;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
+import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.FireworkRocketEntity;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileWeaponItem;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
+import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
+import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
+import net.neoforged.neoforge.event.enchanting.GetEnchantmentLevelEvent;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
+import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
+import net.neoforged.neoforge.event.entity.item.ItemTossEvent;
+import net.neoforged.neoforge.event.entity.living.*;
+import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
+import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.furnace.FurnaceFuelBurnTimeEvent;
+import net.neoforged.neoforge.event.level.BlockDropsEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
+
+import java.util.List;
+import java.util.function.Predicate;
+
+@EventBusSubscriber
+public class PropertyEventHandler
+{
+	@SubscribeEvent
+	public static void onLivingDamage(LivingDamageEvent.Pre event)
+	{
+
+		if(event.getSource().is(AlchemancyTags.DamageTypes.TRIGGERS_ON_HIT_EFFECTS) && event.getSource().getDirectEntity() instanceof LivingEntity user)
+		{
+			ItemStack stack = user.getMainHandItem();
+			InfusedPropertiesHelper.forEachProperty(stack, holder -> holder.value().modifyAttackDamage(user, stack, event));
+		}
+		else if (event.getSource().is(AlchemancyTags.DamageTypes.TRIGGERS_ON_PROJECTILE_HIT_EFFECTS) && event.getSource().getDirectEntity() instanceof Projectile projectile)
+		{
+			ItemStack stack = getProjectileItemStack(projectile);
+			if(!stack.isEmpty())
+				InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().modifyAttackDamage(projectile, stack, event));
+		}
+
+		for (EquipmentSlot slot : EquipmentSlot.values()) {
+			ItemStack stack = event.getEntity().getItemBySlot(slot);
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().modifyDamageReceived(event.getEntity(), stack, slot, event));
+		}
+	}
+
+	@SubscribeEvent
+	public static void onLivingDeath(LivingDeathEvent event)
+	{
+		if(event.getSource().is(AlchemancyTags.DamageTypes.TRIGGERS_ON_HIT_EFFECTS) && event.getSource().getDirectEntity() instanceof LivingEntity user)
+		{
+			ItemStack stack = user.getMainHandItem();
+			InfusedPropertiesHelper.forEachProperty(stack, holder -> holder.value().onKill(event.getEntity(), user, stack, event));
+		}
+
+		for (EquipmentSlot slot : EquipmentSlot.values()) {
+			ItemStack stack = event.getEntity().getItemBySlot(slot);
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onUserDeath(event.getEntity(), stack, slot, event));
+		}
+	}
+
+	@SubscribeEvent
+	public static void onIncomingDamage(LivingIncomingDamageEvent event)
+	{
+		if(event.getSource().is(AlchemancyTags.DamageTypes.TRIGGERS_ON_HIT_EFFECTS) && event.getSource().getDirectEntity() instanceof LivingEntity user)
+		{
+			ItemStack stack = user.getMainHandItem();
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onIncomingAttack(user, stack, event.getEntity(), event));
+		}
+		else if (event.getSource().is(AlchemancyTags.DamageTypes.TRIGGERS_ON_PROJECTILE_HIT_EFFECTS) && event.getSource().getDirectEntity() instanceof Projectile projectile)
+		{
+			ItemStack stack = getProjectileItemStack(projectile);
+			if(!stack.isEmpty())
+				InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onIncomingAttack(projectile, stack, event.getEntity(), event));
+		}
+
+		for (EquipmentSlot slot : EquipmentSlot.values()) {
+			ItemStack stack = event.getEntity().getItemBySlot(slot);
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onIncomingDamageReceived(event.getEntity(), stack, slot, event.getSource(), event));
+		}
+	}
+
+	@SubscribeEvent
+	public static void onCriticalHit(CriticalHitEvent event)
+	{
+		if(event.isCriticalHit())
+		{
+			ItemStack stack = event.getEntity().getMainHandItem();
+			InfusedPropertiesHelper.forEachProperty(stack, holder -> holder.value().modifyCriticalAttack(event.getEntity(), stack, event));
+		}
+	}
+
+	@SubscribeEvent
+	public static void onKnockBack(LivingKnockBackEvent event)
+	{
+		LivingEntity target = event.getEntity();
+
+		for (EquipmentSlot slot : EquipmentSlot.values()) {
+			ItemStack stack = target.getItemBySlot(slot);
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().modifyKnockBackReceived(target, stack, slot, event));
+		}
+
+		if(target.getLastHurtByMobTimestamp() == target.tickCount && target.getLastHurtByMob() != null)
+		{
+			LivingEntity user = target.getLastHurtByMob();
+			ItemStack weapon = user.getMainHandItem();
+			InfusedPropertiesHelper.forEachProperty(weapon, propertyHolder -> propertyHolder.value().modifyKnockBackApplied(user, weapon, target, event));
+		}
+	}
+
+	@SubscribeEvent
+	public static void onEntityTick(EntityTickEvent.Pre event)
+	{
+		if(event.getEntity() instanceof LivingEntity living)
+			for (EquipmentSlot slot : EquipmentSlot.values()) {
+				ItemStack stack = living.getItemBySlot(slot);
+				InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onEquippedTick(living, slot, stack));
+			}
+		else if(event.getEntity() instanceof ItemEntity itemEntity)
+		{
+			ItemStack stack = itemEntity.getItem();
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onEntityItemTick(stack, itemEntity));
+		}
+		else if(event.getEntity() instanceof Projectile projectile)
+		{
+			ItemStack stack = getProjectileItemStack(projectile);
+			if(!stack.isEmpty())
+				InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onProjectileTick(stack, projectile));
+		}
+	}
+
+	@SubscribeEvent
+	public static void onProjectileImpact(ProjectileImpactEvent event)
+	{
+		Projectile projectile = event.getProjectile();
+		ItemStack stack = getProjectileItemStack(projectile);
+		if(!stack.isEmpty())
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onProjectileImpact(stack, projectile, event.getRayTraceResult(), event));
+//		if(event.getRayTraceResult().getType() == HitResult.Type.ENTITY && event.getRayTraceResult() instanceof EntityHitResult entityHitResult)
+//		{
+//			DamageSource damageSource = projectile.damageSources().thrown(projectile, projectile.getOwner());
+//			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onActivation(projectile, entityHitResult.getEntity(), stack, damageSource));
+//		}
+	}
+
+	public static ItemStack getProjectileItemStack(Projectile entity)
+	{
+		if(entity instanceof ThrowableItemProjectile throwableItem)
+			return throwableItem.getItem();
+		if(entity instanceof AbstractArrow arrow)
+			return arrow.getPickupItemStackOrigin();
+		if(entity instanceof FireworkRocketEntity rocket)
+			return rocket.getItem();
+		return ItemStack.EMPTY;
+	}
+
+	@SubscribeEvent
+	public static void onItemPickUp(ItemEntityPickupEvent.Pre event)
+	{
+		if(event.getItemEntity().hasPickUpDelay())
+			return;
+
+		InfusedPropertiesHelper.forEachProperty(event.getItemEntity().getItem(), propertyHolder -> propertyHolder.value().onItemPickedUp(event.getPlayer(), event.getItemEntity().getItem(), event.getItemEntity()));
+		for (EquipmentSlot slot : EquipmentSlot.values()) {
+			ItemStack stack = event.getPlayer().getItemBySlot(slot);
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onPickUpAnyItem(event.getPlayer(), stack, slot, event.getItemEntity(), event));
+		}
+	}
+
+	@SubscribeEvent
+	public static void onItemToss(ItemTossEvent event)
+	{
+		InfusedPropertiesHelper.forEachProperty(event.getEntity().getItem(), propertyHolder -> propertyHolder.value().onItemTossed(event.getPlayer(), event.getEntity().getItem(), event.getEntity(), event));
+	}
+
+	@SubscribeEvent
+	public static void onAttributeModification(ItemAttributeModifierEvent event)
+	{
+		InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder -> propertyHolder.value().applyAttributes(event));
+	}
+
+	@SubscribeEvent
+	public static void onLivingDrops(LivingDropsEvent event)
+	{
+		if(event.getSource().getDirectEntity() instanceof LivingEntity user)
+		{
+			ItemStack weapon = user.getMainHandItem();
+			InfusedPropertiesHelper.forEachProperty(weapon, propertyHolder -> propertyHolder.value().modifyLivingDrops(event.getEntity(), weapon, user, event.getDrops(), event));
+		}
+	}
+
+	@SubscribeEvent
+	public static void onLivingXpDrops(LivingExperienceDropEvent event)
+	{
+		Player user = event.getAttackingPlayer();
+		if(user != null)
+		{
+			ItemStack weapon = user.getMainHandItem();
+			InfusedPropertiesHelper.forEachProperty(weapon, propertyHolder -> propertyHolder.value().modifyLivingExperienceDrops(user, weapon, event.getEntity(), event));
+		}
+	}
+
+	@SubscribeEvent
+	public static void onBlockDrops(BlockDropsEvent event)
+	{
+
+		ItemStack tool = event.getBreaker() instanceof LivingEntity living && (!living.getMainHandItem().isEmpty() && ItemStack.isSameItem(event.getTool(), living.getMainHandItem())) ? living.getMainHandItem() : event.getTool(); //ServerPlayerGameMode uses a copied stack instead of the actual stack held by the player
+		InfusedPropertiesHelper.forEachProperty(tool, propertyHolder -> propertyHolder.value().modifyBlockDrops(event.getBreaker(), tool, event.getDrops(), event));
+
+	}
+
+	@SubscribeEvent
+	public static void onItemUseTick(LivingEntityUseItemEvent.Tick event)
+	{
+
+		InfusedPropertiesHelper.forEachProperty(event.getItem(), propertyHolder -> propertyHolder.value().onItemUseTick(event.getEntity(), event.getItem(), event));
+	}
+
+	@SubscribeEvent
+	public static void onRightClickItem(PlayerInteractEvent.RightClickItem event)
+	{
+		InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder -> propertyHolder.value().onRightClickItem(event));
+		InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder -> propertyHolder.value().onRightClickAny(event));
+	}
+
+	@SubscribeEvent
+	public static void onRightClickEntity(PlayerInteractEvent.EntityInteract event)
+	{
+		InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder -> propertyHolder.value().onRightClickEntity(event));
+		InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder -> propertyHolder.value().onRightClickAny(event));
+
+		if(event.getTarget() instanceof LivingEntity target)
+			for (EquipmentSlot slot : EquipmentSlot.values()) {
+				if(slot.isArmor() && InfusedPropertiesHelper.hasProperty(target.getItemBySlot(slot), AlchemancyProperties.SADDLED) && event.getEntity().startRiding(target))
+				{
+					event.setCancellationResult(InteractionResult.SUCCESS);
+					event.setCanceled(true);
+				}
+			}
+	}
+
+	@SubscribeEvent
+	public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
+	{
+		InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder ->
+		{
+			propertyHolder.value().onRightClickAny(event);
+			propertyHolder.value().onRightClickBlock(event);
+		});
+	}
+
+	@SubscribeEvent
+	public static void onStopUsingItem(LivingEntityUseItemEvent.Stop event)
+	{
+		ItemStack stack = event.getItem();
+		InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onStopUsingItem(stack, event.getEntity(), event));
+	}
+
+	@SubscribeEvent
+	public static void onItemStacking(ItemStackedOnOtherEvent event)
+	{
+		InfusedPropertiesHelper.forEachProperty(event.getStackedOnItem(), propertyHolder -> propertyHolder.value().onStackedOverItem(event.getStackedOnItem(), event.getCarriedItem(), event.getPlayer(), event.getClickAction(), event));
+		InfusedPropertiesHelper.forEachProperty(event.getCarriedItem(), propertyHolder -> propertyHolder.value().onStackedOverMe(event.getStackedOnItem(), event.getCarriedItem(), event.getPlayer(), event.getClickAction(), event));
+	}
+
+	@SubscribeEvent
+	public static void onLivingJump(LivingEvent.LivingJumpEvent event)
+	{
+		for (EquipmentSlot slot : EquipmentSlot.values())
+		{
+			ItemStack stack = event.getEntity().getItemBySlot(slot);
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onJump(event.getEntity(), stack, slot, event));
+		}
+	}
+
+	@SubscribeEvent
+	public static void onLivingFall(LivingFallEvent event)
+	{
+		for (EquipmentSlot slot : EquipmentSlot.values())
+		{
+			ItemStack stack = event.getEntity().getItemBySlot(slot);
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onFall(event.getEntity(), stack, slot, event));
+		}
+	}
+
+	@SubscribeEvent
+	public static void onEnchantmentLevel(GetEnchantmentLevelEvent event)
+	{
+		ItemStack stack = event.getStack();
+		InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().modifyEnchantmentLevels(event));
+	}
+
+	@SubscribeEvent
+	public static void onFurnaceBurnTime(FurnaceFuelBurnTimeEvent event)
+	{
+		ItemStack stack = event.getItemStack();
+		int burnTime = event.getBurnTime();
+		float burnMultiplier = InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.FLAMMABLE) ? 1.5f : 1;
+		if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.CHARRED))
+			burnMultiplier *= 3;
+
+		if(burnMultiplier != 1)
+		{
+			if(stack.isDamageableItem())
+			{
+				float durability = (event.getItemStack().getMaxDamage() - event.getItemStack().getDamageValue()) / 50f;
+				if(durability > 1)
+					durability = 1 + (durability-1)*0.5f;
+				burnMultiplier *= durability;
+			}
+
+			event.setBurnTime((int) (Math.max(burnTime, 300) * burnMultiplier));
+		}
+	}
+
+	@SubscribeEvent
+	public static void onEnderManAnger(EnderManAngerEvent event)
+	{
+		if(InfusedPropertiesHelper.hasProperty(event.getPlayer().getItemBySlot(EquipmentSlot.HEAD), AlchemancyProperties.SCARY))
+			event.setCanceled(true);
+	}
+
+	@SubscribeEvent
+	public static void modifyFov(ComputeFovModifierEvent event)
+	{
+		Player player = event.getPlayer();
+
+		if(player.isShiftKeyDown() && (InfusedPropertiesHelper.hasProperty(player.getMainHandItem(), AlchemancyProperties.SCOPING) ||
+				InfusedPropertiesHelper.hasProperty(player.getOffhandItem(), AlchemancyProperties.SCOPING)))
+			event.setNewFovModifier(0);
+	}
+
+
+
+	@SubscribeEvent
+	public static void onEntityJoinLevel(EntityJoinLevelEvent event)
+	{
+		if(event.getEntity() instanceof PathfinderMob mob)
+		{
+			if(mob.getType().is(AlchemancyTags.EntityTypes.SCARED_BY_SCARY))
+				mob.goalSelector.addGoal(0, new ScareGoal(mob, 2, AlchemancyProperties.SCARY));
+			if(mob.getType().is(AlchemancyTags.EntityTypes.AGGROED_BY_SEEDED) && mob.getAttributes().hasAttribute(Attributes.ATTACK_DAMAGE))
+			{
+				mob.goalSelector.addGoal(3, new MeleeAttackGoal(mob, 1.6, true));
+				mob.targetSelector.addGoal(0, targetLivingHoldingProperty(mob, AlchemancyProperties.SEEDED, EquipmentSlotGroup.ARMOR));
+			}
+		}
+	}
+
+	public static NearestAttackableTargetGoal<LivingEntity> targetLivingHoldingProperty(Mob mob, Holder<Property> property, EquipmentSlotGroup slotsToCheck) {
+		return new NearestAttackableTargetGoal<>(mob, LivingEntity.class, 0, false, false, living -> {
+			for (EquipmentSlot slot : EquipmentSlot.values()) {
+				if (slotsToCheck.test(slot) && InfusedPropertiesHelper.hasProperty(living.getItemBySlot(slot), property))
+					return true;
+			}
+			return false;
+		});
+	}
+
+	@SubscribeEvent
+	public static void onGetProjectile(LivingGetProjectileEvent event)
+	{
+		ItemStack shootable = event.getProjectileWeaponItemStack();
+		ItemStack projectile = event.getProjectileItemStack();
+
+		if(projectile.isEmpty() && event.getEntity() instanceof Player user)
+		{
+			Predicate<ItemStack> predicate = ((ProjectileWeaponItem) shootable.getItem()).getAllSupportedProjectiles(shootable);
+			for (int i = 0; i < user.getInventory().getContainerSize(); i++) {
+				ItemStack stack = user.getInventory().getItem(i);
+				ItemStack storedStack = AlchemancyProperties.HOLLOW.get().getData(stack);
+				if (!storedStack.isEmpty() && predicate.test(storedStack)) {
+					{
+						event.setProjectileItemStack(net.neoforged.neoforge.common.CommonHooks.getProjectile(user, shootable, storedStack));
+						storedStack.shrink(1);
+						AlchemancyProperties.HOLLOW.get().setData(stack, stack.isEmpty() ? ItemStack.EMPTY : storedStack);
+						return;
+					}
+				}
+			}
+		}
+	}
+
+	@SubscribeEvent
+	public static void onItemTooltip(ItemTooltipEvent event)
+	{
+		ItemStack stack = event.getItemStack();
+
+		if(stack.has(AlchemancyItems.Components.INFUSED_PROPERTIES))
+			stack.get(AlchemancyItems.Components.INFUSED_PROPERTIES).forEachProperty(holder -> event.getToolTip().add(holder.value().getName(stack)));
+
+		if(stack.has(AlchemancyItems.Components.STORED_PROPERTIES))
+		{
+			InfusedPropertiesComponent storedProperties = stack.get(AlchemancyItems.Components.STORED_PROPERTIES);
+			if(!storedProperties.properties().isEmpty())
+				event.getToolTip().add(Component.translatable("item.alchemancy.tooltip.stored_properties").withStyle(ChatFormatting.GRAY));
+			storedProperties.forEachProperty(holder -> event.getToolTip().add(holder.value().getName(stack)));
+		}
+
+		if(event.getEntity() != null && (InfusedPropertiesHelper.hasInfusedProperty(stack, AlchemancyProperties.REVEALING) ||
+				InfusedPropertiesHelper.hasProperty(event.getEntity().getItemBySlot(EquipmentSlot.HEAD), AlchemancyProperties.REVEALING)))
+		{
+			List<Holder<Property>> dormantProperties = AlchemancyProperties.getDormantProperties(stack);
+			if(!dormantProperties.isEmpty()) {
+				event.getToolTip().add(Component.translatable("item.alchemancy.tooltip.dormant_properties").withStyle(ChatFormatting.GRAY));
+				for (Holder<Property> dormantProperty : dormantProperties) {
+					event.getToolTip().add(dormantProperty.value().getName(stack));
+				}
+			}
+		}
+
+		if(event.getEntity() != null && ((InfusedPropertiesHelper.hasInfusedProperty(stack, AlchemancyProperties.SCRAMBLED)) ||
+				InfusedPropertiesHelper.hasProperty(event.getEntity().getItemBySlot(EquipmentSlot.HEAD), AlchemancyProperties.SCRAMBLED)))
+		{
+			for(int i = 1; i < event.getToolTip().size(); i++)
+				event.getToolTip().set(i, event.getToolTip().get(i).copy().withStyle(ChatFormatting.OBFUSCATED));
+		}
+	}
+}

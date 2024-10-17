@@ -1,0 +1,10 @@
+{
+  "type": "alchemancy:essence_extraction",
+
+  "ingredient": {
+    "item": "alchemancy:blazing_substance"
+  },
+
+  "essence": "alchemancy:pyro",
+  "amount": 100
+}

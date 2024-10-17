@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:photosynthetic"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:stick"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:oak_sapling"
+  }
+}

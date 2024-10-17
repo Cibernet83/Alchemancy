@@ -1,0 +1,14 @@
+{
+  "type": "alchemancy:forged_property",
+
+  "infusables": [
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "properties": [
+    "alchemancy:awkward"
+  ],
+
+  "result": "alchemancy:swift"
+}

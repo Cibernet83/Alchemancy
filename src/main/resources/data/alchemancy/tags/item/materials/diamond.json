@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "#c:gems/diamond",
+    "#c:storage_blocks/diamond",
+    "#minecraft:diamond_ores",
+
+    "minecraft:diamond_helmet",
+    "minecraft:diamond_chestplate",
+    "minecraft:diamond_leggings",
+    "minecraft:diamond_boots",
+    "minecraft:diamond_horse_armor",
+
+    "minecraft:diamond_pickaxe",
+    "minecraft:diamond_axe",
+    "minecraft:diamond_shovel",
+    "minecraft:diamond_hoe",
+    "minecraft:diamond_sword"
+  ]
+}

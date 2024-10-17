@@ -1,0 +1,8 @@
+
+{
+  "replace": false,
+  "values": [
+    "#alchemancy:dormant_properties/energized",
+    "minecraft:emerald"
+  ]
+}

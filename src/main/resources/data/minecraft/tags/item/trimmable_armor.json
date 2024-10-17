@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "alchemancy:lead_helmet",
+    "alchemancy:lead_chestplate",
+    "alchemancy:lead_leggings",
+    "alchemancy:lead_boots"
+  ]
+}

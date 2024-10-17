@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "#c:ingots/netherite",
+    "#c:storage_blocks/netherite",
+
+    "minecraft:netherite_helmet",
+    "minecraft:netherite_chestplate",
+    "minecraft:netherite_leggings",
+    "minecraft:netherite_boots",
+
+    "minecraft:netherite_pickaxe",
+    "minecraft:netherite_axe",
+    "minecraft:netherite_shovel",
+    "minecraft:netherite_hoe",
+    "minecraft:netherite_sword"
+  ]
+}

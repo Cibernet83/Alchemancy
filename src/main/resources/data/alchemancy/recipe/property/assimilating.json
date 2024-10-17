@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_property",
+
+  "infusables": [
+    {
+      "item": "minecraft:grindstone"
+    }
+  ],
+
+  "properties": [
+    "alchemancy:sticky",
+    "alchemancy:targeted"
+  ],
+
+  "result": "alchemancy:blinding"
+}

@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#alchemancy:materials/stone",
+
+    "#minecraft:anvil",
+    "minecraft:calcite",
+    "minecraft:gilded_blackstone",
+    "minecraft:heavy_weighted_pressure_plate",
+    "minecraft:heavy_core"
+  ]
+}

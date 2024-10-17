@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:musical"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:gold_block"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:bell"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:glowing_aura"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:prismarine"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:sea_lantern"
+  }
+}

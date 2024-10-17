@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#c:tools/igniter",
+    "minecraft:fire_charge"
+  ]
+}

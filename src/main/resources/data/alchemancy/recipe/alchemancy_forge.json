@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "tag": "minecraft:logs"
+    },
+    "B": {
+      "item": "alchemancy:blazing_substance"
+    },
+    "E": {
+      "item": "minecraft:ender_pearl"
+    }
+  },
+  "pattern": [
+    "#B#",
+    "BEB",
+    "#B#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "alchemancy:alchemancy_forge"
+  }
+}

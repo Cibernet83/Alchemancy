@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#c:gems/emerald",
+    "#c:storage_blocks/emerald",
+    "#minecraft:emerald_ores"
+  ]
+}

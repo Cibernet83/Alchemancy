@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:warped_stems",
+    "minecraft:warped_nylium",
+    "minecraft:warped_wart_block",
+    "minecraft:warped_fungus",
+    "minecraft:warped_roots",
+    "minecraft:twisting_vines"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "#c:chests",
+    "#c:barrels",
+    "#minecraft:chest_boats",
+    "minecraft:hopper",
+    "minecraft:composter",
+    "minecraft:chiseled_bookshelf",
+    "minecraft:bee_nest",
+    "minecraft:beehive",
+    "minecraft:dispenser",
+    "minecraft:dropper",
+    "minecraft:chest_minecart",
+    "minecraft:hopper_minecart"
+  ]
+}

@@ -1,0 +1,14 @@
+
+{
+  "replace": false,
+  "values": [
+    "minecraft:trident",
+    "minecraft:arrow",
+    "minecraft:mob_projectile",
+    "minecraft:wind_charge",
+    "minecraft:fireball",
+    "minecraft:unattributed_fireball",
+    "minecraft:fireworks",
+    "minecraft:thrown"
+  ]
+}

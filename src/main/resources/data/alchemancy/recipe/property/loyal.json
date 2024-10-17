@@ -1,0 +1,15 @@
+{
+  "type": "alchemancy:forged_property",
+
+  "infusables": [
+    {
+      "item": "minecraft:prismarine_shard"
+    }
+  ],
+
+  "properties": [
+  "alchemancy:soulbind"
+  ],
+
+  "result": "alchemancy:loyal"
+}

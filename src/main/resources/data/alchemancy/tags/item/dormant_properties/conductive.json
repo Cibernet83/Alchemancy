@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#alchemancy:materials/copper",
+    "minecraft:lightning_rod"
+  ]
+}

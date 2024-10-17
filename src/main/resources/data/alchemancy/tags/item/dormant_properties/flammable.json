@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "#alchemancy:materials/wood",
+    "#minecraft:candles"
+  ],
+  "remove": [
+    "#minecraft:non_flammable_wood"
+  ]
+}

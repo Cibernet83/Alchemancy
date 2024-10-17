@@ -1,0 +1,14 @@
+{
+  "type": "alchemancy:forged_custom_name",
+
+  "infusable": {
+    "item": "minecraft:name_tag"
+  },
+
+  "bold": "alchemancy:heavy",
+  "italic": "alchemancy:slippery",
+  "strikethrough": "alchemancy:slashing",
+  "underlined": "alchemancy:mining",
+  "obfuscated": "alchemancy:scrambled",
+  "can_tint": true
+}

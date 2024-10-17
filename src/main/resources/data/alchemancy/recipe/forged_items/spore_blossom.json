@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:mycellic"
+  ],
+
+  "catalyst": {
+    "tag": "minecraft:small_flowers"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:spore_blossom"
+  }
+}

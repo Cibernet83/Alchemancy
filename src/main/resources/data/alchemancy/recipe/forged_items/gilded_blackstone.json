@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:gilded"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:blackstone"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:gilded_blackstone"
+  }
+}

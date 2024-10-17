@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "#alchemancy:materials/gold",
+
+    "#c:glass_blocks",
+    "#c:glass_panes",
+    "minecraft:glowstone",
+    "minecraft:tinted_glass"
+  ]
+}

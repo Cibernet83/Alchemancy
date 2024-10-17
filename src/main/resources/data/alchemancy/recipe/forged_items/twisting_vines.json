@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:warped"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:vine"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:twisting_vines"
+  }
+}

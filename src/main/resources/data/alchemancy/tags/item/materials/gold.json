@@ -1,0 +1,28 @@
+{
+  "replace": false,
+  "values": [
+    "#c:raw_materials/gold",
+    "#c:ingots/gold",
+    "#c:nuggets/gold",
+    "#c:ingots/gold",
+    "#c:storage_blocks/gold",
+    "#c:storage_blocks/raw_gold",
+    "#minecraft:gold_ores",
+
+    "minecraft:golden_helmet",
+    "minecraft:golden_chestplate",
+    "minecraft:golden_leggings",
+    "minecraft:golden_boots",
+    "minecraft:golden_horse_armor",
+
+    "minecraft:golden_pickaxe",
+    "minecraft:golden_axe",
+    "minecraft:golden_shovel",
+    "minecraft:golden_hoe",
+    "minecraft:golden_sword",
+
+    "minecraft:golden_carrot",
+    "minecraft:golden_apple",
+    "minecraft:enchanted_golden_apple"
+  ]
+}

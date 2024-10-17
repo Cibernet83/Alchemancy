@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:soul_fire_base_blocks",
+    "minecraft:soul_torch",
+    "minecraft:soul_lantern",
+    "minecraft:soul_campfire"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:calcaerous"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:water_bucket"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:milk_bucket"
+  }
+}

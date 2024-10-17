@@ -1,0 +1,14 @@
+{
+  "type": "alchemancy:forged_property",
+
+  "infusables": [
+    {
+      "item": "minecraft:magma_cream"
+    }
+  ],
+  "properties": [
+    "alchemancy:awkward"
+  ],
+
+  "result": "alchemancy:fire_resistant"
+}

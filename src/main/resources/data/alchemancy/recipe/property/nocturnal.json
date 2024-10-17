@@ -1,0 +1,14 @@
+{
+  "type": "alchemancy:forged_property",
+
+  "infusables": [
+    {
+      "item": "minecraft:golden_carrot"
+    }
+  ],
+  "properties": [
+    "alchemancy:awkward"
+  ],
+
+  "result": "alchemancy:nocturnal"
+}

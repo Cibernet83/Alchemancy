@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:rotten_flesh",
+    "minecraft:zombie_head",
+    "minecraft:phantom_membrane"
+  ]
+}

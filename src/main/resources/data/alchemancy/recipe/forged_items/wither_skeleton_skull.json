@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:decaying"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:skeleton_skull"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:wither_skeleton_skull"
+  }
+}

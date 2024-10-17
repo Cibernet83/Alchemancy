@@ -1,0 +1,9 @@
+
+{
+  "replace": false,
+  "values": [
+    "#alchemancy:animals",
+    "#alchemancy:tempted_by_wealthy_property",
+    "minecraft:enderman"
+  ]
+}

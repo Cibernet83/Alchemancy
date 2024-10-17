@@ -1,0 +1,12 @@
+{
+  "type": "alchemancy:item_transmutation",
+
+  "catalyst": {
+    "item": "alchemancy:microspace_singularity"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:macrospace_singularity"
+  }
+}

@@ -1,0 +1,9 @@
+
+{
+  "replace": false,
+  "values": [
+    "#minecraft:arthropod",
+    "#alchemancy:animals",
+    "minecraft:allay"
+  ]
+}

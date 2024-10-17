@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:glowing_aura"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:sweet_berries"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:glow_berries"
+  }
+}

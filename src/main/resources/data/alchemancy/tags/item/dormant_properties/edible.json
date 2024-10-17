@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+
+    "#c:foods/berry",
+    "#c:foods/fruit",
+    "#c:foods/vegetable",
+    "#c:foods/golden",
+    "#c:foods/raw_meat",
+    "#c:foods/cooked_meat",
+    "#c:foods/cooked_fish",
+    "#c:foods/soup",
+    "#c:foods/cookie",
+    "#c:foods/edible_when_placed",
+
+    "minecraft:cod",
+    "minecraft:salmon",
+    "minecraft:pumpkin_pie",
+    "minecraft:baked_potato",
+    "minecraft:dried_kelp",
+    "minecraft:pumpkin",
+    "minecraft:melon",
+    "minecraft:bread"
+  ]
+}

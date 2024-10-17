@@ -1,0 +1,10 @@
+{
+  "type": "alchemancy:property_warp",
+  "properties": [
+    "alchemancy:fire_resistant"
+  ],
+
+  "result": [
+    "alchemancy:burning"
+  ]
+}

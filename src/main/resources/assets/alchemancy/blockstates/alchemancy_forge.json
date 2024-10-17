@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "alchemancy:block/alchemancy_forge",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "alchemancy:block/alchemancy_forge"
+    },
+    "facing=south": {
+      "model": "alchemancy:block/alchemancy_forge",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "alchemancy:block/alchemancy_forge",
+      "y": 270
+    }
+  }
+}

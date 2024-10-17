@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:dripstone_block",
+    "minecraft:pointed_dripstone",
+    "minecraft:small_dripleaf",
+    "minecraft:big_dripleaf"
+  ]
+}

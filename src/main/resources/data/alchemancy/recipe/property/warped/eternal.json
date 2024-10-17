@@ -1,0 +1,11 @@
+{
+  "type": "alchemancy:property_warp",
+  "properties": [
+    "alchemancy:eternal"
+  ],
+
+  "result": [
+    "alchemancy:decaying",
+    "alchemancy:brittle"
+  ]
+}

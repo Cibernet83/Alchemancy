@@ -1,0 +1,11 @@
+{
+  "type": "alchemancy:property_interaction",
+  "properties": [
+    "alchemancy:wet",
+    "alchemancy:ender"
+  ],
+
+  "result": [
+    "alchemancy:wet"
+  ]
+}

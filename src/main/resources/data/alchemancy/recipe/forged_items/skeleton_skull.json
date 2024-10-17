@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:warped"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:wither_skeleton_skull"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:skeleton_skull"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "alchemancy:property_warp",
+  "properties": [
+    "alchemancy:glowing_aura"
+  ],
+
+  "result": [
+    "alchemancy:blinding"
+  ]
+}

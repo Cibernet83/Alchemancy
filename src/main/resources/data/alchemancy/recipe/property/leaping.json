@@ -1,0 +1,15 @@
+{
+  "type": "alchemancy:forged_property",
+
+  "infusables": [
+    {
+      "item": "minecraft:rabbit_foot"
+    }
+  ],
+
+  "properties": [
+    "alchemancy:awkward"
+  ],
+
+  "result": "alchemancy:blinding"
+}

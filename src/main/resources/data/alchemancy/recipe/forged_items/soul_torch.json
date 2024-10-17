@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:soulbind"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:torch"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:soul_torch"
+  }
+}

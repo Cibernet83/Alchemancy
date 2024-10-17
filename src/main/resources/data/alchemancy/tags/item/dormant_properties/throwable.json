@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#c:eggs",
+    "minecraft:snowball",
+    "minecraft:wind_charge",
+    "minecraft:ender_pearl"
+  ]
+}

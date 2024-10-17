@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "alchemancy:block/essence_injector",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "alchemancy:block/essence_injector"
+    },
+    "facing=south": {
+      "model": "alchemancy:block/essence_injector",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "alchemancy:block/essence_injector",
+      "y": 270
+    }
+  }
+}

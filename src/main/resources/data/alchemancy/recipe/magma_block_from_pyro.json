@@ -1,0 +1,19 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "essences": [
+    {
+      "type": "alchemancy:pyro",
+      "amount": 100
+    }
+  ],
+
+  "catalyst": {
+    "item": "minecraft:stone"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:magma_block"
+  }
+}

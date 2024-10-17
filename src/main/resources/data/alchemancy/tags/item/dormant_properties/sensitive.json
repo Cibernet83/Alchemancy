@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:wooden_pressure_plates",
+    "minecraft:stone_pressure_plate",
+    "minecraft:polished_blackstone_pressure_plate",
+    "minecraft:light_weighted_pressure_plate",
+    "minecraft:heavy_weighted_pressure_plate",
+    "minecraft:detector_rail",
+    "minecraft:tripwire_hook",
+    "minecraft:sculk_sensor",
+    "minecraft:calibrated_sculk_sensor",
+    "minecraft:observer"
+  ]
+}

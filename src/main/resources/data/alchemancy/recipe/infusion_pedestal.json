@@ -1,0 +1,12 @@
+{
+  "type": "alchemancy:item_transmutation",
+
+  "catalyst": {
+    "tag": "minecraft:logs"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:infusion_pedestal"
+  }
+}

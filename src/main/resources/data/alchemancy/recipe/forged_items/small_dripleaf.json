@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:dripping"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:azalea"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:small_dripleaf"
+  }
+}

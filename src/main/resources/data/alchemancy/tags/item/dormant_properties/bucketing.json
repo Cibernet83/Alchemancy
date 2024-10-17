@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:bucket",
+    "minecraft:cauldron",
+    "minecraft:bowl",
+    "minecraft:sponge",
+    "minecraft:glass_bottle"
+  ]
+}

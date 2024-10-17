@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "#alchemancy:removes_infusions",
+
+    "alchemancy:lead_helmet",
+    "alchemancy:lead_chestplate",
+    "alchemancy:lead_leggings",
+    "alchemancy:lead_boots",
+    "alchemancy:lead_sword",
+    "alchemancy:lead_shovel",
+    "alchemancy:lead_axe",
+    "alchemancy:lead_pickaxe",
+    "alchemancy:lead_hoe"
+  ]
+}

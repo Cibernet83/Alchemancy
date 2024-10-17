@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#c:bones",
+    "#c:storage_blocks/bone_meal",
+    "minecraft:calcite",
+    "minecraft:bone_meal",
+    "minecraft:skeleton_skull",
+    "minecraft:wither_skeleton_skull",
+    "minecraft:milk_bucket"
+  ]
+}

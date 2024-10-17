@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "#c:end_stones",
+    "minecraft:end_stone_bricks",
+    "minecraft:end_stone_brick_stairs",
+    "minecraft:end_stone_brick_slab",
+    "minecraft:end_stone_brick_wall",
+
+    "minecraft:feather",
+    "minecraft:light_weighted_pressure_plate",
+    "minecraft:phantom_membrane"
+  ]
+}

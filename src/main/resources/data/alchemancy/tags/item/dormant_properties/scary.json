@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:carved_pumpkin",
+    "minecraft:jack_o_lantern",
+    "minecraft:skeleton_skull",
+    "minecraft:wither_skeleton_skull",
+    "minecraft:zombie_head"
+  ]
+}

@@ -1,0 +1,12 @@
+
+{
+  "replace": false,
+  "values": [
+    "#alchemancy:dormant_properties/nonlethal",
+    "minecraft:string",
+    "minecraft:cobweb",
+    "minecraft:bow",
+    "minecraft:crossbow",
+    "minecraft:fishing_rod"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "type": "alchemancy:property_warp",
+  "properties": [
+    "alchemancy:spiking"
+  ],
+
+  "result": [
+    "alchemancy:bouncy",
+    "alchemancy:slippery"
+  ]
+}

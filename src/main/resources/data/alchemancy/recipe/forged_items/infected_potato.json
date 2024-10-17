@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:infected"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:potato"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:poisonous_potato"
+  }
+}

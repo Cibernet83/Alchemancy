@@ -1,0 +1,14 @@
+{
+  "type": "alchemancy:forged_property",
+
+  "infusables": [
+    {
+      "item": "minecraft:pufferfish"
+    }
+  ],
+  "properties": [
+    "alchemancy:awkward"
+  ],
+
+  "result": "alchemancy:aquatic"
+}

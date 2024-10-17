@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:soulbind"
+  ],
+
+  "catalyst": {
+    "tag": "c:sand"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:soul_sand"
+  }
+}

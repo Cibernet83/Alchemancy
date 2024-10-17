@@ -1,0 +1,15 @@
+{
+  "type": "alchemancy:forged_property",
+
+  "infusables": [
+    {
+      "tag": "minecraft:coals"
+    }
+  ],
+
+  "properties": [
+    "alchemancy:awkward"
+  ],
+
+  "result": "alchemancy:blinding"
+}

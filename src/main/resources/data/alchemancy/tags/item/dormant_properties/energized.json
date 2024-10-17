@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "#c:dusts/redstone",
+    "#c:storage_blocks/redstone",
+    "#c:ores/redstone",
+    "#minecraft:redstone_ores",
+    "minecraft:redstone_torch",
+    "minecraft:repeater",
+    "minecraft:comparator",
+    "minecraft:redstone_lamp",
+    "minecraft:powered_rail",
+    "minecraft:activator_rail"
+  ]
+}
