@@ -32,7 +32,7 @@ public class ImprovedProperty extends Property
 			}
 			return UPGRADED_TOOLS.get(tool);
 		}
-		else if (dataType == DataComponents.MAX_DAMAGE && data != null)
+		else if (dataType == DataComponents.MAX_DAMAGE && data instanceof Integer i && i < 1600)
 			return Math.max((int) data, Math.min(1600, (int)data * 2));
 		return super.modifyDataComponent(stack, dataType, data);
 	}
