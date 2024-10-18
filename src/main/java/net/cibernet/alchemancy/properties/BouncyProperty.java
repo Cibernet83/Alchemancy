@@ -35,6 +35,11 @@ public class BouncyProperty extends Property
 	}
 
 	@Override
+	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+		onActivation(event.getEntity(), event.getEntity(), event.getItemStack());
+	}
+
+	@Override
 	public void onDamageReceived(LivingEntity user, ItemStack weapon, EquipmentSlot slot, DamageSource damageSource)
 	{
 		if(slot.isArmor() || user.getUseItem() == weapon)
@@ -81,13 +86,6 @@ public class BouncyProperty extends Property
 			if(user.level().isClientSide())
 				BOUNCE_TARGETS.put(user.getUUID(), user.getDeltaMovement());
 		}
-	}
-
-
-
-	@Override
-	public void onEquippedTick(LivingEntity user, EquipmentSlot slot, ItemStack stack)
-	{
 	}
 
 	@SubscribeEvent
