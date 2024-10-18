@@ -30,12 +30,6 @@ public class LightweightProperty extends Property
 	}
 
 	@Override
-	public TriState isItemInTag(ItemStack stack, TagKey<Item> tagKey)
-	{
-		return tagKey == ItemTags.ARMADILLO_FOOD ? TriState.TRUE : TriState.DEFAULT;
-	}
-
-	@Override
 	public int getColor(ItemStack stack) {
 		return 0xD0D6E5;
 	}

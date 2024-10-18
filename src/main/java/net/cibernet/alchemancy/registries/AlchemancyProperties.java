@@ -83,18 +83,31 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, HeavyProperty> HEAVY = REGISTRY.register("heavy", HeavyProperty::new);
 	public static final DeferredHolder<Property, AntigravProperty> ANTIGRAV = REGISTRY.register("antigrav", AntigravProperty::new);
 
-	//Mob Effects
-	public static final DeferredHolder<Property, LevitatingProperty> LEVITATING = REGISTRY.register("levitating", LevitatingProperty::new);
-	public static final DeferredHolder<Property, SwiftProperty> SWIFT = REGISTRY.register("swift", SwiftProperty::new);
-	public static final DeferredHolder<Property, MobEffectOnHitProperty> POISONOUS = REGISTRY.register("poisonous", () -> new MobEffectOnHitProperty(new MobEffectInstance(MobEffects.POISON, 100)));
-	public static final DeferredHolder<Property, DecayingProperty> DECAYING = REGISTRY.register("decaying", DecayingProperty::new);
-	public static final DeferredHolder<Property, MobEffectEquippedAndHitProperty> TIPSY = REGISTRY.register("tipsy", () -> new MobEffectEquippedAndHitProperty(new MobEffectInstance(MobEffects.CONFUSION, 200, 1), EquipmentSlotGroup.ANY, true));
-	public static final DeferredHolder<Property, MobEffectEquippedAndHitProperty> BLINDING = REGISTRY.register("blinding", () -> new MobEffectEquippedAndHitProperty(new MobEffectInstance(MobEffects.BLINDNESS, 200, 0), EquipmentSlotGroup.HEAD, false));
-	public static final DeferredHolder<Property, NocturnalProperty> NOCTURNAL = REGISTRY.register("nocturnal", NocturnalProperty::new);
-	public static final DeferredHolder<Property, DivingGearProperty> AQUATIC = REGISTRY.register("aquatic", DivingGearProperty::new);
-	public static final DeferredHolder<Property, LeapingProperty> LEAPING = REGISTRY.register("leaping", LeapingProperty::new);
-	public static final DeferredHolder<Property, GlowingProperty> GLOWING_AURA = REGISTRY.register("glowing_aura", GlowingProperty::new);
-	public static final DeferredHolder<Property, MobEffectEquippedAndHitProperty> OMINOUS = REGISTRY.register("ominous", () -> new MobEffectEquippedAndHitProperty(new MobEffectInstance(MobEffects.BAD_OMEN, 1200), EquipmentSlotGroup.ANY, false));
+	//Tools
+	public static final DeferredHolder<Property, ToolProperty> MINING = REGISTRY.register("mining", () -> new ToolProperty(0x888788, BlockTags.MINEABLE_WITH_PICKAXE, ItemAbilities.DEFAULT_PICKAXE_ACTIONS));
+	public static final DeferredHolder<Property, ToolProperty> CHOPPING = REGISTRY.register("chopping", () -> new ToolProperty(0x917142, BlockTags.MINEABLE_WITH_AXE, ItemAbilities.DEFAULT_AXE_ACTIONS));
+	public static final DeferredHolder<Property, ToolProperty> DIGGING = REGISTRY.register("digging", () -> new ToolProperty(0xB9855C, BlockTags.MINEABLE_WITH_SHOVEL, ItemAbilities.DEFAULT_SHOVEL_ACTIONS));
+	public static final DeferredHolder<Property, ToolProperty> REAPING = REGISTRY.register("reaping", () -> new ToolProperty(0x57AD3F, BlockTags.MINEABLE_WITH_HOE, ItemAbilities.DEFAULT_HOE_ACTIONS));
+	public static final DeferredHolder<Property, ShearingProperty> SHEARING = REGISTRY.register("shearing", () -> new ShearingProperty(0xA64F3F, ToolProperty.getShearsRules(), ItemAbilities.DEFAULT_SHEARS_ACTIONS));
+	public static final DeferredHolder<Property, ToolProperty> SLASHING = REGISTRY.register("slashing", () -> new ToolProperty(0xDAD1C5, ToolProperty.getSwordRules(), ItemAbilities.DEFAULT_SWORD_ACTIONS));
+	public static final DeferredHolder<Property, BowProperty> SHARPSHOOTING = REGISTRY.register("sharpshooting", BowProperty::new);
+	public static final DeferredHolder<Property, ShieldingProperty> SHIELDING = REGISTRY.register("shielding", ShieldingProperty::new);
+	public static final DeferredHolder<Property, FirestarterProperty> FIRESTARTING = REGISTRY.register("firestarting", () -> new FirestarterProperty(0xFFB051, List.of(), ItemAbilities.DEFAULT_FLINT_ACTIONS));
+	public static final DeferredHolder<Property, Property> SCOPING = REGISTRY.register("scoping", () -> Property.simple(0xDE923A));
+	public static final DeferredHolder<Property, HeadearProperty> HEADWEAR = REGISTRY.register("headwear", HeadearProperty::new);
+	public static final DeferredHolder<Property, SaddledProperty> SADDLED = REGISTRY.register("saddled", SaddledProperty::new);
+
+	public static final DeferredHolder<Property, CraftyProperty> CRAFTY = REGISTRY.register("crafty", CraftyProperty::new);
+	public static final DeferredHolder<Property, AutosmeltProperty> SMELTING = REGISTRY.register("smelting", AutosmeltProperty::new);
+	public static final DeferredHolder<Property, AssembleProperty> ASSEMBLING = REGISTRY.register("assembling", AssembleProperty::new);
+	public static final DeferredHolder<Property, AssimilatingProperty> ASSIMILATING = REGISTRY.register("assimilating", AssimilatingProperty::new);
+
+	//Storage
+	public static final DeferredHolder<Property, HollowProperty> HOLLOW = REGISTRY.register("hollow", HollowProperty::new);
+	public static final DeferredHolder<Property, BucketingProperty> BUCKETING = REGISTRY.register("bucketing", BucketingProperty::new);
+	public static final DeferredHolder<Property, EncapsulatingProperty> ENCAPSULATING = REGISTRY.register("encapsulating", EncapsulatingProperty::new);
+	public static final DeferredHolder<Property, CapturingProperty> CAPTURING = REGISTRY.register("capturing", CapturingProperty::new);
+	public static final DeferredHolder<Property, DrippingProperty> DRIPPING = REGISTRY.register("dripping", DrippingProperty::new);
 
 	//Triggering
 	public static final DeferredHolder<Property, EdibleProperty> EDIBLE = REGISTRY.register("edible", EdibleProperty::new);
@@ -107,7 +120,18 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, ShatteringProperty> SHATTERING = REGISTRY.register("shattering", ShatteringProperty::new);
 	public static final DeferredHolder<Property, ThrowableProperty> THROWABLE = REGISTRY.register("throwable", ThrowableProperty::new);
 
-
+	//Mob Effects
+	public static final DeferredHolder<Property, LevitatingProperty> LEVITATING = REGISTRY.register("levitating", LevitatingProperty::new);
+	public static final DeferredHolder<Property, SwiftProperty> SWIFT = REGISTRY.register("swift", SwiftProperty::new);
+	public static final DeferredHolder<Property, MobEffectOnHitProperty> POISONOUS = REGISTRY.register("poisonous", () -> new MobEffectOnHitProperty(new MobEffectInstance(MobEffects.POISON, 100)));
+	public static final DeferredHolder<Property, DecayingProperty> DECAYING = REGISTRY.register("decaying", DecayingProperty::new);
+	public static final DeferredHolder<Property, MobEffectEquippedAndHitProperty> TIPSY = REGISTRY.register("tipsy", () -> new MobEffectEquippedAndHitProperty(new MobEffectInstance(MobEffects.CONFUSION, 200, 1), EquipmentSlotGroup.ANY, true));
+	public static final DeferredHolder<Property, MobEffectEquippedAndHitProperty> BLINDING = REGISTRY.register("blinding", () -> new MobEffectEquippedAndHitProperty(new MobEffectInstance(MobEffects.BLINDNESS, 200, 0), EquipmentSlotGroup.HEAD, false));
+	public static final DeferredHolder<Property, NocturnalProperty> NOCTURNAL = REGISTRY.register("nocturnal", NocturnalProperty::new);
+	public static final DeferredHolder<Property, DivingGearProperty> AQUATIC = REGISTRY.register("aquatic", DivingGearProperty::new);
+	public static final DeferredHolder<Property, LeapingProperty> LEAPING = REGISTRY.register("leaping", LeapingProperty::new);
+	public static final DeferredHolder<Property, GlowingProperty> GLOWING_AURA = REGISTRY.register("glowing_aura", GlowingProperty::new);
+	public static final DeferredHolder<Property, MobEffectEquippedAndHitProperty> OMINOUS = REGISTRY.register("ominous", () -> new MobEffectEquippedAndHitProperty(new MobEffectInstance(MobEffects.BAD_OMEN, 1200), EquipmentSlotGroup.ANY, false));
 
 	//Offensive
 	public static final DeferredHolder<Property, GrapplingProperty> GRAPPLING = REGISTRY.register("grappling", GrapplingProperty::new);
@@ -160,7 +184,6 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, CalciumProperty> CALCAEROUS = REGISTRY.register("calcaerous", CalciumProperty::new);
 	public static final DeferredHolder<Property, MusicalProperty> MUSICAL = REGISTRY.register("musical", MusicalProperty::new);
 	public static final DeferredHolder<Property, EntityPullProperty<Projectile>> TARGETED = REGISTRY.register("targeted", () -> new EntityPullProperty<>(0xDC4A4A, Projectile.class, 12, false));
-	public static final DeferredHolder<Property, RandomEffectProperty> RANDOM = REGISTRY.register("random", RandomEffectProperty::new);
 
 	//Cosmetic
 	public static final DeferredHolder<Property, Property> REVEALING = REGISTRY.register("revealing", () -> Property.simple(0xD6DDFF));
@@ -170,32 +193,6 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, SeethroughProperty> SEETHROUGH = REGISTRY.register("seethrough", SeethroughProperty::new);
 	public static final DeferredHolder<Property, TintedProperty> TINTED = REGISTRY.register("tinted", TintedProperty::new);
 
-	//Storage
-	public static final DeferredHolder<Property, HollowProperty> HOLLOW = REGISTRY.register("hollow", HollowProperty::new);
-	public static final DeferredHolder<Property, BucketingProperty> BUCKETING = REGISTRY.register("bucketing", BucketingProperty::new);
-	public static final DeferredHolder<Property, EncapsulatingProperty> ENCAPSULATING = REGISTRY.register("encapsulating", EncapsulatingProperty::new);
-	public static final DeferredHolder<Property, CapturingProperty> CAPTURING = REGISTRY.register("capturing", CapturingProperty::new);
-	public static final DeferredHolder<Property, DrippingProperty> DRIPPING = REGISTRY.register("dripping", DrippingProperty::new);
-
-
-	//Tools
-	public static final DeferredHolder<Property, ToolProperty> MINING = REGISTRY.register("mining", () -> new ToolProperty(0x888788, BlockTags.MINEABLE_WITH_PICKAXE, ItemAbilities.DEFAULT_PICKAXE_ACTIONS));
-	public static final DeferredHolder<Property, ToolProperty> CHOPPING = REGISTRY.register("chopping", () -> new ToolProperty(0x917142, BlockTags.MINEABLE_WITH_AXE, ItemAbilities.DEFAULT_AXE_ACTIONS));
-	public static final DeferredHolder<Property, ToolProperty> DIGGING = REGISTRY.register("digging", () -> new ToolProperty(0xB9855C, BlockTags.MINEABLE_WITH_SHOVEL, ItemAbilities.DEFAULT_SHOVEL_ACTIONS));
-	public static final DeferredHolder<Property, ToolProperty> REAPING = REGISTRY.register("reaping", () -> new ToolProperty(0x57AD3F, BlockTags.MINEABLE_WITH_HOE, ItemAbilities.DEFAULT_HOE_ACTIONS));
-	public static final DeferredHolder<Property, ShearingProperty> SHEARING = REGISTRY.register("shearing", () -> new ShearingProperty(0xA64F3F, ToolProperty.getShearsRules(), ItemAbilities.DEFAULT_SHEARS_ACTIONS));
-	public static final DeferredHolder<Property, ToolProperty> SLASHING = REGISTRY.register("slashing", () -> new ToolProperty(0xDAD1C5, ToolProperty.getSwordRules(), ItemAbilities.DEFAULT_SWORD_ACTIONS));
-	public static final DeferredHolder<Property, BowProperty> SHARPSHOOTING = REGISTRY.register("sharpshooting", BowProperty::new);
-	public static final DeferredHolder<Property, ShieldingProperty> SHIELDING = REGISTRY.register("shielding", ShieldingProperty::new);
-	public static final DeferredHolder<Property, FirestarterProperty> FIRESTARTING = REGISTRY.register("firestarting", () -> new FirestarterProperty(0xFFB051, List.of(), ItemAbilities.DEFAULT_FLINT_ACTIONS));
-	public static final DeferredHolder<Property, Property> SCOPING = REGISTRY.register("scoping", () -> Property.simple(0xDE923A));
-	public static final DeferredHolder<Property, HeadearProperty> HEADWEAR = REGISTRY.register("headwear", HeadearProperty::new);
-	public static final DeferredHolder<Property, SaddledProperty> SADDLED = REGISTRY.register("saddled", SaddledProperty::new);
-
-	public static final DeferredHolder<Property, CraftyProperty> CRAFTY = REGISTRY.register("crafty", CraftyProperty::new);
-	public static final DeferredHolder<Property, AutosmeltProperty> SMELTING = REGISTRY.register("smelting", AutosmeltProperty::new);
-	public static final DeferredHolder<Property, AssembleProperty> ASSEMBLING = REGISTRY.register("assembling", AssembleProperty::new);
-	public static final DeferredHolder<Property, AssimilatingProperty> ASSIMILATING = REGISTRY.register("assimilating", AssimilatingProperty::new);
 
 	//Special
 	public static final DeferredHolder<Property, Property> AWAKENED = REGISTRY.register("awakened", () -> Property.simpleInterpolated(false, 0.5f, 0x91EAE3, 0x91EAE3, 0xEDF2F8, 0xEBBBDB, 0xEBBBDB, 0xEDF2F8));
@@ -203,11 +200,11 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, Property> LIMIT_BREAK = REGISTRY.register("limit_break", () -> IncreaseInfuseSlotsProperty.simple(2, (style) -> style.withBold(true), () -> ColorUtils.interpolateColorsOverTime(0.1f, 0xFF9D14, 0xFFE14F, 0xFFFF9B, 0xFFFFFF)));
 
 	public static final DeferredHolder<Property, Property> DIRTY = REGISTRY.register("dirty", () -> Property.simple(0x96592E));
-	public static final DeferredHolder<Property, WaxedProperty> WAXED = REGISTRY.register("waxed", WaxedProperty::new);
 	public static final DeferredHolder<Property, Property> AWKWARD = REGISTRY.register("awkward", () -> Property.simple(0xA5266C));
 	public static final DeferredHolder<Property, Property> WARPED = REGISTRY.register("warped", () -> Property.simple(0x14B485));
 
 	//Stuff to goof around
+	public static final DeferredHolder<Property, RandomEffectProperty> RANDOM = REGISTRY.register("random", RandomEffectProperty::new);
 	public static final DeferredHolder<Property, BlockVacuumProperty> BLOCK_VACUUM = REGISTRY.register("block_vacuum", BlockVacuumProperty::new);
 	public static final DeferredHolder<Property, BigSuckProperty> CEASELESS_VOID = REGISTRY.register("ceaseless_void", BigSuckProperty::new);
 	public static final DeferredHolder<Property, VoidtouchProperty> VOIDTOUCH = REGISTRY.register("voidtouch", VoidtouchProperty::new);

@@ -46,12 +46,6 @@ public class StickyProperty extends Property
 	}
 
 	@Override
-	public void onStackedOverItem(ItemStack stackedOnItem, ItemStack carriedItem, Player player, ClickAction clickAction, ItemStackedOnOtherEvent event) {
-
-		event.getSlot();
-	}
-
-	@Override
 	public void onEquippedTick(LivingEntity user, EquipmentSlot slot, ItemStack stack)
 	{
 		Vec3 delta = user.getDeltaMovement();

@@ -28,13 +28,13 @@ public class DivingGearProperty extends Property
 			event.addModifier(Attributes.OXYGEN_BONUS, OXYGEN_MOD, EquipmentSlotGroup.BODY);
 		if(slot == EquipmentSlot.HEAD)
 			event.addModifier(Attributes.OXYGEN_BONUS, OXYGEN_MOD, EquipmentSlotGroup.CHEST);
-		if(slot == EquipmentSlot.CHEST)
+		else if(slot == EquipmentSlot.CHEST)
 			event.addModifier(Attributes.SUBMERGED_MINING_SPEED, SPEED_MOD, EquipmentSlotGroup.CHEST);
 		else if(slot == EquipmentSlot.LEGS)
 			event.addModifier(NeoForgeMod.SWIM_SPEED, SPEED_MOD, EquipmentSlotGroup.LEGS);
 		else if(slot == EquipmentSlot.FEET)
 			event.addModifier(Attributes.WATER_MOVEMENT_EFFICIENCY, SPEED_MOD, EquipmentSlotGroup.FEET);
-		else if(slot != EquipmentSlot.HEAD)
+		else if(slot == EquipmentSlot.MAINHAND)
 			event.addModifier(Attributes.SUBMERGED_MINING_SPEED, MINING_MOD, EquipmentSlotGroup.MAINHAND);
 	}
 
