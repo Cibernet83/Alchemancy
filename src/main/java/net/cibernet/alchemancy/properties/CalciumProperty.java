@@ -15,8 +15,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class CalciumProperty extends Property
 {
-	private static final AttributeModifier SAFE_FALL_MOD = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "calcaerous_property_modifier"), 10F, AttributeModifier.Operation.ADD_VALUE);
-	private static final AttributeModifier FALL_DAMAGE_MOD = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "calcaerous_property_modifier"), -0.5, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+	private static final AttributeModifier SAFE_FALL_MOD = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "calcareous_property_modifier"), 10F, AttributeModifier.Operation.ADD_VALUE);
+	private static final AttributeModifier FALL_DAMAGE_MOD = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "calcareous_property_modifier"), -0.5, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 
 	@Override
 	public void applyAttributes(ItemAttributeModifierEvent event)

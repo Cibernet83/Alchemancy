@@ -148,6 +148,7 @@ public class AlchemancyProperties
 
 	//Resistances
 	public static final DeferredHolder<Property, CozyProperty> COZY = REGISTRY.register("cozy", CozyProperty::new);
+	public static final DeferredHolder<Property, WaxedProperty> WAXED = REGISTRY.register("waxed", WaxedProperty::new);
 	public static final DeferredHolder<Property, FireproofProperty> FIRE_RESISTANT = REGISTRY.register("fire_resistant", FireproofProperty::new);
 	public static final DeferredHolder<Property, ConditionalDamageReductionProperty> BLAST_RESISTANT = REGISTRY.register("blast_resistant", () -> ConditionalDamageReductionProperty.reduceExplosionDamage(0x3B2754)); //2CCC26
 	public static final DeferredHolder<Property, ConditionalDamageReductionProperty> INSULATED = REGISTRY.register("insulated", () -> ConditionalDamageReductionProperty.reduceShockDamage(0x659191));
@@ -181,7 +182,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, LooseProperty> LOOSE = REGISTRY.register("loose", LooseProperty::new);
 	public static final DeferredHolder<Property, SparkingProperty> SPARKING = REGISTRY.register("sparking", SparkingProperty::new);
 	public static final DeferredHolder<Property, ExtendedProperty> EXTENDED = REGISTRY.register("extended", ExtendedProperty::new);
-	public static final DeferredHolder<Property, CalciumProperty> CALCAEROUS = REGISTRY.register("calcaerous", CalciumProperty::new);
+	public static final DeferredHolder<Property, CalciumProperty> CALCAREOUS = REGISTRY.register("calcareous", CalciumProperty::new);
 	public static final DeferredHolder<Property, MusicalProperty> MUSICAL = REGISTRY.register("musical", MusicalProperty::new);
 	public static final DeferredHolder<Property, EntityPullProperty<Projectile>> TARGETED = REGISTRY.register("targeted", () -> new EntityPullProperty<>(0xDC4A4A, Projectile.class, 12, false));
 
