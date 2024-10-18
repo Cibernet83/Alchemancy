@@ -1,0 +1,12 @@
+{
+  "type": "alchemancy:item_transmutation",
+
+  "catalyst": {
+    "item": "minecraft:wither_skeleton_skull"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:skeleton_skull"
+  }
+}

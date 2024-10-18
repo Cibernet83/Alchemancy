@@ -2,15 +2,15 @@
   "type": "alchemancy:forged_item",
 
   "properties": [
-    "alchemancy:warped"
+    "alchemancy:undying"
   ],
 
   "catalyst": {
-    "item": "minecraft:wither_skeleton_skull"
+    "item": "minecraft:skeleton_head"
   },
 
   "result": {
     "count": 1,
-    "id": "minecraft:skeleton_skull"
+    "id": "minecraft:player_head"
   }
 }
