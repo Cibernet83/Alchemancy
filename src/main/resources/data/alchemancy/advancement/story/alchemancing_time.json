@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:story/enter_the_nether",
+  "criteria": {
+    "has_forge": {
+      "conditions": {
+        "items": [
+          {
+            "items": "alchemancy:alchemancy_forge"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.story.alchemancy:alchemancing_time.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "alchemancy:alchemancy_forge"
+    },
+    "title": {
+      "translate": "advancements.story.alchemancy:alchemancing_time.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_forge"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

@@ -257,5 +257,8 @@
   "death.attack.alchemancy.gamble": "%s died from a gambling addiction",
   "death.attack.alchemancy.gamble.player": "%1$s gambled too hard whilst fighting %2$s",
   "death.attack.alchemancy.gamble.item": "%1$s gambled too hard whilst fighting %2$s",
-  "death.attack.alchemancy.soul_escaped": "%s felt the wrath of a fleeing soul"
+  "death.attack.alchemancy.soul_escaped": "%s felt the wrath of a fleeing soul",
+
+  "advancements.story.alchemancy:alchemancing_time.title": "It's Alchemancing Time",
+  "advancements.story.alchemancy:alchemancing_time.description": "Use Alchemical Extract to craft an Alchemancy Forge. Now place it down, right-click it, and start Alchemancing!"
 }
