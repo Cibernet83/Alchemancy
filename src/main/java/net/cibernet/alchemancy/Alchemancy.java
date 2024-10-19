@@ -62,19 +62,11 @@ public class Alchemancy {
 		AlchemancyParticles.REGISTRY.register(modEventBus);
 
 		// Register our mod's ModConfigSpec so that FML can create and load the config file for us
-		modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+		//modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 	}
 
-	private void commonSetup(final FMLCommonSetupEvent event) {
-		// Some common setup code
-		LOGGER.info("HELLO FROM COMMON SETUP");
-
-		if (Config.logDirtBlock)
-			LOGGER.info("DIRT BLOCK >> {}", BuiltInRegistries.BLOCK.getKey(Blocks.DIRT));
-
-		LOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
-
-		Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
+	private void commonSetup(final FMLCommonSetupEvent event)
+	{
 	}
 
 }
