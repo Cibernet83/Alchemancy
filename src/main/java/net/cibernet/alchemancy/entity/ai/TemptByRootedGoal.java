@@ -1,8 +1,10 @@
 package net.cibernet.alchemancy.entity.ai;
 
+import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.blocks.blockentities.RootedItemBlockEntity;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
+import net.cibernet.alchemancy.registries.AlchemancyBlocks;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
@@ -13,6 +15,7 @@ import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 import javax.annotation.Nullable;
@@ -51,12 +54,14 @@ public class TemptByRootedGoal extends Goal
 			return false;
 		} else {
 
+			Level level = mob.level();
 			targetPos = BlockPos.findClosestMatch(mob.blockPosition(), 36, 1,
-					checkPos -> mob.level().getBlockEntity(checkPos) instanceof RootedItemBlockEntity root && this.items.test(root.getItem())).orElse(null);
+					checkPos ->  level.getBlockState(checkPos).is(AlchemancyBlocks.ROOTED_ITEM) && level.getBlockEntity(checkPos) instanceof RootedItemBlockEntity root && this.items.test(root.getItem())).orElse(null);
 
 			return targetPos != null;
 		}
 	}
+
 
 	@Override
 	public boolean canContinueToUse()

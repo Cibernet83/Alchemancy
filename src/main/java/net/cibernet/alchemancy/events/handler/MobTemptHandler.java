@@ -84,7 +84,7 @@ public class MobTemptHandler
 				if(entityPredicate.test(mob))
 				{
 					mob.goalSelector.addGoal(3, new TemptGoal(mob, 1.25, stack -> InfusedPropertiesHelper.hasProperty(stack, propertyHolder), false));
-					mob.goalSelector.addGoal(3, new TemptByRootedGoal(mob, 1.25, propertyHolder));
+					//mob.goalSelector.addGoal(3, new TemptByRootedGoal(mob, 1.25, propertyHolder)); TODO REALLY needs optimizing
 				}
 			}));
 		}
