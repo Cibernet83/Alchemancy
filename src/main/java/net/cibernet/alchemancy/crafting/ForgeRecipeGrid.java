@@ -363,7 +363,10 @@ public class ForgeRecipeGrid implements RecipeInput
 				if(!InfusedPropertiesHelper.getInfusedProperties(target).isEmpty())
 				{
 					if(consume)
+					{
 						consumeItem(pedestal);
+						InfusedPropertiesHelper.clearAllInfusions(target);
+					}
 					return true;
 				}
 				return false;
