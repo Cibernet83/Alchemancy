@@ -1,12 +1,14 @@
 package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.Alchemancy;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -25,7 +27,7 @@ public class BouncyProperty extends Property
 	@Override
 	public void onActivation(@Nullable Entity source, Entity target, ItemStack stack, DamageSource damageSource) {
 
-		Vec3 sourcePos = source == target ? target.getEyePosition().add(target.getLookAngle()) :
+		Vec3 sourcePos = source == target ? target.getEyePosition().add(target.getLookAngle().scale(10)) :
 				source != null ? source.position() :
 				damageSource.getSourcePosition() != null ? damageSource.getSourcePosition() :
 				damageSource.getDirectEntity() != null ? damageSource.getDirectEntity().position() : null;
