@@ -1,6 +1,5 @@
 package net.cibernet.alchemancy.events.handler;
 
-import net.cibernet.alchemancy.entity.ai.ScareGoal;
 import net.cibernet.alchemancy.entity.ai.TemptByRootedGoal;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
@@ -9,8 +8,6 @@ import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.minecraft.core.Holder;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -19,7 +16,6 @@ import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 @EventBusSubscriber
@@ -84,7 +80,7 @@ public class MobTemptHandler
 				if(entityPredicate.test(mob))
 				{
 					mob.goalSelector.addGoal(3, new TemptGoal(mob, 1.25, stack -> InfusedPropertiesHelper.hasProperty(stack, propertyHolder), false));
-					//mob.goalSelector.addGoal(3, new TemptByRootedGoal(mob, 1.25, propertyHolder)); TODO REALLY needs optimizing
+					mob.goalSelector.addGoal(0, new TemptByRootedGoal(mob, 1.25, propertyHolder));
 				}
 			}));
 		}
