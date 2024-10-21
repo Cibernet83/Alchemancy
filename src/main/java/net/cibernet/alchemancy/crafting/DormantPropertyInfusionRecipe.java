@@ -2,6 +2,7 @@ package net.cibernet.alchemancy.crafting;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.cibernet.alchemancy.advancements.predicates.ForgeRecipePredicate;
 import net.cibernet.alchemancy.registries.AlchemancyRecipeTypes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -9,8 +10,10 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.util.TriState;
 import org.apache.commons.lang3.function.TriFunction;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,6 +46,13 @@ public class DormantPropertyInfusionRecipe extends AbstractForgeRecipe<Object>
 	@Override
 	protected Object getResult() {
 		return null;
+	}
+
+	@Override
+	public TriState matches(ForgeRecipePredicate forgeRecipePredicate, ForgeRecipeGrid grid)
+	{
+		return forgeRecipePredicate.outputProperties().isEmpty() || forgeRecipePredicate.outputProperties().get().isEmpty() ? TriState.DEFAULT :
+				new HashSet<>(grid.getDormantProperties()).containsAll(forgeRecipePredicate.outputProperties().get()) ? TriState.TRUE : TriState.FALSE;
 	}
 
 	@Override
