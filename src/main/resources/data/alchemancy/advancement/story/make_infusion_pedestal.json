@@ -1,0 +1,34 @@
+{
+  "parent": "alchemancy:story/transmute_any",
+  "criteria": {
+    "discovered": {
+      "conditions": {
+        "recipe_predicate": {
+          "recipe_type": "alchemancy:item_transmutation",
+          "item": {
+            "item": "alchemancy:infusion_pedestal"
+          }
+        }
+      },
+      "trigger": "alchemancy:perform_forge_recipe"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.story.alchemancy:transmute_any.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "alchemancy:infusion_pedestal"
+    },
+    "title": {
+      "translate": "advancements.story.alchemancy:transmute_any.title"
+    }
+  },
+  "requirements": [
+    [
+      "discovered"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

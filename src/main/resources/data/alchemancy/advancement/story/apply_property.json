@@ -1,0 +1,27 @@
+{
+  "parent": "alchemancy:story/alchemancing_time",
+  "criteria": {
+    "discovered": {
+      "conditions": {},
+      "trigger": "alchemancy:discover_property"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.story.alchemancy:apply_property.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "alchemancy:blazing_substance"
+    },
+    "title": {
+      "translate": "advancements.story.alchemancy:apply_property.title"
+    }
+  },
+  "requirements": [
+    [
+      "discovered"
+    ]
+  ],
+  "sends_telemetry_event": false
+}
