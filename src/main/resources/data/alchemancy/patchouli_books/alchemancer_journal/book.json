@@ -1,0 +1,7 @@
+{
+  "name": "Alchemancer's Journal",
+  "landing_text": "the text with the landing",
+  "version": 1,
+  "creative_tab": "alchemancy:alchemancy",
+  "use_resource_pack": true
+}
