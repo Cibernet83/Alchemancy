@@ -11,6 +11,7 @@ import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.blockentity.BeaconRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
@@ -21,7 +22,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 
-@EventBusSubscriber(Dist.CLIENT)
 public class AlchemancyCatalystRenderer implements BlockEntityRenderer<AlchemancyCatalystBlockEntity>
 {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "alchemancy_catalyst"), "main");
@@ -29,7 +29,6 @@ public class AlchemancyCatalystRenderer implements BlockEntityRenderer<Alchemanc
 	private final ModelPart outer;
 	private final ModelPart inner;
 
-	private static float globalTime = 0;
 
 	public AlchemancyCatalystRenderer(BlockEntityRendererProvider.Context context)
 	{
@@ -57,22 +56,26 @@ public class AlchemancyCatalystRenderer implements BlockEntityRenderer<Alchemanc
 		float scale = 1;
 		poseStack.translate(0.5, -0.5, 0.5);
 
-		float time = blockEntity.getSpinOffset() + ((globalTime + partialTick) * 0.05f);
-		inner.yRot = time % 360;
-		inner.y = Mth.sin(time * 1.5f) * 2f / scale;
-
 		outer.render(poseStack, bufferSource.getBuffer(RenderType.entityTranslucentCull(FRAME_TEXTURE_LOCATION)), packedLight, packedOverlay);
 		poseStack.translate(0, 0.5 - 0.5 * scale, 0);
 		poseStack.scale(scale, scale, scale);
+
+		float animationProgress = blockEntity.getAnimationProgressLeft(partialTick);
+
+		if(animationProgress > 0)
+		{
+			poseStack.pushPose();
+			poseStack.translate(-0.5, 0, -0.5);
+			BeaconRenderer.renderBeaconBeam(poseStack, bufferSource, BeaconRenderer.BEAM_LOCATION, partialTick, 1.0F, blockEntity.getLevel().getGameTime(), -1, 2, blockEntity.getTint(), 0.2F * animationProgress, 0.25F * animationProgress);
+			poseStack.popPose();
+		}
+
+		float time = blockEntity.getSpinOffset() + blockEntity.getRotationTime(partialTick);
+		inner.yRot = time % 360;
+		inner.y = (Mth.lerp(Math.max(0, animationProgress - 0.5f) * 2, Mth.sin(time * 1.5f) * 2f, 0) - Math.max(0, animationProgress - 0.5f) * 8) / scale;
+
 		outer.render(poseStack, bufferSource.getBuffer(
 				RenderType.entityTranslucentCull(ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "textures/entity/alchemancy_catalyst/"+ blockEntity.getCrystalTexture() + ".png"))),
 				LightTexture.FULL_BRIGHT, packedOverlay, blockEntity.getTint());
-	}
-
-	@SubscribeEvent
-	public static void onClientTick(ClientTickEvent.Pre event)
-	{
-		if(Minecraft.getInstance().level != null && !Minecraft.getInstance().level.tickRateManager().isFrozen())
-			globalTime++;
 	}
 }

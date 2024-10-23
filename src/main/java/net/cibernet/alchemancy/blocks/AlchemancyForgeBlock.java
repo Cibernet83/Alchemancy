@@ -20,6 +20,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class AlchemancyForgeBlock extends InfusionPedestalBlock
 {
+
 	public AlchemancyForgeBlock(Properties properties) {
 		super(properties);
 	}
@@ -34,14 +35,16 @@ public class AlchemancyForgeBlock extends InfusionPedestalBlock
 	@Override
 	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
 	{
-		//TODO make it use essense to initiate
 		BlockPos targetPos = pos.above(2);
 
 		if(level.getBlockState(targetPos).is(AlchemancyTags.Blocks.ALCHEMANCY_CRYSTAL_CATALYSTS))
 		{
 			level.destroyBlock(targetPos, false);
 			level.setBlockAndUpdate(targetPos, AlchemancyBlocks.ALCHEMANCY_CATALYST.get().defaultBlockState());
-			level.playSound(null, pos, SoundEvents.BEACON_ACTIVATE, SoundSource.BLOCKS, 1, 1);
+
+			if(!level.isClientSide && level.getBlockEntity(targetPos) instanceof AlchemancyCatalystBlockEntity catalyst)
+				catalyst.playAnimation(true);
+
 			return ItemInteractionResult.SUCCESS;
 		}
 

@@ -3,10 +3,11 @@ package net.cibernet.alchemancy.blocks;
 import com.mojang.authlib.properties.PropertyMap;
 import com.mojang.serialization.MapCodec;
 import net.cibernet.alchemancy.blocks.blockentities.AlchemancyCatalystBlockEntity;
-import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.blocks.blockentities.ItemStackHolderBlockEntity;
-import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.crafting.AbstractForgeRecipe;
+import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
+import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.registries.AlchemancyBlockEntities;
 import net.cibernet.alchemancy.registries.AlchemancyBlocks;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyRecipeTypes;
@@ -21,10 +22,15 @@ import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ResolvableProfile;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.TransparentBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
@@ -112,6 +118,9 @@ public class AlchemancyCatalystBlock extends TransparentBlock implements EntityB
 
 			ItemStackHolderBlockEntity.dropItem(level, forgePos, output);
 			forge.notifyInventoryUpdate();
+
+			if(level.getBlockEntity(catalystPos) instanceof AlchemancyCatalystBlockEntity catalyst)
+				catalyst.playAnimation(false);
 		}
 	}
 
@@ -139,5 +148,18 @@ public class AlchemancyCatalystBlock extends TransparentBlock implements EntityB
 		super.onPlace(state, level, pos, oldState, movedByPiston);
 		if(level.getBlockEntity(pos) instanceof AlchemancyCatalystBlockEntity catalyst)
 			catalyst.randomizeSpinOffset(level.random);
+	}
+
+	@Nullable
+	@Override
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType)
+	{
+		return (BlockEntityTicker<T>) createTicker(level, blockEntityType);
+	}
+
+	@javax.annotation.Nullable
+	protected static <T extends AlchemancyCatalystBlockEntity> BlockEntityTicker<AlchemancyCatalystBlockEntity> createTicker(
+			Level level, BlockEntityType<? extends BlockEntity> serverType) {
+		return serverType != AlchemancyBlockEntities.ALCHEMANCY_CATALYST.get() ? null : level.isClientSide ? AlchemancyCatalystBlockEntity::clientTick : AlchemancyCatalystBlockEntity::serverTick;
 	}
 }
