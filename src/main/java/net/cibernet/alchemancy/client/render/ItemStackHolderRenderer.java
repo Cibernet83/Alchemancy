@@ -36,7 +36,10 @@ public class ItemStackHolderRenderer implements BlockEntityRenderer<ItemStackHol
 		BlockPos itemLightPos = blockEntity.getBlockPos().above();
 		poseStack.pushPose();
 		//pMatrixStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
-		poseStack.translate(0.5f, 1.2f, 0.5f);
+
+		double height = blockEntity.getBlockState().getShape(level, blockEntity.getBlockPos()).bounds().maxY;
+
+		poseStack.translate(0.5f, height + 0.2f, 0.5f);
 		poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockState().getValue(InfusionPedestalBlock.FACING).toYRot()));
 		this.itemRenderer.renderStatic(blockEntity.getItem(), ItemDisplayContext.GROUND, LightTexture.pack(level.getBrightness(LightLayer.BLOCK, itemLightPos),
 				level.getBrightness(LightLayer.SKY, itemLightPos)), OverlayTexture.NO_OVERLAY, poseStack, bufferSource, level, 0);
