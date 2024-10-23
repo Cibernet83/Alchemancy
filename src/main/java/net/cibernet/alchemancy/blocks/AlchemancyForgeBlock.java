@@ -24,7 +24,7 @@ public class AlchemancyForgeBlock extends InfusionPedestalBlock
 		//TODO make it use essense to initiate
 		BlockPos targetPos = pos.above(2);
 
-		if(level.getBlockState(targetPos).canBeReplaced())
+		if(level.getBlockState(targetPos).is(AlchemancyTags.Blocks.ALCHEMANCY_CRYSTAL_CATALYSTS))
 		{
 			level.destroyBlock(targetPos, true);
 			level.setBlockAndUpdate(targetPos, AlchemancyBlocks.ALCHEMANCY_CATALYST.get().defaultBlockState());
