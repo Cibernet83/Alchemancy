@@ -187,7 +187,8 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, EntityPullProperty<Projectile>> TARGETED = REGISTRY.register("targeted", () -> new EntityPullProperty<>(0xDC4A4A, Projectile.class, 12, false));
 
 	//Cosmetic
-	public static final DeferredHolder<Property, Property> REVEALING = REGISTRY.register("revealing", () -> Property.simple(0xD6DDFF));
+	public static final DeferredHolder<Property, Property> REVEALED = REGISTRY.register("revealed", () -> Property.simple(0xD6DDFF));
+	public static final DeferredHolder<Property, Property> REVEALING = REGISTRY.register("revealing", () -> Property.simple((style) -> style.withBold(true), () -> 0xD6DDFF));
 	public static final DeferredHolder<Property, Property> SCRAMBLED = REGISTRY.register("scrambled", () -> Property.simple(0x292200));
 	public static final DeferredHolder<Property, Property> CONCEALED = REGISTRY.register("concealed", () -> Property.simple(0x605665));
 	public static final DeferredHolder<Property, DisguisedProperty> DISGUISED = REGISTRY.register("disguised", DisguisedProperty::new);

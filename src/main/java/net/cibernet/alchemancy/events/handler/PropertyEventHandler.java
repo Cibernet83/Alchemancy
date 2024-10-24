@@ -422,7 +422,7 @@ public class PropertyEventHandler
 			storedProperties.forEachProperty(holder -> event.getToolTip().add(holder.value().getName(stack)));
 		}
 
-		if(event.getEntity() != null && (InfusedPropertiesHelper.hasInfusedProperty(stack, AlchemancyProperties.REVEALING) ||
+		if(event.getEntity() != null && (InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.REVEALED) ||
 				InfusedPropertiesHelper.hasProperty(event.getEntity().getItemBySlot(EquipmentSlot.HEAD), AlchemancyProperties.REVEALING)))
 		{
 			List<Holder<Property>> dormantProperties = AlchemancyProperties.getDormantProperties(stack);
