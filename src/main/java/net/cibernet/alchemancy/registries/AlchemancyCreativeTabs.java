@@ -51,6 +51,10 @@ public class AlchemancyCreativeTabs
 				output.accept(LEAD_LEGGINGS.get());
 				output.accept(LEAD_BOOTS.get());
 
+				output.accept(BLANK_PEARL.get());
+				output.accept(REVEALING_PEARL.get());
+				output.accept(GLOWING_ORB.get());
+
 				output.accept(MICROSPACE_SINGULARITY.get());
 				output.accept(MACROSPACE_SINGULARITY.get());
 			}).build());

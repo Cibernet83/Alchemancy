@@ -2,7 +2,7 @@
   "type": "alchemancy:forged_item",
 
   "properties": [
-    "alchemancy:scoping"
+    "alchemancy:ender"
   ],
 
   "catalyst": {
@@ -11,6 +11,6 @@
 
   "result": {
     "count": 1,
-    "id": "alchemancy:microspace_singularity"
+    "id": "minecraft:ender_pearl"
   }
 }

@@ -24,6 +24,7 @@
 
   "block.alchemancy.rooted_item": "Rooted Item",
   "block.alchemancy.sculk_bud": "Sculk Bud",
+  "block.alchemancy.glowing_orb": "Glowing Orb",
 
   "item.alchemancy.blazing_substance": "Alchemical Extract",
   "item.alchemancy.gusty_substance": "Gusty Substance",
@@ -61,8 +62,13 @@
   "item.alchemancy.dreamsteel_leggings": "Dreamsteel Leggings",
   "item.alchemancy.dreamsteel_boots": "Dreamsteel Boots",
 
-  "item.alchemancy.microspace_singularity": "Orb of Small",
-  "item.alchemancy.macrospace_singularity": "Orb of Big",
+  "item.alchemancy.blank_pearl": "Blank Pearl",
+  "item.alchemancy.revealing_pearl": "Revealing Pearl",
+
+  "item.alchemancy.microspace_singularity": "Microspace Singularity",
+  "item.alchemancy.macrospace_singularity": "Macrospace Singularity",
+
+  "item.alchemancy.eternal_glow_ring": "Ring of Eternal Glow",
 
   "item.alchemancy.property_capsule": "Property Capsule",
 

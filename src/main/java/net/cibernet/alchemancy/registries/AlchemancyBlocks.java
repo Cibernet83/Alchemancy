@@ -59,6 +59,12 @@ public class AlchemancyBlocks
 	public static final DeferredBlock<RootedItemBlock> ROOTED_ITEM = REGISTRY.register("rooted_item", () -> new RootedItemBlock(BlockBehaviour.Properties.of().noOcclusion().mapColor(MapColor.PLANT)));
 	public static final DeferredBlock<SculkBudBlock> SCULK_BUD = REGISTRY.register("sculk_bud", () -> new SculkBudBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_BLACK).strength(0.2F).sound(SoundType.SCULK)));
 
-	public static final DeferredBlock<GlowingOrbBlock> GLOWING_ORB = REGISTRY.register("glowing_orb", () -> new GlowingOrbBlock(BlockBehaviour.Properties.of().noCollission().instabreak().pushReaction(PushReaction.DESTROY).lightLevel(state -> 15)));
+	public static final DeferredBlock<GlowingOrbBlock> GLOWING_ORB = REGISTRY.register("glowing_orb", () -> new GlowingOrbBlock(
+			BlockBehaviour.Properties.of()
+					.noCollission()
+					.instabreak()
+					.pushReaction(PushReaction.DESTROY)
+					.replaceable()
+					.lightLevel(state -> 15)));
 
 }
