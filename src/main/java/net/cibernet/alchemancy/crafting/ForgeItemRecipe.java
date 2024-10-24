@@ -38,7 +38,15 @@ public class ForgeItemRecipe extends AbstractForgeRecipe<ItemStack>
 	@Override
 	public TriFunction<ForgeRecipeGrid, HolderLookup.Provider, ItemStack, ItemStack> processResult()
 	{
-		return (input, registries, output) -> InfusedPropertiesHelper.addProperties(result.copy(), InfusedPropertiesHelper.getInfusedProperties(output));
+		return (input, registries, output) -> {
+
+			ItemStack result = this.result.copy();
+
+			if(ItemStack.isSameItem(result, input.getCurrentOutput()))
+				result.setCount(result.getCount() + input.getCurrentOutput().getCount() - 1);
+
+			return InfusedPropertiesHelper.addProperties(result, InfusedPropertiesHelper.getInfusedProperties(output));
+		};
 	}
 
 	@Override
