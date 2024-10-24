@@ -119,6 +119,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, SporadicProperty> SPORADIC = REGISTRY.register("sporadic", SporadicProperty::new);
 	public static final DeferredHolder<Property, ShatteringProperty> SHATTERING = REGISTRY.register("shattering", ShatteringProperty::new);
 	public static final DeferredHolder<Property, ThrowableProperty> THROWABLE = REGISTRY.register("throwable", ThrowableProperty::new);
+	public static final DeferredHolder<Property, ToggleableProperty> TOGGLEABLE = REGISTRY.register("toggleable", ToggleableProperty::new);
 
 	//Mob Effects
 	public static final DeferredHolder<Property, LevitatingProperty> LEVITATING = REGISTRY.register("levitating", LevitatingProperty::new);

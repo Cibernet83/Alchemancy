@@ -46,6 +46,11 @@ public class InfusedPropertiesHelper
 		return !stack.isEmpty() && stack.has(INFUSED_PROPERTIES.get()) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(property);
 	}
 
+	public static boolean hasInnateProperty(ItemStack stack, Holder<Property> property)
+	{
+		return !stack.isEmpty() && stack.has(INNATE_PROPERTIES.get()) && stack.get(INNATE_PROPERTIES.get()).hasProperty(property);
+	}
+
 	public static boolean modifyInfusions(ItemStack stack, Function<InfusedPropertiesComponent.Mutable, Boolean> consumer)
 	{
 		InfusedPropertiesComponent.Mutable mutable = new InfusedPropertiesComponent.Mutable(stack.getOrDefault(INFUSED_PROPERTIES.get(), InfusedPropertiesComponent.EMPTY));
@@ -56,10 +61,20 @@ public class InfusedPropertiesHelper
 
 	public static void forEachProperty(ItemStack stack, Consumer<Holder<Property>> consumer)
 	{
+		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().getData(stack);
+
 		if (stack.has(INFUSED_PROPERTIES.get()))
-			stack.get(INFUSED_PROPERTIES.get()).forEachProperty(consumer);
+		{
+			if(!toggled && hasInfusedProperty(stack, AlchemancyProperties.TOGGLEABLE))
+				consumer.accept(AlchemancyProperties.TOGGLEABLE);
+			else stack.get(INFUSED_PROPERTIES.get()).forEachProperty(consumer);
+		}
 		if (stack.has(INNATE_PROPERTIES.get()))
-			stack.get(INNATE_PROPERTIES.get()).forEachProperty(consumer);
+		{
+			if(!toggled && hasInnateProperty(stack, AlchemancyProperties.TOGGLEABLE))
+				consumer.accept(AlchemancyProperties.TOGGLEABLE);
+			else stack.get(INNATE_PROPERTIES.get()).forEachProperty(consumer);
+		}
 		if(hasProperty(stack, AlchemancyProperties.AWAKENED))
 			AlchemancyProperties.getDormantProperties(stack).forEach(consumer);
 	}
