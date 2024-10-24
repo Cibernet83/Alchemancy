@@ -365,6 +365,7 @@ public class ForgeRecipeGrid implements RecipeInput
 					if(consume)
 					{
 						consumeItem(pedestal);
+						items.remove(pedestal);
 						InfusedPropertiesHelper.clearAllInfusions(target);
 					}
 					return true;
@@ -392,6 +393,7 @@ public class ForgeRecipeGrid implements RecipeInput
 				if(consume)
 				{
 					InfusedPropertiesHelper.addProperties(target, properties);
+					items.remove(pedestal);
 					consumeItem(pedestal);
 				}
 			}
