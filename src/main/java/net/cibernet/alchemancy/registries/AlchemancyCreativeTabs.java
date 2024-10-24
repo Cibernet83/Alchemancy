@@ -57,6 +57,9 @@ public class AlchemancyCreativeTabs
 
 				output.accept(MICROSPACE_SINGULARITY.get());
 				output.accept(MACROSPACE_SINGULARITY.get());
+
+				output.accept(ETERNAL_GLOW_RING.get());
+
 			}).build());
 
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> PROPERTIES = REGISTRY.register("alchemancy_properties", () -> CreativeModeTab.builder()

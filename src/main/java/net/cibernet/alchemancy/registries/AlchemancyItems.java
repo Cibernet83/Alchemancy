@@ -2,6 +2,7 @@ package net.cibernet.alchemancy.registries;
 
 import com.mojang.serialization.Codec;
 import net.cibernet.alchemancy.Alchemancy;
+import net.cibernet.alchemancy.item.InnatePropertyItem;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
 import net.cibernet.alchemancy.item.components.PropertyDataComponent;
 import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
@@ -68,6 +69,8 @@ public class AlchemancyItems
 
 	public static final DeferredItem<Item> MICROSPACE_SINGULARITY = REGISTRY.registerSimpleItem("microspace_singularity");
 	public static final DeferredItem<Item> MACROSPACE_SINGULARITY = REGISTRY.registerSimpleItem("macrospace_singularity");
+
+	public static final DeferredItem<Item> ETERNAL_GLOW_RING = REGISTRY.register("eternal_glow_ring", () -> new InnatePropertyItem(new Item.Properties(), AlchemancyProperties.ETERNAL_GLOW, AlchemancyProperties.TOGGLEABLE));
 
 	public static final DeferredItem<Item> PROPERTY_CAPSULE = REGISTRY.registerSimpleItem("property_capsule");
 

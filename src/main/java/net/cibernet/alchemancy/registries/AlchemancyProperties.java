@@ -214,6 +214,8 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, Property> QUANTUM_BIND = REGISTRY.register("quantum_bind", () -> Property.simple(0xFFFF00));
 	public static final DeferredHolder<Property, PhasingProperty> PHASING = REGISTRY.register("phasing", PhasingProperty::new);
 
+	public static final DeferredHolder<Property, GlowRingProperty> ETERNAL_GLOW = REGISTRY.register("eternal_glow", GlowRingProperty::new);
+
 	//TODO
 	//Arcane: ??? - Dragon's Breath/Dragon Head
 	//Wayfinding: ??? - Compass/Maps

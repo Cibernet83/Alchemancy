@@ -3,15 +3,20 @@ package net.cibernet.alchemancy;
 import net.cibernet.alchemancy.client.render.AlchemancyCatalystRenderer;
 import net.cibernet.alchemancy.client.render.ItemStackHolderRenderer;
 import net.cibernet.alchemancy.client.render.RootedItemRenderer;
+import net.cibernet.alchemancy.item.InnatePropertyItem;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
 import net.cibernet.alchemancy.registries.AlchemancyBlockEntities;
 import net.cibernet.alchemancy.registries.AlchemancyEntities;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
+import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.FallingBlockRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
+import net.minecraft.world.item.Item;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -40,6 +45,13 @@ public class AlchemancyClient
 
 		EntityRenderers.register(AlchemancyEntities.ITEM_PROJECTILE.get(), ThrownItemRenderer::new);
 		EntityRenderers.register(AlchemancyEntities.FALLING_BLOCK.get(), FallingBlockRenderer::new);
+
+		ResourceLocation toggled = ResourceLocation.fromNamespaceAndPath(MODID, "toggled");
+		for (Item toggleableItem : InnatePropertyItem.TOGGLEABLE_ITEMS)
+			ItemProperties.register(toggleableItem, toggled, ((stack, level, entity, seed) -> {
+				return AlchemancyProperties.TOGGLEABLE.get().getData(stack) ? 1 : 0;
+			}));
+
 	}
 
 	@SubscribeEvent

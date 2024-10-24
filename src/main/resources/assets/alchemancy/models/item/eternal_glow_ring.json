@@ -1,0 +1,15 @@
+{
+  "parent": "minecraft:item/generated",
+  "render_type": "translucent",
+  "textures": {
+    "layer0": "alchemancy:item/eternal_glow_ring"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "alchemancy:toggled": 1
+      },
+      "model": "alchemancy:item/eternal_glow_ring_enabled"
+    }
+  ]
+}

@@ -258,6 +258,8 @@
   "property.alchemancy.ceaseless_void": "Ceaseless Void",
   "property.alchemancy.quantum_bind": "Quantum Bind",
 
+  "property.alchemancy.eternal_glow": "Eternal Glow",
+
   "death.attack.alchemancy.shock": "%s had a shock to their system",
   "death.attack.alchemancy.shock.player": "%1$s was electrocuted by %2$s",
   "death.attack.alchemancy.shock.item": "%1$s was electrocuted by %2$s using %3$s",
