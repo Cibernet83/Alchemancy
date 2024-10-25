@@ -10,6 +10,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -23,11 +25,14 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 public class RootedItemBlock extends BaseEntityBlock
 {
@@ -41,6 +46,26 @@ public class RootedItemBlock extends BaseEntityBlock
 	@Override
 	public VoxelShape getCollisionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
 		return Shapes.empty();
+	}
+
+	@Override
+	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
+	{
+		if(level.getBlockEntity(pos) instanceof RootedItemBlockEntity root)
+		{
+			ItemStack rootedItem = root.getItem();
+			AtomicReference<ItemInteractionResult> result = new AtomicReference<>(ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION);
+			InfusedPropertiesHelper.forEachProperty(rootedItem, propertyHolder -> {
+
+				ItemInteractionResult propertyResult = propertyHolder.value().onRootedRightClick(root, player, hand, hitResult);
+				if(propertyResult != null)
+					result.set(propertyResult);
+			});
+
+			return result.get();
+		}
+
+		return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
 	}
 
 	@Nullable
