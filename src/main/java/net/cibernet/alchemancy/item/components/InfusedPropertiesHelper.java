@@ -22,8 +22,10 @@ public class InfusedPropertiesHelper
 		if(stack.isEmpty() || property == null)
 			return false;
 
-		return (stack.has(INFUSED_PROPERTIES.get()) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(property)
-			|| (stack.has(INNATE_PROPERTIES.get()) && stack.get(INNATE_PROPERTIES.get()).hasProperty(property)))
+		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().getData(stack);
+
+		return (stack.has(INFUSED_PROPERTIES.get()) && (toggled || !hasInfusedProperty(stack, AlchemancyProperties.TOGGLEABLE)) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(property)
+			|| (stack.has(INNATE_PROPERTIES.get()) && (toggled || !hasInnateProperty(stack, AlchemancyProperties.TOGGLEABLE)) && stack.get(INNATE_PROPERTIES.get()).hasProperty(property)))
 			|| ((property == AlchemancyProperties.AWAKENED || hasProperty(stack, AlchemancyProperties.AWAKENED)) && AlchemancyProperties.getDormantProperties(stack).contains(property));
 	}
 
