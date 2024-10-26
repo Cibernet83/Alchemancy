@@ -10,12 +10,16 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.LevelData;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class CommonUtils
@@ -58,6 +62,22 @@ public class CommonUtils
 		return getPropertyDrivenTint(itemStack, 0, 0xFFFFFFFF);
 	}
 
+	public static void tickInventoryItemProperties(Player player)
+	{
+		for (EquipmentSlot slot : EquipmentSlot.values()) {
+			ItemStack stack = player.getItemBySlot(slot);
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onEquippedTick(player, slot, stack));
+		}
+
+		Inventory inventory = player.getInventory();
+		for(int slot = 0; slot < inventory.getContainerSize(); slot++)
+		{
+			ItemStack stack = inventory.getItem(slot);
+			final int currentSlot = slot;
+			if(!stack.isEmpty())
+				InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onInventoryTick(player, stack, player.level(), currentSlot, inventory.selected == currentSlot));
+		}
+	}
 
 	private static void legacyElasticRangeLeashBehaviour(Entity entity, Entity leashHolder, float distance) {
 		double d0 = (leashHolder.getX() - entity.getX()) / (double)distance;

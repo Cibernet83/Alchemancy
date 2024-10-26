@@ -136,7 +136,7 @@ public class PropertyEventHandler
 	@SubscribeEvent
 	public static void onEntityTick(EntityTickEvent.Pre event)
 	{
-		if(event.getEntity() instanceof LivingEntity living)
+		if(event.getEntity() instanceof LivingEntity living && !(living instanceof Player))
 			for (EquipmentSlot slot : EquipmentSlot.values()) {
 				ItemStack stack = living.getItemBySlot(slot);
 				InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onEquippedTick(living, slot, stack));

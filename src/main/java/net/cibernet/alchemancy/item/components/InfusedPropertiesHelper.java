@@ -108,9 +108,11 @@ public class InfusedPropertiesHelper
 		return stack;
 	}
 
+	public static final int DEFAULT_INFUSION_SLOTS = 4;
+
 	public static int getInfusionSlots(ItemStack stack)
 	{
-		return stack.getOrDefault(AlchemancyItems.Components.INFUSION_SLOTS.get(), 4);
+		return stack.getOrDefault(AlchemancyItems.Components.INFUSION_SLOTS.get(), DEFAULT_INFUSION_SLOTS);
 	}
 
 	public static ItemStack truncateProperties(ItemStack stack)

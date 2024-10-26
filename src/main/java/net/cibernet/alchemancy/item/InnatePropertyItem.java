@@ -1,8 +1,10 @@
 package net.cibernet.alchemancy.item;
 
 import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
+import net.cibernet.alchemancy.item.components.PropertyDataComponent;
 import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
 import net.cibernet.alchemancy.properties.Property;
+import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.properties.data.modifiers.PropertyModifierType;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
@@ -64,7 +66,9 @@ public class InnatePropertyItem extends Item
 		private int useTime = 0;
 		private UseAnim useAnim = UseAnim.NONE;
 		private int stacksTo = 64;
-		private Map<Holder<Property>, Map<Holder<PropertyModifierType<?>>, Object>> modifiers = new HashMap<>();
+		private int infusionSlots = -1;
+		private final Map<Holder<Property>, Map<Holder<PropertyModifierType<?>>, Object>> modifiers = new HashMap<>();
+		private final PropertyDataComponent propertyData = new PropertyDataComponent(new HashMap<>());
 
 		@SafeVarargs
 		public final Builder withProperties(Holder<Property>... properties)
@@ -77,6 +81,12 @@ public class InnatePropertyItem extends Item
 		{
 			this.useTime = useTime;
 			this.useAnim = useAnim;
+			return this;
+		}
+
+		public Builder infusionSlots(int slots)
+		{
+			this.infusionSlots = slots;
 			return this;
 		}
 
@@ -95,6 +105,20 @@ public class InnatePropertyItem extends Item
 			return this;
 		}
 
+		public <T, P extends Property & IDataHolder<T>> Builder addData(DeferredHolder<Property, P> property, T value)
+		{
+			property.value().setData(propertyData, value);
+			return this;
+		}
+
+		public Builder toggleable(boolean enabledByDefault)
+		{
+			withProperties(AlchemancyProperties.TOGGLEABLE);
+			if(!enabledByDefault)
+				addData(AlchemancyProperties.TOGGLEABLE, false);
+			return this;
+		}
+
 		public InnatePropertyItem build()
 		{
 			return build(new Properties());
@@ -106,6 +130,8 @@ public class InnatePropertyItem extends Item
 					.stacksTo(stacksTo)
 					.component(AlchemancyItems.Components.INNATE_PROPERTIES, new InfusedPropertiesComponent(properties))
 					.component(AlchemancyItems.Components.PROPERTY_MODIFIERS, new PropertyModifierComponent(modifiers))
+					.component(AlchemancyItems.Components.PROPERTY_DATA, propertyData)
+					.component(AlchemancyItems.Components.INFUSION_SLOTS, infusionSlots)
 			, useTime, useAnim, properties.contains(AlchemancyProperties.TOGGLEABLE));
 		}
 	}

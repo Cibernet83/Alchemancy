@@ -68,6 +68,7 @@
   "item.alchemancy.microspace_singularity": "Microspace Singularity",
   "item.alchemancy.macrospace_singularity": "Macrospace Singularity",
 
+  "item.alchemancy.iron_ring": "Iron Ring",
   "item.alchemancy.eternal_glow_ring": "Ring of Eternal Glow",
   "item.alchemancy.phasing_ring": "Ring of Phasing",
 
@@ -260,6 +261,7 @@
   "property.alchemancy.ceaseless_void": "Ceaseless Void",
   "property.alchemancy.quantum_bind": "Quantum Bind",
 
+  "property.alchemancy.auxiliary": "Auxiliary",
   "property.alchemancy.eternal_glow": "Eternal Glow",
   "property.alchemancy.phase_step": "Phase Step",
 

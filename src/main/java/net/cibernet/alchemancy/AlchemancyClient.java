@@ -5,6 +5,8 @@ import net.cibernet.alchemancy.client.render.ItemStackHolderRenderer;
 import net.cibernet.alchemancy.client.render.RootedItemRenderer;
 import net.cibernet.alchemancy.item.InnatePropertyItem;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
+import net.cibernet.alchemancy.properties.IncreaseInfuseSlotsProperty;
+import net.cibernet.alchemancy.properties.TintedProperty;
 import net.cibernet.alchemancy.registries.AlchemancyBlockEntities;
 import net.cibernet.alchemancy.registries.AlchemancyEntities;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
@@ -62,5 +64,12 @@ public class AlchemancyClient
 			List<Integer> colors = stack.getOrDefault(AlchemancyItems.Components.STORED_PROPERTIES, InfusedPropertiesComponent.EMPTY).properties().stream().map(propertyHolder -> propertyHolder.value().getColor(stack)).toList();
 			return colors.isEmpty() ? -1 : FastColor.ARGB32.color(255, colors.get((int) Math.abs((System.currentTimeMillis() / 2000) % colors.size())));
 		}), AlchemancyItems.PROPERTY_CAPSULE);
+
+		event.register(((stack, tintIndex) -> {
+			if(tintIndex != 1)
+				return -1;
+			List<Integer> colors = stack.getOrDefault(AlchemancyItems.Components.INFUSED_PROPERTIES, InfusedPropertiesComponent.EMPTY).properties().stream().filter(p -> !(p.value() instanceof IncreaseInfuseSlotsProperty)).map(propertyHolder -> propertyHolder.value().getColor(stack)).toList();
+			return colors.isEmpty() ? -1 : FastColor.ARGB32.color(255, colors.get((int) Math.abs((System.currentTimeMillis() / 2000) % colors.size())));
+		}), AlchemancyItems.IRON_RING);
 	}
 }

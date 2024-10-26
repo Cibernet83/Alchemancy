@@ -79,13 +79,6 @@ public abstract class ItemStackMixin
 			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onActivation(livingEntity, livingEntity, stack));
 	}
 
-	@Inject(method = "inventoryTick", at = @At("RETURN"))
-	public void onInventoryTick(Level level, Entity entity, int inventorySlot, boolean isCurrentItem, CallbackInfo ci)
-	{
-		ItemStack stack = alchemancy$self();
-		InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onInventoryTick(entity, stack, level, inventorySlot, isCurrentItem));
-	}
-
 	@WrapOperation(method = "getDestroySpeed", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/Item;getDestroySpeed(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/level/block/state/BlockState;)F"))
 	public float getDestroySpeed(Item instance, ItemStack stack, BlockState state, Operation<Float> original)
 	{

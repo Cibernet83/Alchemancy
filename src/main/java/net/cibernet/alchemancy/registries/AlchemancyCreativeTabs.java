@@ -58,7 +58,9 @@ public class AlchemancyCreativeTabs
 				output.accept(MICROSPACE_SINGULARITY.get());
 				output.accept(MACROSPACE_SINGULARITY.get());
 
+				output.accept(IRON_RING.get());
 				output.accept(ETERNAL_GLOW_RING.get());
+				output.accept(PHASING_RING.get());
 
 			}).build());
 
