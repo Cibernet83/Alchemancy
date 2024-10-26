@@ -112,7 +112,7 @@ public class InfusedPropertiesHelper
 
 	public static int getInfusionSlots(ItemStack stack)
 	{
-		return stack.getOrDefault(AlchemancyItems.Components.INFUSION_SLOTS.get(), DEFAULT_INFUSION_SLOTS);
+		return Math.max(0, stack.getOrDefault(AlchemancyItems.Components.INFUSION_SLOTS.get(), DEFAULT_INFUSION_SLOTS));
 	}
 
 	public static ItemStack truncateProperties(ItemStack stack)

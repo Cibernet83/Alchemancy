@@ -126,12 +126,13 @@ public class InnatePropertyItem extends Item
 
 		public InnatePropertyItem build(Properties itemProperties)
 		{
+			if(infusionSlots >= 0)
+				itemProperties.component(AlchemancyItems.Components.INFUSION_SLOTS, infusionSlots);
 			return new InnatePropertyItem(itemProperties
 					.stacksTo(stacksTo)
 					.component(AlchemancyItems.Components.INNATE_PROPERTIES, new InfusedPropertiesComponent(properties))
 					.component(AlchemancyItems.Components.PROPERTY_MODIFIERS, new PropertyModifierComponent(modifiers))
 					.component(AlchemancyItems.Components.PROPERTY_DATA, propertyData)
-					.component(AlchemancyItems.Components.INFUSION_SLOTS, infusionSlots)
 			, useTime, useAnim, properties.contains(AlchemancyProperties.TOGGLEABLE));
 		}
 	}
