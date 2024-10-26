@@ -6,10 +6,7 @@ import net.cibernet.alchemancy.properties.*;
 import net.cibernet.alchemancy.properties.data.modifiers.PropertyModifierType;
 import net.cibernet.alchemancy.properties.soulbind.SoulbindProperty;
 import net.cibernet.alchemancy.properties.soulbind.VengefulProperty;
-import net.cibernet.alchemancy.properties.special.BigSuckProperty;
-import net.cibernet.alchemancy.properties.special.BlockVacuumProperty;
-import net.cibernet.alchemancy.properties.special.PhasingProperty;
-import net.cibernet.alchemancy.properties.special.VoidtouchProperty;
+import net.cibernet.alchemancy.properties.special.*;
 import net.cibernet.alchemancy.util.ColorUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -171,6 +168,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, Property> SOULBIND = REGISTRY.register("soulbind", SoulbindProperty::new);
 	public static final DeferredHolder<Property, LoyalProperty> LOYAL = REGISTRY.register("loyal", LoyalProperty::new);
 	public static final DeferredHolder<Property, VengefulProperty> VENGEFUL = REGISTRY.register("vengeful", VengefulProperty::new);
+	public static final DeferredHolder<Property, PhasingProperty> PHASING = REGISTRY.register("phasing", PhasingProperty::new);
 
 	//Misc
 	public static final DeferredHolder<Property, NonlethalProperty> NONLETHAL = REGISTRY.register("nonlethal", NonlethalProperty::new);
@@ -223,9 +221,9 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, BigSuckProperty> CEASELESS_VOID = REGISTRY.register("ceaseless_void", BigSuckProperty::new);
 	public static final DeferredHolder<Property, VoidtouchProperty> VOIDTOUCH = REGISTRY.register("voidtouch", VoidtouchProperty::new);
 	public static final DeferredHolder<Property, Property> QUANTUM_BIND = REGISTRY.register("quantum_bind", () -> Property.simple(0xFFFF00));
-	public static final DeferredHolder<Property, PhasingProperty> PHASING = REGISTRY.register("phasing", PhasingProperty::new);
 
 	public static final DeferredHolder<Property, GlowRingProperty> ETERNAL_GLOW = REGISTRY.register("eternal_glow", GlowRingProperty::new);
+	public static final DeferredHolder<Property, PhaseRingProperty> PHASE_STEP = REGISTRY.register("phase_step", PhaseRingProperty::new);
 
 	//TODO
 	//Arcane: ??? - Dragon's Breath/Dragon Head

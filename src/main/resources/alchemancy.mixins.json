@@ -5,10 +5,12 @@
   "compatibilityLevel": "JAVA_21",
   "refmap": "alchemancy.refmap.json",
   "mixins": [
+    "AbstractArrowMixin",
     "AbstractContainerMenuMixin",
     "BlockMixin",
     "BlockStateExtensionMixin",
     "DataComponentHolderMixin",
+    "ItemEntityMixin",
     "ItemMixin",
     "ItemStackExtensionMixin",
     "ItemStackMixin",

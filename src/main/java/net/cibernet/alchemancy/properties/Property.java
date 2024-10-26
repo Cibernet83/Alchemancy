@@ -433,6 +433,16 @@ public abstract class Property
 
 	}
 
+	/**
+	 *
+	 * @param arrow The AbstractArrow entity sourced from a Property-containing item
+	 * @param stack The Property-containing item the entity originates from (the projectile ammo, not the weapon)
+	 * @return Whether the shot arrow can clip through blocks
+	 */
+	public TriState allowArrowClipBlocks(AbstractArrow arrow, ItemStack stack) {
+		return TriState.DEFAULT;
+	}
+
 	@Nullable
 	public ItemInteractionResult onRootedRightClick(RootedItemBlockEntity root, Player user, InteractionHand hand, BlockHitResult hitResult) {
 		return null;

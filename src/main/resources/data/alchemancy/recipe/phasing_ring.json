@@ -1,0 +1,29 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:phasing",
+    "alchemancy:toggleable"
+  ],
+
+  "infusables": [
+    {
+      "item": "alchemancy:blank_pearl"
+    },
+    {
+      "item": "alchemancy:blank_pearl"
+    },
+    {
+      "item": "alchemancy:blank_pearl"
+    }
+  ],
+
+  "catalyst": {
+    "tag": "c:ingots/iron"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:phasing_ring"
+  }
+}

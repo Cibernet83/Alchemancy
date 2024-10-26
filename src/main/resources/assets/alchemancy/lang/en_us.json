@@ -69,6 +69,7 @@
   "item.alchemancy.macrospace_singularity": "Macrospace Singularity",
 
   "item.alchemancy.eternal_glow_ring": "Ring of Eternal Glow",
+  "item.alchemancy.phasing_ring": "Ring of Phasing",
 
   "item.alchemancy.property_capsule": "Property Capsule",
 
@@ -260,6 +261,7 @@
   "property.alchemancy.quantum_bind": "Quantum Bind",
 
   "property.alchemancy.eternal_glow": "Eternal Glow",
+  "property.alchemancy.phase_step": "Phase Step",
 
   "death.attack.alchemancy.shock": "%s had a shock to their system",
   "death.attack.alchemancy.shock.player": "%1$s was electrocuted by %2$s",

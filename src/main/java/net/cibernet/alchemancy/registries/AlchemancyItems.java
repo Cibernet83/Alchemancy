@@ -71,6 +71,7 @@ public class AlchemancyItems
 	public static final DeferredItem<Item> MACROSPACE_SINGULARITY = REGISTRY.registerSimpleItem("macrospace_singularity");
 
 	public static final DeferredItem<Item> ETERNAL_GLOW_RING = REGISTRY.register("eternal_glow_ring", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.ETERNAL_GLOW, AlchemancyProperties.TOGGLEABLE).stacksTo(1).build());
+	public static final DeferredItem<Item> PHASING_RING = REGISTRY.register("phasing_ring", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.PHASE_STEP, AlchemancyProperties.TOGGLEABLE).stacksTo(1).build());
 
 	public static final DeferredItem<Item> PROPERTY_CAPSULE = REGISTRY.registerSimpleItem("property_capsule");
 
