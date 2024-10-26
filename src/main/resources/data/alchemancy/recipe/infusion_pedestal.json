@@ -2,7 +2,7 @@
   "type": "alchemancy:item_transmutation",
 
   "catalyst": {
-    "id": "alchemancy:alchemancy_forge"
+    "item": "alchemancy:alchemancy_forge"
   },
 
   "result": {
