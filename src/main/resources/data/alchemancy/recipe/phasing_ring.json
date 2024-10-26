@@ -12,14 +12,11 @@
     },
     {
       "item": "alchemancy:blank_pearl"
-    },
-    {
-      "item": "alchemancy:blank_pearl"
     }
   ],
 
   "catalyst": {
-    "tag": "c:ingots/iron"
+    "tag": "alchemancy:iron_ring"
   },
 
   "result": {

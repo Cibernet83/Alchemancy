@@ -3,7 +3,8 @@
 
   "properties": [
     "alchemancy:glowing_aura",
-    "alchemancy:toggleable"
+    "alchemancy:toggleable",
+    "alchemancy:gilded"
   ],
 
   "infusables": [
@@ -13,7 +14,7 @@
   ],
 
   "catalyst": {
-    "tag": "c:ingots/gold"
+    "tag": "alchemancy:iron_ring"
   },
 
   "result": {
