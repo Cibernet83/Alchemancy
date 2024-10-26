@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:headwear"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:bone_block"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:skeleton_skull"
+  }
+}

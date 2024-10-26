@@ -1,0 +1,12 @@
+{
+  "type": "alchemancy:item_transmutation",
+
+  "catalyst": {
+    "item": "minecraft:writable_book"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:name_tag"
+  }
+}
