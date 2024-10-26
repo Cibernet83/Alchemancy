@@ -3,19 +3,28 @@ package net.cibernet.alchemancy.properties;
 import com.mojang.serialization.Codec;
 import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
+import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.mixin.accessors.AbstractCauldronAccessor;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.minecraft.core.Holder;
+import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.FastColor;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.AbstractCauldronBlock;
+import net.minecraft.world.level.block.CauldronBlock;
+import net.minecraft.world.level.block.LayeredCauldronBlock;
+import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.ArrayList;
@@ -47,6 +56,23 @@ public class TintedProperty extends IncreaseInfuseSlotsProperty implements IData
 
 		setData(stack, base == getDefaultData() ? FastColor.ARGB32.color(255, color) :  mixColors(base, List.of(color)));
 		return true;
+	}
+
+	@Override
+	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
+	{
+		if(!InfusedPropertiesHelper.hasInfusedProperty(event.getItemStack(), asHolder()))
+			return;
+
+		BlockState state = event.getLevel().getBlockState(event.getPos());
+		if(state.getBlock() instanceof AbstractCauldronBlock cauldron && ((AbstractCauldronAccessor)cauldron).getInteractions().equals(CauldronInteraction.WATER))
+		{
+			if(state.hasProperty(LayeredCauldronBlock.LEVEL))
+				LayeredCauldronBlock.lowerFillLevel(state, event.getLevel(), event.getPos());
+			InfusedPropertiesHelper.removeProperty(event.getItemStack(), asHolder());
+			event.setCancellationResult(InteractionResult.SUCCESS);
+			event.setCanceled(true);
+		}
 	}
 
 	@Override

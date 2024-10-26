@@ -20,6 +20,7 @@
     "ServerLevelMixin",
     "SlotMixin",
     "accessors.AbstractArrowAccessor",
+    "accessors.AbstractCauldronAccessor",
     "accessors.EntityAccessor",
     "accessors.FallingBlockEntityAccessor",
     "accessors.ProjectileAccessor",
