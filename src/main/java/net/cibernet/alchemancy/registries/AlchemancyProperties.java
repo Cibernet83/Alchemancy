@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.properties.*;
 import net.cibernet.alchemancy.properties.data.modifiers.PropertyModifierType;
+import net.cibernet.alchemancy.properties.soulbind.EnergySapperProperty;
 import net.cibernet.alchemancy.properties.soulbind.SoulbindProperty;
 import net.cibernet.alchemancy.properties.soulbind.VengefulProperty;
 import net.cibernet.alchemancy.properties.special.*;
@@ -169,6 +170,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, Property> SOULBIND = REGISTRY.register("soulbind", SoulbindProperty::new);
 	public static final DeferredHolder<Property, LoyalProperty> LOYAL = REGISTRY.register("loyal", LoyalProperty::new);
 	public static final DeferredHolder<Property, VengefulProperty> VENGEFUL = REGISTRY.register("vengeful", VengefulProperty::new);
+	public static final DeferredHolder<Property, EnergySapperProperty> ENERGY_SAPPER = REGISTRY.register("energy_sapper", EnergySapperProperty::new);
 	public static final DeferredHolder<Property, PhasingProperty> PHASING = REGISTRY.register("phasing", PhasingProperty::new);
 
 	//Misc
