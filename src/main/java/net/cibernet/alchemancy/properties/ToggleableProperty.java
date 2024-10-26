@@ -1,14 +1,18 @@
 package net.cibernet.alchemancy.properties;
 
+import net.cibernet.alchemancy.blocks.blockentities.RootedItemBlockEntity;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -24,6 +28,13 @@ public class ToggleableProperty extends Property implements IDataHolder<Boolean>
 			toggle(stackedOnItem, event.getPlayer());
 			event.setCanceled(true);
 		}
+	}
+
+	@Override
+	public @org.jetbrains.annotations.Nullable ItemInteractionResult onRootedRightClick(RootedItemBlockEntity root, Player user, InteractionHand hand, BlockHitResult hitResult)
+	{
+		toggle(root.getItem(), user);
+		return ItemInteractionResult.SUCCESS;
 	}
 
 	@Override
