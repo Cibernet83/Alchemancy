@@ -25,9 +25,7 @@ public class AlchemancyCatalystBlockEntity extends BlockEntity
 	private String crystalTexture = DyeColor.LIME.getName();
 	private int tint = 0xFFFFFFFF;
 
-	@OnlyIn(Dist.CLIENT)
 	private float rotationTime = 0;
-	@OnlyIn(Dist.CLIENT)
 	private float prevRotationTime = 0;
 
 	private int animationTicks = 0;
