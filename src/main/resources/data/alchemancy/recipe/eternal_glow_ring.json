@@ -14,7 +14,7 @@
   ],
 
   "catalyst": {
-    "tag": "alchemancy:iron_ring"
+    "item": "alchemancy:iron_ring"
   },
 
   "result": {
