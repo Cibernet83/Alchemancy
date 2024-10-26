@@ -51,6 +51,17 @@ public class AlchemancyProperties
 		public static final DeferredHolder<PropertyModifierType<?>, PropertyModifierType<Float>> ATTACK_RADIUS = REGISTRY.register("attack_radius", PropertyModifierType.build(1f, Codec.FLOAT, ByteBufCodecs.FLOAT));
 		public static final DeferredHolder<PropertyModifierType<?>, PropertyModifierType<Float>> EFFECT_RADIUS = REGISTRY.register("effect_radius", PropertyModifierType.build(1f, Codec.FLOAT, ByteBufCodecs.FLOAT));
 		public static final DeferredHolder<PropertyModifierType<?>, PropertyModifierType<Float>> EFFECT_VALUE = REGISTRY.register("effect_value", PropertyModifierType.build(1f, Codec.FLOAT, ByteBufCodecs.FLOAT));
+
+		public static Holder<PropertyModifierType<?>> asHolder(PropertyModifierType<?> modifierType)
+		{
+
+			return SUPPLIER.asLookup().get(ResourceKey.create(AlchemancyProperties.Modifiers.REGISTRY.getRegistryKey(), getKey(modifierType))).orElse(null);
+		}
+
+		public static ResourceLocation getKey(PropertyModifierType<?> modifierType)
+		{
+			return AlchemancyProperties.Modifiers.SUPPLIER.getKey(modifierType);
+		}
 	}
 
 	//Elemental

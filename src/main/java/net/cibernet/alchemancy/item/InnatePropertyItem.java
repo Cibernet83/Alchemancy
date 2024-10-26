@@ -1,7 +1,9 @@
 package net.cibernet.alchemancy.item;
 
 import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
+import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
 import net.cibernet.alchemancy.properties.Property;
+import net.cibernet.alchemancy.properties.data.modifiers.PropertyModifierType;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.core.Holder;
@@ -13,10 +15,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class InnatePropertyItem extends Item
 {
@@ -25,20 +26,14 @@ public class InnatePropertyItem extends Item
 
 	public static final ArrayList<Item> TOGGLEABLE_ITEMS = new ArrayList<>();
 
-	@SafeVarargs
-	public InnatePropertyItem(Properties properties, int useTime, UseAnim useAnim, Holder<Property>... innateProperties)
+	private InnatePropertyItem(Properties properties, int useTime, UseAnim useAnim, boolean toggleable)
 	{
-		super(properties.component(AlchemancyItems.Components.INNATE_PROPERTIES, new InfusedPropertiesComponent(List.of(innateProperties))));
+		super(properties);
 		this.useTime = useTime;
 		this.useAnim = useAnim;
 
-		if(Arrays.asList(innateProperties).contains(AlchemancyProperties.TOGGLEABLE))
+		if(toggleable)
 			TOGGLEABLE_ITEMS.add(this);
-	}
-
-	public InnatePropertyItem(Properties properties, Holder<Property>... innateProperties)
-	{
-		this(properties, 0, UseAnim.NONE, innateProperties);
 	}
 
 	@Override
@@ -61,5 +56,57 @@ public class InnatePropertyItem extends Item
 			return InteractionResultHolder.consume(itemstack);
 		}
 		else return super.use(level, player, hand);
+	}
+
+	public static class Builder
+	{
+		private final ArrayList<Holder<Property>> properties = new ArrayList<>();
+		private int useTime = 0;
+		private UseAnim useAnim = UseAnim.NONE;
+		private int stacksTo = 64;
+		private Map<Holder<Property>, Map<Holder<PropertyModifierType<?>>, Object>> modifiers = new HashMap<>();
+
+		@SafeVarargs
+		public final Builder withProperties(Holder<Property>... properties)
+		{
+			this.properties.addAll(List.of(properties));
+			return this;
+		}
+
+		public Builder use(int useTime, UseAnim useAnim)
+		{
+			this.useTime = useTime;
+			this.useAnim = useAnim;
+			return this;
+		}
+
+		public Builder stacksTo(int stack)
+		{
+			this.stacksTo = stack;
+			return this;
+		}
+
+		public <T> Builder addModifier(Holder<Property> property, Holder<PropertyModifierType<T>> modifier, T value)
+		{
+			if(!modifiers.containsKey(property))
+				modifiers.put(property, new HashMap<>());
+
+			modifiers.get(property).put(AlchemancyProperties.Modifiers.asHolder(modifier.value()), value);
+			return this;
+		}
+
+		public InnatePropertyItem build()
+		{
+			return build(new Properties());
+		}
+
+		public InnatePropertyItem build(Properties itemProperties)
+		{
+			return new InnatePropertyItem(itemProperties
+					.stacksTo(stacksTo)
+					.component(AlchemancyItems.Components.INNATE_PROPERTIES, new InfusedPropertiesComponent(properties))
+					.component(AlchemancyItems.Components.PROPERTY_MODIFIERS, new PropertyModifierComponent(modifiers))
+			, useTime, useAnim, properties.contains(AlchemancyProperties.TOGGLEABLE));
+		}
 	}
 }
