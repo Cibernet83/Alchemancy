@@ -70,8 +70,6 @@ public class LeapingProperty extends Property implements IDataHolder<LeapingProp
 
 		LeapData data = getData(stack);
 
-		System.out.println(entity.level().isClientSide() + " chain: " + data.chain + " timestamp: " + data.lastLandedTimestamp + " player tick: " + event.getEntity().tickCount);
-
 		event.getEntity().setDeltaMovement(event.getEntity().getDeltaMovement().multiply(1, 1.2 + data.chain * 0.2, 1));
 		if(data.chain < MAX_CHAIN)
 			setData(stack, new LeapData(data.chain + 1, data.lastLandedTimestamp, data.wasOnGround));

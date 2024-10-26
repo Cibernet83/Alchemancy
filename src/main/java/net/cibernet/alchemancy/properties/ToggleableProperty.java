@@ -22,7 +22,6 @@ public class ToggleableProperty extends Property implements IDataHolder<Boolean>
 	@Override
 	public void onStackedOverMe(ItemStack carriedItem, ItemStack stackedOnItem, Player player, ClickAction clickAction, ItemStackedOnOtherEvent event)
 	{
-		System.out.println(player.level().isClientSide);
 		if(carriedItem.isEmpty() && clickAction == ClickAction.SECONDARY)
 		{
 			toggle(stackedOnItem, event.getPlayer());
