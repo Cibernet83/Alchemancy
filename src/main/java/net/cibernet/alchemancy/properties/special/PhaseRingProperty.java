@@ -16,17 +16,11 @@ public class PhaseRingProperty extends Property
 {
 
 	@Override
-	public void onEquippedTick(LivingEntity user, EquipmentSlot slot, ItemStack stack) {
-		super.onEquippedTick(user, slot, stack);
-	}
-
-	@Override
-	public void onInventoryTick(Entity user, ItemStack stack, Level level, int inventorySlot, boolean isCurrentItem)
+	public void onEquippedTick(LivingEntity user, EquipmentSlot slot, ItemStack stack)
 	{
 		user.noPhysics = true;
 		user.setOnGround(false);
 	}
-
 
 	@Override
 	public int getColor(ItemStack stack) {
