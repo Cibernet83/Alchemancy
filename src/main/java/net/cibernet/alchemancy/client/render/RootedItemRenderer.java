@@ -10,6 +10,8 @@ import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.level.block.SkullBlock;
+import net.minecraft.world.level.block.state.properties.RotationSegment;
 
 public class RootedItemRenderer implements BlockEntityRenderer<ItemStackHolderBlockEntity>
 {
@@ -29,8 +31,10 @@ public class RootedItemRenderer implements BlockEntityRenderer<ItemStackHolderBl
 	{
 		pMatrixStack.pushPose();
 		pMatrixStack.translate(0.5f, 0.25f, 0.5f);
-		pMatrixStack.mulPose(Axis.YP.rotationDegrees(0));
+		float rotation = RotationSegment.convertToDegrees(pBlockEntity.getBlockState().getValue(SkullBlock.ROTATION));
+		pMatrixStack.mulPose(Axis.YN.rotationDegrees(rotation));
 		pMatrixStack.scale(2, 2, 2);
+
 		this.itemRenderer.renderStatic(pBlockEntity.getItem(), ItemDisplayContext.GROUND, pPackedLight, OverlayTexture.NO_OVERLAY, pMatrixStack, pBuffer, pBlockEntity.getLevel(), 0);
 
 		pMatrixStack.popPose();

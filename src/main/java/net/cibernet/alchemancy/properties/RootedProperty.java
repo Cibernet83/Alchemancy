@@ -30,7 +30,7 @@ public class RootedProperty extends Property
 		if(AlchemancyBlocks.ROOTED_ITEM.get().mayPlaceOn(level.getBlockState(pos.below()), level, pos.below()) &&
 				event.getLevel().getBlockState(pos).canBeReplaced(new BlockPlaceContext(event.getEntity(), event.getHand(), stack, event.getHitVec())))
 		{
-			BlockState rootState = AlchemancyBlocks.ROOTED_ITEM.get().defaultBlockState();
+			BlockState rootState = AlchemancyBlocks.ROOTED_ITEM.get().getStateForPlacement(new BlockPlaceContext(event.getEntity(), event.getHand(), event.getItemStack(), event.getHitVec()));
 			level.setBlock(pos, rootState, 3);
 
 			RootedItemBlockEntity root = new RootedItemBlockEntity(pos, rootState);
