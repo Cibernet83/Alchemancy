@@ -43,6 +43,7 @@ public class AlchemancyTags
         public static final TagKey<DamageType> TRIGGERS_ON_HIT_EFFECTS = registerTag(Registries.DAMAGE_TYPE, "triggers_on_hit_effects");
         public static final TagKey<DamageType> TRIGGERS_ON_PROJECTILE_HIT_EFFECTS = registerTag(Registries.DAMAGE_TYPE, "triggers_on_projectile_hit_effects");
         public static final TagKey<DamageType> SHOCK_DAMAGE = registerTag(Registries.DAMAGE_TYPE, "shock_damage");
+        public static final TagKey<DamageType> ARCANE_DAMAGE = registerTag(Registries.DAMAGE_TYPE, "arcane_damage");
 	}
 
 	public static class EntityTypes

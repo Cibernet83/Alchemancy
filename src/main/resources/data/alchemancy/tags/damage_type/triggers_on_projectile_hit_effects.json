@@ -9,6 +9,7 @@
     "minecraft:fireball",
     "minecraft:unattributed_fireball",
     "minecraft:fireworks",
-    "minecraft:thrown"
+    "minecraft:thrown",
+    "alchemancy:arcane_projectile"
   ]
 }

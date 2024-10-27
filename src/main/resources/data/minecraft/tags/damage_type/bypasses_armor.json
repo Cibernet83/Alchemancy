@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "alchemancy:soul_escaped"
+    "alchemancy:soul_escaped",
+    "#alchemancy:arcane_damage"
   ]
 }
