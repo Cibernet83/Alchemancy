@@ -26,11 +26,14 @@ public class HumanoidArmorLayerMixin<T extends LivingEntity, M extends HumanoidM
 	@Inject(method = "renderArmorPiece", at = @At("HEAD"), cancellable = true)
 	public void renderArmorPiece(PoseStack poseStack, MultiBufferSource bufferSource, T livingEntity, EquipmentSlot slot, int packedLight, A p_model, CallbackInfo ci)
 	{
-		poseStack.pushPose();
 		ItemStack stack = livingEntity.getItemBySlot(slot);
-
 		if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.CONCEALED))
+		{
 			ci.cancel();
+			return;
+		}
+
+		poseStack.pushPose();
 		float scale = AlchemancyProperties.RESIZED.value().getData(stack);
 		if(scale != 1)
 			poseStack.scale(scale, scale, scale);
