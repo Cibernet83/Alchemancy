@@ -1,8 +1,6 @@
 package net.cibernet.alchemancy.properties.special;
 
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
-import net.cibernet.alchemancy.mixin.PlayerMixin;
-import net.cibernet.alchemancy.properties.FrostedProperty;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
@@ -14,13 +12,14 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 @EventBusSubscriber
 public class AuxiliaryProperty extends Property
@@ -37,7 +36,7 @@ public class AuxiliaryProperty extends Property
 		return 0xCAE6E1;
 	}
 
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onLivingDamage(LivingDamageEvent.Pre event)
 	{
 		if (event.getSource().is(AlchemancyTags.DamageTypes.TRIGGERS_ON_HIT_EFFECTS) && event.getSource().getDirectEntity() instanceof Player user)
@@ -45,11 +44,20 @@ public class AuxiliaryProperty extends Property
 
 	}
 
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	private static void onIncomingDamage(LivingIncomingDamageEvent event)
 	{
 		if(event.getSource().is(AlchemancyTags.DamageTypes.TRIGGERS_ON_HIT_EFFECTS) && event.getSource().getDirectEntity() instanceof Player user)
 			triggerAuxiliaryEffects(user, (propertyHolder, stack) -> propertyHolder.value().onIncomingAttack(user, stack, event.getEntity(), event));
+	}
+
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	private static void onLivingDeath(LivingDeathEvent event)
+	{
+		if(event.getSource().is(AlchemancyTags.DamageTypes.TRIGGERS_ON_HIT_EFFECTS) && event.getSource().getDirectEntity() instanceof Player user)
+			triggerAuxiliaryEffects(user, (propertyHolder, stack) -> propertyHolder.value().onKill(event.getEntity(), user, stack, event));
+		if(event.getEntity() instanceof Player user)
+			triggerAuxiliaryEffects(user, (propertyHolder, stack) -> propertyHolder.value().onUserDeath(user, stack, EquipmentSlot.MAINHAND, event));
 	}
 
 	public static void triggerAuxiliaryEffects(Player user, BiConsumer<Holder<Property>, ItemStack> consumer)

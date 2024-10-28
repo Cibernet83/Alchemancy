@@ -19,8 +19,7 @@ public class GlowingProperty extends MobEffectEquippedAndHitProperty
 	@Override
 	public void onEquippedTick(LivingEntity user, EquipmentSlot slot, ItemStack stack)
 	{
-		if(validSlots.test(slot))
-			user.addEffect(new MobEffectInstance(MobEffects.GLOWING, 10, 0, false, false));
+		user.addEffect(new MobEffectInstance(MobEffects.GLOWING, 10, 0, false, false));
 	}
 
 	@Override
