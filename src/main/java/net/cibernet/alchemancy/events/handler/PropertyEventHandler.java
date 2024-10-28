@@ -48,6 +48,15 @@ import java.util.function.Predicate;
 public class PropertyEventHandler
 {
 	@SubscribeEvent
+	public static void onLivingHeal(LivingHealEvent event)
+	{
+		for (EquipmentSlot slot : EquipmentSlot.values()) {
+			ItemStack stack = event.getEntity().getItemBySlot(slot);
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().modifyHeal(event.getEntity(), stack, slot, event));
+		}
+	}
+
+	@SubscribeEvent
 	public static void onLivingDamage(LivingDamageEvent.Pre event)
 	{
 

@@ -162,6 +162,16 @@ public abstract class Property
 	{
 	}
 
+	public void modifyHeal(LivingEntity user, ItemStack stack, EquipmentSlot slot, LivingHealEvent event)
+	{
+		onHeal(user, stack, slot, event.getAmount());
+	}
+
+	public void onHeal(LivingEntity user, ItemStack stack, EquipmentSlot slot, float amount)
+	{
+
+	}
+
 	public void onActivation(@Nullable Entity source, Entity target, ItemStack stack, DamageSource damageSource)
 	{
 		onCriticalAttack(source instanceof Player player ? player : null, stack, target);

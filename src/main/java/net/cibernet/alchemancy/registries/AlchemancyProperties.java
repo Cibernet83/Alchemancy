@@ -176,6 +176,7 @@ public class AlchemancyProperties
 	//Misc
 	public static final DeferredHolder<Property, NonlethalProperty> NONLETHAL = REGISTRY.register("nonlethal", NonlethalProperty::new);
 	public static final DeferredHolder<Property, MendingProperty> MENDING = REGISTRY.register("mending", MendingProperty::new);
+	public static final DeferredHolder<Property, FlourishingProperty> FLOURISH = REGISTRY.register("flourish", FlourishingProperty::new);
 	public static final DeferredHolder<Property, UndeadProperty> UNDEAD = REGISTRY.register("undead", UndeadProperty::new);
 	public static final DeferredHolder<Property, UndyingProperty> UNDYING = REGISTRY.register("undying", UndyingProperty::new);
 
