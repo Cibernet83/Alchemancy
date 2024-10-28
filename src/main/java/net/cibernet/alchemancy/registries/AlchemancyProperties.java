@@ -176,7 +176,10 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, Property> SOULBIND = REGISTRY.register("soulbind", SoulbindProperty::new);
 	public static final DeferredHolder<Property, LoyalProperty> LOYAL = REGISTRY.register("loyal", LoyalProperty::new);
 	public static final DeferredHolder<Property, VengefulProperty> VENGEFUL = REGISTRY.register("vengeful", VengefulProperty::new);
+	public static final DeferredHolder<Property, VampiricProperty> VAMPIRIC = REGISTRY.register("vampiric", VampiricProperty::new);
 	public static final DeferredHolder<Property, EnergySapperProperty> ENERGY_SAPPER = REGISTRY.register("energy_sapper", EnergySapperProperty::new);
+	public static final DeferredHolder<Property, RelentlessProperty> RELENTLESS = REGISTRY.register("relentless", RelentlessProperty::new);
+	public static final DeferredHolder<Property, SpiritBondProperty> SPIRIT_BOND = REGISTRY.register("spirit_bond", SpiritBondProperty::new);
 	public static final DeferredHolder<Property, PhasingProperty> PHASING = REGISTRY.register("phasing", PhasingProperty::new);
 
 	//Misc

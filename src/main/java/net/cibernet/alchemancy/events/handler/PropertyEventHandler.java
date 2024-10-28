@@ -117,11 +117,9 @@ public class PropertyEventHandler
 	@SubscribeEvent
 	public static void onCriticalHit(CriticalHitEvent event)
 	{
-		if(event.isCriticalHit())
-		{
-			ItemStack stack = event.getEntity().getMainHandItem();
-			InfusedPropertiesHelper.forEachProperty(stack, holder -> holder.value().modifyCriticalAttack(event.getEntity(), stack, event));
-		}
+		ItemStack stack = event.getEntity().getMainHandItem();
+		InfusedPropertiesHelper.forEachProperty(stack, holder -> holder.value().modifyCriticalAttack(event.getEntity(), stack, event));
+
 	}
 
 	@SubscribeEvent

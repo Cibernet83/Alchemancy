@@ -198,7 +198,8 @@
 
   "property.alchemancy.soulbind": "Soulbind",
   "property.alchemancy.loyal": "Loyal",
-  "property.alchemancy.soul_bond": "Soul Bond",
+  "property.alchemancy.spirit_bond": "Spirit Bond",
+  "property.alchemancy.relentless": "Relentless",
   "property.alchemancy.energy_sapper": "Energy Sapper",
   "property.alchemancy.cursed": "Cursed",
   "property.alchemancy.vengeful": "Vengeful",
