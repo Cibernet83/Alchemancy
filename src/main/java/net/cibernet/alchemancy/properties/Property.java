@@ -141,7 +141,8 @@ public abstract class Property
 
 	public void modifyCriticalAttack(Player user, ItemStack weapon, CriticalHitEvent event)
 	{
-		onCriticalAttack(user, weapon, event.getTarget());
+		if(event.isCriticalHit())
+			onCriticalAttack(user, weapon, event.getTarget());
 	}
 
 	public void modifyAttackDamage(Entity user, ItemStack weapon, LivingDamageEvent.Pre event) {

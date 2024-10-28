@@ -1,10 +1,10 @@
 {
   "type": "alchemancy:property_warp",
   "properties": [
-    "alchemancy:swift"
+    "alchemancy:reinforced"
   ],
 
   "result": [
-    "alchemancy:sluggish"
+    "alchemancy:weak"
   ]
 }

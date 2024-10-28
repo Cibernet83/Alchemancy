@@ -81,6 +81,8 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, WealthyProperty> WEALTHY = REGISTRY.register("wealthy", WealthyProperty::new);
 	public static final DeferredHolder<Property, ReinforcedProperty> REINFORCED = REGISTRY.register("reinforced", ReinforcedProperty::new);
 	public static final DeferredHolder<Property, PristineProperty> PRISTINE = REGISTRY.register("pristine", PristineProperty::new);
+	public static final DeferredHolder<Property, HellbentProperty> HELLBENT = REGISTRY.register("hellbent", HellbentProperty::new);
+	public static final DeferredHolder<Property, DepthDwellerProperty> DEPTH_DWELLER = REGISTRY.register("depth_dweller", DepthDwellerProperty::new);
 
 	//Mobility
 	public static final DeferredHolder<Property, EnergizedProperty> ENERGIZED = REGISTRY.register("energized", EnergizedProperty::new);
@@ -105,6 +107,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, Property> SCOPING = REGISTRY.register("scoping", () -> Property.simple(0xDE923A));
 	public static final DeferredHolder<Property, HeadearProperty> HEADWEAR = REGISTRY.register("headwear", HeadearProperty::new);
 	public static final DeferredHolder<Property, SaddledProperty> SADDLED = REGISTRY.register("saddled", SaddledProperty::new);
+	public static final DeferredHolder<Property, GliderProperty> GLIDER = REGISTRY.register("glider", GliderProperty::new);
 
 	public static final DeferredHolder<Property, CraftyProperty> CRAFTY = REGISTRY.register("crafty", CraftyProperty::new);
 	public static final DeferredHolder<Property, AutosmeltProperty> SMELTING = REGISTRY.register("smelting", AutosmeltProperty::new);
@@ -129,10 +132,12 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, ShatteringProperty> SHATTERING = REGISTRY.register("shattering", ShatteringProperty::new);
 	public static final DeferredHolder<Property, ThrowableProperty> THROWABLE = REGISTRY.register("throwable", ThrowableProperty::new);
 	public static final DeferredHolder<Property, ToggleableProperty> TOGGLEABLE = REGISTRY.register("toggleable", ToggleableProperty::new);
+	public static final DeferredHolder<Property, TickingProperty> TICKING = REGISTRY.register("ticking", TickingProperty::new);
 
 	//Mob Effects
 	public static final DeferredHolder<Property, LevitatingProperty> LEVITATING = REGISTRY.register("levitating", LevitatingProperty::new);
 	public static final DeferredHolder<Property, SwiftProperty> SWIFT = REGISTRY.register("swift", SwiftProperty::new);
+	public static final DeferredHolder<Property, SluggishProperty> SLUGGISH = REGISTRY.register("sluggish", SluggishProperty::new);
 	public static final DeferredHolder<Property, MobEffectOnHitProperty> POISONOUS = REGISTRY.register("poisonous", () -> new MobEffectOnHitProperty(new MobEffectInstance(MobEffects.POISON, 100)));
 	public static final DeferredHolder<Property, DecayingProperty> DECAYING = REGISTRY.register("decaying", DecayingProperty::new);
 	public static final DeferredHolder<Property, MobEffectEquippedAndHitProperty> TIPSY = REGISTRY.register("tipsy", () -> new MobEffectEquippedAndHitProperty(new MobEffectInstance(MobEffects.CONFUSION, 200, 1), EquipmentSlotGroup.ANY, true));
@@ -147,6 +152,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, GrapplingProperty> GRAPPLING = REGISTRY.register("grappling", GrapplingProperty::new);
 	public static final DeferredHolder<Property, SpikingProperty> SPIKING = REGISTRY.register("spiking", SpikingProperty::new);
 	public static final DeferredHolder<Property, DamageMultiplierProperty> SHARP = REGISTRY.register("sharp", () -> new DamageMultiplierProperty(0xEAE5DE, 1.2f));
+	public static final DeferredHolder<Property, WeakProperty> WEAK = REGISTRY.register("weak", WeakProperty::new);
 	public static final DeferredHolder<Property, DenseProperty> DENSE = REGISTRY.register("dense", DenseProperty::new);
 	public static final DeferredHolder<Property, LetsGoGamblingProperty> GAMBLING = REGISTRY.register("gambling", LetsGoGamblingProperty::new);
 	public static final DeferredHolder<Property, ArcaneProperty> ARCANE = REGISTRY.register("arcane", ArcaneProperty::new);

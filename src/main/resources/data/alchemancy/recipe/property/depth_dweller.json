@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_property",
+
+  "infusables": [
+    {
+      "tag": "alchemancy:materials/deepslate"
+    }
+  ],
+
+  "properties": [
+    "alchemancy:sturdy",
+    "alchemancy:heavy"
+  ],
+
+  "result": "alchemancy:depth_dweller"
+}
