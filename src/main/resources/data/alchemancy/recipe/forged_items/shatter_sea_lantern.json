@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:shattering"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:sea_lantern"
+  },
+
+  "result": {
+    "count": 5,
+    "id": "minecraft:prismarine_crystals"
+  }
+}

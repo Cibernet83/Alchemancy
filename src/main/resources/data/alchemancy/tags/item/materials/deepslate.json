@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#c:ore_bearing_ground/deepslate",
+    "#c:ores_in_ground/deepslate",
+    "#c:cobblestones/deepslate"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:aquatic"
+  ],
+
+  "catalyst": {
+    "tag": "minecraft:stone_bricks"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:prismarine_bricks"
+  }
+}

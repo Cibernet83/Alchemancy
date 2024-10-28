@@ -6,7 +6,7 @@
     "#minecraft:stone_crafting_materials",
     "#minecraft:stone_tool_materials",
     "#c:ores_in_ground/stone",
-    "#c:ores_in_ground/deepslate",
+    "#alchemancy:materials/deepslate",
 
     "minecraft:stone_pickaxe",
     "minecraft:stone_axe",
