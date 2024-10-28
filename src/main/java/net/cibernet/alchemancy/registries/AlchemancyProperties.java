@@ -4,9 +4,7 @@ import com.mojang.serialization.Codec;
 import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.properties.*;
 import net.cibernet.alchemancy.properties.data.modifiers.PropertyModifierType;
-import net.cibernet.alchemancy.properties.soulbind.EnergySapperProperty;
-import net.cibernet.alchemancy.properties.soulbind.SoulbindProperty;
-import net.cibernet.alchemancy.properties.soulbind.VengefulProperty;
+import net.cibernet.alchemancy.properties.soulbind.*;
 import net.cibernet.alchemancy.properties.special.*;
 import net.cibernet.alchemancy.util.ColorUtils;
 import net.minecraft.core.Holder;
@@ -238,9 +236,10 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, AuxiliaryProperty> AUXILIARY = REGISTRY.register("auxiliary", AuxiliaryProperty::new);
 	public static final DeferredHolder<Property, GlowRingProperty> ETERNAL_GLOW = REGISTRY.register("eternal_glow", GlowRingProperty::new);
 	public static final DeferredHolder<Property, PhaseRingProperty> PHASE_STEP = REGISTRY.register("phase_step", PhaseRingProperty::new);
+	public static final DeferredHolder<Property, DeathWardProperty> DEATH_WARD = REGISTRY.register("death_ward", DeathWardProperty::new);
+	public static final DeferredHolder<Property, FriendlyProperty> FRIENDLY = REGISTRY.register("friendly", FriendlyProperty::new);
 
 	//TODO
-	//Arcane: ??? - Dragon's Breath/Dragon Head
 	//Wayfinding: ??? - Compass/Maps
 	//Brushing: Copper Brush behavior - Brush
 	//Seeking: Projectiles home towards Glowing entities
@@ -248,23 +247,18 @@ public class AlchemancyProperties
 	//Tethered: On Right Click leashes the user to the targeted entity or fence block. Leash/String maybe?
 	//Flattened: Lets the item be placed onto walls - Painting
 	//Echoing: On Hit/On Activation, the action and target are stored into the item and get repeated after a few ticks (as long as the item remains in the player's inv or as a projectile) - Echo Shard/Recovery Compass
-	//Pristine: Grants extra durability in the form of Property Percentage.
 
 	//Soulbind: Used to make Soul Properties. Has a chance to consume itself when in the player's inventory. When consumed also has a chance at attacking the user. - Soul Sand
 	//Spirit Bond: Unbreaking effect when user is low on health
-	//Energy Sapper: chance to consume hunger when held to repair weapon. Consumes target's hunger On Hit
 	//Cursed: Reduces Luck stat when equipped
 	//Vengeful: Increased damage against the last entity attacking the user. Reduced damage against everything else
 	//Vampiric: chance at healing from attacks
 	//Sentient: Moves around as if it were alive when dropped. Has a chance to pop off when Rooted. Has a chance to drop when in the player's inventory
 	//Spiritual: Creates a weaker copy of the item when consumed.
 	//Reincarnating: Item is retained upon death. One-time use.
-	//Phasing: Lets dropped items and projectiles clip through blocks
 
 	//Warped Properties:
 	//Repelled: Pushes itself away from ALL nearby entities - Targeted/Loyal
-	//Weak: increases damage taken/reduces armor effectiveness when worn - Warding/Reinforced
-	//Sluggish: applies Slowness on hit/when equipped - Swift
 	//Muffled: Suppresses certain vibrations when equipped - Musical/Sensitive/Echoing
 	//Clueless: ??? - Wise/Wayfinding
 	//Lucky: Increases Luck stat when equipped - ??? (don't wanna make it Warped Cursed bc then it'd be too easy to get rid of)

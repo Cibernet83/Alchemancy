@@ -10,6 +10,7 @@ import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.dimension.DimensionType;
 
 public class AlchemancyTags
 {
@@ -53,6 +54,12 @@ public class AlchemancyTags
         public static final TagKey<EntityType<?>> SCARED_BY_SCARY = registerTag(Registries.ENTITY_TYPE, "scared_by_scary_property");
         public static final TagKey<EntityType<?>> AGGROED_BY_SEEDED = registerTag(Registries.ENTITY_TYPE, "aggroed_by_seeded_property");
         public static final TagKey<EntityType<?>> CANNOT_CAPTURE = registerTag(Registries.ENTITY_TYPE, "cannot_capture");
+		public static final TagKey<EntityType<?>> AFFECTED_BY_FRIENDLY = registerTag(Registries.ENTITY_TYPE, "affected_by_friendly");
+	}
+
+	public static class Dimensions
+	{
+		public static final TagKey<DimensionType> DEPTH_DWELLER_EFFECTIVE = registerTag(Registries.DIMENSION_TYPE, "depth_dweller_effective.json");
 	}
 
 	private static <T> TagKey<T> registerCommonTag(ResourceKey<Registry<T>> registry, String key)

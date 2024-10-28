@@ -59,9 +59,9 @@ public class AlchemancyItems
 	public static final DeferredItem<HoeItem> LEAD_HOE = REGISTRY.register("lead_hoe", () -> new HoeItem(Materials.LEAD_TOOLS, new Item.Properties().attributes(ShovelItem.createAttributes(Materials.LEAD_TOOLS, -2.0F, -1.0F))));
 
 	public static final DeferredItem<ArmorItem> LEAD_HELMET = REGISTRY.register("lead_helmet", () -> new ArmorItem(Materials.LEAD_ARMOR, ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(60))));
-	public static final DeferredItem<ArmorItem> LEAD_CHESTPLATE = REGISTRY.register("lead_chestplate", () -> new ArmorItem(Materials.LEAD_ARMOR, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(60))));
-	public static final DeferredItem<ArmorItem> LEAD_LEGGINGS = REGISTRY.register("lead_leggings", () -> new ArmorItem(Materials.LEAD_ARMOR, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(60))));
-	public static final DeferredItem<ArmorItem> LEAD_BOOTS = REGISTRY.register("lead_boots", () -> new ArmorItem(Materials.LEAD_ARMOR, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(60))));
+	public static final DeferredItem<ArmorItem> LEAD_CHESTPLATE = REGISTRY.register("lead_chestplate", () -> new ArmorItem(Materials.LEAD_ARMOR, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(60))));
+	public static final DeferredItem<ArmorItem> LEAD_LEGGINGS = REGISTRY.register("lead_leggings", () -> new ArmorItem(Materials.LEAD_ARMOR, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(60))));
+	public static final DeferredItem<ArmorItem> LEAD_BOOTS = REGISTRY.register("lead_boots", () -> new ArmorItem(Materials.LEAD_ARMOR, ArmorItem.Type.BOOTS, new Item.Properties().durability(ArmorItem.Type.BOOTS.getDurability(60))));
 
 	public static final DeferredItem<Item> BLANK_PEARL = REGISTRY.registerSimpleItem("blank_pearl");
 	public static final DeferredItem<Item> REVEALING_PEARL = REGISTRY.registerSimpleItem("revealing_pearl");
@@ -73,6 +73,8 @@ public class AlchemancyItems
 	public static final DeferredItem<Item> IRON_RING = REGISTRY.register("iron_ring", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.AUXILIARY).stacksTo(1).infusionSlots(1).build());
 	public static final DeferredItem<Item> ETERNAL_GLOW_RING = REGISTRY.register("eternal_glow_ring", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.ETERNAL_GLOW, AlchemancyProperties.AUXILIARY).toggleable(true).stacksTo(1).build());
 	public static final DeferredItem<Item> PHASING_RING = REGISTRY.register("phasing_ring", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.PHASE_STEP, AlchemancyProperties.AUXILIARY).toggleable(true).stacksTo(1).build());
+	public static final DeferredItem<Item> UNDYING_RING = REGISTRY.register("undying_ring", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.DEATH_WARD, AlchemancyProperties.AUXILIARY).stacksTo(1).build());
+	public static final DeferredItem<Item> FRIENDSHIP_RING = REGISTRY.register("friendship_ring", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.FRIENDLY, AlchemancyProperties.AUXILIARY).toggleable(true).stacksTo(1).build());
 
 	public static final DeferredItem<Item> PROPERTY_CAPSULE = REGISTRY.registerSimpleItem("property_capsule");
 

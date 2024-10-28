@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "alchemancy:item/friendship_ring"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "alchemancy:toggled": 1
+      },
+      "model": "alchemancy:item/friendship_ring_enabled"
+    }
+  ]
+}
