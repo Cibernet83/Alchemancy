@@ -11,6 +11,7 @@ import net.minecraft.world.inventory.CraftingMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 import java.util.function.BiFunction;
@@ -24,18 +25,7 @@ public class CraftyProperty extends Property
 
 		if(!event.isCanceled())
 		{
-			openCraftingMenu(event.getEntity());
-			event.setCancellationResult(InteractionResult.SUCCESS);
-			event.setCanceled(true);
-		}
-	}
-
-	@Override
-	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-
-		if(!event.isCanceled())
-		{
-			openCraftingMenu(event.getEntity());
+			openCraftingMenu(event.getEntity(), event.getItemStack());
 			event.setCancellationResult(InteractionResult.SUCCESS);
 			event.setCanceled(true);
 		}
@@ -46,20 +36,28 @@ public class CraftyProperty extends Property
 		return 0xAE693C;
 	}
 
-
-	public static void openCraftingMenu(Player player)
+	public static void openCraftingMenu(Player player, ItemStack sourceItem)
 	{
-		player.openMenu(getMenuProvider());
+		player.openMenu(getMenuProvider(sourceItem));
 	}
 
-	protected static MenuProvider getMenuProvider() {
+	protected static MenuProvider getMenuProvider(final ItemStack sourceItem) {
 		return new SimpleMenuProvider(
-				(p_52229_, p_52230_, p_52231_) -> new CraftingMenu(p_52229_, p_52230_, new ContainerLevelAccess() {
+				(containerId, playerInventory, player) -> new CraftingMenu(containerId, playerInventory, new PlayerContainerLevelAccess(player)) {
 					@Override
-					public <T> Optional<T> evaluate(BiFunction<Level, BlockPos, T> levelPosConsumer) {
-						return Optional.empty();
+					public boolean stillValid(Player player) {
+						return player.getInventory().getSelected().equals(sourceItem);
 					}
-				}), CONTAINER_TITLE
+				}, CONTAINER_TITLE
 		);
+	}
+
+	public record PlayerContainerLevelAccess(Player player) implements ContainerLevelAccess
+	{
+		@Override
+		public <T> @NotNull Optional<T> evaluate(BiFunction<Level, BlockPos, T> levelPosConsumer)
+		{
+			return Optional.ofNullable(levelPosConsumer.apply(player.level(), player.blockPosition()));
+		}
 	}
 }
