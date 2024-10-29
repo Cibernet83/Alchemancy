@@ -1,0 +1,11 @@
+{
+  "type": "alchemancy:property_interaction",
+  "properties": [
+    "alchemancy:flammable",
+    "alchemancy:waxed"
+  ],
+
+  "result": [
+    "alchemancy:waxed"
+  ]
+}
