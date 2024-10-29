@@ -12,6 +12,8 @@
   "block.alchemancy.nightshade": "Nightshade",
   "block.alchemancy.snapthorn": "Snapthorn",
 
+  "block.alchemancy.potted_blazebloom": "Potted Blazebloom",
+
   "block.alchemancy.essence_extractor": "Essence Extractor",
   "block.alchemancy.essence_tank": "Essence Tank",
   "block.alchemancy.essence_conduit": "Essence Conduit",
@@ -26,7 +28,8 @@
   "block.alchemancy.sculk_bud": "Sculk Bud",
   "block.alchemancy.glowing_orb": "Glowing Orb",
 
-  "item.alchemancy.blazing_substance": "Alchemical Extract",
+  "item.alchemancy.alchemical_extract": "Alchemical Extract",
+  "item.alchemancy.blazing_substance": "Blazing Substance",
   "item.alchemancy.gusty_substance": "Gusty Substance",
   "item.alchemancy.earthen_substance": "Earthen Substance",
   "item.alchemancy.tidal_substance": "Tidal Substance",

@@ -11,8 +11,6 @@
     "minecraft:campfire",
     "minecraft:soul_campfire",
     "minecraft:torch",
-    "minecraft:soul_torch",
-
-    "alchemancy:blazing_substance"
+    "minecraft:soul_torch"
   ]
 }

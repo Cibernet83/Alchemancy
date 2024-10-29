@@ -3,12 +3,12 @@ package net.cibernet.alchemancy.registries;
 import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.blocks.*;
 import net.cibernet.alchemancy.blocks.blockentities.SculkBudBlockEntity;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.FlowerBlock;
-import net.minecraft.world.level.block.KelpBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -19,37 +19,22 @@ public class AlchemancyBlocks
 	public static final DeferredRegister.Blocks REGISTRY = DeferredRegister.createBlocks(Alchemancy.MODID);
 
 
-	public static final DeferredBlock<FlowerBlock> BLAZEBLOOM = REGISTRY.register("blazebloom", () -> new FlowerBlock(MobEffects.FIRE_RESISTANCE, 10, BlockBehaviour.Properties.of()
+	public static final DeferredBlock<FlowerBlock> BLAZEBLOOM = REGISTRY.register("blazebloom", () -> new BlazebloomBlock(MobEffects.FIRE_RESISTANCE, 10, BlockBehaviour.Properties.of()
 			.mapColor(MapColor.PLANT)
 			.noCollission()
 			.instabreak()
 			.sound(SoundType.GRASS)
 			.offsetType(BlockBehaviour.OffsetType.XZ)
-			.pushReaction(PushReaction.DESTROY)));
+			.lightLevel(state -> 3)
+			.pushReaction(PushReaction.DESTROY)){
 
-	public static final DeferredBlock<FlowerBlock> CLOUDELION = REGISTRY.register("cloudelion", () -> new FlowerBlock(MobEffects.LEVITATION, 5, BlockBehaviour.Properties.of()
-			.mapColor(MapColor.PLANT)
-			.noCollission()
-			.instabreak()
-			.sound(SoundType.GRASS)
-			.offsetType(BlockBehaviour.OffsetType.XZ)
-			.pushReaction(PushReaction.DESTROY)));
-	public static final DeferredBlock<FlowerBlock> GLOWSHROOM = REGISTRY.register("glowshroom", () -> new FlowerBlock(MobEffects.GLOWING, 5, BlockBehaviour.Properties.of()
-			.mapColor(MapColor.PLANT)
-			.noCollission()
-			.instabreak()
-			.sound(SoundType.GRASS)
-			.offsetType(BlockBehaviour.OffsetType.XZ)
-			.pushReaction(PushReaction.DESTROY)));
+	});
 
-	public static final DeferredBlock<KelpBlock> HYDROLILY = REGISTRY.register("hydrolily", () -> new KelpBlock(
-			BlockBehaviour.Properties.of()
-					.mapColor(MapColor.WATER)
-					.noCollission()
-					.randomTicks()
-					.instabreak()
-					.sound(SoundType.WET_GRASS)
-					.pushReaction(PushReaction.DESTROY)));
+	public static final DeferredBlock<PottedBlazebloomBlock> POTTED_BLAZEBLOOM = REGISTRY.register("potted_blazebloom", () -> new PottedBlazebloomBlock(BLAZEBLOOM, BlockBehaviour.Properties.of()
+			.instabreak()
+			.noOcclusion()
+			.lightLevel(state -> 3)
+			.pushReaction(PushReaction.DESTROY)));
 
 	public static final DeferredBlock<EssenceExtractorBlock> ESSENCE_EXTRACTOR = REGISTRY.register("essence_extractor", () -> new EssenceExtractorBlock(BlockBehaviour.Properties.of().strength(1.5f)));
 	public static final DeferredBlock<EssenceInjectorBlock> ESSENCE_INJECTOR = REGISTRY.register("essence_injector", () -> new EssenceInjectorBlock(BlockBehaviour.Properties.of().strength(1.5f)));

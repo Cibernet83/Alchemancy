@@ -1,12 +1,10 @@
 package net.cibernet.alchemancy.registries;
 
-import com.mojang.serialization.Codec;
 import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.item.InnatePropertyItem;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
 import net.cibernet.alchemancy.item.components.PropertyDataComponent;
 import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
-import net.cibernet.alchemancy.properties.data.modifiers.PropertyModifierType;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
@@ -15,13 +13,9 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.ExtraCodecs;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.armortrim.ArmorTrim;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.SimpleTier;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -38,15 +32,7 @@ public class AlchemancyItems
 	public static final DeferredRegister.Items REGISTRY = DeferredRegister.createItems(MODID);
 
 	public static final DeferredItem<BlockItem> BLAZEBLOOM = REGISTRY.registerSimpleBlockItem("blazebloom", AlchemancyBlocks.BLAZEBLOOM);
-	public static final DeferredItem<BlockItem> CLOUDELION = REGISTRY.registerSimpleBlockItem("cloudelion", AlchemancyBlocks.CLOUDELION);
-	public static final DeferredItem<BlockItem> GLOWSHROOM = REGISTRY.registerSimpleBlockItem("glowshroom", AlchemancyBlocks.GLOWSHROOM);
-	public static final DeferredItem<BlockItem> HYDROLILY = REGISTRY.registerSimpleBlockItem("hydrolily", AlchemancyBlocks.HYDROLILY);
-	public static final DeferredItem<Item> BLAZING_SUBSTANCE = REGISTRY.registerSimpleItem("blazing_substance", new Item.Properties());
-	public static final DeferredItem<Item> GUSTY_SUBSTANCE = REGISTRY.registerSimpleItem("gusty_substance", new Item.Properties());
-	public static final DeferredItem<Item> EARTHEN_SUBSTANCE = REGISTRY.registerSimpleItem("earthen_substance", new Item.Properties());
-	public static final DeferredItem<Item> TIDAL_SUBSTANCE = REGISTRY.registerSimpleItem("tidal_substance", new Item.Properties());
-	public static final DeferredItem<BlockItem> ESSENCE_EXTRACTOR = REGISTRY.registerSimpleBlockItem("essence_extractor", AlchemancyBlocks.ESSENCE_EXTRACTOR);
-	public static final DeferredItem<BlockItem> ESSENCE_INJECTOR = REGISTRY.registerSimpleBlockItem("essence_injector", AlchemancyBlocks.ESSENCE_INJECTOR);
+	public static final DeferredItem<Item> ALCHEMICAL_EXTRACT = REGISTRY.registerSimpleItem("alchemical_extract", new Item.Properties());
 	public static final DeferredItem<BlockItem> INFUSION_PEDESTAL = REGISTRY.registerSimpleBlockItem("infusion_pedestal", AlchemancyBlocks.INFUSION_PEDESTAL);
 	public static final DeferredItem<BlockItem> ALCHEMANCY_FORGE = REGISTRY.registerSimpleBlockItem("alchemancy_forge", AlchemancyBlocks.ALCHEMANCY_FORGE);
 	public static final DeferredItem<BlockItem> ALCHEMANCY_CATALYST = REGISTRY.registerSimpleBlockItem("alchemancy_catalyst", AlchemancyBlocks.ALCHEMANCY_CATALYST);

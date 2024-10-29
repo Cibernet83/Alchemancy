@@ -33,9 +33,9 @@ public class AlchemancyCreativeTabs
 			.icon(() -> BLAZEBLOOM.get().getDefaultInstance())
 			.displayItems((parameters, output) -> {
 				output.accept(BLAZEBLOOM.get());
-				output.accept(BLAZING_SUBSTANCE.get());
 				output.accept(ESSENCE_EXTRACTOR.get());
 				output.accept(ESSENCE_INJECTOR.get());
+				output.accept(ALCHEMICAL_EXTRACT.get());
 				output.accept(ALCHEMANCY_FORGE.get());
 				output.accept(INFUSION_PEDESTAL.get());
 				output.accept(ALCHEMANCY_CATALYST.get());

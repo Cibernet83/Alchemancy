@@ -32,9 +32,10 @@ public class AlchemancyTags
 	public static class Blocks
 	{
 		public static final TagKey<Block> ALCHEMANCY_CRYSTAL_CATALYSTS = registerTag(Registries.BLOCK, "alchemancy_crystal_catalysts");
-
 		public static final TagKey<Block> INCORRECT_FOR_LEAD_TOOL = registerTag(Registries.BLOCK, "incorrect_for_lead_tool");
 		public static final TagKey<Block> INCORRECT_FOR_DREAMSTEEL_TOOL = registerTag(Registries.BLOCK, "incorrect_for_dreamsteel_tool");
+		public static final TagKey<Block> SUPPORTS_BLAZEBLOOM = registerTag(Registries.BLOCK, "supports_blazebloom");
+		public static final TagKey<Block> REQUIRED_FOR_BLAZEBLOOM_GENERATION = registerTag(Registries.BLOCK, "required_for_blazebloom_generation");
 	}
 
 	public static class DamageTypes
