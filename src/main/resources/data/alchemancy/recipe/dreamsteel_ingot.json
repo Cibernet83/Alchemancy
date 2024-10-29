@@ -1,0 +1,12 @@
+{
+  "type": "alchemancy:item_transmutation",
+
+  "catalyst": {
+    "item": "minecraft:netherite_ingot"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:dreamsteel_ingot"
+  }
+}

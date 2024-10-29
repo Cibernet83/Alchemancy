@@ -33,8 +33,6 @@ public class AlchemancyCreativeTabs
 			.icon(() -> BLAZEBLOOM.get().getDefaultInstance())
 			.displayItems((parameters, output) -> {
 				output.accept(BLAZEBLOOM.get());
-				output.accept(ESSENCE_EXTRACTOR.get());
-				output.accept(ESSENCE_INJECTOR.get());
 				output.accept(ALCHEMICAL_EXTRACT.get());
 				output.accept(ALCHEMANCY_FORGE.get());
 				output.accept(INFUSION_PEDESTAL.get());
@@ -50,6 +48,13 @@ public class AlchemancyCreativeTabs
 				output.accept(LEAD_CHESTPLATE.get());
 				output.accept(LEAD_LEGGINGS.get());
 				output.accept(LEAD_BOOTS.get());
+				
+				output.accept(DREAMSTEEL_INGOT.get());
+				output.accept(DREAMSTEEL_SWORD.get());
+				output.accept(DREAMSTEEL_SHOVEL.get());
+				output.accept(DREAMSTEEL_PICKAXE.get());
+				output.accept(DREAMSTEEL_AXE.get());
+				output.accept(DREAMSTEEL_HOE.get());
 
 				output.accept(BLANK_PEARL.get());
 				output.accept(REVEALING_PEARL.get());
@@ -84,6 +89,7 @@ public class AlchemancyCreativeTabs
 		if(event.getTabKey().equals(CreativeModeTabs.COMBAT))
 		{
 			event.insertAfter(Items.GOLDEN_SWORD.getDefaultInstance(), LEAD_SWORD.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+			event.insertAfter(Items.NETHERITE_SWORD.getDefaultInstance(), DREAMSTEEL_SWORD.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 
 			event.insertAfter(Items.GOLDEN_BOOTS.getDefaultInstance(), LEAD_HELMET.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 			event.insertAfter(LEAD_HELMET.get().getDefaultInstance(), LEAD_CHESTPLATE.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
@@ -96,10 +102,16 @@ public class AlchemancyCreativeTabs
 			event.insertAfter(LEAD_SHOVEL.get().getDefaultInstance(), LEAD_PICKAXE.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 			event.insertAfter(LEAD_PICKAXE.get().getDefaultInstance(), LEAD_AXE.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 			event.insertAfter(LEAD_AXE.get().getDefaultInstance(), LEAD_HOE.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+
+			event.insertAfter(Items.NETHERITE_HOE.getDefaultInstance(), DREAMSTEEL_SHOVEL.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+			event.insertAfter(DREAMSTEEL_SHOVEL.get().getDefaultInstance(), DREAMSTEEL_PICKAXE.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+			event.insertAfter(DREAMSTEEL_PICKAXE.get().getDefaultInstance(), DREAMSTEEL_AXE.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+			event.insertAfter(DREAMSTEEL_AXE.get().getDefaultInstance(), DREAMSTEEL_HOE.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 		}
 		else if(event.getTabKey().equals(CreativeModeTabs.INGREDIENTS))
 		{
 			event.insertAfter(Items.GOLD_INGOT.getDefaultInstance(), LEAD_INGOT.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+			event.insertAfter(Items.NETHERITE_INGOT.getDefaultInstance(), DREAMSTEEL_INGOT.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 		}
 	}
 }

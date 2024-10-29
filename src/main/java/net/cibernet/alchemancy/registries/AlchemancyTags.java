@@ -17,13 +17,15 @@ public class AlchemancyTags
 	public static class Items
 	{
         public static final TagKey<Item> INGOTS_LEAD = registerCommonTag(Registries.ITEM, "ingots/lead");
+        public static final TagKey<Item> INGOTS_DREAMSTEEL = registerTag(Registries.ITEM, "ingots/dreamsteel");
 
         public static final TagKey<Item> IMMUNE_TO_INFUSIONS = registerTag(Registries.ITEM, "immune_to_infusions");
         public static final TagKey<Item> REMOVES_INFUSIONS = registerTag(Registries.ITEM, "removes_infusions");
 
         public static final TagKey<Item> INCREASES_SHOCK_DAMAGE_RECEIVED = registerTag(Registries.ITEM, "doubles_shock_damage_received");
 
-        public static final TagKey<Item> BASE_LAYER_TINT = registerTag(Registries.ITEM, "base_layer_tint");
+        public static final TagKey<Item> TINT_BASE_LAYER = registerTag(Registries.ITEM, "tint_base_layer");
+        public static final TagKey<Item> DONT_TINT_BASE_LAYER = registerTag(Registries.ITEM, "dont_tint_base_layer");
         public static final TagKey<Item> INCREASES_RESIZED = registerTag(Registries.ITEM, "increases_resized");
         public static final TagKey<Item> DECREASES_RESIZED = registerTag(Registries.ITEM, "decreases_resized");
 		public static final TagKey<Item> INFUSION_REMOVES_GLINT = registerTag(Registries.ITEM, "infusion_removes_glint");

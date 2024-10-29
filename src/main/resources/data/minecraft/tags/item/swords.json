@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "alchemancy:lead_sword"
+    "alchemancy:lead_sword",
+    "alchemancy:dreamsteel_sword"
   ]
 }

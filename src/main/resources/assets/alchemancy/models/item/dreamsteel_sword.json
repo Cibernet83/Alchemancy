@@ -1,0 +1,7 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "alchemancy:item/dreamsteel_sword",
+    "layer1": "alchemancy:item/dreamsteel_sword_tint"
+  }
+}

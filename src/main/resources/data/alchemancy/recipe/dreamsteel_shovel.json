@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:digging"
+  ],
+
+  "catalyst": {
+    "item": "alchemancy:dreamsteel_ingot"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:dreamsteel_shovel"
+  }
+}

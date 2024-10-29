@@ -1,6 +1,5 @@
 package net.cibernet.alchemancy.properties;
 
-import com.mojang.serialization.Codec;
 import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
@@ -11,9 +10,6 @@ import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.minecraft.core.Holder;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.DyeColor;
@@ -21,7 +17,6 @@ import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.AbstractCauldronBlock;
-import net.minecraft.world.level.block.CauldronBlock;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -78,7 +73,10 @@ public class TintedProperty extends IncreaseInfuseSlotsProperty implements IData
 	@Override
 	public int getTint(ItemStack stack, int tintIndex, int originalTint, int currentTint)
 	{
-		return stack.is(AlchemancyTags.Items.BASE_LAYER_TINT) && tintIndex > 0 ? currentTint : FastColor.ARGB32.color(FastColor.ARGB32.alpha(currentTint), getData(stack));
+		boolean tintBase = stack.is(AlchemancyTags.Items.TINT_BASE_LAYER);
+		boolean dontTintBase = stack.is(AlchemancyTags.Items.DONT_TINT_BASE_LAYER);
+		return (tintBase && dontTintBase) || (tintBase && tintIndex > 0) || (dontTintBase && tintIndex == 0) ?
+						currentTint : FastColor.ARGB32.color(FastColor.ARGB32.alpha(currentTint), getData(stack));
 	}
 
 	@Override

@@ -40,9 +40,27 @@ public class AlchemancyItems
 	public static final DeferredItem<Item> LEAD_INGOT = REGISTRY.registerSimpleItem("lead_ingot");
 	public static final DeferredItem<SwordItem> LEAD_SWORD = REGISTRY.register("lead_sword", () -> new SwordItem(Materials.LEAD_TOOLS, new Item.Properties().attributes(SwordItem.createAttributes(Materials.LEAD_TOOLS, 3, -2.4F))));
 	public static final DeferredItem<ShovelItem> LEAD_SHOVEL = REGISTRY.register("lead_shovel", () -> new ShovelItem(Materials.LEAD_TOOLS, new Item.Properties().attributes(ShovelItem.createAttributes(Materials.LEAD_TOOLS, 1.5F, -3.0F))));
-	public static final DeferredItem<PickaxeItem> LEAD_PICKAXE = REGISTRY.register("lead_pickaxe", () -> new PickaxeItem(Materials.LEAD_TOOLS, new Item.Properties().attributes(ShovelItem.createAttributes(Materials.LEAD_TOOLS, 1.0F, -2.8F))));
-	public static final DeferredItem<AxeItem> LEAD_AXE = REGISTRY.register("lead_axe", () -> new AxeItem(Materials.LEAD_TOOLS, new Item.Properties().attributes(ShovelItem.createAttributes(Materials.LEAD_TOOLS, 6.0F, -3.1F))));
-	public static final DeferredItem<HoeItem> LEAD_HOE = REGISTRY.register("lead_hoe", () -> new HoeItem(Materials.LEAD_TOOLS, new Item.Properties().attributes(ShovelItem.createAttributes(Materials.LEAD_TOOLS, -2.0F, -1.0F))));
+	public static final DeferredItem<PickaxeItem> LEAD_PICKAXE = REGISTRY.register("lead_pickaxe", () -> new PickaxeItem(Materials.LEAD_TOOLS, new Item.Properties().attributes(PickaxeItem.createAttributes(Materials.LEAD_TOOLS, 1.0F, -2.8F))));
+	public static final DeferredItem<AxeItem> LEAD_AXE = REGISTRY.register("lead_axe", () -> new AxeItem(Materials.LEAD_TOOLS, new Item.Properties().attributes(AxeItem.createAttributes(Materials.LEAD_TOOLS, 6.0F, -3.1F))));
+	public static final DeferredItem<HoeItem> LEAD_HOE = REGISTRY.register("lead_hoe", () -> new HoeItem(Materials.LEAD_TOOLS, new Item.Properties().attributes(HoeItem.createAttributes(Materials.LEAD_TOOLS, -2.0F, -1.0F))));
+
+
+	public static final DeferredItem<Item> DREAMSTEEL_INGOT = REGISTRY.registerSimpleItem("dreamsteel_ingot");
+	public static final DeferredItem<SwordItem> DREAMSTEEL_SWORD = REGISTRY.register("dreamsteel_sword", () -> new SwordItem(Materials.DREAMSTEEL_TOOLS, new Item.Properties()
+			.component(Components.INFUSION_SLOTS, 6)
+			.attributes(PickaxeItem.createAttributes(Materials.DREAMSTEEL_TOOLS, 3, -2.4F))));
+	public static final DeferredItem<ShovelItem> DREAMSTEEL_SHOVEL = REGISTRY.register("dreamsteel_shovel", () -> new ShovelItem(Materials.DREAMSTEEL_TOOLS, new Item.Properties()
+			.component(Components.INFUSION_SLOTS, 6)
+			.attributes(PickaxeItem.createAttributes(Materials.DREAMSTEEL_TOOLS, 1.5F, -3.0F))));
+	public static final DeferredItem<PickaxeItem> DREAMSTEEL_PICKAXE = REGISTRY.register("dreamsteel_pickaxe", () -> new PickaxeItem(Materials.DREAMSTEEL_TOOLS, new Item.Properties()
+			.component(Components.INFUSION_SLOTS, 6)
+			.attributes(PickaxeItem.createAttributes(Materials.DREAMSTEEL_TOOLS, 1.0F, -2.8F))));
+	public static final DeferredItem<AxeItem> DREAMSTEEL_AXE = REGISTRY.register("dreamsteel_axe", () -> new AxeItem(Materials.DREAMSTEEL_TOOLS, new Item.Properties()
+			.component(Components.INFUSION_SLOTS, 6)
+			.attributes(AxeItem.createAttributes(Materials.DREAMSTEEL_TOOLS, 6.0F, -3.1F))));
+	public static final DeferredItem<HoeItem> DREAMSTEEL_HOE = REGISTRY.register("dreamsteel_hoe", () -> new HoeItem(Materials.DREAMSTEEL_TOOLS, new Item.Properties()
+			.component(Components.INFUSION_SLOTS, 6)
+			.attributes(AxeItem.createAttributes(Materials.DREAMSTEEL_TOOLS, -2.0F, -1.0F))));
 
 	public static final DeferredItem<ArmorItem> LEAD_HELMET = REGISTRY.register("lead_helmet", () -> new ArmorItem(Materials.LEAD_ARMOR, ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(60))));
 	public static final DeferredItem<ArmorItem> LEAD_CHESTPLATE = REGISTRY.register("lead_chestplate", () -> new ArmorItem(Materials.LEAD_ARMOR, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(60))));
@@ -67,6 +85,7 @@ public class AlchemancyItems
 	public static class Materials
 	{
 		public static final Tier LEAD_TOOLS = new SimpleTier(AlchemancyTags.Blocks.INCORRECT_FOR_LEAD_TOOL, 1000, 6, 1.5f, 10, () -> Ingredient.of(AlchemancyTags.Items.INGOTS_LEAD));
+		public static final Tier DREAMSTEEL_TOOLS = new SimpleTier(AlchemancyTags.Blocks.INCORRECT_FOR_DREAMSTEEL_TOOL, 1561, 9.0F, 4.0F, 15, () -> Ingredient.of(AlchemancyTags.Items.INGOTS_DREAMSTEEL));
 
 
 		public static final DeferredRegister<ArmorMaterial> ARMOR_MATERIAL_REGISTRY = DeferredRegister.create(Registries.ARMOR_MATERIAL, MODID);
@@ -124,15 +143,8 @@ public class AlchemancyItems
 
 		/*  TODO
 
-		 *  Lead Tools & Armor: Iron equivalent, big durability, immune to Infusions
-		 *  Dreamsteel Ingot: Obtained by transmuting Netherite. Grants Awakened. Has a funny cycling color handled by tint.
-		 *  Dreamsteel Tools & Armor: Obtained by infusing the appropriate Properties/Items + Lustrous onto Dreamsteel. +2 Property Slots. Same tint dealeo as Dreamsteel
-		 *  "Mold" items: Can be infused with essences to create new items
-		    -Block
-	        -Rod
-	        -Orb
-	        -Dust
-	        -Gem
+		 *  Dreamsteel Armor: Obtained by infusing the appropriate Properties/Items + Lustrous onto Dreamsteel. +2 Property Slots. Same tint dealeo as Dreamsteel
+		 * Pearlescent Block, Rod, and Crystal: Interacts with properties to create new items
 		 */
 
 

@@ -71,5 +71,8 @@ public class AlchemancyClient
 			List<Integer> colors = stack.getOrDefault(AlchemancyItems.Components.INFUSED_PROPERTIES, InfusedPropertiesComponent.EMPTY).properties().stream().filter(p -> !(p.value() instanceof IncreaseInfuseSlotsProperty)).map(propertyHolder -> propertyHolder.value().getColor(stack)).toList();
 			return colors.isEmpty() ? -1 : FastColor.ARGB32.color(255, colors.get((int) Math.abs((System.currentTimeMillis() / 2000) % colors.size())));
 		}), AlchemancyItems.IRON_RING);
+
+		event.register(((stack, tintIndex) -> tintIndex == 1 ? AlchemancyProperties.AWAKENED.value().getColor(stack) : -1),
+				AlchemancyItems.DREAMSTEEL_INGOT, AlchemancyItems.DREAMSTEEL_PICKAXE, AlchemancyItems.DREAMSTEEL_AXE, AlchemancyItems.DREAMSTEEL_SHOVEL, AlchemancyItems.DREAMSTEEL_HOE, AlchemancyItems.DREAMSTEEL_SWORD);
 	}
 }
