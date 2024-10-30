@@ -20,6 +20,8 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 import java.util.ArrayList;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class CommonUtils
@@ -40,6 +42,12 @@ public class CommonUtils
 	{
 		final MinecraftServer currentServer = ServerLifecycleHooks.getCurrentServer();
 		return currentServer != null ? currentServer.overworld().getLevelData() : ClientUtil.getCurrentLevel().getLevelData();
+	}
+
+	public static Optional<Player> getPlayerByUUID(UUID uuid)
+	{
+		final MinecraftServer currentServer = ServerLifecycleHooks.getCurrentServer();
+		return Optional.ofNullable(currentServer != null ? currentServer.overworld().getPlayerByUUID(uuid) : ClientUtil.getCurrentLevel().getPlayerByUUID(uuid));
 	}
 
 	public static void modifyTint(ItemStack itemStack, int tintIndex, LocalIntRef localTint)

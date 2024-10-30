@@ -7,16 +7,27 @@ import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.util.CommonUtils;
+import net.cibernet.alchemancy.util.WayfindingUtil;
+import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.item.CompassItemPropertyFunction;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.GlobalPos;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.CompassItem;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -82,7 +93,6 @@ public abstract class ItemRendererMixin
 					localStack.set(disguise);
 					localModel.set(getModel(disguise, owner == null ? Minecraft.getInstance().level : owner.level(), owner, owner == null ? 0 : owner.getId()));
 				}
-				alchemancy$livingEntity = null;
 			}
 			if(InfusedPropertiesHelper.hasInfusedProperty(itemStack, AlchemancyProperties.GLOWING_AURA))
 				localLight.set(LightTexture.FULL_BRIGHT);
@@ -102,11 +112,41 @@ public abstract class ItemRendererMixin
 					poseStack.scale(1, 1, 0.05f);
 			}
 
+		if(InfusedPropertiesHelper.hasProperty(itemStack, AlchemancyProperties.WAYFINDING))
+		{
+			Level level = Minecraft.getInstance().level;
+			Entity user = alchemancy$livingEntity == null ? Minecraft.getInstance().player : alchemancy$livingEntity;
+
+			if(user != null && level != null)
+			{
+				boolean updatePrev = WayfindingUtil.shouldWobbleUpdate(user.level().getGameTime());
+
+				float rotation = AlchemancyProperties.WAYFINDING.value().getData(itemStack).getRotation(user, DeltaTracker.ONE.getGameTimeDeltaPartialTick(true)); //WayfindingUtil.getRotationTowardsCompassTarget(alchemancy$livingEntity, level.getGameTime(), new BlockPos(0, 0, 0));
+				float angle = 360 * rotation;
+
+				if(updatePrev)
+					AlchemancyProperties.WAYFINDING.value().setData(itemStack, AlchemancyProperties.WAYFINDING.value().getData(itemStack).withPreviousRotation(rotation));
+
+				switch (displayContext)
+				{
+					case FIRST_PERSON_LEFT_HAND: case THIRD_PERSON_LEFT_HAND: case FIRST_PERSON_RIGHT_HAND: case THIRD_PERSON_RIGHT_HAND:
+						poseStack.mulPose(Axis.YN.rotationDegrees(angle + 195));
+					break;
+					default:
+						poseStack.mulPose(Axis.ZN.rotationDegrees(angle - 45));
+				}
+
+
+			}
+		}
+
 		if(InfusedPropertiesHelper.hasProperty(itemStack, AlchemancyProperties.RESIZED))
 		{
 			float size = AlchemancyProperties.RESIZED.get().getData(itemStack);
 			poseStack.scale(size, size, size);
 		}
-	}
 
+
+		alchemancy$livingEntity = null;
+	}
 }

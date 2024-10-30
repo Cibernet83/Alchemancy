@@ -104,6 +104,8 @@
   "property.detail.item_count": "%s x%s",
   "property.detail.uses_left": "%s uses",
   "property.detail.needs_refueling": "Needs refueling!",
+  "property.detail.global_position": "(%s, %s, %s) in \"%s\"",
+  "property.detail.block_position": "%s, %s, %s",
 
   "property.alchemancy.tinted": "Tinted",
   "property.alchemancy.resized": "Resized",
@@ -233,6 +235,7 @@
   "property.alchemancy.sharpshooting": "Sharpshooting",
   "property.alchemancy.brushing": "Brushing",
   "property.alchemancy.scoping": "Scoping",
+  "property.alchemancy.wayfinding": "Wayfinding",
   "property.alchemancy.headwear": "Headwear",
   "property.alchemancy.saddled": "Saddled",
   "property.alchemancy.glider": "Glider",
