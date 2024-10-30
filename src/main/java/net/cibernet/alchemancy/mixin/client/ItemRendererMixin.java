@@ -92,6 +92,16 @@ public abstract class ItemRendererMixin
 	@Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/neoforged/neoforge/client/ClientHooks;handleCameraTransforms(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/resources/model/BakedModel;Lnet/minecraft/world/item/ItemDisplayContext;Z)Lnet/minecraft/client/resources/model/BakedModel;"))
 	public void renderScale(ItemStack itemStack, ItemDisplayContext displayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight, int combinedOverlay, BakedModel p_model, CallbackInfo ci)
 	{
+		if(InfusedPropertiesHelper.hasProperty(itemStack, AlchemancyProperties.FLATTENED))
+			switch (displayContext)
+			{
+				case FIRST_PERSON_LEFT_HAND: case THIRD_PERSON_LEFT_HAND: case FIRST_PERSON_RIGHT_HAND: case THIRD_PERSON_RIGHT_HAND:
+					poseStack.scale(0.05f, 1, 1);
+					break;
+				default:
+					poseStack.scale(1, 1, 0.05f);
+			}
+
 		if(InfusedPropertiesHelper.hasProperty(itemStack, AlchemancyProperties.RESIZED))
 		{
 			float size = AlchemancyProperties.RESIZED.get().getData(itemStack);

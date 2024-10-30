@@ -32,17 +32,22 @@ public class ItemStackHolderRenderer implements BlockEntityRenderer<ItemStackHol
 	@Override
 	public void render(ItemStackHolderBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay)
 	{
-		Level level = blockEntity.getLevel();
-		BlockPos itemLightPos = blockEntity.getBlockPos().above();
 		poseStack.pushPose();
-		//pMatrixStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
 
-		double height = blockEntity.getBlockState().getShape(level, blockEntity.getBlockPos()).bounds().maxY;
+		if(blockEntity.getBlockState().getBlock() instanceof ItemStackHolderCustomRender block)
+		{
+			block.render(itemRenderer, blockEntity, partialTick, poseStack, bufferSource, packedLight, packedOverlay);
+		}
+		else {
+			Level level = blockEntity.getLevel();
+			BlockPos itemLightPos = blockEntity.getBlockPos().above();
+			double height = blockEntity.getBlockState().getShape(level, blockEntity.getBlockPos()).bounds().maxY;
 
-		poseStack.translate(0.5f, height + 0.2f, 0.5f);
-		poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockState().getValue(InfusionPedestalBlock.FACING).toYRot()));
-		this.itemRenderer.renderStatic(blockEntity.getItem(), ItemDisplayContext.GROUND, LightTexture.pack(level.getBrightness(LightLayer.BLOCK, itemLightPos),
-				level.getBrightness(LightLayer.SKY, itemLightPos)), OverlayTexture.NO_OVERLAY, poseStack, bufferSource, level, 0);
+			poseStack.translate(0.5f, height + 0.2f, 0.5f);
+			poseStack.mulPose(Axis.YP.rotationDegrees(blockEntity.getBlockState().getValue(InfusionPedestalBlock.FACING).toYRot()));
+			this.itemRenderer.renderStatic(blockEntity.getItem(), ItemDisplayContext.GROUND, LightTexture.pack(level.getBrightness(LightLayer.BLOCK, itemLightPos),
+					level.getBrightness(LightLayer.SKY, itemLightPos)), OverlayTexture.NO_OVERLAY, poseStack, bufferSource, level, 0);
+		}
 		poseStack.popPose();
 	}
 

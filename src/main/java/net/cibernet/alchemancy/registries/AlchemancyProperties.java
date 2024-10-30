@@ -215,6 +215,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, DisguisedProperty> DISGUISED = REGISTRY.register("disguised", DisguisedProperty::new);
 	public static final DeferredHolder<Property, SeethroughProperty> SEETHROUGH = REGISTRY.register("seethrough", SeethroughProperty::new);
 	public static final DeferredHolder<Property, TintedProperty> TINTED = REGISTRY.register("tinted", TintedProperty::new);
+	public static final DeferredHolder<Property, FlattenedProperty> FLATTENED = REGISTRY.register("flattened", FlattenedProperty::new);
 
 
 	//Special
