@@ -1,10 +1,14 @@
 package net.cibernet.alchemancy.properties;
 
+import net.cibernet.alchemancy.blocks.blockentities.RootedItemBlockEntity;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -14,6 +18,8 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.List;
@@ -100,6 +106,69 @@ public class AssembleProperty extends Property
 				}
 			}
 		}
+	}
+
+	@Override
+	public @Nullable ItemInteractionResult onRootedRightClick(RootedItemBlockEntity root, Player player, InteractionHand hand, BlockHitResult hitResult)
+	{
+		Level level = player.level();
+		ItemStack stack = root.getItem();
+		List<RecipeHolder<CraftingRecipe>> availableRecipes = getRecipesMatchingOutput(stack, level);
+
+		Tuple<CraftingRecipe, NonNullList<Integer>> selectedRecipe = null;
+		for (RecipeHolder<CraftingRecipe> craftingRecipe : availableRecipes)
+		{
+			NonNullList<Integer> acceptedSlots = NonNullList.withSize(player.getInventory().items.size(), 0);
+
+			boolean accepted = true;
+			for(Ingredient ingredient : craftingRecipe.value().getIngredients())
+			{
+				if(ingredient.isEmpty())
+					continue;
+
+				boolean hasIngredient = false;
+				for (int i = 0; i < player.getInventory().items.size(); i++)
+				{
+					ItemStack inventoryStack = player.getInventory().items.get(i);
+					ItemStack storedItem = AlchemancyProperties.HOLLOW.get().getData(inventoryStack);
+					if(!storedItem.isEmpty())
+						inventoryStack = storedItem;
+
+					if(stack == inventoryStack)
+						continue;
+
+					if(acceptedSlots.get(i) < inventoryStack.getCount() && ingredient.test(inventoryStack))
+					{
+						hasIngredient = true;
+						acceptedSlots.set(i, acceptedSlots.get(i)+1);
+						break;
+					}
+				}
+
+				if(!hasIngredient)
+				{
+					accepted = false;
+					break;
+				}
+			}
+
+			if(accepted)
+				selectedRecipe = new Tuple<>(craftingRecipe.value(), acceptedSlots);
+		}
+
+		if(selectedRecipe != null && player.addItem(selectedRecipe.getA().getResultItem(level.registryAccess()).copy()))
+		{
+			NonNullList<Integer> selectedList = selectedRecipe.getB();
+			if(!level.isClientSide())
+				for(int slotToShrink = 0; slotToShrink < player.getInventory().items.size(); slotToShrink++)
+				{
+					if(selectedList.get(slotToShrink) > 0 && !AlchemancyProperties.HOLLOW.get().shrinkContents(player.getInventory().getItem(slotToShrink), selectedList.get(slotToShrink)))
+						player.getInventory().removeItem(slotToShrink, selectedList.get(slotToShrink));
+				}
+			return ItemInteractionResult.sidedSuccess(level.isClientSide());
+		}
+
+		return super.onRootedRightClick(root, player, hand, hitResult);
 	}
 
 	public static List<RecipeHolder<CraftingRecipe>> getRecipesMatchingOutput(ItemStack output, Level level)
