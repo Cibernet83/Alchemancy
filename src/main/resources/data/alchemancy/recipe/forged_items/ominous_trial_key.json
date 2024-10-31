@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:ominous"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:trial_key"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:ominous_trial_key"
+  }
+}
