@@ -40,8 +40,8 @@ public class PropertyInteractionRecipe extends AbstractForgeRecipe<List<Holder<P
 	);
 	final List<Holder<Property>> result;
 
-	public PropertyInteractionRecipe(Optional<Ingredient> catalyst, List<EssenceContainer> essences, List<Ingredient> infusables, List<Holder<Property>> infusedProperties, List<Holder<Property>> result) {
-		super(catalyst, essences, infusables, infusedProperties);
+	public PropertyInteractionRecipe(Optional<Ingredient> catalyst, Optional<String> catalystName, List<EssenceContainer> essences, List<Ingredient> infusables, List<Holder<Property>> infusedProperties, List<Holder<Property>> result) {
+		super(catalyst, catalystName, essences, infusables, infusedProperties);
 		this.result = result;
 	}
 

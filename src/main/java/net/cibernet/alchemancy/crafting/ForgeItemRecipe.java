@@ -18,9 +18,9 @@ public class ForgeItemRecipe extends AbstractForgeRecipe<ItemStack>
 {
 	final ItemStack result;
 
-	public ForgeItemRecipe(Optional<Ingredient> catalyst, List<EssenceContainer> essences, List<Ingredient> infusables, List<Holder<Property>> infusedProperties, ItemStack result)
+	public ForgeItemRecipe(Optional<Ingredient> catalyst, Optional<String> catalystName, List<EssenceContainer> essences, List<Ingredient> infusables, List<Holder<Property>> infusedProperties, ItemStack result)
 	{
-		super(catalyst.isPresent() ? catalyst : Optional.of(Ingredient.EMPTY), essences, infusables, infusedProperties);
+		super(catalyst.isPresent() ? catalyst : Optional.of(Ingredient.EMPTY), catalystName, essences, infusables, infusedProperties);
 		this.result = result;
 
 	}

@@ -1,6 +1,7 @@
 package net.cibernet.alchemancy.crafting;
 
 import com.mojang.datafixers.util.Function5;
+import com.mojang.datafixers.util.Function6;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -31,12 +32,14 @@ public abstract class AbstractForgeRecipe<RESULT> implements Recipe<ForgeRecipeG
 {
 	public static int MIN_PRIORITY = 0;
 	final Optional<Ingredient> catalyst;
+	final Optional<String> catalystName;
 	final List<Ingredient> infusables;
 	final List<EssenceContainer> essences;
 	final List<Holder<Property>> infusedProperties;
 
-	protected AbstractForgeRecipe(Optional<Ingredient> catalyst, List<EssenceContainer> essences, List<Ingredient> infusables, List<Holder<Property>> infusedProperties) {
+	protected AbstractForgeRecipe(Optional<Ingredient> catalyst, Optional<String> catalystName, List<EssenceContainer> essences, List<Ingredient> infusables, List<Holder<Property>> infusedProperties) {
 		this.catalyst = catalyst;
+		this.catalystName = catalystName;
 		this.infusables = infusables;
 		this.essences = essences;
 		this.infusedProperties = infusedProperties;
@@ -49,10 +52,12 @@ public abstract class AbstractForgeRecipe<RESULT> implements Recipe<ForgeRecipeG
 	public boolean matches(ForgeRecipeGrid input, Level level)
 	{
 		return  (catalyst.isEmpty() || catalyst.get().test(input.getCurrentOutput())) &&
+				(catalystName.isEmpty() || input.getCurrentOutput().getDisplayName().getString().equalsIgnoreCase(catalystName.get())) &&
 				input.testInfusables(infusables, false) &&
 				input.testEssences(essences, false) &&
 				input.testProperties(infusedProperties, false);
 	}
+
 
 	@Override
 	public ItemStack assemble(ForgeRecipeGrid input, HolderLookup.Provider registries)
@@ -125,11 +130,12 @@ public abstract class AbstractForgeRecipe<RESULT> implements Recipe<ForgeRecipeG
 				}
 		);
 
-		public Serializer(Codec<RESULT> resultCodec, StreamCodec<RegistryFriendlyByteBuf, RESULT> streamCodec, Function5<Optional<Ingredient>, List<EssenceContainer>, List<Ingredient>, List<Holder<Property>>, RESULT, T> constructor)
+		public Serializer(Codec<RESULT> resultCodec, StreamCodec<RegistryFriendlyByteBuf, RESULT> streamCodec, Function6<Optional<Ingredient>, Optional<String>, List<EssenceContainer>, List<Ingredient>, List<Holder<Property>>, RESULT, T> constructor)
 		{
 
 			CODEC = RecordCodecBuilder.mapCodec((instance) ->  instance.group(
 					Ingredient.CODEC.optionalFieldOf("catalyst").forGetter((recipe) -> recipe.catalyst),
+					Codec.STRING.optionalFieldOf("catalyst_name").forGetter(recipe -> recipe.catalystName),
 					Codec.list(ESSENCE_CONTAINER_CODEC).fieldOf("essences").orElse(List.of()).forGetter(recipe -> recipe.essences),
 					Codec.list(Ingredient.CODEC).fieldOf("infusables").orElse(List.of()).forGetter(recipe -> recipe.infusables),
 					Property.LIST_CODEC.fieldOf("properties").orElse(List.of()).forGetter(recipe -> recipe.infusedProperties),
@@ -153,6 +159,9 @@ public abstract class AbstractForgeRecipe<RESULT> implements Recipe<ForgeRecipeG
 						encode.writeBoolean(recipe.catalyst.isPresent());
 						recipe.catalyst.ifPresent(ingredient -> Ingredient.CONTENTS_STREAM_CODEC.encode(encode, ingredient));
 
+						encode.writeBoolean(recipe.catalystName.isPresent());
+						recipe.catalystName.ifPresent(name -> ByteBufCodecs.STRING_UTF8.encode(encode, name));
+
 
 						streamCodec.encode(encode, recipe.getResult());
 					},
@@ -173,7 +182,10 @@ public abstract class AbstractForgeRecipe<RESULT> implements Recipe<ForgeRecipeG
 						for(int i = 0; i < listSize; i++)
 							properties.add(Property.STREAM_CODEC.decode(decode));
 
-						return constructor.apply(decode.readBoolean() ? Optional.of(Ingredient.CONTENTS_STREAM_CODEC.decode(decode)) : Optional.empty(), essences, infusables, properties, streamCodec.decode(decode));
+						Optional<Ingredient> catalyst = decode.readBoolean() ? Optional.of(Ingredient.CONTENTS_STREAM_CODEC.decode(decode)) : Optional.empty();
+						Optional<String> catalystName = decode.readBoolean() ? Optional.of(ByteBufCodecs.STRING_UTF8.decode(decode)) : Optional.empty();
+
+						return constructor.apply(catalyst, catalystName, essences, infusables, properties, streamCodec.decode(decode));
 					}
 			);
 		}

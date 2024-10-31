@@ -19,9 +19,9 @@ public class ForgePropertyRecipe extends AbstractForgeRecipe<Holder<Property>>
 {
 	final Holder<Property> result;
 
-	public ForgePropertyRecipe(Optional<Ingredient> catalyst, List<EssenceContainer> essences, List<Ingredient> infusables, List<Holder<Property>> infusedProperties, Holder<Property> result)
+	public ForgePropertyRecipe(Optional<Ingredient> catalyst, Optional<String> catalystName, List<EssenceContainer> essences, List<Ingredient> infusables, List<Holder<Property>> infusedProperties, Holder<Property> result)
 	{
-		super(catalyst, essences, infusables, infusedProperties);
+		super(catalyst, catalystName, essences, infusables, infusedProperties);
 		this.result = result;
 	}
 

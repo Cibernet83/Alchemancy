@@ -40,7 +40,7 @@ public class ForgeCustomNameRecipe extends AbstractForgeRecipe<Object>
 
 	protected ForgeCustomNameRecipe(Ingredient ingredient, Optional<Holder<Property>> bold, Optional<Holder<Property>> italic, Optional<Holder<Property>> strikethrough, Optional<Holder<Property>> underlined, Optional<Holder<Property>> obfuscated, Optional<Boolean> canTint)
 	{
-		super(Optional.empty(), List.of(), List.of(), List.of());
+		super(Optional.empty(), Optional.empty(), List.of(), List.of(), List.of());
 		this.ingredient = ingredient;
 		this.bold = bold;
 		this.italic = italic;
