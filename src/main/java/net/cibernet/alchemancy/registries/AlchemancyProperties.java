@@ -41,6 +41,7 @@ public class AlchemancyProperties
 		public static final DeferredRegister<PropertyModifierType<?>> REGISTRY = DeferredRegister.create(KEY, Alchemancy.MODID);
 		private static final Registry<PropertyModifierType<?>> SUPPLIER = REGISTRY.makeRegistry(propertyRegistryBuilder -> propertyRegistryBuilder.defaultKey(KEY).sync(true));
 
+		public static final DeferredHolder<PropertyModifierType<?>, PropertyModifierType<Boolean>> IGNORE_INFUSED = REGISTRY.register("ignore_infused", PropertyModifierType.build(false, Codec.BOOL, ByteBufCodecs.BOOL));
 		public static final DeferredHolder<PropertyModifierType<?>, PropertyModifierType<Boolean>> PREVENT_CONSUMPTION = REGISTRY.register("prevent_consumption", PropertyModifierType.build(false, Codec.BOOL, ByteBufCodecs.BOOL));
 		public static final DeferredHolder<PropertyModifierType<?>, PropertyModifierType<Integer>> DURABILITY_CONSUMPTION = REGISTRY.register("durability_consumption", PropertyModifierType.build(1, Codec.INT, ByteBufCodecs.INT));
 		public static final DeferredHolder<PropertyModifierType<?>, PropertyModifierType<Float>> ATTACK_DAMAGE = REGISTRY.register("attack_damage", PropertyModifierType.build(1f, Codec.FLOAT, ByteBufCodecs.FLOAT));

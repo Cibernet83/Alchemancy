@@ -81,6 +81,20 @@ public class InfusedPropertiesHelper
 			AlchemancyProperties.getDormantProperties(stack).forEach(consumer);
 	}
 
+	public static void forEachInnateProperty(ItemStack stack, Consumer<Holder<Property>> consumer)
+	{
+		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().getData(stack);
+
+		if (stack.has(INNATE_PROPERTIES.get()))
+		{
+			if(!toggled && hasInnateProperty(stack, AlchemancyProperties.TOGGLEABLE))
+				consumer.accept(AlchemancyProperties.TOGGLEABLE);
+			else stack.get(INNATE_PROPERTIES.get()).forEachProperty(consumer);
+		}
+		if(hasInnateProperty(stack, AlchemancyProperties.AWAKENED))
+			AlchemancyProperties.getDormantProperties(stack).forEach(consumer);
+	}
+
 	public static ItemStack addProperty(ItemStack stack, Holder<Property> property)
 	{
 		modifyInfusions(stack, mutable -> mutable.addProperty(property));

@@ -1,6 +1,8 @@
 package net.cibernet.alchemancy.properties.special;
 
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
+import net.cibernet.alchemancy.properties.ExplodingProperty;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
@@ -20,6 +22,7 @@ import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 @EventBusSubscriber
 public class AuxiliaryProperty extends Property
@@ -28,7 +31,7 @@ public class AuxiliaryProperty extends Property
 	public void onInventoryTick(Entity user, ItemStack stack, Level level, int inventorySlot, boolean isCurrentItem)
 	{
 		if(user instanceof LivingEntity living)
-			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onEquippedTick(living, EquipmentSlot.MAINHAND, stack));
+			triggerAuxiliaryEffects(stack, (propertyHolder) -> propertyHolder.value().onEquippedTick(living, EquipmentSlot.MAINHAND, stack));
 	}
 
 	@Override
@@ -60,14 +63,22 @@ public class AuxiliaryProperty extends Property
 			triggerAuxiliaryEffects(user, (propertyHolder, stack) -> propertyHolder.value().onUserDeath(user, stack, EquipmentSlot.MAINHAND, event));
 	}
 
+	public static void triggerAuxiliaryEffects(ItemStack stack, Consumer<Holder<Property>> consumer)
+	{
+		if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.AUXILIARY))
+		{
+			if(PropertyModifierComponent.getOrElse(stack, AlchemancyProperties.AUXILIARY, AlchemancyProperties.Modifiers.IGNORE_INFUSED, false))
+				InfusedPropertiesHelper.forEachInnateProperty(stack, consumer);
+			else InfusedPropertiesHelper.forEachProperty(stack, consumer);
+		}
+	}
 	public static void triggerAuxiliaryEffects(Player user, BiConsumer<Holder<Property>, ItemStack> consumer)
 	{
 		Inventory inventory = user.getInventory();
 		for(int slot = 0; slot < inventory.getContainerSize(); slot++)
 		{
 			ItemStack stack = inventory.getItem(slot);
-			if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.AUXILIARY))
-				InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> consumer.accept(propertyHolder, stack));
+			triggerAuxiliaryEffects(stack, (propertyHolder -> consumer.accept(propertyHolder, stack)));
 		}
 	}
 }

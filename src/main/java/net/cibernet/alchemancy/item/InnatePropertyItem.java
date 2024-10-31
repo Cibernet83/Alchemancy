@@ -144,12 +144,12 @@ public class InnatePropertyItem extends Item
 			return this;
 		}
 
-		public <T> Builder addModifier(Holder<Property> property, Holder<PropertyModifierType<T>> modifier, T value)
+		public <T> Builder addModifier(Holder<Property> property, DeferredHolder<PropertyModifierType<?>, PropertyModifierType<T>> modifier, T value)
 		{
 			if(!modifiers.containsKey(property))
 				modifiers.put(property, new HashMap<>());
 
-			modifiers.get(property).put(AlchemancyProperties.Modifiers.asHolder(modifier.value()), value);
+			modifiers.get(property).put(modifier, value);
 			return this;
 		}
 
@@ -164,6 +164,14 @@ public class InnatePropertyItem extends Item
 			withProperties(AlchemancyProperties.TOGGLEABLE);
 			if(!enabledByDefault)
 				addData(AlchemancyProperties.TOGGLEABLE, false);
+			return this;
+		}
+
+		public Builder auxiliary(boolean ignoreInfused)
+		{
+			withProperties(AlchemancyProperties.AUXILIARY);
+			if(ignoreInfused)
+				addModifier(AlchemancyProperties.AUXILIARY, AlchemancyProperties.Modifiers.IGNORE_INFUSED, true);
 			return this;
 		}
 
