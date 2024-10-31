@@ -2,6 +2,7 @@ package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
+import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -10,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 
 public class LevitatingProperty extends Property
 {
@@ -36,6 +38,13 @@ public class LevitatingProperty extends Property
 					PropertyModifierComponent.getOrElse(stack, asHolder(), AlchemancyProperties.Modifiers.EFFECT_VALUE, 0.05f), user.getDeltaMovement().z));
 			user.hasImpulse = true;
 		}
+	}
+
+
+	@Override
+	public void onFall(LivingEntity entity, ItemStack stack, EquipmentSlot slot, LivingFallEvent event)
+	{
+		event.setDamageMultiplier(Mth.floor(event.getDamageMultiplier() * 0.75f));
 	}
 
 	@Override
