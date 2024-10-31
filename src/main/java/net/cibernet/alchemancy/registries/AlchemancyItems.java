@@ -92,7 +92,7 @@ public class AlchemancyItems
 			.build());
 	public static final DeferredItem<InnatePropertyItem> ROCKET_POWERED_HAMMER = REGISTRY.register("rocket_powered_hammer", () -> new InnatePropertyItem.Builder()
 			.withProperties(AlchemancyProperties.ROCKET_POWERED, AlchemancyProperties.DENSE)
-			.durability(1200)
+			.durability(600)
 			.stacksTo(1)
 			.build(new Item.Properties()
 					.rarity(Rarity.EPIC)
@@ -100,7 +100,7 @@ public class AlchemancyItems
 					.component(DataComponents.TOOL, MaceItem.createToolProperties())));
 	public static final DeferredItem<InnatePropertyItem> BARRELS_WARHAMMER = REGISTRY.register("barrels_warhammer", () -> new InnatePropertyItem.Builder()
 			.withProperties(AlchemancyProperties.ROCKET_POWERED, AlchemancyProperties.DENSE)
-			.durability(1200)
+			.durability(600)
 			.stacksTo(1)
 			.build(new Item.Properties()
 					.rarity(Rarity.EPIC)

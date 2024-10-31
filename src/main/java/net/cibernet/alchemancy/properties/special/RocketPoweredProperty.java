@@ -32,7 +32,7 @@ public class RocketPoweredProperty extends Property
 		{
 			EquipmentSlot slot = user.getUsedItemHand() == InteractionHand.OFF_HAND ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND;
 			if(stack.isDamageableItem())
-				stack.hurtAndBreak(1, user, slot);
+				stack.hurtAndBreak(2, user, slot);
 			else consumeItem(user, stack, slot);
 		}
 
