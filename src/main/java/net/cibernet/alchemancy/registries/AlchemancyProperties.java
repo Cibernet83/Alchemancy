@@ -102,6 +102,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, BowProperty> SHARPSHOOTING = REGISTRY.register("sharpshooting", BowProperty::new);
 	public static final DeferredHolder<Property, ShieldingProperty> SHIELDING = REGISTRY.register("shielding", ShieldingProperty::new);
 	public static final DeferredHolder<Property, FirestarterProperty> FIRESTARTING = REGISTRY.register("firestarting", () -> new FirestarterProperty(0xFFB051, List.of(), ItemAbilities.DEFAULT_FLINT_ACTIONS));
+	public static final DeferredHolder<Property, BrushProperty> BRUSHING = REGISTRY.register("brushing", BrushProperty::new);
 	public static final DeferredHolder<Property, Property> SCOPING = REGISTRY.register("scoping", () -> Property.simple(0xDE923A));
 	public static final DeferredHolder<Property, WayfindingProperty> WAYFINDING = REGISTRY.register("wayfinding", WayfindingProperty::new);
 	public static final DeferredHolder<Property, HeadearProperty> HEADWEAR = REGISTRY.register("headwear", HeadearProperty::new);
