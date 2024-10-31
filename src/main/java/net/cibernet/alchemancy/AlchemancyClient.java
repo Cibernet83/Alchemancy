@@ -16,6 +16,7 @@ import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.FallingBlockRenderer;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.item.Item;
@@ -25,6 +26,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.List;
 
@@ -55,6 +57,17 @@ public class AlchemancyClient
 
 		ItemProperties.register(AlchemancyItems.WAYWARD_MEDALLION.get(), ResourceLocation.fromNamespaceAndPath(MODID, "bound"),
 				((stack, level, entity, seed) -> AlchemancyProperties.WAYWARD_WARP.value().getData(stack).hasTarget() ? 1 : 0));
+
+		registerItemProperties("active", (stack, level, entity, seed) -> entity != null && stack.equals(entity.getUseItem()) ? 1 : 0,
+				AlchemancyItems.ROCKET_POWERED_HAMMER, AlchemancyItems.BARRELS_WARHAMMER);
+	}
+
+	private static void registerItemProperties(String key, ItemPropertyFunction function, DeferredItem<?>... items)
+	{
+		ResourceLocation location = ResourceLocation.fromNamespaceAndPath(MODID, key);
+		for (DeferredItem<?> item : items) {
+			ItemProperties.register(item.asItem(), location, function);
+		}
 	}
 
 	@SubscribeEvent

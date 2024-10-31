@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "alchemancy:item/rocket_powered_hammer"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "alchemancy:active": 1
+      },
+      "model": "alchemancy:item/rocket_powered_hammer_active"
+    }
+  ]
+}

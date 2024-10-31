@@ -9,6 +9,7 @@ import net.cibernet.alchemancy.properties.special.WaywardWarpProperty;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.ResourceLocation;
@@ -88,6 +89,22 @@ public class AlchemancyItems
 			.tooltip(WaywardWarpProperty.MEDALLION_TOOLTIP)
 			.stacksTo(1)
 			.build());
+	public static final DeferredItem<InnatePropertyItem> ROCKET_POWERED_HAMMER = REGISTRY.register("rocket_powered_hammer", () -> new InnatePropertyItem.Builder()
+			.withProperties(AlchemancyProperties.ROCKET_POWERED, AlchemancyProperties.DENSE)
+			.durability(1200)
+			.stacksTo(1)
+			.build(new Item.Properties()
+					.rarity(Rarity.EPIC)
+					.attributes(MaceItem.createAttributes())
+					.component(DataComponents.TOOL, MaceItem.createToolProperties())));
+	public static final DeferredItem<InnatePropertyItem> BARRELS_WARHAMMER = REGISTRY.register("barrels_warhammer", () -> new InnatePropertyItem.Builder()
+			.withProperties(AlchemancyProperties.ROCKET_POWERED, AlchemancyProperties.DENSE)
+			.durability(1200)
+			.stacksTo(1)
+			.build(new Item.Properties()
+					.rarity(Rarity.EPIC)
+					.attributes(MaceItem.createAttributes())
+					.component(DataComponents.TOOL, MaceItem.createToolProperties())));
 
 	public static final DeferredItem<Item> PROPERTY_CAPSULE = REGISTRY.registerSimpleItem("property_capsule");
 

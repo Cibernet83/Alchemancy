@@ -83,6 +83,9 @@
   "item.alchemancy.wayward_medallion.bound_to_position": "Bound to: (%s, %s, %s)",
   "item.alchemancy.wayward_medallion.in": "in \"%s\"",
 
+  "item.alchemancy.rocket_powered_hammer": "Rocket-Powered Hammer",
+  "item.alchemancy.barrels_warhammer": "Barrel's Warhammer",
+
   "item.alchemancy.property_capsule": "Property Capsule",
 
   "item.alchemancy.tooltip.stored_properties": "Stored Properties:",
@@ -288,6 +291,7 @@
   "property.alchemancy.death_ward": "Death Ward",
   "property.alchemancy.friendly": "Friendly",
 
+  "property.alchemancy.rocket_powered": "Rocket-Powered",
   "property.alchemancy.wayward_warp": "Wayward Warp",
   "property.alchemancy.wayward_warp.dimension_missmatch": "The destination appears to be in another dimension...",
   "property.alchemancy.wayward_warp.missing_destination": "The destination appears to be missing...",

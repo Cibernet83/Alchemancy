@@ -241,6 +241,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, DeathWardProperty> DEATH_WARD = REGISTRY.register("death_ward", DeathWardProperty::new);
 	public static final DeferredHolder<Property, FriendlyProperty> FRIENDLY = REGISTRY.register("friendly", FriendlyProperty::new);
 	public static final DeferredHolder<Property, WaywardWarpProperty> WAYWARD_WARP = REGISTRY.register("wayward_warp", WaywardWarpProperty::new);
+	public static final DeferredHolder<Property, RocketPoweredProperty> ROCKET_POWERED = REGISTRY.register("rocket_powered", RocketPoweredProperty::new);
 
 	//TODO
 	//Brushing: Copper Brush behavior - Brush

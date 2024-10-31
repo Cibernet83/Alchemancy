@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "minecraft:heavy_core",
     "#alchemancy:maces"
   ]
 }

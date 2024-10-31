@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "alchemancy:item/barrels_warhammer"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "alchemancy:active": 1
+      },
+      "model": "alchemancy:item/barrels_warhammer_active"
+    }
+  ]
+}

@@ -72,6 +72,8 @@ public class AlchemancyCreativeTabs
 
 				output.accept(WAYWARD_MEDALLION.get());
 
+				output.accept(ROCKET_POWERED_HAMMER.get());
+
 			}).build());
 
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> PROPERTIES = REGISTRY.register("alchemancy_properties", () -> CreativeModeTab.builder()
@@ -93,6 +95,8 @@ public class AlchemancyCreativeTabs
 		{
 			event.insertAfter(Items.GOLDEN_SWORD.getDefaultInstance(), LEAD_SWORD.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 			event.insertAfter(Items.NETHERITE_SWORD.getDefaultInstance(), DREAMSTEEL_SWORD.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+
+			event.insertAfter(Items.MACE.getDefaultInstance(), ROCKET_POWERED_HAMMER.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 
 			event.insertAfter(Items.GOLDEN_BOOTS.getDefaultInstance(), LEAD_HELMET.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 			event.insertAfter(LEAD_HELMET.get().getDefaultInstance(), LEAD_CHESTPLATE.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
