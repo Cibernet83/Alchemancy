@@ -64,6 +64,7 @@ public class TintedProperty extends IncreaseInfuseSlotsProperty implements IData
 		{
 			if(state.hasProperty(LayeredCauldronBlock.LEVEL))
 				LayeredCauldronBlock.lowerFillLevel(state, event.getLevel(), event.getPos());
+			setData(event.getItemStack(), getDefaultData());
 			InfusedPropertiesHelper.removeProperty(event.getItemStack(), asHolder());
 			event.setCancellationResult(InteractionResult.SUCCESS);
 			event.setCanceled(true);
