@@ -25,6 +25,7 @@ import net.minecraft.world.item.component.ResolvableProfile;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.TransparentBlock;
@@ -32,6 +33,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
@@ -44,8 +48,16 @@ public class AlchemancyCatalystBlock extends TransparentBlock implements EntityB
 	private static RecipeManager.CachedCheck<ForgeRecipeGrid, AbstractForgeRecipe<?>> RECIPE_CHECK;
 	private static MapCodec<AlchemancyCatalystBlock> CODEC = simpleCodec(AlchemancyCatalystBlock::new);
 
+	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
+
 	public AlchemancyCatalystBlock(Properties properties) {
 		super(properties);
+		registerDefaultState(defaultBlockState().setValue(POWERED, false));
+	}
+
+	@Override
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+		builder.add(POWERED);
 	}
 
 	@Override
@@ -78,6 +90,23 @@ public class AlchemancyCatalystBlock extends TransparentBlock implements EntityB
 			}
 		}
 		return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+	}
+
+	@Override
+	protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston)
+	{
+		boolean neighborPowered = level.hasNeighborSignal(pos);
+		boolean powered = state.getValue(POWERED);
+		BlockEntity blockentity = level.getBlockEntity(pos);
+		if (neighborPowered && !powered)
+		{
+			level.scheduleTick(pos, this, 4);
+			level.setBlock(pos, state.setValue(POWERED, Boolean.TRUE), 2);
+
+			performRecipe(level, pos);
+		} else if (!neighborPowered && powered) {
+			level.setBlock(pos, state.setValue(POWERED, Boolean.FALSE), 2);
+		}
 	}
 
 	public static void performRecipe(Level level, BlockPos catalystPos)
