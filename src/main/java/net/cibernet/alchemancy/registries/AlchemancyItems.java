@@ -48,6 +48,7 @@ public class AlchemancyItems
 
 
 	public static final DeferredItem<Item> DREAMSTEEL_INGOT = REGISTRY.registerSimpleItem("dreamsteel_ingot");
+	public static final DeferredItem<Item> DREAMSTEEL_NUGGET = REGISTRY.registerSimpleItem("dreamsteel_nugget");
 	public static final DeferredItem<SwordItem> DREAMSTEEL_SWORD = REGISTRY.register("dreamsteel_sword", () -> new SwordItem(Materials.DREAMSTEEL_TOOLS, new Item.Properties()
 			.component(Components.INFUSION_SLOTS, 6)
 			.attributes(PickaxeItem.createAttributes(Materials.DREAMSTEEL_TOOLS, 3, -2.4F))));

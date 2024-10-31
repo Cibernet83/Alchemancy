@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:shattering"
+  ],
+
+  "catalyst": {
+    "item": "alchemancy:dreamsteel_ingot"
+  },
+
+  "result": {
+    "count": 9,
+    "id": "alchemancy:dreamsteel_nugget"
+  }
+}

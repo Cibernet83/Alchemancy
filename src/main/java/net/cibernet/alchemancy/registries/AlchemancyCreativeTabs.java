@@ -50,6 +50,7 @@ public class AlchemancyCreativeTabs
 				output.accept(LEAD_BOOTS.get());
 				
 				output.accept(DREAMSTEEL_INGOT.get());
+				output.accept(DREAMSTEEL_NUGGET.get());
 				output.accept(DREAMSTEEL_SWORD.get());
 				output.accept(DREAMSTEEL_SHOVEL.get());
 				output.accept(DREAMSTEEL_PICKAXE.get());
@@ -119,6 +120,7 @@ public class AlchemancyCreativeTabs
 		{
 			event.insertAfter(Items.GOLD_INGOT.getDefaultInstance(), LEAD_INGOT.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 			event.insertAfter(Items.NETHERITE_INGOT.getDefaultInstance(), DREAMSTEEL_INGOT.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+			event.insertAfter(Items.GOLD_NUGGET.getDefaultInstance(), DREAMSTEEL_NUGGET.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 		}
 	}
 }

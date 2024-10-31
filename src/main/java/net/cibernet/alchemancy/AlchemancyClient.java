@@ -87,7 +87,14 @@ public class AlchemancyClient
 		}), AlchemancyItems.IRON_RING);
 
 		event.register(((stack, tintIndex) -> tintIndex == 1 ? AlchemancyProperties.AWAKENED.value().getColor(stack) : -1),
-				AlchemancyItems.DREAMSTEEL_INGOT, AlchemancyItems.DREAMSTEEL_PICKAXE, AlchemancyItems.DREAMSTEEL_AXE, AlchemancyItems.DREAMSTEEL_SHOVEL, AlchemancyItems.DREAMSTEEL_HOE, AlchemancyItems.DREAMSTEEL_SWORD);
+				AlchemancyItems.DREAMSTEEL_INGOT,
+				AlchemancyItems.DREAMSTEEL_NUGGET,
+				AlchemancyItems.DREAMSTEEL_PICKAXE,
+				AlchemancyItems.DREAMSTEEL_AXE,
+				AlchemancyItems.DREAMSTEEL_SHOVEL,
+				AlchemancyItems.DREAMSTEEL_HOE,
+				AlchemancyItems.DREAMSTEEL_SWORD);
+
 		event.register(((stack, tintIndex) -> tintIndex == 0 ? AlchemancyProperties.WAYWARD_WARP.value().getColor(stack) : -1),
 				AlchemancyItems.WAYWARD_MEDALLION);
 	}
