@@ -7,9 +7,12 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -25,10 +28,18 @@ import java.util.UUID;
 public class BouncyProperty extends Property
 {
 	@Override
-	public void onActivation(@Nullable Entity source, Entity target, ItemStack stack, DamageSource damageSource) {
+	public void onActivation(@Nullable Entity source, Entity target, ItemStack stack, DamageSource damageSource)
+	{
+		if(target == null)
+			return;
 
-		Vec3 sourcePos = source == target ? target.getEyePosition().add(target.getLookAngle().scale(10)) :
-				source != null ? source.position() :
+		if(source == target && source instanceof LivingEntity user && calculateHitResult(user).getType() != HitResult.Type.MISS)
+		{
+			knockBack(user, user.position().add(user.getLookAngle()));
+			return;
+		}
+
+		Vec3 sourcePos = source != null ? source.position() :
 				damageSource.getSourcePosition() != null ? damageSource.getSourcePosition() :
 				damageSource.getDirectEntity() != null ? damageSource.getDirectEntity().position() : null;
 
@@ -36,9 +47,12 @@ public class BouncyProperty extends Property
 			knockBack(target, sourcePos);
 	}
 
-	@Override
-	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-		onActivation(event.getEntity(), event.getEntity(), event.getItemStack());
+
+
+	private HitResult calculateHitResult(LivingEntity user) {
+		return ProjectileUtil.getHitResultOnViewVector(
+				user, p_281111_ -> !p_281111_.isSpectator() && p_281111_.isPickable(), user.getAttributeValue(Attributes.BLOCK_INTERACTION_RANGE)
+		);
 	}
 
 	@Override
