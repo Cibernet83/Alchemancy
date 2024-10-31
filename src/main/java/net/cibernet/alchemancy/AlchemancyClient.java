@@ -87,6 +87,7 @@ public class AlchemancyClient
 		}), AlchemancyItems.IRON_RING);
 
 		event.register(((stack, tintIndex) -> tintIndex == 1 ? AlchemancyProperties.AWAKENED.value().getColor(stack) : -1),
+				AlchemancyItems.PROPERTY_VISOR,
 				AlchemancyItems.DREAMSTEEL_INGOT,
 				AlchemancyItems.DREAMSTEEL_NUGGET,
 				AlchemancyItems.DREAMSTEEL_PICKAXE,

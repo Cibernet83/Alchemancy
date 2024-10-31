@@ -79,6 +79,8 @@
   "item.alchemancy.undying_ring": "Ring of Undying",
   "item.alchemancy.friendship_ring": "Ring of Friendship",
 
+  "item.alchemancy.property_visor": "Property Visor",
+
   "item.alchemancy.wayward_medallion": "Wayward Medallion",
   "item.alchemancy.wayward_medallion.bound_to_player": "Bound to: %s",
   "item.alchemancy.wayward_medallion.bound_to_position": "Bound to: (%s, %s, %s)",

@@ -84,6 +84,10 @@ public class AlchemancyItems
 	public static final DeferredItem<InnatePropertyItem> UNDYING_RING = REGISTRY.register("undying_ring", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.DEATH_WARD).auxiliary(true).stacksTo(1).build());
 	public static final DeferredItem<InnatePropertyItem> FRIENDSHIP_RING = REGISTRY.register("friendship_ring", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.FRIENDLY).auxiliary(true).toggleable(true).stacksTo(1).build());
 
+	public static final DeferredItem<InnatePropertyItem> PROPERTY_VISOR = REGISTRY.register("property_visor", () -> new InnatePropertyItem.Builder()
+			.withProperties(AlchemancyProperties.HEADWEAR, AlchemancyProperties.REVEALING)
+			.stacksTo(1)
+			.build());
 	public static final DeferredItem<InnatePropertyItem> WAYWARD_MEDALLION = REGISTRY.register("wayward_medallion", () -> new InnatePropertyItem.Builder()
 			.withProperties(AlchemancyProperties.WAYWARD_WARP)
 			.durability(160, Ingredient.of(Items.ENDER_PEARL))

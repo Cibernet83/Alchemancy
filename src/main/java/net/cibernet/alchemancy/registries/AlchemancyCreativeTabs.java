@@ -60,16 +60,19 @@ public class AlchemancyCreativeTabs
 				output.accept(BLANK_PEARL.get());
 				output.accept(REVEALING_PEARL.get());
 				output.accept(PARADOX_PEARL.get());
-				output.accept(GLOWING_ORB.get());
 
 				output.accept(MICROSPACE_SINGULARITY.get());
 				output.accept(MACROSPACE_SINGULARITY.get());
+
+				output.accept(GLOWING_ORB.get());
 
 				output.accept(IRON_RING.get());
 				output.accept(ETERNAL_GLOW_RING.get());
 				output.accept(PHASING_RING.get());
 				output.accept(UNDYING_RING.get());
 				output.accept(FRIENDSHIP_RING.get());
+
+				output.accept(PROPERTY_VISOR.get());
 
 				output.accept(WAYWARD_MEDALLION.get());
 
