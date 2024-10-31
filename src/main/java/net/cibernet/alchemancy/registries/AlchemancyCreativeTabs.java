@@ -70,6 +70,8 @@ public class AlchemancyCreativeTabs
 				output.accept(UNDYING_RING.get());
 				output.accept(FRIENDSHIP_RING.get());
 
+				output.accept(WAYWARD_MEDALLION.get());
+
 			}).build());
 
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> PROPERTIES = REGISTRY.register("alchemancy_properties", () -> CreativeModeTab.builder()

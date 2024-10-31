@@ -18,23 +18,5 @@ import java.util.concurrent.atomic.AtomicReference;
 @Mixin(Item.class)
 public class ItemMixin
 {
-	@Inject(method = "getUseDuration", at = @At("RETURN"), cancellable = true)
-	public void getUseDuration(ItemStack stack, LivingEntity entity, CallbackInfoReturnable<Integer> cir)
-	{
-		int original = cir.getReturnValue();
-		AtomicInteger result = new AtomicInteger(original);
 
-		InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> result.set(propertyHolder.value().modifyUseDuration(stack, original, result.get())));
-		cir.setReturnValue(result.get());
-	}
-
-	@Inject(method = "getUseAnimation", at = @At("RETURN"), cancellable = true)
-	public void getUseAnimation(ItemStack stack, CallbackInfoReturnable<UseAnim> cir)
-	{
-		AtomicReference<Optional<UseAnim>> useAnim = new AtomicReference<>(Optional.empty());
-
-		InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> useAnim.set(propertyHolder.value().modifyUseAnimation(stack, cir.getReturnValue(), useAnim.get())));
-		if(useAnim.get().isPresent())
-			cir.setReturnValue(useAnim.get().get());
-	}
 }

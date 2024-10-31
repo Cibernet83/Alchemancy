@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "alchemancy:item/wayward_medallion_bound_tint",
+    "layer1": "alchemancy:item/wayward_medallion_bound"
+  }
+}

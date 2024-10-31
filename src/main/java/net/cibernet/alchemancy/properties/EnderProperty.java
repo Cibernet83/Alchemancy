@@ -9,6 +9,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -88,18 +89,7 @@ public class EnderProperty extends Property
 			return;
 		}
 
-		for (int i = 0; i < 32; i++) {
-			projectile.level()
-					.addParticle(
-							ParticleTypes.PORTAL,
-							projectile.getX(),
-							projectile.getY() + projectile.getRandom().nextDouble() * 2.0,
-							projectile.getZ(),
-							projectile.getRandom().nextGaussian(),
-							0.0,
-							projectile.getRandom().nextGaussian()
-					);
-		}
+		playParticles(projectile.level(), projectile.position(), projectile.getRandom());
 
 		if (projectile.level() instanceof ServerLevel serverlevel && !projectile.isRemoved()) {
 			Entity entity = projectile.getOwner();
@@ -146,7 +136,23 @@ public class EnderProperty extends Property
 		}
 	}
 
-	private static void playSound(Level level, Vec3 pos) {
+	public static void playParticles(Level level, Vec3 pos, RandomSource randomSource) {
+
+		for (int i = 0; i < 32; i++) {
+			level
+					.addParticle(
+							ParticleTypes.PORTAL,
+							pos.x(),
+							pos.y() + randomSource.nextDouble() * 2.0,
+							pos.z(),
+							randomSource.nextGaussian(),
+							0.0,
+							randomSource.nextGaussian()
+					);
+		}
+	}
+
+	public static void playSound(Level level, Vec3 pos) {
 		level.playSound(null, pos.x, pos.y, pos.z, SoundEvents.PLAYER_TELEPORT, SoundSource.PLAYERS);
 	}
 

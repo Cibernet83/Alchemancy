@@ -240,21 +240,16 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, PhaseRingProperty> PHASE_STEP = REGISTRY.register("phase_step", PhaseRingProperty::new);
 	public static final DeferredHolder<Property, DeathWardProperty> DEATH_WARD = REGISTRY.register("death_ward", DeathWardProperty::new);
 	public static final DeferredHolder<Property, FriendlyProperty> FRIENDLY = REGISTRY.register("friendly", FriendlyProperty::new);
+	public static final DeferredHolder<Property, WaywardWarpProperty> WAYWARD_WARP = REGISTRY.register("wayward_warp", WaywardWarpProperty::new);
 
 	//TODO
-	//Wayfinding: ??? - Compass/Maps
 	//Brushing: Copper Brush behavior - Brush
 	//Seeking: Projectiles home towards Glowing entities
-	//Ticking: Has a timer that starts ticking down whenever the item's in a player's inventory. Triggers On Activate when timer reaches 0. Timer resets on pick up - Clock/Repeater
 	//Tethered: On Right Click leashes the user to the targeted entity or fence block. Leash/String maybe?
-	//Flattened: Lets the item be placed onto walls - Painting
 	//Echoing: On Hit/On Activation, the action and target are stored into the item and get repeated after a few ticks (as long as the item remains in the player's inv or as a projectile) - Echo Shard/Recovery Compass
 
 	//Soulbind: Used to make Soul Properties. Has a chance to consume itself when in the player's inventory. When consumed also has a chance at attacking the user. - Soul Sand
-	//Spirit Bond: Unbreaking effect when user is low on health
 	//Cursed: Reduces Luck stat when equipped
-	//Vengeful: Increased damage against the last entity attacking the user. Reduced damage against everything else
-	//Vampiric: chance at healing from attacks
 	//Sentient: Moves around as if it were alive when dropped. Has a chance to pop off when Rooted. Has a chance to drop when in the player's inventory
 	//Spiritual: Creates a weaker copy of the item when consumed.
 	//Reincarnating: Item is retained upon death. One-time use.

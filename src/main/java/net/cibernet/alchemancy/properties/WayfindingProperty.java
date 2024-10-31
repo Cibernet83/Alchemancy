@@ -87,41 +87,6 @@ public class WayfindingProperty extends Property implements IDataHolder<Wayfindi
 	}
 
 	@Override
-	public int getColor(ItemStack stack) {
-		return 0x387CB5;
-	}
-
-	@Override
-	public WayfindData readData(CompoundTag tag)
-	{
-		Optional<GlobalPos> targetedPos = Optional.empty();
-		Optional<GlobalPos> fallbackPos = Optional.empty();
-
-		if(tag.contains("target_position", CompoundTag.TAG_COMPOUND))
-		{
-			CompoundTag targetTag = tag.getCompound("target_position");
-			targetedPos = Optional.of(
-					new GlobalPos(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(targetTag.getString("dimension"))),
-					NbtUtils.readBlockPos(targetTag, "pos").orElse(BlockPos.ZERO)));
-		}
-
-		if(tag.contains("fallback_position", CompoundTag.TAG_COMPOUND))
-		{
-			CompoundTag targetTag = tag.getCompound("fallback_position");
-			fallbackPos = Optional.of(
-					new GlobalPos(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(targetTag.getString("dimension"))),
-					NbtUtils.readBlockPos(targetTag, "pos").orElse(BlockPos.ZERO)));
-		}
-
-		return new WayfindData(
-				Optional.ofNullable(tag.hasUUID("target_player") ? new Tuple<>(tag.getUUID("target_player"), tag.contains("target_player_name", Tag.TAG_STRING) ? tag.getString("target_player_name") : "???") : null),
-				targetedPos,
-				fallbackPos,
-				tag.getFloat("previous_rotation")
-		);
-	}
-
-	@Override
 	public Component getName(ItemStack stack)
 	{
 		WayfindData data = getData(stack);
@@ -147,41 +112,59 @@ public class WayfindingProperty extends Property implements IDataHolder<Wayfindi
 	}
 
 	@Override
-	public CompoundTag writeData(WayfindData data)
-	{
-		return new CompoundTag(){{
-			data.targetedPlayer.ifPresent(player -> {
-				putUUID("target_player", player.getA());
-				putString("target_player_name", player.getB());
-			});
-			if(data.targetedPos.isPresent())
-			{
-				CompoundTag targetTag = new CompoundTag();
-				targetTag.putString("dimension", data.targetedPos.get().dimension().location().toString());
-				targetTag.put("pos", NbtUtils.writeBlockPos(data.targetedPos.get().pos()));
-				put("target_position", targetTag);
-			}
-			if(data.fallbackPos.isPresent())
-			{
-				CompoundTag targetTag = new CompoundTag();
-				targetTag.putString("dimension", data.fallbackPos.get().dimension().location().toString());
-				targetTag.put("pos", NbtUtils.writeBlockPos(data.fallbackPos.get().pos()));
-				put("fallback_position", targetTag);
-			}
-
-			putFloat("previous_rotation", data.prevRotation);
-		}};
+	public int getColor(ItemStack stack) {
+		return 0x387CB5;
 	}
 
+	@Override
+	public WayfindData readData(CompoundTag tag)
+	{
+		return WayfindData.fromNbt(tag);
+	}
 
-	private static final WayfindData DEFAULT = new WayfindData(Optional.empty(), Optional.empty(), Optional.empty(), -1);
+	@Override
+	public CompoundTag writeData(WayfindData data)
+	{
+		return data.toNbt();
+	}
+
 	@Override
 	public WayfindData getDefaultData() {
-		return DEFAULT;
+		return WayfindData.DEFAULT;
 	}
 
 	public record WayfindData(Optional<Tuple<UUID, String>> targetedPlayer, Optional<GlobalPos> targetedPos, Optional<GlobalPos> fallbackPos, float prevRotation)
 	{
+		public static final WayfindData DEFAULT = new WayfindData(Optional.empty(), Optional.empty(), Optional.empty(), -1);
+
+		public static WayfindData fromNbt(CompoundTag tag) {
+			Optional<GlobalPos> targetedPos = Optional.empty();
+			Optional<GlobalPos> fallbackPos = Optional.empty();
+
+			if(tag.contains("target_position", CompoundTag.TAG_COMPOUND))
+			{
+				CompoundTag targetTag = tag.getCompound("target_position");
+				targetedPos = Optional.of(
+						new GlobalPos(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(targetTag.getString("dimension"))),
+								NbtUtils.readBlockPos(targetTag, "pos").orElse(BlockPos.ZERO)));
+			}
+
+			if(tag.contains("fallback_position", CompoundTag.TAG_COMPOUND))
+			{
+				CompoundTag targetTag = tag.getCompound("fallback_position");
+				fallbackPos = Optional.of(
+						new GlobalPos(ResourceKey.create(Registries.DIMENSION, ResourceLocation.parse(targetTag.getString("dimension"))),
+								NbtUtils.readBlockPos(targetTag, "pos").orElse(BlockPos.ZERO)));
+			}
+
+			return new WayfindData(
+					Optional.ofNullable(tag.hasUUID("target_player") ? new Tuple<>(tag.getUUID("target_player"), tag.contains("target_player_name", Tag.TAG_STRING) ? tag.getString("target_player_name") : "???") : null),
+					targetedPos,
+					fallbackPos,
+					tag.getFloat("previous_rotation")
+			);
+		}
+
 		public WayfindData withPlayer(Player targetedPlayer)
 		{
 			return new WayfindData(Optional.of(new Tuple<>(targetedPlayer.getUUID(), targetedPlayer.getGameProfile().getName())), Optional.empty(), fallbackPos, prevRotation);
@@ -241,6 +224,46 @@ public class WayfindingProperty extends Property implements IDataHolder<Wayfindi
 		public boolean hasTarget()
 		{
 			return targetedPos.isPresent() || targetedPlayer.isPresent();
+		}
+
+		public CompoundTag toNbt() {
+			return new CompoundTag(){{
+				targetedPlayer.ifPresent(player -> {
+					putUUID("target_player", player.getA());
+					putString("target_player_name", player.getB());
+				});
+				if(targetedPos.isPresent())
+				{
+					CompoundTag targetTag = new CompoundTag();
+					targetTag.putString("dimension", targetedPos.get().dimension().location().toString());
+					targetTag.put("pos", NbtUtils.writeBlockPos(targetedPos.get().pos()));
+					put("target_position", targetTag);
+				}
+				if(fallbackPos.isPresent())
+				{
+					CompoundTag targetTag = new CompoundTag();
+					targetTag.putString("dimension", fallbackPos.get().dimension().location().toString());
+					targetTag.put("pos", NbtUtils.writeBlockPos(fallbackPos.get().pos()));
+					put("fallback_position", targetTag);
+				}
+
+				putFloat("previous_rotation", prevRotation);
+			}};
+		}
+
+		public Optional<ResourceKey<Level>> getTargetDimension(Level level) {
+
+			if(targetedPlayer.isPresent())
+			{
+				Player target = level.getPlayerByUUID(targetedPlayer.get().getA());
+				if(target != null)
+					return Optional.of(target.level().dimension());
+			}
+
+			if(targetedPos.isPresent() && targetedPos.get().dimension().location().equals(level.dimension().location()))
+				return Optional.of(targetedPos.get().dimension());
+
+			return Optional.empty();
 		}
 	}
 }

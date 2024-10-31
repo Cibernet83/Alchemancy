@@ -1,0 +1,15 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "alchemancy:item/empty",
+    "layer1": "alchemancy:item/wayward_medallion"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "alchemancy:bound": 1
+      },
+      "model": "alchemancy:item/wayward_medallion_bound"
+    }
+  ]
+}

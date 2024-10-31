@@ -78,6 +78,11 @@
   "item.alchemancy.undying_ring": "Ring of Undying",
   "item.alchemancy.friendship_ring": "Ring of Friendship",
 
+  "item.alchemancy.wayward_medallion": "Wayward Medallion",
+  "item.alchemancy.wayward_medallion.bound_to_player": "Bound to: %s",
+  "item.alchemancy.wayward_medallion.bound_to_position": "Bound to: (%s, %s, %s)",
+  "item.alchemancy.wayward_medallion.in": "in \"%s\"",
+
   "item.alchemancy.property_capsule": "Property Capsule",
 
   "item.alchemancy.tooltip.stored_properties": "Stored Properties:",
@@ -282,6 +287,11 @@
   "property.alchemancy.phase_step": "Phase Step",
   "property.alchemancy.death_ward": "Death Ward",
   "property.alchemancy.friendly": "Friendly",
+
+  "property.alchemancy.wayward_warp": "Wayward Warp",
+  "property.alchemancy.wayward_warp.dimension_missmatch": "The destination appears to be in another dimension...",
+  "property.alchemancy.wayward_warp.missing_destination": "The destination appears to be missing...",
+  "property.alchemancy.wayward_warp.obstructed_destination": "WThe destination appears to be obstructed...",
 
   "death.attack.alchemancy.shock": "%s had a shock to their system",
   "death.attack.alchemancy.shock.player": "%1$s was electrocuted by %2$s",

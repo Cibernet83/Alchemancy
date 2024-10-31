@@ -4,6 +4,7 @@
     "minecraft:potion",
     "minecraft:splash_potion",
     "minecraft:lingering_potion",
-    "alchemancy:iron_ring"
+    "alchemancy:iron_ring",
+    "alchemancy:wayward_medallion"
   ]
 }

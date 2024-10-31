@@ -50,10 +50,11 @@ public class AlchemancyClient
 
 		ResourceLocation toggled = ResourceLocation.fromNamespaceAndPath(MODID, "toggled");
 		for (Item toggleableItem : InnatePropertyItem.TOGGLEABLE_ITEMS)
-			ItemProperties.register(toggleableItem, toggled, ((stack, level, entity, seed) -> {
-				return AlchemancyProperties.TOGGLEABLE.get().getData(stack) ? 1 : 0;
-			}));
+			ItemProperties.register(toggleableItem, toggled, ((stack, level, entity, seed) ->
+					AlchemancyProperties.TOGGLEABLE.get().getData(stack) ? 1 : 0));
 
+		ItemProperties.register(AlchemancyItems.WAYWARD_MEDALLION.get(), ResourceLocation.fromNamespaceAndPath(MODID, "bound"),
+				((stack, level, entity, seed) -> AlchemancyProperties.WAYWARD_WARP.value().getData(stack).hasTarget() ? 1 : 0));
 	}
 
 	@SubscribeEvent
@@ -74,5 +75,7 @@ public class AlchemancyClient
 
 		event.register(((stack, tintIndex) -> tintIndex == 1 ? AlchemancyProperties.AWAKENED.value().getColor(stack) : -1),
 				AlchemancyItems.DREAMSTEEL_INGOT, AlchemancyItems.DREAMSTEEL_PICKAXE, AlchemancyItems.DREAMSTEEL_AXE, AlchemancyItems.DREAMSTEEL_SHOVEL, AlchemancyItems.DREAMSTEEL_HOE, AlchemancyItems.DREAMSTEEL_SWORD);
+		event.register(((stack, tintIndex) -> tintIndex == 0 ? AlchemancyProperties.WAYWARD_WARP.value().getColor(stack) : -1),
+				AlchemancyItems.WAYWARD_MEDALLION);
 	}
 }

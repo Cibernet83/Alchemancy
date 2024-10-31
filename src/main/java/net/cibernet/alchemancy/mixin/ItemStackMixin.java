@@ -15,6 +15,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -27,6 +28,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 
 @Mixin(value = ItemStack.class)
@@ -84,5 +88,27 @@ public abstract class ItemStackMixin
 	{
 		Tool tool = stack.get(DataComponents.TOOL);
 		return original.call(instance, stack, state) * (tool != null && tool.isCorrectForDrops(state) ? AlchemancyProperties.RUSTY.get().getMiningSpeedMultiplier(stack) : 1);
+	}
+
+	@Inject(method = "getUseDuration", at = @At("RETURN"), cancellable = true)
+	public void getUseDuration(LivingEntity entity, CallbackInfoReturnable<Integer> cir)
+	{
+		int original = cir.getReturnValue();
+		AtomicInteger result = new AtomicInteger(original);
+		ItemStack stack = alchemancy$self();
+
+		InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> result.set(propertyHolder.value().modifyUseDuration(stack, original, result.get())));
+		cir.setReturnValue(result.get());
+	}
+
+	@Inject(method = "getUseAnimation", at = @At("RETURN"), cancellable = true)
+	public void getUseAnimation(CallbackInfoReturnable<UseAnim> cir)
+	{
+		AtomicReference<Optional<UseAnim>> useAnim = new AtomicReference<>(Optional.empty());
+		ItemStack stack = alchemancy$self();
+
+		InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> useAnim.set(propertyHolder.value().modifyUseAnimation(stack, cir.getReturnValue(), useAnim.get())));
+		if(useAnim.get().isPresent())
+			cir.setReturnValue(useAnim.get().get());
 	}
 }
