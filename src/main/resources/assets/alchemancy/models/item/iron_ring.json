@@ -2,6 +2,7 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "alchemancy:item/iron_ring",
-    "layer1": "alchemancy:item/iron_ring_pearl"
+    "layer1": "alchemancy:item/iron_ring_pearl",
+    "layer2": "alchemancy:item/iron_ring_overlay"
   }
 }
