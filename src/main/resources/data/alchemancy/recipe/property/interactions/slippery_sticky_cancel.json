@@ -1,8 +1,8 @@
 {
   "type": "alchemancy:property_interaction",
   "properties": [
-    "alchemancy:burning",
-    "alchemancy:wet"
+    "alchemancy:slippery",
+    "alchemancy:sticky"
   ],
 
   "result": [
