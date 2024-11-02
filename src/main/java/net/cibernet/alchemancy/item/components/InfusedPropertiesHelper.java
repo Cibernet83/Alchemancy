@@ -1,6 +1,7 @@
 package net.cibernet.alchemancy.item.components;
 
 import net.cibernet.alchemancy.properties.Property;
+import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.core.Holder;
@@ -116,6 +117,10 @@ public class InfusedPropertiesHelper
 		if(stack.has(INFUSED_PROPERTIES))
 		{
 			modifyInfusions(stack, mutable -> mutable.removeProperty(property));
+
+			if(property.value() instanceof IDataHolder<?> dataHolder)
+				dataHolder.removeData(stack);
+
 			if (getInfusedProperties(stack).isEmpty())
 				stack.remove(INFUSED_PROPERTIES);
 		}

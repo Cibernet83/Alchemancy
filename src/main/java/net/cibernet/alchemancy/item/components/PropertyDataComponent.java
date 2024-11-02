@@ -30,6 +30,10 @@ public record PropertyDataComponent(Map<Holder<Property>, CustomData> data)
 		return data.containsKey(property) ? Optional.of(data.get(property).copyTag()) : Optional.empty();
 	}
 
+	public boolean isEmpty() {
+		return data.isEmpty();
+	}
+
 	/*
 	public <T, P extends Property & IDataHolder<T>> Optional<T> getData(Holder<P> property)
 	{
@@ -53,6 +57,11 @@ public record PropertyDataComponent(Map<Holder<Property>, CustomData> data)
 		public void setDataNbt(Holder<Property> property, CompoundTag value)
 		{
 			data.put(property, CustomData.of(value));
+		}
+
+		public void removeData(Holder<Property> propertyHolder)
+		{
+			data.remove(propertyHolder);
 		}
 
 		public PropertyDataComponent toImmutable()
