@@ -14,8 +14,8 @@ public class SpiritBondProperty extends Property
 	{
 		if(weapon.isDamageableItem())
 		{
-			weapon.hurtAndBreak((int) event.getNewDamage(), user, slot);
-			event.setNewDamage(event.getNewDamage() - 0.5f);
+			weapon.hurtAndBreak((int) Math.ceil(event.getNewDamage()), user, slot);
+			event.setNewDamage(event.getNewDamage() - 1f);
 		}
 	}
 
@@ -23,7 +23,7 @@ public class SpiritBondProperty extends Property
 	public void onHeal(LivingEntity user, ItemStack stack, EquipmentSlot slot, float amount)
 	{
 		if(stack.isDamaged())
-			stack.setDamageValue(stack.getDamageValue() - (int)amount);
+			stack.setDamageValue(stack.getDamageValue() - (int)(amount * 10));
 	}
 
 	@Override
