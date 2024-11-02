@@ -5,6 +5,8 @@ import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.ITintModifier;
+import net.cibernet.alchemancy.util.ColorUtils;
+import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.ChunkRenderTypeSet;
@@ -21,15 +23,7 @@ public class RenderTypeHelperMixin
 	private static boolean isTranslucent(ChunkRenderTypeSet instance, RenderType renderType, Operation<Boolean> original, @Local(argsOnly = true)ItemStack stack)
 	{
 		if(!original.call(instance, renderType))
-		{
-			AtomicBoolean translucent = new AtomicBoolean(false);
-			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> {
-				if (propertyHolder.value() instanceof ITintModifier tintModifier && tintModifier.modifiesAlpha())
-					translucent.set(true);
-			});
-
-			return translucent.get();
-		}
+			return CommonUtils.hasPropertyDrivenAlpha(stack);
 		return true;
 	}
 }

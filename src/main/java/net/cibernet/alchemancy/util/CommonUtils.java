@@ -22,6 +22,7 @@ import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class CommonUtils
@@ -63,6 +64,17 @@ public class CommonUtils
 				localTint.set(property.getTint(itemStack, tintIndex, originalTint, localTint.get()));
 		});
 		return localTint.get();
+	}
+
+	public static boolean hasPropertyDrivenAlpha(ItemStack stack)
+	{
+		AtomicBoolean translucent = new AtomicBoolean(false);
+		InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> {
+			if (propertyHolder.value() instanceof ITintModifier tintModifier && tintModifier.modifiesAlpha())
+				translucent.set(true);
+		});
+
+		return translucent.get();
 	}
 
 	public static int getPropertyDrivenTint(ItemStack itemStack)

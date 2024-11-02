@@ -28,6 +28,7 @@
   ],
   "client": [
     "client.CustomHeadLayerMixin",
+    "client.ElytraLayerMixin",
     "client.HumanoidArmorLayerMixin",
     "client.ItemRendererMixin",
     "client.LocalPlayerMixin"
