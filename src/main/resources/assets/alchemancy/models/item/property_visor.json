@@ -63,7 +63,7 @@
 			"scale": [1.6, 1.6, 1.6]
 		},
 		"head": {
-			"translation": [0, -0.25, 0],
+			"translation": [0, -0.25, -0.25],
 			"scale": [1.6, 1.6, 1.6]
 		},
 		"fixed": {
