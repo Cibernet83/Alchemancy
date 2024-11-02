@@ -10,6 +10,7 @@ import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -29,6 +30,7 @@ import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
 import net.neoforged.neoforge.event.enchanting.GetEnchantmentLevelEvent;
+import net.neoforged.neoforge.event.entity.EntityInvulnerabilityCheckEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.item.ItemTossEvent;
@@ -47,6 +49,13 @@ import java.util.function.Predicate;
 @EventBusSubscriber
 public class PropertyEventHandler
 {
+	@SubscribeEvent
+	public static void onEntityInvulnerableCheck(EntityInvulnerabilityCheckEvent event)
+	{
+		if(event.getSource().is(DamageTypeTags.IS_EXPLOSION) && event.getEntity() instanceof ItemEntity itemEntity && InfusedPropertiesHelper.hasProperty(itemEntity.getItem(), AlchemancyProperties.BLAST_RESISTANT))
+			event.setInvulnerable(true);
+	}
+
 	@SubscribeEvent
 	public static void onLivingHeal(LivingHealEvent event)
 	{
