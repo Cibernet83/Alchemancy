@@ -3,6 +3,7 @@ package net.cibernet.alchemancy.crafting;
 import net.cibernet.alchemancy.blocks.blockentities.EssenceContainer;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
+import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyRecipeTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -45,7 +46,9 @@ public class ForgeItemRecipe extends AbstractForgeRecipe<ItemStack>
 			if(ItemStack.isSameItem(result, input.getCurrentOutput()))
 				result.setCount(result.getCount() + input.getCurrentOutput().getCount() - 1);
 
-			return InfusedPropertiesHelper.addProperties(result, InfusedPropertiesHelper.getInfusedProperties(output));
+			result.set(AlchemancyItems.Components.INFUSED_PROPERTIES, output.get(AlchemancyItems.Components.INFUSED_PROPERTIES));
+			result.set(AlchemancyItems.Components.PROPERTY_DATA, output.get(AlchemancyItems.Components.PROPERTY_DATA));
+			return result;
 		};
 	}
 
