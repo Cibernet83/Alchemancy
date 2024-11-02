@@ -1,5 +1,6 @@
 package net.cibernet.alchemancy.events.handler;
 
+import net.cibernet.alchemancy.crafting.ingredient.WaterBottleIngredient;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Items;
@@ -15,7 +16,6 @@ public class RecipeEventHandler
 	@SubscribeEvent
 	public static void onBrewingRegistry(RegisterBrewingRecipesEvent event)
 	{
-		//TODO make ICustomIngredient to have the recipe only accept water bottles
-		event.getBuilder().addRecipe(Ingredient.of(Items.POTION.asItem()), Ingredient.of(AlchemancyItems.BLAZEBLOOM.asItem()), AlchemancyItems.ALCHEMICAL_EXTRACT.toStack());
+		event.getBuilder().addRecipe(new WaterBottleIngredient().toVanilla(), Ingredient.of(AlchemancyItems.BLAZEBLOOM.asItem()), AlchemancyItems.ALCHEMICAL_EXTRACT.toStack());
 	}
 }
