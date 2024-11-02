@@ -9,7 +9,11 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
-public class DisguisedProperty extends Property implements IDataHolder<ItemStack> {
+public class DisguisedProperty extends IncreaseInfuseSlotsProperty implements IDataHolder<ItemStack> {
+
+	public DisguisedProperty() {
+		super(1);
+	}
 
 	@Override
 	public void onRightClickItem(PlayerInteractEvent.RightClickItem event)

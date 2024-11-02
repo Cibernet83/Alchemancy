@@ -215,7 +215,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, Property> REVEALED = REGISTRY.register("revealed", () -> Property.simple(0xD6DDFF));
 	public static final DeferredHolder<Property, Property> REVEALING = REGISTRY.register("revealing", () -> Property.simple((style) -> style.withBold(true), () -> 0xD6DDFF));
 	public static final DeferredHolder<Property, Property> SCRAMBLED = REGISTRY.register("scrambled", () -> Property.simple(0x292200));
-	public static final DeferredHolder<Property, Property> CONCEALED = REGISTRY.register("concealed", () -> Property.simple(0x605665));
+	public static final DeferredHolder<Property, Property> CONCEALED = REGISTRY.register("concealed", () -> IncreaseInfuseSlotsProperty.simple(1, 0x605665));
 	public static final DeferredHolder<Property, DisguisedProperty> DISGUISED = REGISTRY.register("disguised", DisguisedProperty::new);
 	public static final DeferredHolder<Property, SeethroughProperty> SEETHROUGH = REGISTRY.register("seethrough", SeethroughProperty::new);
 	public static final DeferredHolder<Property, TintedProperty> TINTED = REGISTRY.register("tinted", TintedProperty::new);
