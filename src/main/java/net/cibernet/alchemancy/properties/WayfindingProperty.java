@@ -1,5 +1,6 @@
 package net.cibernet.alchemancy.properties;
 
+import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.cibernet.alchemancy.util.ClientUtil;
@@ -8,6 +9,8 @@ import net.cibernet.alchemancy.util.WayfindingUtil;
 import net.minecraft.client.server.IntegratedServer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
@@ -23,8 +26,10 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CompassItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.LodestoneTracker;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 import java.util.Optional;
@@ -32,6 +37,24 @@ import java.util.UUID;
 
 public class WayfindingProperty extends Property implements IDataHolder<WayfindingProperty.WayfindData>
 {
+	@Override
+	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid)
+	{
+		if(super.onInfusedByDormantProperty(stack, propertySource, grid))
+		{
+			if(propertySource.has(DataComponents.LODESTONE_TRACKER))
+			{
+				LodestoneTracker tracker = propertySource.get(DataComponents.LODESTONE_TRACKER);
+				if(tracker.target().isPresent())
+					setData(stack, getDefaultData().withBlockPosition(tracker.target().get()));
+			}
+
+			return true;
+		}
+
+		return false;
+	}
+
 	@Override
 	public void onInventoryTick(Entity user, ItemStack stack, Level level, int inventorySlot, boolean isCurrentItem)
 	{
@@ -192,7 +215,9 @@ public class WayfindingProperty extends Property implements IDataHolder<Wayfindi
 
 			float result;
 
-			if(target.isPresent())
+			if(targetedPlayer.isPresent() && user instanceof Player player && player.getUUID().equals(targetedPlayer.get().getA()))
+				result = WayfindingUtil.getRandomlySpinningRotation(0, level.getGameTime());
+			else if(target.isPresent())
 				result = WayfindingUtil.getRotationTowardsCompassTarget(user, level.getGameTime(), target.get());
 			else if(fallbackPos.isPresent() && fallbackPos.get().dimension().location().equals(user.level().dimension().location()))
 				result = WayfindingUtil.getRotationTowardsCompassTarget(user, level.getGameTime(), fallbackPos.get().pos());
