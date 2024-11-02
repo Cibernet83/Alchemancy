@@ -39,7 +39,7 @@ public interface IDataHolder<T>
 	default void removeData(ItemStack stack)
 	{
 		PropertyDataComponent comp = stack.getOrDefault(AlchemancyItems.Components.PROPERTY_DATA, PropertyDataComponent.EMPTY);
-		removeData(comp);
+		comp = removeData(comp);
 		if(comp.isEmpty())
 			stack.remove(AlchemancyItems.Components.PROPERTY_DATA);
 		else stack.set(AlchemancyItems.Components.PROPERTY_DATA, comp);
@@ -66,5 +66,10 @@ public interface IDataHolder<T>
 		}
 
 		return component;
+	}
+
+	default boolean cluelessCanReset()
+	{
+		return true;
 	}
 }

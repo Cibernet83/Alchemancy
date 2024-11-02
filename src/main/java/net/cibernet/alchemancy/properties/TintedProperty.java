@@ -36,6 +36,11 @@ public class TintedProperty extends IncreaseInfuseSlotsProperty implements IData
 	}
 
 	@Override
+	public boolean cluelessCanReset() {
+		return false;
+	}
+
+	@Override
 	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid)
 	{
 		int base = getData(stack);

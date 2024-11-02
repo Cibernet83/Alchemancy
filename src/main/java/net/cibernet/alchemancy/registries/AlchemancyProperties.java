@@ -200,6 +200,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, Property> SEEDED = REGISTRY.register("seeded", () -> SpreadsOnHitProperty.simple(0xACB038, EquipmentSlotGroup.ARMOR));
 
 	public static final DeferredHolder<Property, ConductiveProperty> CONDUCTIVE = REGISTRY.register("conductive", ConductiveProperty::new);
+	public static final DeferredHolder<Property, CluelessProperty> CLUELESS = REGISTRY.register("clueless", CluelessProperty::new);
 	public static final DeferredHolder<Property, ExperienceBoostProperty> WISE = REGISTRY.register("wise", ExperienceBoostProperty::new);
 	public static final DeferredHolder<Property, ExperiencedProperty> EXPERIENCED = REGISTRY.register("experienced", ExperiencedProperty::new);
 	public static final DeferredHolder<Property, EnderProperty> ENDER = REGISTRY.register("ender", EnderProperty::new);
@@ -247,12 +248,10 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, RocketPoweredProperty> ROCKET_POWERED = REGISTRY.register("rocket_powered", RocketPoweredProperty::new);
 
 	//TODO
-	//Brushing: Copper Brush behavior - Brush
 	//Seeking: Projectiles home towards Glowing entities
 	//Tethered: On Right Click leashes the user to the targeted entity or fence block. Leash/String maybe?
 	//Echoing: On Hit/On Activation, the action and target are stored into the item and get repeated after a few ticks (as long as the item remains in the player's inv or as a projectile) - Echo Shard/Recovery Compass
 
-	//Soulbind: Used to make Soul Properties. Has a chance to consume itself when in the player's inventory. When consumed also has a chance at attacking the user. - Soul Sand
 	//Cursed: Reduces Luck stat when equipped
 	//Sentient: Moves around as if it were alive when dropped. Has a chance to pop off when Rooted. Has a chance to drop when in the player's inventory
 	//Spiritual: Creates a weaker copy of the item when consumed.
@@ -261,7 +260,6 @@ public class AlchemancyProperties
 	//Warped Properties:
 	//Repelled: Pushes itself away from ALL nearby entities - Targeted/Loyal
 	//Muffled: Suppresses certain vibrations when equipped - Musical/Sensitive/Echoing
-	//Clueless: ??? - Wise/Wayfinding
 	//Lucky: Increases Luck stat when equipped - ??? (don't wanna make it Warped Cursed bc then it'd be too easy to get rid of)
 
 	@Nullable
