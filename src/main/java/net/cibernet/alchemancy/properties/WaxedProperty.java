@@ -1,5 +1,6 @@
 package net.cibernet.alchemancy.properties;
 
+import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.util.ColorUtils;
@@ -26,6 +27,16 @@ public class WaxedProperty extends Property implements IDataHolder<Integer>
 	public int getColor(ItemStack stack)
 	{
 		return 0xFABF29;
+	}
+
+
+	@Override
+	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid) {
+		if (!getData(stack).equals(getDefaultData())) {
+			removeData(stack);
+			return true;
+		}
+		return super.onInfusedByDormantProperty(stack, propertySource, grid);
 	}
 
 	@Override

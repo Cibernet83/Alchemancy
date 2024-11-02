@@ -1,5 +1,6 @@
 package net.cibernet.alchemancy.properties;
 
+import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.util.ColorUtils;
@@ -15,6 +16,17 @@ public class PristineProperty extends Property implements IDataHolder<Integer>, 
 	@Override
 	public int getColor(ItemStack stack) {
 		return ColorUtils.interpolateColorsOverTime(5, 0xff79B7AB, 0xff79B794, 0xff5E85A4, 0xff5E9EA4);
+	}
+
+	@Override
+	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid)
+	{
+		if(!getData(stack).equals(getDefaultData()))
+		{
+			removeData(stack);
+			return true;
+		}
+		return super.onInfusedByDormantProperty(stack, propertySource, grid);
 	}
 
 	@Override
