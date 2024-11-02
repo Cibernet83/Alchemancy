@@ -373,14 +373,15 @@ public class ForgeRecipeGrid implements RecipeInput
 
 			if(perform)
 			{
-				success = true;
-
 				if(consume)
 				{
 					InfusedPropertiesHelper.addProperties(target, properties);
 					items.remove(pedestal);
 					consumeItem(pedestal);
 				}
+
+				success = true;
+				break;
 			}
 		}
 
