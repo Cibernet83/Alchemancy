@@ -358,21 +358,6 @@ public class ForgeRecipeGrid implements RecipeInput
 			ItemStack stack = pedestal.getItem();
 			ItemStack target = !consume ? currentOutput.copy() : currentOutput;
 
-			if(stack.is(AlchemancyTags.Items.REMOVES_INFUSIONS))
-			{
-				if(!InfusedPropertiesHelper.getInfusedProperties(target).isEmpty())
-				{
-					if(consume)
-					{
-						consumeItem(pedestal);
-						items.remove(pedestal);
-						InfusedPropertiesHelper.clearAllInfusions(target);
-					}
-					return true;
-				}
-				return false;
-			}
-
 			List<Holder<Property>> properties = AlchemancyProperties.getDormantProperties(stack);
 
 			properties.addAll(stack.getOrDefault(AlchemancyItems.Components.STORED_PROPERTIES, InfusedPropertiesComponent.EMPTY).properties());

@@ -132,6 +132,11 @@ public abstract class AbstractForgeRecipe<RESULT> implements Recipe<ForgeRecipeG
 
 		public Serializer(Codec<RESULT> resultCodec, StreamCodec<RegistryFriendlyByteBuf, RESULT> streamCodec, Function6<Optional<Ingredient>, Optional<String>, List<EssenceContainer>, List<Ingredient>, List<Holder<Property>>, RESULT, T> constructor)
 		{
+			this(resultCodec.fieldOf("result"), streamCodec, constructor);
+		}
+
+		public Serializer(MapCodec<RESULT> resultCodec, StreamCodec<RegistryFriendlyByteBuf, RESULT> streamCodec, Function6<Optional<Ingredient>, Optional<String>, List<EssenceContainer>, List<Ingredient>, List<Holder<Property>>, RESULT, T> constructor)
+		{
 
 			CODEC = RecordCodecBuilder.mapCodec((instance) ->  instance.group(
 					Ingredient.CODEC.optionalFieldOf("catalyst").forGetter((recipe) -> recipe.catalyst),
@@ -139,7 +144,7 @@ public abstract class AbstractForgeRecipe<RESULT> implements Recipe<ForgeRecipeG
 					Codec.list(ESSENCE_CONTAINER_CODEC).fieldOf("essences").orElse(List.of()).forGetter(recipe -> recipe.essences),
 					Codec.list(Ingredient.CODEC).fieldOf("infusables").orElse(List.of()).forGetter(recipe -> recipe.infusables),
 					Property.LIST_CODEC.fieldOf("properties").orElse(List.of()).forGetter(recipe -> recipe.infusedProperties),
-					resultCodec.fieldOf("result").forGetter(AbstractForgeRecipe::getResult)
+					resultCodec.forGetter(AbstractForgeRecipe::getResult)
 			).apply(instance, constructor));
 
 			STREAM_CODEC = StreamCodec.of(

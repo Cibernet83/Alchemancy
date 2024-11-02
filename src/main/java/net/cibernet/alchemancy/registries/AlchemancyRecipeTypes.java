@@ -6,6 +6,7 @@ import net.cibernet.alchemancy.crafting.*;
 import net.cibernet.alchemancy.properties.Property;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -13,6 +14,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.List;
+import java.util.Optional;
 
 public class AlchemancyRecipeTypes
 {
@@ -37,6 +39,8 @@ public class AlchemancyRecipeTypes
 		public static final DeferredHolder<RecipeSerializer<?>, AbstractForgeRecipe.Serializer<PropertyWarpRecipe, List<Holder<Property>>>> PROPERTY_WARP = REGISTRY.register("property_warp", () ->
 				new AbstractForgeRecipe.Serializer<>(Property.LIST_CODEC, PropertyInteractionRecipe.PROPERTY_LIST_STREAM_CODEC, PropertyWarpRecipe::new));
 		public static final DeferredHolder<RecipeSerializer<?>, DormantPropertyInfusionRecipe.Serializer> DORMANT_PROPERTIES = REGISTRY.register("dormant_properties", DormantPropertyInfusionRecipe.Serializer::new);
+		public static final DeferredHolder<RecipeSerializer<?>, AbstractForgeRecipe.Serializer<ForgeRemovePropertiesRecipe, Optional<ItemStack>>> REMOVE_PROPERTIES = REGISTRY.register("remove_properties", () ->
+				new AbstractForgeRecipe.Serializer<>(ItemStack.CODEC.optionalFieldOf("result"), ByteBufCodecs.optional(ItemStack.STREAM_CODEC), ForgeRemovePropertiesRecipe::new));
 		public static final DeferredHolder<RecipeSerializer<?>, ForgeCustomNameRecipe.Serializer> ALCHEMANCY_FORGE_CUSTOM_NAME = REGISTRY.register("forged_custom_name", ForgeCustomNameRecipe.Serializer::new);
 	}
 }
