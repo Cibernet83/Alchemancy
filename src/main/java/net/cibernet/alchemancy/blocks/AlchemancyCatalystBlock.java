@@ -146,7 +146,6 @@ public class AlchemancyCatalystBlock extends TransparentBlock implements EntityB
 			}
 
 			ItemStackHolderBlockEntity.dropItem(level, forgePos, output);
-			forge.notifyInventoryUpdate();
 
 			if(level.getBlockEntity(catalystPos) instanceof AlchemancyCatalystBlockEntity catalyst)
 				catalyst.playAnimation(false);

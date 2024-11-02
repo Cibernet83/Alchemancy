@@ -235,7 +235,6 @@ public class ForgeRecipeGrid implements RecipeInput
 			applyGlint = Optional.of(false);
 
 		pedestal.removeItem(1);
-		pedestal.notifyInventoryUpdate();
 		slotOrder.remove(pedestal);
 		return true;
 	}

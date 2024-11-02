@@ -75,23 +75,17 @@ public class InfusionPedestalBlock extends BaseEntityBlock
 	{
 		if(!level.isClientSide() && level.getBlockEntity(pos) instanceof ItemStackHolderBlockEntity pedestal)
 		{
-			boolean notify = false;
 			if(!pedestal.getItem().isEmpty())
 			{
 				dropItem(level, pos, pedestal.getItem());
 				pedestal.clearContent();
-				notify = true;
 			}
-			if(!stack.isEmpty())
+			else if(!stack.isEmpty())
 			{
 				pedestal.setItem(stack);
 				player.setItemInHand(hand, ItemStack.EMPTY);
-				notify = true;
-				//level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, state));
 			}
 
-			if(notify)
-				pedestal.notifyInventoryUpdate();
 
 		}
 		return ItemInteractionResult.SUCCESS;

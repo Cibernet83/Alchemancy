@@ -68,6 +68,26 @@ public class ItemStackHolderBlockEntity extends BaseContainerBlockEntity
 		return removeItem(0, amount);
 	}
 
+	@Override
+	public void setItem(int slot, ItemStack stack) {
+		super.setItem(slot, stack);
+		notifyInventoryUpdate();
+	}
+
+	@Override
+	public ItemStack removeItem(int slot, int amount)
+	{
+		ItemStack result = super.removeItem(slot, amount);
+		notifyInventoryUpdate();
+		return result;
+	}
+
+	@Override
+	public void clearContent() {
+		super.clearContent();
+		notifyInventoryUpdate();
+	}
+
 	public void setItem(ItemStack stack)
 	{
 		super.setItem(0, stack);
