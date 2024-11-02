@@ -16,7 +16,9 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -211,6 +213,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, CalciumProperty> CALCAREOUS = REGISTRY.register("calcareous", CalciumProperty::new);
 	public static final DeferredHolder<Property, MusicalProperty> MUSICAL = REGISTRY.register("musical", MusicalProperty::new);
 	public static final DeferredHolder<Property, EntityPullProperty<Projectile>> TARGETED = REGISTRY.register("targeted", () -> new EntityPullProperty<>(0xDC4A4A, Projectile.class, 12, false));
+	public static final DeferredHolder<Property, RepelledProperty<Entity>> REPELLED = REGISTRY.register("repelled", () -> new RepelledProperty<>(0x4ADCDC, Entity.class, 12, false));
 
 	//Cosmetic
 	public static final DeferredHolder<Property, Property> REVEALED = REGISTRY.register("revealed", () -> Property.simple(0xD6DDFF));
@@ -252,13 +255,13 @@ public class AlchemancyProperties
 	//Tethered: On Right Click leashes the user to the targeted entity or fence block. Leash/String maybe?
 	//Echoing: On Hit/On Activation, the action and target are stored into the item and get repeated after a few ticks (as long as the item remains in the player's inv or as a projectile) - Echo Shard/Recovery Compass
 
+	//Soulbind Properties:
 	//Cursed: Reduces Luck stat when equipped
 	//Sentient: Moves around as if it were alive when dropped. Has a chance to pop off when Rooted. Has a chance to drop when in the player's inventory
 	//Spiritual: Creates a weaker copy of the item when consumed.
 	//Reincarnating: Item is retained upon death. One-time use.
 
 	//Warped Properties:
-	//Repelled: Pushes itself away from ALL nearby entities - Targeted/Loyal
 	//Muffled: Suppresses certain vibrations when equipped - Musical/Sensitive/Echoing
 	//Lucky: Increases Luck stat when equipped - ??? (don't wanna make it Warped Cursed bc then it'd be too easy to get rid of)
 
