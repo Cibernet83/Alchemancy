@@ -1,0 +1,8 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "alchemancy:item/pearlescent_ring",
+    "layer1": "alchemancy:item/pearlescent_ring_pearl",
+    "layer2": "alchemancy:item/pearlescent_ring_overlay"
+  }
+}

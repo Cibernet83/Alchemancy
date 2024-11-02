@@ -78,7 +78,7 @@ public class AlchemancyItems
 	public static final DeferredItem<Item> MICROSPACE_SINGULARITY = REGISTRY.registerSimpleItem("microspace_singularity");
 	public static final DeferredItem<Item> MACROSPACE_SINGULARITY = REGISTRY.registerSimpleItem("macrospace_singularity");
 
-	public static final DeferredItem<InnatePropertyItem> IRON_RING = REGISTRY.register("iron_ring", () -> new InnatePropertyItem.Builder().auxiliary(false).stacksTo(1).infusionSlots(1).build());
+	public static final DeferredItem<InnatePropertyItem> IRON_RING = REGISTRY.register("pearlescent_ring", () -> new InnatePropertyItem.Builder().auxiliary(false).stacksTo(1).infusionSlots(1).build());
 	public static final DeferredItem<InnatePropertyItem> ETERNAL_GLOW_RING = REGISTRY.register("eternal_glow_ring", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.ETERNAL_GLOW).auxiliary(true).toggleable(true).stacksTo(1).build());
 	public static final DeferredItem<InnatePropertyItem> PHASING_RING = REGISTRY.register("phasing_ring", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.PHASE_STEP).auxiliary(true).toggleable(true).stacksTo(1).build());
 	public static final DeferredItem<InnatePropertyItem> UNDYING_RING = REGISTRY.register("undying_ring", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.DEATH_WARD).auxiliary(true).stacksTo(1).build());
