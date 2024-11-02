@@ -1,8 +1,6 @@
 {
   "replace": false,
   "values": [
-    "minecraft:gunpowder",
-    "minecraft:firework_star",
     "minecraft:tnt",
     "minecraft:tnt_minecart",
     "minecraft:end_crystal"
