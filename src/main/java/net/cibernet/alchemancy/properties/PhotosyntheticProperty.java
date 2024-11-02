@@ -40,7 +40,7 @@ public class PhotosyntheticProperty extends Property
 		BlockPos pPos = root.getBlockPos();
 		Level level = root.getLevel();
 
-		if(canPhotosynthesize(level, pPos))
+		if(root.getItem().isDamaged() && canPhotosynthesize(level, pPos))
 		{
 			playRootedParticles(root, random, ParticleTypes.WAX_ON);
 		}

@@ -13,7 +13,7 @@ public class NocturnalProperty extends MobEffectEquippedAndHitProperty
 {
 	public NocturnalProperty()
 	{
-		super(new MobEffectInstance(MobEffects.NIGHT_VISION, 300), EquipmentSlotGroup.HEAD, false);
+		super(new MobEffectInstance(MobEffects.NIGHT_VISION, 300, 0, false, false), EquipmentSlotGroup.HEAD, false);
 	}
 
 	@Override

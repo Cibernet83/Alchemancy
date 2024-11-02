@@ -115,6 +115,9 @@ public class WaywardWarpProperty extends Property implements IDataHolder<Wayfind
 
 	public boolean teleport(LivingEntity user, Level level, ItemStack stack)
 	{
+		if(level.isClientSide())
+			return false;
+
 		WayfindingProperty.WayfindData data = getData(stack);
 
 		if(!data.hasTarget())
@@ -131,7 +134,7 @@ public class WaywardWarpProperty extends Property implements IDataHolder<Wayfind
 
 		Optional<BlockPos> targetPos = data.getTargetPos(level);
 
-		if(targetPos.isEmpty())
+		if(targetPos.isEmpty() || (data.targetedPos().isPresent() && !level.getBlockState(targetPos.get()).is(AlchemancyTags.Blocks.WAYFINDING_TARGETABLE)))
 		{
 			if (user instanceof Player player) {
 				player.displayClientMessage(MISSING_DESTINATION, true);

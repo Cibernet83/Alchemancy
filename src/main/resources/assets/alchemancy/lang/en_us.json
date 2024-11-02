@@ -73,7 +73,7 @@
   "item.alchemancy.microspace_singularity": "Microspace Singularity",
   "item.alchemancy.macrospace_singularity": "Macrospace Singularity",
 
-  "item.alchemancy.iron_ring": "Iron Ring",
+  "item.alchemancy.pearlescent_ring": "Iron Ring",
   "item.alchemancy.eternal_glow_ring": "Ring of Eternal Glow",
   "item.alchemancy.phasing_ring": "Ring of Phasing",
   "item.alchemancy.undying_ring": "Ring of Undying",
@@ -298,7 +298,7 @@
   "property.alchemancy.wayward_warp": "Wayward Warp",
   "property.alchemancy.wayward_warp.dimension_missmatch": "The destination appears to be in another dimension...",
   "property.alchemancy.wayward_warp.missing_destination": "The destination appears to be missing...",
-  "property.alchemancy.wayward_warp.obstructed_destination": "WThe destination appears to be obstructed...",
+  "property.alchemancy.wayward_warp.obstructed_destination": "The destination appears to be obstructed...",
 
   "death.attack.alchemancy.shock": "%s had a shock to their system",
   "death.attack.alchemancy.shock.player": "%1$s was electrocuted by %2$s",

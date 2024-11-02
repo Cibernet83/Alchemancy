@@ -49,7 +49,7 @@ public class DepthDwellerProperty extends Property
 			blockBreakSpeed.addPermanentModifier(new AttributeModifier(MOD_KEY, value, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
 		}
 
-		if(slot.isArmor())
+		if(slot == EquipmentSlot.LEGS || slot == EquipmentSlot.FEET || slot == EquipmentSlot.BODY)
 		{
 			AttributeInstance movementSpeed = user.getAttributes().getInstance(Attributes.MOVEMENT_SPEED);
 			movementSpeed.removeModifier(MOD_KEY);
