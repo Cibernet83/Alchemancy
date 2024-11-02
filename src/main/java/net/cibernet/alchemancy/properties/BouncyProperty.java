@@ -2,6 +2,7 @@ package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.Alchemancy;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -96,7 +97,7 @@ public class BouncyProperty extends Property
 	@Override
 	public void onFall(LivingEntity user, ItemStack stack, EquipmentSlot slot, LivingFallEvent event)
 	{
-		if(slot == EquipmentSlot.FEET && event.getDistance() >= 0.2f)
+		if(slot == EquipmentSlot.FEET && event.getDistance() >= 0.2f && !user.isShiftKeyDown())
 		{
 			event.setDamageMultiplier(0);
 			if(user.level().isClientSide())
@@ -113,6 +114,7 @@ public class BouncyProperty extends Property
 		{
 			user.hurtMarked = true;
 			user.setDeltaMovement(BOUNCE_TARGETS.get(uuid).multiply(1, -0.8, 1));
+			user.playSound(SoundEvents.SLIME_JUMP);
 			BOUNCE_TARGETS.remove(uuid);
 		}
 	}
