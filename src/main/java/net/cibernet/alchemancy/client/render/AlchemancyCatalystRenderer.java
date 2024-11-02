@@ -54,10 +54,10 @@ public class AlchemancyCatalystRenderer implements BlockEntityRenderer<Alchemanc
 	public void render(AlchemancyCatalystBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay)
 	{
 		float scale = 1;
-		poseStack.translate(0.5, -0.5, 0.5);
+		//poseStack.translate(0.5, -0.5, 0.5);
 
-		outer.render(poseStack, bufferSource.getBuffer(RenderType.entityTranslucentCull(FRAME_TEXTURE_LOCATION)), packedLight, packedOverlay);
-		poseStack.translate(0, 0.5 - 0.5 * scale, 0);
+		//outer.render(poseStack, bufferSource.getBuffer(RenderType.entityTranslucentCull(FRAME_TEXTURE_LOCATION)), packedLight, packedOverlay);
+		poseStack.translate(0.5, - 0.5 * scale, 0.5);
 		poseStack.scale(scale, scale, scale);
 
 		float animationProgress = blockEntity.getAnimationProgressLeft(partialTick);
