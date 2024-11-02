@@ -44,8 +44,11 @@ public class HollowProperty extends Property implements IDataHolder<ItemStack>
 	}
 
 	@Override
-	public void onPickUpAnyItem(Player user, ItemStack stack, EquipmentSlot slot, ItemEntity itemToPickUp, ItemEntityPickupEvent.Pre event)
+	public void onPickUpAnyItem(Player user, ItemStack stack, EquipmentSlot slot, ItemEntity itemToPickUp, boolean canPickUp, ItemEntityPickupEvent.Pre event)
 	{
+		if(!canPickUp)
+			return;
+
 		ItemStack storedStack = getData(stack);
 		ItemStack stackToPickUp = event.getItemEntity().getItem();
 

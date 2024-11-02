@@ -121,6 +121,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, EncapsulatingProperty> ENCAPSULATING = REGISTRY.register("encapsulating", EncapsulatingProperty::new);
 	public static final DeferredHolder<Property, CapturingProperty> CAPTURING = REGISTRY.register("capturing", CapturingProperty::new);
 	public static final DeferredHolder<Property, DrippingProperty> DRIPPING = REGISTRY.register("dripping", DrippingProperty::new);
+	public static final DeferredHolder<Property, AbsorbingProperty> ABSORBING = REGISTRY.register("absorbent", AbsorbingProperty::new);
 
 	//Triggering
 	public static final DeferredHolder<Property, EdibleProperty> EDIBLE = REGISTRY.register("edible", EdibleProperty::new);

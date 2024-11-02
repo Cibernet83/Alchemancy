@@ -421,7 +421,7 @@ public abstract class Property
 
 	}
 
-	public void onPickUpAnyItem(Player user, ItemStack stack, EquipmentSlot slot, ItemEntity itemToPickUp, ItemEntityPickupEvent.Pre event) {
+	public void onPickUpAnyItem(Player user, ItemStack stack, EquipmentSlot slot, ItemEntity itemToPickUp, boolean canPickUp, ItemEntityPickupEvent.Pre event) {
 
 	}
 

@@ -123,6 +123,11 @@ public class BucketingProperty extends Property implements IDataHolder<Fluid>
 		return false;
 	}
 
+	public boolean isEmpty(ItemStack stack)
+	{
+		return getData(stack).equals(getDefaultData());
+	}
+
 	@Override
 	public void onEntityItemDestroyed(ItemStack stack, Entity itemEntity, DamageSource damageSource)
 	{
