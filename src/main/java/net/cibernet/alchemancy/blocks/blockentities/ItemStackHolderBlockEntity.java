@@ -90,7 +90,7 @@ public class ItemStackHolderBlockEntity extends BaseContainerBlockEntity
 
 	public void setItem(ItemStack stack)
 	{
-		super.setItem(0, stack);
+		setItem(0, stack);
 	}
 
 	public void notifyInventoryUpdate()
