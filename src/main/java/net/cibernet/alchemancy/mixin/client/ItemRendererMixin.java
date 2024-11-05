@@ -128,7 +128,10 @@ public abstract class ItemRendererMixin
 				{
 					case FIRST_PERSON_LEFT_HAND: case THIRD_PERSON_LEFT_HAND: case FIRST_PERSON_RIGHT_HAND: case THIRD_PERSON_RIGHT_HAND:
 						poseStack.mulPose(Axis.YN.rotationDegrees(angle + 195));
-					break;
+						break;
+					case HEAD:
+						poseStack.mulPose(Axis.YN.rotationDegrees(angle));
+						break;
 					default:
 						poseStack.mulPose(Axis.ZN.rotationDegrees(angle - 45));
 				}
