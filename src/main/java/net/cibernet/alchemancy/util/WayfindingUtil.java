@@ -1,6 +1,5 @@
 package net.cibernet.alchemancy.util;
 
-import net.minecraft.client.renderer.item.CompassItemPropertyFunction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -25,6 +24,7 @@ public class WayfindingUtil
 			}
 
 			double d3 = d0 + wobble.rotation;
+
 			return Mth.positiveModulo((float)d3, 1.0F);
 		}
 
@@ -57,6 +57,7 @@ public class WayfindingUtil
 	@OnlyIn(Dist.CLIENT)
 	static class CompassWobble {
 		double rotation;
+		double previousRotation;
 		private double deltaRotation;
 		private long lastUpdateTick;
 
@@ -70,6 +71,8 @@ public class WayfindingUtil
 			d0 = Mth.positiveModulo(d0 + 0.5, 1.0) - 0.5;
 			this.deltaRotation += d0 * 0.1;
 			this.deltaRotation *= 0.8;
+
+			this.previousRotation = this.rotation;
 			this.rotation = Mth.positiveModulo(this.rotation + this.deltaRotation, 1.0);
 		}
 	}

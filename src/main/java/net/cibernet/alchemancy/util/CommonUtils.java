@@ -3,12 +3,8 @@ package net.cibernet.alchemancy.util;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.ITintModifier;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.RegistryAccess;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.FastColor;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Inventory;
@@ -19,7 +15,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
-import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -106,5 +101,15 @@ public class CommonUtils
 		entity.setDeltaMovement(
 				entity.getDeltaMovement().add(Math.copySign(d0 * d0 * 0.4, d0), Math.copySign(d1 * d1 * 0.4, d1), Math.copySign(d2 * d2 * 0.4, d2))
 		);
+	}
+
+	public static double lerpAngle(double amount, double start, double end)
+	{
+		return (((((end - start) % 1.0) + 1.5) % 1.0) - 0.5) * amount + start;
+	}
+
+	public static float lerpAngle(float amount, float start, float end)
+	{
+		return (((((end - start) % 1.0f) + 1.5f) % 1.0f) - 0.5f) * amount + start;
 	}
 }

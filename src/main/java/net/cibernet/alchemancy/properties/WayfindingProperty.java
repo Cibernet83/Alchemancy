@@ -1,7 +1,9 @@
 package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
+import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
+import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.cibernet.alchemancy.util.ClientUtil;
 import net.cibernet.alchemancy.util.CommonUtils;
@@ -9,7 +11,6 @@ import net.cibernet.alchemancy.util.WayfindingUtil;
 import net.minecraft.client.server.IntegratedServer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -19,23 +20,25 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.Mth;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CompassItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.LodestoneTracker;
 import net.minecraft.world.level.Level;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.event.entity.player.PlayerSetSpawnEvent;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 import java.util.Optional;
 import java.util.UUID;
 
-public class WayfindingProperty extends Property implements IDataHolder<WayfindingProperty.WayfindData>
+public class WayfindingProperty extends Property implements IDataHolder<Tuple<WayfindingProperty.WayfindData, WayfindingProperty.RotationData>>
 {
 	@Override
 	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid)
@@ -46,7 +49,7 @@ public class WayfindingProperty extends Property implements IDataHolder<Wayfindi
 			{
 				LodestoneTracker tracker = propertySource.get(DataComponents.LODESTONE_TRACKER);
 				if(tracker.target().isPresent())
-					setData(stack, getDefaultData().withBlockPosition(tracker.target().get()));
+					setData(stack, getDefaultData().getA().withBlockPosition(tracker.target().get()));
 			}
 
 			return true;
@@ -60,7 +63,7 @@ public class WayfindingProperty extends Property implements IDataHolder<Wayfindi
 	{
 		if(level.isClientSide())
 			return;
-		WayfindData data = getData(stack);
+		WayfindData data = getData(stack).getA();
 
 		if(data.fallbackPos.isEmpty() || !data.fallbackPos.get().dimension().location().equals(level.dimension().location()))
 		{
@@ -79,13 +82,12 @@ public class WayfindingProperty extends Property implements IDataHolder<Wayfindi
 
 			setData(stack, data.withFallback(fallback));
 		}
-
 	}
 
 	@Override
 	public void onRightClickEntity(PlayerInteractEvent.EntityInteract event)
 	{
-		WayfindData data = getData(event.getItemStack());
+		WayfindData data = getData(event.getItemStack()).getA();
 		if(!data.hasTarget() && event.getTarget() instanceof Player target)
 		{
 			setData(event.getItemStack(), data.withPlayer(target));
@@ -100,7 +102,7 @@ public class WayfindingProperty extends Property implements IDataHolder<Wayfindi
 		if(!event.getLevel().getBlockState(event.getPos()).is(AlchemancyTags.Blocks.WAYFINDING_TARGETABLE))
 			return;
 
-		WayfindData data = getData(event.getItemStack());
+		WayfindData data = getData(event.getItemStack()).getA();
 		if(!data.hasTarget())
 		{
 			setData(event.getItemStack(), data.withBlockPosition(new GlobalPos(event.getLevel().dimension(), event.getPos())));
@@ -112,7 +114,7 @@ public class WayfindingProperty extends Property implements IDataHolder<Wayfindi
 	@Override
 	public Component getName(ItemStack stack)
 	{
-		WayfindData data = getData(stack);
+		WayfindData data = getData(stack).getA();
 
 		if(!data.hasTarget())
 			return super.getName(stack);
@@ -134,31 +136,73 @@ public class WayfindingProperty extends Property implements IDataHolder<Wayfindi
 		return Component.translatable("property.detail", super.getName(stack), target).withColor(getColor(stack));
 	}
 
+	public void setData(ItemStack item, WayfindData value)
+	{
+		IDataHolder.super.setData(item, new Tuple<>(value, ServerLifecycleHooks.getCurrentServer() == null || ServerLifecycleHooks.getCurrentServer() instanceof IntegratedServer ?
+				getData(item).getB() : RotationData.DEFAULT));
+	}
+
+	public void setData(ItemStack item, RotationData value)
+	{
+		IDataHolder.super.setData(item, new Tuple<>(getData(item).getA(), value));
+	}
+
 	@Override
 	public int getColor(ItemStack stack) {
 		return 0x387CB5;
 	}
 
 	@Override
-	public WayfindData readData(CompoundTag tag)
+	public Tuple<WayfindingProperty.WayfindData, WayfindingProperty.RotationData> readData(CompoundTag tag)
 	{
-		return WayfindData.fromNbt(tag);
+		return new Tuple<>(WayfindData.fromNbt(tag), RotationData.fromNbt(tag.getCompound("rotation_data")));
 	}
 
 	@Override
-	public CompoundTag writeData(WayfindData data)
+	public CompoundTag writeData(Tuple<WayfindingProperty.WayfindData, WayfindingProperty.RotationData> data)
 	{
-		return data.toNbt();
+		CompoundTag tag = data.getA().toNbt();
+		tag.put("rotation_data", data.getB().toNbt());
+		return tag;
 	}
 
+	private static final Tuple<WayfindData, RotationData> DEFAULT = new Tuple<>(WayfindData.DEFAULT, RotationData.DEFAULT);
 	@Override
-	public WayfindData getDefaultData() {
-		return WayfindData.DEFAULT;
+	public Tuple<WayfindingProperty.WayfindData, WayfindingProperty.RotationData> getDefaultData() {
+		return DEFAULT;
 	}
 
-	public record WayfindData(Optional<Tuple<UUID, String>> targetedPlayer, Optional<GlobalPos> targetedPos, Optional<GlobalPos> fallbackPos, float prevRotation)
+	public record RotationData(float rotation, float previousRotaion, long lastUpdateTick)
 	{
-		public static final WayfindData DEFAULT = new WayfindData(Optional.empty(), Optional.empty(), Optional.empty(), -1);
+		public static final RotationData DEFAULT = new RotationData(0, 0, 0);
+
+		public RotationData step(float rotation, long currentTick)
+		{
+			return new RotationData(rotation, this.rotation, currentTick);
+		}
+
+		public static RotationData fromNbt(CompoundTag tag)
+		{
+			return new RotationData(tag.getFloat("rotation"), tag.getFloat("previous_rotation"), tag.getLong("last_update_tick"));
+		}
+
+		public CompoundTag toNbt()
+		{
+			return new CompoundTag(){{
+				putFloat("rotation", rotation);
+				putFloat("previous_rotation", previousRotaion);
+				putLong("last_update_tick", lastUpdateTick);
+			}};
+		}
+
+		public boolean shouldUpdate(long gameTime) {
+			return lastUpdateTick != gameTime;
+		}
+	}
+
+	public record WayfindData(Optional<Tuple<UUID, String>> targetedPlayer, Optional<GlobalPos> targetedPos, Optional<GlobalPos> fallbackPos)
+	{
+		public static final WayfindData DEFAULT = new WayfindData(Optional.empty(), Optional.empty(), Optional.empty());
 
 		public static WayfindData fromNbt(CompoundTag tag) {
 			Optional<GlobalPos> targetedPos = Optional.empty();
@@ -183,32 +227,26 @@ public class WayfindingProperty extends Property implements IDataHolder<Wayfindi
 			return new WayfindData(
 					Optional.ofNullable(tag.hasUUID("target_player") ? new Tuple<>(tag.getUUID("target_player"), tag.contains("target_player_name", Tag.TAG_STRING) ? tag.getString("target_player_name") : "???") : null),
 					targetedPos,
-					fallbackPos,
-					tag.getFloat("previous_rotation")
+					fallbackPos
 			);
 		}
 
 		public WayfindData withPlayer(Player targetedPlayer)
 		{
-			return new WayfindData(Optional.of(new Tuple<>(targetedPlayer.getUUID(), targetedPlayer.getGameProfile().getName())), Optional.empty(), fallbackPos, prevRotation);
+			return new WayfindData(Optional.of(new Tuple<>(targetedPlayer.getUUID(), targetedPlayer.getGameProfile().getName())), Optional.empty(), fallbackPos);
 		}
 
 		public WayfindData withBlockPosition(GlobalPos targetedPos)
 		{
-			return new WayfindData(Optional.empty(), Optional.of(targetedPos), fallbackPos, prevRotation);
+			return new WayfindData(Optional.empty(), Optional.of(targetedPos), fallbackPos);
 		}
 
 		public WayfindData withFallback(GlobalPos fallbackPos)
 		{
-			return new WayfindData(targetedPlayer, targetedPos, Optional.ofNullable(fallbackPos), prevRotation);
+			return new WayfindData(targetedPlayer, targetedPos, Optional.ofNullable(fallbackPos));
 		}
 
-		public WayfindData withPreviousRotation(float previousRotation)
-		{
-			return new WayfindData(targetedPlayer, targetedPos, fallbackPos, previousRotation);
-		}
-
-		public float getRotation(Entity user, float partialTicks)
+		public float getRotation(Entity user)
 		{
 			Level level = user.level();
 			Optional<BlockPos> target = getTargetPos(level);
@@ -228,7 +266,7 @@ public class WayfindingProperty extends Property implements IDataHolder<Wayfindi
 						WayfindingUtil.getRandomlySpinningRotation(0, level.getGameTime());
 			}
 
-			return prevRotation <= -1 ? result : Mth.lerp(partialTicks, prevRotation, result);
+			return result;
 		}
 
 		public Optional<BlockPos> getTargetPos(Level level)
@@ -271,8 +309,6 @@ public class WayfindingProperty extends Property implements IDataHolder<Wayfindi
 					targetTag.put("pos", NbtUtils.writeBlockPos(fallbackPos.get().pos()));
 					put("fallback_position", targetTag);
 				}
-
-				putFloat("previous_rotation", prevRotation);
 			}};
 		}
 

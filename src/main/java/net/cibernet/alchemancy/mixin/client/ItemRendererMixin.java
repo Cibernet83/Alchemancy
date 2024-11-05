@@ -1,7 +1,5 @@
 package net.cibernet.alchemancy.mixin.client;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
@@ -9,29 +7,21 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.properties.WayfindingProperty;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.util.CommonUtils;
-import net.cibernet.alchemancy.util.WayfindingUtil;
-import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.client.renderer.item.CompassItemPropertyFunction;
 import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.GlobalPos;
-import net.minecraft.util.Mth;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CompassItem;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -119,13 +109,20 @@ public abstract class ItemRendererMixin
 
 			if(user != null && level != null)
 			{
-				boolean updatePrev = WayfindingUtil.shouldWobbleUpdate(user.level().getGameTime());
+				Tuple<WayfindingProperty.WayfindData, WayfindingProperty.RotationData> data = AlchemancyProperties.WAYFINDING.value().getData(itemStack);
+				boolean updatePrev = data.getB().shouldUpdate(user.level().getGameTime());
 
-				float rotation = AlchemancyProperties.WAYFINDING.value().getData(itemStack).getRotation(user, DeltaTracker.ONE.getGameTimeDeltaPartialTick(true)); //WayfindingUtil.getRotationTowardsCompassTarget(alchemancy$livingEntity, level.getGameTime(), new BlockPos(0, 0, 0));
-				float angle = 360 * rotation;
+				float rotation = data.getA().getRotation(user);
+				float prevRotation = data.getB().previousRotaion();
+				float partialTick = Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(true);
 
 				if(updatePrev)
-					AlchemancyProperties.WAYFINDING.value().setData(itemStack, AlchemancyProperties.WAYFINDING.value().getData(itemStack).withPreviousRotation(rotation));
+				{
+					prevRotation = data.getB().rotation();
+					AlchemancyProperties.WAYFINDING.value().setData(itemStack, AlchemancyProperties.WAYFINDING.value().getData(itemStack).getB().step(rotation, user.level().getGameTime()));
+				}
+
+				float angle = 360 * CommonUtils.lerpAngle(partialTick, prevRotation, rotation);
 
 				switch (displayContext)
 				{
