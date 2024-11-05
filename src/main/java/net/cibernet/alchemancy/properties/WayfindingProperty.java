@@ -38,6 +38,7 @@ import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import java.util.Optional;
 import java.util.UUID;
 
+@EventBusSubscriber
 public class WayfindingProperty extends Property implements IDataHolder<Tuple<WayfindingProperty.WayfindData, WayfindingProperty.RotationData>>
 {
 	@Override
@@ -109,6 +110,26 @@ public class WayfindingProperty extends Property implements IDataHolder<Tuple<Wa
 			event.setCancellationResult(InteractionResult.SUCCESS);
 			event.setCanceled(true);
 		}
+	}
+
+	@SubscribeEvent
+	public static void onPlayerSetSpawn(PlayerSetSpawnEvent event)
+	{
+		Inventory inventory = event.getEntity().getInventory();
+
+		if(event.getNewSpawn() != null)
+			for(int slot = 0; slot < inventory.getContainerSize(); slot++)
+			{
+				ItemStack stack = inventory.getItem(slot);
+				final int currentSlot = slot;
+				if (InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.WAYFINDING))
+				{
+					WayfindData data = AlchemancyProperties.WAYFINDING.get().getData(stack).getA();
+
+					if(data.fallbackPos().isPresent() && data.fallbackPos().get().dimension().equals(event.getSpawnLevel()))
+						AlchemancyProperties.WAYFINDING.get().setData(stack, data.withFallback(new GlobalPos(event.getSpawnLevel(), event.getNewSpawn())));
+				}
+			}
 	}
 
 	@Override
