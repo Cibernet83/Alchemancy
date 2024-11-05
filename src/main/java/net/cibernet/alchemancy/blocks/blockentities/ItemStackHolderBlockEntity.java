@@ -95,7 +95,8 @@ public class ItemStackHolderBlockEntity extends BaseContainerBlockEntity
 
 	public void notifyInventoryUpdate()
 	{
-		level.markAndNotifyBlock(getBlockPos(), level.getChunkAt(getBlockPos()), getBlockState(), getBlockState(), 2, 1);
+		if(level != null)
+			level.markAndNotifyBlock(getBlockPos(), level.getChunkAt(getBlockPos()), getBlockState(), getBlockState(), 2, 1);
 	}
 
 	public static void dropItem(Level pLevel, BlockPos pPos, ItemStack itemstack)

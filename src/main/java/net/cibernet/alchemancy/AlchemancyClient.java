@@ -1,16 +1,17 @@
 package net.cibernet.alchemancy;
 
+import net.cibernet.alchemancy.client.render.AlchemancyCatalystItemRenderer;
 import net.cibernet.alchemancy.client.render.AlchemancyCatalystRenderer;
 import net.cibernet.alchemancy.client.render.ItemStackHolderRenderer;
 import net.cibernet.alchemancy.client.render.RootedItemRenderer;
 import net.cibernet.alchemancy.item.InnatePropertyItem;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
 import net.cibernet.alchemancy.properties.IncreaseInfuseSlotsProperty;
-import net.cibernet.alchemancy.properties.TintedProperty;
 import net.cibernet.alchemancy.registries.AlchemancyBlockEntities;
 import net.cibernet.alchemancy.registries.AlchemancyEntities;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.FallingBlockRenderer;
@@ -25,8 +26,12 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.registries.DeferredItem;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -98,5 +103,22 @@ public class AlchemancyClient
 
 		event.register(((stack, tintIndex) -> tintIndex == 0 ? AlchemancyProperties.WAYWARD_WARP.value().getColor(stack) : -1),
 				AlchemancyItems.WAYWARD_MEDALLION);
+	}
+
+	@SubscribeEvent
+	public static void initClientExtensions(RegisterClientExtensionsEvent event)
+	{
+		event.registerItem(new IClientItemExtensions() {
+			@Override
+			public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+				return AlchemancyCatalystItemRenderer.instance;
+			}
+		}, AlchemancyItems.ALCHEMANCY_CATALYST.get());
+	}
+
+	@SubscribeEvent
+	public static void initAdditionalModels(ModelEvent.RegisterAdditional event)
+	{
+		event.register(AlchemancyCatalystItemRenderer.FRAME_LOCATION);
 	}
 }
