@@ -37,7 +37,7 @@ public class ForgePropertyRecipe extends AbstractForgeRecipe<Holder<Property>>
 	}
 
 	@Override
-	protected Holder<Property> getResult() {
+	public Holder<Property> getResult() {
 		return result;
 	}
 

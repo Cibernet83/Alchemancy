@@ -49,7 +49,7 @@ public class PropertyWarpRecipe extends AbstractForgeRecipe<List<Holder<Property
 	}
 
 	@Override
-	protected List<Holder<Property>> getResult()
+	public List<Holder<Property>> getResult()
 	{
 		return result;
 	}

@@ -137,14 +137,6 @@ public class AlchemancyCatalystBlock extends TransparentBlock implements EntityB
 
 			grid.applyGlint.ifPresent(aBoolean -> output.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, aBoolean));
 
-			if(grid.canPerformTransmutation() && output.is(Items.PLAYER_HEAD) && output.has(DataComponents.CUSTOM_NAME))
-			{
-				String playerName = toPlayerName(output.get(DataComponents.CUSTOM_NAME).getString());
-				output.set(DataComponents.PROFILE, new ResolvableProfile(Optional.of(playerName), Optional.empty(), new PropertyMap()));
-				output.remove(DataComponents.CUSTOM_NAME);
-
-			}
-
 			ItemStackHolderBlockEntity.dropItem(level, forgePos, output);
 
 			if(level.getBlockEntity(catalystPos) instanceof AlchemancyCatalystBlockEntity catalyst)
@@ -153,11 +145,6 @@ public class AlchemancyCatalystBlock extends TransparentBlock implements EntityB
 	}
 
 
-	public static String toPlayerName(String playerName)
-	{
-		return playerName.substring(0, Math.min(playerName.length(), 16)).chars().filter(c -> !(c <= 32 || c >= 127)).collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
-		//return playerName.length() <= 16 && playerName.chars().filter(p_332111_ -> p_332111_ <= 32 || p_332111_ >= 127).findAny().isEmpty();
-	}
 
 	public static RecipeManager.CachedCheck<ForgeRecipeGrid, AbstractForgeRecipe<?>> createCheck(final RecipeType<AbstractForgeRecipe<?>> recipeType)
 	{

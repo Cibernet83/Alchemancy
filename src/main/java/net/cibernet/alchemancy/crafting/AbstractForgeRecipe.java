@@ -48,6 +48,22 @@ public abstract class AbstractForgeRecipe<RESULT> implements Recipe<ForgeRecipeG
 			MIN_PRIORITY = getPriority();
 	}
 
+	public Optional<Ingredient> getCatalyst() {
+		return catalyst;
+	}
+
+	public Optional<String> getCatalystName() {
+		return catalystName;
+	}
+
+	public List<Holder<Property>> getInfusedProperties() {
+		return infusedProperties;
+	}
+
+	public List<Ingredient> getInfusables() {
+		return infusables;
+	}
+
 	@Override
 	public boolean matches(ForgeRecipeGrid input, Level level)
 	{

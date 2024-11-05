@@ -68,7 +68,7 @@ public class PropertyInteractionRecipe extends AbstractForgeRecipe<List<Holder<P
 	}
 
 	@Override
-	protected List<Holder<Property>> getResult()
+	public List<Holder<Property>> getResult()
 	{
 		return result;
 	}

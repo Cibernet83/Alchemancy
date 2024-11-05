@@ -32,6 +32,7 @@ public class AlchemancyRecipeTypes
 				new AbstractForgeRecipe.Serializer<>(ItemStack.CODEC, ItemStack.STREAM_CODEC, ForgeItemRecipe::new));
 		public static final DeferredHolder<RecipeSerializer<?>, AbstractForgeRecipe.Serializer<ItemTransmutationRecipe, ItemStack>> ITEM_TRANSMUTATION = REGISTRY.register("item_transmutation", () ->
 				new AbstractForgeRecipe.Serializer<>(ItemStack.CODEC, ItemStack.STREAM_CODEC, ItemTransmutationRecipe::new));
+		public static final DeferredHolder<RecipeSerializer<?>, PlayerHeadTransmutationRecipe.Serializer> PLAYER_HEAD_TRANSMUTATION = REGISTRY.register("player_head_transmutation", PlayerHeadTransmutationRecipe.Serializer::new);
 		public static final DeferredHolder<RecipeSerializer<?>, AbstractForgeRecipe.Serializer<ForgePropertyRecipe, Holder<Property>>> ALCHEMANCY_FORGE_PROPERTY = REGISTRY.register("forged_property", () ->
 				new AbstractForgeRecipe.Serializer<>(Property.CODEC, Property.STREAM_CODEC, ForgePropertyRecipe::new));
 		public static final DeferredHolder<RecipeSerializer<?>, AbstractForgeRecipe.Serializer<PropertyInteractionRecipe, List<Holder<Property>>>> PROPERTY_INTERACTION = REGISTRY.register("property_interaction", () ->
