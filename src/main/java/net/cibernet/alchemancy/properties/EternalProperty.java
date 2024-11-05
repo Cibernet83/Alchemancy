@@ -8,7 +8,7 @@ public class EternalProperty extends Property
 	@Override
 	public void onEntityItemTick(ItemStack stack, ItemEntity entity)
 	{
-		if(entity.getAge() != -32768)
+		if(!entity.level().isClientSide() && entity.getAge() > -32768)
 			entity.setUnlimitedLifetime();
 	}
 

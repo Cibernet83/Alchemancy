@@ -213,7 +213,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, CalciumProperty> CALCAREOUS = REGISTRY.register("calcareous", CalciumProperty::new);
 	public static final DeferredHolder<Property, MusicalProperty> MUSICAL = REGISTRY.register("musical", MusicalProperty::new);
 	public static final DeferredHolder<Property, EntityPullProperty<Projectile>> TARGETED = REGISTRY.register("targeted", () -> new EntityPullProperty<>(0xDC4A4A, Projectile.class, 12, false));
-	public static final DeferredHolder<Property, RepelledProperty<Entity>> REPELLED = REGISTRY.register("repelled", () -> new RepelledProperty<>(0x4ADCDC, Entity.class, 12, false));
+	public static final DeferredHolder<Property, RepelledProperty<Entity>> REPELLED = REGISTRY.register("repelled", () -> new RepelledProperty<>(0x4ADCDC, Entity.class, 8, false));
 
 	//Cosmetic
 	public static final DeferredHolder<Property, Property> REVEALED = REGISTRY.register("revealed", () -> Property.simple(0xD6DDFF));
