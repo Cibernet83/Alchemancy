@@ -17,6 +17,7 @@ public abstract class AbstractTimerProperty extends Property implements IDataHol
 
 	public long getElapsedTime(ItemStack stack)
 	{
+
 		long timestamp = getData(stack);
 		return timestamp == 0 ? 0 : CommonUtils.getLevelData().getDayTime() - timestamp;
 	}
