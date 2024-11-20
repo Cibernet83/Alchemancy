@@ -2,22 +2,37 @@ package net.cibernet.alchemancy.modSupport.jei;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.RecipeTypes;
+import mezz.jei.api.ingredients.IIngredientType;
+import mezz.jei.api.ingredients.subtypes.ISubtypeInterpreter;
+import mezz.jei.api.ingredients.subtypes.UidContext;
+import mezz.jei.api.recipe.IRecipeManager;
 import mezz.jei.api.recipe.RecipeType;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.*;
 import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.crafting.*;
+import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyRecipeTypes;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.HolderSet;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @JeiPlugin
 public class AlchemancyJeiPlugin implements IModPlugin
@@ -43,6 +58,30 @@ public class AlchemancyJeiPlugin implements IModPlugin
 		registration.addRecipeCategories(new ItemForgingCategory(registration.getJeiHelpers().getGuiHelper()));
 		registration.addRecipeCategories(new PropertyForgingCategory(registration.getJeiHelpers().getGuiHelper()));
 		registration.addRecipeCategories(new PropertyInteractionsCategory(registration.getJeiHelpers().getGuiHelper()));
+	}
+
+	@Override
+	public void registerItemSubtypes(ISubtypeRegistration registration)
+	{
+		registration.registerSubtypeInterpreter(AlchemancyItems.PROPERTY_CAPSULE.asItem(), new ISubtypeInterpreter<>()
+		{
+			@Override
+			public @Nullable Object getSubtypeData(ItemStack ingredient, UidContext context)
+			{
+				return ingredient.get(AlchemancyItems.Components.STORED_PROPERTIES);
+			}
+
+			@Override
+			public String getLegacyStringSubtypeInfo(ItemStack ingredient, UidContext context)
+			{
+				return String.join(" ", ingredient.getOrDefault(AlchemancyItems.Components.STORED_PROPERTIES, InfusedPropertiesComponent.EMPTY).properties().stream().map(propertyHolder -> propertyHolder.value().getKey().toString()).toList());
+			}
+		});
+	}
+
+	@Override
+	public void registerExtraIngredients(IExtraIngredientRegistration registration) {
+		IModPlugin.super.registerExtraIngredients(registration);
 	}
 
 	@Override
@@ -83,6 +122,21 @@ public class AlchemancyJeiPlugin implements IModPlugin
 		registration.addRecipes(ITEM_FORGING, forgeItemRecipes);
 		registration.addRecipes(PROPERTY_FORGING, forgePropertyRecipes);
 		registration.addRecipes(PROPERTY_INTERACTIONS, propertyInteractionRecipes);
+
+
+		List<ItemStack> dormantPropertyCapsules = new ArrayList<>();
+
+		for (DeferredHolder<Property, ? extends Property> propertyHolder : AlchemancyProperties.REGISTRY.getEntries())
+		{
+			TagKey<Item> tagKey = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "dormant_properties/" + propertyHolder.getKey().location().getPath()));
+			Optional<HolderSet.Named<Item>> tag = BuiltInRegistries.ITEM.getTag(tagKey);
+
+
+			if(tag.isPresent() && tag.get().size() > 0)
+				dormantPropertyCapsules.add(InfusedPropertiesHelper.createPropertyCapsule(propertyHolder));
+		}
+
+		registration.addItemStackInfo(dormantPropertyCapsules, Component.translatable("recipe.alchemancy.dormant_properties.info"));
 	}
 
 	public <T extends AbstractForgeRecipe<?>> boolean addToExact(List<T> list, Class<T> clazz, RecipeHolder<AbstractForgeRecipe<?>> holder)

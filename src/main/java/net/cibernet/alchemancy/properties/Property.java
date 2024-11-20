@@ -220,6 +220,11 @@ public abstract class Property
 		return Component.translatable("property." + getKey().toLanguageKey()).withColor(getColor(stack));
 	}
 
+	public String getRawName()
+	{
+		return Component.translatable("property." + getKey().toLanguageKey()).getString();
+	}
+
 	public int getPriority()
 	{
 		return Priority.NORMAL;
