@@ -423,14 +423,15 @@ public class PropertyEventHandler
 	public static void onItemTooltip(ItemTooltipEvent event)
 	{
 		ItemStack stack = event.getItemStack();
+		boolean hasInfusions = !InfusedPropertiesHelper.getInfusedProperties(stack).isEmpty();
 
-		if(stack.has(AlchemancyItems.Components.INFUSED_PROPERTIES))
+		if(hasInfusions)
 			stack.get(AlchemancyItems.Components.INFUSED_PROPERTIES).forEachProperty(holder -> event.getToolTip().add(holder.value().getName(stack)));
 
 		if(stack.has(AlchemancyItems.Components.STORED_PROPERTIES))
 		{
 			InfusedPropertiesComponent storedProperties = stack.get(AlchemancyItems.Components.STORED_PROPERTIES);
-			if(!storedProperties.properties().isEmpty())
+			if(hasInfusions && !storedProperties.properties().isEmpty())
 				event.getToolTip().add(Component.translatable("item.alchemancy.tooltip.stored_properties").withStyle(ChatFormatting.GRAY));
 			storedProperties.forEachProperty(holder -> event.getToolTip().add(holder.value().getName(stack)));
 		}

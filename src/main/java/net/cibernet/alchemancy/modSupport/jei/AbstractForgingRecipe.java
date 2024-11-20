@@ -68,7 +68,7 @@ public abstract class AbstractForgingRecipe<T extends AbstractForgeRecipe<?>> im
 		int xOff = RADIUS, yOff = RADIUS;
 
 		ArrayList<Ingredient> ingredients = new ArrayList<>(recipe.getInfusables());
-		List<ItemStack> propertyCapsules = recipe.getInfusedProperties().stream().map(InfusedPropertiesHelper::createPropertyCapsule).toList();
+		List<ItemStack> propertyCapsules = recipe.getInfusedProperties().stream().map(InfusedPropertiesHelper::createPropertyIngredient).toList();
 		float totalSize = ingredients.size() + propertyCapsules.size();
 
 		for(int i = 0; i < ingredients.size(); i++)

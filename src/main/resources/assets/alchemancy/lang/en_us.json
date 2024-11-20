@@ -91,6 +91,7 @@
   "item.alchemancy.barrels_warhammer": "Barrel's Warhammer",
 
   "item.alchemancy.property_capsule": "Property Capsule",
+  "item.alchemancy.property_capsule.ingredient": "Infused Property",
 
   "item.alchemancy.tooltip.stored_properties": "Stored Properties:",
   "item.alchemancy.tooltip.dormant_properties": "Dormant Properties:",

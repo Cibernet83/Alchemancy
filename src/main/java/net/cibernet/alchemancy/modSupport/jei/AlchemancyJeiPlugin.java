@@ -86,7 +86,7 @@ public class AlchemancyJeiPlugin implements IModPlugin
 		registration.addRecipeCatalysts(ITEM_FORGING, AlchemancyItems.ALCHEMANCY_CATALYST, AlchemancyItems.ALCHEMANCY_FORGE, AlchemancyItems.INFUSION_PEDESTAL);
 		registration.addRecipeCatalysts(PROPERTY_FORGING, AlchemancyItems.ALCHEMANCY_CATALYST, AlchemancyItems.ALCHEMANCY_FORGE, AlchemancyItems.INFUSION_PEDESTAL);
 		registration.addRecipeCatalysts(PROPERTY_WARPING, AlchemancyItems.ALCHEMANCY_CATALYST, AlchemancyItems.ALCHEMANCY_FORGE);
-		registration.addRecipeCatalyst(InfusedPropertiesHelper.createPropertyCapsule(AlchemancyProperties.WARPED), PROPERTY_WARPING);
+		registration.addRecipeCatalyst(InfusedPropertiesHelper.createPropertyIngredient(AlchemancyProperties.WARPED), PROPERTY_WARPING);
 	}
 
 	@Override
@@ -124,7 +124,7 @@ public class AlchemancyJeiPlugin implements IModPlugin
 
 
 			if(tag.isPresent() && tag.get().size() > 0)
-				dormantPropertyCapsules.add(InfusedPropertiesHelper.createPropertyCapsule(propertyHolder));
+				dormantPropertyCapsules.add(InfusedPropertiesHelper.createPropertyIngredient(propertyHolder));
 		}
 
 		registration.addItemStackInfo(dormantPropertyCapsules, Component.translatable("recipe.alchemancy.dormant_properties.info"));

@@ -5,9 +5,12 @@ import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 
 import java.util.Arrays;
 import java.util.List;
@@ -173,6 +176,11 @@ public class InfusedPropertiesHelper
 		stack.set(AlchemancyItems.Components.STORED_PROPERTIES, new InfusedPropertiesComponent(properties));
 		return stack;
 	}
+	@SafeVarargs
+	public static ItemStack storeProperties(ItemStack stack, Holder<Property>... properties)
+	{
+		return storeProperties(stack, Arrays.asList(properties));
+	}
 
 	public static ItemStack createPropertyCapsule(List<Holder<Property>> properties)
 	{
@@ -180,14 +188,27 @@ public class InfusedPropertiesHelper
 	}
 
 	@SafeVarargs
-	public static ItemStack storeProperties(ItemStack stack, Holder<Property>... properties)
-	{
-		return storeProperties(stack, Arrays.asList(properties));
-	}
-
-	@SafeVarargs
 	public static ItemStack createPropertyCapsule(Holder<Property>... properties)
 	{
 		return storeProperties(AlchemancyItems.PROPERTY_CAPSULE.toStack(), properties);
+	}
+
+	private static final Component PROPERTY_INGREDIENT_NAME = Component.translatable("item.alchemancy.property_capsule.ingredient");
+
+	public static ItemStack createPropertyIngredient(List<Holder<Property>> properties)
+	{
+		ItemStack result = createPropertyCapsule(properties);
+		result.set(DataComponents.RARITY, Rarity.COMMON);
+		result.set(DataComponents.ITEM_NAME, PROPERTY_INGREDIENT_NAME);
+		return result;
+	}
+
+	@SafeVarargs
+	public static ItemStack createPropertyIngredient(Holder<Property>... properties)
+	{
+		ItemStack result = createPropertyCapsule(properties);
+		result.set(DataComponents.RARITY, Rarity.COMMON);
+		result.set(DataComponents.ITEM_NAME, PROPERTY_INGREDIENT_NAME);
+		return result;
 	}
 }

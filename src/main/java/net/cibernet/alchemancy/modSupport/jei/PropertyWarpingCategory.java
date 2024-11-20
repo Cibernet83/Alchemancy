@@ -67,7 +67,7 @@ public class PropertyWarpingCategory implements IRecipeCategory<PropertyWarpReci
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, PropertyWarpRecipe recipe, IFocusGroup focuses)
 	{
-		builder.addInputSlot(0, 0).addItemStack(InfusedPropertiesHelper.createPropertyCapsule(recipe.getInfusedProperties()));
-		builder.addOutputSlot(48, 0).addItemStack(InfusedPropertiesHelper.createPropertyCapsule(recipe.getResult()));
+		builder.addInputSlot(0, 0).addItemStack(InfusedPropertiesHelper.createPropertyIngredient(recipe.getInfusedProperties()));
+		builder.addOutputSlot(48, 0).addItemStack(InfusedPropertiesHelper.createPropertyIngredient(recipe.getResult()));
 	}
 }
