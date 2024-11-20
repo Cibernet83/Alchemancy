@@ -18,7 +18,6 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlotGroup;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -28,6 +27,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class AlchemancyProperties
@@ -285,7 +285,7 @@ public class AlchemancyProperties
 	{
 		List<Holder<Property>> res = new ArrayList<>();
 
-		for(TagKey<Item> tag : stack.getTags().filter(t -> t.location().getPath().contains("dormant_properties")).toList())
+		for(TagKey<Item> tag : stack.getTags().filter(t -> t.location().getNamespace().equals(Alchemancy.MODID) && t.location().getPath().contains("dormant_properties")).toList())
 		{
 			Holder<Property> property = getProperty(tag);
 			if(property != null)
@@ -298,5 +298,15 @@ public class AlchemancyProperties
 	public static Holder<Property> getHolder(Property property)
 	{
 		return SUPPLIER.asLookup().get(ResourceKey.create(REGISTRY.getRegistryKey(), property.getKey())).orElse(null);
+	}
+
+	public static Collection<DeferredHolder<Property, ? extends Property>> getAllAsHolders()
+	{
+		return REGISTRY.getEntries();
+	}
+
+	public static Collection<Property> getAll()
+	{
+		return getAllAsHolders().stream().map(holder -> (Property)holder.value()).toList();
 	}
 }

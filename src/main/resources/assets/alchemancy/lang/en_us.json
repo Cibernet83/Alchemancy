@@ -95,6 +95,14 @@
   "item.alchemancy.tooltip.stored_properties": "Stored Properties:",
   "item.alchemancy.tooltip.dormant_properties": "Dormant Properties:",
 
+  "recipe.alchemancy.item_transmutation": "Item Transmutation",
+  "recipe.alchemancy.item_forging": "Item Forging",
+  "recipe.alchemancy.property_forging": "Property Forging",
+  "recipe.alchemancy.property_warping": "Property Warping",
+  "recipe.alchemancy.property_interactions": "Property Interactions",
+  "recipe.alchemancy.dormant_properties": "Dormant Properties",
+  "recipe.alchemancy.dormant_properties.info": "This property can be obtained through the infusion of an unknown item.",
+
   "essence.alchemancy.pyro": "Pyro",
   "essence.alchemancy.aero": "Aero",
   "essence.alchemancy.terra": "Terra",

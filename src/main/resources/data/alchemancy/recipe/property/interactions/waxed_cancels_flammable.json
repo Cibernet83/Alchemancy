@@ -1,5 +1,5 @@
 {
-  "type": "alchemancy:property_interaction",
+  "type": "alchemancy:forged_property",
   "properties": [
     "alchemancy:flammable",
     "alchemancy:waxed"

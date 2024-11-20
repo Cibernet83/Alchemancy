@@ -220,6 +220,11 @@ public abstract class Property
 		return Component.translatable("property." + getKey().toLanguageKey()).withColor(getColor(stack));
 	}
 
+	public String getRawName()
+	{
+		return Component.translatable("property." + getKey().toLanguageKey()).getString();
+	}
+
 	public int getPriority()
 	{
 		return Priority.NORMAL;
@@ -427,9 +432,7 @@ public abstract class Property
 
 	public Collection<ItemStack> populateCreativeTab(DeferredItem<Item> capsuleItem, Holder<Property> holder)
 	{
-		ItemStack stack = capsuleItem.toStack();
-		stack.set(AlchemancyItems.Components.STORED_PROPERTIES, new InfusedPropertiesComponent(List.of(holder)));
-		return List.of(stack);
+		return List.of(InfusedPropertiesHelper.storeProperties(capsuleItem.toStack(), holder));
 	}
 
 	public Optional<UseAnim> modifyUseAnimation(ItemStack stack, UseAnim original, Optional<UseAnim> current) {

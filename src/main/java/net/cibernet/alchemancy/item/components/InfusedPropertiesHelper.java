@@ -9,6 +9,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -165,5 +166,28 @@ public class InfusedPropertiesHelper
 
 	public static List<Holder<Property>> getInfusedProperties(ItemStack stack) {
 		return stack.getOrDefault(INFUSED_PROPERTIES, InfusedPropertiesComponent.EMPTY).properties();
+	}
+
+	public static ItemStack storeProperties(ItemStack stack, List<Holder<Property>> properties)
+	{
+		stack.set(AlchemancyItems.Components.STORED_PROPERTIES, new InfusedPropertiesComponent(properties));
+		return stack;
+	}
+
+	public static ItemStack createPropertyCapsule(List<Holder<Property>> properties)
+	{
+		return storeProperties(AlchemancyItems.PROPERTY_CAPSULE.toStack(), properties);
+	}
+
+	@SafeVarargs
+	public static ItemStack storeProperties(ItemStack stack, Holder<Property>... properties)
+	{
+		return storeProperties(stack, Arrays.asList(properties));
+	}
+
+	@SafeVarargs
+	public static ItemStack createPropertyCapsule(Holder<Property>... properties)
+	{
+		return storeProperties(AlchemancyItems.PROPERTY_CAPSULE.toStack(), properties);
 	}
 }
