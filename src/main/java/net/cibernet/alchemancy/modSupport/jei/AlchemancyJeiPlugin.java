@@ -2,11 +2,8 @@ package net.cibernet.alchemancy.modSupport.jei;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.constants.RecipeTypes;
-import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.ingredients.subtypes.ISubtypeInterpreter;
 import mezz.jei.api.ingredients.subtypes.UidContext;
-import mezz.jei.api.recipe.IRecipeManager;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.registration.*;
 import net.cibernet.alchemancy.Alchemancy;
@@ -43,7 +40,6 @@ public class AlchemancyJeiPlugin implements IModPlugin
 	public static final RecipeType<PropertyWarpRecipe> PROPERTY_WARPING = RecipeType.create(Alchemancy.MODID, "property_warping", PropertyWarpRecipe.class);
 	public static final RecipeType<ForgeItemRecipe> ITEM_FORGING = RecipeType.create(Alchemancy.MODID, "item_forging", ForgeItemRecipe.class);
 	public static final RecipeType<ForgePropertyRecipe> PROPERTY_FORGING = RecipeType.create(Alchemancy.MODID, "property_forging", ForgePropertyRecipe.class);
-	public static final RecipeType<PropertyInteractionRecipe> PROPERTY_INTERACTIONS = RecipeType.create(Alchemancy.MODID, "property_interactions", PropertyInteractionRecipe.class);
 
 	@Override
 	public ResourceLocation getPluginUid() {
@@ -57,7 +53,6 @@ public class AlchemancyJeiPlugin implements IModPlugin
 		registration.addRecipeCategories(new PropertyWarpingCategory(registration.getJeiHelpers().getGuiHelper()));
 		registration.addRecipeCategories(new ItemForgingCategory(registration.getJeiHelpers().getGuiHelper()));
 		registration.addRecipeCategories(new PropertyForgingCategory(registration.getJeiHelpers().getGuiHelper()));
-		registration.addRecipeCategories(new PropertyInteractionsCategory(registration.getJeiHelpers().getGuiHelper()));
 	}
 
 	@Override
@@ -88,7 +83,6 @@ public class AlchemancyJeiPlugin implements IModPlugin
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration)
 	{
 		registration.addRecipeCatalysts(TRANSMUTATION, AlchemancyItems.ALCHEMANCY_CATALYST, AlchemancyItems.ALCHEMANCY_FORGE);
-		registration.addRecipeCatalysts(PROPERTY_INTERACTIONS, AlchemancyItems.ALCHEMANCY_CATALYST, AlchemancyItems.ALCHEMANCY_FORGE);
 		registration.addRecipeCatalysts(ITEM_FORGING, AlchemancyItems.ALCHEMANCY_CATALYST, AlchemancyItems.ALCHEMANCY_FORGE, AlchemancyItems.INFUSION_PEDESTAL);
 		registration.addRecipeCatalysts(PROPERTY_FORGING, AlchemancyItems.ALCHEMANCY_CATALYST, AlchemancyItems.ALCHEMANCY_FORGE, AlchemancyItems.INFUSION_PEDESTAL);
 		registration.addRecipeCatalysts(PROPERTY_WARPING, AlchemancyItems.ALCHEMANCY_CATALYST, AlchemancyItems.ALCHEMANCY_FORGE);
@@ -104,7 +98,6 @@ public class AlchemancyJeiPlugin implements IModPlugin
 		List<PropertyWarpRecipe> propertyWarpRecipes = new ArrayList<>();
 		List<ForgeItemRecipe> forgeItemRecipes = new ArrayList<>();
 		List<ForgePropertyRecipe> forgePropertyRecipes = new ArrayList<>();
-		List<PropertyInteractionRecipe> propertyInteractionRecipes = new ArrayList<>();
 
 		for (RecipeHolder<AbstractForgeRecipe<?>> recipe : forgeRecipes)
 		{
@@ -112,8 +105,7 @@ public class AlchemancyJeiPlugin implements IModPlugin
 					addTo(transmutationRecipes, ItemTransmutationRecipe.class, recipe) ||
 					addToExact(propertyWarpRecipes, PropertyWarpRecipe.class, recipe) ||
 					addToExact(forgeItemRecipes, ForgeItemRecipe.class, recipe) ||
-					addToExact(forgePropertyRecipes, ForgePropertyRecipe.class, recipe) ||
-					addToExact(propertyInteractionRecipes, PropertyInteractionRecipe.class, recipe)
+					addToExact(forgePropertyRecipes, ForgePropertyRecipe.class, recipe)
 			);
 		}
 
@@ -121,7 +113,6 @@ public class AlchemancyJeiPlugin implements IModPlugin
 		registration.addRecipes(PROPERTY_WARPING, propertyWarpRecipes);
 		registration.addRecipes(ITEM_FORGING, forgeItemRecipes);
 		registration.addRecipes(PROPERTY_FORGING, forgePropertyRecipes);
-		registration.addRecipes(PROPERTY_INTERACTIONS, propertyInteractionRecipes);
 
 
 		List<ItemStack> dormantPropertyCapsules = new ArrayList<>();

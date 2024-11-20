@@ -20,7 +20,7 @@ public class PropertyForgingCategory extends AbstractForgingRecipe<ForgeProperty
 	@Override
 	public ItemStack getOutput(ForgePropertyRecipe recipe)
 	{
-		return InfusedPropertiesHelper.createPropertyCapsule(recipe.getResult());
+		return recipe.getResult().isEmpty() ? ItemStack.EMPTY : InfusedPropertiesHelper.createPropertyCapsule(recipe.getResult());
 	}
 
 	@Override

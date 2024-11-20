@@ -1,6 +1,5 @@
 package net.cibernet.alchemancy.registries;
 
-import com.mojang.serialization.Codec;
 import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.crafting.*;
 import net.cibernet.alchemancy.properties.Property;
@@ -33,12 +32,10 @@ public class AlchemancyRecipeTypes
 		public static final DeferredHolder<RecipeSerializer<?>, AbstractForgeRecipe.Serializer<ItemTransmutationRecipe, ItemStack>> ITEM_TRANSMUTATION = REGISTRY.register("item_transmutation", () ->
 				new AbstractForgeRecipe.Serializer<>(ItemStack.CODEC, ItemStack.STREAM_CODEC, ItemTransmutationRecipe::new));
 		public static final DeferredHolder<RecipeSerializer<?>, PlayerHeadTransmutationRecipe.Serializer> PLAYER_HEAD_TRANSMUTATION = REGISTRY.register("player_head_transmutation", PlayerHeadTransmutationRecipe.Serializer::new);
-		public static final DeferredHolder<RecipeSerializer<?>, AbstractForgeRecipe.Serializer<ForgePropertyRecipe, Holder<Property>>> ALCHEMANCY_FORGE_PROPERTY = REGISTRY.register("forged_property", () ->
-				new AbstractForgeRecipe.Serializer<>(Property.CODEC, Property.STREAM_CODEC, ForgePropertyRecipe::new));
-		public static final DeferredHolder<RecipeSerializer<?>, AbstractForgeRecipe.Serializer<PropertyInteractionRecipe, List<Holder<Property>>>> PROPERTY_INTERACTION = REGISTRY.register("property_interaction", () ->
-				new AbstractForgeRecipe.Serializer<>(Property.LIST_CODEC, PropertyInteractionRecipe.PROPERTY_LIST_STREAM_CODEC, PropertyInteractionRecipe::new));
+		public static final DeferredHolder<RecipeSerializer<?>, AbstractForgeRecipe.Serializer<ForgePropertyRecipe, List<Holder<Property>>>> ALCHEMANCY_FORGE_PROPERTY = REGISTRY.register("forged_property", () ->
+				new AbstractForgeRecipe.Serializer<>(Property.LIST_CODEC, ForgePropertyRecipe.PROPERTY_LIST_STREAM_CODEC, ForgePropertyRecipe::new));
 		public static final DeferredHolder<RecipeSerializer<?>, AbstractForgeRecipe.Serializer<PropertyWarpRecipe, List<Holder<Property>>>> PROPERTY_WARP = REGISTRY.register("property_warp", () ->
-				new AbstractForgeRecipe.Serializer<>(Property.LIST_CODEC, PropertyInteractionRecipe.PROPERTY_LIST_STREAM_CODEC, PropertyWarpRecipe::new));
+				new AbstractForgeRecipe.Serializer<>(Property.LIST_CODEC, ForgePropertyRecipe.PROPERTY_LIST_STREAM_CODEC, PropertyWarpRecipe::new));
 		public static final DeferredHolder<RecipeSerializer<?>, DormantPropertyInfusionRecipe.Serializer> DORMANT_PROPERTIES = REGISTRY.register("dormant_properties", DormantPropertyInfusionRecipe.Serializer::new);
 		public static final DeferredHolder<RecipeSerializer<?>, AbstractForgeRecipe.Serializer<ForgeRemovePropertiesRecipe, Optional<ItemStack>>> REMOVE_PROPERTIES = REGISTRY.register("remove_properties", () ->
 				new AbstractForgeRecipe.Serializer<>(ItemStack.CODEC.optionalFieldOf("result"), ByteBufCodecs.optional(ItemStack.STREAM_CODEC), ForgeRemovePropertiesRecipe::new));
