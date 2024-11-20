@@ -2,6 +2,7 @@ package net.cibernet.alchemancy.properties.special;
 
 import net.cibernet.alchemancy.item.InnatePropertyItem;
 import net.cibernet.alchemancy.properties.EnderProperty;
+import net.cibernet.alchemancy.properties.LightningBoltProperty;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.properties.WayfindingProperty;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
@@ -14,8 +15,11 @@ import net.minecraft.core.GlobalPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -25,6 +29,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.RespawnAnchorBlock;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
@@ -110,10 +115,16 @@ public class WaywardWarpProperty extends Property implements IDataHolder<Wayfind
 	@Override
 	public boolean onFinishUsingItem(LivingEntity user, Level level, ItemStack stack)
 	{
-		return teleport(user, level, stack);
+		return teleport(user, user, level, stack);
 	}
 
-	public boolean teleport(LivingEntity user, Level level, ItemStack stack)
+	@Override
+	public void onActivation(@Nullable Entity source, Entity target, ItemStack stack, DamageSource damageSource)
+	{
+		teleport(source instanceof LivingEntity living ? living : null, target, target.level(), stack);
+	}
+
+	public boolean teleport(@Nullable LivingEntity effectSource, Entity user, Level level, ItemStack stack)
 	{
 		if(level.isClientSide())
 			return false;
@@ -150,10 +161,16 @@ public class WaywardWarpProperty extends Property implements IDataHolder<Wayfind
 			EnderProperty.playSound(level, destination.get());
 			EnderProperty.playParticles(level, destination.get(), user.getRandom());
 
-			EquipmentSlot slot = user.getUsedItemHand() == InteractionHand.OFF_HAND ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND;
-			if(stack.isDamageableItem())
-				stack.hurtAndBreak(10, user, slot);
+			EquipmentSlot slot = effectSource != null && effectSource.getUsedItemHand() == InteractionHand.OFF_HAND ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND;
+			if (stack.isDamageableItem())
+				if(effectSource == null)
+				{
+					if(level instanceof ServerLevel serverLevel)
+						stack.hurtAndBreak(10, serverLevel, null, (item) -> {});
+				}
+				else stack.hurtAndBreak(10, effectSource, slot);
 			else consumeItem(user, stack, slot);
+
 			return true;
 		}
 		else if(user instanceof Player player)
