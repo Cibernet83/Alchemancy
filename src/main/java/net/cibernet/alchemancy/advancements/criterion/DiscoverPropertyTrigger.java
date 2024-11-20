@@ -4,6 +4,8 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
+import net.cibernet.alchemancy.registries.AlchemancyCriteriaTriggers;
+import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
@@ -43,6 +45,11 @@ public class DiscoverPropertyTrigger extends SimpleCriterionTrigger<DiscoverProp
 		public boolean matches(Holder<Property> property)
 		{
 			return this.property.isEmpty() || this.property.get().is(Objects.requireNonNull(property.getKey()));
+		}
+
+		public static Criterion<TriggerInsance> discoverProperty(Holder<Property> propertyHolder)
+		{
+			return AlchemancyCriteriaTriggers.DISCOVER_PROPERTY.get().createCriterion(new TriggerInsance(Optional.empty(), Optional.of(propertyHolder)));
 		}
 	}
 }
