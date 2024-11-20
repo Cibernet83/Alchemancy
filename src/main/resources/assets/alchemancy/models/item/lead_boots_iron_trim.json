@@ -2,6 +2,6 @@
   "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "alchemancy:item/lead_boots",
-    "layer1": "minecraft:trims/items/boots_trim_lead_darker"
+    "layer1": "minecraft:trims/items/boots_trim_iron"
   }
 }
