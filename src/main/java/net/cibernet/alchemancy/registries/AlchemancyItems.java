@@ -111,7 +111,7 @@ public class AlchemancyItems
 					.attributes(MaceItem.createAttributes())
 					.component(DataComponents.TOOL, MaceItem.createToolProperties())));
 
-	public static final DeferredItem<Item> PROPERTY_CAPSULE = REGISTRY.registerSimpleItem("property_capsule");
+	public static final DeferredItem<Item> PROPERTY_CAPSULE = REGISTRY.registerItem("property_capsule", properties -> new Item(properties.rarity(Rarity.EPIC)));
 
 	public static class Materials
 	{
