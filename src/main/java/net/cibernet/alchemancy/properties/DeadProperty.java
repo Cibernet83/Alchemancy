@@ -39,13 +39,13 @@ public class DeadProperty extends Property
 	}
 
 	@Override
-	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-		event.setUseItem(TriState.FALSE);
+	public int getPriority() {
+		return Priority.HIGHEST;
 	}
 
 	@Override
-	public int modifyUseDuration(ItemStack stack, int original, int result) {
-		return 0;
+	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+		event.setUseItem(TriState.FALSE);
 	}
 
 	@Override

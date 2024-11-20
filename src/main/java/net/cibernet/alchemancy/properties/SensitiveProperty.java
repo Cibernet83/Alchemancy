@@ -42,7 +42,7 @@ public class SensitiveProperty extends Property
 		return sense(level, classSelector, new AABB(pos), List.of(ignore), (entity) ->
 		{
 			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder ->
-					propertyHolder.value().onActivationByBlock(level, pos.getCenter(), entity, stack));
+					propertyHolder.value().onActivationByBlock(level, pos, entity, stack));
 		});
 	}
 

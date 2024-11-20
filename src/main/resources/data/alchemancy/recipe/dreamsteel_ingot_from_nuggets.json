@@ -1,0 +1,39 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "infusables": [
+    {
+      "item": "alchemancy:dreamsteel_nugget"
+    },
+    {
+      "item": "alchemancy:dreamsteel_nugget"
+    },
+    {
+      "item": "alchemancy:dreamsteel_nugget"
+    },
+    {
+      "item": "alchemancy:dreamsteel_nugget"
+    },
+    {
+      "item": "alchemancy:dreamsteel_nugget"
+    },
+    {
+      "item": "alchemancy:dreamsteel_nugget"
+    },
+    {
+      "item": "alchemancy:dreamsteel_nugget"
+    },
+    {
+      "item": "alchemancy:dreamsteel_nugget"
+    }
+  ],
+
+  "catalyst": {
+    "item": "alchemancy:dreamsteel_nugget"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:dreamsteel_ingot"
+  }
+}

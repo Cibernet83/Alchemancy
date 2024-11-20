@@ -4,6 +4,8 @@ import net.cibernet.alchemancy.advancements.predicates.ForgeRecipePredicate;
 import net.cibernet.alchemancy.blocks.blockentities.EssenceContainer;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
+import net.cibernet.alchemancy.registries.AlchemancyItems;
+import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyRecipeTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -11,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.neoforged.neoforge.common.util.TriState;
+import net.minecraft.world.level.Level;
 import org.apache.commons.lang3.function.TriFunction;
 
 import java.util.List;
@@ -20,9 +23,14 @@ public class ForgeItemRecipe extends AbstractForgeRecipe<ItemStack>
 {
 	final ItemStack result;
 
-	public ForgeItemRecipe(Optional<Ingredient> catalyst, List<EssenceContainer> essences, List<Ingredient> infusables, List<Holder<Property>> infusedProperties, ItemStack result)
+	@Override
+	public boolean matches(ForgeRecipeGrid input, Level level) {
+		return checkParadoxical(input.getCurrentOutput()) && super.matches(input, level);
+	}
+
+	public ForgeItemRecipe(Optional<Ingredient> catalyst, Optional<String> catalystName, List<EssenceContainer> essences, List<Ingredient> infusables, List<Holder<Property>> infusedProperties, ItemStack result)
 	{
-		super(catalyst.isPresent() ? catalyst : Optional.of(Ingredient.EMPTY), essences, infusables, infusedProperties);
+		super(catalyst.isPresent() ? catalyst : Optional.of(Ingredient.EMPTY), catalystName, essences, infusables, infusedProperties);
 		this.result = result;
 
 	}
@@ -45,7 +53,17 @@ public class ForgeItemRecipe extends AbstractForgeRecipe<ItemStack>
 	@Override
 	public TriFunction<ForgeRecipeGrid, HolderLookup.Provider, ItemStack, ItemStack> processResult()
 	{
-		return (input, registries, output) -> InfusedPropertiesHelper.addProperties(result.copy(), InfusedPropertiesHelper.getInfusedProperties(output));
+		return (input, registries, output) -> {
+
+			ItemStack result = this.result.copy();
+
+			if(ItemStack.isSameItem(result, input.getCurrentOutput()))
+				result.setCount(result.getCount() + input.getCurrentOutput().getCount() - 1);
+
+			result.set(AlchemancyItems.Components.INFUSED_PROPERTIES, output.get(AlchemancyItems.Components.INFUSED_PROPERTIES));
+			result.set(AlchemancyItems.Components.PROPERTY_DATA, output.get(AlchemancyItems.Components.PROPERTY_DATA));
+			return result;
+		};
 	}
 
 	@Override

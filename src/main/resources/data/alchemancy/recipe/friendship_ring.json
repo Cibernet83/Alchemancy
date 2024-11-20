@@ -1,0 +1,17 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:sweet",
+    "alchemancy:nonlethal"
+  ],
+
+  "catalyst": {
+    "item": "alchemancy:pearlescent_ring"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:friendship_ring"
+  }
+}

@@ -50,31 +50,41 @@ public class StickyProperty extends Property
 	{
 		Vec3 delta = user.getDeltaMovement();
 		float halfWidth = user.getBbWidth()/2f;
+		Level level = user.level();
 
 		if(slot == EquipmentSlot.HEAD)
 		{
-			if(user.level().getBlockCollisions(user, new AABB(user.getX()-halfWidth, user.getY()+user.getBbHeight(), user.getZ()-halfWidth,
+			if(level.getBlockCollisions(user, new AABB(user.getX()-halfWidth, user.getY()+user.getBbHeight(), user.getZ()-halfWidth,
 					user.getX()+halfWidth, user.getY()+user.getBbHeight() + 0.1f, user.getZ()+halfWidth)).iterator().hasNext())
+			{
 				user.setDeltaMovement(delta.x, Math.max(delta.y, 0), delta.z);
+				user.resetFallDistance();
+			}
 		}
 		else if (slot == EquipmentSlot.FEET)
 		{
-			if(user.level().getBlockCollisions(user, new AABB(user.getX()-halfWidth, user.getY(), user.getZ()-halfWidth,
+			if(level.getBlockCollisions(user, new AABB(user.getX()-halfWidth, user.getY(), user.getZ()-halfWidth,
 								user.getX()+halfWidth, user.getY() - 0.1f, user.getZ()+halfWidth)).iterator().hasNext())
 				user.setDeltaMovement(delta.x, Math.min(delta.y, 0.05), delta.z);
 		}
 		else if(slot == EquipmentSlot.CHEST)
 		{
 			halfWidth += 0.05f;
-			if(user.level().getBlockCollisions(user, new AABB(user.getX()-halfWidth, user.getY() + user.getBbHeight() * 0.5f, user.getZ()-halfWidth,
+			if(level.getBlockCollisions(user, new AABB(user.getX()-halfWidth, user.getY() + user.getBbHeight() * 0.5f, user.getZ()-halfWidth,
 					user.getX()+halfWidth, user.getY() + user.getBbHeight(), user.getZ()+halfWidth)).iterator().hasNext())
+			{
 				user.setDeltaMovement(delta.x, Math.max(delta.y, 0), delta.z);
+				user.resetFallDistance();
+			}
 		} if(slot == EquipmentSlot.LEGS)
 		{
 			halfWidth += 0.05f;
-			if(user.level().getBlockCollisions(user, new AABB(user.getX()-halfWidth, user.getY(), user.getZ()-halfWidth,
+			if(level.getBlockCollisions(user, new AABB(user.getX()-halfWidth, user.getY(), user.getZ()-halfWidth,
 					user.getX()+halfWidth, user.getY() + user.getBbHeight() * 0.5f, user.getZ()+halfWidth)).iterator().hasNext())
+			{
 				user.setDeltaMovement(delta.x, Math.max(delta.y, 0), delta.z);
+				user.resetFallDistance();
+			}
 		}
 	}
 

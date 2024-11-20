@@ -19,7 +19,7 @@ public class GildedProperty extends Property
 	@Override
 	public void applyAttributes(ItemAttributeModifierEvent event)
 	{
-		event.addModifier(Attributes.MINING_EFFICIENCY, SPEED_MOD, EquipmentSlotGroup.MAINHAND);
+		event.addModifier(Attributes.BLOCK_BREAK_SPEED, SPEED_MOD, EquipmentSlotGroup.MAINHAND);
 	}
 
 	@Override

@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#alchemancy:generates_blazebloom",
+  "features": "alchemancy:blazebloom",
+  "step": "vegetal_decoration"
+}

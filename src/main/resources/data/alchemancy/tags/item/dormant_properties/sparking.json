@@ -2,6 +2,12 @@
   "replace": false,
   "values": [
     "#c:gravels",
-    "minecraft:flint"
+    "minecraft:flint",
+    "minecraft:gunpowder",
+
+    "minecraft:campfire",
+    "minecraft:soul_campfire",
+    "minecraft:torch",
+    "minecraft:soul_torch"
   ]
 }

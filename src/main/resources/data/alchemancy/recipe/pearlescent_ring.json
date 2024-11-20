@@ -1,0 +1,18 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "infusables": [
+    {
+      "item": "alchemancy:blank_pearl"
+    }
+  ],
+
+  "catalyst": {
+    "tag": "c:ingots/iron"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:pearlescent_ring"
+  }
+}

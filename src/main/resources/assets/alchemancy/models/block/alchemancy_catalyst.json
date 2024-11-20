@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "render_type": "cutout",
+  "textures": {
+    "all": "alchemancy:block/alchemancy_catalyst_frame"
+  }
+}

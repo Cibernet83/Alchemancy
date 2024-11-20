@@ -8,7 +8,7 @@
       }
     },
     {
-      "model": "alchemancy:item/lead_helmet_lead_darker_trim",
+      "model": "alchemancy:item/lead_helmet_iron_trim",
       "predicate": {
         "trim_type": 0.2
       }

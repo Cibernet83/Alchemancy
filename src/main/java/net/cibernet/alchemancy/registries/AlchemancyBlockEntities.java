@@ -17,7 +17,7 @@ public class AlchemancyBlockEntities
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<EssenceInjectorBlockEntity>> ESSENCE_INJECTOR = REGISTRY.register(
 			"essence_injector", () -> BlockEntityType.Builder.of(EssenceInjectorBlockEntity::new, AlchemancyBlocks.ESSENCE_INJECTOR.get()).build(null));
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ItemStackHolderBlockEntity>> ITEMSTACK_HOLDER = REGISTRY.register(
-			"pedestal", () -> BlockEntityType.Builder.of(ItemStackHolderBlockEntity::new, AlchemancyBlocks.INFUSION_PEDESTAL.get(), AlchemancyBlocks.ALCHEMANCY_FORGE.get()).build(null));
+			"pedestal", () -> BlockEntityType.Builder.of(ItemStackHolderBlockEntity::new, AlchemancyBlocks.INFUSION_PEDESTAL.get(), AlchemancyBlocks.ALCHEMANCY_FORGE.get(), AlchemancyBlocks.FLATTENED_ITEM.get()).build(null));
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AlchemancyCatalystBlockEntity>> ALCHEMANCY_CATALYST = REGISTRY.register(
 			"alchemancy_catalyst", () -> BlockEntityType.Builder.of(AlchemancyCatalystBlockEntity::new, AlchemancyBlocks.ALCHEMANCY_CATALYST.get()).build(null));
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<RootedItemBlockEntity>> ROOTED_ITEM = REGISTRY.register(

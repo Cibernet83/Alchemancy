@@ -12,20 +12,25 @@
   "block.alchemancy.nightshade": "Nightshade",
   "block.alchemancy.snapthorn": "Snapthorn",
 
+  "block.alchemancy.potted_blazebloom": "Potted Blazebloom",
+
   "block.alchemancy.essence_extractor": "Essence Extractor",
   "block.alchemancy.essence_tank": "Essence Tank",
   "block.alchemancy.essence_conduit": "Essence Conduit",
   "block.alchemancy.essence_injector": "Essence Injector",
   "block.alchemancy.infusion_pedestal": "Infusion Pedestal",
   "block.alchemancy.alchemancy_forge": "Alchemancy Forge",
+  "block.alchemancy.alchemancy_catalyst": "Alchemancy Catalyst",
 
   "block.alchemancy.lead_block": "Block of Lead",
   "block.alchemancy.dreamsteel_block": "Block of Dreamsteel",
 
   "block.alchemancy.rooted_item": "Rooted Item",
   "block.alchemancy.sculk_bud": "Sculk Bud",
+  "block.alchemancy.glowing_orb": "Glowing Orb",
 
-  "item.alchemancy.blazing_substance": "Alchemical Extract",
+  "item.alchemancy.alchemical_extract": "Alchemical Extract",
+  "item.alchemancy.blazing_substance": "Blazing Substance",
   "item.alchemancy.gusty_substance": "Gusty Substance",
   "item.alchemancy.earthen_substance": "Earthen Substance",
   "item.alchemancy.tidal_substance": "Tidal Substance",
@@ -51,6 +56,7 @@
   "item.alchemancy.lead_apple": "Leaden Apple",
 
   "item.alchemancy.dreamsteel_ingot": "Dreamsteel Ingot",
+  "item.alchemancy.dreamsteel_nugget": "Dreamsteel Nugget",
   "item.alchemancy.dreamsteel_sword": "Dreamsteel Sword",
   "item.alchemancy.dreamsteel_pickaxe": "Dreamsteel Pickaxe",
   "item.alchemancy.dreamsteel_axe": "Dreamsteel Axe",
@@ -61,13 +67,42 @@
   "item.alchemancy.dreamsteel_leggings": "Dreamsteel Leggings",
   "item.alchemancy.dreamsteel_boots": "Dreamsteel Boots",
 
-  "item.alchemancy.microspace_singularity": "Orb of Small",
-  "item.alchemancy.macrospace_singularity": "Orb of Big",
+  "item.alchemancy.blank_pearl": "Blank Pearl",
+  "item.alchemancy.revealing_pearl": "Revealing Pearl",
+  "item.alchemancy.paradox_pearl": "Paradox Pearl",
+
+  "item.alchemancy.microspace_singularity": "Microspace Singularity",
+  "item.alchemancy.macrospace_singularity": "Macrospace Singularity",
+
+  "item.alchemancy.pearlescent_ring": "Pearlescent Ring",
+  "item.alchemancy.eternal_glow_ring": "Ring of Eternal Glow",
+  "item.alchemancy.phasing_ring": "Ring of Phasing",
+  "item.alchemancy.undying_ring": "Ring of Undying",
+  "item.alchemancy.friendship_ring": "Ring of Friendship",
+
+  "item.alchemancy.property_visor": "Property Visor",
+
+  "item.alchemancy.wayward_medallion": "Wayward Medallion",
+  "item.alchemancy.wayward_medallion.bound_to_player": "Bound to: %s",
+  "item.alchemancy.wayward_medallion.bound_to_position": "Bound to: (%s, %s, %s)",
+  "item.alchemancy.wayward_medallion.in": "in \"%s\"",
+
+  "item.alchemancy.rocket_powered_hammer": "Rocket-Powered Hammer",
+  "item.alchemancy.barrels_warhammer": "Barrel's Warhammer",
 
   "item.alchemancy.property_capsule": "Property Capsule",
+  "item.alchemancy.property_capsule.ingredient": "Infused Property",
 
   "item.alchemancy.tooltip.stored_properties": "Stored Properties:",
   "item.alchemancy.tooltip.dormant_properties": "Dormant Properties:",
+
+  "recipe.alchemancy.item_transmutation": "Item Transmutation",
+  "recipe.alchemancy.item_forging": "Item Forging",
+  "recipe.alchemancy.property_forging": "Property Forging",
+  "recipe.alchemancy.property_warping": "Property Warping",
+  "recipe.alchemancy.property_interactions": "Property Interactions",
+  "recipe.alchemancy.dormant_properties": "Dormant Properties",
+  "recipe.alchemancy.dormant_properties.info": "This property can be obtained through the infusion of an unknown item.",
 
   "essence.alchemancy.pyro": "Pyro",
   "essence.alchemancy.aero": "Aero",
@@ -90,6 +125,8 @@
   "property.detail.item_count": "%s x%s",
   "property.detail.uses_left": "%s uses",
   "property.detail.needs_refueling": "Needs refueling!",
+  "property.detail.global_position": "(%s, %s, %s) in \"%s\"",
+  "property.detail.block_position": "%s, %s, %s",
 
   "property.alchemancy.tinted": "Tinted",
   "property.alchemancy.resized": "Resized",
@@ -97,6 +134,7 @@
   "property.alchemancy.enchanted": "Foil",
   "property.alchemancy.magical_concealment": "Magical Concealment",
   "property.alchemancy.revealing": "Revealing",
+  "property.alchemancy.revealed": "Revealed",
   "property.alchemancy.scrambled": "Scrambled",
   "property.alchemancy.seethrough": "Seethrough",
   "property.alchemancy.concealed": "Concealed",
@@ -118,18 +156,22 @@
   "property.alchemancy.lustrous": "Lustrous",
   "property.alchemancy.wealthy": "Wealthy",
   "property.alchemancy.pristine": "Pristine",
+  "property.alchemancy.hellbent": "Hellbent",
+  "property.alchemancy.depth_dweller": "Depth Dweller",
   "property.alchemancy.sparking": "Sparking",
   "property.alchemancy.loose": "Loose",
 
   "property.alchemancy.extended": "Extended",
   "property.alchemancy.calcareous": "Calcaerous",
   "property.alchemancy.sharp": "Sharp",
+  "property.alchemancy.weak": "Weak",
   "property.alchemancy.dense": "Dense",
   "property.alchemancy.gambling": "Gambling",
   "property.alchemancy.warding": "Warding",
   "property.alchemancy.reinforced": "Reinforced",
   "property.alchemancy.experienced": "Experienced",
   "property.alchemancy.wise": "Wise",
+  "property.alchemancy.clueless": "Clueless?",
 
   "property.alchemancy.cozy": "Cozy",
   "property.alchemancy.insulated": "Insulated",
@@ -146,11 +188,13 @@
   "property.alchemancy.smiting": "Smiting",
   "property.alchemancy.nonlethal": "Nonlethal",
   "property.alchemancy.mending": "Mending",
+  "property.alchemancy.flourish": "Flourish",
   "property.alchemancy.solar_powered": "Solar Powered",
   "property.alchemancy.arcane": "Arcane",
   "property.alchemancy.ender": "Ender",
   "property.alchemancy.sculking": "Sculking",
   "property.alchemancy.targeted": "Targeted",
+  "property.alchemancy.repelled": "Repelled",
   "property.alchemancy.seeking": "Seeking",
 
   "property.alchemancy.bouncy": "Bouncy",
@@ -175,6 +219,7 @@
   "property.alchemancy.blinding": "Blinding",
   "property.alchemancy.glowing_aura": "Glowing Aura",
   "property.alchemancy.swift": "Swift",
+  "property.alchemancy.sluggish": "Sluggish",
   "property.alchemancy.leaping": "Leaping",
   "property.alchemancy.nocturnal": "Nocturnal",
   "property.alchemancy.amphibious": "Amphibious",
@@ -184,7 +229,8 @@
 
   "property.alchemancy.soulbind": "Soulbind",
   "property.alchemancy.loyal": "Loyal",
-  "property.alchemancy.soul_bond": "Soul Bond",
+  "property.alchemancy.spirit_bond": "Spirit Bond",
+  "property.alchemancy.relentless": "Relentless",
   "property.alchemancy.energy_sapper": "Energy Sapper",
   "property.alchemancy.cursed": "Cursed",
   "property.alchemancy.vengeful": "Vengeful",
@@ -192,12 +238,14 @@
   "property.alchemancy.sentient": "Sentient",
   "property.alchemancy.spiritual": "Spiritual",
   "property.alchemancy.reincarnating": "Reincarnating",
+  "property.alchemancy.phasing": "Phasing",
 
   "property.alchemancy.hollow": "Hollow",
   "property.alchemancy.encapsulating": "Encapsulating",
   "property.alchemancy.bucketing": "Bucketing",
   "property.alchemancy.capturing": "Capturing",
   "property.alchemancy.dripping": "Dripping",
+  "property.alchemancy.absorbent": "Absorbent",
 
   "property.alchemancy.tethered": "Tethered",
   "property.alchemancy.mining": "Mining",
@@ -211,8 +259,10 @@
   "property.alchemancy.sharpshooting": "Sharpshooting",
   "property.alchemancy.brushing": "Brushing",
   "property.alchemancy.scoping": "Scoping",
+  "property.alchemancy.wayfinding": "Wayfinding",
   "property.alchemancy.headwear": "Headwear",
   "property.alchemancy.saddled": "Saddled",
+  "property.alchemancy.glider": "Glider",
 
   "property.alchemancy.crafty": "Crafty",
   "property.alchemancy.assembling": "Assembling",
@@ -250,6 +300,18 @@
   "property.alchemancy.voidtouch": "Voidtouch",
   "property.alchemancy.ceaseless_void": "Ceaseless Void",
   "property.alchemancy.quantum_bind": "Quantum Bind",
+
+  "property.alchemancy.auxiliary": "Auxiliary",
+  "property.alchemancy.eternal_glow": "Eternal Glow",
+  "property.alchemancy.phase_step": "Phase Step",
+  "property.alchemancy.death_ward": "Death Ward",
+  "property.alchemancy.friendly": "Friendly",
+
+  "property.alchemancy.rocket_powered": "Rocket-Powered",
+  "property.alchemancy.wayward_warp": "Wayward Warp",
+  "property.alchemancy.wayward_warp.dimension_missmatch": "The destination appears to be in another dimension...",
+  "property.alchemancy.wayward_warp.missing_destination": "The destination appears to be missing...",
+  "property.alchemancy.wayward_warp.obstructed_destination": "The destination appears to be obstructed...",
 
   "death.attack.alchemancy.shock": "%s had a shock to their system",
   "death.attack.alchemancy.shock.player": "%1$s was electrocuted by %2$s",

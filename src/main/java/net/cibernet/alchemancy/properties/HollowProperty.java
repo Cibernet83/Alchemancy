@@ -12,6 +12,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -21,9 +22,11 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -41,8 +44,11 @@ public class HollowProperty extends Property implements IDataHolder<ItemStack>
 	}
 
 	@Override
-	public void onPickUpAnyItem(Player user, ItemStack stack, EquipmentSlot slot, ItemEntity itemToPickUp, ItemEntityPickupEvent.Pre event)
+	public void onPickUpAnyItem(Player user, ItemStack stack, EquipmentSlot slot, ItemEntity itemToPickUp, boolean canPickUp, ItemEntityPickupEvent.Pre event)
 	{
+		if(!canPickUp)
+			return;
+
 		ItemStack storedStack = getData(stack);
 		ItemStack stackToPickUp = event.getItemEntity().getItem();
 
@@ -141,10 +147,10 @@ public class HollowProperty extends Property implements IDataHolder<ItemStack>
 		}
 	}
 
-	public boolean storeItem(Entity player, ItemStack hollowItem, ItemStack itemToPickUp)
+	public boolean storeItem(@Nullable Entity player, ItemStack hollowItem, ItemStack itemToPickUp)
 	{
 		ItemStack storedStack = getData(hollowItem);
-		if ((storedStack.isEmpty() || ItemStack.matches(storedStack, itemToPickUp)))
+		if (canStore(hollowItem, itemToPickUp))
 		{
 			if(storedStack.isEmpty())
 			{
@@ -158,12 +164,25 @@ public class HollowProperty extends Property implements IDataHolder<ItemStack>
 
 			}
 
-			playInsertSound(player);
+			if(player != null)
+				playInsertSound(player);
 			setData(hollowItem, storedStack);
 			return true;
 		}
 
 		return false;
+	}
+
+	public boolean canStore(ItemStack hollowItem, ItemStack itemToPickUp)
+	{
+		ItemStack storedStack = getData(hollowItem);
+		return (storedStack.isEmpty() || (ItemStack.isSameItemSameComponents(storedStack, itemToPickUp) && storedStack.getCount() + itemToPickUp.getCount() <= storedStack.getMaxStackSize()));
+	}
+
+	public boolean isFull(ItemStack hollowItem)
+	{
+		ItemStack storedStack = getData(hollowItem);
+		return !storedStack.isEmpty() && storedStack.getCount() >= storedStack.getMaxStackSize();
 	}
 
 	private void playInsertSound(Entity entity) {
@@ -178,38 +197,38 @@ public class HollowProperty extends Property implements IDataHolder<ItemStack>
 	public void onRootedTick(RootedItemBlockEntity root, List<LivingEntity> entitiesInBounds)
 	{
 		ItemStack rootStack = root.getItem();
-		ItemStack storedStack = getData(rootStack);
 
-		if(storedStack.isEmpty() || storedStack.getCount() < root.getMaxStackSize())
+		if(!isFull(rootStack))
 		{
 			Level level = root.getLevel();
 			BlockPos pos = root.getBlockPos();
 			List<ItemEntity> items = level.getEntitiesOfClass(ItemEntity.class, root.getBlockState().getShape(level, pos).bounds().move(pos));
 
-			if(!items.isEmpty())
+			for (ItemEntity itemEntity : items)
 			{
-				ItemEntity itemEntity = items.getFirst();
 				ItemStack itemToPickUp = itemEntity.getItem();
-				if (!itemEntity.isRemoved() && (storedStack.isEmpty() || ItemStack.matches(storedStack, itemToPickUp)))
+				if (!itemEntity.isRemoved() && storeItem(null, rootStack, itemToPickUp) && itemToPickUp.getCount() <= 0)
 				{
-					if(storedStack.isEmpty())
-					{
-						storedStack = itemToPickUp;
-						itemEntity.discard();
-					} else
-					{
-						int mergeLimit = storedStack.getMaxStackSize() - storedStack.getCount();
-						storedStack.setCount(Math.min(storedStack.getMaxStackSize(), storedStack.getCount() + itemToPickUp.getCount()));
-						itemToPickUp.shrink(mergeLimit);
-
-						if(itemToPickUp.getCount() <= 0)
-							itemEntity.discard();
-					}
-
-					setData(rootStack, storedStack);
+					itemEntity.discard();
+					break;
 				}
 			}
 		}
+	}
+
+	@Override
+	public @Nullable ItemInteractionResult onRootedRightClick(RootedItemBlockEntity root, Player user, InteractionHand hand, BlockHitResult hitResult)
+	{
+		ItemStack heldItem = user.getItemInHand(hand);
+
+		if(heldItem.isEmpty())
+		{
+			user.addItem(getData(root.getItem()));
+			setData(root.getItem(), getDefaultData());
+			return ItemInteractionResult.sidedSuccess(user.level().isClientSide());
+		}
+
+		return storeItem(user, root.getItem(), heldItem) ? ItemInteractionResult.sidedSuccess(user.level().isClientSide()) : ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
 	}
 
 	@Override

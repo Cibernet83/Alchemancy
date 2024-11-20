@@ -1,8 +1,12 @@
 {
-  "type": "alchemancy:item_transmutation",
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:scoping"
+  ],
 
   "catalyst": {
-    "item": "minecraft:ender_pearl"
+    "item": "alchemancy:blank_pearl"
   },
 
   "result": {

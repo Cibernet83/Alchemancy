@@ -1,0 +1,9 @@
+{
+  "type": "alchemancy:remove_properties",
+
+  "infusables": [
+    {
+      "tag": "alchemancy:removes_infusions"
+    }
+  ]
+}

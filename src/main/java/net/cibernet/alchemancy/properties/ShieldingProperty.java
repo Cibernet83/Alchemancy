@@ -24,8 +24,9 @@ public class ShieldingProperty extends Property
 	@Override
 	public void modifyDamageReceived(LivingEntity user, ItemStack weapon, EquipmentSlot slot, LivingDamageEvent.Pre event)
 	{
-		if(user.getUseItem() == weapon && event.getNewDamage() > 0)
+		if(user.getUseItem() == weapon && event.getNewDamage() > 0 && user.isDamageSourceBlocked(event.getSource()))
 		{
+
 			event.setNewDamage(event.getNewDamage() * 0.5f);
 
 			if(weapon.isDamageableItem())

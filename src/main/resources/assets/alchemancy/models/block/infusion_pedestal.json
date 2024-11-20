@@ -1,6 +1,50 @@
 {
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "alchemancy:block/infusion_pedestal"
-  }
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"textures": {
+		"0": "alchemancy:block/infusion_pedestal_side",
+		"1": "alchemancy:block/pedestal_bottom",
+		"2": "alchemancy:block/infusion_pedestal_top",
+		"3": "alchemancy:block/pedestal_middle",
+		"particle": "alchemancy:block/infusion_pedestal_side"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 2, 16],
+			"faces": {
+				"north": {"uv": [0, 14, 16, 16], "texture": "#0"},
+				"east": {"uv": [0, 14, 16, 16], "texture": "#0"},
+				"south": {"uv": [0, 14, 16, 16], "texture": "#0"},
+				"west": {"uv": [0, 14, 16, 16], "texture": "#0"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#1"}
+			}
+		},
+		{
+			"from": [0, 8, 0],
+			"to": [16, 14, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 12, 0]},
+			"faces": {
+				"north": {"uv": [0, 2, 16, 8], "texture": "#0"},
+				"east": {"uv": [0, 2, 16, 8], "texture": "#0"},
+				"south": {"uv": [0, 2, 16, 8], "texture": "#0"},
+				"west": {"uv": [0, 2, 16, 8], "texture": "#0"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#2"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#3"}
+			}
+		},
+		{
+			"from": [3, 2, 3],
+			"to": [13, 8, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [3, 2, 3]},
+			"faces": {
+				"north": {"uv": [3, 8, 13, 14], "texture": "#0"},
+				"east": {"uv": [3, 8, 13, 14], "texture": "#0"},
+				"south": {"uv": [3, 8, 13, 14], "texture": "#0"},
+				"west": {"uv": [3, 8, 13, 14], "texture": "#0"}
+			}
+		}
+	],
+	"display": {}
 }

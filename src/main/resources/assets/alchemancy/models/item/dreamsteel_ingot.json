@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "alchemancy:item/dreamsteel_ingot",
+    "layer1": "alchemancy:item/dreamsteel_ingot_tint"
+  }
+}

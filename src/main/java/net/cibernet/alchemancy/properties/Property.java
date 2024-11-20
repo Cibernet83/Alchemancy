@@ -24,9 +24,9 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.FastColor;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
@@ -35,6 +35,7 @@ import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.item.Equipable;
@@ -45,6 +46,7 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.ItemAbility;
@@ -139,7 +141,8 @@ public abstract class Property
 
 	public void modifyCriticalAttack(Player user, ItemStack weapon, CriticalHitEvent event)
 	{
-		onCriticalAttack(user, weapon, event.getTarget());
+		if(event.isCriticalHit())
+			onCriticalAttack(user, weapon, event.getTarget());
 	}
 
 	public void modifyAttackDamage(Entity user, ItemStack weapon, LivingDamageEvent.Pre event) {
@@ -160,6 +163,16 @@ public abstract class Property
 	{
 	}
 
+	public void modifyHeal(LivingEntity user, ItemStack stack, EquipmentSlot slot, LivingHealEvent event)
+	{
+		onHeal(user, stack, slot, event.getAmount());
+	}
+
+	public void onHeal(LivingEntity user, ItemStack stack, EquipmentSlot slot, float amount)
+	{
+
+	}
+
 	public void onActivation(@Nullable Entity source, Entity target, ItemStack stack, DamageSource damageSource)
 	{
 		onCriticalAttack(source instanceof Player player ? player : null, stack, target);
@@ -172,9 +185,9 @@ public abstract class Property
 		onActivation(source, target, stack, activationDamageSource(source.level(), source, source.position()));
 	}
 
-	public final void onActivationByBlock(Level level, Vec3 position, Entity target, ItemStack stack)
+	public final void onActivationByBlock(Level level, BlockPos position, Entity target, ItemStack stack)
 	{
-		onActivation(null, target, stack, activationDamageSource(level, null, position));
+		onActivation(null, target, stack, activationDamageSource(level, null, position.getCenter()));
 	}
 
 	public static DamageSource activationDamageSource(Level level, @Nullable Entity source, Vec3 position)
@@ -205,6 +218,11 @@ public abstract class Property
 	public Component getName(ItemStack stack)
 	{
 		return Component.translatable("property." + getKey().toLanguageKey()).withColor(getColor(stack));
+	}
+
+	public String getRawName()
+	{
+		return Component.translatable("property." + getKey().toLanguageKey()).getString();
 	}
 
 	public int getPriority()
@@ -408,15 +426,13 @@ public abstract class Property
 
 	}
 
-	public void onPickUpAnyItem(Player user, ItemStack stack, EquipmentSlot slot, ItemEntity itemToPickUp, ItemEntityPickupEvent.Pre event) {
+	public void onPickUpAnyItem(Player user, ItemStack stack, EquipmentSlot slot, ItemEntity itemToPickUp, boolean canPickUp, ItemEntityPickupEvent.Pre event) {
 
 	}
 
 	public Collection<ItemStack> populateCreativeTab(DeferredItem<Item> capsuleItem, Holder<Property> holder)
 	{
-		ItemStack stack = capsuleItem.toStack();
-		stack.set(AlchemancyItems.Components.STORED_PROPERTIES, new InfusedPropertiesComponent(List.of(holder)));
-		return List.of(stack);
+		return List.of(InfusedPropertiesHelper.storeProperties(capsuleItem.toStack(), holder));
 	}
 
 	public Optional<UseAnim> modifyUseAnimation(ItemStack stack, UseAnim original, Optional<UseAnim> current) {
@@ -429,6 +445,21 @@ public abstract class Property
 
 	public void onItemUseTick(LivingEntity user, ItemStack stack, LivingEntityUseItemEvent.Tick event) {
 
+	}
+
+	/**
+	 *
+	 * @param arrow The AbstractArrow entity sourced from a Property-containing item
+	 * @param stack The Property-containing item the entity originates from (the projectile ammo, not the weapon)
+	 * @return Whether the shot arrow can clip through blocks
+	 */
+	public TriState allowArrowClipBlocks(AbstractArrow arrow, ItemStack stack) {
+		return TriState.DEFAULT;
+	}
+
+	@Nullable
+	public ItemInteractionResult onRootedRightClick(RootedItemBlockEntity root, Player user, InteractionHand hand, BlockHitResult hitResult) {
+		return null;
 	}
 
 	public static class Priority

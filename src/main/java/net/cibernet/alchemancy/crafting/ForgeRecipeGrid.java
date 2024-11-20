@@ -235,7 +235,6 @@ public class ForgeRecipeGrid implements RecipeInput
 			applyGlint = Optional.of(false);
 
 		pedestal.removeItem(1);
-		pedestal.notifyInventoryUpdate();
 		slotOrder.remove(pedestal);
 
 		cachedDormantProperties = null;
@@ -361,20 +360,6 @@ public class ForgeRecipeGrid implements RecipeInput
 			ItemStack stack = pedestal.getItem();
 			ItemStack target = !consume ? currentOutput.copy() : currentOutput;
 
-			if(stack.is(AlchemancyTags.Items.REMOVES_INFUSIONS))
-			{
-				if(!InfusedPropertiesHelper.getInfusedProperties(target).isEmpty())
-				{
-					if(consume)
-					{
-						consumeItem(pedestal);
-						InfusedPropertiesHelper.clearAllInfusions(target);
-					}
-					return true;
-				}
-				return false;
-			}
-
 			List<Holder<Property>> properties = AlchemancyProperties.getDormantProperties(stack);
 
 			properties.addAll(stack.getOrDefault(AlchemancyItems.Components.STORED_PROPERTIES, InfusedPropertiesComponent.EMPTY).properties());
@@ -390,13 +375,15 @@ public class ForgeRecipeGrid implements RecipeInput
 
 			if(perform)
 			{
-				success = true;
-
 				if(consume)
 				{
 					InfusedPropertiesHelper.addProperties(target, properties);
+					items.remove(pedestal);
 					consumeItem(pedestal);
 				}
+
+				success = true;
+				break;
 			}
 		}
 

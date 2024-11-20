@@ -12,10 +12,12 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 import java.util.Optional;
 
+import static net.cibernet.alchemancy.registries.AlchemancyRecipeTypes.Serializers.ITEM_TRANSMUTATION;
+
 public class ItemTransmutationRecipe extends ForgeItemRecipe
 {
-	public ItemTransmutationRecipe(Optional<Ingredient> catalyst, List<EssenceContainer> essences, List<Ingredient> infusables, List<Holder<Property>> infusedProperties, ItemStack result) {
-		super(catalyst, List.of(), List.of(), List.of(), result);
+	public ItemTransmutationRecipe(Optional<Ingredient> catalyst, Optional<String> catalystName, List<EssenceContainer> essences, List<Ingredient> infusables, List<Holder<Property>> infusedProperties, ItemStack result) {
+		super(catalyst, catalystName, List.of(), List.of(), List.of(), result);
 	}
 
 	@Override
@@ -36,5 +38,10 @@ public class ItemTransmutationRecipe extends ForgeItemRecipe
 	@Override
 	public int getPriority() {
 		return 100;
+	}
+
+	@Override
+	public RecipeSerializer<?> getSerializer() {
+		return ITEM_TRANSMUTATION.get();
 	}
 }

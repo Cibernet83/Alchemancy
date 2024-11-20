@@ -1,0 +1,24 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:headwear",
+    "alchemancy:scoping",
+    "alchemancy:wise"
+  ],
+
+  "infusables": [
+    {
+      "item": "alchemancy:revealing_pearl"
+    }
+  ],
+
+  "catalyst": {
+    "item": "alchemancy:dreamsteel_ingot"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:property_visor"
+  }
+}

@@ -1,0 +1,9 @@
+
+{
+  "replace": false,
+  "values": [
+    "#alchemancy:animals",
+    "minecraft:player",
+    "minecraft:villager"
+  ]
+}

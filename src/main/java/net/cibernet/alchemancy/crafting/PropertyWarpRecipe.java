@@ -23,8 +23,8 @@ public class PropertyWarpRecipe extends AbstractForgeRecipe<List<Holder<Property
 {
 	final List<Holder<Property>> result;
 
-	public PropertyWarpRecipe(Optional<Ingredient> catalyst, List<EssenceContainer> essences, List<Ingredient> infusables, List<Holder<Property>> infusedProperties, List<Holder<Property>> result) {
-		super(catalyst, List.of(), List.of(), infusedProperties);
+	public PropertyWarpRecipe(Optional<Ingredient> catalyst, Optional<String> catalystName, List<EssenceContainer> essences, List<Ingredient> infusables, List<Holder<Property>> infusedProperties, List<Holder<Property>> result) {
+		super(catalyst, catalystName, List.of(), List.of(), infusedProperties);
 		this.result = result;
 	}
 
@@ -52,7 +52,7 @@ public class PropertyWarpRecipe extends AbstractForgeRecipe<List<Holder<Property
 	}
 
 	@Override
-	protected List<Holder<Property>> getResult()
+	public List<Holder<Property>> getResult()
 	{
 		return result;
 	}

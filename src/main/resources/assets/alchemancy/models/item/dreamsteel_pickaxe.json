@@ -1,0 +1,7 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "alchemancy:item/dreamsteel_pickaxe",
+    "layer1": "alchemancy:item/dreamsteel_pickaxe_tint"
+  }
+}

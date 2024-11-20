@@ -1,13 +1,18 @@
 package net.cibernet.alchemancy.item.components;
 
 import net.cibernet.alchemancy.properties.Property;
+import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -22,8 +27,10 @@ public class InfusedPropertiesHelper
 		if(stack.isEmpty() || property == null)
 			return false;
 
-		return (stack.has(INFUSED_PROPERTIES.get()) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(property)
-			|| (stack.has(INNATE_PROPERTIES.get()) && stack.get(INNATE_PROPERTIES.get()).hasProperty(property)))
+		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().getData(stack);
+
+		return (stack.has(INFUSED_PROPERTIES.get()) && (toggled || !hasInfusedProperty(stack, AlchemancyProperties.TOGGLEABLE)) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(property)
+			|| (stack.has(INNATE_PROPERTIES.get()) && (toggled || !hasInnateProperty(stack, AlchemancyProperties.TOGGLEABLE)) && stack.get(INNATE_PROPERTIES.get()).hasProperty(property)))
 			|| ((property == AlchemancyProperties.AWAKENED || hasProperty(stack, AlchemancyProperties.AWAKENED)) && AlchemancyProperties.getDormantProperties(stack).contains(property));
 	}
 
@@ -46,6 +53,11 @@ public class InfusedPropertiesHelper
 		return !stack.isEmpty() && stack.has(INFUSED_PROPERTIES.get()) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(property);
 	}
 
+	public static boolean hasInnateProperty(ItemStack stack, Holder<Property> property)
+	{
+		return !stack.isEmpty() && stack.has(INNATE_PROPERTIES.get()) && stack.get(INNATE_PROPERTIES.get()).hasProperty(property);
+	}
+
 	public static boolean modifyInfusions(ItemStack stack, Function<InfusedPropertiesComponent.Mutable, Boolean> consumer)
 	{
 		InfusedPropertiesComponent.Mutable mutable = new InfusedPropertiesComponent.Mutable(stack.getOrDefault(INFUSED_PROPERTIES.get(), InfusedPropertiesComponent.EMPTY));
@@ -56,11 +68,35 @@ public class InfusedPropertiesHelper
 
 	public static void forEachProperty(ItemStack stack, Consumer<Holder<Property>> consumer)
 	{
+		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().getData(stack);
+
 		if (stack.has(INFUSED_PROPERTIES.get()))
-			stack.get(INFUSED_PROPERTIES.get()).forEachProperty(consumer);
+		{
+			if(!toggled && hasInfusedProperty(stack, AlchemancyProperties.TOGGLEABLE))
+				consumer.accept(AlchemancyProperties.TOGGLEABLE);
+			else stack.get(INFUSED_PROPERTIES.get()).forEachProperty(consumer);
+		}
 		if (stack.has(INNATE_PROPERTIES.get()))
-			stack.get(INNATE_PROPERTIES.get()).forEachProperty(consumer);
+		{
+			if(!toggled && hasInnateProperty(stack, AlchemancyProperties.TOGGLEABLE))
+				consumer.accept(AlchemancyProperties.TOGGLEABLE);
+			else stack.get(INNATE_PROPERTIES.get()).forEachProperty(consumer);
+		}
 		if(hasProperty(stack, AlchemancyProperties.AWAKENED))
+			AlchemancyProperties.getDormantProperties(stack).forEach(consumer);
+	}
+
+	public static void forEachInnateProperty(ItemStack stack, Consumer<Holder<Property>> consumer)
+	{
+		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().getData(stack);
+
+		if (stack.has(INNATE_PROPERTIES.get()))
+		{
+			if(!toggled && hasInnateProperty(stack, AlchemancyProperties.TOGGLEABLE))
+				consumer.accept(AlchemancyProperties.TOGGLEABLE);
+			else stack.get(INNATE_PROPERTIES.get()).forEachProperty(consumer);
+		}
+		if(hasInnateProperty(stack, AlchemancyProperties.AWAKENED))
 			AlchemancyProperties.getDormantProperties(stack).forEach(consumer);
 	}
 
@@ -85,15 +121,21 @@ public class InfusedPropertiesHelper
 		if(stack.has(INFUSED_PROPERTIES))
 		{
 			modifyInfusions(stack, mutable -> mutable.removeProperty(property));
+
+			if(property.value() instanceof IDataHolder<?> dataHolder)
+				dataHolder.removeData(stack);
+
 			if (getInfusedProperties(stack).isEmpty())
 				stack.remove(INFUSED_PROPERTIES);
 		}
 		return stack;
 	}
 
+	public static final int DEFAULT_INFUSION_SLOTS = 4;
+
 	public static int getInfusionSlots(ItemStack stack)
 	{
-		return stack.getOrDefault(AlchemancyItems.Components.INFUSION_SLOTS.get(), 4);
+		return Math.max(0, stack.getOrDefault(AlchemancyItems.Components.INFUSION_SLOTS.get(), DEFAULT_INFUSION_SLOTS));
 	}
 
 	public static ItemStack truncateProperties(ItemStack stack)
@@ -127,5 +169,46 @@ public class InfusedPropertiesHelper
 
 	public static List<Holder<Property>> getInfusedProperties(ItemStack stack) {
 		return stack.getOrDefault(INFUSED_PROPERTIES, InfusedPropertiesComponent.EMPTY).properties();
+	}
+
+	public static ItemStack storeProperties(ItemStack stack, List<Holder<Property>> properties)
+	{
+		stack.set(AlchemancyItems.Components.STORED_PROPERTIES, new InfusedPropertiesComponent(properties));
+		return stack;
+	}
+	@SafeVarargs
+	public static ItemStack storeProperties(ItemStack stack, Holder<Property>... properties)
+	{
+		return storeProperties(stack, Arrays.asList(properties));
+	}
+
+	public static ItemStack createPropertyCapsule(List<Holder<Property>> properties)
+	{
+		return storeProperties(AlchemancyItems.PROPERTY_CAPSULE.toStack(), properties);
+	}
+
+	@SafeVarargs
+	public static ItemStack createPropertyCapsule(Holder<Property>... properties)
+	{
+		return storeProperties(AlchemancyItems.PROPERTY_CAPSULE.toStack(), properties);
+	}
+
+	private static final Component PROPERTY_INGREDIENT_NAME = Component.translatable("item.alchemancy.property_capsule.ingredient");
+
+	public static ItemStack createPropertyIngredient(List<Holder<Property>> properties)
+	{
+		ItemStack result = createPropertyCapsule(properties);
+		result.set(DataComponents.RARITY, Rarity.COMMON);
+		result.set(DataComponents.ITEM_NAME, PROPERTY_INGREDIENT_NAME);
+		return result;
+	}
+
+	@SafeVarargs
+	public static ItemStack createPropertyIngredient(Holder<Property>... properties)
+	{
+		ItemStack result = createPropertyCapsule(properties);
+		result.set(DataComponents.RARITY, Rarity.COMMON);
+		result.set(DataComponents.ITEM_NAME, PROPERTY_INGREDIENT_NAME);
+		return result;
 	}
 }

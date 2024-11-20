@@ -1,5 +1,6 @@
 package net.cibernet.alchemancy.properties;
 
+import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.util.ColorUtils;
@@ -22,12 +23,20 @@ import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 public class WaxedProperty extends Property implements IDataHolder<Integer>
 {
-	private static final int[] colors = new int[] {0xFF0000, 0x00FF00, 0x0000FF};
-
 	@Override
 	public int getColor(ItemStack stack)
 	{
-		return ColorUtils.interpolateColorsOverTime(2, colors);
+		return 0xFABF29;
+	}
+
+
+	@Override
+	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid) {
+		if (!getData(stack).equals(getDefaultData())) {
+			removeData(stack);
+			return true;
+		}
+		return super.onInfusedByDormantProperty(stack, propertySource, grid);
 	}
 
 	@Override
@@ -67,6 +76,6 @@ public class WaxedProperty extends Property implements IDataHolder<Integer>
 
 	@Override
 	public Integer getDefaultData() {
-		return 50;
+		return 100;
 	}
 }

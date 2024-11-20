@@ -38,6 +38,11 @@ public class ResizedProperty extends Property implements IDataHolder<Float>
 	}
 
 	@Override
+	public boolean cluelessCanReset() {
+		return false;
+	}
+
+	@Override
 	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid)
 	{
 		//boolean hasMatching = super.onInfusedByDormantProperty(stack, propertySource, grid);

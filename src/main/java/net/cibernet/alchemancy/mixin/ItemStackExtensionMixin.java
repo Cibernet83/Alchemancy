@@ -8,6 +8,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.item.ElytraItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.ItemAbility;
@@ -41,6 +42,19 @@ public interface ItemStackExtensionMixin
 	default boolean makesPiglinsNeutral(Item instance, ItemStack stack, LivingEntity living, Operation<Boolean> original)
 	{
 		return InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.GILDED) || original.call(instance, stack, living);
+	}
+
+	@WrapOperation(method = "canElytraFly", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/Item;canElytraFly(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/LivingEntity;)Z"))
+	default boolean canElytryFly(Item instance, ItemStack stack, LivingEntity living, Operation<Boolean> original)
+	{
+		return (InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.GLIDER) && ElytraItem.isFlyEnabled(stack)) || original.call(instance, stack, living);
+	}
+
+	@WrapOperation(method = "elytraFlightTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/Item;elytraFlightTick(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/LivingEntity;I)Z"))
+	default boolean elytraFlightTick(Item instance, ItemStack stack, LivingEntity living, int i, Operation<Boolean> original)
+	{
+
+		return InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.GLIDER) || original.call(instance, stack, living, i);
 	}
 
 	@Inject(method = "canPerformAction", at = @At("RETURN"), cancellable = true)

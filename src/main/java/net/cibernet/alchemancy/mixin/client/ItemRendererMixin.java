@@ -1,13 +1,13 @@
 package net.cibernet.alchemancy.mixin.client;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.properties.WayfindingProperty;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.client.Minecraft;
@@ -16,11 +16,12 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.util.Tuple;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -82,7 +83,6 @@ public abstract class ItemRendererMixin
 					localStack.set(disguise);
 					localModel.set(getModel(disguise, owner == null ? Minecraft.getInstance().level : owner.level(), owner, owner == null ? 0 : owner.getId()));
 				}
-				alchemancy$livingEntity = null;
 			}
 			if(InfusedPropertiesHelper.hasInfusedProperty(itemStack, AlchemancyProperties.GLOWING_AURA))
 				localLight.set(LightTexture.FULL_BRIGHT);
@@ -92,11 +92,61 @@ public abstract class ItemRendererMixin
 	@Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/neoforged/neoforge/client/ClientHooks;handleCameraTransforms(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/resources/model/BakedModel;Lnet/minecraft/world/item/ItemDisplayContext;Z)Lnet/minecraft/client/resources/model/BakedModel;"))
 	public void renderScale(ItemStack itemStack, ItemDisplayContext displayContext, boolean leftHand, PoseStack poseStack, MultiBufferSource bufferSource, int combinedLight, int combinedOverlay, BakedModel p_model, CallbackInfo ci)
 	{
+		if(InfusedPropertiesHelper.hasProperty(itemStack, AlchemancyProperties.FLATTENED))
+			switch (displayContext)
+			{
+				case FIRST_PERSON_LEFT_HAND: case THIRD_PERSON_LEFT_HAND: case FIRST_PERSON_RIGHT_HAND: case THIRD_PERSON_RIGHT_HAND:
+					poseStack.scale(0.05f, 1, 1);
+					break;
+				default:
+					poseStack.scale(1, 1, 0.05f);
+			}
+
+		if(InfusedPropertiesHelper.hasProperty(itemStack, AlchemancyProperties.WAYFINDING))
+		{
+			Level level = Minecraft.getInstance().level;
+			Entity user = alchemancy$livingEntity == null ? Minecraft.getInstance().player : alchemancy$livingEntity;
+
+			if(user != null && level != null)
+			{
+				Tuple<WayfindingProperty.WayfindData, WayfindingProperty.RotationData> data = AlchemancyProperties.WAYFINDING.value().getData(itemStack);
+				boolean updatePrev = data.getB().shouldUpdate(user.level().getGameTime());
+
+				float rotation = data.getA().getRotation(user);
+				float prevRotation = data.getB().previousRotaion();
+				float partialTick = Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(true);
+
+				if(updatePrev)
+				{
+					prevRotation = data.getB().rotation();
+					AlchemancyProperties.WAYFINDING.value().setData(itemStack, AlchemancyProperties.WAYFINDING.value().getData(itemStack).getB().step(rotation, user.level().getGameTime()));
+				}
+
+				float angle = 360 * CommonUtils.lerpAngle(partialTick, prevRotation, rotation);
+
+				switch (displayContext)
+				{
+					case FIRST_PERSON_LEFT_HAND: case THIRD_PERSON_LEFT_HAND: case FIRST_PERSON_RIGHT_HAND: case THIRD_PERSON_RIGHT_HAND:
+						poseStack.mulPose(Axis.YN.rotationDegrees(angle + 195));
+						break;
+					case HEAD:
+						poseStack.mulPose(Axis.YN.rotationDegrees(angle));
+						break;
+					default:
+						poseStack.mulPose(Axis.ZN.rotationDegrees(angle - 45));
+				}
+
+
+			}
+		}
+
 		if(InfusedPropertiesHelper.hasProperty(itemStack, AlchemancyProperties.RESIZED))
 		{
 			float size = AlchemancyProperties.RESIZED.get().getData(itemStack);
 			poseStack.scale(size, size, size);
 		}
-	}
 
+
+		alchemancy$livingEntity = null;
+	}
 }

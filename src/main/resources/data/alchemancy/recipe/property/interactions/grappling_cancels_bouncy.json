@@ -1,0 +1,11 @@
+{
+  "type": "alchemancy:forged_property",
+  "properties": [
+    "alchemancy:bouncy",
+    "alchemancy:grappling"
+  ],
+
+  "result": [
+    "alchemancy:grappling"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "alchemancy:item_transmutation",
+
+  "catalyst": {
+    "item": "alchemancy:rocket_powered_hammer"
+  },
+
+  "catalyst_name": "Barrel the Brave",
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:barrels_warhammer"
+  }
+}

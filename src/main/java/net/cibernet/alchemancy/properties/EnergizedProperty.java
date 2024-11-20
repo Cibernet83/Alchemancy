@@ -48,7 +48,7 @@ public class EnergizedProperty extends AbstractTimerProperty
 		Multimap<Holder<Attribute>, AttributeModifier> attributes = HashMultimap.create();
 		attributes.put(Attributes.ATTACK_SPEED, new AttributeModifier(SPEED_MOD_KEY, energizedValue, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
 		attributes.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(SPEED_MOD_KEY, energizedValue, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-		attributes.put(Attributes.MINING_EFFICIENCY, new AttributeModifier(SPEED_MOD_KEY, energizedValue, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+		attributes.put(Attributes.BLOCK_BREAK_SPEED, new AttributeModifier(SPEED_MOD_KEY, energizedValue, AttributeModifier.Operation.ADD_MULTIPLIED_BASE));
 
 		attributeMap.removeAttributeModifiers(attributes);
 		if(energizedValue > 0)

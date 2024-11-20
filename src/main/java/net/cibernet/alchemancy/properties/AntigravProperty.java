@@ -49,8 +49,10 @@ public class AntigravProperty extends Property
 	}
 
 	@Override
-	public void onFall(LivingEntity entity, ItemStack stack, EquipmentSlot slot, LivingFallEvent event) {
-		event.setDamageMultiplier(0);
+	public void onFall(LivingEntity entity, ItemStack stack, EquipmentSlot slot, LivingFallEvent event)
+	{
+		if(slot.isArmor())
+			event.setDamageMultiplier(0);
 	}
 
 	@Override

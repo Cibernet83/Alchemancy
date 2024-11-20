@@ -1,0 +1,13 @@
+{
+  "type": "alchemancy:near_lava_vegetation",
+  "config": {
+    "spread_height": 8,
+    "spread_width": 12,
+    "state_provider": {
+      "type": "simple_state_provider",
+      "state": {
+        "Name": "alchemancy:blazebloom"
+      }
+    }
+  }
+}

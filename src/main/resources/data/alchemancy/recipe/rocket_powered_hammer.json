@@ -1,0 +1,29 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:exploding",
+    "alchemancy:burning"
+  ],
+
+  "infusables": [
+    {
+      "item": "minecraft:firework_rocket"
+    },
+    {
+      "item": "minecraft:firework_rocket"
+    },
+    {
+      "item": "minecraft:firework_rocket"
+    }
+  ],
+
+  "catalyst": {
+    "item": "minecraft:mace"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:rocket_powered_hammer"
+  }
+}

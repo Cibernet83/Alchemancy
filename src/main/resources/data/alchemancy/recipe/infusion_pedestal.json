@@ -2,7 +2,7 @@
   "type": "alchemancy:item_transmutation",
 
   "catalyst": {
-    "tag": "minecraft:logs"
+    "item": "alchemancy:alchemancy_forge"
   },
 
   "result": {

@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "alchemancy:item/dreamsteel_nugget",
+    "layer1": "alchemancy:item/dreamsteel_nugget_tint"
+  }
+}

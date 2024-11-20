@@ -1,0 +1,24 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:glowing_aura",
+    "alchemancy:toggleable",
+    "alchemancy:gilded"
+  ],
+
+  "infusables": [
+    {
+      "item": "alchemancy:glowing_orb"
+    }
+  ],
+
+  "catalyst": {
+    "item": "alchemancy:pearlescent_ring"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:eternal_glow_ring"
+  }
+}

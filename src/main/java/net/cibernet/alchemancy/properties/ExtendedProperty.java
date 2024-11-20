@@ -30,7 +30,7 @@ public class ExtendedProperty extends Property
 	public <T> Object modifyDataComponent(ItemStack stack, DataComponentType<? extends T> dataType, T data)
 	{
 		if(dataType == DataComponents.FIREWORKS && data instanceof Fireworks fireworks)
-			return new Fireworks(fireworks.flightDuration(), fireworks.explosions());
+			return new Fireworks(fireworks.flightDuration() * 2, fireworks.explosions());
 		return super.modifyDataComponent(stack, dataType, data);
 	}
 

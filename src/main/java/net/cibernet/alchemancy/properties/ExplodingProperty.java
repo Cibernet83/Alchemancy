@@ -109,8 +109,9 @@ public class ExplodingProperty extends Property
 
 			if(entity != null)
 			{
-				if(PropertyModifierComponent.get(stack, asHolder(), AlchemancyProperties.Modifiers.PREVENT_CONSUMPTION))
-					stack.hurtAndBreak(PropertyModifierComponent.getOrElse(stack, asHolder(), AlchemancyProperties.Modifiers.DURABILITY_CONSUMPTION, 10), entity, slot);
+
+				if(PropertyModifierComponent.getOrElse(stack, asHolder(), AlchemancyProperties.Modifiers.PREVENT_CONSUMPTION, stack.isDamageableItem()))
+					stack.hurtAndBreak(PropertyModifierComponent.getOrElse(stack, asHolder(), AlchemancyProperties.Modifiers.DURABILITY_CONSUMPTION, 20), entity, slot);
 				else consumeItem(entity, stack, slot);
 			}
 		}

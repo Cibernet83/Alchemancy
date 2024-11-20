@@ -5,10 +5,12 @@
   "compatibilityLevel": "JAVA_21",
   "refmap": "alchemancy.refmap.json",
   "mixins": [
+    "AbstractArrowMixin",
     "AbstractContainerMenuMixin",
     "BlockMixin",
     "BlockStateExtensionMixin",
     "DataComponentHolderMixin",
+    "ItemEntityMixin",
     "ItemMixin",
     "ItemStackExtensionMixin",
     "ItemStackMixin",
@@ -18,6 +20,7 @@
     "ServerLevelMixin",
     "SlotMixin",
     "accessors.AbstractArrowAccessor",
+    "accessors.AbstractCauldronAccessor",
     "accessors.EntityAccessor",
     "accessors.FallingBlockEntityAccessor",
     "accessors.ProjectileAccessor",
@@ -25,6 +28,7 @@
   ],
   "client": [
     "client.CustomHeadLayerMixin",
+    "client.ElytraLayerMixin",
     "client.HumanoidArmorLayerMixin",
     "client.ItemRendererMixin",
     "client.LocalPlayerMixin"

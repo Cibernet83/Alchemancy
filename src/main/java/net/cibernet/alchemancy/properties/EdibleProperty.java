@@ -1,14 +1,17 @@
 package net.cibernet.alchemancy.properties;
 
+import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +29,18 @@ public class EdibleProperty extends Property
 				return new FoodProperties((int) (foodProperties.nutrition() * 1.5f), foodProperties.saturation() * 1.25f, true, foodProperties.eatSeconds(), foodProperties.usingConvertsTo(), foodProperties.effects());
 		}
 		return super.modifyDataComponent(stack, dataType, data);
+	}
+
+	@Override
+	public void onRightClickItem(PlayerInteractEvent.RightClickItem event)
+	{
+		ItemStack stack = event.getItemStack();
+		if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.DEAD))
+		{
+			event.getEntity().startUsingItem(event.getHand());
+			event.setCancellationResult(InteractionResult.CONSUME);
+			event.setCanceled(true);
+		}
 	}
 
 	@Override

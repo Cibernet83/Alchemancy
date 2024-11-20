@@ -23,9 +23,8 @@ public class LightningBoltProperty extends Property
 		lightningbolt.setCause(user instanceof ServerPlayer ? (ServerPlayer)user : null);
 		target.level().addFreshEntity(lightningbolt);
 
-
-		if(PropertyModifierComponent.get(weapon, asHolder(), AlchemancyProperties.Modifiers.PREVENT_CONSUMPTION))
-			weapon.hurtAndBreak(PropertyModifierComponent.getOrElse(weapon, asHolder(), AlchemancyProperties.Modifiers.DURABILITY_CONSUMPTION, 10), user, EquipmentSlot.MAINHAND);
+		if(PropertyModifierComponent.getOrElse(weapon, asHolder(), AlchemancyProperties.Modifiers.PREVENT_CONSUMPTION, weapon.isDamageableItem()))
+			weapon.hurtAndBreak(PropertyModifierComponent.getOrElse(weapon, asHolder(), AlchemancyProperties.Modifiers.DURABILITY_CONSUMPTION, 20), user, EquipmentSlot.MAINHAND);
 		else consumeItem(user, weapon, EquipmentSlot.MAINHAND);
 	}
 

@@ -1,0 +1,24 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:wayfinding",
+    "alchemancy:ender",
+    "alchemancy:friendly"
+  ],
+
+  "infusables": [
+    {
+      "item": "minecraft:string"
+    }
+  ],
+
+  "catalyst": {
+    "item": "minecraft:diamond"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:wayward_medallion"
+  }
+}

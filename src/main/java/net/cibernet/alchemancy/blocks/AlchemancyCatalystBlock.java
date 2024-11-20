@@ -3,10 +3,11 @@ package net.cibernet.alchemancy.blocks;
 import com.mojang.authlib.properties.PropertyMap;
 import com.mojang.serialization.MapCodec;
 import net.cibernet.alchemancy.blocks.blockentities.AlchemancyCatalystBlockEntity;
-import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.blocks.blockentities.ItemStackHolderBlockEntity;
-import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.crafting.AbstractForgeRecipe;
+import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
+import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.registries.AlchemancyBlockEntities;
 import net.cibernet.alchemancy.registries.AlchemancyBlocks;
 import net.cibernet.alchemancy.registries.AlchemancyCriteriaTriggers;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
@@ -24,11 +25,20 @@ import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ResolvableProfile;
-import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.TransparentBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,13 +51,21 @@ public class AlchemancyCatalystBlock extends TransparentBlock implements EntityB
 	private static RecipeManager.CachedCheck<ForgeRecipeGrid, AbstractForgeRecipe<?>> RECIPE_CHECK;
 	private static MapCodec<AlchemancyCatalystBlock> CODEC = simpleCodec(AlchemancyCatalystBlock::new);
 
+	public static final BooleanProperty POWERED = BlockStateProperties.POWERED;
+
 	public AlchemancyCatalystBlock(Properties properties) {
 		super(properties);
+		registerDefaultState(defaultBlockState().setValue(POWERED, false));
+	}
+
+	@Override
+	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+		builder.add(POWERED);
 	}
 
 	@Override
 	protected RenderShape getRenderShape(BlockState state) {
-		return RenderShape.ENTITYBLOCK_ANIMATED;
+		return RenderShape.MODEL;
 	}
 
 	@Override
@@ -75,6 +93,23 @@ public class AlchemancyCatalystBlock extends TransparentBlock implements EntityB
 			}
 		}
 		return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+	}
+
+	@Override
+	protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston)
+	{
+		boolean neighborPowered = level.hasNeighborSignal(pos);
+		boolean powered = state.getValue(POWERED);
+		BlockEntity blockentity = level.getBlockEntity(pos);
+		if (neighborPowered && !powered)
+		{
+			level.scheduleTick(pos, this, 4);
+			level.setBlock(pos, state.setValue(POWERED, Boolean.TRUE), 2);
+
+			performRecipe(null, level, pos);
+		} else if (!neighborPowered && powered) {
+			level.setBlock(pos, state.setValue(POWERED, Boolean.FALSE), 2);
+		}
 	}
 
 	public static void performRecipe(@Nullable Player player,  Level level, BlockPos catalystPos)
@@ -114,25 +149,14 @@ public class AlchemancyCatalystBlock extends TransparentBlock implements EntityB
 
 			grid.applyGlint.ifPresent(aBoolean -> output.set(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, aBoolean));
 
-			if(grid.canPerformTransmutation() && output.is(Items.PLAYER_HEAD) && output.has(DataComponents.CUSTOM_NAME))
-			{
-				String playerName = toPlayerName(output.get(DataComponents.CUSTOM_NAME).getString());
-				output.set(DataComponents.PROFILE, new ResolvableProfile(Optional.of(playerName), Optional.empty(), new PropertyMap()));
-				output.remove(DataComponents.CUSTOM_NAME);
-
-			}
-
 			ItemStackHolderBlockEntity.dropItem(level, forgePos, output);
-			forge.notifyInventoryUpdate();
+
+			if(level.getBlockEntity(catalystPos) instanceof AlchemancyCatalystBlockEntity catalyst)
+				catalyst.playAnimation(false);
 		}
 	}
 
 
-	public static String toPlayerName(String playerName)
-	{
-		return playerName.substring(0, Math.min(playerName.length(), 16)).chars().filter(c -> !(c <= 32 || c >= 127)).collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append).toString();
-		//return playerName.length() <= 16 && playerName.chars().filter(p_332111_ -> p_332111_ <= 32 || p_332111_ >= 127).findAny().isEmpty();
-	}
 
 	public static RecipeManager.CachedCheck<ForgeRecipeGrid, AbstractForgeRecipe<?>> createCheck(final RecipeType<AbstractForgeRecipe<?>> recipeType)
 	{
@@ -151,5 +175,18 @@ public class AlchemancyCatalystBlock extends TransparentBlock implements EntityB
 		super.onPlace(state, level, pos, oldState, movedByPiston);
 		if(level.getBlockEntity(pos) instanceof AlchemancyCatalystBlockEntity catalyst)
 			catalyst.randomizeSpinOffset(level.random);
+	}
+
+	@Nullable
+	@Override
+	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType)
+	{
+		return (BlockEntityTicker<T>) createTicker(level, blockEntityType);
+	}
+
+	@javax.annotation.Nullable
+	protected static <T extends AlchemancyCatalystBlockEntity> BlockEntityTicker<AlchemancyCatalystBlockEntity> createTicker(
+			Level level, BlockEntityType<? extends BlockEntity> serverType) {
+		return serverType != AlchemancyBlockEntities.ALCHEMANCY_CATALYST.get() ? null : level.isClientSide ? AlchemancyCatalystBlockEntity::clientTick : AlchemancyCatalystBlockEntity::serverTick;
 	}
 }

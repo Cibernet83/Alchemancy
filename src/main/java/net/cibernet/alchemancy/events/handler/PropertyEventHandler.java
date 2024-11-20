@@ -10,6 +10,7 @@ import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -29,6 +30,7 @@ import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
 import net.neoforged.neoforge.event.enchanting.GetEnchantmentLevelEvent;
+import net.neoforged.neoforge.event.entity.EntityInvulnerabilityCheckEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.item.ItemTossEvent;
@@ -47,6 +49,22 @@ import java.util.function.Predicate;
 @EventBusSubscriber
 public class PropertyEventHandler
 {
+	@SubscribeEvent
+	public static void onEntityInvulnerableCheck(EntityInvulnerabilityCheckEvent event)
+	{
+		if(event.getSource().is(DamageTypeTags.IS_EXPLOSION) && event.getEntity() instanceof ItemEntity itemEntity && InfusedPropertiesHelper.hasProperty(itemEntity.getItem(), AlchemancyProperties.BLAST_RESISTANT))
+			event.setInvulnerable(true);
+	}
+
+	@SubscribeEvent
+	public static void onLivingHeal(LivingHealEvent event)
+	{
+		for (EquipmentSlot slot : EquipmentSlot.values()) {
+			ItemStack stack = event.getEntity().getItemBySlot(slot);
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().modifyHeal(event.getEntity(), stack, slot, event));
+		}
+	}
+
 	@SubscribeEvent
 	public static void onLivingDamage(LivingDamageEvent.Pre event)
 	{
@@ -108,11 +126,9 @@ public class PropertyEventHandler
 	@SubscribeEvent
 	public static void onCriticalHit(CriticalHitEvent event)
 	{
-		if(event.isCriticalHit())
-		{
-			ItemStack stack = event.getEntity().getMainHandItem();
-			InfusedPropertiesHelper.forEachProperty(stack, holder -> holder.value().modifyCriticalAttack(event.getEntity(), stack, event));
-		}
+		ItemStack stack = event.getEntity().getMainHandItem();
+		InfusedPropertiesHelper.forEachProperty(stack, holder -> holder.value().modifyCriticalAttack(event.getEntity(), stack, event));
+
 	}
 
 	@SubscribeEvent
@@ -136,7 +152,7 @@ public class PropertyEventHandler
 	@SubscribeEvent
 	public static void onEntityTick(EntityTickEvent.Pre event)
 	{
-		if(event.getEntity() instanceof LivingEntity living)
+		if(event.getEntity() instanceof LivingEntity living && !(living instanceof Player))
 			for (EquipmentSlot slot : EquipmentSlot.values()) {
 				ItemStack stack = living.getItemBySlot(slot);
 				InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onEquippedTick(living, slot, stack));
@@ -182,13 +198,10 @@ public class PropertyEventHandler
 	@SubscribeEvent
 	public static void onItemPickUp(ItemEntityPickupEvent.Pre event)
 	{
-		if(event.getItemEntity().hasPickUpDelay())
-			return;
-
 		InfusedPropertiesHelper.forEachProperty(event.getItemEntity().getItem(), propertyHolder -> propertyHolder.value().onItemPickedUp(event.getPlayer(), event.getItemEntity().getItem(), event.getItemEntity()));
 		for (EquipmentSlot slot : EquipmentSlot.values()) {
 			ItemStack stack = event.getPlayer().getItemBySlot(slot);
-			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onPickUpAnyItem(event.getPlayer(), stack, slot, event.getItemEntity(), event));
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onPickUpAnyItem(event.getPlayer(), stack, slot, event.getItemEntity(), event.getItemEntity().hasPickUpDelay(), event));
 		}
 	}
 
@@ -410,19 +423,20 @@ public class PropertyEventHandler
 	public static void onItemTooltip(ItemTooltipEvent event)
 	{
 		ItemStack stack = event.getItemStack();
+		boolean hasInfusions = !InfusedPropertiesHelper.getInfusedProperties(stack).isEmpty();
 
-		if(stack.has(AlchemancyItems.Components.INFUSED_PROPERTIES))
+		if(hasInfusions)
 			stack.get(AlchemancyItems.Components.INFUSED_PROPERTIES).forEachProperty(holder -> event.getToolTip().add(holder.value().getName(stack)));
 
 		if(stack.has(AlchemancyItems.Components.STORED_PROPERTIES))
 		{
 			InfusedPropertiesComponent storedProperties = stack.get(AlchemancyItems.Components.STORED_PROPERTIES);
-			if(!storedProperties.properties().isEmpty())
+			if(hasInfusions && !storedProperties.properties().isEmpty())
 				event.getToolTip().add(Component.translatable("item.alchemancy.tooltip.stored_properties").withStyle(ChatFormatting.GRAY));
 			storedProperties.forEachProperty(holder -> event.getToolTip().add(holder.value().getName(stack)));
 		}
 
-		if(event.getEntity() != null && (InfusedPropertiesHelper.hasInfusedProperty(stack, AlchemancyProperties.REVEALING) ||
+		if(event.getEntity() != null && (InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.REVEALED) ||
 				InfusedPropertiesHelper.hasProperty(event.getEntity().getItemBySlot(EquipmentSlot.HEAD), AlchemancyProperties.REVEALING)))
 		{
 			List<Holder<Property>> dormantProperties = AlchemancyProperties.getDormantProperties(stack);

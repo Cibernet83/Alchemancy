@@ -10,7 +10,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class MobEffectEquippedAndHitProperty extends MobEffectOnHitProperty
 {
-	private final EquipmentSlotGroup validSlots;
+	protected final EquipmentSlotGroup validSlots;
 	private final boolean italics;
 
 	public MobEffectEquippedAndHitProperty(MobEffectInstance effect, EquipmentSlotGroup slots, boolean italics) {
