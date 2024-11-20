@@ -1,0 +1,14 @@
+{
+  "type": "alchemancy:forged_property",
+
+  "infusables": [
+    {
+      "item": "alchemancy:paradox_pearl"
+    }
+  ],
+  "properties": [
+    "alchemancy:paradoxical"
+  ],
+
+  "result": []
+}
