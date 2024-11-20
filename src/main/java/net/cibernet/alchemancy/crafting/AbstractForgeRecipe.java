@@ -1,6 +1,5 @@
 package net.cibernet.alchemancy.crafting;
 
-import com.mojang.datafixers.util.Function5;
 import com.mojang.datafixers.util.Function6;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;

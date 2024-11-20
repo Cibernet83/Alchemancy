@@ -26,11 +26,6 @@ public class ItemTransmutationRecipe extends ForgeItemRecipe
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
-		return AlchemancyRecipeTypes.Serializers.ITEM_TRANSMUTATION.get();
-	}
-
-	@Override
 	public boolean isTransmutation() {
 		return true;
 	}

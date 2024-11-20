@@ -1,19 +1,13 @@
 package net.cibernet.alchemancy.blocks;
 
-import com.mojang.authlib.properties.PropertyMap;
 import com.mojang.serialization.MapCodec;
 import net.cibernet.alchemancy.blocks.blockentities.AlchemancyCatalystBlockEntity;
 import net.cibernet.alchemancy.blocks.blockentities.ItemStackHolderBlockEntity;
 import net.cibernet.alchemancy.crafting.AbstractForgeRecipe;
 import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
-import net.cibernet.alchemancy.registries.AlchemancyBlockEntities;
-import net.cibernet.alchemancy.registries.AlchemancyBlocks;
-import net.cibernet.alchemancy.registries.AlchemancyCriteriaTriggers;
-import net.cibernet.alchemancy.registries.AlchemancyProperties;
-import net.cibernet.alchemancy.registries.AlchemancyRecipeTypes;
+import net.cibernet.alchemancy.registries.*;
 import net.cibernet.alchemancy.util.CommonUtils;
-import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerPlayer;
@@ -23,8 +17,6 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.component.ResolvableProfile;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
@@ -43,7 +35,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
-import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AlchemancyCatalystBlock extends TransparentBlock implements EntityBlock
