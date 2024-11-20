@@ -7,8 +7,10 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.cibernet.alchemancy.blocks.blockentities.EssenceContainer;
 import net.cibernet.alchemancy.essence.Essence;
+import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.registries.AlchemancyEssence;
+import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyRecipeTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -119,6 +121,11 @@ public abstract class AbstractForgeRecipe<RESULT> implements Recipe<ForgeRecipeG
 
 	public boolean isEmpty() {
 		return infusables.isEmpty() && essences.isEmpty();
+	}
+
+	public boolean checkParadoxical(ItemStack input)
+	{
+		return infusedProperties.contains(AlchemancyProperties.PARADOXICAL) || !InfusedPropertiesHelper.hasProperty(input, AlchemancyProperties.PARADOXICAL);
 	}
 
 	public static class Serializer<T extends AbstractForgeRecipe<RESULT>, RESULT> implements RecipeSerializer<T>

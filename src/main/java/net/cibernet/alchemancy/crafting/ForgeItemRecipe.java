@@ -4,12 +4,14 @@ import net.cibernet.alchemancy.blocks.blockentities.EssenceContainer;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
+import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyRecipeTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.level.Level;
 import org.apache.commons.lang3.function.TriFunction;
 
 import java.util.List;
@@ -18,6 +20,11 @@ import java.util.Optional;
 public class ForgeItemRecipe extends AbstractForgeRecipe<ItemStack>
 {
 	final ItemStack result;
+
+	@Override
+	public boolean matches(ForgeRecipeGrid input, Level level) {
+		return checkParadoxical(input.getCurrentOutput()) && super.matches(input, level);
+	}
 
 	public ForgeItemRecipe(Optional<Ingredient> catalyst, Optional<String> catalystName, List<EssenceContainer> essences, List<Ingredient> infusables, List<Holder<Property>> infusedProperties, ItemStack result)
 	{

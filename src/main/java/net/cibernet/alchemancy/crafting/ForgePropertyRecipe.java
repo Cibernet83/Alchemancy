@@ -55,7 +55,7 @@ public class ForgePropertyRecipe extends AbstractForgeRecipe<List<Holder<Propert
 
 	@Override
 	public boolean matches(ForgeRecipeGrid input, Level level) {
-		return !InfusedPropertiesHelper.hasProperty(input.getCurrentOutput(), result) && super.matches(input, level);
+		return checkParadoxical(input.getCurrentOutput()) && super.matches(input, level);
 	}
 
 	@Override
