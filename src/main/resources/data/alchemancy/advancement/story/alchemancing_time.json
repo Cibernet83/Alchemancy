@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:story/enter_the_nether",
+  "parent": "alchemancy:story/alchemical_breakthrough",
   "criteria": {
     "has_forge": {
       "conditions": {

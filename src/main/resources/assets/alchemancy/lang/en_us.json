@@ -328,5 +328,31 @@
   "advancements.alchemancy:discovery.discover.description": "You discovered this property! Check the Journal for more info",
 
   "advancements.story.alchemancy:alchemancing_time.title": "It's Alchemancing Time",
-  "advancements.story.alchemancy:alchemancing_time.description": "Use Alchemical Extract to craft an Alchemancy Forge. Now place it down, right-click it, and start Alchemancing!"
+  "advancements.story.alchemancy:alchemancing_time.description": "Start the Alchemancy Forge by putting an Emerald Block above it and right-clicking it. Time to get Alchemancing!",
+
+  "advancements.story.alchemancy:alchemical_breakthrough.title": "Alchemical Breakthrough",
+  "advancements.story.alchemancy:alchemical_breakthrough.description": "Obtain Alchemical Extract by brewing a Blazebloom",
+
+  "alchemancy.category.basics": "Fundamentals",
+  "alchemancy.category.properties": "Infusion Properties",
+  "alchemancy.category.trinkets": "Gadgets and Trinkets",
+
+  "alchemancy.entry.blazebloom": "Mysterious Flora",
+  "alchemancy.entry.blazebloom.page0": "During one of my expeditions through The Nether, I came across this peculiar flower growing near a pool of lava. It's warm and oily, capable of emitting a faint glow when planted on Netherrack or a Flower Pot, quite distinct from anything I've seen growing in the Overworld. Due to its warm nature, I believe a suitable name would be $(item)Blazebloom$(0).",
+  "alchemancy.entry.blazebloom.page1": "Like a warm day at the beach.",
+  "alchemancy.entry.blazebloom.page2": "So far its oils have served me well as a great source of ink for writing this book. However, I believe that there may be more to this mystical plant. Perhaps I could gather some form of extract by boiling and distilling it in a $(item)Brewing Stand$(0).",
+  "alchemancy.entry.blazebloom.page3": "I wonder what it tastes like..?",
+
+  "alchemancy.entry.alchemancy_forge": "Alchemical Breakthrough",
+  "alchemancy.entry.alchemancy_forge.page0": "My experimentation with $(item)Blazeblooms$(0) has lead me to the discovery of a strange new substance, it's as vibrant as it is corrosive and most certainly NOT safe to ingest. The heat it emits has increased exponentially, and no longer requires any form of soil to generate, my guess would be that this is due to its exposure to Blaze Powder.",
+  "alchemancy.entry.alchemancy_forge.page1": "After some more experimentation, I had accidentally spilled some of the extract onto an $(item)Ender Pearl$(0) I had on my desk, causing it to shoot out an intense beam of energy that mutated a wall of Stone it collided with! A nearby stash of $(item)Emeralds$(0) also seemed to have reacted to the beam, vibrating as if they were atracted to it. Could this be some new form of crafting? Or perhaps an undiscovered facet of Alchemy? All I know is that I might have some ideas to put it to good use.",
+  "alchemancy.entry.alchemancy_forge.page2": "",
+  "alchemancy.entry.alchemancy_forge.page3": "By utilizing some vials of Extract and an Ender Pearl as a lens, I have managed to create a device capable of firing beams of Alchemical energy on command... sort of. In order to stabilize the device's structure, I had to fit the vials of Extract underneath my lens. And thanks to the unrelenting power of gravity, I am unable to safely pour Extract onto the Ender Pearl.",
+  "alchemancy.entry.alchemancy_forge.page4": "I am most certainly not concerned about this setback, as I have discovered that large quantities of specific gemstones appear to pull in and react to the Alchemical Extract, so a $(item)Block of Emerald$(0) above my device with a gap in between should be more than enough to run some tests. All that's left to do would be to give the device a click to get it started.",
+  "alchemancy.entry.alchemancy_forge.page5": "It may not be portable, or weaponizeable, but it should get the job done.",
+
+
+  "alchemancy.entry.infusion_property.missing": "$(o)This entry appears to be missing, please inform the mod author.",
+  "alchemancy.entry.infusion_property.wiki": "$(o)Read the wiki for more detailed information on this Property.",
+  "alchemancy.entry.infusion_property.wiki_button": "Alchemancy Wiki",
 }

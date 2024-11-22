@@ -419,11 +419,21 @@ public class PropertyEventHandler
 		}
 	}
 
+	private static final Component PROPERTY_INGREDIENT_NAME = Component.translatable("item.alchemancy.property_capsule.ingredient");
+
 	@SubscribeEvent
 	public static void onItemTooltip(ItemTooltipEvent event)
 	{
 		ItemStack stack = event.getItemStack();
 		boolean hasInfusions = !InfusedPropertiesHelper.getInfusedProperties(stack).isEmpty();
+
+		if(stack.has(AlchemancyItems.Components.INGREDIENT_DISPLAY))
+		{
+			event.getToolTip().clear();
+			if(stack.is(AlchemancyItems.PROPERTY_CAPSULE))
+				event.getToolTip().add(PROPERTY_INGREDIENT_NAME);
+			else event.getToolTip().add(stack.getDisplayName());
+		}
 
 		if(hasInfusions)
 			stack.get(AlchemancyItems.Components.INFUSED_PROPERTIES).forEachProperty(holder -> event.getToolTip().add(holder.value().getName(stack)));

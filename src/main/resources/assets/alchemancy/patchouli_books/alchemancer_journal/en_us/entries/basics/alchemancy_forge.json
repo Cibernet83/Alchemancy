@@ -1,0 +1,53 @@
+{
+  "name": "alchemancy.entry.alchemancy_forge",
+  "sortnum": 1,
+  "advancement": "alchemancy:story/alchemical_breakthrough",
+  "icon": "alchemancy:alchemical_extract",
+  "category": "alchemancy:basics",
+
+  "extra_recipe_mappings": {
+    "alchemancy:alchemancy_catalyst": 5
+  },
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.alchemancy_forge.page0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.alchemancy_forge.page1"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "alchemancy:alchemancy_forge",
+      "text": "alchemancy.entry.alchemancy_forge.page2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.alchemancy_forge.page3"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.alchemancy_forge.page4"
+    },
+    {
+      "type": "patchouli:multiblock",
+      "name": "Alchemancy Forge",
+      "text": "alchemancy.entry.alchemancy_forge.page5",
+      "multiblock": {
+        "pattern": [
+          ["C"],
+          [" "],
+          ["0"],
+          ["_"]
+        ],
+
+        "mapping": {
+          "C": "#alchemancy:alchemancy_crystal_catalysts",
+          "0": "alchemancy:alchemancy_forge"
+        }
+      }
+    }
+  ]
+}
