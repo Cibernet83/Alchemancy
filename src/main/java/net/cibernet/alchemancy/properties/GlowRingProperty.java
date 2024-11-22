@@ -33,4 +33,9 @@ public class GlowRingProperty extends Property
 	public int getColor(ItemStack stack) {
 		return 0xFFFFBA;
 	}
+
+	@Override
+	public boolean hasJournalEntry() {
+		return false;
+	}
 }

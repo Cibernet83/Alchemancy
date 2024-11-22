@@ -184,4 +184,9 @@ public class WaywardWarpProperty extends Property implements IDataHolder<Wayfind
 	public WayfindingProperty.WayfindData getDefaultData() {
 		return WayfindingProperty.WayfindData.DEFAULT;
 	}
+
+	@Override
+	public boolean hasJournalEntry() {
+		return false;
+	}
 }

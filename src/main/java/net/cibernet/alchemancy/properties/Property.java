@@ -217,12 +217,17 @@ public abstract class Property
 
 	public Component getName(ItemStack stack)
 	{
-		return Component.translatable("property." + getKey().toLanguageKey()).withColor(getColor(stack));
+		return Component.translatable(getLanguageKey()).withColor(getColor(stack));
 	}
 
 	public String getRawName()
 	{
-		return Component.translatable("property." + getKey().toLanguageKey()).getString();
+		return Component.translatable(getLanguageKey()).getString();
+	}
+
+	public String getLanguageKey()
+	{
+		return "property." + getKey().toLanguageKey();
 	}
 
 	public int getPriority()
@@ -460,6 +465,14 @@ public abstract class Property
 	@Nullable
 	public ItemInteractionResult onRootedRightClick(RootedItemBlockEntity root, Player user, InteractionHand hand, BlockHitResult hitResult) {
 		return null;
+	}
+
+	/**
+	 * @return whether or not the datagen should generate an entry for this property in the Alchemancer's Journal
+	 */
+	public boolean hasJournalEntry()
+	{
+		return true;
 	}
 
 	public static class Priority

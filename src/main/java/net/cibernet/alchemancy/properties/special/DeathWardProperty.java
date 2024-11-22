@@ -45,4 +45,9 @@ public class DeathWardProperty extends Property
 	public Component getName(ItemStack stack) {
 		return super.getName(stack).copy().withStyle(ChatFormatting.BOLD);
 	}
+
+	@Override
+	public boolean hasJournalEntry() {
+		return false;
+	}
 }

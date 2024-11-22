@@ -107,4 +107,9 @@ public class RandomEffectProperty extends Property implements IDataHolder<Long>
 	public Long getDefaultData() {
 		return 0L;
 	}
+
+	@Override
+	public boolean hasJournalEntry() {
+		return false;
+	}
 }
