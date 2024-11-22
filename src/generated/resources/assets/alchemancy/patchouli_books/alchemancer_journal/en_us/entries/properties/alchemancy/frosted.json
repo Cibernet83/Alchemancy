@@ -1,0 +1,20 @@
+{
+  "advancement": "alchemancy:discovery/frosted",
+  "category": "alchemancy:properties",
+  "icon": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:frosted\"], alchemancy:ingredient_display={}]",
+  "name": "property.alchemancy.frosted",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:frosted\"], alchemancy:ingredient_display={}]",
+      "text": "alchemancy.entry.infusion_property.missing",
+      "title": "property.alchemancy.frosted"
+    },
+    {
+      "type": "patchouli:link",
+      "link_text": "alchemancy.entry.infusion_property.wiki_button",
+      "text": "alchemancy.entry.infusion_property.wiki",
+      "url": "https://github.com/Cibernet83/Alchemancy/wiki/Infusion-Properties#frosted"
+    }
+  ]
+}

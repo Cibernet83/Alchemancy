@@ -1,0 +1,20 @@
+{
+  "advancement": "alchemancy:discovery/poisonous",
+  "category": "alchemancy:properties",
+  "icon": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:poisonous\"], alchemancy:ingredient_display={}]",
+  "name": "property.alchemancy.poisonous",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:poisonous\"], alchemancy:ingredient_display={}]",
+      "text": "alchemancy.entry.infusion_property.missing",
+      "title": "property.alchemancy.poisonous"
+    },
+    {
+      "type": "patchouli:link",
+      "link_text": "alchemancy.entry.infusion_property.wiki_button",
+      "text": "alchemancy.entry.infusion_property.wiki",
+      "url": "https://github.com/Cibernet83/Alchemancy/wiki/Infusion-Properties#poisonous"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "advancement": "alchemancy:discovery/nonlethal",
+  "category": "alchemancy:properties",
+  "icon": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:nonlethal\"], alchemancy:ingredient_display={}]",
+  "name": "property.alchemancy.nonlethal",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:nonlethal\"], alchemancy:ingredient_display={}]",
+      "text": "alchemancy.entry.infusion_property.missing",
+      "title": "property.alchemancy.nonlethal"
+    },
+    {
+      "type": "patchouli:link",
+      "link_text": "alchemancy.entry.infusion_property.wiki_button",
+      "text": "alchemancy.entry.infusion_property.wiki",
+      "url": "https://github.com/Cibernet83/Alchemancy/wiki/Infusion-Properties#nonlethal"
+    }
+  ]
+}
