@@ -53,12 +53,17 @@ public class RandomEffectProperty extends Property implements IDataHolder<Long>
 	@Override
 	public int getColor(ItemStack stack)
 	{
-		return getRandomEffect(stack).value().getColor(stack);
+		return getRandomEffect(stack, 20L).value().getColor(stack);
 	}
 
 	public Holder<Property> getRandomEffect(ItemStack stack)
 	{
-		return getRandomEffect(new Random(getData(stack) + CommonUtils.getLevelData().getGameTime() / 2L));
+		return getRandomEffect(stack, 2L);
+	}
+
+	public Holder<Property> getRandomEffect(ItemStack stack, long delay)
+	{
+		return getRandomEffect(new Random(getData(stack) + CommonUtils.getLevelData().getGameTime() / delay));
 	}
 
 	public static Holder<Property> getRandomEffect(Random random)
