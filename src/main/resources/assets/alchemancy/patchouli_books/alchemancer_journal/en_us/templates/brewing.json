@@ -1,0 +1,65 @@
+{
+  "components": [
+    {
+      "type": "patchouli:image",
+      "image": "alchemancy:textures/gui/journal/brewing_recipe.png",
+      "width": 128,
+      "height": 64,
+      "u": 0,
+      "v": 0,
+      "texture_width": 128,
+      "texture_height": 128,
+      "x": 0,
+      "y": 8
+    },
+    {
+      "type": "patchouli:header",
+      "text": "#title",
+      "x": -1
+    },
+    {
+      "type": "patchouli:text",
+      "text": "#text",
+      "x": 0,
+      "y": 72
+    },
+    {
+      "type": "patchouli:item",
+      "item": "#output",
+      "x": 97,
+      "y": 32,
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:item",
+      "item": "minecraft:brewing_stand",
+      "x": 97,
+      "y": 51,
+      "link_recipe": true
+    },
+    {
+      "type": "patchouli:item",
+      "item": "#input",
+      "x": 30,
+      "y": 13
+    },
+    {
+      "type": "patchouli:item",
+      "item": "#base",
+      "x": 4,
+      "y": 40
+    },
+    {
+      "type": "patchouli:item",
+      "item": "#base",
+      "x": 30,
+      "y": 51
+    },
+    {
+      "type": "patchouli:item",
+      "item": "#base",
+      "x": 56,
+      "y": 40
+    }
+  ]
+}

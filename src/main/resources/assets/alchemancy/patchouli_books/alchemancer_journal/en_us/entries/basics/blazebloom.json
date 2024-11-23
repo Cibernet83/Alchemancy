@@ -24,6 +24,14 @@
     {
       "type": "patchouli:text",
       "text": "alchemancy.entry.blazebloom.page2"
+    },
+    {
+      "type": "alchemancy:brewing",
+      "title": "item.alchemancy.alchemical_extract",
+      "text": "alchemancy.entry.blazebloom.page3",
+      "input": "alchemancy:blazebloom",
+      "base": "minecraft:potion[minecraft:potion_contents=\"minecraft:water\"]",
+      "output": "alchemancy:alchemical_extract"
     }
   ]
 }
