@@ -353,6 +353,6 @@
 
 
   "alchemancy.entry.infusion_property.missing": "$(o)This entry appears to be missing, please inform the mod author.",
-  "alchemancy.entry.infusion_property.wiki": "$(o)Read the wiki for more detailed information on this Property.",
+  "alchemancy.entry.infusion_property.wiki": "$(o)In the meantime, please refer to the wiki for information on this property.",
   "alchemancy.entry.infusion_property.wiki_button": "Alchemancy Wiki"
 }
