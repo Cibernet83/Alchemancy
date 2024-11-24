@@ -1,0 +1,15 @@
+{
+  "type": "alchemancy:item_transmutation",
+
+  "catalyst": {
+    "item": "minecraft:book"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "patchouli:guide_book",
+    "components": {
+      "patchouli:book": "alchemancy:alchemancer_journal"
+    }
+  }
+}

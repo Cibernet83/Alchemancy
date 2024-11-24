@@ -1,0 +1,12 @@
+{
+  "type": "alchemancy:item_transmutation",
+
+  "catalyst": {
+    "item": "minecraft:armadillo_scute"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:turtle_scute"
+  }
+}

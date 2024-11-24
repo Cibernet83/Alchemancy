@@ -1,0 +1,12 @@
+{
+  "type": "alchemancy:item_transmutation",
+
+  "catalyst": {
+    "item": "minecraft:honey_bottle"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:slime_ball"
+  }
+}

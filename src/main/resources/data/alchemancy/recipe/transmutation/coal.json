@@ -1,0 +1,12 @@
+{
+  "type": "alchemancy:item_transmutation",
+
+  "catalyst": {
+    "item": "minecraft:charcoal"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:coal"
+  }
+}

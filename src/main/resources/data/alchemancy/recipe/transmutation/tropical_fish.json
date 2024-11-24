@@ -1,0 +1,12 @@
+{
+  "type": "alchemancy:item_transmutation",
+
+  "catalyst": {
+    "item": "minecraft:cod"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:tropical_fish"
+  }
+}

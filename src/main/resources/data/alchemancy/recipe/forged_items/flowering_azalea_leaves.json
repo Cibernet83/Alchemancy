@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:flourish"
+  ],
+
+  "catalyst": {
+    "item": "alchemancy:azalea_leaves"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:flowering_azalea_leaves"
+  }
+}
