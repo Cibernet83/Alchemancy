@@ -44,7 +44,7 @@ public class DormantPropertyInfusionRecipe extends AbstractForgeRecipe<Object>
 	}
 
 	@Override
-	protected Object getResult() {
+	public Object getResult() {
 		return null;
 	}
 

@@ -1,0 +1,62 @@
+{
+  "processor": "net.cibernet.alchemancy.modSupport.patchouli.InfusionRecipeComponentProcessor",
+
+  "components": [
+    {
+      "type": "patchouli:image",
+      "image": "alchemancy:textures/gui/journal/forge_diagram.png",
+      "x": 5,
+      "y": 15,
+      "width": 50,
+      "height": 50,
+      "u": 0,
+      "v": 0,
+      "texture_width": 64,
+      "texture_height": 64
+    },
+    {
+      "type": "patchouli:image",
+      "image": "alchemancy:textures/gui/journal/forge_diagram.png",
+      "x": 61,
+      "y": 32,
+      "width": 32,
+      "height": 14,
+      "u": 0,
+      "v": 50,
+      "texture_width": 64,
+      "texture_height": 64
+    },
+    {
+      "type": "patchouli:header",
+      "text": "#title",
+      "x": -1
+    },
+    {
+      "type": "patchouli:custom",
+      "class": "net.cibernet.alchemancy.modSupport.patchouli.ItemInfusionRecipeComponent",
+      "recipe": "#recipe",
+      "x": -2,
+      "y": 8
+    },
+    {
+      "type": "patchouli:item",
+      "item": "#output",
+      "framed": "true",
+      "link_recipe": "true",
+      "x": 96,
+      "y": 32
+    },
+    {
+      "type": "patchouli:item",
+      "item": "alchemancy:alchemancy_forge",
+      "x": 68,
+      "y": 40
+    },
+    {
+      "type": "patchouli:item",
+      "item": "alchemancy:alchemancy_catalyst",
+      "x": 68,
+      "y": 24
+    }
+  ]
+}

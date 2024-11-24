@@ -100,7 +100,7 @@ public class ForgeCustomNameRecipe extends AbstractForgeRecipe<Object>
 	}
 
 	@Override
-	protected Object getResult() {
+	public Object getResult() {
 		return null;
 	}
 

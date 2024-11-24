@@ -39,7 +39,7 @@ public class ForgeItemRecipe extends AbstractForgeRecipe<ItemStack>
 	}
 
 	@Override
-	protected ItemStack getResult() {
+	public ItemStack getResult() {
 		return result;
 	}
 

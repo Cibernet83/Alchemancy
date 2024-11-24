@@ -86,10 +86,9 @@ public class ForgePropertyRecipe extends AbstractForgeRecipe<List<Holder<Propert
 		};
 	}
 
-
 	@Override
 	public ItemStack getResultItem(HolderLookup.Provider registries) {
-		return ItemStack.EMPTY;
+		return InfusedPropertiesHelper.createPropertyIngredient(result);
 	}
 
 	@Override

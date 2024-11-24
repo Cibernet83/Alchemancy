@@ -43,7 +43,7 @@ public class ForgeRemovePropertiesRecipe extends AbstractForgeRecipe<Optional<It
 	}
 
 	@Override
-	protected Optional<ItemStack> getResult() {
+	public Optional<ItemStack> getResult() {
 		return result;
 	}
 

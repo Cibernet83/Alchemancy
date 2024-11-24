@@ -117,7 +117,7 @@ public abstract class AbstractForgeRecipe<RESULT> implements Recipe<ForgeRecipeG
 		return AlchemancyRecipeTypes.ALCHEMANCY_FORGE.get();
 	}
 
-	protected abstract RESULT getResult();
+	public abstract RESULT getResult();
 
 	public boolean isEmpty() {
 		return infusables.isEmpty() && essences.isEmpty();
