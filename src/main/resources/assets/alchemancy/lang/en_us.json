@@ -351,6 +351,11 @@
   "alchemancy.entry.alchemancy_forge.page4": "I am most certainly not concerned about this setback, as I have discovered that large quantities of specific gemstones appear to pull in and react to the Alchemical Extract, so a $(item)Block of Emerald$(0) above my device with a gap in between should be more than enough to run some tests. All that's left to do would be to give the device a click to get it started.",
   "alchemancy.entry.alchemancy_forge.page5": "It may not be portable, or weaponizeable, but it should get the job done.",
 
+  "alchemancy.entry.transmutation": "Item Transmutation",
+  "alchemancy.entry.transmutation.page0": "After activating the $(item)Alchemancy Forge$(0), all of the extract stored inside of it was consumed and transfered to the Block of Emerald, converting it into an astonishing new crystal! This crystal seems to radiate intense energy, the same created by pouring Alchemical Extract onto an Ender Pearl. And it appears to generate it as well, so I shouldn't need to worry about refueling it.",
+  "alchemancy.entry.transmutation.page1": "Activating the crystal with a right-click or a redstone signal shoots out beams of Alchemical energy down to the forge, so placing an item on top of it should allow me to safely convert it into something else. I have dubbed this process Transmutation.$(br)$(br)After experimenting with the forge for a bit, I managed to discover a handful of transmutations. The following pages will detail a handful of my discoveries.",
+  "alchemancy.entry.transmutation.page2": "Transmuting an $(item)Ender Pearl$(0) appears to yield results different to simply pouring extract onto it. It appears as if the pearl has lost all of its \"$(property)Ender$(0)\" properties, leaving nothing but a blank husk behind. Perhaps it could be refilled with some other type of energy...",
+  "alchemancy.entry.transmutation.page3": "Bizarrely, transmuting a blank book creates an exact copy of my notes, what kind of cosmic joke is this? Does this prove the intervention of a higher power?",
 
   "alchemancy.entry.infusion_property.missing": "$(o)This entry appears to be missing, please inform the mod author.",
   "alchemancy.entry.infusion_property.wiki": "$(o)In the meantime, please refer to the wiki for information on this property.",

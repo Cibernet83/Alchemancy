@@ -1,0 +1,28 @@
+{
+  "include": [
+    {
+      "template": "alchemancy:include/property_warping_single",
+      "as": "recipe1",
+      "using": {
+        "recipe": "#recipe1",
+        "title": "#title1"
+      }
+    },
+    {
+      "template": "alchemancy:include/property_warping_single",
+      "as": "recipe2",
+      "using": {
+        "recipe": "#recipe2",
+        "title": "#title2"
+      },
+      "y": 59
+    }
+  ],
+  "components": [
+    {
+      "type": "patchouli:text",
+      "text": "#text",
+      "y": 118
+    }
+  ]
+}

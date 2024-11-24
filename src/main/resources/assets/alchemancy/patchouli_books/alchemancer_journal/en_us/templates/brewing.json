@@ -34,8 +34,7 @@
       "type": "patchouli:item",
       "item": "minecraft:brewing_stand",
       "x": 97,
-      "y": 51,
-      "link_recipe": true
+      "y": 51
     },
     {
       "type": "patchouli:item",
