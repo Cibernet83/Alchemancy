@@ -2,8 +2,10 @@ package net.cibernet.alchemancy.blocks;
 
 import net.cibernet.alchemancy.blocks.blockentities.AlchemancyCatalystBlockEntity;
 import net.cibernet.alchemancy.registries.AlchemancyBlocks;
+import net.cibernet.alchemancy.registries.AlchemancyCriteriaTriggers;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -43,7 +45,11 @@ public class AlchemancyForgeBlock extends InfusionPedestalBlock
 			level.setBlockAndUpdate(targetPos, AlchemancyBlocks.ALCHEMANCY_CATALYST.get().defaultBlockState());
 
 			if(!level.isClientSide && level.getBlockEntity(targetPos) instanceof AlchemancyCatalystBlockEntity catalyst)
+			{
 				catalyst.playAnimation(true);
+				if(player instanceof ServerPlayer serverPlayer)
+					AlchemancyCriteriaTriggers.ACTIVATE_FORGE.get().trigger(serverPlayer, pos);
+			}
 
 			return ItemInteractionResult.SUCCESS;
 		}
