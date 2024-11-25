@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "alchemancy:blazebloom"
+    },
+    {
+      "item": "minecraft:book"
+    }
+  ],
+  "result": {
+    "components": {
+      "patchouli:book": "alchemancy:alchemancer_journal"
+    },
+    "count": 1,
+    "id": "patchouli:guide_book"
+  }
+}

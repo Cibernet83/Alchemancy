@@ -1,0 +1,20 @@
+{
+  "advancement": "alchemancy:discovery/ticking",
+  "category": "alchemancy:properties",
+  "icon": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:ticking\"], alchemancy:ingredient_display={}]",
+  "name": "property.alchemancy.ticking",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:ticking\"], alchemancy:ingredient_display={}]",
+      "text": "alchemancy.entry.infusion_property.missing",
+      "title": "property.alchemancy.ticking"
+    },
+    {
+      "type": "patchouli:link",
+      "link_text": "alchemancy.entry.infusion_property.wiki_button",
+      "text": "alchemancy.entry.infusion_property.wiki",
+      "url": "https://github.com/Cibernet83/Alchemancy/wiki/Infusion-Properties#ticking"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "parent": "alchemancy:story/apply_property",
+  "criteria": {
+    "has_item": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:mace"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.story.alchemancy:find_mace.description"
+    },
+    "icon": {
+      "count": 1,
+      "id": "minecraft:mace"
+    },
+    "title": {
+      "translate": "advancements.story.alchemancy:find_mace.title"
+    }
+  },
+  "requirements": [
+    [
+      "has_item"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

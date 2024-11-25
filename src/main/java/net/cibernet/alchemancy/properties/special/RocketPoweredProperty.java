@@ -82,4 +82,9 @@ public class RocketPoweredProperty extends Property
 	public int getColor(ItemStack stack) {
 		return 0xD62A2A;
 	}
+
+	@Override
+	public boolean hasJournalEntry() {
+		return false;
+	}
 }

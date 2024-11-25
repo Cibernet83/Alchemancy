@@ -1,27 +1,22 @@
 package net.cibernet.alchemancy.blocks;
 
-import com.mojang.authlib.properties.PropertyMap;
 import com.mojang.serialization.MapCodec;
 import net.cibernet.alchemancy.blocks.blockentities.AlchemancyCatalystBlockEntity;
 import net.cibernet.alchemancy.blocks.blockentities.ItemStackHolderBlockEntity;
 import net.cibernet.alchemancy.crafting.AbstractForgeRecipe;
 import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
-import net.cibernet.alchemancy.registries.AlchemancyBlockEntities;
-import net.cibernet.alchemancy.registries.AlchemancyBlocks;
-import net.cibernet.alchemancy.registries.AlchemancyProperties;
-import net.cibernet.alchemancy.registries.AlchemancyRecipeTypes;
+import net.cibernet.alchemancy.registries.*;
 import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.component.ResolvableProfile;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
@@ -40,7 +35,6 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
-import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AlchemancyCatalystBlock extends TransparentBlock implements EntityBlock
@@ -69,7 +63,7 @@ public class AlchemancyCatalystBlock extends TransparentBlock implements EntityB
 	protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult)
 	{
 		if(!level.isClientSide())
-			performRecipe(level, pos);
+			performRecipe(player, level, pos);
 		return InteractionResult.SUCCESS_NO_ITEM_USED;
 	}
 
@@ -103,13 +97,13 @@ public class AlchemancyCatalystBlock extends TransparentBlock implements EntityB
 			level.scheduleTick(pos, this, 4);
 			level.setBlock(pos, state.setValue(POWERED, Boolean.TRUE), 2);
 
-			performRecipe(level, pos);
+			performRecipe(null, level, pos);
 		} else if (!neighborPowered && powered) {
 			level.setBlock(pos, state.setValue(POWERED, Boolean.FALSE), 2);
 		}
 	}
 
-	public static void performRecipe(Level level, BlockPos catalystPos)
+	public static void performRecipe(@Nullable Player player,  Level level, BlockPos catalystPos)
 	{
 		if(RECIPE_CHECK == null)
 			RECIPE_CHECK = createCheck(AlchemancyRecipeTypes.ALCHEMANCY_FORGE.get());
@@ -123,11 +117,20 @@ public class AlchemancyCatalystBlock extends TransparentBlock implements EntityB
 			AtomicBoolean loop = new AtomicBoolean(true);
 			for(int i = 0; i < 128 && loop.get() && !grid.isPerformingTransmutation(); i++)
 			{
-				RECIPE_CHECK.getRecipeFor(grid, level).ifPresentOrElse((recipe) -> grid.processRecipe(recipe.value(), level.registryAccess()), () ->
+				RECIPE_CHECK.getRecipeFor(grid, level).ifPresentOrElse((recipe) ->
+				{
+					if(player instanceof ServerPlayer serverPlayer)
+						AlchemancyCriteriaTriggers.PERFORM_FORGE_RECIPE.get().trigger(serverPlayer, recipe, grid);
+					grid.processRecipe(recipe.value(), level.registryAccess());
+				}, () ->
 						loop.set(false));
 			}
 
 			ItemStack output = grid.getCurrentOutput();
+
+
+			if(player instanceof ServerPlayer serverPlayer)
+				AlchemancyCriteriaTriggers.DISCOVER_PROPERTY.get().trigger(serverPlayer, output);
 
 			if(grid.shouldConsumeWarped())
 				InfusedPropertiesHelper.removeProperty(output, AlchemancyProperties.WARPED);

@@ -1,9 +1,9 @@
 package net.cibernet.alchemancy.crafting;
 
+import net.cibernet.alchemancy.advancements.predicates.ForgeRecipePredicate;
 import net.cibernet.alchemancy.blocks.blockentities.EssenceContainer;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
-import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyRecipeTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -13,9 +13,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.util.TriState;
 import org.apache.commons.lang3.function.TriFunction;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,6 +66,15 @@ public class ForgePropertyRecipe extends AbstractForgeRecipe<List<Holder<Propert
 	}
 
 	@Override
+	public TriState matches(ForgeRecipePredicate forgeRecipePredicate, ForgeRecipeGrid grid)
+	{
+		if(forgeRecipePredicate.outputProperties().isEmpty() || forgeRecipePredicate.outputProperties().get().isEmpty())
+			return TriState.DEFAULT;
+		return new HashSet<>(result).containsAll(forgeRecipePredicate.outputProperties().get()) ? TriState.TRUE : TriState.FALSE;
+	}
+
+
+	@Override
 	public TriFunction<ForgeRecipeGrid, HolderLookup.Provider, ItemStack, ItemStack> processResult()
 	{
 		return (input, registries, resultItem) ->
@@ -75,10 +86,9 @@ public class ForgePropertyRecipe extends AbstractForgeRecipe<List<Holder<Propert
 		};
 	}
 
-
 	@Override
 	public ItemStack getResultItem(HolderLookup.Provider registries) {
-		return ItemStack.EMPTY;
+		return InfusedPropertiesHelper.createPropertyIngredient(result);
 	}
 
 	@Override

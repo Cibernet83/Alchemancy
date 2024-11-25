@@ -136,4 +136,9 @@ public class BlockVacuumProperty extends Property implements IDataHolder<Block>
 			return Component.translatable("property.detail", name, storedBlock.getName()).withColor(getColor(stack));
 		return name;
 	}
+
+	@Override
+	public boolean hasJournalEntry() {
+		return false;
+	}
 }

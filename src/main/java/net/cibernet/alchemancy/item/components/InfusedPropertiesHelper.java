@@ -7,6 +7,7 @@ import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Unit;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -193,13 +194,11 @@ public class InfusedPropertiesHelper
 		return storeProperties(AlchemancyItems.PROPERTY_CAPSULE.toStack(), properties);
 	}
 
-	private static final Component PROPERTY_INGREDIENT_NAME = Component.translatable("item.alchemancy.property_capsule.ingredient");
 
 	public static ItemStack createPropertyIngredient(List<Holder<Property>> properties)
 	{
 		ItemStack result = createPropertyCapsule(properties);
-		result.set(DataComponents.RARITY, Rarity.COMMON);
-		result.set(DataComponents.ITEM_NAME, PROPERTY_INGREDIENT_NAME);
+		result.set(AlchemancyItems.Components.INGREDIENT_DISPLAY, Unit.INSTANCE);
 		return result;
 	}
 
@@ -207,8 +206,7 @@ public class InfusedPropertiesHelper
 	public static ItemStack createPropertyIngredient(Holder<Property>... properties)
 	{
 		ItemStack result = createPropertyCapsule(properties);
-		result.set(DataComponents.RARITY, Rarity.COMMON);
-		result.set(DataComponents.ITEM_NAME, PROPERTY_INGREDIENT_NAME);
+		result.set(AlchemancyItems.Components.INGREDIENT_DISPLAY, Unit.INSTANCE);
 		return result;
 	}
 }

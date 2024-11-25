@@ -3,6 +3,7 @@ package net.cibernet.alchemancy.crafting;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.cibernet.alchemancy.advancements.predicates.ForgeRecipePredicate;
 import net.cibernet.alchemancy.blocks.blockentities.ItemStackHolderBlockEntity;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
@@ -21,6 +22,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.util.TriState;
 import org.apache.commons.lang3.function.TriFunction;
 
 import java.util.ArrayList;
@@ -98,8 +100,13 @@ public class ForgeCustomNameRecipe extends AbstractForgeRecipe<Object>
 	}
 
 	@Override
-	protected Object getResult() {
+	public Object getResult() {
 		return null;
+	}
+
+	@Override
+	public TriState matches(ForgeRecipePredicate forgeRecipePredicate, ForgeRecipeGrid grid) {
+		return TriState.DEFAULT;
 	}
 
 	@Override

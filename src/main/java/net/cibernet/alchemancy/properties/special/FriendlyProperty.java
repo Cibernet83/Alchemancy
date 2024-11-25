@@ -25,4 +25,9 @@ public class FriendlyProperty extends Property
 	public int getColor(ItemStack stack) {
 		return 0xDC989E;
 	}
+
+	@Override
+	public boolean hasJournalEntry() {
+		return false;
+	}
 }

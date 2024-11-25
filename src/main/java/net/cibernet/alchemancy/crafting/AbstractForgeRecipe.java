@@ -1,10 +1,10 @@
 package net.cibernet.alchemancy.crafting;
 
-import com.mojang.datafixers.util.Function5;
 import com.mojang.datafixers.util.Function6;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.cibernet.alchemancy.advancements.predicates.ForgeRecipePredicate;
 import net.cibernet.alchemancy.blocks.blockentities.EssenceContainer;
 import net.cibernet.alchemancy.essence.Essence;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
@@ -24,6 +24,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.util.TriState;
 import org.apache.commons.lang3.function.TriFunction;
 
 import java.util.ArrayList;
@@ -76,7 +77,6 @@ public abstract class AbstractForgeRecipe<RESULT> implements Recipe<ForgeRecipeG
 				input.testProperties(infusedProperties, false);
 	}
 
-
 	@Override
 	public ItemStack assemble(ForgeRecipeGrid input, HolderLookup.Provider registries)
 	{
@@ -117,7 +117,7 @@ public abstract class AbstractForgeRecipe<RESULT> implements Recipe<ForgeRecipeG
 		return AlchemancyRecipeTypes.ALCHEMANCY_FORGE.get();
 	}
 
-	protected abstract RESULT getResult();
+	public abstract RESULT getResult();
 
 	public boolean isEmpty() {
 		return infusables.isEmpty() && essences.isEmpty();
@@ -127,6 +127,8 @@ public abstract class AbstractForgeRecipe<RESULT> implements Recipe<ForgeRecipeG
 	{
 		return infusedProperties.contains(AlchemancyProperties.PARADOXICAL) || !InfusedPropertiesHelper.hasProperty(input, AlchemancyProperties.PARADOXICAL);
 	}
+
+	public abstract TriState matches(ForgeRecipePredicate forgeRecipePredicate, ForgeRecipeGrid grid);
 
 	public static class Serializer<T extends AbstractForgeRecipe<RESULT>, RESULT> implements RecipeSerializer<T>
 	{

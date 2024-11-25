@@ -1,15 +1,9 @@
 {
-  "parent": "minecraft:story/enter_the_nether",
+  "parent": "alchemancy:story/alchemical_breakthrough",
   "criteria": {
-    "has_forge": {
-      "conditions": {
-        "items": [
-          {
-            "items": "alchemancy:alchemancy_forge"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
+    "activate_forge": {
+      "conditions": {},
+      "trigger": "alchemancy:activate_alchemancy_forge"
     }
   },
   "display": {
@@ -26,7 +20,7 @@
   },
   "requirements": [
     [
-      "has_forge"
+      "activate_forge"
     ]
   ],
   "sends_telemetry_event": false

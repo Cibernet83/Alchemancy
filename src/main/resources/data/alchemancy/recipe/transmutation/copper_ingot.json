@@ -1,0 +1,12 @@
+{
+  "type": "alchemancy:item_transmutation",
+
+  "catalyst": {
+    "item": "minecraft:iron_ingot"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:copper_ingot"
+  }
+}

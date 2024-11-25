@@ -1,0 +1,20 @@
+{
+  "advancement": "alchemancy:discovery/conductive",
+  "category": "alchemancy:properties",
+  "icon": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:conductive\"], alchemancy:ingredient_display={}]",
+  "name": "property.alchemancy.conductive",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:conductive\"], alchemancy:ingredient_display={}]",
+      "text": "alchemancy.entry.infusion_property.missing",
+      "title": "property.alchemancy.conductive"
+    },
+    {
+      "type": "patchouli:link",
+      "link_text": "alchemancy.entry.infusion_property.wiki_button",
+      "text": "alchemancy.entry.infusion_property.wiki",
+      "url": "https://github.com/Cibernet83/Alchemancy/wiki/Infusion-Properties#conductive"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "name": "alchemancy.entry.dreamsteel",
+  "sortnum": 6,
+  "advancement": "alchemancy:story/find_netherite",
+  "icon": "alchemancy:dreamsteel_ingot",
+  "category": "alchemancy:basics",
+
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "alchemancy:dreamsteel_ingot",
+      "text": "alchemancy.entry.dreamsteel.page0"
+    },
+    {
+      "type": "alchemancy:transmutation",
+      "recipe": "alchemancy:dreamsteel_ingot",
+      "text": "alchemancy.entry.dreamsteel.page1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.dreamsteel.page2"
+    },
+    {
+      "type": "alchemancy:infusion_double",
+      "recipe1": "alchemancy:dreamsteel_sword",
+      "recipe2": "alchemancy:dreamsteel_shovel"
+    },
+    {
+      "type": "alchemancy:infusion_double",
+      "recipe1": "alchemancy:dreamsteel_axe",
+      "recipe2": "alchemancy:dreamsteel_pickaxe"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:dreamsteel_hoe",
+      "text": "alchemancy.entry.dreamsteel.page3"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.dreamsteel.page4"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.dreamsteel.page5"
+    },
+    {
+      "type": "alchemancy:infusion_double",
+      "recipe1": "alchemancy:dreamsteel_nugget",
+      "recipe2": "alchemancy:dreamsteel_ingot_from_nuggets"
+    }
+
+  ]
+}

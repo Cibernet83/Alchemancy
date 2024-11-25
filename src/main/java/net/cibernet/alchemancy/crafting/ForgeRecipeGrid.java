@@ -236,6 +236,9 @@ public class ForgeRecipeGrid implements RecipeInput
 
 		pedestal.removeItem(1);
 		slotOrder.remove(pedestal);
+
+		cachedDormantProperties = null;
+
 		return true;
 	}
 
@@ -387,6 +390,45 @@ public class ForgeRecipeGrid implements RecipeInput
 
 
 		return success;
+	}
+
+	private List<Holder<Property>> cachedDormantProperties = null;
+	public List<Holder<Property>> getDormantProperties()
+	{
+		if(cachedDormantProperties != null)
+			return cachedDormantProperties;
+
+		final List<Holder<Property>> result = new ArrayList<>();
+
+		for (ItemStackHolderBlockEntity pedestal : new ArrayList<>(items))
+		{
+			ItemStack stack = pedestal.getItem();
+			ItemStack target = currentOutput.copy();
+
+			if(stack.is(AlchemancyTags.Items.REMOVES_INFUSIONS))
+			{
+				result.clear();
+				continue;
+			}
+
+			List<Holder<Property>> properties = AlchemancyProperties.getDormantProperties(stack);
+
+			properties.addAll(stack.getOrDefault(AlchemancyItems.Components.STORED_PROPERTIES, InfusedPropertiesComponent.EMPTY).properties());
+
+			if(properties.isEmpty())
+				continue;
+
+			boolean perform = false;
+			for (Holder<Property> property : properties) {
+				if(property.value().onInfusedByDormantProperty(target, stack, this))
+					perform = true;
+			}
+
+			if(perform)
+				result.addAll(properties);
+		}
+		cachedDormantProperties = result;
+		return result;
 	}
 
 	public boolean hasBeenWarped(List<Holder<Property>> properties)

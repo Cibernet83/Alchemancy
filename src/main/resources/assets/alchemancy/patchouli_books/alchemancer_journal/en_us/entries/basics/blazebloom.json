@@ -1,0 +1,37 @@
+{
+  "name": "alchemancy.entry.blazebloom",
+  "sortnum": 0,
+  "icon": "alchemancy:blazebloom",
+  "category": "alchemancy:basics",
+
+  "extra_recipe_mappings": {
+    "alchemancy:blazebloom": 0
+  },
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.blazebloom.page0"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alchemancy:textures/gui/entry/blazeblooms.png"
+      ],
+      "border": true,
+      "text": "alchemancy.entry.blazebloom.page1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.blazebloom.page2"
+    },
+    {
+      "type": "alchemancy:brewing",
+      "title": "item.alchemancy.alchemical_extract",
+      "text": "alchemancy.entry.blazebloom.page3",
+      "input": "alchemancy:blazebloom",
+      "base": "minecraft:potion[minecraft:potion_contents=\"minecraft:water\"]",
+      "output": "alchemancy:alchemical_extract"
+    }
+  ]
+}

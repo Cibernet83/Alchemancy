@@ -1,0 +1,53 @@
+{
+  "name": "alchemancy.entry.lead",
+  "sortnum": 5,
+  "advancement": "alchemancy:story/apply_property",
+  "icon": "alchemancy:lead_ingot",
+  "category": "alchemancy:basics",
+
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "alchemancy:lead_ingot",
+      "text": "alchemancy.entry.lead.page0"
+    },
+    {
+      "type": "alchemancy:transmutation",
+      "recipe": "alchemancy:lead_ingot",
+      "text": "alchemancy.entry.lead.page1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.lead.page2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.lead.page3"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "alchemancy:lead_helmet",
+      "recipe2": "alchemancy:lead_chestplate"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "alchemancy:lead_leggings",
+      "recipe2": "alchemancy:lead_boots"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "alchemancy:lead_sword",
+      "recipe2": "alchemancy:lead_shovel"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "alchemancy:lead_axe",
+      "recipe2": "alchemancy:lead_pickaxe"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "alchemancy:lead_hoe"
+    }
+
+  ]
+}

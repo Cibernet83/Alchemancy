@@ -1,0 +1,16 @@
+{
+  "name": "Alchemancer's Journal",
+  "landing_text": "the text with the landing",
+  "version": 1,
+  "creative_tab": "alchemancy:alchemancy",
+  "use_resource_pack": true,
+  "book_texture": "patchouli:textures/gui/book_red.png",
+  "model": "alchemancy:alchemancer_journal",
+  "i18n": true,
+  "text_color": "3F0000",
+
+  "macros": {
+    "$(property)": "$(#4CFF00)",
+    "$(hint)": "$(#00FFFF)"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "name": "alchemancy.entry.transmutation",
+  "sortnum": 2,
+  "advancement": "alchemancy:story/alchemancing_time",
+  "icon": "alchemancy:alchemancy_forge",
+  "category": "alchemancy:basics",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.transmutation.page0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.transmutation.page1"
+    },
+    {
+      "type": "alchemancy:transmutation",
+      "recipe": "alchemancy:transmutation/blank_pearl",
+      "text": "alchemancy.entry.transmutation.page2"
+    },
+    {
+      "type": "alchemancy:transmutation_triple",
+      "recipe1": "alchemancy:transmutation/copper_ingot",
+      "recipe2": "alchemancy:transmutation/coal",
+      "recipe3": "alchemancy:transmutation/fern"
+    },
+    {
+      "type": "alchemancy:transmutation_triple",
+      "recipe1": "alchemancy:transmutation/tropical_fish",
+      "recipe2": "alchemancy:transmutation/turtle_scute",
+      "recipe3": "alchemancy:transmutation/turtle_egg"
+    },
+    {
+      "type": "alchemancy:transmutation_triple",
+      "recipe1": "alchemancy:transmutation/name_tag",
+      "recipe2": "alchemancy:transmutation/slimeball",
+      "recipe3": "alchemancy:transmutation/skeleton_skull"
+    },
+    {
+      "type": "alchemancy:transmutation",
+      "recipe": "alchemancy:transmutation/alchemancer_journal",
+      "text": "alchemancy.entry.transmutation.page3"
+    }
+  ]
+}

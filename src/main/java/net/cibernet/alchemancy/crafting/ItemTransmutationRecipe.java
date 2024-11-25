@@ -2,6 +2,7 @@ package net.cibernet.alchemancy.crafting;
 
 import net.cibernet.alchemancy.blocks.blockentities.EssenceContainer;
 import net.cibernet.alchemancy.properties.Property;
+import net.cibernet.alchemancy.registries.AlchemancyRecipeTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -21,7 +22,10 @@ public class ItemTransmutationRecipe extends ForgeItemRecipe
 
 	@Override
 	public boolean matches(ForgeRecipeGrid input, Level level) {
-		return input.canPerformTransmutation() && (catalyst.isEmpty() || catalyst.get().test(input.getCurrentOutput()));
+		return
+				input.canPerformTransmutation() &&
+				(catalyst.isEmpty() || catalyst.get().test(input.getCurrentOutput())) &&
+				(catalystName.isEmpty() || input.getCurrentOutput().getHoverName().getString().equalsIgnoreCase(catalystName.get()));
 	}
 
 	@Override

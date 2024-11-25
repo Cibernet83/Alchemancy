@@ -1,0 +1,28 @@
+{
+  "include": [
+    {
+      "template": "alchemancy:include/transmutation_single",
+      "as": "recipe1",
+      "using": {
+        "recipe": "#recipe",
+        "title": "#title"
+      }
+    },
+    {
+      "template": "alchemancy:include/transmutation_single",
+      "as": "recipe2",
+      "using": {
+        "recipe": "#recipe2",
+        "title": "#title2"
+      },
+      "y": 48
+    }
+  ],
+  "components": [
+    {
+      "type": "patchouli:text",
+      "text": "#text",
+      "y": 96
+    }
+  ]
+}

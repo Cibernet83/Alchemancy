@@ -1,10 +1,9 @@
 package net.cibernet.alchemancy.crafting;
 
+import net.cibernet.alchemancy.advancements.predicates.ForgeRecipePredicate;
 import net.cibernet.alchemancy.blocks.blockentities.EssenceContainer;
-import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
-import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyRecipeTypes;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -12,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.util.TriState;
 import org.apache.commons.lang3.function.TriFunction;
 
 import java.util.List;
@@ -39,8 +39,13 @@ public class ForgeItemRecipe extends AbstractForgeRecipe<ItemStack>
 	}
 
 	@Override
-	protected ItemStack getResult() {
+	public ItemStack getResult() {
 		return result;
+	}
+
+	@Override
+	public TriState matches(ForgeRecipePredicate forgeRecipePredicate, ForgeRecipeGrid grid) {
+		return forgeRecipePredicate.outputItem().isEmpty() ? TriState.DEFAULT : forgeRecipePredicate.outputItem().get().test(result) ? TriState.TRUE : TriState.FALSE;
 	}
 
 	@Override

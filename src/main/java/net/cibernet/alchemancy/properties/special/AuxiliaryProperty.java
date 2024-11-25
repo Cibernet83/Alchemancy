@@ -81,4 +81,9 @@ public class AuxiliaryProperty extends Property
 			triggerAuxiliaryEffects(stack, (propertyHolder -> consumer.accept(propertyHolder, stack)));
 		}
 	}
+
+	@Override
+	public boolean hasJournalEntry() {
+		return false;
+	}
 }

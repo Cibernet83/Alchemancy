@@ -12,9 +12,11 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.ExtraCodecs;
+import net.minecraft.util.Unit;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.SimpleTier;
@@ -171,6 +173,12 @@ public class AlchemancyItems
 				new DataComponentType.Builder<PropertyModifierComponent>()
 				.persistent(PropertyModifierComponent.CODEC)
 				.networkSynchronized(PropertyModifierComponent.STREAM_CODEC).build());
+
+		public static final DeferredHolder<DataComponentType<?>, DataComponentType<Unit>> INGREDIENT_DISPLAY = REGISTRY.register("ingredient_display", () ->
+				new DataComponentType.Builder<Unit>()
+				.persistent(Unit.CODEC)
+				.networkSynchronized(StreamCodec.unit(Unit.INSTANCE)).build());
+
 
 		/*  TODO
 

@@ -59,4 +59,9 @@ public class VoidtouchProperty extends Property
 	public int getColor(ItemStack stack) {
 		return 0;
 	}
+
+	@Override
+	public boolean hasJournalEntry() {
+		return false;
+	}
 }
