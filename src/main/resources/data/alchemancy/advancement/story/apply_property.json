@@ -12,7 +12,10 @@
     },
     "icon": {
       "count": 1,
-      "id": "alchemancy:blazing_substance"
+      "id": "alchemancy:property_capsule",
+      "components": {
+        "alchemancy:stored_properties": ["alchemancy:random"]
+      }
     },
     "title": {
       "translate": "advancements.story.alchemancy:apply_property.title"

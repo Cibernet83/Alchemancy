@@ -1,0 +1,26 @@
+{
+  "name": "alchemancy.entry.infusion_properties",
+  "sortnum": 4,
+  "advancement": "alchemancy:story/apply_property",
+  "icon": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:random\"]]",
+  "category": "alchemancy:basics",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.infusion_properties.page0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.infusion_properties.page1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.infusion_properties.page2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.infusion_properties.page3"
+    }
+  ]
+}
