@@ -403,7 +403,7 @@ public abstract class Property
 
 	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid)
 	{
-		return !InfusedPropertiesHelper.hasProperty(stack, asHolder());
+		return !InfusedPropertiesHelper.hasInfusedProperty(stack, asHolder());
 	}
 
 	public void onInfusedByForgeRecipe(ItemStack stack, RecipeHolder<ForgePropertyRecipe> recipe, ForgeRecipeGrid grid)
