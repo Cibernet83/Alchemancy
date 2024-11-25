@@ -1,0 +1,35 @@
+{
+  "name": "alchemancy.entry.infusion",
+  "sortnum": 3,
+  "advancement": "alchemancy:story/alchemancing_time",
+  "icon": "alchemancy:infusion_pedestal",
+  "category": "alchemancy:basics",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.infusion.page0"
+    },
+    {
+      "type": "alchemancy:transmutation",
+      "recipe": "alchemancy:infusion_pedestal",
+      "text": "alchemancy.entry.infusion.page1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.infusion.page2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.infusion.page3"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "alchemancy:textures/gui/entry/alchemancy_forge.png"
+      ],
+      "border": true,
+      "text": "alchemancy.entry.infusion.page4"
+    }
+  ]
+}
