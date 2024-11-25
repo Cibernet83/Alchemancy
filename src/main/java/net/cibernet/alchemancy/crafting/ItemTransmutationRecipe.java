@@ -22,7 +22,10 @@ public class ItemTransmutationRecipe extends ForgeItemRecipe
 
 	@Override
 	public boolean matches(ForgeRecipeGrid input, Level level) {
-		return input.canPerformTransmutation() && (catalyst.isEmpty() || catalyst.get().test(input.getCurrentOutput()));
+		return
+				input.canPerformTransmutation() &&
+				(catalyst.isEmpty() || catalyst.get().test(input.getCurrentOutput())) &&
+				(catalystName.isEmpty() || input.getCurrentOutput().getHoverName().getString().equalsIgnoreCase(catalystName.get()));
 	}
 
 	@Override
