@@ -5,13 +5,16 @@ import net.cibernet.alchemancy.registries.AlchemancyBlocks;
 import net.cibernet.alchemancy.registries.AlchemancyCriteriaTriggers;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
@@ -51,6 +54,13 @@ public class AlchemancyForgeBlock extends InfusionPedestalBlock
 					AlchemancyCriteriaTriggers.ACTIVATE_FORGE.get().trigger(serverPlayer, pos);
 			}
 
+			return ItemInteractionResult.SUCCESS;
+		}
+		else if(hitResult.getDirection() == Direction.UP && level.getBlockState(pos.above(2)).canBeReplaced() &&
+				stack.getItem() instanceof BlockItem blockItem &&
+				blockItem.getBlock().defaultBlockState().is(AlchemancyTags.Blocks.ALCHEMANCY_CRYSTAL_CATALYSTS) &&
+				blockItem.place(new BlockPlaceContext(level, player, hand, stack, new BlockHitResult(hitResult.getLocation(), hitResult.getDirection(), pos.above(2), hitResult.isInside()))).consumesAction())
+		{
 			return ItemInteractionResult.SUCCESS;
 		}
 
