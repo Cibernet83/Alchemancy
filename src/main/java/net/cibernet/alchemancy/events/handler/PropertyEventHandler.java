@@ -363,11 +363,14 @@ public class PropertyEventHandler
 	{
 		Player player = event.getPlayer();
 
-		if(player.isShiftKeyDown() && (InfusedPropertiesHelper.hasProperty(player.getMainHandItem(), AlchemancyProperties.SCOPING) ||
-				InfusedPropertiesHelper.hasProperty(player.getOffhandItem(), AlchemancyProperties.SCOPING)))
+		if(isScoping(player))
 			event.setNewFovModifier(0);
 	}
 
+	public static boolean isScoping(Player player) {
+		return player.isShiftKeyDown() && (InfusedPropertiesHelper.hasProperty(player.getMainHandItem(), AlchemancyProperties.SCOPING) ||
+				InfusedPropertiesHelper.hasProperty(player.getOffhandItem(), AlchemancyProperties.SCOPING));
+	}
 
 
 	@SubscribeEvent

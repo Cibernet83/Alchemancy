@@ -31,7 +31,8 @@
     "client.ElytraLayerMixin",
     "client.HumanoidArmorLayerMixin",
     "client.ItemRendererMixin",
-    "client.LocalPlayerMixin"
+    "client.LocalPlayerMixin",
+    "client.MouseHandlerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
