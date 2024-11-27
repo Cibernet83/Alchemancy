@@ -1,9 +1,12 @@
 package net.cibernet.alchemancy.properties.special;
 
+import net.cibernet.alchemancy.mixin.accessors.LivingEntityAccessor;
 import net.cibernet.alchemancy.properties.Property;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ServerboundPlayerInputPacket;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -23,7 +26,7 @@ public class RocketPoweredProperty extends Property
 	@Override
 	public void onItemUseTick(LivingEntity user, ItemStack stack, LivingEntityUseItemEvent.Tick event)
 	{
-		if(event.getDuration() % 20 == 10)
+		if(event.getDuration() % 20 == 5)
 		{
 			EquipmentSlot slot = user.getUsedItemHand() == InteractionHand.OFF_HAND ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND;
 			if(stack.isDamageableItem())
@@ -34,6 +37,37 @@ public class RocketPoweredProperty extends Property
 		playParticles(user);
 		user.moveRelative(0.25f, new Vec3(0, (float)Math.cos((user.getXRot()+90)*Math.PI/180f), (float)Math.sin((user.getXRot()+90)*Math.PI/180f)));
 		user.hasImpulse = true;
+	}
+
+	@Override
+	public void onEquippedTick(LivingEntity user, EquipmentSlot slot, ItemStack stack)
+	{
+		if(slot == EquipmentSlot.FEET && !user.isPassenger())
+		{
+			boolean jumping = ((LivingEntityAccessor) user).isJumping();
+			if (user.level().isClientSide() && user instanceof LocalPlayer localPlayer) //Dumbest way to check for jump input serverside
+				localPlayer.connection.send(new ServerboundPlayerInputPacket(localPlayer.xxa, localPlayer.zza, jumping, localPlayer.isShiftKeyDown()));
+			else if(jumping)
+			{
+				if (user.tickCount % 20 == 0) {
+					if (stack.isDamageableItem())
+						stack.hurtAndBreak(2, user, slot);
+					else consumeItem(user, stack, slot);
+				}
+			}
+
+			if(jumping)
+			{
+				playParticles(user);
+				user.moveRelative(0.125f, user.isFallFlying() ?
+						new Vec3(0, (float) Math.cos((user.getXRot() + 90) * Math.PI / 180f), (float) Math.sin((user.getXRot() + 90) * Math.PI / 180f)) :
+						new Vec3(0, 1, 0));
+
+				user.fallDistance *= 0.8f;
+
+				user.hasImpulse = true;
+			}
+		}
 	}
 
 	public static void playParticles(Entity source)

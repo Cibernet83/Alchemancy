@@ -18,11 +18,13 @@
     "MobMixin",
     "PlayerMixin",
     "ServerLevelMixin",
+    "ServerPlayerMixin",
     "SlotMixin",
     "accessors.AbstractArrowAccessor",
     "accessors.AbstractCauldronAccessor",
     "accessors.EntityAccessor",
     "accessors.FallingBlockEntityAccessor",
+    "accessors.LivingEntityAccessor",
     "accessors.ProjectileAccessor",
     "client.RenderTypeHelperMixin"
   ],
