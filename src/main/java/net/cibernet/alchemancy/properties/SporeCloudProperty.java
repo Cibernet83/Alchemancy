@@ -59,10 +59,11 @@ public class SporeCloudProperty extends AbstractTimerProperty
 
 		ItemStack refStack = stack.copy();
 		for (LivingEntity target : entities)
-			InfusedPropertiesHelper.forEachProperty(refStack, propertyHolder -> {
-				if(!propertyHolder.equals(asHolder()))
-					propertyHolder.value().onActivation(source, target, stack);
-			});
+			if(target != source)
+				InfusedPropertiesHelper.forEachProperty(refStack, propertyHolder -> {
+					if(!propertyHolder.equals(asHolder()))
+						propertyHolder.value().onActivation(source, target, stack);
+				});
 
 		resetStartTimestamp(stack);
 	}
