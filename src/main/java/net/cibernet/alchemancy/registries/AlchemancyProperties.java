@@ -131,7 +131,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, RootedProperty> ROOTED = REGISTRY.register("rooted", RootedProperty::new);
 	public static final DeferredHolder<Property, SensitiveProperty> SENSITIVE = REGISTRY.register("sensitive", SensitiveProperty::new);
 	public static final DeferredHolder<Property, InteractableProperty> INTERACTABLE = REGISTRY.register("interactable", InteractableProperty::new);
-	public static final DeferredHolder<Property, SporeCloudProperty> MYCELLIC = REGISTRY.register("mycellic", SporeCloudProperty::new);
+	public static final DeferredHolder<Property, SporeCloudProperty> MYCELLIC = REGISTRY.register("fungal", SporeCloudProperty::new);
 	public static final DeferredHolder<Property, SporadicProperty> SPORADIC = REGISTRY.register("sporadic", SporadicProperty::new);
 	public static final DeferredHolder<Property, ShatteringProperty> SHATTERING = REGISTRY.register("shattering", ShatteringProperty::new);
 	public static final DeferredHolder<Property, ThrowableProperty> THROWABLE = REGISTRY.register("throwable", ThrowableProperty::new);

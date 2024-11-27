@@ -3,7 +3,7 @@
   "criteria": {
     "discover_property": {
       "conditions": {
-        "property": "alchemancy:mycellic"
+        "property": "alchemancy:fungal"
       },
       "trigger": "alchemancy:discover_property"
     }
@@ -17,7 +17,7 @@
     "icon": {
       "components": {
         "alchemancy:stored_properties": [
-          "alchemancy:mycellic"
+          "alchemancy:fungal"
         ]
       },
       "count": 1,
@@ -25,7 +25,7 @@
     },
     "show_toast": false,
     "title": {
-      "translate": "property.alchemancy.mycellic"
+      "translate": "property.alchemancy.fungal"
     }
   },
   "requirements": [
