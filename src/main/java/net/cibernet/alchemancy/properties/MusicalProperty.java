@@ -14,6 +14,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -67,6 +68,14 @@ public class MusicalProperty extends Property
 		Level level = event.getLevel();
 		if(!level.isClientSide())
 			playSound(event.getEntity(), level, event.getEntity().getEyePosition(), getInstrumentFromItem(event.getItemStack()), event.getEntity().getXRot() / -90f);
+	}
+
+	@Override
+	public void onActivation(@org.jetbrains.annotations.Nullable Entity source, Entity target, ItemStack stack, DamageSource damageSource)
+	{
+		Level level = target.level();
+		if(!level.isClientSide())
+			playSound(target, level, target.getEyePosition(), getInstrumentFromItem(stack), target.getRandom().nextFloat());
 	}
 
 	@Override

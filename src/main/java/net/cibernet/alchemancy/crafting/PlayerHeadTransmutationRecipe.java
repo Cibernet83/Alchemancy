@@ -5,17 +5,16 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.server.IntegratedServer;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ResolvableProfile;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import org.apache.commons.lang3.function.TriFunction;
@@ -35,7 +34,7 @@ public class PlayerHeadTransmutationRecipe extends ItemTransmutationRecipe
 	@Override
 	public Optional<String> getCatalystName()
 	{
-		if(ServerLifecycleHooks.getCurrentServer() == null || ServerLifecycleHooks.getCurrentServer() instanceof IntegratedServer && Minecraft.getInstance().player != null)
+		if(ServerLifecycleHooks.getCurrentServer() == null || !(ServerLifecycleHooks.getCurrentServer() instanceof DedicatedServer) && Minecraft.getInstance().player != null)
 			return Optional.of(Minecraft.getInstance().player.getGameProfile().getName());
 		return super.getCatalystName();
 	}
@@ -44,7 +43,7 @@ public class PlayerHeadTransmutationRecipe extends ItemTransmutationRecipe
 	public ItemStack getResultItem(HolderLookup.Provider registries)
 	{
 		ItemStack result = super.getResultItem(registries).copy();
-		if(ServerLifecycleHooks.getCurrentServer() == null || ServerLifecycleHooks.getCurrentServer() instanceof IntegratedServer && Minecraft.getInstance().player != null)
+		if(ServerLifecycleHooks.getCurrentServer() == null || !(ServerLifecycleHooks.getCurrentServer() instanceof DedicatedServer) && Minecraft.getInstance().player != null)
 			result.set(DataComponents.PROFILE, new ResolvableProfile(Minecraft.getInstance().player.getGameProfile()));
 		return result;
 	}

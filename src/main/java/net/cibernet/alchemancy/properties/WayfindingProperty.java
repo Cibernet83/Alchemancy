@@ -8,7 +8,6 @@ import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.cibernet.alchemancy.util.ClientUtil;
 import net.cibernet.alchemancy.util.CommonUtils;
 import net.cibernet.alchemancy.util.WayfindingUtil;
-import net.minecraft.client.server.IntegratedServer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.core.component.DataComponents;
@@ -19,6 +18,7 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.InteractionResult;
@@ -149,7 +149,7 @@ public class WayfindingProperty extends Property implements IDataHolder<Tuple<Wa
 		else if(data.targetedPos.isPresent())
 		{
 			GlobalPos pos = data.targetedPos.get();
-			if((ServerLifecycleHooks.getCurrentServer() == null || ServerLifecycleHooks.getCurrentServer() instanceof IntegratedServer) && !ClientUtil.getCurrentLevel().dimension().equals(pos.dimension()))
+			if((ServerLifecycleHooks.getCurrentServer() == null || !(ServerLifecycleHooks.getCurrentServer() instanceof DedicatedServer)) && !ClientUtil.getCurrentLevel().dimension().equals(pos.dimension()))
 				target = Component.literal(pos.dimension().location().toString());
 			else target =  Component.translatable("property.detail.block_position", pos.pos().getX(), pos.pos().getY(), pos.pos().getZ());
 		}
@@ -159,7 +159,7 @@ public class WayfindingProperty extends Property implements IDataHolder<Tuple<Wa
 
 	public void setData(ItemStack item, WayfindData value)
 	{
-		IDataHolder.super.setData(item, new Tuple<>(value, ServerLifecycleHooks.getCurrentServer() == null || ServerLifecycleHooks.getCurrentServer() instanceof IntegratedServer ?
+		IDataHolder.super.setData(item, new Tuple<>(value, ServerLifecycleHooks.getCurrentServer() == null || !(ServerLifecycleHooks.getCurrentServer() instanceof DedicatedServer) ?
 				getData(item).getB() : RotationData.DEFAULT));
 	}
 
