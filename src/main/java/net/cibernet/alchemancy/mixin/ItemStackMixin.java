@@ -45,8 +45,8 @@ public abstract class ItemStackMixin
 		return (ItemStack) (Object) this;
 	}
 
-	@Inject(at = @At(value = "INVOKE", target = "Lnet/minecraft/advancements/critereon/ItemDurabilityTrigger;trigger(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/item/ItemStack;I)V",
-			shift = At.Shift.BY, by = -2),
+	@Inject(at = @At(value = "CONSTANT",
+			shift = At.Shift.BEFORE, args = "classValue=net/minecraft/server/level/ServerPlayer", ordinal = 0),
 			method = "hurtAndBreak(ILnet/minecraft/server/level/ServerLevel;Lnet/minecraft/world/entity/LivingEntity;Ljava/util/function/Consumer;)V")
 	public void hurtAndBreak(int damageAmount, ServerLevel level, LivingEntity user, Consumer<Item> onBreak, CallbackInfo ci, @Local(ordinal = 0, argsOnly = true) LocalIntRef newDamageAmount)
 	{
