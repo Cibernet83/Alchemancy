@@ -1,5 +1,6 @@
 package net.cibernet.alchemancy.properties;
 
+import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.ChatFormatting;
@@ -84,6 +85,9 @@ public class DenseProperty extends Property
 
 					}
 				}
+
+				if(entity.fallDistance >= 6)
+					InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onActivation(entity, entity, stack));
 
 				stack.hurtAndBreak((int) (entity.fallDistance * 0.5f) *
 						PropertyModifierComponent.get(stack, asHolder(), AlchemancyProperties.Modifiers.DURABILITY_CONSUMPTION), entity, slot);
