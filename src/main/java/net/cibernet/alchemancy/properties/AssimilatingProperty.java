@@ -27,9 +27,9 @@ public class AssimilatingProperty extends Property
 
 		if(stack.isDamageableItem() && user instanceof Player player)
 		{
-			for (int i = 0; i < player.getInventory().items.size(); i++)
+			for (int i = 0; i < player.getInventory().getContainerSize(); i++)
 			{
-				ItemStack otherStack = player.getInventory().items.get(i);
+				ItemStack otherStack = player.getInventory().getItem(i);
 				if(stack != otherStack && ItemStack.isSameItem(stack, otherStack) && (shouldRepair(stack) || stack.getDamageValue() >= stack.getMaxDamage() - otherStack.getDamageValue()))
 				{
 					stack.setDamageValue(Math.max(0, stack.getDamageValue() - (stack.getMaxDamage() - otherStack.getDamageValue())));

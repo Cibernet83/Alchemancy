@@ -17,6 +17,10 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
+
 public class AbsorbingProperty extends Property
 {
 	@Override
@@ -41,10 +45,10 @@ public class AbsorbingProperty extends Property
 	{
 		if(shouldRepair(stack) && user instanceof Player player)
 		{
-			for (int i = 0; i < player.getInventory().items.size(); i++)
+			for (int i = 0; i < player.getInventory().getContainerSize(); i++)
 			{
-				ItemStack otherStack = player.getInventory().items.get(i);
-				ItemStack repairStack = player.getInventory().items.get(i);
+				ItemStack otherStack = player.getInventory().getItem(i);
+				ItemStack repairStack = otherStack;
 
 				ItemStack storedStack = AlchemancyProperties.HOLLOW.get().getData(repairStack);
 				if(!storedStack.isEmpty())

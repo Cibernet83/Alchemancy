@@ -55,9 +55,9 @@ public class AssembleProperty extends Property
 						continue;
 
 					boolean hasIngredient = false;
-					for (int i = 0; i < player.getInventory().items.size(); i++)
+					for (int i = 0; i < player.getInventory().getContainerSize(); i++)
 					{
-						ItemStack inventoryStack = player.getInventory().items.get(i);
+						ItemStack inventoryStack = player.getInventory().getItem(i);
 						ItemStack storedItem = AlchemancyProperties.HOLLOW.get().getData(inventoryStack);
 						if(!storedItem.isEmpty())
 							inventoryStack = storedItem;
