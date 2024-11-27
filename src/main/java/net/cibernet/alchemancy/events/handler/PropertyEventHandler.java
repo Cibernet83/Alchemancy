@@ -12,6 +12,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
@@ -27,6 +28,7 @@ import net.minecraft.world.item.ProjectileWeaponItem;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
+import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
 import net.neoforged.neoforge.event.enchanting.GetEnchantmentLevelEvent;
@@ -35,10 +37,7 @@ import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.item.ItemTossEvent;
 import net.neoforged.neoforge.event.entity.living.*;
-import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
-import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
-import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
@@ -262,6 +261,30 @@ public class PropertyEventHandler
 	}
 
 	@SubscribeEvent
+	public static void onRightClickItem(UseItemOnBlockEvent event)
+	{
+		if(event.getUsePhase() == UseItemOnBlockEvent.UsePhase.ITEM_AFTER_BLOCK && event.getPlayer() != null)
+		{
+			PlayerInteractEvent.RightClickItem clickEvent = new PlayerInteractEvent.RightClickItem(event.getPlayer(), event.getHand());
+			InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder -> propertyHolder.value().onRightClickItem(clickEvent));
+			InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder -> propertyHolder.value().onRightClickAny(clickEvent));
+
+			if(clickEvent.isCanceled())
+				event.cancelWithResult(resultToItemResult(clickEvent.getCancellationResult()));
+		}
+	}
+
+	private static ItemInteractionResult resultToItemResult(InteractionResult result) {
+		return switch (result) {
+			case SUCCESS, SUCCESS_NO_ITEM_USED -> ItemInteractionResult.SUCCESS;
+			case CONSUME -> ItemInteractionResult.CONSUME;
+			case CONSUME_PARTIAL -> ItemInteractionResult.CONSUME_PARTIAL;
+			case PASS -> ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+			case FAIL -> ItemInteractionResult.FAIL;
+		};
+	}
+
+	@SubscribeEvent
 	public static void onRightClickEntity(PlayerInteractEvent.EntityInteract event)
 	{
 		InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder -> propertyHolder.value().onRightClickEntity(event));
@@ -412,7 +435,7 @@ public class PropertyEventHandler
 				ItemStack storedStack = AlchemancyProperties.HOLLOW.get().getData(stack);
 				if (!storedStack.isEmpty() && predicate.test(storedStack)) {
 					{
-						event.setProjectileItemStack(net.neoforged.neoforge.common.CommonHooks.getProjectile(user, shootable, storedStack));
+						event.setProjectileItemStack(CommonHooks.getProjectile(user, shootable, storedStack));
 						storedStack.shrink(1);
 						AlchemancyProperties.HOLLOW.get().setData(stack, stack.isEmpty() ? ItemStack.EMPTY : storedStack);
 						return;

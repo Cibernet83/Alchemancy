@@ -78,14 +78,6 @@ public class MusicalProperty extends Property
 			playSound(target, level, target.getEyePosition(), getInstrumentFromItem(stack), target.getRandom().nextFloat());
 	}
 
-	@Override
-	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
-	{
-		Level level = event.getLevel();
-		if(!level.isClientSide())
-			playSound(event.getEntity(), level, event.getEntity().getEyePosition(), getInstrumentFromItem(event.getItemStack()), event.getEntity().getXRot() / -90f);
-	}
-
 	private void playSound(@Nullable Entity source, Level pLevel, Vec3 pPos, SoundEvent sound, float i)
 	{
 		float f = (float)Math.pow(2.0D, i);

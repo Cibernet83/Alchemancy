@@ -28,17 +28,6 @@ public class ThrowableProperty extends Property
 		}
 	}
 
-	@Override
-	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
-	{
-		if(!event.isCanceled())
-		{
-			throwItem(event.getLevel(), event.getEntity(), event.getItemStack());
-			event.setCancellationResult(InteractionResult.SUCCESS);
-			event.setCanceled(true);
-		}
-	}
-
 	private void throwItem(Level level, LivingEntity user, ItemStack stack)
 	{
 		if(stack.isEmpty())
