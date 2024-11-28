@@ -47,6 +47,8 @@ public class SporeCloudProperty extends AbstractTimerProperty
 
 	public void releaseSpores(Level level, Entity source, ItemStack stack)
 	{
+		resetStartTimestamp(stack);
+
 		RandomSource rand = level.getRandom();
 		List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, source.getBoundingBox().inflate(RADIUS));
 
@@ -64,8 +66,6 @@ public class SporeCloudProperty extends AbstractTimerProperty
 					if(!propertyHolder.equals(asHolder()))
 						propertyHolder.value().onActivation(source, target, stack);
 				});
-
-		resetStartTimestamp(stack);
 	}
 
 	@Override

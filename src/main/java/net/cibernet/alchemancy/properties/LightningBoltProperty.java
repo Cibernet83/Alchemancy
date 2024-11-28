@@ -2,11 +2,9 @@ package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LightningBolt;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
@@ -23,8 +21,12 @@ public class LightningBoltProperty extends Property
 		lightningbolt.setCause(user instanceof ServerPlayer ? (ServerPlayer)user : null);
 		target.level().addFreshEntity(lightningbolt);
 
-		if(PropertyModifierComponent.getOrElse(weapon, asHolder(), AlchemancyProperties.Modifiers.PREVENT_CONSUMPTION, weapon.isDamageableItem()))
-			weapon.hurtAndBreak(PropertyModifierComponent.getOrElse(weapon, asHolder(), AlchemancyProperties.Modifiers.DURABILITY_CONSUMPTION, 20), user, EquipmentSlot.MAINHAND);
+		if(target.level() instanceof ServerLevel serverLevel && PropertyModifierComponent.getOrElse(weapon, asHolder(), AlchemancyProperties.Modifiers.PREVENT_CONSUMPTION, weapon.isDamageableItem()))
+		{
+			if(user == null)
+				weapon.hurtAndBreak(20, serverLevel, user, (item) -> {});
+			else weapon.hurtAndBreak(PropertyModifierComponent.getOrElse(weapon, asHolder(), AlchemancyProperties.Modifiers.DURABILITY_CONSUMPTION, 20), user, EquipmentSlot.MAINHAND);
+		}
 		else consumeItem(user, weapon, EquipmentSlot.MAINHAND);
 	}
 

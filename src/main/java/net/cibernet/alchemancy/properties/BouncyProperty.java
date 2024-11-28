@@ -85,6 +85,7 @@ public class BouncyProperty extends Property
 
 	public static void knockBack(Entity target, Vec3 sourcePos)
 	{
+		target.hurtMarked = true;
 		target.hasImpulse = true;
 		Vec3 vec3 = target.getDeltaMovement();
 		float strength = target.onGround() ? 2 : 1;
