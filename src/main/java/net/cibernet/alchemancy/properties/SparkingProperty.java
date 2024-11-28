@@ -1,9 +1,11 @@
 package net.cibernet.alchemancy.properties;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -16,11 +18,18 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 
+import java.util.Random;
 
+@EventBusSubscriber(Dist.CLIENT)
 public class SparkingProperty extends Property
 {
 	@Override
@@ -72,6 +81,18 @@ public class SparkingProperty extends Property
 
 	@Override
 	public int getColor(ItemStack stack) {
-		return 0x717171;
+		return FastColor.ARGB32.lerp(sparkColor, 0x717171, 0xFFC251);
+	}
+
+	private static final Random random = new Random();
+	private static float sparkColor = 0;
+
+	@OnlyIn(Dist.CLIENT)
+	@SubscribeEvent
+	private static void onClientTick(ClientTickEvent.Pre event)
+	{
+		if(random.nextFloat() < 0.05f)
+			sparkColor = 1;
+		else sparkColor = Math.max(0, sparkColor- 1/30f);
 	}
 }
