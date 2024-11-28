@@ -130,6 +130,8 @@
 
   "property.alchemancy.tinted": "Tinted",
   "property.alchemancy.resized": "Resized",
+  "property.alchemancy.resized.increase": "Resized [+10%]",
+  "property.alchemancy.resized.decrease": "Resized [-10%]",
   "property.alchemancy.flattened": "Flattened",
   "property.alchemancy.enchanted": "Foil",
   "property.alchemancy.magical_concealment": "Magical Concealment",

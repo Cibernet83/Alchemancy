@@ -73,7 +73,7 @@ public class SlipperyProperty extends Property
 	}
 
 	@Override
-	public Component getName(ItemStack stack) {
-		return super.getName(stack).copy().withStyle(ChatFormatting.ITALIC);
+	public Component getDisplayText(ItemStack stack) {
+		return super.getDisplayText(stack).copy().withStyle(ChatFormatting.ITALIC);
 	}
 }

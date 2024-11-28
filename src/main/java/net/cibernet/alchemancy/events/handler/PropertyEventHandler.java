@@ -462,7 +462,7 @@ public class PropertyEventHandler
 		}
 
 		if(hasInfusions)
-			stack.get(AlchemancyItems.Components.INFUSED_PROPERTIES).forEachProperty(holder -> event.getToolTip().add(holder.value().getName(stack)));
+			stack.get(AlchemancyItems.Components.INFUSED_PROPERTIES).forEachProperty(holder -> event.getToolTip().add(holder.value().getDisplayText(stack)));
 
 		if(stack.has(AlchemancyItems.Components.STORED_PROPERTIES))
 		{

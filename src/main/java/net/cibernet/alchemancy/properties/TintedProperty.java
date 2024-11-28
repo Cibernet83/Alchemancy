@@ -10,6 +10,7 @@ import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.minecraft.core.Holder;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.DyeColor;
@@ -44,18 +45,24 @@ public class TintedProperty extends IncreaseInfuseSlotsProperty implements IData
 	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid)
 	{
 		int base = getData(stack);
-		int color = -1;
+		int color = getDyeColor(propertySource);
 
-		if(propertySource.getItem() instanceof DyeItem dyeItem)
-			color = dyeItem.getDyeColor().getTextureDiffuseColor();
-		else if(!getData(propertySource).equals(getDefaultData()))
-			color = getData(propertySource);
+
 
 		if(color == -1)
 			return super.onInfusedByDormantProperty(stack, propertySource, grid);
 
 		setData(stack, base == getDefaultData() ? FastColor.ARGB32.color(255, color) :  mixColors(base, List.of(color)));
 		return true;
+	}
+
+	public int getDyeColor(ItemStack stack)
+	{
+		if(stack.getItem() instanceof DyeItem dyeItem)
+			return dyeItem.getDyeColor().getTextureDiffuseColor();
+		else if(!getData(stack).equals(getDefaultData()))
+			return getData(stack);
+		return -1;
 	}
 
 	@Override
@@ -103,6 +110,11 @@ public class TintedProperty extends IncreaseInfuseSlotsProperty implements IData
 	@Override
 	public int getColor(ItemStack stack) {
 		return getData(stack);
+	}
+
+	@Override
+	public Component getName(ItemStack stack) {
+		return super.getName(stack).copy().withColor(getDyeColor(stack));
 	}
 
 	@Override

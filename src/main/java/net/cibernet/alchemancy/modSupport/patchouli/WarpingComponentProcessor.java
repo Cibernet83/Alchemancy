@@ -9,7 +9,6 @@ import vazkii.patchouli.api.IComponentProcessor;
 import vazkii.patchouli.api.IVariable;
 import vazkii.patchouli.api.IVariableProvider;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class WarpingComponentProcessor implements IComponentProcessor
@@ -40,7 +39,7 @@ public class WarpingComponentProcessor implements IComponentProcessor
 		if(!hasTitle && key.equals("title"))
 		{
 			return IVariable.wrap(recipe.getResult().stream()
-					.map(propertyHolder -> propertyHolder.value().getName(ItemStack.EMPTY).getString())
+					.map(propertyHolder -> propertyHolder.value().getDisplayText(ItemStack.EMPTY).getString())
 					.collect(Collectors.joining(" and ")), level.registryAccess());
 		}
 

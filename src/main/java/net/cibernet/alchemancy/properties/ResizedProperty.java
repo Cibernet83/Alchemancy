@@ -81,8 +81,20 @@ public class ResizedProperty extends Property implements IDataHolder<Float>
 	}
 
 	@Override
-	public Component getName(ItemStack stack) {
-		return Component.translatable("property.detail", super.getName(stack), Component.translatable("property.detail.percentage", (int)(getData(stack) * 100))).withColor(getColor(stack));
+	public Component getDisplayText(ItemStack stack) {
+		return Component.translatable("property.detail", super.getDisplayText(stack), Component.translatable("property.detail.percentage", (int)(getData(stack) * 100))).withColor(getColor(stack));
+	}
+
+	@Override
+	public Component getName(ItemStack stack)
+	{
+		if(stack.is(AlchemancyTags.Items.INCREASES_RESIZED))
+			return Component.translatable("property.alchemancy.resized.increase").withColor(getColor(stack));
+		else if(stack.is(AlchemancyTags.Items.DECREASES_RESIZED))
+			return Component.translatable("property.alchemancy.resized.decrease").withColor(getColor(stack));
+		else if (!getData(stack).equals(getDefaultData()))
+			return getDisplayText(stack);
+		return super.getName(stack);
 	}
 
 	@Override

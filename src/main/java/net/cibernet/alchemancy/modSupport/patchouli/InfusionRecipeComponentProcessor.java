@@ -2,11 +2,6 @@ package net.cibernet.alchemancy.modSupport.patchouli;
 
 import net.cibernet.alchemancy.crafting.AbstractForgeRecipe;
 import net.cibernet.alchemancy.crafting.ForgePropertyRecipe;
-import net.cibernet.alchemancy.crafting.ItemTransmutationRecipe;
-import net.cibernet.alchemancy.modSupport.jei.AbstractForgingRecipe;
-import net.cibernet.alchemancy.properties.Property;
-import net.minecraft.core.Holder;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -45,7 +40,7 @@ public class InfusionRecipeComponentProcessor implements IComponentProcessor
 		{
 			if(recipe instanceof ForgePropertyRecipe recipe1)
 				return IVariable.wrap(recipe1.getResult().stream()
-						.map(propertyHolder -> propertyHolder.value().getName(ItemStack.EMPTY).getString())
+						.map(propertyHolder -> propertyHolder.value().getName().getString())
 						.collect(Collectors.joining(" and ")), level.registryAccess());
 
 			return IVariable.from(recipe.getResultItem(level.registryAccess()).getHoverName(), level.registryAccess());

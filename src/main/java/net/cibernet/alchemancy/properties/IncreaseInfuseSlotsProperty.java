@@ -26,8 +26,8 @@ public abstract class IncreaseInfuseSlotsProperty extends Property
 			}
 
 			@Override
-			public Component getName(ItemStack stack) {
-				return super.getName(stack).copy().withStyle(style);
+			public Component getDisplayText(ItemStack stack) {
+				return super.getDisplayText(stack).copy().withStyle(style);
 			}
 		};
 	}

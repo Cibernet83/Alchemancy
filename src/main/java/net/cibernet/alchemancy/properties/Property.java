@@ -4,9 +4,7 @@ import com.mojang.serialization.Codec;
 import net.cibernet.alchemancy.blocks.blockentities.RootedItemBlockEntity;
 import net.cibernet.alchemancy.crafting.ForgePropertyRecipe;
 import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
-import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
-import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.util.ColorUtils;
 import net.minecraft.core.BlockPos;
@@ -93,8 +91,8 @@ public abstract class Property
 			}
 
 			@Override
-			public Component getName(ItemStack stack) {
-				return super.getName(stack).copy().withStyle(style);
+			public Component getDisplayText(ItemStack stack) {
+				return super.getDisplayText(stack).copy().withStyle(style);
 			}
 		};
 	}
@@ -215,9 +213,19 @@ public abstract class Property
 
 	public abstract int getColor(ItemStack stack);
 
+	public Component getDisplayText(ItemStack stack)
+	{
+		return Component.translatable(getLanguageKey()).withColor(getColor(stack));
+	}
+
 	public Component getName(ItemStack stack)
 	{
 		return Component.translatable(getLanguageKey()).withColor(getColor(stack));
+	}
+
+	public Component getName()
+	{
+		return getName(ItemStack.EMPTY);
 	}
 
 	public String getRawName()

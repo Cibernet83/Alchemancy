@@ -42,8 +42,8 @@ public class DeathWardProperty extends Property
 	}
 
 	@Override
-	public Component getName(ItemStack stack) {
-		return super.getName(stack).copy().withStyle(ChatFormatting.BOLD);
+	public Component getDisplayText(ItemStack stack) {
+		return super.getDisplayText(stack).copy().withStyle(ChatFormatting.BOLD);
 	}
 
 	@Override

@@ -17,10 +17,6 @@ import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.entity.FurnaceBlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.loot.LootParams;
-import net.neoforged.neoforge.common.extensions.IItemStackExtension;
 import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
@@ -158,9 +154,9 @@ public class AutosmeltProperty extends Property implements IDataHolder<Integer>
 
 
 	@Override
-	public Component getName(ItemStack stack)
+	public Component getDisplayText(ItemStack stack)
 	{
-		Component name = super.getName(stack);
+		Component name = super.getDisplayText(stack);
 		int fuel = getData(stack);
 
 		return Component.translatable("property.detail", name.copy().withStyle(ChatFormatting.BOLD), fuel > 0 ?

@@ -52,9 +52,9 @@ public class BucketingProperty extends Property implements IDataHolder<Fluid>
 	}
 
 	@Override
-	public Component getName(ItemStack stack)
+	public Component getDisplayText(ItemStack stack)
 	{
-		Component name = super.getName(stack);
+		Component name = super.getDisplayText(stack);
 		Fluid storedFluid = getData(stack);
 
 		if(!storedFluid.equals(getDefaultData()))

@@ -56,9 +56,9 @@ public class DisguisedProperty extends IncreaseInfuseSlotsProperty implements ID
 	}
 
 	@Override
-	public Component getName(ItemStack stack)
+	public Component getDisplayText(ItemStack stack)
 	{
-		Component name = super.getName(stack);
+		Component name = super.getDisplayText(stack);
 		ItemStack disguise = getData(stack);
 
 		if(!disguise.isEmpty())

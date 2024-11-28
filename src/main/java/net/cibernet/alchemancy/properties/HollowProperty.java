@@ -361,9 +361,9 @@ public class HollowProperty extends Property implements IDataHolder<ItemStack>
 	}
 
 	@Override
-	public Component getName(ItemStack stack)
+	public Component getDisplayText(ItemStack stack)
 	{
-		Component name = super.getName(stack);
+		Component name = super.getDisplayText(stack);
 		ItemStack storedStack = getData(stack);
 
 		if(!storedStack.isEmpty())

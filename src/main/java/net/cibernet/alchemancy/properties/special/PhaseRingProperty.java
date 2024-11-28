@@ -3,14 +3,9 @@ package net.cibernet.alchemancy.properties.special;
 import net.cibernet.alchemancy.properties.Property;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.damagesource.DamageTypes;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Pose;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 
 public class PhaseRingProperty extends Property
 {
@@ -28,8 +23,8 @@ public class PhaseRingProperty extends Property
 	}
 
 	@Override
-	public Component getName(ItemStack stack) {
-		return super.getName(stack).copy().withStyle(ChatFormatting.BOLD);
+	public Component getDisplayText(ItemStack stack) {
+		return super.getDisplayText(stack).copy().withStyle(ChatFormatting.BOLD);
 	}
 
 	@Override

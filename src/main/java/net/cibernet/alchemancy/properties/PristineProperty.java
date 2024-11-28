@@ -42,8 +42,8 @@ public class PristineProperty extends Property implements IDataHolder<Integer>, 
 	}
 
 	@Override
-	public Component getName(ItemStack stack) {
-		return Component.translatable("property.detail", super.getName(stack), Component.translatable("property.detail.percentage", (int) (getDurabilityPercentage(stack) * 100))).withColor(getColor(stack));
+	public Component getDisplayText(ItemStack stack) {
+		return Component.translatable("property.detail", super.getDisplayText(stack), Component.translatable("property.detail.percentage", (int) (getDurabilityPercentage(stack) * 100))).withColor(getColor(stack));
 	}
 
 	private float getDurabilityPercentage(ItemStack stack) {

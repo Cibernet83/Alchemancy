@@ -133,12 +133,12 @@ public class WayfindingProperty extends Property implements IDataHolder<Tuple<Wa
 	}
 
 	@Override
-	public Component getName(ItemStack stack)
+	public Component getDisplayText(ItemStack stack)
 	{
 		WayfindData data = getData(stack).getA();
 
 		if(!data.hasTarget())
-			return super.getName(stack);
+			return super.getDisplayText(stack);
 		Component target = Component.empty();
 
 		if(data.targetedPlayer.isPresent())
@@ -154,7 +154,7 @@ public class WayfindingProperty extends Property implements IDataHolder<Tuple<Wa
 			else target =  Component.translatable("property.detail.block_position", pos.pos().getX(), pos.pos().getY(), pos.pos().getZ());
 		}
 
-		return Component.translatable("property.detail", super.getName(stack), target).withColor(getColor(stack));
+		return Component.translatable("property.detail", super.getDisplayText(stack), target).withColor(getColor(stack));
 	}
 
 	public void setData(ItemStack item, WayfindData value)

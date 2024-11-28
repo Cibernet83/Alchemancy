@@ -27,7 +27,7 @@ public class MobEffectEquippedAndHitProperty extends MobEffectOnHitProperty
 	}
 
 	@Override
-	public Component getName(ItemStack stack) {
-		return italics ? super.getName(stack).copy().withStyle(ChatFormatting.ITALIC) : super.getName(stack);
+	public Component getDisplayText(ItemStack stack) {
+		return italics ? super.getDisplayText(stack).copy().withStyle(ChatFormatting.ITALIC) : super.getDisplayText(stack);
 	}
 }

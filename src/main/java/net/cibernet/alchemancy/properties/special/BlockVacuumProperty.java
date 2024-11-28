@@ -127,9 +127,9 @@ public class BlockVacuumProperty extends Property implements IDataHolder<Block>
 	}
 
 	@Override
-	public Component getName(ItemStack stack)
+	public Component getDisplayText(ItemStack stack)
 	{
-		Component name = super.getName(stack);
+		Component name = super.getDisplayText(stack);
 		Block storedBlock = getData(stack);
 
 		if(!storedBlock.equals(getDefaultData()))

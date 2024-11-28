@@ -3,22 +3,14 @@ package net.cibernet.alchemancy.properties;
 import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
-import net.cibernet.alchemancy.util.ColorUtils;
-import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.DamageTypeTags;
-import net.minecraft.util.FastColor;
-import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 public class WaxedProperty extends Property implements IDataHolder<Integer>
@@ -60,8 +52,8 @@ public class WaxedProperty extends Property implements IDataHolder<Integer>
 	}
 
 	@Override
-	public Component getName(ItemStack stack) {
-		return Component.translatable("property.detail", super.getName(stack), Component.translatable("property.detail.percentage", (int)(getData(stack) * 100 / getDefaultData()))).withColor(getColor(stack));
+	public Component getDisplayText(ItemStack stack) {
+		return Component.translatable("property.detail", super.getDisplayText(stack), Component.translatable("property.detail.percentage", (int)(getData(stack) * 100 / getDefaultData()))).withColor(getColor(stack));
 	}
 
 	@Override
