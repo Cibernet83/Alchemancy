@@ -88,6 +88,7 @@ public class AlchemancyItems
 
 	public static final DeferredItem<InnatePropertyItem> PROPERTY_VISOR = REGISTRY.register("property_visor", () -> new InnatePropertyItem.Builder()
 			.withProperties(AlchemancyProperties.HEADWEAR, AlchemancyProperties.REVEALING)
+			.addModifier(AlchemancyProperties.HEADWEAR, AlchemancyProperties.Modifiers.ON_RIGHT_CLICK, true)
 			.stacksTo(1)
 			.build());
 	public static final DeferredItem<InnatePropertyItem> WAYWARD_MEDALLION = REGISTRY.register("wayward_medallion", () -> new InnatePropertyItem.Builder()
