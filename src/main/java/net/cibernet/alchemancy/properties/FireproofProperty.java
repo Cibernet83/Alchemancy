@@ -22,7 +22,11 @@ public class FireproofProperty extends Property
 	public void onEquippedTick(LivingEntity user, EquipmentSlot slot, ItemStack stack)
 	{
 		if(slot.isArmor() && user.isOnFire())
-			user.setRemainingFireTicks(Math.min(240, user.tickCount % 5 == 0 ? user.getRemainingFireTicks() - 10 : user.getRemainingFireTicks()));
+		{
+			if(slot == EquipmentSlot.BODY)
+				user.setRemainingFireTicks(0);
+			else user.setRemainingFireTicks(Math.min(240, user.tickCount % 5 == 0 ? user.getRemainingFireTicks() - 10 : user.getRemainingFireTicks()));
+		}
 	}
 
 	@Override
