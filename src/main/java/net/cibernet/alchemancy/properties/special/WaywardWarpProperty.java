@@ -1,6 +1,7 @@
 package net.cibernet.alchemancy.properties.special;
 
 import net.cibernet.alchemancy.item.InnatePropertyItem;
+import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.EnderProperty;
 import net.cibernet.alchemancy.properties.LightningBoltProperty;
 import net.cibernet.alchemancy.properties.Property;
@@ -23,11 +24,15 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.RespawnAnchorBlock;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import org.jetbrains.annotations.Nullable;
 
@@ -122,6 +127,14 @@ public class WaywardWarpProperty extends Property implements IDataHolder<Wayfind
 	public void onActivation(@Nullable Entity source, Entity target, ItemStack stack, DamageSource damageSource)
 	{
 		teleport(source instanceof LivingEntity living ? living : null, target, target.level(), stack);
+	}
+
+	@Override
+	public void onProjectileImpact(ItemStack stack, Projectile projectile, HitResult rayTraceResult, ProjectileImpactEvent event) {
+
+		if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.SHATTERING) &&
+				rayTraceResult.getType() == HitResult.Type.ENTITY && rayTraceResult instanceof EntityHitResult entityHitResult)
+			teleport(null, entityHitResult.getEntity(), projectile.level(), stack);
 	}
 
 	public boolean teleport(@Nullable LivingEntity effectSource, Entity user, Level level, ItemStack stack)
