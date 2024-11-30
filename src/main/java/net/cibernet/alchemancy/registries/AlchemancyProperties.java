@@ -266,9 +266,8 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, RocketPoweredProperty> ROCKET_POWERED = REGISTRY.register("rocket_powered", RocketPoweredProperty::new);
 
 	//TODO
-	//Seeking: Projectiles home towards Glowing entities
 	//Tethered: On Right Click leashes the user to the targeted entity or fence block. Leash/String maybe?
-	//Echoing: On Hit/On Activation, the action and target are stored into the item and get repeated after a few ticks (as long as the item remains in the player's inv or as a projectile) - Echo Shard/Recovery Compass
+	//Echoing: On Hit/On Activation, the action and target are stored into the item and get repeated after a few ticks (as long as the item remains in the player's inv or as a projectile) - Echo Shard/Recovery Compass, Warped Echoed > Muffled
 
 	//Soulbind Properties:
 	//Cursed: Reduces Luck stat when equipped
@@ -277,7 +276,6 @@ public class AlchemancyProperties
 	//Reincarnating: Item is retained upon death. One-time use.
 
 	//Warped Properties:
-	//Muffled: Suppresses certain vibrations when equipped - Musical/Sensitive/Echoing
 	//Lucky: Increases Luck stat when equipped - ??? (don't wanna make it Warped Cursed bc then it'd be too easy to get rid of)
 
 	@Nullable
