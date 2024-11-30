@@ -10,6 +10,7 @@
     "BlockMixin",
     "BlockStateExtensionMixin",
     "DataComponentHolderMixin",
+    "EntityMixin",
     "ItemEntityMixin",
     "ItemMixin",
     "ItemStackExtensionMixin",

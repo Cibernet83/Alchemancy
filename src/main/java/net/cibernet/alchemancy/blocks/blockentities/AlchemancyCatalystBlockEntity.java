@@ -30,6 +30,8 @@ public class AlchemancyCatalystBlockEntity extends BlockEntity
 
 	private int animationTicks = 0;
 
+	public boolean silent = false;
+
 	public AlchemancyCatalystBlockEntity(BlockPos pos, BlockState blockState) {
 		super(AlchemancyBlockEntities.ALCHEMANCY_CATALYST.get(), pos, blockState);
 	}
@@ -49,6 +51,7 @@ public class AlchemancyCatalystBlockEntity extends BlockEntity
 			setTint(tag.getInt("tint"));
 
 		animationTicks = tag.getInt("animation_ticks");
+		silent = tag.getBoolean("silent");
 	}
 
 	@Override
@@ -60,6 +63,7 @@ public class AlchemancyCatalystBlockEntity extends BlockEntity
 		tag.putInt("tint", getTint());
 
 		tag.putInt("animation_ticks", animationTicks);
+		tag.putBoolean("silent", silent);
 	}
 
 	public float getSpinOffset() {
@@ -132,8 +136,11 @@ public class AlchemancyCatalystBlockEntity extends BlockEntity
 	public void playAnimation(boolean startup)
 	{
 		animationTicks = ANIMATION_LENGTH;
-		level.markAndNotifyBlock(getBlockPos(), level.getChunkAt(getBlockPos()), getBlockState(), getBlockState(), 2, 1);
-		level.playSound(null, getBlockPos(), startup ? SoundEvents.BEACON_ACTIVATE : SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.BLOCKS, 1, 1);
+		if(level != null) {
+			level.markAndNotifyBlock(getBlockPos(), level.getChunkAt(getBlockPos()), getBlockState(), getBlockState(), 2, 1);
+			if (!silent)
+				level.playSound(null, getBlockPos(), startup ? SoundEvents.BEACON_ACTIVATE : SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.BLOCKS, 1, 1);
+		}
 	}
 
 	public float getAnimationSpeed()

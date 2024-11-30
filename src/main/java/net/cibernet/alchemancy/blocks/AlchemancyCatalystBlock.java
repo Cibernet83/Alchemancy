@@ -74,10 +74,13 @@ public class AlchemancyCatalystBlock extends TransparentBlock implements EntityB
 		{
 			int tint = CommonUtils.getPropertyDrivenTint(stack);
 
-			if(!catalyst.getCrystalTexture().equals(dye.getDyeColor().getName()) || catalyst.getTint() != CommonUtils.getPropertyDrivenTint(stack))
+			if(!catalyst.getCrystalTexture().equals(dye.getDyeColor().getName()) ||
+					catalyst.getTint() != CommonUtils.getPropertyDrivenTint(stack) ||
+					InfusedPropertiesHelper.hasInfusedProperty(stack, AlchemancyProperties.MUFFLED) != catalyst.silent)
 			{
 				catalyst.setCrystalTexture(dye.getDyeColor());
 				catalyst.setTint(tint);
+				catalyst.silent = InfusedPropertiesHelper.hasInfusedProperty(stack, AlchemancyProperties.MUFFLED);
 
 				stack.consume(1, player);
 				return ItemInteractionResult.SUCCESS;

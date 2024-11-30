@@ -176,6 +176,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, ConditionalDamageReductionProperty> INSULATED = REGISTRY.register("insulated", () -> ConditionalDamageReductionProperty.reduceShockDamage(0x659191));
 	public static final DeferredHolder<Property, WardingProperty> WARDING = REGISTRY.register("warding", WardingProperty::new);
 	public static final DeferredHolder<Property, EternalProperty> ETERNAL = REGISTRY.register("eternal", EternalProperty::new);
+	public static final DeferredHolder<Property, Property> MUFFLED = REGISTRY.register("muffled", () -> Property.simple(0x5E92F9));
 
 	//Soulbind
 	public static final DeferredHolder<Property, Property> SOULBIND = REGISTRY.register("soulbind", SoulbindProperty::new);

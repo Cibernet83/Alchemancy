@@ -8,6 +8,7 @@ import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.DamageTypeTags;
@@ -25,12 +26,15 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
+import net.neoforged.neoforge.client.event.sound.PlaySoundSourceEvent;
 import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
+import net.neoforged.neoforge.event.VanillaGameEvent;
 import net.neoforged.neoforge.event.enchanting.GetEnchantmentLevelEvent;
 import net.neoforged.neoforge.event.entity.EntityInvulnerabilityCheckEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
@@ -42,6 +46,7 @@ import net.neoforged.neoforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -443,6 +448,33 @@ public class PropertyEventHandler
 				}
 			}
 		}
+	}
+
+	private static final HashMap<EquipmentSlot, List<Holder<GameEvent>>> MUFFLED_EVENTS = new HashMap<>()
+	{{
+		put(EquipmentSlot.MAINHAND, List.of(GameEvent.BLOCK_PLACE, GameEvent.ITEM_INTERACT_START, GameEvent.ITEM_INTERACT_FINISH, GameEvent.ENTITY_PLACE, GameEvent.ENTITY_ACTION, GameEvent.SHEAR, GameEvent.PROJECTILE_SHOOT));
+		put(EquipmentSlot.OFFHAND, List.of(GameEvent.BLOCK_PLACE, GameEvent.ITEM_INTERACT_START, GameEvent.ITEM_INTERACT_FINISH, GameEvent.ENTITY_PLACE, GameEvent.ENTITY_ACTION, GameEvent.SHEAR));
+		put(EquipmentSlot.HEAD, List.of(GameEvent.EAT, GameEvent.DRINK));
+		put(EquipmentSlot.CHEST, List.of(GameEvent.ENTITY_DAMAGE, GameEvent.ENTITY_DIE, GameEvent.ELYTRA_GLIDE, GameEvent.TELEPORT));
+		put(EquipmentSlot.LEGS, List.of(GameEvent.ENTITY_DAMAGE, GameEvent.ENTITY_DIE, GameEvent.SPLASH, GameEvent.SWIM, GameEvent.TELEPORT));
+		put(EquipmentSlot.FEET, List.of(GameEvent.STEP, GameEvent.HIT_GROUND, GameEvent.SPLASH));
+	}};
+
+	@SubscribeEvent
+	public static void onVanillaGameEvent(VanillaGameEvent event)
+	{
+		if(event.getCause() instanceof LivingEntity living)
+		{
+			for (EquipmentSlot slot : EquipmentSlot.values())
+			{
+				if(InfusedPropertiesHelper.hasProperty(living.getItemBySlot(slot), AlchemancyProperties.MUFFLED) &&
+						(!MUFFLED_EVENTS.containsKey(slot) || MUFFLED_EVENTS.get(slot).contains(event.getVanillaEvent())))
+					event.setCanceled(true);
+			}
+		} else if (event.getCause() instanceof Projectile projectile &&
+				InfusedPropertiesHelper.hasProperty(getProjectileItemStack(projectile), AlchemancyProperties.MUFFLED) &&
+				event.getVanillaEvent().equals(GameEvent.PROJECTILE_LAND))
+			event.setCanceled(true);
 	}
 
 	private static final Component PROPERTY_INGREDIENT_NAME = Component.translatable("item.alchemancy.property_capsule.ingredient");
