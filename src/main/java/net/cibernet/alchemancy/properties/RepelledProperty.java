@@ -69,7 +69,7 @@ public class RepelledProperty<E extends Entity> extends Property
 
 			float strength = (float) Math.max(0, radius - distanceTo) * .05f;
 
-			target.hasImpulse = true;
+			user.hasImpulse = true;
 			Vec3 vec3 = user.getDeltaMovement();
 			Vec3 vec31 = target.position().subtract(user.position()).normalize().scale(strength);
 

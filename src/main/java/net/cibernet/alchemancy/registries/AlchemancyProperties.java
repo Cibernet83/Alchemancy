@@ -18,6 +18,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -216,6 +217,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, MusicalProperty> MUSICAL = REGISTRY.register("musical", MusicalProperty::new);
 	public static final DeferredHolder<Property, EntityPullProperty<Projectile>> TARGETED = REGISTRY.register("targeted", () -> new EntityPullProperty<>(0xDC4A4A, Projectile.class, 12, false));
 	public static final DeferredHolder<Property, RepelledProperty<Entity>> REPELLED = REGISTRY.register("repelled", () -> new RepelledProperty<>(0x4ADCDC, Entity.class, 8, false));
+	public static final DeferredHolder<Property, HomingProperty<LivingEntity>> LIGHT_SEEKING = REGISTRY.register("light_seeking", () -> new HomingProperty<>(0xFFFF00, LivingEntity.class, 24, 1f, HomingProperty.EffectType.PROJECTILE_ONLY, (e) -> e.isOnFire() || e.isCurrentlyGlowing()));
 
 	//Cosmetic
 	public static final DeferredHolder<Property, Property> REVEALED = REGISTRY.register("revealed", () -> Property.simple(0xD6DDFF));
@@ -245,7 +247,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, Property> QUANTUM_BIND = REGISTRY.register("quantum_bind", () -> new Property() {
 		@Override
 		public int getColor(ItemStack stack) {
-			return 0xFFFF00;
+			return 0xE8FF00;
 		}
 
 		@Override
