@@ -8,6 +8,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
@@ -24,6 +25,19 @@ public class GlowRingProperty extends Property
 		if(level.getBrightness(LightLayer.BLOCK, pos) <= 7 && level.getBlockState(pos).canBeReplaced())
 		{
 			BlockState state = AlchemancyBlocks.GLOWING_ORB.get().getStateForPlacement(new BlockPlaceContext(level, user instanceof Player player ? player : null, InteractionHand.MAIN_HAND, ItemStack.EMPTY,
+					new BlockHitResult(pos.getCenter(), Direction.UP, pos, false)));
+			level.setBlock(pos, state == null ? AlchemancyBlocks.GLOWING_ORB.get().defaultBlockState() : state, 11);
+		}
+	}
+
+	@Override
+	public void onProjectileTick(ItemStack stack, Projectile projectile)
+	{
+		Level level = projectile.level();
+		BlockPos pos = projectile.blockPosition();
+		if(level.getBrightness(LightLayer.BLOCK, pos) <= 7 && level.getBlockState(pos).canBeReplaced())
+		{
+			BlockState state = AlchemancyBlocks.GLOWING_ORB.get().getStateForPlacement(new BlockPlaceContext(level, null, InteractionHand.MAIN_HAND, ItemStack.EMPTY,
 					new BlockHitResult(pos.getCenter(), Direction.UP, pos, false)));
 			level.setBlock(pos, state == null ? AlchemancyBlocks.GLOWING_ORB.get().defaultBlockState() : state, 11);
 		}
