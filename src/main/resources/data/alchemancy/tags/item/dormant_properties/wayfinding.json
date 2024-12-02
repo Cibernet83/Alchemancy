@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "minecraft:compass",
-    "minecraft:recovery_compass"
+    "minecraft:recovery_compass",
+    "minecraft:ender_eye"
   ]
 }

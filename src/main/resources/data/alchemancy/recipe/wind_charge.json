@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:wind_charged"
+  ],
+
+  "catalyst": {
+    "item": "alchemancy:blank_pearl"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:wind_charge"
+  }
+}
