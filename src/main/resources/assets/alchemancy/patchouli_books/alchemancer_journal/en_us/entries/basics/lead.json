@@ -7,8 +7,7 @@
 
   "pages": [
     {
-      "type": "patchouli:spotlight",
-      "item": "alchemancy:lead_ingot",
+      "type": "patchouli:text",
       "text": "alchemancy.entry.lead.page0"
     },
     {

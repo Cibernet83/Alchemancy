@@ -24,12 +24,16 @@
       "text": "alchemancy.entry.infusion.page3"
     },
     {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.infusion.page4"
+    },
+    {
       "type": "patchouli:image",
       "images": [
         "alchemancy:textures/gui/entry/alchemancy_forge.png"
       ],
       "border": true,
-      "text": "alchemancy.entry.infusion.page4"
+      "text": "alchemancy.entry.infusion.page5"
     }
   ]
 }

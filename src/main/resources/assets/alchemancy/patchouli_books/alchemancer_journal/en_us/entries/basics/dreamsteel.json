@@ -7,8 +7,7 @@
 
   "pages": [
     {
-      "type": "patchouli:spotlight",
-      "item": "alchemancy:dreamsteel_ingot",
+      "type": "patchouli:text",
       "text": "alchemancy.entry.dreamsteel.page0"
     },
     {
