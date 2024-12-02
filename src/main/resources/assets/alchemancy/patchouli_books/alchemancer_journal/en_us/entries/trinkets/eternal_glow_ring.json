@@ -1,0 +1,36 @@
+{
+  "name": "alchemancy.entry.eternal_glow_ring",
+  "sortnum": 0,
+  "advancement": "alchemancy:discovery/glowing_aura",
+  "icon": "alchemancy:eternal_glow_ring",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.eternal_glow_ring.page0"
+    },
+    {
+      "type": "alchemancy:infusion_double",
+      "recipe1": "alchemancy:glowing_orb",
+      "recipe2": "alchemancy:glowing_orb_cloning"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.eternal_glow_ring.page1"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:eternal_glow_ring"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.eternal_glow_ring.page2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.eternal_glow_ring.page3"
+    }
+
+  ]
+}

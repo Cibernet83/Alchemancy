@@ -1,0 +1,28 @@
+{
+  "name": "alchemancy.entry.undying_ring",
+  "sortnum": 0,
+  "advancement": "alchemancy:discovery/undying",
+  "icon": "alchemancy:undying_ring",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.undying_ring.page0"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:undying_ring",
+      "text": "alchemancy.entry.undying_ring.page1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.undying_ring.page2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.undying_ring.page3"
+    }
+
+  ]
+}

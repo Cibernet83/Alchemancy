@@ -1,0 +1,28 @@
+{
+  "name": "alchemancy.entry.pearlescent_ring",
+  "sortnum": -10,
+  "advancement": "alchemancy:story/alchemancing_time",
+  "icon": "alchemancy:pearlescent_ring",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.pearlescent_ring.page0"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:pearlescent_ring",
+      "text": "alchemancy.entry.pearlescent_ring.page1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.pearlescent_ring.page2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.pearlescent_ring.page3"
+    }
+
+  ]
+}

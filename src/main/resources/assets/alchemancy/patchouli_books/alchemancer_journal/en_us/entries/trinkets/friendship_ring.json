@@ -1,0 +1,19 @@
+{
+  "name": "alchemancy.entry.friendship_ring",
+  "sortnum": 0,
+  "advancement": "alchemancy:discovery/nonlethal",
+  "icon": "alchemancy:friendship_ring",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.friendship_ring.page0"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:friendship_ring",
+      "text": "alchemancy.entry.friendship_ring.page1"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "alchemancy.entry.phasing_ring",
+  "sortnum": 0,
+  "advancement": "alchemancy:discovery/phasing",
+  "icon": "alchemancy:phasing_ring",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.phasing_ring.page0"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:phasing_ring",
+      "text": "alchemancy.entry.phasing_ring.page1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.phasing_ring.page2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.phasing_ring.page3"
+    }
+
+  ]
+}
