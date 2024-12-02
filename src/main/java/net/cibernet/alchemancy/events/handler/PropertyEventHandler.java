@@ -20,10 +20,7 @@ import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.FireworkRocketEntity;
-import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -190,12 +187,10 @@ public class PropertyEventHandler
 
 	public static ItemStack getProjectileItemStack(Projectile entity)
 	{
-		if(entity instanceof ThrowableItemProjectile throwableItem)
-			return throwableItem.getItem();
+		if(entity instanceof ItemSupplier itemSupplier)
+			return itemSupplier.getItem();
 		if(entity instanceof AbstractArrow arrow)
 			return arrow.getPickupItemStackOrigin();
-		if(entity instanceof FireworkRocketEntity rocket)
-			return rocket.getItem();
 		return ItemStack.EMPTY;
 	}
 
