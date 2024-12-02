@@ -3,6 +3,7 @@ package net.cibernet.alchemancy.blocks;
 import net.cibernet.alchemancy.blocks.blockentities.AlchemancyCatalystBlockEntity;
 import net.cibernet.alchemancy.registries.AlchemancyBlocks;
 import net.cibernet.alchemancy.registries.AlchemancyCriteriaTriggers;
+import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -58,7 +59,7 @@ public class AlchemancyForgeBlock extends InfusionPedestalBlock
 		}
 		else if(hitResult.getDirection() == Direction.UP && level.getBlockState(pos.above(2)).canBeReplaced() &&
 				stack.getItem() instanceof BlockItem blockItem &&
-				blockItem.getBlock().defaultBlockState().is(AlchemancyTags.Blocks.ALCHEMANCY_CRYSTAL_CATALYSTS) &&
+				(stack.is(AlchemancyItems.ALCHEMANCY_CATALYST) || blockItem.getBlock().defaultBlockState().is(AlchemancyTags.Blocks.ALCHEMANCY_CRYSTAL_CATALYSTS)) &&
 				blockItem.place(new BlockPlaceContext(level, player, hand, stack, new BlockHitResult(hitResult.getLocation(), hitResult.getDirection(), pos.above(2), hitResult.isInside()))).consumesAction())
 		{
 			return ItemInteractionResult.SUCCESS;
