@@ -45,15 +45,17 @@ public class HumanoidArmorLayerMixin<T extends LivingEntity, M extends HumanoidM
 			lightRef.set(LightTexture.FULL_BRIGHT);
 	}
 
-	@Inject(method = "renderArmorPiece", at = @At(value = "INVOKE", target = "Lnet/neoforged/neoforge/client/ClientHooks;getArmorTexture(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ArmorMaterial$Layer;ZLnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/resources/ResourceLocation;",
+	@Inject(method = "renderArmorPiece(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/EquipmentSlot;ILnet/minecraft/client/model/HumanoidModel;FFFFFF)V",
+			at = @At(value = "INVOKE", target = "Lnet/neoforged/neoforge/client/ClientHooks;getArmorTexture(Lnet/minecraft/world/entity/Entity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ArmorMaterial$Layer;ZLnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/resources/ResourceLocation;",
 			shift = At.Shift.BEFORE), cancellable = true)
-	public void modifyArmorTint(PoseStack poseStack, MultiBufferSource bufferSource, T livingEntity, EquipmentSlot slot, int packedLight, A p_model, CallbackInfo ci, @Local(ordinal = 2) LocalIntRef localInt)
+	public void modifyArmorTint(PoseStack poseStack, MultiBufferSource bufferSource, T livingEntity, EquipmentSlot slot, int packedLight, A p_model, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci, @Local(ordinal = 2) LocalIntRef localInt)
 	{
 		ItemStack stack = livingEntity.getItemBySlot(slot);
 		CommonUtils.modifyTint(stack, -1, localInt);
 	}
 
-	@WrapOperation(method = "renderArmorPiece", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;getItemBySlot(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;"))
+	@WrapOperation(method = "renderArmorPiece(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/EquipmentSlot;ILnet/minecraft/client/model/HumanoidModel;FFFFFF)V",
+			at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;getItemBySlot(Lnet/minecraft/world/entity/EquipmentSlot;)Lnet/minecraft/world/item/ItemStack;"))
 	public ItemStack modifyArmorItem(LivingEntity instance, EquipmentSlot equipmentSlot, Operation<ItemStack> original)
 	{
 		ItemStack stack = original.call(instance, equipmentSlot);
@@ -62,7 +64,7 @@ public class HumanoidArmorLayerMixin<T extends LivingEntity, M extends HumanoidM
 		return disguise.isEmpty() ? stack : disguise;
 	}
 
-	@Inject(method = "renderArmorPiece", at = @At("RETURN"))
+	@Inject(method = "renderArmorPiece(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/EquipmentSlot;ILnet/minecraft/client/model/HumanoidModel;)V", at = @At("RETURN"))
 	public void renderArmorPieceTail(PoseStack poseStack, MultiBufferSource bufferSource, T livingEntity, EquipmentSlot slot, int packedLight, A p_model, CallbackInfo ci)
 	{
 		poseStack.popPose();
