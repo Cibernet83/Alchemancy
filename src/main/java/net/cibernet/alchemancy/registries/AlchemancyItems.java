@@ -77,8 +77,8 @@ public class AlchemancyItems
 	public static final DeferredItem<Item> PARADOX_PEARL = REGISTRY.registerSimpleItem("paradox_pearl");
 	public static final DeferredItem<Item> GLOWING_ORB = REGISTRY.register("glowing_orb", () -> new BlockItem(AlchemancyBlocks.GLOWING_ORB.get(), new Item.Properties()));
 
-	public static final DeferredItem<Item> MICROSPACE_SINGULARITY = REGISTRY.registerSimpleItem("microspace_singularity");
-	public static final DeferredItem<Item> MACROSPACE_SINGULARITY = REGISTRY.registerSimpleItem("macrospace_singularity");
+	public static final DeferredItem<Item> MICROSCOPIC_LENS = REGISTRY.registerSimpleItem("microscopic_lens");
+	public static final DeferredItem<Item> MACROSCOPIC_LENS = REGISTRY.registerSimpleItem("macroscopic_lens");
 
 	public static final DeferredItem<InnatePropertyItem> IRON_RING = REGISTRY.register("pearlescent_ring", () -> new InnatePropertyItem.Builder().auxiliary(false).stacksTo(1).infusionSlots(1).build());
 	public static final DeferredItem<InnatePropertyItem> ETERNAL_GLOW_RING = REGISTRY.register("eternal_glow_ring", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.ETERNAL_GLOW).auxiliary(true).toggleable(true).stacksTo(1).build());

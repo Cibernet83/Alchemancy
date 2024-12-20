@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "alchemancy:item/microspace_singularity"
+    "layer0": "alchemancy:item/macroscopic_lens"
   }
 }

@@ -2,11 +2,11 @@
   "type": "alchemancy:item_transmutation",
 
   "catalyst": {
-    "item": "alchemancy:microspace_singularity"
+    "item": "alchemancy:microscopic_lens"
   },
 
   "result": {
     "count": 1,
-    "id": "alchemancy:macrospace_singularity"
+    "id": "alchemancy:macroscopic_lens"
   }
 }
