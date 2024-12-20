@@ -341,6 +341,23 @@
   "advancements.story.alchemancy:find_mace.title": "Stop, Hammertime!",
   "advancements.story.alchemancy:find_mace.description": "Maces are pretty cool. But with the power of Alchemancy, we can make them much cooler...",
 
+  "subtitles.block.alchemancy_catalyst.activate": "Alchemancy Catalyst activates",
+  "subtitles.block.alchemancy_catalyst.use": "Alchemancy Catalyst fires",
+  "subtitles.block.glowing_orb.extinguish": "Glowing Orb extinguished",
+
+  "subtitles.property.heavy": "Heavy item landed",
+  "subtitles.property.bouncy": "Bouncy item bounces",
+  "subtitles.property.toggleable": "Toggleable item is toggled",
+  "subtitles.property.ticking": "Ticking item clicks",
+  "subtitles.property.smelting.recharge": "Smelting item is refueled",
+  "subtitles.property.smelting.depleted": "Smelting item needs refueling",
+  "subtitles.property.calcareous.milk": "Calcareous item gets milked",
+  "subtitles.property.hollow.drop_contents": "Hollow item empties",
+  "subtitles.property.hollow.insert": "Item packed",
+  "subtitles.property.throwable": "Thrown item flies",
+  "subtitles.property.loyal": "Loyal item returns",
+  "subtitles.property.clueless": "Huh?",
+
   "alchemancy.category.basics": "Fundamentals",
   "alchemancy.category.properties": "Infusion Properties",
   "alchemancy.category.trinkets": "Gadgets and Trinkets",

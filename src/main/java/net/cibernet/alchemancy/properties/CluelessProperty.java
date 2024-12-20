@@ -2,6 +2,8 @@ package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
+import net.cibernet.alchemancy.registries.AlchemancySoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -27,7 +29,7 @@ public class CluelessProperty extends Property
 
 		if(performed.get())
 		{
-			//TODO play huh sound
+			user.playSound(AlchemancySoundEvents.CLUELESS.value());
 			if(InfusedPropertiesHelper.hasInfusedProperty(stack, asHolder()))
 				InfusedPropertiesHelper.removeProperty(stack, asHolder());
 		}

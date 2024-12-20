@@ -1,23 +1,15 @@
 package net.cibernet.alchemancy.properties;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvents;
+import net.cibernet.alchemancy.registries.AlchemancySoundEvents;
 import net.minecraft.util.Mth;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 public class HeavyProperty extends Property
 {
@@ -51,7 +43,7 @@ public class HeavyProperty extends Property
 	@Override
 	public void onFall(LivingEntity entity, ItemStack stack, EquipmentSlot slot, LivingFallEvent event)
 	{
-		entity.playSound(SoundEvents.ANVIL_LAND, Mth.lerp(entity.fallDistance / 23f, 0.1f, 1f), Mth.lerp(event.getDistance() / entity.getMaxFallDistance(), 1f, 0.5f));
+		entity.playSound(AlchemancySoundEvents.HEAVY.value(), Mth.lerp(entity.fallDistance / 23f, 0.1f, 1f), Mth.lerp(event.getDistance() / entity.getMaxFallDistance(), 1f, 0.5f));
 	}
 
 	@Override

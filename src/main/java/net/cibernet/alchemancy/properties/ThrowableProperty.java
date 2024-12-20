@@ -3,11 +3,11 @@ package net.cibernet.alchemancy.properties;
 import net.cibernet.alchemancy.entity.InfusedItemProjectile;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
+import net.cibernet.alchemancy.registries.AlchemancySoundEvents;
 import net.cibernet.alchemancy.util.InfusionPropertyDispenseBehavior;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
 import net.minecraft.core.dispenser.BlockSource;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionResult;
@@ -88,7 +88,7 @@ public class ThrowableProperty extends Property
 				user.getX(),
 				user.getY(),
 				user.getZ(),
-				SoundEvents.SNOWBALL_THROW,
+				AlchemancySoundEvents.THROWABLE.value(),
 				SoundSource.PLAYERS,
 				0.5F,
 				0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F)

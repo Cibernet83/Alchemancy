@@ -3,7 +3,7 @@ package net.cibernet.alchemancy.properties;
 import net.cibernet.alchemancy.blocks.blockentities.RootedItemBlockEntity;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
-import net.minecraft.sounds.SoundEvents;
+import net.cibernet.alchemancy.registries.AlchemancySoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
@@ -11,7 +11,6 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.Cow;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
@@ -91,7 +90,7 @@ public class DrippingProperty extends Property
 	{
 		ItemStack itemstack = player.getItemInHand(hand);
 		if (itemstack.is(Items.BUCKET)) {
-			player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
+			player.playSound(AlchemancySoundEvents.CALCAREOUS_MILK.value(), 1.0F, 1.0F);
 			ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, Items.MILK_BUCKET.getDefaultInstance());
 			player.setItemInHand(hand, itemstack1);
 			return true;

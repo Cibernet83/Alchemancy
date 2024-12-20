@@ -1,6 +1,7 @@
 package net.cibernet.alchemancy.blocks.blockentities;
 
 import net.cibernet.alchemancy.registries.AlchemancyBlockEntities;
+import net.cibernet.alchemancy.registries.AlchemancySoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -139,7 +140,7 @@ public class AlchemancyCatalystBlockEntity extends BlockEntity
 		if(level != null) {
 			level.markAndNotifyBlock(getBlockPos(), level.getChunkAt(getBlockPos()), getBlockState(), getBlockState(), 2, 1);
 			if (!silent)
-				level.playSound(null, getBlockPos(), startup ? SoundEvents.BEACON_ACTIVATE : SoundEvents.RESPAWN_ANCHOR_CHARGE, SoundSource.BLOCKS, 1, 1);
+				level.playSound(null, getBlockPos(), startup ? AlchemancySoundEvents.ALCHEMANCY_CRYSTAL_ACTIVATE.value() : AlchemancySoundEvents.ALCHEMANCY_CRYSTAL_FIRE.value(), SoundSource.BLOCKS, 1, 1);
 		}
 	}
 

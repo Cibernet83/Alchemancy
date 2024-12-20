@@ -2,6 +2,7 @@ package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.blocks.blockentities.RootedItemBlockEntity;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
+import net.cibernet.alchemancy.registries.AlchemancySoundEvents;
 import net.cibernet.alchemancy.util.CommonUtils;
 import net.cibernet.alchemancy.util.InfusionPropertyDispenseBehavior;
 import net.minecraft.core.BlockPos;
@@ -12,7 +13,6 @@ import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -207,11 +207,11 @@ public class HollowProperty extends Property implements IDataHolder<ItemStack>
 	}
 
 	private void playInsertSound(Entity entity) {
-		entity.playSound(SoundEvents.BUNDLE_INSERT, 0.8F, 0.8F + entity.level().getRandom().nextFloat() * 0.4F);
+		entity.playSound(AlchemancySoundEvents.HOLLOW_INSERT.value(), 0.8F, 0.8F + entity.level().getRandom().nextFloat() * 0.4F);
 	}
 
 	private void playDropContentsSound(Entity entity) {
-		entity.playSound(SoundEvents.BUNDLE_DROP_CONTENTS, 0.8F, 0.8F + entity.level().getRandom().nextFloat() * 0.4F);
+		entity.playSound(AlchemancySoundEvents.HOLLOW_DROP_CONTENTS.value(), 0.8F, 0.8F + entity.level().getRandom().nextFloat() * 0.4F);
 	}
 
 	@Override

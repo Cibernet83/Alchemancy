@@ -1,0 +1,190 @@
+{
+  "block.alchemancy_catalyst.use": {
+    "sounds": [
+      "block/respawn_anchor/charge1",
+      "block/respawn_anchor/charge2",
+      "block/respawn_anchor/charge3"
+    ],
+    "subtitle": "subtitles.block.alchemancy_catalyst.use"
+  },
+  "block.alchemancy_catalyst.activate": {
+    "sounds": [
+      "block/beacon/activate"
+    ],
+    "subtitle": "subtitles.block.alchemancy_catalyst.activate"
+  },
+  "block.glowing_orb.extinguish": {
+  "sounds": [
+    "random/fizz"
+  ],
+  "subtitle": "subtitles.block.glowing_orb.extinguish"
+},
+  "property.heavy": {
+    "sounds": [
+      "random/anvil_land"
+    ],
+    "subtitle": "subtitles.property.heavy"
+  },
+  "property.bouncy.jump": {
+  "sounds": [
+    "mob/slime/big1",
+    "mob/slime/big2",
+    "mob/slime/big3",
+    "mob/slime/big4"
+  ],
+  "subtitle": "subtitles.property.bouncy"
+},
+  "property.bouncy.jump_small": {
+    "sounds": [
+      "mob/slime/small1",
+      "mob/slime/small2",
+      "mob/slime/small3",
+      "mob/slime/small4",
+      "mob/slime/small5"
+    ],
+    "subtitle": "subtitles.property.bouncy"
+  },
+  "property.toggleable": {
+    "sounds": [
+      "random/click"
+    ],
+    "subtitle": "subtitles.property.toggleable"
+  },
+  "property.ticking": {
+    "sounds": [
+      "random/click"
+    ],
+    "subtitle": "subtitles.property.ticking"
+  },
+  "property.smelting.recharge": {
+    "sounds": [
+      "mob/ghast/fireball4"
+    ],
+    "subtitle": "subtitles.property.smelting.recharge"
+  },
+  "property.smelting.depleted": {
+  "sounds": [
+    "random/fizz"
+  ],
+  "subtitle": "property.smelting.depleted"
+  },
+  "property.calcareous.milk": {
+    "sounds": [
+      "entity/cow/milk1",
+      "entity/cow/milk2",
+      "entity/cow/milk3"
+    ],
+    "subtitle": "subtitles.property.calcareous.milk"
+  },
+  "property.hollow.drop_contents": {
+    "sounds": [
+      "item/bundle/drop_contents1",
+      {
+        "name": "item/bundle/drop_contents1",
+        "pitch": 0.95
+      },
+      "item/bundle/drop_contents2",
+      {
+        "name": "item/bundle/drop_contents2",
+        "pitch": 0.95
+      },
+      "item/bundle/drop_contents3",
+      {
+        "name": "item/bundle/drop_contents3",
+        "pitch": 0.95
+      }
+    ],
+    "subtitle": "subtitles.property.hollow.drop_contents"
+  },
+  "property.hollow.insert": {
+    "sounds": [
+      "item/bundle/insert1",
+      {
+        "name": "item/bundle/insert1",
+        "pitch": 0.95
+      },
+      {
+        "name": "item/bundle/insert1",
+        "pitch": 1.05
+      },
+      "item/bundle/insert2",
+      {
+        "name": "item/bundle/insert2",
+        "pitch": 0.95
+      },
+      {
+        "name": "item/bundle/insert2",
+        "pitch": 1.05
+      },
+      "item/bundle/insert3",
+      {
+        "name": "item/bundle/insert3",
+        "pitch": 0.95
+      },
+      {
+        "name": "item/bundle/insert3",
+        "pitch": 1.05
+      }
+    ],
+    "subtitle": "subtitles.property.hollow.insert"
+  },
+  "property.throwable": {
+    "sounds": [
+      "random/bow"
+    ],
+    "subtitle": "subtitles.property.throwable"
+  },
+  "property.loyal": {
+  "sounds": [
+    {
+      "name": "item/trident/return1",
+      "volume": 0.8
+    },
+    {
+      "name": "item/trident/return2",
+      "volume": 0.8
+    },
+    {
+      "name": "item/trident/return2",
+      "pitch": 0.8,
+      "volume": 0.8
+    },
+    {
+      "name": "item/trident/return2",
+      "pitch": 1.2,
+      "volume": 0.8
+    },
+    {
+      "name": "item/trident/return2",
+      "pitch": 1.2,
+      "volume": 0.8
+    },
+    {
+      "name": "item/trident/return3",
+      "volume": 0.8
+    },
+    {
+      "name": "item/trident/return3",
+      "pitch": 0.8,
+      "volume": 0.8
+    },
+    {
+      "name": "item/trident/return3",
+      "pitch": 0.8,
+      "volume": 0.8
+    },
+    {
+      "name": "item/trident/return3",
+      "pitch": 1.2,
+      "volume": 0.8
+    }
+  ],
+  "subtitle": "subtitles.property.loyal"
+  },
+  "property.clueless": {
+    "sounds": [
+      "alchemancy:random/clueless"
+    ],
+    "subtitle": "subtitles.property.clueless"
+  }
+}

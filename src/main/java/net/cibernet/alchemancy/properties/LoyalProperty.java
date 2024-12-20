@@ -37,7 +37,7 @@ public class LoyalProperty extends Property
 					arrow.hasImpulse = true;
 					/*
 					if (arrow.clientSideReturnTridentTickCount == 0) {
-						arrow.playSound(SoundEvents.TRIDENT_RETURN, 10.0F, 1.0F);
+						arrow.playSound(AlchemancySoundEvents.LOYAL.value(), 10.0F, 1.0F);
 					}
 
 					arrow.clientSideReturnTridentTickCount++;

@@ -1,11 +1,9 @@
 package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.blocks.blockentities.RootedItemBlockEntity;
-import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
+import net.cibernet.alchemancy.registries.AlchemancySoundEvents;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -52,7 +50,7 @@ public class ToggleableProperty extends Property implements IDataHolder<Boolean>
 		boolean active = getData(stack);
 		setData(stack, !active);
 		if(entity != null)
-			entity.playSound(SoundEvents.LEVER_CLICK, 0.3F, active ? 0.5F : 0.6F);
+			entity.playSound(AlchemancySoundEvents.TOGGLEABLE.value(), 0.3F, active ? 0.5F : 0.6F);
 	}
 
 	@Override

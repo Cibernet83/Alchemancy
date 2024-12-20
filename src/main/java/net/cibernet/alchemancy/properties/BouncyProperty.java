@@ -1,16 +1,11 @@
 package net.cibernet.alchemancy.properties;
 
-import net.cibernet.alchemancy.Alchemancy;
-import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.InteractionResult;
+import net.cibernet.alchemancy.registries.AlchemancySoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.HitResult;
@@ -18,7 +13,6 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import org.jetbrains.annotations.Nullable;
 
@@ -115,7 +109,7 @@ public class BouncyProperty extends Property
 		{
 			user.hurtMarked = true;
 			user.setDeltaMovement(BOUNCE_TARGETS.get(uuid).multiply(1, -0.8, 1));
-			user.playSound(SoundEvents.SLIME_JUMP);
+			user.playSound((BOUNCE_TARGETS.get(uuid).length() > 0.7) ? AlchemancySoundEvents.BOUNCY.value() : AlchemancySoundEvents.BOUNCY_SMALL.value());
 			BOUNCE_TARGETS.remove(uuid);
 		}
 	}

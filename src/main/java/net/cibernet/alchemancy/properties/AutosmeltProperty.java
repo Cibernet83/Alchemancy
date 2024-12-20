@@ -2,6 +2,7 @@ package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
+import net.cibernet.alchemancy.registries.AlchemancySoundEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -99,12 +100,12 @@ public class AutosmeltProperty extends Property implements IDataHolder<Integer>
 
 	public void playRefuelSound(Entity entity)
 	{
-		entity.playSound(SoundEvents.FIRECHARGE_USE);
+		entity.playSound(AlchemancySoundEvents.SMELTING_RECHARGE.value());
 	}
 
 	public void playOutOfFuelSound(Entity entity)
 	{
-		entity.playSound(SoundEvents.FIRE_EXTINGUISH);
+		entity.playSound(AlchemancySoundEvents.SMELTING_DEPLETED.value());
 	}
 
 	public boolean checkAndConsumeFuel(Entity entity, ItemStack stack)

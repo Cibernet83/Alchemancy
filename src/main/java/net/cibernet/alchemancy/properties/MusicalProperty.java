@@ -3,7 +3,10 @@ package net.cibernet.alchemancy.properties;
 import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.blocks.blockentities.RootedItemBlockEntity;
 import net.cibernet.alchemancy.events.handler.GeneralEventHandler;
+import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.registries.AlchemancyBlocks;
+import net.cibernet.alchemancy.registries.AlchemancyProperties;
+import net.cibernet.alchemancy.registries.AlchemancySoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -67,7 +70,9 @@ public class MusicalProperty extends Property
 	{
 		Level level = event.getLevel();
 		if(!level.isClientSide())
+		{
 			playSound(event.getEntity(), level, event.getEntity().getEyePosition(), getInstrumentFromItem(event.getItemStack()), event.getEntity().getXRot() / -90f);
+		}
 	}
 
 	@Override
@@ -108,6 +113,9 @@ public class MusicalProperty extends Property
 
 	public static SoundEvent getInstrumentFromItem(ItemStack stack)
 	{
+		if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.CLUELESS))
+			return AlchemancySoundEvents.CLUELESS.value();
+
 		for(TagKey<Item> tag : ON_CLICK_SOUNDS.keySet())
 			if(stack.is(tag))
 				return ON_CLICK_SOUNDS.get(tag);

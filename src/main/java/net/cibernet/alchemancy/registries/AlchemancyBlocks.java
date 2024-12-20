@@ -51,6 +51,7 @@ public class AlchemancyBlocks
 					.instabreak()
 					.pushReaction(PushReaction.DESTROY)
 					.replaceable()
+					.sound(AlchemancySoundEvents.GLOWING_ORB)
 					.lightLevel(state -> 15)));
 
 }

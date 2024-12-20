@@ -25,7 +25,7 @@ public class GlowingOrbBlock  extends BarrierBlock
 
 	@Override
 	protected RenderShape getRenderShape(BlockState state) {
-		return RenderShape.MODEL; //TODO use cube until we figure out a good way to use particles
+		return RenderShape.MODEL;
 	}
 
 	@Override

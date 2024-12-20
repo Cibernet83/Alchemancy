@@ -2,7 +2,7 @@ package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
-import net.minecraft.sounds.SoundEvents;
+import net.cibernet.alchemancy.registries.AlchemancySoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -23,7 +23,7 @@ public class TickingProperty extends AbstractTimerProperty
 		if(percentageTimeLeft > 0)
 		{
 			if(System.currentTimeMillis() % (int)(1000) == 0)
-				user.playSound(SoundEvents.LEVER_CLICK, 0.2f, 0.8f);
+				user.playSound(AlchemancySoundEvents.TICKING.value(), 0.2f, 0.8f);
 		}
 		if(percentageTimeLeft == 0)
 		{
