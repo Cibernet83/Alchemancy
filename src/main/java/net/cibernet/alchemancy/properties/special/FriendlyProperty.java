@@ -48,7 +48,8 @@ public class FriendlyProperty extends Property
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onIncomingDamage(LivingIncomingDamageEvent event)
 	{
-		if(event.isCanceled() || !event.getEntity().getType().is(AlchemancyTags.EntityTypes.AFFECTED_BY_FRIENDLY))
+		if(event.isCanceled() || event.getEntity().equals(event.getSource().getEntity()) ||
+				!event.getEntity().getType().is(AlchemancyTags.EntityTypes.AFFECTED_BY_FRIENDLY))
 			return;
 
 		if(event.getSource().getEntity() instanceof Player user)
