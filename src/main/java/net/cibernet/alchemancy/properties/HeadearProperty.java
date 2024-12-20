@@ -2,6 +2,9 @@ package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
+import net.cibernet.alchemancy.util.InfusionPropertyDispenseBehavior;
+import net.minecraft.core.Direction;
+import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -46,6 +49,16 @@ public class HeadearProperty extends Property
 		}
 	}
 
+	@Override
+	public InfusionPropertyDispenseBehavior.DispenseResult onItemDispense(BlockSource blockSource, Direction direction, ItemStack stack, InfusionPropertyDispenseBehavior.DispenseResult currentResult)
+	{
+		if(currentResult != InfusionPropertyDispenseBehavior.DispenseResult.CONSUME && ArmorItem.dispenseArmor(blockSource, stack))
+		{
+			InfusionPropertyDispenseBehavior.playDefaultEffects(blockSource, direction);
+			return InfusionPropertyDispenseBehavior.DispenseResult.CONSUME;
+		}
+		return InfusionPropertyDispenseBehavior.DispenseResult.PASS;
+	}
 
 	public static InteractionResultHolder<ItemStack> swapWithEquipmentSlot(Item item, Level level, Player player, InteractionHand hand) {
 		ItemStack itemstack = player.getItemInHand(hand);

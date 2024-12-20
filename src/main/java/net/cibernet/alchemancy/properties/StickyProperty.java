@@ -2,7 +2,10 @@ package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.blocks.blockentities.RootedItemBlockEntity;
+import net.cibernet.alchemancy.util.InfusionPropertyDispenseBehavior;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
@@ -31,6 +34,11 @@ import java.util.List;
 public class StickyProperty extends Property
 {
 	private static final AttributeModifier SPEED_MOD = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "sticky_property_speed_penalty"), -0.25F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+
+	@Override
+	public InfusionPropertyDispenseBehavior.DispenseResult onItemDispense(BlockSource blockSource, Direction direction, ItemStack stack, InfusionPropertyDispenseBehavior.DispenseResult currentResult) {
+		return InfusionPropertyDispenseBehavior.DispenseResult.SUCCESS;
+	}
 
 	@Override
 	public void onItemTossed(Player player, ItemStack stack, ItemEntity itemEntity, ItemTossEvent event)

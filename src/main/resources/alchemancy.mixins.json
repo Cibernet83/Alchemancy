@@ -11,6 +11,7 @@
     "BlockStateBaseMixin",
     "BlockStateExtensionMixin",
     "DataComponentHolderMixin",
+    "DispenserBlockMixin",
     "EntityMixin",
     "ItemEntityMixin",
     "ItemMixin",

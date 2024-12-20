@@ -1,11 +1,15 @@
 package net.cibernet.alchemancy.properties;
 
+import net.cibernet.alchemancy.util.InfusionPropertyDispenseBehavior;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.neoforge.common.IShearable;
@@ -23,6 +27,12 @@ public class ShearingProperty extends ToolProperty
 
 	public ShearingProperty(int color, List<RuleFunc> toolRules, Set<ItemAbility> abilities) {
 		super(color, toolRules, abilities);
+	}
+
+	@Override
+	public InfusionPropertyDispenseBehavior.DispenseResult onItemDispense(BlockSource blockSource, Direction direction, ItemStack stack, InfusionPropertyDispenseBehavior.DispenseResult currentResult)
+	{
+		return InfusionPropertyDispenseBehavior.executeItemBehavior(blockSource, stack, Items.SHEARS);
 	}
 
 	@Override

@@ -2,11 +2,13 @@ package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.util.CommonUtils;
+import net.cibernet.alchemancy.util.InfusionPropertyDispenseBehavior;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -71,7 +73,7 @@ public class BucketingProperty extends Property implements IDataHolder<Fluid>
 	@Override
 	public void onRightClickItem(PlayerInteractEvent.RightClickItem event)
 	{
-		if(!event.isCanceled() && handleInteraction(event))
+		if(!event.isCanceled() && handleInteraction(event.getLevel(), event.getItemStack(), event.getEntity()))
 		{
 			event.setCancellationResult(InteractionResult.SUCCESS);
 			event.setCanceled(true);
@@ -81,45 +83,67 @@ public class BucketingProperty extends Property implements IDataHolder<Fluid>
 	@Override
 	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
 	{
-		if(!event.isCanceled() && handleInteraction(event))
+		if(!event.isCanceled() && handleInteraction(event.getLevel(), event.getItemStack(), event.getEntity()))
 		{
 			event.setCancellationResult(InteractionResult.SUCCESS);
 			event.setCanceled(true);
 		}
 	}
 
-	private boolean handleInteraction(PlayerInteractEvent event)
+	@Override
+	public InfusionPropertyDispenseBehavior.DispenseResult onItemDispense(BlockSource blockSource, Direction direction, ItemStack stack, InfusionPropertyDispenseBehavior.DispenseResult currentResult)
 	{
-		Level level = event.getLevel();
-		ItemStack stack = event.getItemStack();
+		if (handleInteraction(blockSource.level(), stack, blockSource.pos().relative(direction), direction, null))
+		{
+			InfusionPropertyDispenseBehavior.playDefaultEffects(blockSource, direction);
+			return InfusionPropertyDispenseBehavior.DispenseResult.SUCCESS;
+		}
+		return InfusionPropertyDispenseBehavior.DispenseResult.PASS;
+	}
+
+	private boolean handleInteraction(Level level, ItemStack stack, Player user)
+	{
 		Fluid storedFluid = getData(stack);
-		BlockHitResult hitResult = Item.getPlayerPOVHitResult(level, event.getEntity(), storedFluid.equals(Fluids.EMPTY) ? ClipContext.Fluid.SOURCE_ONLY : ClipContext.Fluid.NONE);
-		Player user = event.getEntity();
+		BlockHitResult hitResult = Item.getPlayerPOVHitResult(level, user, storedFluid.equals(Fluids.EMPTY) ? ClipContext.Fluid.SOURCE_ONLY : ClipContext.Fluid.NONE);
 		BlockPos hitPos = hitResult.getBlockPos();
-		BlockState hitState = level.getBlockState(hitPos);
 		Direction hitDirection = hitResult.getDirection();
 
 		if(hitResult.getType() == HitResult.Type.BLOCK)
+			return handleInteraction(level, stack, hitPos, hitDirection, user);
+
+		return false;
+	}
+
+	private boolean handleInteraction(Level level, ItemStack stack, BlockPos pos, Direction direction, @Nullable Player user)
+	{
+		Fluid storedFluid = getData(stack);
+		BlockState state = level.getBlockState(pos);
+
+		if(storedFluid.equals(getDefaultData()))
 		{
-			if(storedFluid.equals(getDefaultData()))
-			{
 
-				if(hitState.getBlock() instanceof BucketPickup bucketPickup && bucketPickup.pickupBlock(user, level, hitPos, hitState).getItem() instanceof BucketItem bucketItem)
+			if(state.getBlock() instanceof BucketPickup bucketPickup && bucketPickup.pickupBlock(user, level, pos, state).getItem() instanceof BucketItem bucketItem)
+			{
+				if(user != null)
 				{
-					bucketPickup.getPickupSound(hitState).ifPresent(sound -> user.playSound(sound, 1.0F, 1.0F));
-					level.gameEvent(user, GameEvent.FLUID_PICKUP, hitPos);
-
-					setData(stack, bucketItem.content);
-					return true;
+					bucketPickup.getPickupSound(state).ifPresent(sound -> user.playSound(sound, 1.0F, 1.0F));
+					level.gameEvent(user, GameEvent.FLUID_PICKUP, pos);
 				}
-			}
-			else if(placeLiquid(level, hitPos, storedFluid, user, hitDirection))
-			{
-				setData(stack, getDefaultData());
+				else
+				{
+					bucketPickup.getPickupSound(state).ifPresent(sound -> level.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0f, 0.5f));
+					level.gameEvent(GameEvent.FLUID_PICKUP, pos, GameEvent.Context.of(state));
+				}
+
+				setData(stack, bucketItem.content);
 				return true;
 			}
 		}
-
+		else if(placeLiquid(level, pos, storedFluid, user, direction))
+		{
+			setData(stack, getDefaultData());
+			return true;
+		}
 		return false;
 	}
 

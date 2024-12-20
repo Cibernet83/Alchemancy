@@ -2,11 +2,14 @@ package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.util.CommonUtils;
+import net.cibernet.alchemancy.util.InfusionPropertyDispenseBehavior;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
@@ -48,18 +51,8 @@ public class EncapsulatingProperty extends Property implements IDataHolder<Encap
 
 		if(data.blockState.isAir())
 		{
-			BlockState state = level.getBlockState(pos);
-			BlockEntity blockEntity = level.getBlockEntity(pos);
-
-			if(!state.isAir() && state.getDestroySpeed(level, pos) >= 0)
+			if(pickUpBlock(level, pos, event.getItemStack(), event.getEntity()))
 			{
-				if(blockEntity != null)
-					level.removeBlockEntity(pos);
-				level.removeBlock(pos, false);
-				setData(event.getItemStack(), state, blockEntity);
-
-				level.playSound(null, pos, data.blockState.getSoundType(level, pos, event.getEntity()).getBreakSound(), SoundSource.BLOCKS, 1.0f, 0.5f);
-
 				event.setCancellationResult(InteractionResult.SUCCESS);
 				event.setCanceled(true);
 			}
@@ -78,9 +71,55 @@ public class EncapsulatingProperty extends Property implements IDataHolder<Encap
 	}
 
 	@Override
+	public InfusionPropertyDispenseBehavior.DispenseResult onItemDispense(BlockSource blockSource, Direction direction, ItemStack stack, InfusionPropertyDispenseBehavior.DispenseResult currentResult)
+	{
+		Level level = blockSource.level();
+		BlockPos pos = blockSource.pos().relative(direction);
+		BlockData data = getData(stack);
+
+		if(data.blockState.isAir())
+		{
+			if(pickUpBlock(level, pos, stack, null))
+			{
+				InfusionPropertyDispenseBehavior.playDefaultParticles(blockSource, direction);
+				return InfusionPropertyDispenseBehavior.DispenseResult.SUCCESS;
+			}
+		}
+		else
+		{
+			if(attemptPlaceBlock(level, pos, data, stack, null))
+			{
+				InfusionPropertyDispenseBehavior.playDefaultEffects(blockSource, direction);
+				return InfusionPropertyDispenseBehavior.DispenseResult.SUCCESS;
+			}
+		}
+
+		return InfusionPropertyDispenseBehavior.DispenseResult.PASS;
+	}
+
+	@Override
 	public void onEntityItemDestroyed(ItemStack stack, Entity itemEntity, DamageSource damageSource)
 	{
 		attemptPlaceBlock(itemEntity.level(), itemEntity.blockPosition(), getData(stack), stack, null);
+	}
+
+	public boolean pickUpBlock(Level level, BlockPos pos, ItemStack stack, @Nullable Entity user)
+	{
+		BlockState state = level.getBlockState(pos);
+		BlockEntity blockEntity = level.getBlockEntity(pos);
+
+		if(!state.isAir() && state.getDestroySpeed(level, pos) >= 0)
+		{
+			if(blockEntity != null)
+				level.removeBlockEntity(pos);
+			level.removeBlock(pos, false);
+			setData(stack, state, blockEntity);
+
+			level.playSound(null, pos, state.getSoundType(level, pos, user).getBreakSound(), SoundSource.BLOCKS, 1.0f, 0.5f);
+
+			return true;
+		}
+		return false;
 	}
 
 	public boolean attemptPlaceBlock(Level level, BlockPos pos, BlockData data, ItemStack source, @Nullable Entity user)

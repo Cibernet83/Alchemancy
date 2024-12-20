@@ -3,10 +3,14 @@ package net.cibernet.alchemancy.properties;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.cibernet.alchemancy.util.CommonUtils;
+import net.cibernet.alchemancy.util.InfusionPropertyDispenseBehavior;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -19,12 +23,15 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -33,6 +40,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.Optional;
 
 public class CapturingProperty extends Property implements IDataHolder<CapturingProperty.EntityData<?>>
@@ -62,6 +70,29 @@ public class CapturingProperty extends Property implements IDataHolder<Capturing
 			source = target;
 		else lookVec = source.getLookAngle();
 		releaseMob(source.level(), stack, source.position().add(lookVec), lookVec);
+	}
+
+	@Override
+	public InfusionPropertyDispenseBehavior.DispenseResult onItemDispense(BlockSource blockSource, Direction direction, ItemStack stack, InfusionPropertyDispenseBehavior.DispenseResult currentResult)
+	{
+		if(releaseMob(blockSource.level(), stack, blockSource.pos().relative(direction).getCenter(), new Vec3(direction.getStepX(), direction.getStepY(), direction.getStepZ())))
+		{
+			InfusionPropertyDispenseBehavior.playDefaultEffects(blockSource, direction);
+			return InfusionPropertyDispenseBehavior.DispenseResult.SUCCESS;
+		}
+		else
+		{
+			ServerLevel serverlevel = blockSource.level();
+			BlockPos blockpos = blockSource.pos().relative(blockSource.state().getValue(DispenserBlock.FACING));
+			List<Entity> list = serverlevel.getEntitiesOfClass(Entity.class, new AABB(blockpos), EntitySelector.NO_SPECTATORS);
+
+			if(!list.isEmpty() && captureMob(list.getFirst(), stack))
+			{
+				InfusionPropertyDispenseBehavior.playDefaultEffects(blockSource, direction);
+				return InfusionPropertyDispenseBehavior.DispenseResult.SUCCESS;
+			}
+		}
+		return InfusionPropertyDispenseBehavior.DispenseResult.PASS;
 	}
 
 	@Override
