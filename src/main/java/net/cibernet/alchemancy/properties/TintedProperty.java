@@ -42,7 +42,7 @@ public class TintedProperty extends IncreaseInfuseSlotsProperty implements IData
 	}
 
 	@Override
-	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid)
+	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid, List<Holder<Property>> propertiesToAdd)
 	{
 		int base = getData(stack);
 		int color = getDyeColor(propertySource);
@@ -50,7 +50,7 @@ public class TintedProperty extends IncreaseInfuseSlotsProperty implements IData
 
 
 		if(color == -1)
-			return super.onInfusedByDormantProperty(stack, propertySource, grid);
+			return super.onInfusedByDormantProperty(stack, propertySource, grid, propertiesToAdd);
 
 		setData(stack, base == getDefaultData() ? FastColor.ARGB32.color(255, color) :  mixColors(base, List.of(color)));
 		return true;

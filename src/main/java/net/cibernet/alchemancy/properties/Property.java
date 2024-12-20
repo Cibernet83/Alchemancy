@@ -412,7 +412,7 @@ public abstract class Property
 	public void onUserDeath(LivingEntity entity, ItemStack stack, EquipmentSlot slot, LivingDeathEvent event) {
 	}
 
-	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid)
+	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid, List<Holder<Property>> propertiesToAdd)
 	{
 		return !InfusedPropertiesHelper.hasInfusedProperty(stack, asHolder());
 	}

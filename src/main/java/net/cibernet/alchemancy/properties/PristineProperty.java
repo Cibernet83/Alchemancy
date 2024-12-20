@@ -4,12 +4,15 @@ import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.util.ColorUtils;
+import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.List;
 
 public class PristineProperty extends Property implements IDataHolder<Integer>, ITintModifier
 {
@@ -19,14 +22,14 @@ public class PristineProperty extends Property implements IDataHolder<Integer>, 
 	}
 
 	@Override
-	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid)
+	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid, List<Holder<Property>> propertiesToAdd)
 	{
 		if(!getData(stack).equals(getDefaultData()))
 		{
 			removeData(stack);
 			return true;
 		}
-		return super.onInfusedByDormantProperty(stack, propertySource, grid);
+		return super.onInfusedByDormantProperty(stack, propertySource, grid, propertiesToAdd);
 	}
 
 	@Override

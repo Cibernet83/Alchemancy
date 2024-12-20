@@ -368,8 +368,9 @@ public class ForgeRecipeGrid implements RecipeInput
 				continue;
 
 			boolean perform = false;
-			for (Holder<Property> property : properties) {
-				if(property.value().onInfusedByDormantProperty(target, stack, this))
+			for (Holder<Property> property : List.copyOf(properties))
+			{
+				if(property.value().onInfusedByDormantProperty(target, stack, this, properties))
 					perform = true;
 			}
 
@@ -420,7 +421,7 @@ public class ForgeRecipeGrid implements RecipeInput
 
 			boolean perform = false;
 			for (Holder<Property> property : properties) {
-				if(property.value().onInfusedByDormantProperty(target, stack, this))
+				if(property.value().onInfusedByDormantProperty(target, stack, this, properties))
 					perform = true;
 			}
 

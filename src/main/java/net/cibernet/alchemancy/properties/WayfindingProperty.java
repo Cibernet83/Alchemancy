@@ -10,6 +10,7 @@ import net.cibernet.alchemancy.util.CommonUtils;
 import net.cibernet.alchemancy.util.WayfindingUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
+import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
@@ -35,6 +36,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerSetSpawnEvent;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -42,9 +44,9 @@ import java.util.UUID;
 public class WayfindingProperty extends Property implements IDataHolder<Tuple<WayfindingProperty.WayfindData, WayfindingProperty.RotationData>>
 {
 	@Override
-	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid)
+	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid, List<Holder<Property>> propertiesToAdd)
 	{
-		if(super.onInfusedByDormantProperty(stack, propertySource, grid))
+		if(super.onInfusedByDormantProperty(stack, propertySource, grid, propertiesToAdd))
 		{
 			if(propertySource.has(DataComponents.LODESTONE_TRACKER))
 			{

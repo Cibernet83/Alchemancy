@@ -3,6 +3,7 @@ package net.cibernet.alchemancy.properties;
 import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
+import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
@@ -12,6 +13,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+
+import java.util.List;
 
 public class WaxedProperty extends Property implements IDataHolder<Integer>
 {
@@ -23,12 +26,12 @@ public class WaxedProperty extends Property implements IDataHolder<Integer>
 
 
 	@Override
-	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid) {
+	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid, List<Holder<Property>> propertiesToAdd) {
 		if (!getData(stack).equals(getDefaultData())) {
 			removeData(stack);
 			return true;
 		}
-		return super.onInfusedByDormantProperty(stack, propertySource, grid);
+		return super.onInfusedByDormantProperty(stack, propertySource, grid, propertiesToAdd);
 	}
 
 	@Override
