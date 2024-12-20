@@ -438,6 +438,9 @@
   "alchemancy.entry.friendship_ring.page0": "Some of my experiments can be quite harmful, making me worry for the safety of my companions. With the discovery of the $(property)Nonlethal$() Property I believe I should be able to create a Ring that allows them to stay safe from my attacks, whether direct or indirect.",
   "alchemancy.entry.friendship_ring.page1": "As long as this ring is active and stays my inventory, any of my attacks will be incapable of harming animals, villagers, and other players.",
 
+  "alchemancy.entry.missing_infusion_entries": "Missing Entries",
+  "alchemancy.entry.missing_infusion_entries.page0": "$(o)For some strange reason, the author of the mod thought would be a good idea to implement over 150 $(thing)Infusion Properties$() before even starting work on the guidebook. So in the interest of releasing the mod before the end of the decade, a large portion of these will be missing and will be added over time. Please be patient!",
+  "alchemancy.entry.missing_infusion_entries.page1": "$(o)In the meantime, you can refer to the wiki for more information on the mod and all infusions.",
   "alchemancy.entry.infusion_property.missing": "$(o)This entry appears to be missing, please inform the mod author.",
   "alchemancy.entry.infusion_property.wiki": "$(o)In the meantime, please refer to the wiki for information on this property.",
   "alchemancy.entry.infusion_property.wiki_button": "Alchemancy Wiki"

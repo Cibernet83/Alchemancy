@@ -43,7 +43,7 @@ public class AlchemancyDatagenHandler
 				AlchemancyDatagenHandler::getPropertyDiscoveryAdvancements
 		)));
 
-		generator.addProvider(event.includeClient(), new PropertyEntryProvider(output, lookupProvider));
+		//generator.addProvider(event.includeClient(), new PropertyEntryProvider(output, lookupProvider));
 	}
 
 	public static void getPropertyDiscoveryAdvancements(HolderLookup.Provider registries, Consumer<AdvancementHolder> saver, ExistingFileHelper existingFileHelper)
