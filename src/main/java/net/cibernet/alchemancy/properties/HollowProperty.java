@@ -3,9 +3,13 @@ package net.cibernet.alchemancy.properties;
 import net.cibernet.alchemancy.blocks.blockentities.RootedItemBlockEntity;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.util.CommonUtils;
+import net.cibernet.alchemancy.util.InfusionPropertyDispenseBehavior;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.dispenser.BlockSource;
+import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -22,6 +26,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
@@ -41,6 +46,22 @@ public class HollowProperty extends Property implements IDataHolder<ItemStack>
 	public <T> Object modifyDataComponent(ItemStack stack, DataComponentType<? extends T> dataType, T data)
 	{
 		return dataType == DataComponents.MAX_STACK_SIZE ? 1 : data;
+	}
+
+	@Override
+	public InfusionPropertyDispenseBehavior.DispenseResult onItemDispense(BlockSource blockSource, Direction direction, ItemStack stack, InfusionPropertyDispenseBehavior.DispenseResult currentResult)
+	{
+		ItemStack storedStack = getData(stack);
+
+		if(!stack.isEmpty())
+		{
+			DefaultDispenseItemBehavior.spawnItem(blockSource.level(), storedStack, 6, direction, DispenserBlock.getDispensePosition(blockSource));
+			setData(stack, getDefaultData());
+			InfusionPropertyDispenseBehavior.playDefaultEffects(blockSource, direction);
+			return InfusionPropertyDispenseBehavior.DispenseResult.SUCCESS;
+		}
+
+		return InfusionPropertyDispenseBehavior.DispenseResult.PASS;
 	}
 
 	@Override
