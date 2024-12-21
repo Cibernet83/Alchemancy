@@ -1,0 +1,31 @@
+{
+  "name": "alchemancy.entry.mace_upgrades",
+  "sortnum": 0,
+  "advancement": "alchemancy:story/find_mace",
+  "icon": "alchemancy:rocket_powered_hammer",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.mace_upgrades.page0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.mace_upgrades.page1"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:rocket_powered_hammer",
+      "text": "alchemancy.entry.mace_upgrades.page2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.mace_upgrades.page3"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.mace_upgrades.page4"
+    }
+  ]
+}

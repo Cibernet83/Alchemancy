@@ -30,6 +30,11 @@ public class PropertyEntryProvider implements DataProvider
 		this(output, registries, "https://github.com/Cibernet83/Alchemancy/wiki/Infusion-Properties#", AlchemancyProperties.REGISTRY.getEntries());
 	}
 
+	protected PropertyEntryProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries, DeferredHolder<Property, ? extends Property>... entries)
+	{
+		this(output, registries, "https://github.com/Cibernet83/Alchemancy/wiki/Infusion-Properties#", List.of(entries));
+	}
+
 	public PropertyEntryProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries, String wikiLink, Collection<DeferredHolder<Property, ? extends Property>> entries)
 	{
 		this.registries = registries;

@@ -1,0 +1,32 @@
+{
+  "name": "alchemancy.entry.size_manipulation",
+  "sortnum": 0,
+  "advancement": "alchemancy:discovery/scoping",
+  "icon": "alchemancy:microscopic_lens",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.size_manipulation.page0"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:microscopic_lens",
+      "text": "alchemancy.entry.size_manipulation.page1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.size_manipulation.page2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.size_manipulation.page3"
+    },
+    {
+      "type": "alchemancy:transmutation",
+      "recipe": "alchemancy:macroscopic_lens",
+      "text": "alchemancy.entry.size_manipulation.page4"
+    }
+  ]
+}

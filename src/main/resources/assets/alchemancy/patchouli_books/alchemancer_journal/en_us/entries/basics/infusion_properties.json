@@ -5,6 +5,10 @@
   "icon": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:random\"]]",
   "category": "alchemancy:basics",
 
+  "extra_recipe_mappings": {
+    "alchemancy:property_capsule": 0
+  },
+
   "pages": [
     {
       "type": "patchouli:text",

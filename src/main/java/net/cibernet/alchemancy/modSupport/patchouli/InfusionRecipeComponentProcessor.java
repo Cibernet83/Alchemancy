@@ -3,7 +3,6 @@ package net.cibernet.alchemancy.modSupport.patchouli;
 import net.cibernet.alchemancy.crafting.AbstractForgeRecipe;
 import net.cibernet.alchemancy.crafting.ForgePropertyRecipe;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import vazkii.patchouli.api.IComponentProcessor;
@@ -16,6 +15,7 @@ public class InfusionRecipeComponentProcessor implements IComponentProcessor
 {
 	private AbstractForgeRecipe<?> recipe;
 	private boolean hasTitle;
+	//private Optional<Boolean> linkRecipe;
 
 	@Override
 	public void setup(Level level, IVariableProvider variables)
@@ -25,16 +25,30 @@ public class InfusionRecipeComponentProcessor implements IComponentProcessor
 			this.recipe = r;
 		else throw new IllegalArgumentException(key + " is not a valid infusion recipe");
 		hasTitle = variables.has("title");
+		//linkRecipe = variables.has("link_recipe") ? Optional.of(variables.get("link_recipe", level.registryAccess()).asBoolean()) : Optional.empty();
+
 	}
 
 
 	@Override
 	public IVariable process(Level level, String key)
 	{
+		System.out.println("goober key: " + key);
+
 		if(key.equals("catalyst"))
 			return IVariable.from(recipe.getCatalyst().orElse(Ingredient.EMPTY), level.registryAccess());
 		if(key.equals("output"))
 			return IVariable.from(recipe.getResultItem(level.registryAccess()), level.registryAccess());
+
+		//WHY DOESN'T PROCESS WORK WITH BOOLS AAAAAAAAAAAAAA
+//		if(key.equals("link_recipe"))
+//		{
+//			return linkRecipe.map(aBoolean -> IVariable.wrap(aBoolean, level.registryAccess()))
+//					.orElseGet(() -> {
+//						System.out.println("recipe: " + recipe + " result: " + recipe.getResult() + "links recipe? " + (recipe instanceof ForgeItemRecipe));
+//						return IVariable.wrap(recipe instanceof ForgeItemRecipe, level.registryAccess());
+//					});
+//		}
 
 		if(!hasTitle && key.equals("title"))
 		{

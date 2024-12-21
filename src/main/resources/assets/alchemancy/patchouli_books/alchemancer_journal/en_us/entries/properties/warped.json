@@ -1,0 +1,37 @@
+{
+  "advancement": "alchemancy:discovery/warped",
+  "category": "alchemancy:properties",
+  "icon": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:warped\"], alchemancy:ingredient_display={}]",
+  "name": "property.alchemancy.warped",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:warped\"], alchemancy:ingredient_display={}]",
+      "text": "alchemancy.entry.infusion_property.warped.page0",
+      "title": "property.alchemancy.warped"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.infusion_property.warped.page1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.infusion_property.warped.page2"
+    },
+    {
+      "type": "alchemancy:property_warping_double",
+      "recipe1": "alchemancy:property/warped/burning",
+      "recipe2": "alchemancy:property/warped/bouncy"
+    },
+    {
+      "type": "alchemancy:property_warping_double",
+      "recipe1": "alchemancy:property/warped/wealthy",
+      "recipe2": "alchemancy:property/warped/conductive"
+    },
+    {
+      "type": "alchemancy:property_warping_double",
+      "recipe1": "alchemancy:property/warped/warding",
+      "recipe2": "alchemancy:property/warped/levitating"
+    }
+  ]
+}

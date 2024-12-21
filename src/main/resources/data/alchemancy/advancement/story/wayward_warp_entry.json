@@ -1,0 +1,34 @@
+{
+  "parent": "alchemancy:story/apply_property",
+  "criteria": {
+    "discover_wayward_warp": {
+      "conditions": {
+        "property": "alchemancy:wayward_warp"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_nonlethal": {
+      "conditions": {
+        "property": "alchemancy:nonlethal"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_ender": {
+      "conditions": {
+        "property": "alchemancy:ender"
+      },
+      "trigger": "alchemancy:discover_property"
+    }
+  },
+  "requirements": [
+    [
+      "discover_nonlethal",
+      "discover_wayward_warp"
+    ],
+    [
+      "discover_ender",
+      "discover_wayward_warp"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

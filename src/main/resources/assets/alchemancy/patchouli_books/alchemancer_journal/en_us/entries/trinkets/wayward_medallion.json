@@ -1,0 +1,35 @@
+{
+  "name": "alchemancy.entry.wayward_medallion",
+  "sortnum": 0,
+  "advancement": "alchemancy:story/wayward_warp_entry",
+  "icon": "alchemancy:wayward_medallion",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.wayward_medallion.page0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.wayward_medallion.page1"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:wayward_medallion",
+      "text": "alchemancy.entry.wayward_medallion.page2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.wayward_medallion.page3"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.wayward_medallion.page4"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.wayward_medallion.page5"
+    }
+  ]
+}

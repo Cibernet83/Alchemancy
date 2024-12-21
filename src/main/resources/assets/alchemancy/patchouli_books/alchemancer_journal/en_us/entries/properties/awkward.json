@@ -1,0 +1,44 @@
+{
+  "advancement": "alchemancy:discovery/awkward",
+  "category": "alchemancy:properties",
+  "icon": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:awkward\"], alchemancy:ingredient_display={}]",
+  "name": "property.alchemancy.awkward",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:awkward\"], alchemancy:ingredient_display={}]",
+      "text": "alchemancy.entry.infusion_property.awkward.page0",
+      "title": "property.alchemancy.awkward"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.infusion_property.awkward.page1"
+    },
+    {
+      "type": "alchemancy:infusion_double",
+      "recipe1": "alchemancy:property/aquatic",
+      "recipe2": "alchemancy:property/blinding"
+    },
+    {
+      "type": "alchemancy:infusion_double",
+      "link_recipe1": "false",
+      "link_recipe2": "false",
+      "recipe1": "alchemancy:property/fire_resistant",
+      "recipe2": "alchemancy:property/leaping"
+    },
+    {
+      "type": "alchemancy:infusion_double",
+      "link_recipe1": "false",
+      "link_recipe2": "false",
+      "recipe1": "alchemancy:property/nocturnal",
+      "recipe2": "alchemancy:property/sanitized"
+    },
+    {
+      "type": "alchemancy:infusion_double",
+      "link_recipe1": "false",
+      "link_recipe2": "false",
+      "recipe1": "alchemancy:property/swift",
+      "recipe2": "alchemancy:property/tipsy"
+    }
+  ]
+}
