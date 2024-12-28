@@ -1,0 +1,19 @@
+{
+  "advancement": "alchemancy:discovery/scrambled",
+  "category": "alchemancy:properties",
+  "icon": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:scrambled\"], alchemancy:ingredient_display={}]",
+  "name": "property.alchemancy.scrambled",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:scrambled\"], alchemancy:ingredient_display={}]",
+      "text": "alchemancy.entry.infusion_property.scrambled.page0",
+      "title": "property.alchemancy.scrambled"
+    },
+    {
+      "type": "alchemancy:property_warping",
+      "text": "alchemancy.entry.infusion_property.scrambled.page1",
+      "recipe": "alchemancy:property/warped/scrambled"
+    }
+  ]
+}

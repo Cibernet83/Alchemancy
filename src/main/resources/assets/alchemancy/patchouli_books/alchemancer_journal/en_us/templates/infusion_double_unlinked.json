@@ -1,0 +1,21 @@
+{
+  "include": [
+    {
+      "template": "alchemancy:include/infusion_single_unlinked",
+      "as": "recipe",
+      "using": {
+        "recipe": "#recipe1",
+        "title": "#title1"
+      }
+    },
+    {
+      "template": "alchemancy:include/infusion_single_unlinked",
+      "as": "recipe",
+      "using": {
+        "recipe": "#recipe2",
+        "title": "#title2"
+      },
+      "y": 72
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "advancement": "alchemancy:discovery/revealed",
+  "category": "alchemancy:properties",
+  "icon": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:revealed\"], alchemancy:ingredient_display={}]",
+  "name": "property.alchemancy.revealed",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:revealed\"], alchemancy:ingredient_display={}]",
+      "text": "alchemancy.entry.infusion_property.revealed.page0",
+      "title": "property.alchemancy.revealed"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "text": "alchemancy.entry.infusion_property.revealed.page1",
+      "recipe": "alchemancy:revealing_pearl"
+    },
+    {
+      "type": "alchemancy:infusion_unlinked",
+      "text": "alchemancy.entry.infusion_property.revealed.page2",
+      "recipe": "alchemancy:revealing_pearl_cloning"
+    }
+  ]
+}

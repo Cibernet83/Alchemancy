@@ -1,0 +1,22 @@
+{
+  "advancement": "alchemancy:discovery/wise",
+  "category": "alchemancy:properties",
+  "icon": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:wise\"], alchemancy:ingredient_display={}]",
+  "name": "property.alchemancy.wise",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:wise\"], alchemancy:ingredient_display={}]",
+      "text": "alchemancy.entry.infusion_property.wise.page0",
+      "title": "property.alchemancy.wise"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.infusion_property.wise.page1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.infusion_property.wise.page2"
+    }
+  ]
+}

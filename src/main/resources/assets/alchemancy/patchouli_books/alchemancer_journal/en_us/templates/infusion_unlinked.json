@@ -1,0 +1,19 @@
+{
+  "include": [
+    {
+      "template": "alchemancy:include/infusion_single_unlinked",
+      "as": "recipe",
+      "using": {
+        "recipe": "#recipe",
+        "title": "#title"
+      }
+    }
+  ],
+  "components": [
+    {
+      "type": "patchouli:text",
+      "text": "#text",
+      "y": 72
+    }
+  ]
+}

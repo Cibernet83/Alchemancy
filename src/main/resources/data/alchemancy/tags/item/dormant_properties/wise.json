@@ -5,6 +5,11 @@
     "minecraft:lectern",
     "minecraft:chiseled_bookshelf",
     "#minecraft:lectern_books",
-    "#c:bookshelves"
+    "#c:bookshelves",
+
+    {
+      "id": "patchouli:guide_book",
+      "required": false
+    }
   ]
 }

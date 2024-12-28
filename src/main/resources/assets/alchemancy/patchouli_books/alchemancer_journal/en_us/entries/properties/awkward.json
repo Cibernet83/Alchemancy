@@ -15,26 +15,26 @@
       "text": "alchemancy.entry.infusion_property.awkward.page1"
     },
     {
-      "type": "alchemancy:infusion_double",
+      "type": "alchemancy:infusion_double_unlinked",
       "recipe1": "alchemancy:property/aquatic",
       "recipe2": "alchemancy:property/blinding"
     },
     {
-      "type": "alchemancy:infusion_double",
+      "type": "alchemancy:infusion_double_unlinked",
       "link_recipe1": "false",
       "link_recipe2": "false",
       "recipe1": "alchemancy:property/fire_resistant",
       "recipe2": "alchemancy:property/leaping"
     },
     {
-      "type": "alchemancy:infusion_double",
+      "type": "alchemancy:infusion_double_unlinked",
       "link_recipe1": "false",
       "link_recipe2": "false",
       "recipe1": "alchemancy:property/nocturnal",
       "recipe2": "alchemancy:property/sanitized"
     },
     {
-      "type": "alchemancy:infusion_double",
+      "type": "alchemancy:infusion_double_unlinked",
       "link_recipe1": "false",
       "link_recipe2": "false",
       "recipe1": "alchemancy:property/swift",

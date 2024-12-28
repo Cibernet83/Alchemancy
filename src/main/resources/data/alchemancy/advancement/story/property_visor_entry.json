@@ -1,0 +1,38 @@
+{
+  "parent": "alchemancy:story/apply_property",
+  "criteria": {
+    "discover_revealing": {
+      "conditions": {
+        "property": "alchemancy:revealing"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_revealed": {
+      "conditions": {
+        "property": "alchemancy:revealed"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "make_dreamsteel": {
+      "conditions": {
+        "items": [
+          {
+            "items": "alchemancy:dreamsteel_ingot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "discover_revealed",
+      "discover_revealing"
+    ],
+    [
+      "make_dreamsteel",
+      "discover_revealing"
+    ]
+  ],
+  "sends_telemetry_event": false
+}
