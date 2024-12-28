@@ -95,7 +95,7 @@ public abstract class ItemRendererMixin
 		if(InfusedPropertiesHelper.hasProperty(itemStack, AlchemancyProperties.FLATTENED))
 			switch (displayContext)
 			{
-				case FIRST_PERSON_LEFT_HAND: case THIRD_PERSON_LEFT_HAND: case FIRST_PERSON_RIGHT_HAND: case THIRD_PERSON_RIGHT_HAND:
+				case FIRST_PERSON_RIGHT_HAND: case THIRD_PERSON_RIGHT_HAND:
 					poseStack.scale(0.05f, 1, 1);
 					break;
 				default:

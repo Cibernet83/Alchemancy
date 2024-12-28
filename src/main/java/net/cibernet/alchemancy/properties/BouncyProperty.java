@@ -1,6 +1,7 @@
 package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.registries.AlchemancySoundEvents;
+import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -25,12 +26,13 @@ public class BouncyProperty extends Property
 	@Override
 	public void onActivation(@Nullable Entity source, Entity target, ItemStack stack, DamageSource damageSource)
 	{
-		if(target == null)
+		if(target == null || target.level().isClientSide())
 			return;
 
-		if(source == target && source instanceof LivingEntity user && calculateHitResult(user).getType() != HitResult.Type.MISS)
+		if(source == target && source instanceof LivingEntity user)
 		{
-			knockBack(user, user.position().add(user.getLookAngle()));
+			if(CommonUtils.calculateHitResult(user).getType() != HitResult.Type.MISS)
+				knockBack(user, user.position().add(user.getLookAngle()));
 			return;
 		}
 
@@ -40,14 +42,6 @@ public class BouncyProperty extends Property
 
 		if(sourcePos != null)
 			knockBack(target, sourcePos);
-	}
-
-
-
-	private HitResult calculateHitResult(LivingEntity user) {
-		return ProjectileUtil.getHitResultOnViewVector(
-				user, p_281111_ -> !p_281111_.isSpectator() && p_281111_.isPickable(), user.getAttributeValue(Attributes.BLOCK_INTERACTION_RANGE)
-		);
 	}
 
 	@Override
@@ -82,7 +76,7 @@ public class BouncyProperty extends Property
 		target.hurtMarked = true;
 		target.hasImpulse = true;
 		Vec3 vec3 = target.getDeltaMovement();
-		float strength = target.onGround() ? 2 : 1;
+		float strength = 1;
 		Vec3 vec31 = sourcePos.subtract(target.position()).normalize().scale(strength);
 		target.setDeltaMovement(vec3.x * 0.5 - vec31.x, vec3.y * 0.5 - vec31.y, vec3.z * 0.5 - vec31.z);
 	}

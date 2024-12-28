@@ -7,6 +7,7 @@ import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
+import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Holder;
@@ -24,6 +25,7 @@ import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.HitResult;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
@@ -232,8 +234,11 @@ public class PropertyEventHandler
 		Player user = event.getAttackingPlayer();
 		if(user != null)
 		{
-			ItemStack weapon = user.getMainHandItem();
-			InfusedPropertiesHelper.forEachProperty(weapon, propertyHolder -> propertyHolder.value().modifyLivingExperienceDrops(user, weapon, event.getEntity(), event));
+			for(EquipmentSlot slot : EquipmentSlot.values())
+			{
+				ItemStack item = user.getItemBySlot(slot);
+				InfusedPropertiesHelper.forEachProperty(item, propertyHolder -> propertyHolder.value().modifyLivingExperienceDrops(user, item, slot, event.getEntity(), event));
+			}
 		}
 	}
 
@@ -242,8 +247,17 @@ public class PropertyEventHandler
 	{
 
 		ItemStack tool = event.getBreaker() instanceof LivingEntity living && (!living.getMainHandItem().isEmpty() && ItemStack.isSameItem(event.getTool(), living.getMainHandItem())) ? living.getMainHandItem() : event.getTool(); //ServerPlayerGameMode uses a copied stack instead of the actual stack held by the player
-		InfusedPropertiesHelper.forEachProperty(tool, propertyHolder -> propertyHolder.value().modifyBlockDrops(event.getBreaker(), tool, event.getDrops(), event));
+		InfusedPropertiesHelper.forEachProperty(tool, propertyHolder -> propertyHolder.value().modifyBlockDrops(event.getBreaker(), tool, EquipmentSlot.MAINHAND, event.getDrops(), event));
 
+		if(event.getBreaker() instanceof LivingEntity living)
+			for(EquipmentSlot slot : EquipmentSlot.values())
+			{
+				if(slot == EquipmentSlot.MAINHAND)
+					continue;
+
+				ItemStack item = living.getItemBySlot(slot);
+				InfusedPropertiesHelper.forEachProperty(tool, propertyHolder -> propertyHolder.value().modifyBlockDrops(event.getBreaker(), tool, slot, event.getDrops(), event));
+			}
 	}
 
 	@SubscribeEvent
@@ -256,8 +270,11 @@ public class PropertyEventHandler
 	@SubscribeEvent
 	public static void onRightClickItem(PlayerInteractEvent.RightClickItem event)
 	{
-		InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder -> propertyHolder.value().onRightClickItem(event));
-		InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder -> propertyHolder.value().onRightClickAny(event));
+		if(CommonUtils.calculateHitResult(event.getEntity()).getType() != HitResult.Type.BLOCK)
+		{
+			InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder -> propertyHolder.value().onRightClickItem(event));
+			InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder -> propertyHolder.value().onRightClickAny(event));
+		}
 	}
 
 	@SubscribeEvent
@@ -298,16 +315,6 @@ public class PropertyEventHandler
 					event.setCanceled(true);
 				}
 			}
-	}
-
-	@SubscribeEvent
-	public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
-	{
-		InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder ->
-		{
-			propertyHolder.value().onRightClickAny(event);
-			propertyHolder.value().onRightClickBlock(event);
-		});
 	}
 
 	@SubscribeEvent
@@ -391,8 +398,10 @@ public class PropertyEventHandler
 	}
 
 	public static boolean isScoping(Player player) {
-		return player.isShiftKeyDown() && (InfusedPropertiesHelper.hasProperty(player.getMainHandItem(), AlchemancyProperties.SCOPING) ||
-				InfusedPropertiesHelper.hasProperty(player.getOffhandItem(), AlchemancyProperties.SCOPING));
+		return player.isShiftKeyDown() &&
+				(InfusedPropertiesHelper.hasProperty(player.getMainHandItem(), AlchemancyProperties.SCOPING) ||
+				InfusedPropertiesHelper.hasProperty(player.getOffhandItem(), AlchemancyProperties.SCOPING) ||
+				InfusedPropertiesHelper.hasProperty(player.getItemBySlot(EquipmentSlot.HEAD), AlchemancyProperties.SCOPING));
 	}
 
 

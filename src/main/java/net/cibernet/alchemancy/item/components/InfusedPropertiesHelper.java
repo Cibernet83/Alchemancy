@@ -69,6 +69,9 @@ public class InfusedPropertiesHelper
 
 	public static void forEachProperty(ItemStack stack, Consumer<Holder<Property>> consumer)
 	{
+		if(stack.isEmpty())
+			return;
+
 		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().getData(stack);
 
 		if (stack.has(INFUSED_PROPERTIES.get()))

@@ -6,8 +6,8 @@ import net.cibernet.alchemancy.registries.AlchemancySoundEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -57,7 +57,7 @@ public class AutosmeltProperty extends Property implements IDataHolder<Integer>
 
 
 	@Override
-	public void modifyBlockDrops(Entity breaker, ItemStack tool, List<ItemEntity> drops, BlockDropsEvent event)
+	public void modifyBlockDrops(Entity breaker, ItemStack tool, EquipmentSlot slot, List<ItemEntity> drops, BlockDropsEvent event)
 	{
 		if (checkAndConsumeFuel(breaker, tool))
 		{

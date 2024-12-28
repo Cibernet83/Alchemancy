@@ -1,5 +1,7 @@
 package net.cibernet.alchemancy.properties.special;
 
+import net.cibernet.alchemancy.crafting.ForgePropertyRecipe;
+import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.item.InnatePropertyItem;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.EnderProperty;
@@ -13,6 +15,7 @@ import net.cibernet.alchemancy.util.ColorUtils;
 import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
+import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -27,6 +30,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.RespawnAnchorBlock;
 import net.minecraft.world.phys.EntityHitResult;
@@ -36,6 +40,7 @@ import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Optional;
 
 public class WaywardWarpProperty extends Property implements IDataHolder<WayfindingProperty.WayfindData>
@@ -66,6 +71,25 @@ public class WaywardWarpProperty extends Property implements IDataHolder<Wayfind
 
 		}
 	};
+
+	@Override
+	public void onInfusedByForgeRecipe(ItemStack stack, RecipeHolder<ForgePropertyRecipe> recipe, ForgeRecipeGrid grid)
+	{
+		super.onInfusedByForgeRecipe(stack, recipe, grid);
+
+		WayfindingProperty.WayfindData wayfindData = AlchemancyProperties.WAYFINDING.get().getData(stack).getA();
+		if(wayfindData.hasTarget())
+			setData(stack, wayfindData);
+	}
+
+	@Override
+	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid, List<Holder<Property>> propertiesToAdd)
+	{
+		WayfindingProperty.WayfindData wayfindData = AlchemancyProperties.WAYFINDING.get().getData(stack).getA();
+		if(wayfindData.hasTarget())
+			setData(stack, wayfindData);
+		return super.onInfusedByDormantProperty(stack, propertySource, grid, propertiesToAdd);
+	}
 
 	@Override
 	public void onRightClickEntity(PlayerInteractEvent.EntityInteract event)

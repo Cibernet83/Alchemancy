@@ -1,7 +1,9 @@
 package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
@@ -12,7 +14,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.List;
 
-public class ShatteringProperty extends Property
+public class ShatteringProperty extends Property implements IDataHolder<Boolean>
 {
 
 	private static final float RADIUS = 3;
@@ -37,8 +39,13 @@ public class ShatteringProperty extends Property
 		}
 	}
 
-	public static void shatter(Level level, Entity source, ItemStack stack)
+	public void shatter(Level level, Entity source, ItemStack stack)
 	{
+		if(getData(stack))
+			return;
+
+		setData(stack, true);
+
 		RandomSource rand = level.getRandom();
 		List<LivingEntity> entities = level.getEntitiesOfClass(LivingEntity.class, source.getBoundingBox().inflate(RADIUS));
 		DamageSource damageSource = activationDamageSource(level, source, source.position());
@@ -65,5 +72,20 @@ public class ShatteringProperty extends Property
 	@Override
 	public int getColor(ItemStack stack) {
 		return 0x53A6B5;
+	}
+
+	@Override
+	public Boolean readData(CompoundTag tag) {
+		return tag.getBoolean("activated");
+	}
+
+	@Override
+	public CompoundTag writeData(Boolean data) {
+		return new CompoundTag(){{putBoolean("activated", data);}};
+	}
+
+	@Override
+	public Boolean getDefaultData() {
+		return false;
 	}
 }

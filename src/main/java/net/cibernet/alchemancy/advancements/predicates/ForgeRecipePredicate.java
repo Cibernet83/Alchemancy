@@ -3,12 +3,15 @@ package net.cibernet.alchemancy.advancements.predicates;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.cibernet.alchemancy.crafting.AbstractForgeRecipe;
+import net.cibernet.alchemancy.crafting.ForgeItemRecipe;
 import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
+import net.cibernet.alchemancy.crafting.ItemTransmutationRecipe;
 import net.cibernet.alchemancy.properties.Property;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.neoforged.neoforge.common.util.TriState;
 
@@ -26,6 +29,9 @@ public record ForgeRecipePredicate(Optional<List<Holder<Property>>> outputProper
 
 	public boolean matches(RecipeHolder<AbstractForgeRecipe<?>> recipe, ForgeRecipeGrid grid)
 	{
+		if(outputItem().isPresent() && recipe.value().getResult() instanceof ItemStack recipeResult)
+			return outputItem.get().test(recipeResult);
+
 		if(recipeKey.isPresent() && recipe.id().equals(recipeKey.get()))
 			return true;
 

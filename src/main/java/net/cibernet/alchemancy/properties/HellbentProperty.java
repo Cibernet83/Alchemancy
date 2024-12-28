@@ -41,7 +41,7 @@ public class HellbentProperty extends Property implements IDataHolder<Holder<Blo
 	}
 
 	@Override
-	public void modifyBlockDrops(Entity breaker, ItemStack tool, List<ItemEntity> drops, BlockDropsEvent event)
+	public void modifyBlockDrops(Entity breaker, ItemStack tool, EquipmentSlot slot, List<ItemEntity> drops, BlockDropsEvent event)
 	{
 		if(breaker instanceof Player player)
 		{

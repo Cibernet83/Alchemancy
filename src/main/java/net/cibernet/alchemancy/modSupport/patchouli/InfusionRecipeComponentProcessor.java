@@ -33,8 +33,6 @@ public class InfusionRecipeComponentProcessor implements IComponentProcessor
 	@Override
 	public IVariable process(Level level, String key)
 	{
-		System.out.println("goober key: " + key);
-
 		if(key.equals("catalyst"))
 			return IVariable.from(recipe.getCatalyst().orElse(Ingredient.EMPTY), level.registryAccess());
 		if(key.equals("output"))

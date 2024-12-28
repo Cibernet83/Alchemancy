@@ -7,11 +7,15 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.LevelData;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
@@ -111,5 +115,11 @@ public class CommonUtils
 	public static float lerpAngle(float amount, float start, float end)
 	{
 		return (((((end - start) % 1.0f) + 1.5f) % 1.0f) - 0.5f) * amount + start;
+	}
+
+	public static HitResult calculateHitResult(LivingEntity user) {
+		return ProjectileUtil.getHitResultOnViewVector(
+				user, p_281111_ -> !p_281111_.isSpectator() && p_281111_.isPickable(), user.getAttributeValue(Attributes.BLOCK_INTERACTION_RANGE)
+		);
 	}
 }

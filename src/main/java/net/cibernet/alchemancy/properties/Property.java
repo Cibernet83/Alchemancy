@@ -201,7 +201,7 @@ public abstract class Property
 
 	}
 
-	public void modifyBlockDrops(Entity breaker, ItemStack tool, List<ItemEntity> drops, BlockDropsEvent event) {
+	public void modifyBlockDrops(Entity breaker, ItemStack tool, EquipmentSlot slot, List<ItemEntity> drops, BlockDropsEvent event) {
 
 	}
 
@@ -210,7 +210,7 @@ public abstract class Property
 
 	}
 
-	public void modifyLivingExperienceDrops(Player user, ItemStack weapon, LivingEntity entity, LivingExperienceDropEvent event)
+	public void modifyLivingExperienceDrops(Player user, ItemStack weapon, EquipmentSlot slot, LivingEntity entity, LivingExperienceDropEvent event)
 	{
 	}
 

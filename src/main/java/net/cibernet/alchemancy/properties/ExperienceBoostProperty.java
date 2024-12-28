@@ -1,6 +1,7 @@
 package net.cibernet.alchemancy.properties;
 
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -13,14 +14,19 @@ import java.util.List;
 public class ExperienceBoostProperty extends Property
 {
 	@Override
-	public void modifyLivingExperienceDrops(Player user, ItemStack weapon, LivingEntity entity, LivingExperienceDropEvent event) {
-		event.setDroppedExperience(event.getDroppedExperience() * 2);
+	public void modifyLivingExperienceDrops(Player user, ItemStack weapon, EquipmentSlot slot, LivingEntity entity, LivingExperienceDropEvent event)
+	{
+		if(slot == EquipmentSlot.MAINHAND || slot == EquipmentSlot.BODY)
+			event.setDroppedExperience(event.getDroppedExperience() * 2);
+		else event.setDroppedExperience((int) Math.floor(event.getDroppedExperience() * 1.1f));
 	}
 
 	@Override
-	public void modifyBlockDrops(Entity breaker, ItemStack tool, List<ItemEntity> drops, BlockDropsEvent event)
+	public void modifyBlockDrops(Entity breaker, ItemStack tool, EquipmentSlot slot, List<ItemEntity> drops, BlockDropsEvent event)
 	{
-		event.setDroppedExperience(event.getDroppedExperience() * 2);
+		if(slot == EquipmentSlot.MAINHAND || slot == EquipmentSlot.BODY)
+			event.setDroppedExperience(event.getDroppedExperience() * 2);
+		else event.setDroppedExperience((int) Math.floor(event.getDroppedExperience() * 1.1f));
 	}
 
 	@Override
