@@ -5,6 +5,7 @@
     "#c:ingots/copper",
     "#c:storage_blocks/copper",
     "#c:storage_blocks/raw_copper",
+    "#c:furnaces/copper",
     "#minecraft:copper_ores",
 
     "minecraft:copper_block",

@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "#c:furnaces",
     "minecraft:furnace",
     "minecraft:blast_furnace",
     "minecraft:smoker",

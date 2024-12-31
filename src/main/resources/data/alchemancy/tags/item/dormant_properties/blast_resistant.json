@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#c:obsidians"
+    "#c:obsidians",
+    "#c:furnaces/obsidian"
   ]
 }

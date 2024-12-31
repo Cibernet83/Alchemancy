@@ -7,6 +7,7 @@
     "#c:ingots/gold",
     "#c:storage_blocks/gold",
     "#c:storage_blocks/raw_gold",
+    "#c:furnaces/gold",
     "#minecraft:gold_ores",
 
     "minecraft:golden_helmet",

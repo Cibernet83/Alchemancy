@@ -3,6 +3,7 @@
   "values": [
     "#c:gems/diamond",
     "#c:storage_blocks/diamond",
+    "#c:furnaces/diamond",
     "#minecraft:diamond_ores",
 
     "minecraft:diamond_helmet",

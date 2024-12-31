@@ -8,6 +8,7 @@
     "#c:storage_blocks/iron",
     "#c:storage_blocks/raw_iron",
     "#minecraft:iron_ores",
+    "#c:furnaces/iron",
     "#minecraft:anvil",
 
     "minecraft:iron_helmet",

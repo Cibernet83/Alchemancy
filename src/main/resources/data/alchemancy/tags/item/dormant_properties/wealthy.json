@@ -3,6 +3,7 @@
   "values": [
     "#c:gems/emerald",
     "#c:storage_blocks/emerald",
+    "#c:furnaces/emerald",
     "#minecraft:emerald_ores"
   ]
 }
