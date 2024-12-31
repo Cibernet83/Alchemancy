@@ -9,6 +9,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.dimension.DimensionType;
 
@@ -65,6 +66,11 @@ public class AlchemancyTags
 	{
 		public static final TagKey<DimensionType> DEPTH_DWELLER_EFFECTIVE = registerTag(Registries.DIMENSION_TYPE, "depth_dweller_effective");
 		public static final TagKey<DimensionType> WAYFINDING_POINTS_TO_ORIGIN = registerTag(Registries.DIMENSION_TYPE, "wayfinding_points_to_origin");
+	}
+
+	public static final class Enchantments
+	{
+		public static final TagKey<Enchantment> BUFFS_BURNING = registerTag(Registries.ENCHANTMENT, "buffs_burning");
 	}
 
 	private static <T> TagKey<T> registerCommonTag(ResourceKey<Registry<T>> registry, String key)
