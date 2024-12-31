@@ -21,6 +21,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
@@ -37,6 +38,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -129,12 +131,12 @@ public class CapturingProperty extends Property implements IDataHolder<Capturing
 
 
 	@Override
-	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
+	public void onRightClickBlock(UseItemOnBlockEvent event)
 	{
 		Vec3i faceNormal = event.getFace().getNormal();
 		if(releaseMob(event.getLevel(), event.getItemStack(), event.getPos().relative(event.getFace()).getCenter(), new Vec3(faceNormal.getX(), faceNormal.getY(), faceNormal.getZ())))
 		{
-			event.setCancellationResult(InteractionResult.SUCCESS);
+			event.setCancellationResult(ItemInteractionResult.SUCCESS);
 			event.setCanceled(true);
 		}
 	}

@@ -13,6 +13,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.Item;
@@ -21,6 +22,7 @@ import net.minecraft.world.level.block.AbstractCauldronBlock;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.ArrayList;
@@ -66,7 +68,7 @@ public class TintedProperty extends IncreaseInfuseSlotsProperty implements IData
 	}
 
 	@Override
-	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
+	public void onRightClickBlock(UseItemOnBlockEvent event)
 	{
 		if(!InfusedPropertiesHelper.hasInfusedProperty(event.getItemStack(), asHolder()))
 			return;
@@ -78,7 +80,7 @@ public class TintedProperty extends IncreaseInfuseSlotsProperty implements IData
 				LayeredCauldronBlock.lowerFillLevel(state, event.getLevel(), event.getPos());
 			setData(event.getItemStack(), getDefaultData());
 			InfusedPropertiesHelper.removeProperty(event.getItemStack(), asHolder());
-			event.setCancellationResult(InteractionResult.SUCCESS);
+			event.setCancellationResult(ItemInteractionResult.SUCCESS);
 			event.setCanceled(true);
 		}
 	}

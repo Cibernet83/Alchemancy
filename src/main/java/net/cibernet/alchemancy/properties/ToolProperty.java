@@ -10,6 +10,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -28,6 +29,7 @@ import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import org.apache.logging.log4j.util.TriConsumer;
 
 import java.util.ArrayList;
@@ -126,16 +128,16 @@ public class ToolProperty extends Property
 	}
 
 	@Override
-	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
+	public void onRightClickBlock(UseItemOnBlockEvent event)
 	{
 		Level level = event.getLevel();
 		BlockPos pos = event.getPos();
 		BlockState state = level.getBlockState(pos);
-		Player player = event.getEntity();
+		Player player = event.getPlayer();
 
 		for (ItemAbility ability : abilities) {
 
-			BlockState modifiedState = state.getToolModifiedState(new UseOnContext(player, event.getHand(), event.getHitVec()), ability, false);
+			BlockState modifiedState = state.getToolModifiedState(event.getUseOnContext(), ability, false);
 
 			if(modifiedState == null)
 				continue;
@@ -153,7 +155,7 @@ public class ToolProperty extends Property
 			if(itemstack.isDamageableItem())
 				itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(event.getHand()));
 
-			event.setCancellationResult(InteractionResult.sidedSuccess(level.isClientSide));
+			event.cancelWithResult(ItemInteractionResult.sidedSuccess(level.isClientSide));
 			event.setCanceled(true);
 			return;
 		}

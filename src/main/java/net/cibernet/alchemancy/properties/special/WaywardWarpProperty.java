@@ -5,7 +5,6 @@ import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.item.InnatePropertyItem;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.EnderProperty;
-import net.cibernet.alchemancy.properties.LightningBoltProperty;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.properties.WayfindingProperty;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
@@ -22,6 +21,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -38,6 +38,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -104,7 +105,7 @@ public class WaywardWarpProperty extends Property implements IDataHolder<Wayfind
 	}
 
 	@Override
-	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
+	public void onRightClickBlock(UseItemOnBlockEvent event)
 	{
 		if(!event.getLevel().getBlockState(event.getPos()).is(AlchemancyTags.Blocks.WAYFINDING_TARGETABLE))
 			return;
@@ -113,7 +114,7 @@ public class WaywardWarpProperty extends Property implements IDataHolder<Wayfind
 		if(!data.hasTarget())
 		{
 			setData(event.getItemStack(), data.withBlockPosition(new GlobalPos(event.getLevel().dimension(), event.getPos())));
-			event.setCancellationResult(InteractionResult.SUCCESS);
+			event.setCancellationResult(ItemInteractionResult.SUCCESS);
 			event.setCanceled(true);
 		}
 	}

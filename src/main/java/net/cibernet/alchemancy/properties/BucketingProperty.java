@@ -22,6 +22,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -40,6 +41,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
 
 import javax.annotation.Nullable;
@@ -81,11 +83,11 @@ public class BucketingProperty extends Property implements IDataHolder<Fluid>
 	}
 
 	@Override
-	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
+	public void onRightClickBlock(UseItemOnBlockEvent event)
 	{
-		if(!event.isCanceled() && handleInteraction(event.getLevel(), event.getItemStack(), event.getEntity()))
+		if(!event.isCanceled() && handleInteraction(event.getLevel(), event.getItemStack(), event.getPlayer()))
 		{
-			event.setCancellationResult(InteractionResult.SUCCESS);
+			event.setCancellationResult(ItemInteractionResult.SUCCESS);
 			event.setCanceled(true);
 		}
 	}

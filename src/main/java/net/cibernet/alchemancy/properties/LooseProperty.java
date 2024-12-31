@@ -4,15 +4,13 @@ import net.cibernet.alchemancy.entity.CustomFallingBlock;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.FallingBlock;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import org.jetbrains.annotations.Nullable;
 
 public class LooseProperty extends Property
@@ -23,7 +21,7 @@ public class LooseProperty extends Property
 	}
 
 	@Override
-	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
+	public void onRightClickBlock(UseItemOnBlockEvent event)
 	{
 		ItemStack stack = event.getItemStack();
 		if(!event.isCanceled() && stack.getItem() instanceof BlockItem blockItem)
@@ -32,7 +30,7 @@ public class LooseProperty extends Property
 			BlockPos pos = event.getPos().relative(event.getFace());
 
 			if(FallingBlock.isFree(level.getBlockState(pos.below())) &&
-					blockItem.useOn(new UseOnContext(event.getLevel(), event.getEntity(), event.getHand(), stack, event.getHitVec())).consumesAction())
+					blockItem.useOn(event.getUseOnContext()).consumesAction())
 			{
 				CustomFallingBlock fallingBlockEntity = CustomFallingBlock.fall(level, pos, level.getBlockState(pos));
 
@@ -44,7 +42,7 @@ public class LooseProperty extends Property
 				else if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.ANTIGRAV))
 					fallingBlockEntity.setGravity(0);
 
-				event.setCancellationResult(InteractionResult.SUCCESS);
+				event.setCancellationResult(ItemInteractionResult.SUCCESS);
 				event.setCanceled(true);
 			}
 		}

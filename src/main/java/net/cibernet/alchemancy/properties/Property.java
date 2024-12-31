@@ -61,6 +61,7 @@ import net.neoforged.neoforge.event.entity.living.*;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.Nullable;
@@ -251,9 +252,7 @@ public abstract class Property
 		return getKey().toString();
 	}
 
-	public void onRightClickAny(PlayerInteractEvent event) {
-	}
-	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+	public void onRightClickBlock(UseItemOnBlockEvent event) {
 	}
 
 	public void onRootedTick(RootedItemBlockEntity root, List<LivingEntity> entitiesInBounds) {

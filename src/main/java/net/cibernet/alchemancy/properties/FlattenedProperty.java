@@ -6,11 +6,11 @@ import net.cibernet.alchemancy.registries.AlchemancyBlocks;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 
 public class FlattenedProperty extends IncreaseInfuseSlotsProperty
 {
@@ -19,17 +19,18 @@ public class FlattenedProperty extends IncreaseInfuseSlotsProperty
 	}
 
 	@Override
-	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
+	public void onRightClickBlock(UseItemOnBlockEvent event)
 	{
 		if(event.isCanceled() || InfusedPropertiesHelper.hasProperty(event.getItemStack(), AlchemancyProperties.DEAD))
 			return;
 
 		BlockPos pos = event.getPos();
+		BlockPlaceContext context = new BlockPlaceContext(event.getUseOnContext());
 
-		if(!event.getLevel().getBlockState(pos).canBeReplaced(new BlockPlaceContext(event.getEntity(), event.getHand(), event.getItemStack(), event.getHitVec())))
+		if(!event.getLevel().getBlockState(pos).canBeReplaced(context))
 			pos = pos.relative(event.getFace() == null ? Direction.UP : event.getFace());
 
-		BlockState blockState = AlchemancyBlocks.FLATTENED_ITEM.get().getStateForPlacement(new BlockPlaceContext(event.getEntity(), event.getHand(), event.getItemStack(), event.getHitVec()));
+		BlockState blockState = AlchemancyBlocks.FLATTENED_ITEM.get().getStateForPlacement(context);
 		if(blockState.canSurvive(event.getLevel(), pos))
 		{
 			event.getLevel().setBlock(pos, blockState, 3);
@@ -38,7 +39,7 @@ public class FlattenedProperty extends IncreaseInfuseSlotsProperty
 			event.getLevel().setBlockEntity(blockEntity);
 
 			event.setCanceled(true);
-			event.setCancellationResult(InteractionResult.SUCCESS);
+			event.setCancellationResult(ItemInteractionResult.SUCCESS);
 		}
 	}
 

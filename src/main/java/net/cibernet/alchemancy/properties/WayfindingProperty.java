@@ -23,6 +23,7 @@ import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -34,6 +35,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerSetSpawnEvent;
+import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 import java.util.List;
@@ -100,7 +102,7 @@ public class WayfindingProperty extends Property implements IDataHolder<Tuple<Wa
 	}
 
 	@Override
-	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
+	public void onRightClickBlock(UseItemOnBlockEvent event)
 	{
 		if(!event.getLevel().getBlockState(event.getPos()).is(AlchemancyTags.Blocks.WAYFINDING_TARGETABLE))
 			return;
@@ -109,7 +111,7 @@ public class WayfindingProperty extends Property implements IDataHolder<Tuple<Wa
 		if(!data.hasTarget())
 		{
 			setData(event.getItemStack(), data.withBlockPosition(new GlobalPos(event.getLevel().dimension(), event.getPos())));
-			event.setCancellationResult(InteractionResult.SUCCESS);
+			event.setCancellationResult(ItemInteractionResult.SUCCESS);
 			event.setCanceled(true);
 		}
 	}

@@ -25,6 +25,7 @@ import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -273,21 +274,24 @@ public class PropertyEventHandler
 		if(CommonUtils.calculateHitResult(event.getEntity()).getType() != HitResult.Type.BLOCK)
 		{
 			InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder -> propertyHolder.value().onRightClickItem(event));
-			InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder -> propertyHolder.value().onRightClickAny(event));
 		}
 	}
 
 	@SubscribeEvent
-	public static void onRightClickItem(UseItemOnBlockEvent event)
+	public static void onRightClickItemOnBlock(UseItemOnBlockEvent event)
 	{
 		if(event.getUsePhase() == UseItemOnBlockEvent.UsePhase.ITEM_AFTER_BLOCK && event.getPlayer() != null)
 		{
-			PlayerInteractEvent.RightClickItem clickEvent = new PlayerInteractEvent.RightClickItem(event.getPlayer(), event.getHand());
-			InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder -> propertyHolder.value().onRightClickItem(clickEvent));
-			InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder -> propertyHolder.value().onRightClickAny(clickEvent));
+			InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder -> propertyHolder.value().onRightClickBlock(event));
 
-			if(clickEvent.isCanceled())
-				event.cancelWithResult(resultToItemResult(clickEvent.getCancellationResult()));
+			if(!event.isCanceled())
+			{
+				PlayerInteractEvent.RightClickItem clickEvent = new PlayerInteractEvent.RightClickItem(event.getPlayer(), event.getHand());
+				InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder -> propertyHolder.value().onRightClickItem(clickEvent));
+
+				if (clickEvent.isCanceled())
+					event.cancelWithResult(resultToItemResult(clickEvent.getCancellationResult()));
+			}
 		}
 	}
 
@@ -305,7 +309,6 @@ public class PropertyEventHandler
 	public static void onRightClickEntity(PlayerInteractEvent.EntityInteract event)
 	{
 		InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder -> propertyHolder.value().onRightClickEntity(event));
-		InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder -> propertyHolder.value().onRightClickAny(event));
 
 		if(event.getTarget() instanceof LivingEntity target)
 			for (EquipmentSlot slot : EquipmentSlot.values()) {

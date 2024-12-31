@@ -2,35 +2,35 @@ package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.blocks.blockentities.RootedItemBlockEntity;
 import net.cibernet.alchemancy.registries.AlchemancyBlocks;
-import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 
 import java.util.List;
 
 public class RootedProperty extends Property
 {
 	@Override
-	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
+	public void onRightClickBlock(UseItemOnBlockEvent event)
 	{
 		Level level = event.getLevel();
 		ItemStack stack = event.getItemStack();
 		BlockPos pos = event.getPos();
+		BlockPlaceContext context = new BlockPlaceContext(event.getUseOnContext());
 
-		if(!event.getLevel().getBlockState(pos).canBeReplaced(new BlockPlaceContext(event.getEntity(), event.getHand(), stack, event.getHitVec())))
+		if(!event.getLevel().getBlockState(pos).canBeReplaced(context))
 			pos = pos.relative(event.getFace() == null ? Direction.UP : event.getFace());
 
 		if(AlchemancyBlocks.ROOTED_ITEM.get().mayPlaceOn(level.getBlockState(pos.below()), level, pos.below()) &&
-				event.getLevel().getBlockState(pos).canBeReplaced(new BlockPlaceContext(event.getEntity(), event.getHand(), stack, event.getHitVec())))
+				event.getLevel().getBlockState(pos).canBeReplaced(context))
 		{
-			BlockState rootState = AlchemancyBlocks.ROOTED_ITEM.get().getStateForPlacement(new BlockPlaceContext(event.getEntity(), event.getHand(), event.getItemStack(), event.getHitVec()));
+			BlockState rootState = AlchemancyBlocks.ROOTED_ITEM.get().getStateForPlacement(context);
 			level.setBlock(pos, rootState, 3);
 
 			RootedItemBlockEntity root = new RootedItemBlockEntity(pos, rootState);
@@ -38,7 +38,7 @@ public class RootedProperty extends Property
 			level.setBlockEntity(root);
 
 			event.setCanceled(true);
-			event.setCancellationResult(InteractionResult.SUCCESS);
+			event.cancelWithResult(ItemInteractionResult.SUCCESS);
 		}
 	}
 

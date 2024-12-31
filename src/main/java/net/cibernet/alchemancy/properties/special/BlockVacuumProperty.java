@@ -11,6 +11,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -23,6 +24,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.*;
@@ -79,12 +81,12 @@ public class BlockVacuumProperty extends Property implements IDataHolder<Block>
 	}
 
 	@Override
-	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
+	public void onRightClickBlock(UseItemOnBlockEvent event)
 	{
 		if(getData(event.getItemStack()).equals(getDefaultData()))
 		{
 			setData(event.getItemStack(), event.getLevel().getBlockState(event.getPos()).getBlock());
-			event.setCancellationResult(InteractionResult.SUCCESS);
+			event.setCancellationResult(ItemInteractionResult.SUCCESS);
 			event.setCanceled(true);
 		}
 	}

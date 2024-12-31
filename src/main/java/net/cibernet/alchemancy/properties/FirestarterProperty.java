@@ -10,6 +10,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -22,6 +23,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 
 import java.util.List;
 import java.util.Set;
@@ -43,13 +45,13 @@ public class FirestarterProperty extends ToolProperty
 	}
 
 	@Override
-	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
+	public void onRightClickBlock(UseItemOnBlockEvent event)
 	{
-		Player player = event.getEntity();
+		Player player = event.getPlayer();
 		Level level = event.getLevel();
 		BlockPos blockpos = event.getPos();
 		BlockState blockstate = level.getBlockState(blockpos);
-		UseOnContext context = new UseOnContext(player, event.getHand(), event.getHitVec());
+		UseOnContext context = event.getUseOnContext();
 
 		BlockState blockstate2 = blockstate.getToolModifiedState(context, net.neoforged.neoforge.common.ItemAbilities.FIRESTARTER_LIGHT, false);
 
@@ -66,7 +68,8 @@ public class FirestarterProperty extends ToolProperty
 					itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(context.getHand()));
 				}
 
-
+				event.cancelWithResult(ItemInteractionResult.sidedSuccess(level.isClientSide));
+				event.setCanceled(true);
 			}
 		} else super.onRightClickBlock(event);
 	}

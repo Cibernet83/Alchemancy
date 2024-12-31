@@ -4,8 +4,6 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.bus.api.ICancellableEvent;
-import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
@@ -41,11 +39,6 @@ public class DeadProperty extends Property
 	@Override
 	public int getPriority() {
 		return Priority.HIGHEST;
-	}
-
-	@Override
-	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
-		event.setUseItem(TriState.FALSE);
 	}
 
 	@Override

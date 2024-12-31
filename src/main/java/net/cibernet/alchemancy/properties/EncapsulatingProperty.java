@@ -17,7 +17,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
@@ -28,7 +28,7 @@ import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -43,7 +43,7 @@ public class EncapsulatingProperty extends Property implements IDataHolder<Encap
 	}
 
 	@Override
-	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
+	public void onRightClickBlock(UseItemOnBlockEvent event)
 	{
 		Level level = event.getLevel();
 		BlockPos pos = event.getPos();
@@ -51,9 +51,9 @@ public class EncapsulatingProperty extends Property implements IDataHolder<Encap
 
 		if(data.blockState.isAir())
 		{
-			if(pickUpBlock(level, pos, event.getItemStack(), event.getEntity()))
+			if(pickUpBlock(level, pos, event.getItemStack(), event.getPlayer()))
 			{
-				event.setCancellationResult(InteractionResult.SUCCESS);
+				event.setCancellationResult(ItemInteractionResult.SUCCESS);
 				event.setCanceled(true);
 			}
 		}
@@ -62,9 +62,9 @@ public class EncapsulatingProperty extends Property implements IDataHolder<Encap
 			if (event.getFace() != null && !level.getBlockState(pos).canBeReplaced())
 				pos = pos.relative(event.getFace());
 
-			if(attemptPlaceBlock(level, pos, data, event.getItemStack(), event.getEntity()))
+			if(attemptPlaceBlock(level, pos, data, event.getItemStack(), event.getPlayer()))
 			{
-				event.setCancellationResult(InteractionResult.SUCCESS);
+				event.setCancellationResult(ItemInteractionResult.SUCCESS);
 				event.setCanceled(true);
 			}
 		}

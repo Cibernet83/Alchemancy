@@ -32,6 +32,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
@@ -93,7 +94,7 @@ public class EnergizedProperty extends AbstractTimerProperty
 	}
 
 	@Override
-	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
+	public void onRightClickBlock(UseItemOnBlockEvent event) {
 
 		if(event.getLevel() instanceof ServerLevel serverLevel && InfusedPropertiesHelper.hasProperty(event.getItemStack(), AlchemancyProperties.INTERACTABLE))
 			powerBlock(serverLevel, event.getPos(), 1, event.getFace());

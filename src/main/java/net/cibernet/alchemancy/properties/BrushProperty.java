@@ -7,6 +7,7 @@ import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.armadillo.Armadillo;
@@ -19,6 +20,7 @@ import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,12 +34,12 @@ public class BrushProperty extends Property
 	}
 
 	@Override
-	public void onRightClickBlock(PlayerInteractEvent.RightClickBlock event)
+	public void onRightClickBlock(UseItemOnBlockEvent event)
 	{
-		if(!event.isCanceled())
+		if(!event.isCanceled() && event.getPlayer() != null)
 		{
-			event.getEntity().startUsingItem(event.getHand());
-			event.setCancellationResult(InteractionResult.CONSUME);
+			event.getPlayer().startUsingItem(event.getHand());
+			event.setCancellationResult(ItemInteractionResult.CONSUME);
 			event.setCanceled(true);
 		}
 	}
