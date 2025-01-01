@@ -3,7 +3,11 @@
   "values": [
     "#c:ingots/netherite",
     "#c:storage_blocks/netherite",
-    "#c:furnaces/netherite",
+
+    {
+      "id": "#c:furnaces/netherite",
+      "required": false
+    },
 
     "minecraft:netherite_helmet",
     "minecraft:netherite_chestplate",

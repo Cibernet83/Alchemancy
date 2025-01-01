@@ -3,8 +3,11 @@
   "values": [
     "#c:glass_blocks",
     "#c:glass_panes",
-    "#c:furnaces/crystal",
-    "minecraft:glass_bottle"
+    "minecraft:glass_bottle",
+    {
+      "id": "#c:furnaces/crystal",
+      "required": false
+    }
   ],
   "remove": [
     "#c:glass_blocks/tinted"

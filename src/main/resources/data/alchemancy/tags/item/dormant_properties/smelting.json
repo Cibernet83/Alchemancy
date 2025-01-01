@@ -1,12 +1,16 @@
 {
   "replace": false,
   "values": [
-    "#c:furnaces",
     "minecraft:furnace",
     "minecraft:blast_furnace",
     "minecraft:smoker",
 
     "minecraft:campfire",
-    "minecraft:soul_campfire"
+    "minecraft:soul_campfire",
+
+    {
+      "id": "#c:furnaces",
+      "required": false
+    }
   ]
 }

@@ -1,7 +1,10 @@
 {
   "replace": false,
   "values": [
-    "#c:brushes",
-    "#c:tools/brush"
+    "#c:tools/brush",
+    {
+      "id": "#c:brushes",
+      "required": false
+    }
   ]
 }

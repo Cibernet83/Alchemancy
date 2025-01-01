@@ -7,8 +7,12 @@
     "#c:ingots/gold",
     "#c:storage_blocks/gold",
     "#c:storage_blocks/raw_gold",
-    "#c:furnaces/gold",
     "#minecraft:gold_ores",
+
+    {
+      "id": "#c:furnaces/gold",
+      "required": false
+    },
 
     "minecraft:golden_helmet",
     "minecraft:golden_chestplate",

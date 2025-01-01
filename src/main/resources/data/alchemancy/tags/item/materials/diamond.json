@@ -3,8 +3,12 @@
   "values": [
     "#c:gems/diamond",
     "#c:storage_blocks/diamond",
-    "#c:furnaces/diamond",
     "#minecraft:diamond_ores",
+
+    {
+      "id": "#c:furnaces/diamond",
+      "required": false
+    },
 
     "minecraft:diamond_helmet",
     "minecraft:diamond_chestplate",
