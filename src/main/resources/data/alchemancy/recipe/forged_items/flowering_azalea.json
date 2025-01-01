@@ -6,11 +6,11 @@
   ],
 
   "catalyst": {
-    "item": "minecraft:azalea_leaves"
+    "item": "minecraft:azalea"
   },
 
   "result": {
     "count": 1,
-    "id": "minecraft:flowering_azalea_leaves"
+    "id": "minecraft:flowering_azalea"
   }
 }
