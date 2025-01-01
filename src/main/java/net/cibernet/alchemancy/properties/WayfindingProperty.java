@@ -307,7 +307,8 @@ public class WayfindingProperty extends Property implements IDataHolder<Tuple<Wa
 
 			float result;
 
-			if(targetedPlayer.isPresent() && user instanceof Player player && player.getUUID().equals(targetedPlayer.get().getA()))
+			if(targetedPlayer.isPresent() && (target.isEmpty() ||
+					(user instanceof Player player && player.getUUID().equals(targetedPlayer.get().getA()))))
 				result = WayfindingUtil.getRandomlySpinningRotation(0, level.getGameTime());
 			else if(target.isPresent())
 				result = WayfindingUtil.getRotationTowardsCompassTarget(user, level.getGameTime(), target.get());
