@@ -34,8 +34,8 @@ public class AlchemancySoundEvents
 
 
 	public static final SoundType GLOWING_ORB = new DeferredSoundType(
-			0.35f,
-			1,
+			0.1f,
+			0.5f,
 			GLOWING_ORB_EXTINGUISH::value,
 			() -> SoundEvents.GLASS_STEP,
 			() -> SoundEvents.GLASS_PLACE,
