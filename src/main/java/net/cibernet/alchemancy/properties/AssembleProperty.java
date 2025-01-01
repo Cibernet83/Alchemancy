@@ -2,10 +2,13 @@ package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.blocks.blockentities.RootedItemBlockEntity;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.core.Holder;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
@@ -26,6 +29,20 @@ import java.util.List;
 
 public class AssembleProperty extends Property
 {
+	private static final List<DataComponentType<?>> COMPONENTS_TO_CLONE = List.of(
+			AlchemancyItems.Components.INFUSED_PROPERTIES.get(),
+			AlchemancyItems.Components.PROPERTY_DATA.get(),
+			DataComponents.CUSTOM_NAME,
+			DataComponents.LORE,
+			DataComponents.ITEM_NAME,
+			DataComponents.PROFILE,
+			DataComponents.ENCHANTMENT_GLINT_OVERRIDE,
+			DataComponents.BANNER_PATTERNS,
+			DataComponents.DYED_COLOR,
+			DataComponents.CAN_BREAK,
+			DataComponents.CAN_PLACE_ON
+	);
+
 	@Override
 	public void onEquippedTick(LivingEntity user, EquipmentSlot slot, ItemStack stack) {
 
@@ -55,7 +72,7 @@ public class AssembleProperty extends Property
 						continue;
 
 					boolean hasIngredient = false;
-					for (int i = 0; i < player.getInventory().getContainerSize(); i++)
+					for (int i = 0; i < acceptedSlots.size(); i++)
 					{
 						ItemStack inventoryStack = player.getInventory().getItem(i);
 						ItemStack storedItem = AlchemancyProperties.HOLLOW.get().getData(inventoryStack);
@@ -92,8 +109,9 @@ public class AssembleProperty extends Property
 
 			ItemStack resultItem = selected.getResultItem(registryAccess).copy();
 
-			for(Holder<Property> property : InfusedPropertiesHelper.getInfusedProperties(stack))
-				InfusedPropertiesHelper.addProperty(resultItem, property);
+			for (DataComponentType<?> dataComponentType : COMPONENTS_TO_CLONE) {
+				copyComponentTo(dataComponentType, stack, resultItem);
+			}
 
 			if(assimilate || player.getInventory().add(resultItem))
 			{
@@ -106,6 +124,12 @@ public class AssembleProperty extends Property
 				}
 			}
 		}
+	}
+
+	public static <T> void copyComponentTo(DataComponentType<T> componentType, ItemStack from, ItemStack to)
+	{
+		if(from.has(componentType))
+			to.set(componentType, from.get(componentType));
 	}
 
 	@Override
