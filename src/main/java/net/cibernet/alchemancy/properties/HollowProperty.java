@@ -48,6 +48,8 @@ public class HollowProperty extends Property implements IDataHolder<ItemStack>
 		return dataType == DataComponents.MAX_STACK_SIZE ? 1 : data;
 	}
 
+
+
 	@Override
 	public InfusionPropertyDispenseBehavior.DispenseResult onItemDispense(BlockSource blockSource, Direction direction, ItemStack stack, InfusionPropertyDispenseBehavior.DispenseResult currentResult)
 	{
@@ -360,6 +362,15 @@ public class HollowProperty extends Property implements IDataHolder<ItemStack>
 		if (!level.isClientSide) {
 			contents.forEach(p_352858_ -> level.addFreshEntity(new ItemEntity(level, container.getX(), container.getY(), container.getZ(), p_352858_)));
 		}
+	}
+
+	@Override
+	public int modifyDurabilityConsumed(ItemStack stack, LivingEntity user, int originalAmount, int resultingAmount)
+	{
+		if(stack.getMaxDamage() <= stack.getDamageValue() + resultingAmount)
+			dropItems(stack, user);
+
+		return resultingAmount;
 	}
 
 	@Override
