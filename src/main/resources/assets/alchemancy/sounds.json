@@ -186,5 +186,26 @@
       "alchemancy:random/clueless"
     ],
     "subtitle": "subtitles.property.clueless"
-  }
+  },
+  "property.wayfinding": {
+  "sounds": [
+    {
+      "name": "block/lodestone/lock1",
+      "pitch": 0.85
+    },
+    {
+      "name": "block/lodestone/lock1",
+      "pitch": 0.95
+    },
+    {
+      "name": "block/lodestone/lock2",
+      "pitch": 0.85
+    },
+    {
+      "name": "block/lodestone/lock2",
+      "pitch": 0.95
+    }
+  ],
+  "subtitle": "subtitles.property.wayfinding"
+}
 }

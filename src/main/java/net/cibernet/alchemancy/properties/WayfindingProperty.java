@@ -4,6 +4,7 @@ import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
+import net.cibernet.alchemancy.registries.AlchemancySoundEvents;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.cibernet.alchemancy.util.ClientUtil;
 import net.cibernet.alchemancy.util.CommonUtils;
@@ -21,6 +22,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
@@ -31,6 +33,7 @@ import net.minecraft.world.item.CompassItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.LodestoneTracker;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -96,6 +99,7 @@ public class WayfindingProperty extends Property implements IDataHolder<Tuple<Wa
 		if(!data.hasTarget() && event.getTarget() instanceof Player target)
 		{
 			setData(event.getItemStack(), data.withPlayer(target));
+			playWayfindingSound(target);
 			event.setCancellationResult(InteractionResult.SUCCESS);
 			event.setCanceled(true);
 		}
@@ -111,9 +115,34 @@ public class WayfindingProperty extends Property implements IDataHolder<Tuple<Wa
 		if(!data.hasTarget())
 		{
 			setData(event.getItemStack(), data.withBlockPosition(new GlobalPos(event.getLevel().dimension(), event.getPos())));
+			playWayfindingSound(event.getLevel(), event.getPos());
 			event.setCancellationResult(ItemInteractionResult.SUCCESS);
 			event.setCanceled(true);
 		}
+	}
+
+	public static void playWayfindingSound(Entity source)
+	{
+		playWayfindingSound(source.level(), source.position());
+	}
+
+	public static void playWayfindingSound(Level level, BlockPos pos)
+	{
+		playWayfindingSound(level, pos.getCenter());
+	}
+
+	public static void playWayfindingSound(Level level, Vec3 pos)
+	{
+		level.playSound(
+				null,
+				pos.x,
+				pos.y,
+				pos.z,
+				AlchemancySoundEvents.WAYFINDING.value(),
+				SoundSource.PLAYERS,
+				1,
+				1
+		);
 	}
 
 	@SubscribeEvent

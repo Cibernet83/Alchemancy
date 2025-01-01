@@ -99,6 +99,7 @@ public class WaywardWarpProperty extends Property implements IDataHolder<Wayfind
 		if(!data.hasTarget() && event.getTarget() instanceof Player target)
 		{
 			setData(event.getItemStack(), data.withPlayer(target));
+			WayfindingProperty.playWayfindingSound(target);
 			event.setCancellationResult(InteractionResult.SUCCESS);
 			event.setCanceled(true);
 		}
@@ -114,6 +115,7 @@ public class WaywardWarpProperty extends Property implements IDataHolder<Wayfind
 		if(!data.hasTarget())
 		{
 			setData(event.getItemStack(), data.withBlockPosition(new GlobalPos(event.getLevel().dimension(), event.getPos())));
+			WayfindingProperty.playWayfindingSound(event.getLevel(), event.getPos());
 			event.setCancellationResult(ItemInteractionResult.SUCCESS);
 			event.setCanceled(true);
 		}

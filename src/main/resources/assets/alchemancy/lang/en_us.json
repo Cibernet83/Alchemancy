@@ -357,6 +357,7 @@
   "subtitles.property.throwable": "Thrown item flies",
   "subtitles.property.loyal": "Loyal item returns",
   "subtitles.property.clueless": "Huh?",
+  "subtitles.property.wayfinding": "Wayfinding item locks onto target",
 
   "alchemancy.category.basics": "Fundamentals",
   "alchemancy.category.properties": "Infusion Properties",
