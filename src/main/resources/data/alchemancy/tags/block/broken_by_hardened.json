@@ -1,0 +1,21 @@
+{
+  "values": [
+    "#c:glass_blocks",
+    "#c:glass_panes",
+    "minecraft:ice",
+    "minecraft:decorated_pot",
+
+    {
+      "id": "supplementaries:brick_breakable_recursive",
+      "required": false
+    },
+    {
+      "id": "supplementaries:brick_breakable",
+      "required": false
+    },
+    {
+      "id": "chipped:ice",
+      "required": false
+    }
+  ]
+}

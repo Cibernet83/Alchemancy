@@ -1,0 +1,11 @@
+{
+  "values": [
+    "#alchemancy:arcane_damage",
+    "#c:is_magic"
+  ],
+  "remove": [
+    "#c:is_poison",
+    "#c:is_wither",
+    "minecraft:thorns"
+  ]
+}

@@ -13,6 +13,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -23,6 +24,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.Nullable;
@@ -88,6 +90,8 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, PristineProperty> PRISTINE = REGISTRY.register("pristine", PristineProperty::new);
 	public static final DeferredHolder<Property, HellbentProperty> HELLBENT = REGISTRY.register("hellbent", HellbentProperty::new);
 	public static final DeferredHolder<Property, DepthDwellerProperty> DEPTH_DWELLER = REGISTRY.register("depth_dweller", DepthDwellerProperty::new);
+	public static final DeferredHolder<Property, HardenedProperty> HARDENED = REGISTRY.register("hardened", HardenedProperty::new);
+	public static final DeferredHolder<Property, CrackedProperty> CRACKED = REGISTRY.register("cracked", CrackedProperty::new);
 
 	//Mobility
 	public static final DeferredHolder<Property, EnergizedProperty> ENERGIZED = REGISTRY.register("energized", EnergizedProperty::new);
@@ -176,11 +180,12 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, CozyProperty> COZY = REGISTRY.register("cozy", CozyProperty::new);
 	public static final DeferredHolder<Property, WaxedProperty> WAXED = REGISTRY.register("waxed", WaxedProperty::new);
 	public static final DeferredHolder<Property, FireproofProperty> FIRE_RESISTANT = REGISTRY.register("fire_resistant", FireproofProperty::new);
-	public static final DeferredHolder<Property, ConditionalDamageReductionProperty> BLAST_RESISTANT = REGISTRY.register("blast_resistant", () -> ConditionalDamageReductionProperty.reduceExplosionDamage(0x3B2754)); //2CCC26
+	public static final DeferredHolder<Property, ConditionalDamageReductionProperty> BLAST_RESISTANT = REGISTRY.register("blast_resistant", () -> ConditionalDamageReductionProperty.reduceDamageByTag(0x3B2754, DamageTypeTags.IS_EXPLOSION, 0.5f)); //2CCC26
 	public static final DeferredHolder<Property, ConditionalDamageReductionProperty> INSULATED = REGISTRY.register("insulated", () -> ConditionalDamageReductionProperty.reduceShockDamage(0x659191));
 	public static final DeferredHolder<Property, WardingProperty> WARDING = REGISTRY.register("warding", WardingProperty::new);
 	public static final DeferredHolder<Property, EternalProperty> ETERNAL = REGISTRY.register("eternal", EternalProperty::new);
 	public static final DeferredHolder<Property, Property> MUFFLED = REGISTRY.register("muffled", () -> Property.simple(0x5E92F9));
+	public static final DeferredHolder<Property, ConditionalDamageReductionProperty> MAGIC_RESISTANT = REGISTRY.register("magic_resistant", () -> ConditionalDamageReductionProperty.reduceDamageByTag(0x5E14FF, Tags.DamageTypes.IS_MAGIC, 0.85f));
 
 	//Soulbind
 	public static final DeferredHolder<Property, Property> SOULBIND = REGISTRY.register("soulbind", SoulbindProperty::new);

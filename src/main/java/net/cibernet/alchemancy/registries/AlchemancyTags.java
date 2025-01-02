@@ -1,6 +1,7 @@
 package net.cibernet.alchemancy.registries;
 
 import net.cibernet.alchemancy.Alchemancy;
+import net.cibernet.alchemancy.properties.Property;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -40,6 +41,7 @@ public class AlchemancyTags
 		public static final TagKey<Block> SUPPORTS_BLAZEBLOOM = registerTag(Registries.BLOCK, "supports_blazebloom");
 		public static final TagKey<Block> REQUIRED_FOR_BLAZEBLOOM_GENERATION = registerTag(Registries.BLOCK, "required_for_blazebloom_generation");
 		public static final TagKey<Block> WAYFINDING_TARGETABLE = registerTag(Registries.BLOCK, "wayfinding_targetable");
+		public static final TagKey<Block> BROKEN_BY_HARDENED = registerTag(Registries.BLOCK, "broken_by_hardened");
 	}
 
 	public static class DamageTypes
@@ -66,6 +68,11 @@ public class AlchemancyTags
 	{
 		public static final TagKey<DimensionType> DEPTH_DWELLER_EFFECTIVE = registerTag(Registries.DIMENSION_TYPE, "depth_dweller_effective");
 		public static final TagKey<DimensionType> WAYFINDING_POINTS_TO_ORIGIN = registerTag(Registries.DIMENSION_TYPE, "wayfinding_points_to_origin");
+	}
+
+	public static class Properties
+	{
+		public static final TagKey<Property> DISABLES_BLOCK_ATTACK_IN_CREATIVE = registerTag(AlchemancyProperties.REGISTRY_KEY, "disables_block_attack_in_creative");
 	}
 
 	public static final class Enchantments

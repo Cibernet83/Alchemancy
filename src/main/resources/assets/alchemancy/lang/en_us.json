@@ -162,6 +162,9 @@
   "property.alchemancy.depth_dweller": "Depth Dweller",
   "property.alchemancy.sparking": "Sparking",
   "property.alchemancy.loose": "Loose",
+  "property.alchemancy.hardened": "Hardened",
+  "property.alchemancy.malleable": "Malleable",
+  "property.alchemancy.cracked": "Cracked",
 
   "property.alchemancy.extended": "Extended",
   "property.alchemancy.calcareous": "Calcaerous",
@@ -171,6 +174,7 @@
   "property.alchemancy.gambling": "Gambling",
   "property.alchemancy.warding": "Warding",
   "property.alchemancy.reinforced": "Reinforced",
+  "property.alchemancy.enchanting": "Enchanting",
   "property.alchemancy.experienced": "Experienced",
   "property.alchemancy.wise": "Wise",
   "property.alchemancy.clueless": "Clueless?",
@@ -180,6 +184,7 @@
   "property.alchemancy.waterproof": "Waterproof",
   "property.alchemancy.blast_resistant": "Blast Resistant",
   "property.alchemancy.fire_resistant": "Fire Resistant",
+  "property.alchemancy.magic_resistant": "Magic Resistant",
   "property.alchemancy.eternal": "Eternal",
   "property.alchemancy.muffled": "Muffled",
 

@@ -1,8 +1,9 @@
 package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.registries.AlchemancyTags;
-import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -22,10 +23,10 @@ public class ConditionalDamageReductionProperty extends Property
 				equipmentSlot.isArmor() && damageSource.is(AlchemancyTags.DamageTypes.SHOCK_DAMAGE) ? equipmentSlot == EquipmentSlot.BODY ? 0 : 0.75f : 1));
 	}
 
-	public static ConditionalDamageReductionProperty reduceExplosionDamage(int color)
+	public static ConditionalDamageReductionProperty reduceDamageByTag(int color, TagKey<DamageType> damageTypeTag, float multiplier)
 	{
 		return new ConditionalDamageReductionProperty((stack) -> color, ((living, equipmentSlot, damageSource) ->
-				equipmentSlot.isArmor() && damageSource.is(DamageTypeTags.IS_EXPLOSION) ? equipmentSlot == EquipmentSlot.BODY ? 0 : 0.5f : 1));
+				equipmentSlot.isArmor() && damageSource.is(damageTypeTag) ? equipmentSlot == EquipmentSlot.BODY ? 0 : multiplier : 1));
 	}
 
 	public ConditionalDamageReductionProperty(Function<ItemStack, Integer> color, TriFunction<LivingEntity, EquipmentSlot, DamageSource, Float> damageMultiplier) {
