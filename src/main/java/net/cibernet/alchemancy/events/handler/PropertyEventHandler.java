@@ -484,6 +484,17 @@ public class PropertyEventHandler
 			event.setCanceled(true);
 	}
 
+	@SubscribeEvent
+	public static void onBlockLeftClicked(PlayerInteractEvent.LeftClickBlock event)
+	{
+		ItemStack stack = event.getItemStack();
+
+		if((event.getEntity().isCreative() && InfusedPropertiesHelper.hasProperty(stack, AlchemancyTags.Properties.DISABLES_BLOCK_ATTACK_IN_CREATIVE)) ||
+				InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.FLIMSY))
+			event.setCanceled(true);
+
+	}
+
 	private static final Component PROPERTY_INGREDIENT_NAME = Component.translatable("item.alchemancy.property_capsule.ingredient");
 
 	@SubscribeEvent

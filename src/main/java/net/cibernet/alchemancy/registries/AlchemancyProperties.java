@@ -220,6 +220,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, EntityPullProperty<Projectile>> TARGETED = REGISTRY.register("targeted", () -> new EntityPullProperty<>(0xDC4A4A, Projectile.class, 12, false));
 	public static final DeferredHolder<Property, RepelledProperty<Entity>> REPELLED = REGISTRY.register("repelled", () -> new RepelledProperty<>(0x4ADCDC, Entity.class, 8, false));
 	public static final DeferredHolder<Property, HomingProperty<LivingEntity>> LIGHT_SEEKING = REGISTRY.register("light_seeking", () -> new HomingProperty<>(0xFFFF00, LivingEntity.class, 24, 1f, HomingProperty.EffectType.PROJECTILE_ONLY, (e) -> e.isOnFire() || e.isCurrentlyGlowing()));
+	public static final DeferredHolder<Property, Property> FLIMSY = REGISTRY.register("flimsy", () -> Property.simple(0xC0C49D));
 
 	//Cosmetic
 	public static final DeferredHolder<Property, Property> REVEALED = REGISTRY.register("revealed", () -> Property.simple(0xD6DDFF));
