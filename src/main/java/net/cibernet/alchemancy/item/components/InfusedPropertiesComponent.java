@@ -8,6 +8,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipProvider;
@@ -42,6 +43,10 @@ public record InfusedPropertiesComponent(List<Holder<Property>> properties)
 				return true;
 		return false;
 		*/
+	}
+
+	public boolean hasProperty(TagKey<Property> propertyTag) {
+		return properties.stream().anyMatch(property -> property.is(propertyTag));
 	}
 
 	@Override

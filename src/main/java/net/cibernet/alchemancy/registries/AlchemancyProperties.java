@@ -33,7 +33,9 @@ import java.util.List;
 
 public class AlchemancyProperties
 {
-	private static final ResourceLocation KEY = ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "properties");
+	private static final ResourceLocation KEY = ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "infusion_properties");
+
+	public static final ResourceKey<Registry<Property>> REGISTRY_KEY = ResourceKey.createRegistryKey(KEY);
 	public static final DeferredRegister<Property> REGISTRY = DeferredRegister.create(KEY, Alchemancy.MODID);
 	private static final Registry<Property> SUPPLIER = REGISTRY.makeRegistry(propertyRegistryBuilder -> propertyRegistryBuilder.defaultKey(KEY).sync(true));
 

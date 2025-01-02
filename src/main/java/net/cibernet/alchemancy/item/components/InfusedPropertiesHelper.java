@@ -32,7 +32,19 @@ public class InfusedPropertiesHelper
 
 		return (stack.has(INFUSED_PROPERTIES.get()) && (toggled || !hasInfusedProperty(stack, AlchemancyProperties.TOGGLEABLE)) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(property)
 			|| (stack.has(INNATE_PROPERTIES.get()) && (toggled || !hasInnateProperty(stack, AlchemancyProperties.TOGGLEABLE)) && stack.get(INNATE_PROPERTIES.get()).hasProperty(property)))
-			|| ((property == AlchemancyProperties.AWAKENED || hasProperty(stack, AlchemancyProperties.AWAKENED)) && AlchemancyProperties.getDormantProperties(stack).contains(property));
+			|| ((property == AlchemancyProperties.AWAKENED || hasProperty(stack, AlchemancyProperties.AWAKENED)) && hasDormantProperty(stack, property));
+	}
+
+	public static boolean hasProperty(ItemStack stack, TagKey<Property> propertyTag)
+	{
+		if(stack.isEmpty() || propertyTag == null)
+			return false;
+
+		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().getData(stack);
+
+		return (stack.has(INFUSED_PROPERTIES.get()) && (toggled || !hasInfusedProperty(stack, AlchemancyProperties.TOGGLEABLE)) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(propertyTag)
+			|| (stack.has(INNATE_PROPERTIES.get()) && (toggled || !hasInnateProperty(stack, AlchemancyProperties.TOGGLEABLE)) && stack.get(INNATE_PROPERTIES.get()).hasProperty(propertyTag)))
+			|| ((hasProperty(stack, AlchemancyProperties.AWAKENED)) && hasDormantProperty(stack, propertyTag));
 	}
 
 	public static boolean hasProperties(ItemStack stack, List<Holder<Property>> properties, boolean matchesAll)
@@ -57,6 +69,26 @@ public class InfusedPropertiesHelper
 	public static boolean hasInnateProperty(ItemStack stack, Holder<Property> property)
 	{
 		return !stack.isEmpty() && stack.has(INNATE_PROPERTIES.get()) && stack.get(INNATE_PROPERTIES.get()).hasProperty(property);
+	}
+
+	public static boolean hasDormantProperty(ItemStack stack, Holder<Property> property)
+	{
+		return !stack.isEmpty() && AlchemancyProperties.getDormantProperties(stack).contains(property);
+	}
+
+	public static boolean hasInfusedProperty(ItemStack stack, TagKey<Property> propertyTag)
+	{
+		return !stack.isEmpty() && stack.has(INFUSED_PROPERTIES.get()) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(propertyTag);
+	}
+
+	public static boolean hasInnateProperty(ItemStack stack, TagKey<Property> propertyTag)
+	{
+		return !stack.isEmpty() && stack.has(INNATE_PROPERTIES.get()) && stack.get(INNATE_PROPERTIES.get()).hasProperty(propertyTag);
+	}
+
+	public static boolean hasDormantProperty(ItemStack stack, TagKey<Property> propertyTag)
+	{
+		return !stack.isEmpty() && AlchemancyProperties.getDormantProperties(stack).stream().anyMatch(property -> property.is(propertyTag));
 	}
 
 	public static boolean modifyInfusions(ItemStack stack, Function<InfusedPropertiesComponent.Mutable, Boolean> consumer)
