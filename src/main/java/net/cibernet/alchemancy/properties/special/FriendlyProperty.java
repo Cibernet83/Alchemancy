@@ -48,33 +48,9 @@ public class FriendlyProperty extends Property
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onIncomingDamage(LivingIncomingDamageEvent event)
 	{
-		if(event.isCanceled() || event.getEntity().equals(event.getSource().getEntity()) ||
-				!event.getEntity().getType().is(AlchemancyTags.EntityTypes.AFFECTED_BY_FRIENDLY))
-			return;
-
-		if(event.getSource().getEntity() instanceof Player user)
-		{
-			Inventory inventory = user.getInventory();
-			for(int slot = 0; slot < inventory.getContainerSize(); slot++)
-			{
-				ItemStack stack = inventory.getItem(slot);
-				if(InfusedPropertiesHelper.hasProperties(stack, PROPERTIES_TO_CHECK, true))
-				{
-					event.setCanceled(true);
-					return;
-				}
-			}
-		}
-		else if(event.getSource().getEntity() instanceof LivingEntity user)
-		{
-			for (EquipmentSlot slot : EquipmentSlot.values()) {
-				ItemStack stack = user.getItemBySlot(slot);
-				if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.FRIENDLY))
-				{
-					event.setCanceled(true);
-					return;
-				}
-			}
-		}
+		if(!(event.isCanceled() || event.getEntity().equals(event.getSource().getEntity()) || !event.getEntity().getType().is(AlchemancyTags.EntityTypes.AFFECTED_BY_FRIENDLY)) &&
+				event.getSource().getEntity() instanceof LivingEntity user &&
+				InfusedPropertiesHelper.hasItemWithProperty(user, AlchemancyProperties.FRIENDLY, true))
+			event.setCanceled(true);
 	}
 }

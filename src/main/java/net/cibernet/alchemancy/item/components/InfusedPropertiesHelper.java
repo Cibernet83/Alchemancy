@@ -7,9 +7,13 @@ import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Unit;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 
@@ -23,6 +27,33 @@ import static net.cibernet.alchemancy.registries.AlchemancyItems.Components.INNA
 
 public class InfusedPropertiesHelper
 {
+	public static boolean hasItemWithProperty(LivingEntity user, Holder<Property> property, boolean checkAuxiliary)
+	{
+		if(checkAuxiliary && user instanceof Player player)
+		{
+			Inventory inventory = player.getInventory();
+			List<Holder<Property>> propertiesToCheck = List.of(AlchemancyProperties.AUXILIARY, property);
+
+			for(int slot = 0; slot < inventory.getContainerSize(); slot++)
+			{
+				ItemStack stack = inventory.getItem(slot);
+				if(InfusedPropertiesHelper.hasProperties(stack, propertiesToCheck, true))
+				{
+					return true;
+				}
+			}
+		}
+
+		for (EquipmentSlot slot : EquipmentSlot.values()) {
+			ItemStack stack = user.getItemBySlot(slot);
+			if(InfusedPropertiesHelper.hasProperty(stack, property))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public static boolean hasProperty(ItemStack stack, Holder<Property> property)
 	{
 		if(stack.isEmpty() || property == null)
