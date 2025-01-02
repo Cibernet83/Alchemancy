@@ -27,7 +27,7 @@ public class DivingGearProperty extends Property
 		if(slot == EquipmentSlot.BODY)
 			event.addModifier(Attributes.OXYGEN_BONUS, OXYGEN_MOD, EquipmentSlotGroup.BODY);
 		if(slot == EquipmentSlot.HEAD)
-			event.addModifier(Attributes.OXYGEN_BONUS, OXYGEN_MOD, EquipmentSlotGroup.CHEST);
+			event.addModifier(Attributes.OXYGEN_BONUS, OXYGEN_MOD, EquipmentSlotGroup.HEAD);
 		else if(slot == EquipmentSlot.CHEST)
 			event.addModifier(Attributes.SUBMERGED_MINING_SPEED, SPEED_MOD, EquipmentSlotGroup.CHEST);
 		else if(slot == EquipmentSlot.LEGS)
