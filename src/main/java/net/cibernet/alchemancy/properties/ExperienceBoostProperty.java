@@ -30,6 +30,11 @@ public class ExperienceBoostProperty extends Property
 	}
 
 	@Override
+	public int modifyEnchantmentValue(int originalValue, int result) {
+		return result + 5;
+	}
+
+	@Override
 	public int getColor(ItemStack stack) {
 		return 0x83FF56;
 	}
