@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:max_damage",
+    "minecraft:damage",
+    "minecraft:container",
+    "minecraft:bundle_contents",
+    "minecraft:charged_projectiles"
+  ]
+}

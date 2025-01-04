@@ -3,6 +3,7 @@ package net.cibernet.alchemancy.registries;
 import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.properties.Property;
 import net.minecraft.core.Registry;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -31,6 +32,8 @@ public class AlchemancyTags
         public static final TagKey<Item> INCREASES_RESIZED = registerTag(Registries.ITEM, "increases_resized");
         public static final TagKey<Item> DECREASES_RESIZED = registerTag(Registries.ITEM, "decreases_resized");
 		public static final TagKey<Item> INFUSION_REMOVES_GLINT = registerTag(Registries.ITEM, "infusion_removes_glint");
+
+		public static final TagKey<Item> DISABLES_COMPACT = registerTag(Registries.ITEM, "disables_compact");
 	}
 
 	public static class Blocks
@@ -46,8 +49,6 @@ public class AlchemancyTags
 
 	public static class DamageTypes
 	{
-
-
         public static final TagKey<DamageType> TRIGGERS_ON_HIT_EFFECTS = registerTag(Registries.DAMAGE_TYPE, "triggers_on_hit_effects");
         public static final TagKey<DamageType> TRIGGERS_ON_PROJECTILE_HIT_EFFECTS = registerTag(Registries.DAMAGE_TYPE, "triggers_on_projectile_hit_effects");
         public static final TagKey<DamageType> SHOCK_DAMAGE = registerTag(Registries.DAMAGE_TYPE, "shock_damage");
@@ -73,6 +74,11 @@ public class AlchemancyTags
 	public static class Properties
 	{
 		public static final TagKey<Property> DISABLES_BLOCK_ATTACK_IN_CREATIVE = registerTag(AlchemancyProperties.REGISTRY_KEY, "disables_block_attack_in_creative");
+	}
+
+	public static class DataComponents
+	{
+		public static final TagKey<DataComponentType<?>> DISABLES_COMPACT = registerTag(Registries.DATA_COMPONENT_TYPE, "disables_compact");
 	}
 
 	public static final class Enchantments
