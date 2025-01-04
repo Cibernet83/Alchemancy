@@ -46,7 +46,7 @@ public class AlchemancyProperties
 	{
 		private static final ResourceLocation KEY = ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "property_modifiers");
 		public static final DeferredRegister<PropertyModifierType<?>> REGISTRY = DeferredRegister.create(KEY, Alchemancy.MODID);
-		private static final Registry<PropertyModifierType<?>> SUPPLIER = REGISTRY.makeRegistry(propertyRegistryBuilder -> propertyRegistryBuilder.defaultKey(KEY).sync(true));
+		public static final Registry<PropertyModifierType<?>> SUPPLIER = REGISTRY.makeRegistry(propertyRegistryBuilder -> propertyRegistryBuilder.defaultKey(KEY).sync(true));
 
 		public static final DeferredHolder<PropertyModifierType<?>, PropertyModifierType<Boolean>> IGNORE_INFUSED = REGISTRY.register("ignore_infused", PropertyModifierType.build(false, Codec.BOOL, ByteBufCodecs.BOOL));
 		public static final DeferredHolder<PropertyModifierType<?>, PropertyModifierType<Boolean>> PREVENT_CONSUMPTION = REGISTRY.register("prevent_consumption", PropertyModifierType.build(false, Codec.BOOL, ByteBufCodecs.BOOL));
@@ -56,6 +56,7 @@ public class AlchemancyProperties
 		public static final DeferredHolder<PropertyModifierType<?>, PropertyModifierType<Float>> ATTACK_RADIUS = REGISTRY.register("attack_radius", PropertyModifierType.build(1f, Codec.FLOAT, ByteBufCodecs.FLOAT));
 		public static final DeferredHolder<PropertyModifierType<?>, PropertyModifierType<Float>> EFFECT_RADIUS = REGISTRY.register("effect_radius", PropertyModifierType.build(1f, Codec.FLOAT, ByteBufCodecs.FLOAT));
 		public static final DeferredHolder<PropertyModifierType<?>, PropertyModifierType<Float>> EFFECT_VALUE = REGISTRY.register("effect_value", PropertyModifierType.build(1f, Codec.FLOAT, ByteBufCodecs.FLOAT));
+		public static final DeferredHolder<PropertyModifierType<?>, PropertyModifierType<Integer>> BONUS_SLOTS = REGISTRY.register("bonus_slots", PropertyModifierType.build(0, Codec.INT, ByteBufCodecs.INT));
 
 		public static Holder<PropertyModifierType<?>> asHolder(PropertyModifierType<?> modifierType)
 		{
@@ -227,6 +228,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, RepelledProperty<Entity>> REPELLED = REGISTRY.register("repelled", () -> new RepelledProperty<>(0x4ADCDC, Entity.class, 8, false));
 	public static final DeferredHolder<Property, HomingProperty<LivingEntity>> LIGHT_SEEKING = REGISTRY.register("light_seeking", () -> new HomingProperty<>(0xFFFF00, LivingEntity.class, 24, 1f, HomingProperty.EffectType.PROJECTILE_ONLY, (e) -> e.isOnFire() || e.isCurrentlyGlowing()));
 	public static final DeferredHolder<Property, Property> FLIMSY = REGISTRY.register("flimsy", () -> Property.simple(0xC0C49D));
+	public static final DeferredHolder<Property, CompactProperty> COMPACT = REGISTRY.register("compact", CompactProperty::new);
 
 	//Cosmetic
 	public static final DeferredHolder<Property, Property> REVEALED = REGISTRY.register("revealed", () -> Property.simple(0xD6DDFF));
@@ -241,7 +243,7 @@ public class AlchemancyProperties
 
 	//Special
 	public static final DeferredHolder<Property, Property> AWAKENED = REGISTRY.register("awakened", () -> Property.simpleInterpolated(false, 0.5f, 0xFF91EAE3, 0xFF91EAE3, 0xFFEDF2F8, 0xFFEBBBDB, 0xFFEBBBDB, 0xFFEDF2F8));
-	public static final DeferredHolder<Property, Property> PARADOXICAL = REGISTRY.register("paradoxical", () -> Property.simpleFlashing(true, 100d, 0xFF0000, 0x00FF00, 0x0000FF, 0xA100FF));
+	public static final DeferredHolder<Property, Property> PARADOXICAL = REGISTRY.register("paradoxical", () -> Property.simpleInterpolated(true, 0.2f, 0xFFFF0000, 0xFFFFFF00, 0xFF00FF00, 0xFF0000FF, 0xFFA100FF));
 	public static final DeferredHolder<Property, Property> LIMIT_BREAK = REGISTRY.register("limit_break", () -> IncreaseInfuseSlotsProperty.simple(2, (style) -> style.withBold(true), IncreaseInfuseSlotsProperty::limitBreakColors, IncreaseInfuseSlotsProperty::limitBreakCreativeTab));
 
 	public static final DeferredHolder<Property, Property> DIRTY = REGISTRY.register("dirty", () -> Property.simple(0x96592E));
@@ -275,7 +277,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, RocketPoweredProperty> ROCKET_POWERED = REGISTRY.register("rocket_powered", RocketPoweredProperty::new);
 
 	//TODO
-	//Tethered: On Right Click leashes the user to the targeted entity or fence block. Leash/String maybe?
+	//Tethered: On Right Click leashes the user to the targeted entity or fence block. - Leash
 	//Echoing: On Hit/On Activation, the action and target are stored into the item and get repeated after a few ticks (as long as the item remains in the player's inv or as a projectile) - Echo Shard/Recovery Compass, Warped Echoed > Muffled
 
 	//Soulbind Properties:
