@@ -1,5 +1,6 @@
 package net.cibernet.alchemancy.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
@@ -21,6 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 @Mixin(IItemStackExtension.class)
@@ -55,6 +57,17 @@ public interface ItemStackExtensionMixin
 	{
 
 		return InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.GLIDER) || original.call(instance, stack, living, i);
+	}
+
+	@WrapMethod(method = "getEnchantmentValue")
+	default int getEnchantmentValue(Operation<Integer> original)
+	{
+		int originalValue = original.call();
+		AtomicInteger result = new AtomicInteger(originalValue);
+
+		InfusedPropertiesHelper.forEachProperty(self(), propertyHolder -> result.set(propertyHolder.value().modifyEnchantmentValue(originalValue, result.get())));
+
+		return result.get();
 	}
 
 	@Inject(method = "canPerformAction", at = @At("RETURN"), cancellable = true)

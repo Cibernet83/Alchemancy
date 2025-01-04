@@ -6,7 +6,6 @@ import net.cibernet.alchemancy.properties.*;
 import net.cibernet.alchemancy.properties.data.modifiers.PropertyModifierType;
 import net.cibernet.alchemancy.properties.soulbind.*;
 import net.cibernet.alchemancy.properties.special.*;
-import net.cibernet.alchemancy.util.ColorUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -215,6 +214,7 @@ public class AlchemancyProperties
 
 	public static final DeferredHolder<Property, ConductiveProperty> CONDUCTIVE = REGISTRY.register("conductive", ConductiveProperty::new);
 	public static final DeferredHolder<Property, CluelessProperty> CLUELESS = REGISTRY.register("clueless", CluelessProperty::new);
+	public static final DeferredHolder<Property, Property> ENCHANTING = REGISTRY.register("enchanting", EnchantingProperty::new);
 	public static final DeferredHolder<Property, ExperienceBoostProperty> WISE = REGISTRY.register("wise", ExperienceBoostProperty::new);
 	public static final DeferredHolder<Property, ExperiencedProperty> EXPERIENCED = REGISTRY.register("experienced", ExperiencedProperty::new);
 	public static final DeferredHolder<Property, EnderProperty> ENDER = REGISTRY.register("ender", EnderProperty::new);

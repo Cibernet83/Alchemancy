@@ -489,6 +489,10 @@ public abstract class Property
 		return InfusionPropertyDispenseBehavior.DispenseResult.PASS;
 	}
 
+	public int modifyEnchantmentValue(int originalValue, int result) {
+		return result;
+	}
+
 	public static class Priority
 	{
 		public static final int LOWEST = Integer.MAX_VALUE;
