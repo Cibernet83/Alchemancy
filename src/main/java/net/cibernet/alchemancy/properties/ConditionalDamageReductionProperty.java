@@ -20,13 +20,13 @@ public class ConditionalDamageReductionProperty extends Property
 	public static ConditionalDamageReductionProperty reduceShockDamage(int color)
 	{
 		return new ConditionalDamageReductionProperty((stack) -> color, ((living, equipmentSlot, damageSource) ->
-				equipmentSlot.isArmor() && damageSource.is(AlchemancyTags.DamageTypes.SHOCK_DAMAGE) ? equipmentSlot == EquipmentSlot.BODY ? 0 : 0.75f : 1));
+				(equipmentSlot.isArmor() || living.getItemBySlot(equipmentSlot).equals(living.getUseItem())) && damageSource.is(AlchemancyTags.DamageTypes.SHOCK_DAMAGE) ? equipmentSlot == EquipmentSlot.BODY ? 0 : 0.75f : 1));
 	}
 
 	public static ConditionalDamageReductionProperty reduceDamageByTag(int color, TagKey<DamageType> damageTypeTag, float multiplier)
 	{
 		return new ConditionalDamageReductionProperty((stack) -> color, ((living, equipmentSlot, damageSource) ->
-				equipmentSlot.isArmor() && damageSource.is(damageTypeTag) ? equipmentSlot == EquipmentSlot.BODY ? 0 : multiplier : 1));
+				(equipmentSlot.isArmor() || living.getItemBySlot(equipmentSlot).equals(living.getUseItem())) && damageSource.is(damageTypeTag) ? equipmentSlot == EquipmentSlot.BODY ? 0 : multiplier : 1));
 	}
 
 	public ConditionalDamageReductionProperty(Function<ItemStack, Integer> color, TriFunction<LivingEntity, EquipmentSlot, DamageSource, Float> damageMultiplier) {
