@@ -103,6 +103,9 @@ public class AlchemancyClient
 
 		event.register(((stack, tintIndex) -> tintIndex == 0 ? AlchemancyProperties.WAYWARD_WARP.value().getColor(stack) : -1),
 				AlchemancyItems.WAYWARD_MEDALLION);
+
+		event.register(((stack, tintIndex) -> tintIndex == 0 ? AlchemancyProperties.PARADOXICAL.value().getColor(stack) : -1),
+				AlchemancyItems.PARADOX_PEARL);
 	}
 
 	@SubscribeEvent
