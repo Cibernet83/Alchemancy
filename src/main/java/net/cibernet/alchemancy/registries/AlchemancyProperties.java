@@ -146,6 +146,9 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, ThrowableProperty> THROWABLE = REGISTRY.register("throwable", ThrowableProperty::new);
 	public static final DeferredHolder<Property, ToggleableProperty> TOGGLEABLE = REGISTRY.register("toggleable", ToggleableProperty::new);
 	public static final DeferredHolder<Property, TickingProperty> TICKING = REGISTRY.register("ticking", TickingProperty::new);
+	public static final DeferredHolder<Property, HydrophobicProperty> HYDROPHOBIC = REGISTRY.register("hydrophobic", HydrophobicProperty::new);
+	public static final DeferredHolder<Property, AllergicProperty> ALLERGIC = REGISTRY.register("allergic", AllergicProperty::new);
+	public static final DeferredHolder<Property, ArmorPulseProperty> ARMOR_PULSE = REGISTRY.register("armor_pulse", ArmorPulseProperty::new);
 
 	//Mob Effects
 	public static final DeferredHolder<Property, LevitatingProperty> LEVITATING = REGISTRY.register("levitating", LevitatingProperty::new);
@@ -185,7 +188,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, WardingProperty> WARDING = REGISTRY.register("warding", WardingProperty::new);
 	public static final DeferredHolder<Property, EternalProperty> ETERNAL = REGISTRY.register("eternal", EternalProperty::new);
 	public static final DeferredHolder<Property, Property> MUFFLED = REGISTRY.register("muffled", () -> Property.simple(0x5E92F9));
-	public static final DeferredHolder<Property, ConditionalDamageReductionProperty> MAGIC_RESISTANT = REGISTRY.register("magic_resistant", () -> ConditionalDamageReductionProperty.reduceDamageByTag(0x5E14FF, Tags.DamageTypes.IS_MAGIC, 0.85f));
+	public static final DeferredHolder<Property, ConditionalDamageReductionProperty> MAGIC_RESISTANT = REGISTRY.register("magic_resistant", () -> ConditionalDamageReductionProperty.reduceDamageByTag(0x5E14FF, AlchemancyTags.DamageTypes.AFFECTED_BY_MAGIC_RESISTANT, 0.85f));
 
 	//Soulbind
 	public static final DeferredHolder<Property, Property> SOULBIND = REGISTRY.register("soulbind", SoulbindProperty::new);

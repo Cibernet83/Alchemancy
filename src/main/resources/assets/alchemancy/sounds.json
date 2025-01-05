@@ -189,23 +189,40 @@
   },
   "property.wayfinding": {
   "sounds": [
-    {
-      "name": "block/lodestone/lock1",
-      "pitch": 0.85
-    },
-    {
-      "name": "block/lodestone/lock1",
-      "pitch": 0.95
-    },
-    {
-      "name": "block/lodestone/lock2",
-      "pitch": 0.85
-    },
-    {
-      "name": "block/lodestone/lock2",
-      "pitch": 0.95
-    }
-  ],
-  "subtitle": "subtitles.property.wayfinding"
-}
+      {
+        "name": "block/lodestone/lock1",
+        "pitch": 0.85
+      },
+      {
+        "name": "block/lodestone/lock1",
+        "pitch": 0.95
+      },
+      {
+        "name": "block/lodestone/lock2",
+        "pitch": 0.85
+      },
+      {
+        "name": "block/lodestone/lock2",
+        "pitch": 0.95
+      }
+    ],
+    "subtitle": "subtitles.property.wayfinding"
+  },
+  "property.allergic": {
+    "sounds": [
+      {
+        "name": "mob/panda/sneeze1",
+        "pitch": 0.5
+      },
+      {
+        "name": "mob/panda/sneeze2",
+        "pitch": 0.5
+      },
+      {
+        "name": "mob/panda/sneeze3",
+        "pitch": 0.5
+      }
+    ],
+    "subtitle": "subtitles.property.allergic"
+  }
 }

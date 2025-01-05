@@ -493,6 +493,14 @@ public abstract class Property
 		return result;
 	}
 
+	public void onMobEffectAdded(ItemStack stack, EquipmentSlot slot, LivingEntity user, MobEffectEvent.Added event) {
+
+	}
+
+	public void isMobEffectApplicable(ItemStack stack, EquipmentSlot slot, LivingEntity user, MobEffectEvent.Applicable event) {
+
+	}
+
 	public static class Priority
 	{
 		public static final int LOWEST = Integer.MAX_VALUE;

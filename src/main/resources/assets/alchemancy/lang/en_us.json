@@ -291,6 +291,10 @@
   "property.alchemancy.sporadic": "Sporadic",
   "property.alchemancy.ticking": "Ticking",
 
+  "property.alchemancy.hydrophobic": "Hydrophobic",
+  "property.alchemancy.allergic": "Allergic",
+  "property.alchemancy.armor_pulse": "Armor Pulse",
+
   "property.alchemancy.undying": "Undying",
   "property.alchemancy.paradoxical": "Paradoxical",
   "property.alchemancy.limit_break": "Limit Break",
@@ -366,6 +370,7 @@
   "subtitles.property.loyal": "Loyal item returns",
   "subtitles.property.clueless": "Huh?",
   "subtitles.property.wayfinding": "Wayfinding item locks onto target",
+  "subtitles.property.allergic": "Allergic item sneezes",
 
   "alchemancy.category.basics": "Fundamentals",
   "alchemancy.category.properties": "Infusion Properties",

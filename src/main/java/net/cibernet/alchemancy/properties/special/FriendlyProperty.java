@@ -43,8 +43,6 @@ public class FriendlyProperty extends Property
 		return false;
 	}
 
-	private static final List<Holder<Property>> PROPERTIES_TO_CHECK = List.of(AlchemancyProperties.AUXILIARY, AlchemancyProperties.FRIENDLY);
-
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onIncomingDamage(LivingIncomingDamageEvent event)
 	{

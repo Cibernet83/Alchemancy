@@ -20,6 +20,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -61,6 +62,20 @@ public class AuxiliaryProperty extends Property
 			triggerAuxiliaryEffects(user, (propertyHolder, stack) -> propertyHolder.value().onKill(event.getEntity(), user, stack, event));
 		if(event.getEntity() instanceof Player user)
 			triggerAuxiliaryEffects(user, (propertyHolder, stack) -> propertyHolder.value().onUserDeath(user, stack, EquipmentSlot.MAINHAND, event));
+	}
+
+	@SubscribeEvent
+	private static void onEffectAdded(MobEffectEvent.Added event)
+	{
+		if(event.getEntity() instanceof Player player)
+			triggerAuxiliaryEffects(player, (propertyHolder, stack) -> propertyHolder.value().onMobEffectAdded(stack, EquipmentSlot.MAINHAND, player, event));
+	}
+
+	@SubscribeEvent
+	private static void onEffectApplicable(MobEffectEvent.Applicable event)
+	{
+		if(event.getEntity() instanceof Player player)
+			triggerAuxiliaryEffects(player, (propertyHolder, stack) -> propertyHolder.value().isMobEffectApplicable(stack, EquipmentSlot.MAINHAND, player, event));
 	}
 
 	public static void triggerAuxiliaryEffects(ItemStack stack, Consumer<Holder<Property>> consumer)

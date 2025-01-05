@@ -264,8 +264,25 @@ public class PropertyEventHandler
 	@SubscribeEvent
 	public static void onItemUseTick(LivingEntityUseItemEvent.Tick event)
 	{
-
 		InfusedPropertiesHelper.forEachProperty(event.getItem(), propertyHolder -> propertyHolder.value().onItemUseTick(event.getEntity(), event.getItem(), event));
+	}
+
+	@SubscribeEvent
+	public static void onEffectAdded(MobEffectEvent.Added event)
+	{
+		for (EquipmentSlot slot : EquipmentSlot.values()) {
+			ItemStack stack = event.getEntity().getItemBySlot(slot);
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onMobEffectAdded(stack, slot, event.getEntity(), event));
+		}
+	}
+
+	@SubscribeEvent
+	public static void onEffectApplicable(MobEffectEvent.Applicable event)
+	{
+		for (EquipmentSlot slot : EquipmentSlot.values()) {
+			ItemStack stack = event.getEntity().getItemBySlot(slot);
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().isMobEffectApplicable(stack, slot, event.getEntity(), event));
+		}
 	}
 
 	@SubscribeEvent

@@ -7,6 +7,8 @@ import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.Objects;
+
 public abstract class AbstractTimerProperty extends Property implements IDataHolder<Long>
 {
 	public void resetStartTimestamp(ItemStack stack)
@@ -19,7 +21,12 @@ public abstract class AbstractTimerProperty extends Property implements IDataHol
 	{
 
 		long timestamp = getData(stack);
-		return timestamp == 0 ? 0 : CommonUtils.getLevelData().getDayTime() - timestamp;
+		return timestamp == 0 ? 0 : Math.max(0, CommonUtils.getLevelData().getDayTime() - timestamp);
+	}
+
+	public boolean hasRecordedTimestamp(ItemStack stack)
+	{
+		return !Objects.equals(getData(stack), getDefaultData());
 	}
 
 	@Override
