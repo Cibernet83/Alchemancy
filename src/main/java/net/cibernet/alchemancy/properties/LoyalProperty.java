@@ -1,17 +1,23 @@
 package net.cibernet.alchemancy.properties;
 
+import com.google.common.collect.Lists;
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.mixin.accessors.AbstractArrowAccessor;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -39,6 +45,35 @@ public class LoyalProperty extends Property implements IDataHolder<UUID>
 			projectile.setDeltaMovement(projectile.getDeltaMovement().scale(0.95).add(vec3.normalize().scale(d0)));
 			projectile.hasImpulse = true;
 		}
+	}
+
+	protected void dealArrowDamage(AbstractArrow arrow, Entity target)
+	{
+		float f = (float)arrow.getDeltaMovement().length();
+		double d0 = arrow.getBaseDamage();
+		Entity entity1 = arrow.getOwner();
+		DamageSource damagesource = arrow.damageSources().arrow(arrow, entity1 != null ? entity1 : arrow);
+		if (arrow.getWeaponItem() != null && arrow.level() instanceof ServerLevel serverlevel) {
+			d0 = EnchantmentHelper.modifyDamage(serverlevel, arrow.getWeaponItem(), target, damagesource, (float)d0);
+		}
+
+		int j = Mth.ceil(Mth.clamp((double)f * d0, 0.0, 2.147483647E9));
+
+		if (arrow.isCritArrow()) {
+			long k = arrow.getRandom().nextInt(j / 2 + 2);
+			j = (int)Math.min(k + (long)j, 2147483647L);
+		}
+
+		if (entity1 instanceof LivingEntity livingentity1) {
+			livingentity1.setLastHurtMob(target);
+		}
+
+		boolean flag = target.getType() == EntityType.ENDERMAN;
+		if (arrow.isOnFire() && !flag) {
+			target.igniteForSeconds(5.0F);
+		}
+
+		target.hurt(damagesource, (float) j);
 	}
 
 	public boolean isReturning(Entity projectile)
@@ -73,8 +108,13 @@ public class LoyalProperty extends Property implements IDataHolder<UUID>
 			if(rayTraceResult.getType() == HitResult.Type.ENTITY && rayTraceResult instanceof EntityHitResult entityHitResult)
 			{
 				Entity entity = entityHitResult.getEntity();
-				DamageSource damageSource = projectile.damageSources().thrown(projectile, projectile.getOwner());
-				entity.hurt(damageSource, (float)(Property.getItemAttackDamage(stack) - 1));
+
+				if(projectile instanceof AbstractArrow arrow)
+					dealArrowDamage(arrow, entity);
+				else {
+					DamageSource damageSource = projectile.damageSources().thrown(projectile, projectile.getOwner());
+					entity.hurt(damageSource, (float)(Property.getItemAttackDamage(stack) - 1));
+				}
 			}
 
 			projectile.getPersistentData().putBoolean(Alchemancy.MODID + ":loyal_returning", true);
