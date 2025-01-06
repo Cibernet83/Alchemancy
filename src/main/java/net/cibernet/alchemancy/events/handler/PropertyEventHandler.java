@@ -180,12 +180,11 @@ public class PropertyEventHandler
 		Projectile projectile = event.getProjectile();
 		ItemStack stack = getProjectileItemStack(projectile);
 		if(!stack.isEmpty())
-			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onProjectileImpact(stack, projectile, event.getRayTraceResult(), event));
-//		if(event.getRayTraceResult().getType() == HitResult.Type.ENTITY && event.getRayTraceResult() instanceof EntityHitResult entityHitResult)
-//		{
-//			DamageSource damageSource = projectile.damageSources().thrown(projectile, projectile.getOwner());
-//			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onActivation(projectile, entityHitResult.getEntity(), stack, damageSource));
-//		}
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder ->
+			{
+				if(propertyHolder.equals(AlchemancyProperties.LOYAL) || AlchemancyProperties.LOYAL.value().canTriggerImpactEffects(projectile, event.getRayTraceResult()))
+					propertyHolder.value().onProjectileImpact(stack, projectile, event.getRayTraceResult(), event);
+			});
 	}
 
 	public static ItemStack getProjectileItemStack(Projectile entity)
