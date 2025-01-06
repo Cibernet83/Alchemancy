@@ -1,9 +1,11 @@
 package net.cibernet.alchemancy.properties;
 
+import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -120,9 +122,33 @@ public class ToolProperty extends Property
 			Tool tool = stack.get(DataComponents.TOOL);
 			BlockState blockHit = level.getBlockState(blockHitResult.getBlockPos());
 
-			if(tool != null && tool.isCorrectForDrops(blockHit) && tool.getMiningSpeed(blockHit) <= projectile.getKnownMovement().length())
+			double projectileSpeed = projectile.getKnownMovement().length();
+			if(tool != null && tool.isCorrectForDrops(blockHit) && projectileSpeed > 0.3 && tool.getMiningSpeed(blockHit) / blockHit.getDestroySpeed(level, blockHitResult.getBlockPos()) > 1 / projectileSpeed)
 			{
 				level.destroyBlock(blockHitResult.getBlockPos(), true, projectile);
+				event.setCanceled(true);
+
+				projectile.setDeltaMovement(projectile.getDeltaMovement().scale(0.5));
+				projectile.hasImpulse = true;
+
+				if(stack.isDamageableItem())
+				{
+					if (projectile.level() instanceof ServerLevel serverLevel)
+						stack.hurtAndBreak(2, serverLevel, null, (item) -> {
+						});
+				}
+
+				if(stack.isEmpty())
+				{
+					InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onEntityItemDestroyed(stack, projectile, projectile.damageSources().generic()));
+					projectile.level().broadcastEntityEvent(projectile, (byte) 3);
+				}
+			}
+			else for(int i = 0; i < 16; i++)
+			{
+				if(!level.noCollision(projectile, projectile.getBoundingBox().deflate(1.0E-7)))
+					projectile.setPos(projectile.position().subtract(projectile.getKnownMovement()));
+				else break;
 			}
 		}
 	}
