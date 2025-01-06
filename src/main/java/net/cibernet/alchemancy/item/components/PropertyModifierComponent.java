@@ -1,5 +1,6 @@
 package net.cibernet.alchemancy.item.components;
 
+import com.google.common.collect.ImmutableMap;
 import com.mojang.serialization.Codec;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.properties.data.modifiers.PropertyModifierType;
@@ -107,6 +108,14 @@ public record PropertyModifierComponent(Map<Holder<Property>, Map<Holder<Propert
 
 			if (!hasProperty(property))
 				modifiers.put(property, new HashMap<>());
+
+			Map<Holder<PropertyModifierType<?>>, Object> thing = modifiers.get(property);
+			if(thing instanceof ImmutableMap<Holder<PropertyModifierType<?>>, Object>)
+			{
+				thing = new HashMap<>(thing);
+				modifiers.put(property, thing);
+			}
+
 			modifiers.get(property).put(modifier, value);
 			return this;
 		}

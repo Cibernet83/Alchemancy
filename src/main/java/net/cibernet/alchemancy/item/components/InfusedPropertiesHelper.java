@@ -71,7 +71,7 @@ public class InfusedPropertiesHelper
 		if(stack.isEmpty() || propertyTag == null)
 			return false;
 
-		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().getData(stack);
+		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().    getData(stack);
 
 		return (stack.has(INFUSED_PROPERTIES.get()) && (toggled || !hasInfusedProperty(stack, AlchemancyProperties.TOGGLEABLE)) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(propertyTag)
 			|| (stack.has(INNATE_PROPERTIES.get()) && (toggled || !hasInnateProperty(stack, AlchemancyProperties.TOGGLEABLE)) && stack.get(INNATE_PROPERTIES.get()).hasProperty(propertyTag)))

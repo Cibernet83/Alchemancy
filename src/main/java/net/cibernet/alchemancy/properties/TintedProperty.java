@@ -29,14 +29,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class TintedProperty extends IncreaseInfuseSlotsProperty implements IDataHolder<Integer>, ITintModifier
+public class TintedProperty extends Property implements IDataHolder<Integer>, ITintModifier
 {
 	public static final int DEFAULT_COLOR = FastColor.ARGB32.opaque(0xFFFFFF);
-
-	public TintedProperty()
-	{
-		super(1);
-	}
 
 	@Override
 	public boolean cluelessCanReset() {

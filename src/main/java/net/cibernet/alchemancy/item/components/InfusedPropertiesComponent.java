@@ -3,6 +3,7 @@ package net.cibernet.alchemancy.item.components;
 import com.mojang.serialization.Codec;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
+import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -89,9 +90,17 @@ public record InfusedPropertiesComponent(List<Holder<Property>> properties)
 		}
 
 		public boolean truncateProperties(int limit) {
-			if (properties.size() <= limit)
+
+			List<Holder<Property>> slotless = List.copyOf(properties).stream().filter(propertyHolder -> propertyHolder.is(AlchemancyTags.Properties.SLOTLESS)).toList();
+
+
+			if (properties.size() - slotless.size() <= limit)
 				return false;
+
+			properties.removeIf(slotless::contains);
 			properties.subList(limit, properties.size()).clear();
+			properties.addAll(slotless);
+
 			return true;
 		}
 

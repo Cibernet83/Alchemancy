@@ -75,6 +75,7 @@ public class AlchemancyTags
 	public static class Properties
 	{
 		public static final TagKey<Property> DISABLES_BLOCK_ATTACK_IN_CREATIVE = registerTag(AlchemancyProperties.REGISTRY_KEY, "disables_block_attack_in_creative");
+		public static final TagKey<Property> SLOTLESS = registerTag(AlchemancyProperties.REGISTRY_KEY, "slotless");
 	}
 
 	public static class DataComponents
