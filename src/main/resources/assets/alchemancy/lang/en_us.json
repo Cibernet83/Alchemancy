@@ -128,6 +128,8 @@
   "property.detail.global_position": "(%s, %s, %s) in \"%s\"",
   "property.detail.block_position": "%s, %s, %s",
 
+  "property.disabled": "%s (Disabled)",
+
   "property.alchemancy.tinted": "Tinted",
   "property.alchemancy.resized": "Resized",
   "property.alchemancy.resized.increase": "Resized [+10%]",

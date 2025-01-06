@@ -4,6 +4,7 @@ import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
+import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
@@ -56,7 +57,7 @@ public class InfusedPropertiesHelper
 
 	public static boolean hasProperty(ItemStack stack, Holder<Property> property)
 	{
-		if(stack.isEmpty() || property == null)
+		if(stack.isEmpty() || property == null || property.is(AlchemancyTags.Properties.DISABLED))
 			return false;
 
 		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().getData(stack);
@@ -211,7 +212,8 @@ public class InfusedPropertiesHelper
 			while(true)
 			{
 				truncateProperties(stack, getInfusionSlots(stack));
-				if(getInfusionSlots(stack) >= getInfusedProperties(stack).size())
+				List<Holder<Property>> infusedProperties = getInfusedProperties(stack);
+				if(getInfusionSlots(stack) >= infusedProperties.size() - infusedProperties.stream().filter(propertyHolder -> propertyHolder.is(AlchemancyTags.Properties.SLOTLESS)).count())
 					return stack;
 			}
 		return stack;

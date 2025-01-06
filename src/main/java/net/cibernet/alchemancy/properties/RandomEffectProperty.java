@@ -2,6 +2,7 @@ package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
+import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.nbt.CompoundTag;
@@ -70,6 +71,8 @@ public class RandomEffectProperty extends Property implements IDataHolder<Long>
 	{
 		ArrayList<DeferredHolder<Property, ? extends Property>> properties = new ArrayList<>(AlchemancyProperties.REGISTRY.getEntries());
 		properties.remove(AlchemancyProperties.RANDOM);
+		properties.removeIf(property -> property.is(AlchemancyTags.Properties.DISABLED));
+
 		Collections.shuffle(properties, random);
 		return properties.getFirst();
 	}

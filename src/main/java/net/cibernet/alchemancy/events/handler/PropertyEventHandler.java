@@ -529,14 +529,20 @@ public class PropertyEventHandler
 		}
 
 		if(hasInfusions)
-			stack.get(AlchemancyItems.Components.INFUSED_PROPERTIES).forEachProperty(holder -> event.getToolTip().add(holder.value().getDisplayText(stack)));
+			stack.get(AlchemancyItems.Components.INFUSED_PROPERTIES).forEachProperty(holder -> event.getToolTip().add(
+					holder.is(AlchemancyTags.Properties.DISABLED) ?
+							Component.translatable("property.disabled", Component.translatable(holder.value().getLanguageKey())).withStyle(ChatFormatting.DARK_GRAY) :
+							holder.value().getDisplayText(stack)), false);
 
 		if(stack.has(AlchemancyItems.Components.STORED_PROPERTIES))
 		{
 			InfusedPropertiesComponent storedProperties = stack.get(AlchemancyItems.Components.STORED_PROPERTIES);
 			if(hasInfusions && !storedProperties.properties().isEmpty())
 				event.getToolTip().add(Component.translatable("item.alchemancy.tooltip.stored_properties").withStyle(ChatFormatting.GRAY));
-			storedProperties.forEachProperty(holder -> event.getToolTip().add(holder.value().getName(stack)));
+			storedProperties.forEachProperty(holder -> event.getToolTip().add(
+					holder.is(AlchemancyTags.Properties.DISABLED) ?
+							Component.translatable("property.disabled", Component.translatable(holder.value().getLanguageKey())).withStyle(ChatFormatting.DARK_GRAY) :
+							holder.value().getDisplayText(stack)), false);
 		}
 
 		if(event.getEntity() != null && (InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.REVEALED) ||

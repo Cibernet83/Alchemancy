@@ -32,12 +32,17 @@ public record InfusedPropertiesComponent(List<Holder<Property>> properties)
 	);
 	public static final InfusedPropertiesComponent EMPTY = new InfusedPropertiesComponent(new ArrayList<>());
 
+	public void forEachProperty(Consumer<Holder<Property>> consumer, boolean ignoreDisabled)
+	{
+		properties.stream().sorted(Comparator.comparingInt(p -> p.value().getPriority())).filter(property -> !ignoreDisabled || !property.is(AlchemancyTags.Properties.DISABLED)).forEach(consumer);
+	}
+
 	public void forEachProperty(Consumer<Holder<Property>> consumer) {
-		properties.stream().sorted(Comparator.comparingInt(p -> p.value().getPriority())).forEach(consumer);
+		forEachProperty(consumer, true);
 	}
 
 	public boolean hasProperty(Holder<Property> property) {
-		return properties.contains(property);
+		return !property.is(AlchemancyTags.Properties.DISABLED) && properties.contains(property);
 		/*
 		for (Holder<Property> propertyHolder : properties)
 			if(propertyHolder.is(property.getKey()))
@@ -47,7 +52,7 @@ public record InfusedPropertiesComponent(List<Holder<Property>> properties)
 	}
 
 	public boolean hasProperty(TagKey<Property> propertyTag) {
-		return properties.stream().anyMatch(property -> property.is(propertyTag));
+		return properties.stream().anyMatch(property -> property.is(propertyTag) && !property.is(AlchemancyTags.Properties.DISABLED));
 	}
 
 	@Override

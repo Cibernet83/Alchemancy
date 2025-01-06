@@ -25,6 +25,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.Nullable;
 
@@ -262,6 +263,11 @@ public class AlchemancyProperties
 		@Override
 		public int getColor(ItemStack stack) {
 			return 0xE8FF00;
+		}
+
+		@Override
+		public Collection<ItemStack> populateCreativeTab(DeferredItem<Item> capsuleItem, Holder<Property> holder) {
+			return List.of();
 		}
 
 		@Override
