@@ -6,7 +6,10 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 public class DisguisedProperty extends Property implements IDataHolder<ItemStack> {
@@ -22,6 +25,19 @@ public class DisguisedProperty extends Property implements IDataHolder<ItemStack
 			{
 				setData(stack, disguise);
 				event.setCancellationResult(InteractionResult.SUCCESS);
+				event.setCanceled(true);
+			}
+		}
+	}
+
+	@Override
+	public void onStackedOverMe(ItemStack disguise, ItemStack stack, Player player, ClickAction clickAction, ItemStackedOnOtherEvent event)
+	{
+		if(clickAction == ClickAction.SECONDARY)
+		{
+			if(getData(stack).isEmpty() && !disguise.isEmpty())
+			{
+				setData(stack, disguise);
 				event.setCanceled(true);
 			}
 		}
