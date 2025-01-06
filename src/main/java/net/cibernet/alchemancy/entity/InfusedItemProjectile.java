@@ -7,11 +7,13 @@ import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -85,12 +87,24 @@ public class InfusedItemProjectile extends ThrowableItemProjectile
 	@Override
 	protected void onHit(HitResult result) {
 		super.onHit(result);
-		if (!this.level().isClientSide)
+		if (!this.level().isClientSide && !isRemoved())
 		{
-			this.level().broadcastEntityEvent(this, (byte)3);
-
 			ItemStack stack = getItem();
-			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onEntityItemDestroyed(stack, this, damageSources().generic()));
+
+			if(stack.isDamageableItem())
+			{
+				if (level() instanceof ServerLevel serverLevel)
+					stack.hurtAndBreak(20, serverLevel, null, (item) -> {
+					});
+			}
+			else stack.shrink(1);
+
+			if(stack.isEmpty())
+			{
+				InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onEntityItemDestroyed(stack, this, damageSources().generic()));
+				this.level().broadcastEntityEvent(this, (byte) 3);
+			}
+			else level().addFreshEntity(new ItemEntity(level(), position().x, position().y, position().z, stack));
 
 			this.discard();
 		}
