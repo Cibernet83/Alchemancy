@@ -62,9 +62,11 @@ public class InfusedPropertiesHelper
 
 		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().getData(stack);
 
-		return (stack.has(INFUSED_PROPERTIES.get()) && (toggled || !hasInfusedProperty(stack, AlchemancyProperties.TOGGLEABLE)) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(property)
-			|| (stack.has(INNATE_PROPERTIES.get()) && (toggled || !hasInnateProperty(stack, AlchemancyProperties.TOGGLEABLE)) && stack.get(INNATE_PROPERTIES.get()).hasProperty(property)))
-			|| ((property == AlchemancyProperties.AWAKENED || hasProperty(stack, AlchemancyProperties.AWAKENED)) && hasDormantProperty(stack, property));
+
+
+		return ((toggled || !hasInfusedProperty(stack, AlchemancyProperties.TOGGLEABLE)) && hasInfusedProperty(stack, property))
+			|| ((toggled || !hasInnateProperty(stack, AlchemancyProperties.TOGGLEABLE)) && (property == AlchemancyProperties.DEAD || !hasProperty(stack, AlchemancyProperties.DEAD)) && hasInnateProperty(stack, property))
+			|| (hasInfusedProperty(stack, AlchemancyProperties.AWAKENED) && hasDormantProperty(stack, property));
 	}
 
 	public static boolean hasProperty(ItemStack stack, TagKey<Property> propertyTag)
@@ -74,8 +76,8 @@ public class InfusedPropertiesHelper
 
 		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().    getData(stack);
 
-		return (stack.has(INFUSED_PROPERTIES.get()) && (toggled || !hasInfusedProperty(stack, AlchemancyProperties.TOGGLEABLE)) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(propertyTag)
-			|| (stack.has(INNATE_PROPERTIES.get()) && (toggled || !hasInnateProperty(stack, AlchemancyProperties.TOGGLEABLE)) && stack.get(INNATE_PROPERTIES.get()).hasProperty(propertyTag)))
+		return ((toggled || !hasInfusedProperty(stack, AlchemancyProperties.TOGGLEABLE)) && hasInfusedProperty(stack, propertyTag))
+			|| ((toggled || !hasInnateProperty(stack, AlchemancyProperties.TOGGLEABLE)) && hasInnateProperty(stack, propertyTag))
 			|| ((hasProperty(stack, AlchemancyProperties.AWAKENED)) && hasDormantProperty(stack, propertyTag));
 	}
 
@@ -144,7 +146,7 @@ public class InfusedPropertiesHelper
 				consumer.accept(AlchemancyProperties.TOGGLEABLE);
 			else stack.get(INFUSED_PROPERTIES.get()).forEachProperty(consumer);
 		}
-		if (stack.has(INNATE_PROPERTIES.get()))
+		if (!hasProperty(stack, AlchemancyProperties.DEAD) && stack.has(INNATE_PROPERTIES.get()))
 		{
 			if(!toggled && hasInnateProperty(stack, AlchemancyProperties.TOGGLEABLE))
 				consumer.accept(AlchemancyProperties.TOGGLEABLE);
