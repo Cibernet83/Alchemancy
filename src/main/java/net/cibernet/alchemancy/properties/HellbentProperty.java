@@ -4,24 +4,32 @@ import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
+import net.cibernet.alchemancy.util.ClientUtil;
 import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.common.CommonHooks;
+import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.player.CriticalHitEvent;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
@@ -38,6 +46,17 @@ public class HellbentProperty extends Property implements IDataHolder<Holder<Blo
 	public void modifyCriticalAttack(Player user, ItemStack weapon, CriticalHitEvent event)
 	{
 		event.setCriticalHit(true);
+	}
+
+	@Override
+	public void onProjectileImpact(ItemStack stack, Projectile projectile, HitResult rayTraceResult, ProjectileImpactEvent event)
+	{
+		if(rayTraceResult.getType() == HitResult.Type.ENTITY && rayTraceResult instanceof EntityHitResult entityHitResult)
+		{
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onCriticalAttack(null, stack, entityHitResult.getEntity()));
+			if(projectile.level().isClientSide)
+				ClientUtil.createTrackedParticles(entityHitResult.getEntity(), ParticleTypes.CRIT);
+		}
 	}
 
 	@Override
