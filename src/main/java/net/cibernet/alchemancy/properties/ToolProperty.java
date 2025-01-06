@@ -21,6 +21,7 @@ import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -125,7 +126,8 @@ public class ToolProperty extends Property
 			double projectileSpeed = projectile.getKnownMovement().length();
 			if(tool != null && tool.isCorrectForDrops(blockHit) && projectileSpeed > 0.3 && tool.getMiningSpeed(blockHit) / blockHit.getDestroySpeed(level, blockHitResult.getBlockPos()) > 1 / projectileSpeed)
 			{
-				level.destroyBlock(blockHitResult.getBlockPos(), true, projectile);
+				level.destroyBlock(blockHitResult.getBlockPos(), false, projectile);
+				Block.dropResources(blockHit, level, blockHitResult.getBlockPos(), level.getBlockEntity(blockHitResult.getBlockPos()), projectile, stack);
 				event.setCanceled(true);
 
 				projectile.setDeltaMovement(projectile.getDeltaMovement().scale(0.5));
