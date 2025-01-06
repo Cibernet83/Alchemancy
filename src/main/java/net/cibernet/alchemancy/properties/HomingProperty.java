@@ -1,5 +1,6 @@
 package net.cibernet.alchemancy.properties;
 
+import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -61,15 +62,17 @@ public class HomingProperty<E extends Entity> extends Property
 	}
 
 	@Override
-	public void onProjectileTick(ItemStack stack, Projectile projectile) {
-		pullUser(projectile);
+	public void onProjectileTick(ItemStack stack, Projectile projectile)
+	{
+		if(!AlchemancyProperties.LOYAL.value().isReturning(projectile))
+			pullUser(projectile);
 	}
 
 	private void pullUser(Entity user)
 	{
 
 		List<E> targets = user.level().getEntitiesOfClass(targetEntities, CommonUtils.boundingBoxAroundPoint(user.position(), radius));
-		targets.removeIf(target -> (target.equals(user) || !entityPredicate.test(target)));
+		targets.removeIf(target -> (target.equals(user) || (user instanceof Projectile projectile && target.equals(projectile.getOwner())) || !entityPredicate.test(target)));
 		targets.sort((target1, target2) -> (int)(target1.getEyePosition().distanceTo(user.position()) - target2.getEyePosition().distanceTo(user.position())));
 
 		if(targets.isEmpty())
