@@ -13,6 +13,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.phys.Vec3;
@@ -35,7 +36,11 @@ public class RocketPoweredProperty extends Property
 		}
 
 		playParticles(user);
-		user.moveRelative(0.25f, new Vec3(0, (float)Math.cos((user.getXRot()+90)*Math.PI/180f), (float)Math.sin((user.getXRot()+90)*Math.PI/180f)));
+		user.moveRelative(user.isFallFlying() ? 0.05f : 0.2f, new Vec3(0, (float)Math.cos((user.getXRot()+90)*Math.PI/180f), (float)Math.sin((user.getXRot()+90)*Math.PI/180f)));
+
+		if(!user.isFallFlying() && !(user instanceof Player player && player.getAbilities().flying))
+			user.setDeltaMovement(user.getDeltaMovement().add(0, user.getGravity() * 0.75f, 0));
+
 		user.hasImpulse = true;
 	}
 
