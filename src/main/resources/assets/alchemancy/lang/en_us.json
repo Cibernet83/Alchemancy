@@ -87,6 +87,9 @@
   "item.alchemancy.wayward_medallion.bound_to_position": "Bound to: (%s, %s, %s)",
   "item.alchemancy.wayward_medallion.in": "in \"%s\"",
 
+  "item.alchemancy.unshaped_clay": "Unshaped Clay",
+  "item.alchemancy.unshaped_clay.tooltip": "Smelt or combine with a Clay Ball to restore [%s]",
+
   "item.alchemancy.rocket_powered_hammer": "Rocket-Powered Hammer",
   "item.alchemancy.barrels_warhammer": "Barrel's Warhammer",
 
@@ -166,6 +169,7 @@
   "property.alchemancy.loose": "Loose",
   "property.alchemancy.hardened": "Hardened",
   "property.alchemancy.malleable": "Malleable",
+  "property.alchemancy.clay_mold": "Clay Mold",
   "property.alchemancy.cracked": "Cracked",
 
   "property.alchemancy.extended": "Extended",
@@ -373,6 +377,7 @@
   "subtitles.property.clueless": "Huh?",
   "subtitles.property.wayfinding": "Wayfinding item locks onto target",
   "subtitles.property.allergic": "Allergic item sneezes",
+  "subtitles.property.clay_mold": "Unshaped Clay is restored",
 
   "alchemancy.category.basics": "Fundamentals",
   "alchemancy.category.properties": "Infusion Properties",

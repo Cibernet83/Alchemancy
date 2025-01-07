@@ -91,6 +91,9 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, PristineProperty> PRISTINE = REGISTRY.register("pristine", PristineProperty::new);
 	public static final DeferredHolder<Property, HellbentProperty> HELLBENT = REGISTRY.register("hellbent", HellbentProperty::new);
 	public static final DeferredHolder<Property, DepthDwellerProperty> DEPTH_DWELLER = REGISTRY.register("depth_dweller", DepthDwellerProperty::new);
+
+	public static final DeferredHolder<Property, MalleableProperty> MALLEABLE = REGISTRY.register("malleable", MalleableProperty::new);
+	public static final DeferredHolder<Property, ClayMoldProperty> CLAY_MOLD = REGISTRY.register("clay_mold", ClayMoldProperty::new);
 	public static final DeferredHolder<Property, HardenedProperty> HARDENED = REGISTRY.register("hardened", HardenedProperty::new);
 	public static final DeferredHolder<Property, CrackedProperty> CRACKED = REGISTRY.register("cracked", CrackedProperty::new);
 

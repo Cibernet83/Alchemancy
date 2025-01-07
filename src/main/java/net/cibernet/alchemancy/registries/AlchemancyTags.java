@@ -34,6 +34,7 @@ public class AlchemancyTags
 		public static final TagKey<Item> INFUSION_REMOVES_GLINT = registerTag(Registries.ITEM, "infusion_removes_glint");
 
 		public static final TagKey<Item> DISABLES_COMPACT = registerTag(Registries.ITEM, "disables_compact");
+		public static final TagKey<Item> REPAIRS_UNSHAPED_CLAY = registerTag(Registries.ITEM, "repairs_unshaped_clay");
 	}
 
 	public static class Blocks
@@ -77,6 +78,8 @@ public class AlchemancyTags
 		public static final TagKey<Property> DISABLES_BLOCK_ATTACK_IN_CREATIVE = registerTag(AlchemancyProperties.REGISTRY_KEY, "disables_block_attack_in_creative");
 		public static final TagKey<Property> SLOTLESS = registerTag(AlchemancyProperties.REGISTRY_KEY, "slotless");
 		public static final TagKey<Property> DISABLED = registerTag(AlchemancyProperties.REGISTRY_KEY, "disabled");
+
+		public static final TagKey<Property> RETAINED_BY_UNSHAPED_CLAY = registerTag(AlchemancyProperties.REGISTRY_KEY, "retained_by_unshaped_clay");
 	}
 
 	public static class DataComponents

@@ -90,6 +90,7 @@ public class InfusedItemProjectile extends ThrowableItemProjectile
 		if (!this.level().isClientSide && !isRemoved())
 		{
 			ItemStack stack = getItem();
+			ItemStack copyStack = stack.copy();
 
 			if(stack.isDamageableItem())
 			{
@@ -101,7 +102,7 @@ public class InfusedItemProjectile extends ThrowableItemProjectile
 
 			if(stack.isEmpty())
 			{
-				InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onEntityItemDestroyed(stack, this, damageSources().generic()));
+				InfusedPropertiesHelper.forEachProperty(copyStack, propertyHolder -> propertyHolder.value().onEntityItemDestroyed(copyStack, this, damageSources().generic()));
 				this.level().broadcastEntityEvent(this, (byte) 3);
 			}
 			else level().addFreshEntity(new ItemEntity(level(), position().x, position().y, position().z, stack));

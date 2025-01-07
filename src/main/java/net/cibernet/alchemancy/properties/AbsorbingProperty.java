@@ -1,7 +1,9 @@
 package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.properties.special.ClayMoldProperty;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
+import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -19,6 +21,7 @@ import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.*;
 import java.util.stream.Stream;
 
 public class AbsorbingProperty extends Property
@@ -40,30 +43,55 @@ public class AbsorbingProperty extends Property
 		itemToPickUp.setNoPickUpDelay();
 	}
 
+	public static boolean scanInventoryAndConsume(ItemStack stack, Player player, Predicate<ItemStack> predicate, Consumer<ItemStack> function)
+	{
+		for (int i = 0; i < player.getInventory().getContainerSize(); i++)
+		{
+			ItemStack otherStack = player.getInventory().getItem(i);
+			ItemStack repairStack = otherStack;
+
+			ItemStack storedStack = AlchemancyProperties.HOLLOW.get().getData(repairStack);
+			if(!storedStack.isEmpty())
+				repairStack = storedStack;
+
+			if(stack != repairStack && predicate.test(repairStack))
+			{
+				function.accept(repairStack);
+
+				if(storedStack == repairStack)
+					AlchemancyProperties.HOLLOW.get().setData(otherStack, storedStack);
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	@Override
 	public void onEquippedTick(LivingEntity user, EquipmentSlot slot, ItemStack stack)
 	{
-		if(shouldRepair(stack) && user instanceof Player player)
+		if(user instanceof Player player)
 		{
-			for (int i = 0; i < player.getInventory().getContainerSize(); i++)
-			{
-				ItemStack otherStack = player.getInventory().getItem(i);
-				ItemStack repairStack = otherStack;
+			if(shouldRepair(stack))
+				scanInventoryAndConsume(stack, player, consumeStack -> stack.getItem().isValidRepairItem(stack, consumeStack), consumeStack -> {
 
-				ItemStack storedStack = AlchemancyProperties.HOLLOW.get().getData(repairStack);
-				if(!storedStack.isEmpty())
-					repairStack = storedStack;
-
-				if(stack != repairStack && stack.getItem().isValidRepairItem(stack, repairStack))
-				{
 					stack.setDamageValue(stack.getDamageValue() - Math.min(stack.getDamageValue(), stack.getMaxDamage() / 4));
-					repairStack.shrink(1);
+					consumeStack.shrink(1);
+				});
+			else if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.CLAY_MOLD))
+				scanInventoryAndConsume(stack, player, consumeStack -> consumeStack.is(AlchemancyTags.Items.REPAIRS_UNSHAPED_CLAY), consumeStack -> {
 
-					if(storedStack == repairStack)
-						AlchemancyProperties.HOLLOW.get().setData(otherStack, storedStack);
-					return;
-				}
-			}
+					ItemStack storedItem = ClayMoldProperty.repair(AlchemancyProperties.CLAY_MOLD.get().getData(stack));
+
+					if(player.getItemBySlot(slot) == stack && stack.getCount() <= 1)
+						player.setItemSlot(slot, storedItem);
+					else if(!player.addItem(storedItem))
+						player.drop(storedItem, true);
+
+					ClayMoldProperty.playRepairEffects(player);
+					stack.shrink(1);
+					consumeStack.shrink(1);
+				});
 		}
 
 		if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.BUCKETING) && AlchemancyProperties.BUCKETING.get().isEmpty(stack))

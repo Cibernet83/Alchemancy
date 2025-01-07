@@ -33,6 +33,7 @@ public class AlchemancySoundEvents
 	public static final Holder<SoundEvent> CLUELESS = register("property.clueless");
 	public static final Holder<SoundEvent> WAYFINDING = register("property.wayfinding");
 	public static final Holder<SoundEvent> ALLERGIC = register("property.allergic");
+	public static final Holder<SoundEvent> CLAY_MOLD = register("property.clay_mold");
 
 
 	public static final SoundType GLOWING_ORB = new DeferredSoundType(

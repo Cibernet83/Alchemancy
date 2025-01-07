@@ -72,4 +72,9 @@ public interface IDataHolder<T>
 	{
 		return true;
 	}
+
+	default void copyData(ItemStack from, ItemStack to)
+	{
+		setData(to, getData(from));
+	};
 }

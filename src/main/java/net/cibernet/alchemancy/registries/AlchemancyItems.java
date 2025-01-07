@@ -5,6 +5,7 @@ import net.cibernet.alchemancy.item.InnatePropertyItem;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
 import net.cibernet.alchemancy.item.components.PropertyDataComponent;
 import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
+import net.cibernet.alchemancy.properties.special.ClayMoldProperty;
 import net.cibernet.alchemancy.properties.special.WaywardWarpProperty;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
@@ -113,6 +114,10 @@ public class AlchemancyItems
 					.rarity(Rarity.EPIC)
 					.attributes(MaceItem.createAttributes())
 					.component(DataComponents.TOOL, MaceItem.createToolProperties())));
+	public static final DeferredItem<InnatePropertyItem> UNSHAPED_CLAY = REGISTRY.register("unshaped_clay", () -> new InnatePropertyItem.Builder()
+			.withProperties(AlchemancyProperties.CLAY_MOLD)
+			.tooltip(ClayMoldProperty.ITEM_TOOLTIP)
+			.build());
 
 	public static final DeferredItem<Item> PROPERTY_CAPSULE = REGISTRY.registerItem("property_capsule", properties -> new Item(properties.rarity(Rarity.EPIC)));
 
@@ -143,7 +148,7 @@ public class AlchemancyItems
 
 	public static class Components
 	{
-		public static final DeferredRegister.DataComponents REGISTRY = DeferredRegister.createDataComponents(MODID);
+		public static final DeferredRegister.DataComponents REGISTRY = DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, MODID);
 
 		public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> INFUSION_SLOTS = REGISTRY.register("infusion_slots", () ->
 				new DataComponentType.Builder<Integer>()

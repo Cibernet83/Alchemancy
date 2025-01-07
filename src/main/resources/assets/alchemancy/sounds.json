@@ -224,5 +224,14 @@
       }
     ],
     "subtitle": "subtitles.property.allergic"
+  },
+  "property.clay_mold": {
+    "sounds": [
+      "dig/gravel1",
+      "dig/gravel2",
+      "dig/gravel3",
+      "dig/gravel4"
+    ],
+    "subtitle": "property.clay_mold"
   }
 }
