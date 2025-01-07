@@ -5,6 +5,8 @@ import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 
 public class HydrophobicProperty extends Property implements IDataHolder<Boolean>
@@ -16,6 +18,24 @@ public class HydrophobicProperty extends Property implements IDataHolder<Boolean
 			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onActivation(user, user, stack));
 
 		setData(stack, user.isInWater());
+	}
+
+	@Override
+	public void onEntityItemTick(ItemStack stack, ItemEntity itemEntity)
+	{
+		if(itemEntity.isInWater() && !getData(stack))
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onActivation(itemEntity, itemEntity, stack));
+
+		setData(stack, itemEntity.isInWater());
+	}
+
+	@Override
+	public void onProjectileTick(ItemStack stack, Projectile projectile) {
+
+		if(projectile.isInWater() && !getData(stack))
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onActivation(projectile, projectile, stack));
+
+		setData(stack, projectile.isInWater());
 	}
 
 	@Override
