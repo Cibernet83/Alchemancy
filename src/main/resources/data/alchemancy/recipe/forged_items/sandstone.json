@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:hardened"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:sand"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:sandstone"
+  }
+}

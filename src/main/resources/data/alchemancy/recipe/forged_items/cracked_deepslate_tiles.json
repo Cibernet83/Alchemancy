@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:cracked"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:deepslate_tiles"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:cracked_deepslate_tiles"
+  }
+}

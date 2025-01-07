@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#c:strings"
+    "#c:strings",
+    "minecraft:paper"
   ]
 }

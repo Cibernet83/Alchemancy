@@ -1,0 +1,10 @@
+{
+  "type": "alchemancy:property_warp",
+  "properties": [
+    "alchemancy:arcane"
+  ],
+
+  "result": [
+    "alchemancy:magic_resistant"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "type": "alchemancy:forged_property",
+  "properties": [
+    "alchemancy:hearty",
+    "alchemancy:allergic"
+  ],
+
+  "result": [
+    "alchemancy:hearty"
+  ]
+}

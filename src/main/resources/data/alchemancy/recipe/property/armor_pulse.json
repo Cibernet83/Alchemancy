@@ -1,0 +1,11 @@
+{
+  "type": "alchemancy:forged_property",
+
+  "properties": [
+    "alchemancy:sensitive",
+    "alchemancy:dripping",
+    "alchemancy:warding"
+  ],
+
+  "result": "alchemancy:armor_pulse"
+}

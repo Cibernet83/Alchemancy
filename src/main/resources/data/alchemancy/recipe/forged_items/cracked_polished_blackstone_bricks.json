@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:cracked"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:polished_blackstone_bricks"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "minecraft:cracked_polished_blackstone_bricks"
+  }
+}

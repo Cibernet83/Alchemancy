@@ -1,0 +1,12 @@
+{
+  "type": "alchemancy:forged_property",
+
+  "properties": [
+    "alchemancy:ender",
+    "alchemancy:levitating",
+    "alchemancy:bouncy",
+    "alchemancy:spiking"
+  ],
+
+  "result": "alchemancy:launching"
+}

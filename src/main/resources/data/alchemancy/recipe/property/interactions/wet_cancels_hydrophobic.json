@@ -1,0 +1,11 @@
+{
+  "type": "alchemancy:forged_property",
+  "properties": [
+    "alchemancy:wet",
+    "alchemancy:hydrophobic"
+  ],
+
+  "result": [
+    "alchemancy:wet"
+  ]
+}
