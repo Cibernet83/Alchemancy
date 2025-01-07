@@ -16,6 +16,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -25,6 +26,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -35,8 +37,6 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-
-import java.util.logging.Level;
 
 @EventBusSubscriber
 public class EnergizedProperty extends AbstractTimerProperty
@@ -98,6 +98,13 @@ public class EnergizedProperty extends AbstractTimerProperty
 
 		if(event.getLevel() instanceof ServerLevel serverLevel && InfusedPropertiesHelper.hasProperty(event.getItemStack(), AlchemancyProperties.INTERACTABLE))
 			powerBlock(serverLevel, event.getPos(), 1, event.getFace());
+	}
+
+	@Override
+	public void onActivationByBlock(Level level, BlockPos position, Entity target, ItemStack stack)
+	{
+		if(level instanceof ServerLevel serverLevel)
+			RedstoneSources.createSourceAt(serverLevel, position, 15, 20, Direction.DOWN);
 	}
 
 	@Override
