@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "#alchemancy:materials/iron",
-    "#c:buckets"
+    "#c:buckets",
+    "minecraft:smithing_table"
   ]
 }

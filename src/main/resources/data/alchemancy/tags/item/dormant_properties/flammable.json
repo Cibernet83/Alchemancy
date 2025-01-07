@@ -4,7 +4,8 @@
     "#alchemancy:materials/wood",
     "#alchemancy:materials/bamboo",
     "#minecraft:candles",
-    "#c:storage_blocks/wheat"
+    "#c:storage_blocks/wheat",
+    "#c:crops/wheat"
   ],
   "remove": [
     "#minecraft:non_flammable_wood"
