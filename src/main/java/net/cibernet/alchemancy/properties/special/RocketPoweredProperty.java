@@ -58,7 +58,7 @@ public class RocketPoweredProperty extends Property
 
 			if(jumping)
 			{
-				playParticles(user);
+				playBootParticles(user);
 				user.moveRelative(0.125f, user.isFallFlying() ?
 						new Vec3(0, (float) Math.cos((user.getXRot() + 90) * Math.PI / 180f), (float) Math.sin((user.getXRot() + 90) * Math.PI / 180f)) :
 						new Vec3(0, 1, 0));
@@ -71,6 +71,22 @@ public class RocketPoweredProperty extends Property
 	}
 
 	public static void playParticles(Entity source)
+	{
+		Vec3 pos = source.position();
+		RandomSource randomSource = source.getRandom();
+		source.level().addParticle(
+				ParticleTypes.FLAME,
+				pos.x(),
+				source.getEyeY() - 0.2f,
+				pos.z(),
+				-source.getDeltaMovement().x * 0.5 + randomSource.nextGaussian() * 0.05,
+				-source.getDeltaMovement().y * 0.5 + randomSource.nextGaussian() * 0.05,
+				-source.getDeltaMovement().z * 0.5 + randomSource.nextGaussian() * 0.05
+		);
+
+	}
+
+	public static void playBootParticles(Entity source)
 	{
 		Vec3 pos = source.position();
 		RandomSource randomSource = source.getRandom();
