@@ -3,6 +3,7 @@
   "replace": false,
   "values": [
     "minecraft:player",
+    "minecraft:ender_dragon",
     "#c:capturing_not_supported"
   ]
 }
