@@ -3,6 +3,7 @@
   "values": [
     "#c:ore_bearing_ground/netherrack",
     "#c:netherracks",
-    "#c:ores_in_ground/netherrack"
+    "#c:ores_in_ground/netherrack",
+    "#alchemancy:materials/nether_brick"
   ]
 }

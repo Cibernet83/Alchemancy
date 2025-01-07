@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "#c:bricks",
+    "#c:glazed_terracottas",
+    "#minecraft:terracotta",
+    "#minecraft:decorated_pot_ingredients",
+    "#alchemancy:materials/nether_brick",
+    "#alchemancy:materials/sandstone",
+    "#alchemancy:materials/packed_mud",
+    "minecraft:bricks",
+    "minecraft:bricks",
+    "minecraft:brick_stairs",
+    "minecraft:brick_slab",
+    "minecraft:brick_wall",
+    "minecraft:decorated_pot",
+    "minecraft:flower_pot"
+  ]
+}

@@ -3,6 +3,7 @@
   "values": [
     "#c:ore_bearing_ground/deepslate",
     "#c:ores_in_ground/deepslate",
-    "#c:cobblestones/deepslate"
+    "#c:cobblestones/deepslate",
+    "minecraft:infested_deepslate"
   ]
 }

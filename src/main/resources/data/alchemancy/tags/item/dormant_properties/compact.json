@@ -1,7 +1,8 @@
 {
   "replace": false,
   "values": [
-    "#minecraft:dirt",
+    "#c:storage_blocks",
+    "#alchemancy:materials/sandstone",
     "#alchemancy:materials/packed_mud"
   ]
 }

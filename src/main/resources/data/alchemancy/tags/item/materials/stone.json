@@ -7,11 +7,43 @@
     "#minecraft:stone_tool_materials",
     "#c:ores_in_ground/stone",
     "#alchemancy:materials/deepslate",
+    "#alchemancy:materials/cobblestone",
+
+    "minecraft:reinforced_deepslate",
 
     "minecraft:stone_pickaxe",
     "minecraft:stone_axe",
     "minecraft:stone_shovel",
     "minecraft:stone_hoe",
-    "minecraft:stone_sword"
+    "minecraft:stone_sword",
+
+    "minecraft:stone_stairs",
+    "minecraft:stone_slab",
+    "minecraft:stone_pressure_plate",
+    "minecraft:stone_button",
+    "minecraft:smooth_stone",
+    "minecraft:smooth_stone_slab",
+
+    "minecraft:infested_stone",
+    "minecraft:infested_mossy_stone_bricks",
+    "minecraft:infested_stone_bricks",
+    "minecraft:infested_chiseled_stone_bricks",
+    "minecraft:infested_cracked_stone_bricks",
+    
+    "minecraft:mossy_cobblestone",
+    "minecraft:mossy_cobblestone_stairs",
+    "minecraft:mossy_cobblestone_slab",
+    "minecraft:mossy_cobblestone_wall",
+
+    "minecraft:mossy_stone_bricks",
+    "minecraft:mossy_stone_brick_stairs",
+    "minecraft:mossy_stone_brick_slab",
+    "minecraft:mossy_stone_brick_wall",
+
+    "minecraft:stone_bricks",
+    "minecraft:chiseled_stone_bricks",
+    "minecraft:stone_brick_stairs",
+    "minecraft:stone_brick_slab",
+    "minecraft:stone_brick_wall"
   ]
 }

@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "#neoforge:enchanting_fuels",
+    "#alchemancy:materials/lapis_lazuli",
+    "minecraft:enchanting_table"
+  ]
+}

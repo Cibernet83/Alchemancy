@@ -1,0 +1,16 @@
+{
+  "values": [
+
+    "minecraft:cobblestone",
+    "minecraft:infested_cobblestone",
+    "minecraft:cobblestone_stairs",
+    "minecraft:cobblestone_slab",
+    "minecraft:cobblestone_wall",
+    "minecraft:cobblestone",
+    
+    "minecraft:cobbled_deepslate",
+    "minecraft:cobbled_deepslate_stairs",
+    "minecraft:cobbled_deepslate_slab",
+    "minecraft:cobbled_deepslate_wall"
+  ]
+}

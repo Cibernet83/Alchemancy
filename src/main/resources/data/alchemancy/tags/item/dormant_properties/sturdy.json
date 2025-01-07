@@ -1,18 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#c:stones",
-    "#c:ores_in_ground/stone",
-    "#c:ores_in_ground/deepslate",
-    "#minecraft:stone_bricks",
-    "#minecraft:stone_crafting_materials",
-    "#minecraft:stone_tool_materials",
-
-    "minecraft:stone_pickaxe",
-    "minecraft:stone_axe",
-    "minecraft:stone_shovel",
-    "minecraft:stone_hoe",
-    "minecraft:stone_sword",
+    "#alchemancy:materials/stone",
 
     "minecraft:obsidian",
     "minecraft:gilded_blackstone",

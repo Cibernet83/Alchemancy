@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "#c:sandstone/blocks",
+    "#c:sandstone/slabs",
+    "#c:sandstone/stairs",
+    "minecraft:sandstone_wall",
+    "minecraft:red_sandstone_wall"
+  ]
+}
