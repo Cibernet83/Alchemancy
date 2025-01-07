@@ -215,6 +215,7 @@
   "property.alchemancy.sticky": "Sticky",
   "property.alchemancy.grappling": "Grappling",
   "property.alchemancy.spiking": "Spiking",
+  "property.alchemancy.launching": "Launching",
   "property.alchemancy.slippery": "Slippery",
   "property.alchemancy.flimsy": "Flimsy",
   "property.alchemancy.dexterous": "Dexterous",
@@ -242,6 +243,7 @@
   "property.alchemancy.aquatic": "Aquatic",
   "property.alchemancy.levitating": "Levitating",
   "property.alchemancy.ominous": "Ominous",
+  "property.alchemancy.hearty": "Hearty",
 
   "property.alchemancy.soulbind": "Soulbind",
   "property.alchemancy.loyal": "Loyal",

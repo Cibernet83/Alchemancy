@@ -167,10 +167,12 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, LeapingProperty> LEAPING = REGISTRY.register("leaping", LeapingProperty::new);
 	public static final DeferredHolder<Property, GlowingProperty> GLOWING_AURA = REGISTRY.register("glowing_aura", GlowingProperty::new);
 	public static final DeferredHolder<Property, MobEffectEquippedAndHitProperty> OMINOUS = REGISTRY.register("ominous", () -> new MobEffectEquippedAndHitProperty(new MobEffectInstance(MobEffects.BAD_OMEN, 10), EquipmentSlotGroup.ANY, false));
+	public static final DeferredHolder<Property, HeartyProperty> HEARTY = REGISTRY.register("hearty", HeartyProperty::new);
 
 	//Offensive
 	public static final DeferredHolder<Property, GrapplingProperty> GRAPPLING = REGISTRY.register("grappling", GrapplingProperty::new);
 	public static final DeferredHolder<Property, SpikingProperty> SPIKING = REGISTRY.register("spiking", SpikingProperty::new);
+	public static final DeferredHolder<Property, LaunchingProperty> LAUNCHING = REGISTRY.register("launching", LaunchingProperty::new);
 	public static final DeferredHolder<Property, DamageMultiplierProperty> SHARP = REGISTRY.register("sharp", () -> new DamageMultiplierProperty(0xEAE5DE, 1.2f));
 	public static final DeferredHolder<Property, WeakProperty> WEAK = REGISTRY.register("weak", WeakProperty::new);
 	public static final DeferredHolder<Property, DenseProperty> DENSE = REGISTRY.register("dense", DenseProperty::new);

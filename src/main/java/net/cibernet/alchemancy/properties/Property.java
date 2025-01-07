@@ -187,7 +187,7 @@ public abstract class Property
 		onActivation(source, target, stack, activationDamageSource(source.level(), source, source.position()));
 	}
 
-	public final void onActivationByBlock(Level level, BlockPos position, Entity target, ItemStack stack)
+	public void onActivationByBlock(Level level, BlockPos position, Entity target, ItemStack stack)
 	{
 		onActivation(null, target, stack, activationDamageSource(level, null, position.getCenter()));
 	}

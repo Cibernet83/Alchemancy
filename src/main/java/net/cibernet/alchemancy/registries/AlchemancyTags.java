@@ -35,6 +35,7 @@ public class AlchemancyTags
 
 		public static final TagKey<Item> DISABLES_COMPACT = registerTag(Registries.ITEM, "disables_compact");
 		public static final TagKey<Item> REPAIRS_UNSHAPED_CLAY = registerTag(Registries.ITEM, "repairs_unshaped_clay");
+		public static final TagKey<Item> TRIGGERS_HEARTY = registerTag(Registries.ITEM, "triggers_hearty_on_use");
 	}
 
 	public static class Blocks
