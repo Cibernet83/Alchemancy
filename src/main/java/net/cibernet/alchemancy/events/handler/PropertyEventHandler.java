@@ -290,6 +290,7 @@ public class PropertyEventHandler
 		if(CommonUtils.calculateHitResult(event.getEntity()).getType() != HitResult.Type.BLOCK)
 		{
 			InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder -> propertyHolder.value().onRightClickItem(event));
+			InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder -> propertyHolder.value().onRightClickItemPost(event));
 		}
 	}
 
@@ -304,6 +305,7 @@ public class PropertyEventHandler
 			{
 				PlayerInteractEvent.RightClickItem clickEvent = new PlayerInteractEvent.RightClickItem(event.getPlayer(), event.getHand());
 				InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder -> propertyHolder.value().onRightClickItem(clickEvent));
+				InfusedPropertiesHelper.forEachProperty(event.getItemStack(), propertyHolder -> propertyHolder.value().onRightClickItemPost(clickEvent));
 
 				if (clickEvent.isCanceled())
 					event.cancelWithResult(resultToItemResult(clickEvent.getCancellationResult()));

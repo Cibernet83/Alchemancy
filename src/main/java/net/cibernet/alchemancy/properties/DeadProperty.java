@@ -19,7 +19,7 @@ public class DeadProperty extends Property
 	}
 
 	@Override
-	public void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
+	public void onRightClickItemPost(PlayerInteractEvent.RightClickItem event) {
 		if(!event.isCanceled())
 		{
 			event.setCancellationResult(InteractionResult.PASS);

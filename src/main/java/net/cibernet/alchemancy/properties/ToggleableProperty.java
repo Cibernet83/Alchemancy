@@ -35,7 +35,7 @@ public class ToggleableProperty extends Property implements IDataHolder<Boolean>
 	}
 
 	@Override
-	public void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
+	public void onRightClickItemPost(PlayerInteractEvent.RightClickItem event) {
 		if(!event.isCanceled())
 			toggle(event.getItemStack(), event.getEntity());
 	}

@@ -315,6 +315,9 @@ public abstract class Property
 	public void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
 
 	}
+	public void onRightClickItemPost(PlayerInteractEvent.RightClickItem event) {
+
+	}
 	public void onRightClickEntity(PlayerInteractEvent.EntityInteract event) {
 
 	}
