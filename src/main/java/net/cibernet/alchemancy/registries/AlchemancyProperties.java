@@ -19,6 +19,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -280,6 +281,7 @@ public class AlchemancyProperties
 			return false;
 		}
 	});
+	public static final DeferredHolder<Property, ItemMagnetProperty> ITEM_MAGNET = REGISTRY.register("item_magnet", ItemMagnetProperty::new);
 
 	//Innate Properties
 	public static final DeferredHolder<Property, AuxiliaryProperty> AUXILIARY = REGISTRY.register("auxiliary", AuxiliaryProperty::new);
