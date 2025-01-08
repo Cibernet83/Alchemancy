@@ -19,8 +19,9 @@ public class AlchemancyTags
 {
 	public static class Items
 	{
-        public static final TagKey<Item> INGOTS_LEAD = registerCommonTag(Registries.ITEM, "ingots/lead");
-        public static final TagKey<Item> INGOTS_DREAMSTEEL = registerTag(Registries.ITEM, "ingots/dreamsteel");
+		public static final TagKey<Item> REPAIRS_LEAD = registerTag(Registries.ITEM, "repairs_lead");
+		public static final TagKey<Item> REPAIRS_DREAMSTEEL = registerTag(Registries.ITEM, "repairs_dreamsteel");
+		public static final TagKey<Item> REPAIRS_UNSHAPED_CLAY = registerTag(Registries.ITEM, "repairs_unshaped_clay");
 
         public static final TagKey<Item> IMMUNE_TO_INFUSIONS = registerTag(Registries.ITEM, "immune_to_infusions");
         public static final TagKey<Item> REMOVES_INFUSIONS = registerTag(Registries.ITEM, "removes_infusions");
@@ -34,7 +35,6 @@ public class AlchemancyTags
 		public static final TagKey<Item> INFUSION_REMOVES_GLINT = registerTag(Registries.ITEM, "infusion_removes_glint");
 
 		public static final TagKey<Item> DISABLES_COMPACT = registerTag(Registries.ITEM, "disables_compact");
-		public static final TagKey<Item> REPAIRS_UNSHAPED_CLAY = registerTag(Registries.ITEM, "repairs_unshaped_clay");
 		public static final TagKey<Item> TRIGGERS_HEARTY = registerTag(Registries.ITEM, "triggers_hearty_on_use");
 	}
 
