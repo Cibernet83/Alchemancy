@@ -39,6 +39,13 @@ public class ShatteringProperty extends Property implements IDataHolder<Boolean>
 		}
 	}
 
+	@Override
+	public void onInventoryTick(Entity user, ItemStack stack, Level level, int inventorySlot, boolean isCurrentItem)
+	{
+		if(getData(stack))
+			setData(stack, false);
+	}
+
 	public void shatter(Level level, Entity source, ItemStack stack)
 	{
 		if(getData(stack))
@@ -67,6 +74,8 @@ public class ShatteringProperty extends Property implements IDataHolder<Boolean>
 				}
 			}
 		});
+
+		setData(stack, false);
 	}
 
 	@Override

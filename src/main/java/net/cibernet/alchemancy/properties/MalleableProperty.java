@@ -21,10 +21,8 @@ public class MalleableProperty extends Property
 	{
 		if(stack.isDamageableItem())
 			stack.setDamageValue(stack.getMaxDamage() - 1);
-		ItemStack clayWad = AlchemancyItems.UNSHAPED_CLAY.toStack();
-		AlchemancyProperties.CLAY_MOLD.get().setData(clayWad, stack.copy());
 
-		itemEntity.level().addFreshEntity(new ItemEntity(itemEntity.level(), itemEntity.position().x, itemEntity.position().y, itemEntity.position().z, clayWad));
+		itemEntity.level().addFreshEntity(new ItemEntity(itemEntity.level(), itemEntity.position().x, itemEntity.position().y, itemEntity.position().z, getUnshapedClay(stack)));
 		stack.setCount(0);
 	}
 
@@ -36,33 +34,40 @@ public class MalleableProperty extends Property
 		{
 			stack.setDamageValue(stack.getMaxDamage() - 1);
 
-			ItemStack clayWad = AlchemancyItems.UNSHAPED_CLAY.toStack();
-			AlchemancyProperties.CLAY_MOLD.get().setData(clayWad, stack.copy());
-
-			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder ->
-			{
-				if(propertyHolder.is(AlchemancyTags.Properties.RETAINED_BY_UNSHAPED_CLAY))
-				{
-					InfusedPropertiesHelper.addProperty(clayWad, propertyHolder);
-					if(propertyHolder.value() instanceof IDataHolder<?> dataHolder)
-						dataHolder.copyData(stack, clayWad);
-				}
-			});
+			ItemStack clay = getUnshapedClay(stack);
 
 			if(user.getMainHandItem() == stack)
-				user.setItemInHand(InteractionHand.MAIN_HAND, clayWad);
+				user.setItemInHand(InteractionHand.MAIN_HAND, clay);
 			else if(user.getOffhandItem() == stack)
-				user.setItemInHand(InteractionHand.OFF_HAND, clayWad);
+				user.setItemInHand(InteractionHand.OFF_HAND, clay);
 			else if(user instanceof Player player)
 			{
-				if(!player.addItem(clayWad))
-					player.drop(clayWad, true);
+				if(!player.addItem(clay))
+					player.drop(clay, true);
 			}
-			else HollowProperty.nonPlayerDrop(user, clayWad, false, true);
+			else HollowProperty.nonPlayerDrop(user, clay, false, true);
 
 		}
 
 		return resultingAmount;
+	}
+
+	public ItemStack getUnshapedClay(ItemStack stackToStore)
+	{
+		ItemStack clay = AlchemancyItems.UNSHAPED_CLAY.toStack();
+		AlchemancyProperties.CLAY_MOLD.get().setData(clay, stackToStore.copy());
+
+		InfusedPropertiesHelper.forEachProperty(stackToStore, propertyHolder ->
+		{
+			if(propertyHolder.is(AlchemancyTags.Properties.RETAINED_BY_UNSHAPED_CLAY))
+			{
+				InfusedPropertiesHelper.addProperty(clay, propertyHolder);
+				if(propertyHolder.value() instanceof IDataHolder<?> dataHolder)
+					dataHolder.copyData(stackToStore, clay);
+			}
+		});
+
+		return clay;
 	}
 
 	@Override
