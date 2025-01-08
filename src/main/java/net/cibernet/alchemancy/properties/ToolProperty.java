@@ -126,8 +126,12 @@ public class ToolProperty extends Property
 			double projectileSpeed = projectile.getKnownMovement().length();
 			if(tool != null && tool.isCorrectForDrops(blockHit) && projectileSpeed > 0.3 && tool.getMiningSpeed(blockHit) / blockHit.getDestroySpeed(level, blockHitResult.getBlockPos()) > 1 / projectileSpeed)
 			{
-				level.destroyBlock(blockHitResult.getBlockPos(), false, projectile);
-				Block.dropResources(blockHit, level, blockHitResult.getBlockPos(), level.getBlockEntity(blockHitResult.getBlockPos()), projectile, stack);
+				if(!level.isClientSide())
+				{
+					level.destroyBlock(blockHitResult.getBlockPos(), false, projectile);
+					Block.dropResources(blockHit, level, blockHitResult.getBlockPos(), level.getBlockEntity(blockHitResult.getBlockPos()), projectile, stack);
+				}
+
 				event.setCanceled(true);
 
 				projectile.setDeltaMovement(projectile.getDeltaMovement().scale(0.5));
