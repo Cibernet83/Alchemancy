@@ -41,8 +41,9 @@ public class AlchemancyRecipeTypes
 		public static final DeferredHolder<RecipeSerializer<?>, AbstractForgeRecipe.Serializer<ForgeRemovePropertiesRecipe, Optional<ItemStack>>> REMOVE_PROPERTIES = REGISTRY.register("remove_properties", () ->
 				new AbstractForgeRecipe.Serializer<>(ItemStack.CODEC.optionalFieldOf("result"), ByteBufCodecs.optional(ItemStack.STREAM_CODEC), ForgeRemovePropertiesRecipe::new));
 		public static final DeferredHolder<RecipeSerializer<?>, ForgeCustomNameRecipe.Serializer> ALCHEMANCY_FORGE_CUSTOM_NAME = REGISTRY.register("forged_custom_name", ForgeCustomNameRecipe.Serializer::new);
+		public static final DeferredHolder<RecipeSerializer<?>, ForgeLoreRecipe.Serializer> ALCHEMANCY_FORGE_CUSTOM_LORE = REGISTRY.register("forged_custom_lore", ForgeLoreRecipe.Serializer::new);
 
-		public static final DeferredHolder<RecipeSerializer<?>, RestoreClayMoldSmeltingRecipe.Serializer> RESTORE_CLAY_MOLD_SMELTING = REGISTRY.register("restore_clay_mold_smelting", () -> RestoreClayMoldSmeltingRecipe.SERIALIZER);
-		public static final DeferredHolder<RecipeSerializer<?>, SimpleCraftingRecipeSerializer<RestoreClayMoldCraftingRecipe>> RESTORE_CLAY_MOLD_CRAFTING = REGISTRY.register("restore_clay_mold_crafting", () -> RestoreClayMoldCraftingRecipe.SERIALIZER);
+		public static final DeferredHolder<RecipeSerializer<?>, RestoreClayMoldSmeltingRecipe.Serializer> RESTORE_CLAY_MOLD_SMELTING = REGISTRY.register("restore_clay_mold_smelting", RestoreClayMoldSmeltingRecipe.Serializer::new);
+		public static final DeferredHolder<RecipeSerializer<?>, SimpleCraftingRecipeSerializer<RestoreClayMoldCraftingRecipe>> RESTORE_CLAY_MOLD_CRAFTING = REGISTRY.register("restore_clay_mold_crafting", () -> new SimpleCraftingRecipeSerializer<>(RestoreClayMoldCraftingRecipe::new));
 	}
 }

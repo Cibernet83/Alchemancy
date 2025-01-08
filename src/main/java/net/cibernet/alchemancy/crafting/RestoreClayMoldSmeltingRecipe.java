@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
+import net.cibernet.alchemancy.registries.AlchemancyRecipeTypes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -42,11 +43,9 @@ public class RestoreClayMoldSmeltingRecipe extends SmeltingRecipe
 		return storedItem;
 	}
 
-	public static final Serializer SERIALIZER = new Serializer();
-
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SERIALIZER;
+		return AlchemancyRecipeTypes.Serializers.RESTORE_CLAY_MOLD_SMELTING.get();
 	}
 
 	public static class Serializer implements RecipeSerializer<RestoreClayMoldSmeltingRecipe>

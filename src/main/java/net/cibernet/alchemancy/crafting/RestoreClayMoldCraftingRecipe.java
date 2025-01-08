@@ -3,6 +3,7 @@ package net.cibernet.alchemancy.crafting;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.special.ClayMoldProperty;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
+import net.cibernet.alchemancy.registries.AlchemancyRecipeTypes;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.ItemStack;
@@ -11,8 +12,6 @@ import net.minecraft.world.level.Level;
 
 public class RestoreClayMoldCraftingRecipe extends CustomRecipe
 {
-	public static final SimpleCraftingRecipeSerializer<RestoreClayMoldCraftingRecipe> SERIALIZER = new SimpleCraftingRecipeSerializer<>(RestoreClayMoldCraftingRecipe::new);
-
 	public RestoreClayMoldCraftingRecipe(CraftingBookCategory category) {
 		super(category);
 	}
@@ -60,6 +59,6 @@ public class RestoreClayMoldCraftingRecipe extends CustomRecipe
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return SERIALIZER;
+		return AlchemancyRecipeTypes.Serializers.RESTORE_CLAY_MOLD_CRAFTING.get();
 	}
 }
