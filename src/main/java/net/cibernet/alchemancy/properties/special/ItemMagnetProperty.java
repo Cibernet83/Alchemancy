@@ -1,12 +1,18 @@
 package net.cibernet.alchemancy.properties.special;
 
 import net.cibernet.alchemancy.properties.Property;
+import net.minecraft.core.Holder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.registries.DeferredItem;
+
+import java.util.Collection;
+import java.util.List;
 
 public class ItemMagnetProperty extends Property
 {
@@ -36,6 +42,16 @@ public class ItemMagnetProperty extends Property
 		for (ItemEntity itemEntity : projectile.level().getEntitiesOfClass(ItemEntity.class, projectile.getBoundingBox().inflate(RADIUS))) {
 			itemEntity.setPos(projectile.position());
 		}
+	}
+
+	@Override
+	public Collection<ItemStack> populateCreativeTab(DeferredItem<Item> capsuleItem, Holder<Property> holder) {
+		return List.of();
+	}
+
+	@Override
+	public boolean hasJournalEntry() {
+		return false;
 	}
 
 	@Override
