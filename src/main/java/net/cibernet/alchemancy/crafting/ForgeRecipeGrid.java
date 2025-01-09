@@ -1,6 +1,7 @@
 package net.cibernet.alchemancy.crafting;
 
 import com.mojang.datafixers.util.Pair;
+import net.cibernet.alchemancy.blocks.AlchemancyCatalystBlock;
 import net.cibernet.alchemancy.blocks.InfusionPedestalBlock;
 import net.cibernet.alchemancy.blocks.blockentities.EssenceContainer;
 import net.cibernet.alchemancy.blocks.blockentities.IEssenceHolder;
@@ -8,10 +9,7 @@ import net.cibernet.alchemancy.blocks.blockentities.ItemStackHolderBlockEntity;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
-import net.cibernet.alchemancy.registries.AlchemancyBlocks;
-import net.cibernet.alchemancy.registries.AlchemancyItems;
-import net.cibernet.alchemancy.registries.AlchemancyProperties;
-import net.cibernet.alchemancy.registries.AlchemancyTags;
+import net.cibernet.alchemancy.registries.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -19,7 +17,9 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeInput;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -40,6 +40,25 @@ public class ForgeRecipeGrid implements RecipeInput
 	public Optional<Boolean> applyGlint = Optional.empty();
 	private final ArrayList<Holder<Property>> warpResults = new ArrayList<>();
 
+
+
+	public static ItemStack resolveInteractions(ItemStack input, Level level)
+	{
+		ForgeRecipeGrid grid = new ForgeRecipeGrid(input);
+
+		for(int i = 0; i < 128; i++)
+		{
+			Optional<RecipeHolder<AbstractForgeRecipe<?>>> recipe = OUT_OF_FORGE_INTERACTIONS_CHECK.getRecipeFor(grid, level);
+			if(recipe.isPresent())
+				grid.processRecipe(recipe.get().value(), level.registryAccess());
+			else break;
+		}
+		return grid.getCurrentOutput();
+	}
+
+	private static RecipeManager.CachedCheck<ForgeRecipeGrid, AbstractForgeRecipe<?>> OUT_OF_FORGE_INTERACTIONS_CHECK = (input, level) -> level.getRecipeManager().getRecipesFor(AlchemancyRecipeTypes.ALCHEMANCY_FORGE.get(), input, level).stream().filter(recipe -> recipe.value().matches(input, level) && !recipe.value().isTransmutation())
+			.min(Comparator.comparingInt(recipe -> recipe.value().getRecipeCompareValue(input)));;
+
 	@Override
 	public ItemStack getItem(int index)
 	{
@@ -51,6 +70,13 @@ public class ForgeRecipeGrid implements RecipeInput
 					new Pair<>(1, 0), new Pair<>(1, 1), new Pair<>(0, 1), new Pair<>(-1, 1),
 					new Pair<>(-1, 0), new Pair<>(-1, -1), new Pair<>(0, -1), new Pair<>(1, -1)
 			};
+
+	private ForgeRecipeGrid(ItemStack stack)
+	{
+		forge = new ItemStackHolderBlockEntity(BlockPos.ZERO, AlchemancyBlocks.ALCHEMANCY_FORGE.get().defaultBlockState());
+		forge.setItem(stack);
+		currentOutput = stack.copy();
+	}
 
 	public ForgeRecipeGrid(Level level, BlockPos pos, ItemStackHolderBlockEntity forge)
 	{

@@ -382,6 +382,9 @@
   "subtitles.property.allergic": "Allergic item sneezes",
   "subtitles.property.clay_mold": "Unshaped Clay is restored",
 
+  "dataPack.alchemancy.infused_loot": "Infused Loot",
+  "dataPack.alchemancy.infused_loot.description": "Gives a chance for mob equipment and chest loot to have Infused Properties",
+
   "alchemancy.category.basics": "Fundamentals",
   "alchemancy.category.properties": "Infusion Properties",
   "alchemancy.category.trinkets": "Gadgets and Trinkets",

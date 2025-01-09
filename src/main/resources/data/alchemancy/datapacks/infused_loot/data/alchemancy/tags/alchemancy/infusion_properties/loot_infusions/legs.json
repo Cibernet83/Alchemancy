@@ -1,0 +1,12 @@
+{
+  "values": [
+    "#alchemancy:loot_infusions/armor",
+
+    "alchemancy:depth_dweller",
+    "alchemancy:leaping",
+    "alchemancy:spiking",
+    "alchemancy:swift",
+    "alchemancy:sluggish",
+    "alchemancy:calcareous"
+  ]
+}

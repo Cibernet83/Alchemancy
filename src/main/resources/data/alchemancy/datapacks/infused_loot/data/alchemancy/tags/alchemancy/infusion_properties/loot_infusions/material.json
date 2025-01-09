@@ -1,0 +1,20 @@
+{
+  "values": [
+    "alchemancy:brittle",
+    "alchemancy:conductive",
+    "alchemancy:edible",
+    "alchemancy:sweet",
+    "alchemancy:sparking",
+    "alchemancy:burning",
+    "alchemancy:wet",
+    "alchemancy:throwable",
+    "alchemancy:glowing_aura",
+    "alchemancy:flammable",
+    "alchemancy:heavy",
+    "alchemancy:lightweight",
+    "alchemancy:buoyant",
+    "alchemancy:dirty",
+    "alchemancy:dead",
+    "alchemancy:sanitized"
+  ]
+}

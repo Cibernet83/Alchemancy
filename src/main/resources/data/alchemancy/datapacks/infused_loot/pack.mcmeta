@@ -1,0 +1,13 @@
+{
+  "features": {
+    "enabled": [
+      "alchemancy:infused_loot"
+    ]
+  },
+  "pack": {
+    "description": {
+      "translate": "dataPack.alchemancy.infused_loot.description"
+    },
+    "pack_format": 48
+  }
+}

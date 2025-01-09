@@ -1,0 +1,12 @@
+{
+  "values": [
+    "#alchemancy:loot_infusions/rare/generic",
+
+    "alchemancy:antigrav",
+    "alchemancy:warding",
+    "alchemancy:reinforced",
+    "alchemancy:relentless",
+    "alchemancy:magic_resistant",
+    "alchemancy:saddled"
+  ]
+}

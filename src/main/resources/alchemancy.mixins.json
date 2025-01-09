@@ -18,6 +18,7 @@
     "ItemStackExtensionMixin",
     "ItemStackMixin",
     "LivingEntityMixin",
+    "LootTableMixin",
     "MobMixin",
     "PlayerMixin",
     "ServerLevelMixin",

@@ -1,0 +1,33 @@
+{
+  "values": [
+    "#alchemancy:loot_infusions/generic",
+
+    "alchemancy:sharp",
+    "alchemancy:extended",
+    "alchemancy:nocturnal",
+    "alchemancy:grappling",
+    "alchemancy:hellbent",
+    "alchemancy:nonlethal",
+    "alchemancy:hollow",
+    "alchemancy:bucketing",
+    "alchemancy:chopping",
+    "alchemancy:digging",
+    "alchemancy:reaping",
+    "alchemancy:slashing",
+    "alchemancy:shearing",
+    "alchemancy:firestarting",
+    "alchemancy:sharpshooting",
+    "alchemancy:scoping",
+    "alchemancy:musical",
+    "alchemancy:poisonous",
+    "alchemancy:rooted",
+    "alchemancy:rusty",
+    "alchemancy:shielding",
+    "alchemancy:shocking",
+    "alchemancy:slippery",
+    "alchemancy:throwable",
+    "alchemancy:wealthy",
+    "alchemancy:malleable",
+    "alchemancy:blinding"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "values": [
+    "#alchemancy:loot_infusions/generic",
+
+    "alchemancy:blast_resistant",
+    "alchemancy:fire_resistant",
+    "alchemancy:buoyant",
+    "alchemancy:sticky",
+    "alchemancy:aquatic",
+    "alchemancy:jagged",
+    "alchemancy:cozy",
+    "alchemancy:hearty",
+    "alchemancy:insulated",
+    "alchemancy:waxed"
+  ]
+}
