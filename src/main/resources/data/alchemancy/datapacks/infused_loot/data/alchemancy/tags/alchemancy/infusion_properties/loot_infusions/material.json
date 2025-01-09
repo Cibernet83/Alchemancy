@@ -15,6 +15,7 @@
     "alchemancy:buoyant",
     "alchemancy:dirty",
     "alchemancy:dead",
-    "alchemancy:sanitized"
+    "alchemancy:sanitized",
+    "alchemancy:compact"
   ]
 }
