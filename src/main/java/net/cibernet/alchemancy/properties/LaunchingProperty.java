@@ -28,14 +28,14 @@ public class LaunchingProperty extends Property implements IDataHolder<Long>
 	@Override
 	public void onCriticalAttack(@Nullable Player user, ItemStack weapon, Entity target)
 	{
-		launch(weapon, target, 1f);
+		launch(user, weapon, target, 1f);
 		setData(weapon, target.level().getGameTime());
 	}
 
 	@Override
 	public void onActivationByBlock(Level level, BlockPos position, Entity target, ItemStack stack)
 	{
-		launch(stack, target, 2f);
+		launch(null, stack, target, 2f);
 	}
 
 	public static final DustColorTransitionOptions PARTICLES = new DustColorTransitionOptions(
@@ -66,7 +66,7 @@ public class LaunchingProperty extends Property implements IDataHolder<Long>
 		pLevel.addParticle(PARTICLES, d0 + d5, d1 + d6, d2 + d7, 0.0D, 4D, 0.0D);
 	}
 
-	public void launch(ItemStack weapon, Entity target, float strength)
+	public void launch(@Nullable LivingEntity user, ItemStack weapon, Entity target, float strength)
 	{
 		target.setDeltaMovement(target.getDeltaMovement().multiply(1, 0, 1).add(0, strength, 0));
 		target.hasImpulse = true;
@@ -74,12 +74,12 @@ public class LaunchingProperty extends Property implements IDataHolder<Long>
 
 		if(PropertyModifierComponent.getOrElse(weapon, asHolder(), AlchemancyProperties.Modifiers.PREVENT_CONSUMPTION, weapon.isDamageableItem()))
 		{
-			int durabilityConsumed = PropertyModifierComponent.getOrElse(weapon, asHolder(), AlchemancyProperties.Modifiers.DURABILITY_CONSUMPTION, 2);
-			if(target instanceof LivingEntity living)
-				weapon.hurtAndBreak(durabilityConsumed, living, EquipmentSlot.MAINHAND);
+			int durabilityConsumed = PropertyModifierComponent.getOrElse(weapon, asHolder(), AlchemancyProperties.Modifiers.DURABILITY_CONSUMPTION, 20);
+			if(user != null)
+				weapon.hurtAndBreak(durabilityConsumed, user, EquipmentSlot.MAINHAND);
 			else if(target.level() instanceof ServerLevel serverLevel) weapon.hurtAndBreak(durabilityConsumed, serverLevel, null, (item) -> {});
 		}
-		else consumeItem(target, weapon, EquipmentSlot.MAINHAND);
+		else consumeItem(user, weapon, EquipmentSlot.MAINHAND);
 	}
 
 	@Override
