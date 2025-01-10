@@ -1,0 +1,1445 @@
+{
+  "parent": "alchemancy:story/apply_property",
+  "criteria": {
+    "discover_alchemancy:absorbent": {
+      "conditions": {
+        "property": "alchemancy:absorbent"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:allergic": {
+      "conditions": {
+        "property": "alchemancy:allergic"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:antigrav": {
+      "conditions": {
+        "property": "alchemancy:antigrav"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:aquatic": {
+      "conditions": {
+        "property": "alchemancy:aquatic"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:arcane": {
+      "conditions": {
+        "property": "alchemancy:arcane"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:armor_pulse": {
+      "conditions": {
+        "property": "alchemancy:armor_pulse"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:assembling": {
+      "conditions": {
+        "property": "alchemancy:assembling"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:assimilating": {
+      "conditions": {
+        "property": "alchemancy:assimilating"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:awakened": {
+      "conditions": {
+        "property": "alchemancy:awakened"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:awkward": {
+      "conditions": {
+        "property": "alchemancy:awkward"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:blast_resistant": {
+      "conditions": {
+        "property": "alchemancy:blast_resistant"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:blinding": {
+      "conditions": {
+        "property": "alchemancy:blinding"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:bouncy": {
+      "conditions": {
+        "property": "alchemancy:bouncy"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:brittle": {
+      "conditions": {
+        "property": "alchemancy:brittle"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:brushing": {
+      "conditions": {
+        "property": "alchemancy:brushing"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:bucketing": {
+      "conditions": {
+        "property": "alchemancy:bucketing"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:buoyant": {
+      "conditions": {
+        "property": "alchemancy:buoyant"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:burning": {
+      "conditions": {
+        "property": "alchemancy:burning"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:calcareous": {
+      "conditions": {
+        "property": "alchemancy:calcareous"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:capturing": {
+      "conditions": {
+        "property": "alchemancy:capturing"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:charred": {
+      "conditions": {
+        "property": "alchemancy:charred"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:chopping": {
+      "conditions": {
+        "property": "alchemancy:chopping"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:clueless": {
+      "conditions": {
+        "property": "alchemancy:clueless"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:compact": {
+      "conditions": {
+        "property": "alchemancy:compact"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:concealed": {
+      "conditions": {
+        "property": "alchemancy:concealed"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:conductive": {
+      "conditions": {
+        "property": "alchemancy:conductive"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:cozy": {
+      "conditions": {
+        "property": "alchemancy:cozy"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:cracked": {
+      "conditions": {
+        "property": "alchemancy:cracked"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:crafty": {
+      "conditions": {
+        "property": "alchemancy:crafty"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:dead": {
+      "conditions": {
+        "property": "alchemancy:dead"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:death_ward": {
+      "conditions": {
+        "property": "alchemancy:death_ward"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:decaying": {
+      "conditions": {
+        "property": "alchemancy:decaying"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:dense": {
+      "conditions": {
+        "property": "alchemancy:dense"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:depth_dweller": {
+      "conditions": {
+        "property": "alchemancy:depth_dweller"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:dexterous": {
+      "conditions": {
+        "property": "alchemancy:dexterous"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:digging": {
+      "conditions": {
+        "property": "alchemancy:digging"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:dirty": {
+      "conditions": {
+        "property": "alchemancy:dirty"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:disguised": {
+      "conditions": {
+        "property": "alchemancy:disguised"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:dripping": {
+      "conditions": {
+        "property": "alchemancy:dripping"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:edible": {
+      "conditions": {
+        "property": "alchemancy:edible"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:encapsulating": {
+      "conditions": {
+        "property": "alchemancy:encapsulating"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:enchanting": {
+      "conditions": {
+        "property": "alchemancy:enchanting"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:ender": {
+      "conditions": {
+        "property": "alchemancy:ender"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:energized": {
+      "conditions": {
+        "property": "alchemancy:energized"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:energy_sapper": {
+      "conditions": {
+        "property": "alchemancy:energy_sapper"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:eternal": {
+      "conditions": {
+        "property": "alchemancy:eternal"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:eternal_glow": {
+      "conditions": {
+        "property": "alchemancy:eternal_glow"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:experienced": {
+      "conditions": {
+        "property": "alchemancy:experienced"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:exploding": {
+      "conditions": {
+        "property": "alchemancy:exploding"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:extended": {
+      "conditions": {
+        "property": "alchemancy:extended"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:ferrous": {
+      "conditions": {
+        "property": "alchemancy:ferrous"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:fire_resistant": {
+      "conditions": {
+        "property": "alchemancy:fire_resistant"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:firestarting": {
+      "conditions": {
+        "property": "alchemancy:firestarting"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:flammable": {
+      "conditions": {
+        "property": "alchemancy:flammable"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:flattened": {
+      "conditions": {
+        "property": "alchemancy:flattened"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:flimsy": {
+      "conditions": {
+        "property": "alchemancy:flimsy"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:flourish": {
+      "conditions": {
+        "property": "alchemancy:flourish"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:friendly": {
+      "conditions": {
+        "property": "alchemancy:friendly"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:frosted": {
+      "conditions": {
+        "property": "alchemancy:frosted"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:fungal": {
+      "conditions": {
+        "property": "alchemancy:fungal"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:gambling": {
+      "conditions": {
+        "property": "alchemancy:gambling"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:gilded": {
+      "conditions": {
+        "property": "alchemancy:gilded"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:glider": {
+      "conditions": {
+        "property": "alchemancy:glider"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:glowing_aura": {
+      "conditions": {
+        "property": "alchemancy:glowing_aura"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:grappling": {
+      "conditions": {
+        "property": "alchemancy:grappling"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:hardened": {
+      "conditions": {
+        "property": "alchemancy:hardened"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:headwear": {
+      "conditions": {
+        "property": "alchemancy:headwear"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:hearty": {
+      "conditions": {
+        "property": "alchemancy:hearty"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:heavy": {
+      "conditions": {
+        "property": "alchemancy:heavy"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:hellbent": {
+      "conditions": {
+        "property": "alchemancy:hellbent"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:hollow": {
+      "conditions": {
+        "property": "alchemancy:hollow"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:hydrophobic": {
+      "conditions": {
+        "property": "alchemancy:hydrophobic"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:infected": {
+      "conditions": {
+        "property": "alchemancy:infected"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:insulated": {
+      "conditions": {
+        "property": "alchemancy:insulated"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:interactable": {
+      "conditions": {
+        "property": "alchemancy:interactable"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:jagged": {
+      "conditions": {
+        "property": "alchemancy:jagged"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:launching": {
+      "conditions": {
+        "property": "alchemancy:launching"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:leaping": {
+      "conditions": {
+        "property": "alchemancy:leaping"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:levitating": {
+      "conditions": {
+        "property": "alchemancy:levitating"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:light_seeking": {
+      "conditions": {
+        "property": "alchemancy:light_seeking"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:lightweight": {
+      "conditions": {
+        "property": "alchemancy:lightweight"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:limit_break": {
+      "conditions": {
+        "property": "alchemancy:limit_break"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:loose": {
+      "conditions": {
+        "property": "alchemancy:loose"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:loyal": {
+      "conditions": {
+        "property": "alchemancy:loyal"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:lustrous": {
+      "conditions": {
+        "property": "alchemancy:lustrous"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:magic_resistant": {
+      "conditions": {
+        "property": "alchemancy:magic_resistant"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:malleable": {
+      "conditions": {
+        "property": "alchemancy:malleable"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:mending": {
+      "conditions": {
+        "property": "alchemancy:mending"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:mining": {
+      "conditions": {
+        "property": "alchemancy:mining"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:muffled": {
+      "conditions": {
+        "property": "alchemancy:muffled"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:musical": {
+      "conditions": {
+        "property": "alchemancy:musical"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:nocturnal": {
+      "conditions": {
+        "property": "alchemancy:nocturnal"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:nonlethal": {
+      "conditions": {
+        "property": "alchemancy:nonlethal"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:ominous": {
+      "conditions": {
+        "property": "alchemancy:ominous"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:paradoxical": {
+      "conditions": {
+        "property": "alchemancy:paradoxical"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:phase_step": {
+      "conditions": {
+        "property": "alchemancy:phase_step"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:phasing": {
+      "conditions": {
+        "property": "alchemancy:phasing"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:photosynthetic": {
+      "conditions": {
+        "property": "alchemancy:photosynthetic"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:poisonous": {
+      "conditions": {
+        "property": "alchemancy:poisonous"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:pristine": {
+      "conditions": {
+        "property": "alchemancy:pristine"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:reaping": {
+      "conditions": {
+        "property": "alchemancy:reaping"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:reinforced": {
+      "conditions": {
+        "property": "alchemancy:reinforced"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:relentless": {
+      "conditions": {
+        "property": "alchemancy:relentless"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:repelled": {
+      "conditions": {
+        "property": "alchemancy:repelled"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:resized": {
+      "conditions": {
+        "property": "alchemancy:resized"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:revealed": {
+      "conditions": {
+        "property": "alchemancy:revealed"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:revealing": {
+      "conditions": {
+        "property": "alchemancy:revealing"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:rocket_powered": {
+      "conditions": {
+        "property": "alchemancy:rocket_powered"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:rooted": {
+      "conditions": {
+        "property": "alchemancy:rooted"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:rusty": {
+      "conditions": {
+        "property": "alchemancy:rusty"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:saddled": {
+      "conditions": {
+        "property": "alchemancy:saddled"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:sanitized": {
+      "conditions": {
+        "property": "alchemancy:sanitized"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:scary": {
+      "conditions": {
+        "property": "alchemancy:scary"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:scoping": {
+      "conditions": {
+        "property": "alchemancy:scoping"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:scrambled": {
+      "conditions": {
+        "property": "alchemancy:scrambled"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:sculking": {
+      "conditions": {
+        "property": "alchemancy:sculking"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:seeded": {
+      "conditions": {
+        "property": "alchemancy:seeded"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:seethrough": {
+      "conditions": {
+        "property": "alchemancy:seethrough"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:sensitive": {
+      "conditions": {
+        "property": "alchemancy:sensitive"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:sharp": {
+      "conditions": {
+        "property": "alchemancy:sharp"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:sharpshooting": {
+      "conditions": {
+        "property": "alchemancy:sharpshooting"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:shattering": {
+      "conditions": {
+        "property": "alchemancy:shattering"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:shearing": {
+      "conditions": {
+        "property": "alchemancy:shearing"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:shielding": {
+      "conditions": {
+        "property": "alchemancy:shielding"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:shocking": {
+      "conditions": {
+        "property": "alchemancy:shocking"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:slashing": {
+      "conditions": {
+        "property": "alchemancy:slashing"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:slippery": {
+      "conditions": {
+        "property": "alchemancy:slippery"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:sluggish": {
+      "conditions": {
+        "property": "alchemancy:sluggish"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:smelting": {
+      "conditions": {
+        "property": "alchemancy:smelting"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:soulbind": {
+      "conditions": {
+        "property": "alchemancy:soulbind"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:sparking": {
+      "conditions": {
+        "property": "alchemancy:sparking"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:spiking": {
+      "conditions": {
+        "property": "alchemancy:spiking"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:spirit_bond": {
+      "conditions": {
+        "property": "alchemancy:spirit_bond"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:sporadic": {
+      "conditions": {
+        "property": "alchemancy:sporadic"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:sticky": {
+      "conditions": {
+        "property": "alchemancy:sticky"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:sturdy": {
+      "conditions": {
+        "property": "alchemancy:sturdy"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:sweet": {
+      "conditions": {
+        "property": "alchemancy:sweet"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:swift": {
+      "conditions": {
+        "property": "alchemancy:swift"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:targeted": {
+      "conditions": {
+        "property": "alchemancy:targeted"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:throwable": {
+      "conditions": {
+        "property": "alchemancy:throwable"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:ticking": {
+      "conditions": {
+        "property": "alchemancy:ticking"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:tinted": {
+      "conditions": {
+        "property": "alchemancy:tinted"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:tipsy": {
+      "conditions": {
+        "property": "alchemancy:tipsy"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:toggleable": {
+      "conditions": {
+        "property": "alchemancy:toggleable"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:undead": {
+      "conditions": {
+        "property": "alchemancy:undead"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:undying": {
+      "conditions": {
+        "property": "alchemancy:undying"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:vampiric": {
+      "conditions": {
+        "property": "alchemancy:vampiric"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:vengeful": {
+      "conditions": {
+        "property": "alchemancy:vengeful"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:warding": {
+      "conditions": {
+        "property": "alchemancy:warding"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:warped": {
+      "conditions": {
+        "property": "alchemancy:warped"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:waxed": {
+      "conditions": {
+        "property": "alchemancy:waxed"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:wayfinding": {
+      "conditions": {
+        "property": "alchemancy:wayfinding"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:wayward_warp": {
+      "conditions": {
+        "property": "alchemancy:wayward_warp"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:weak": {
+      "conditions": {
+        "property": "alchemancy:weak"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:wealthy": {
+      "conditions": {
+        "property": "alchemancy:wealthy"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:wet": {
+      "conditions": {
+        "property": "alchemancy:wet"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:wind_charged": {
+      "conditions": {
+        "property": "alchemancy:wind_charged"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:wise": {
+      "conditions": {
+        "property": "alchemancy:wise"
+      },
+      "trigger": "alchemancy:discover_property"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.story.alchemancy:all_properties.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "alchemancy:alchemancy_catalyst"
+    },
+    "title": {
+      "translate": "advancements.story.alchemancy:all_properties.title"
+    }
+  },
+  "requirements": [
+    [
+      "discover_alchemancy:burning"
+    ],
+    [
+      "discover_alchemancy:wet"
+    ],
+    [
+      "discover_alchemancy:frosted"
+    ],
+    [
+      "discover_alchemancy:shocking"
+    ],
+    [
+      "discover_alchemancy:photosynthetic"
+    ],
+    [
+      "discover_alchemancy:flammable"
+    ],
+    [
+      "discover_alchemancy:charred"
+    ],
+    [
+      "discover_alchemancy:sturdy"
+    ],
+    [
+      "discover_alchemancy:brittle"
+    ],
+    [
+      "discover_alchemancy:rusty"
+    ],
+    [
+      "discover_alchemancy:ferrous"
+    ],
+    [
+      "discover_alchemancy:gilded"
+    ],
+    [
+      "discover_alchemancy:lustrous"
+    ],
+    [
+      "discover_alchemancy:wealthy"
+    ],
+    [
+      "discover_alchemancy:reinforced"
+    ],
+    [
+      "discover_alchemancy:pristine"
+    ],
+    [
+      "discover_alchemancy:hellbent"
+    ],
+    [
+      "discover_alchemancy:depth_dweller"
+    ],
+    [
+      "discover_alchemancy:malleable"
+    ],
+    [
+      "discover_alchemancy:hardened"
+    ],
+    [
+      "discover_alchemancy:cracked"
+    ],
+    [
+      "discover_alchemancy:energized"
+    ],
+    [
+      "discover_alchemancy:bouncy"
+    ],
+    [
+      "discover_alchemancy:sticky"
+    ],
+    [
+      "discover_alchemancy:slippery"
+    ],
+    [
+      "discover_alchemancy:buoyant"
+    ],
+    [
+      "discover_alchemancy:lightweight"
+    ],
+    [
+      "discover_alchemancy:heavy"
+    ],
+    [
+      "discover_alchemancy:antigrav"
+    ],
+    [
+      "discover_alchemancy:dexterous"
+    ],
+    [
+      "discover_alchemancy:mining"
+    ],
+    [
+      "discover_alchemancy:chopping"
+    ],
+    [
+      "discover_alchemancy:digging"
+    ],
+    [
+      "discover_alchemancy:reaping"
+    ],
+    [
+      "discover_alchemancy:shearing"
+    ],
+    [
+      "discover_alchemancy:slashing"
+    ],
+    [
+      "discover_alchemancy:sharpshooting"
+    ],
+    [
+      "discover_alchemancy:shielding"
+    ],
+    [
+      "discover_alchemancy:firestarting"
+    ],
+    [
+      "discover_alchemancy:brushing"
+    ],
+    [
+      "discover_alchemancy:scoping"
+    ],
+    [
+      "discover_alchemancy:wayfinding"
+    ],
+    [
+      "discover_alchemancy:headwear"
+    ],
+    [
+      "discover_alchemancy:saddled"
+    ],
+    [
+      "discover_alchemancy:glider"
+    ],
+    [
+      "discover_alchemancy:crafty"
+    ],
+    [
+      "discover_alchemancy:smelting"
+    ],
+    [
+      "discover_alchemancy:assembling"
+    ],
+    [
+      "discover_alchemancy:assimilating"
+    ],
+    [
+      "discover_alchemancy:hollow"
+    ],
+    [
+      "discover_alchemancy:bucketing"
+    ],
+    [
+      "discover_alchemancy:encapsulating"
+    ],
+    [
+      "discover_alchemancy:capturing"
+    ],
+    [
+      "discover_alchemancy:dripping"
+    ],
+    [
+      "discover_alchemancy:absorbent"
+    ],
+    [
+      "discover_alchemancy:edible"
+    ],
+    [
+      "discover_alchemancy:jagged"
+    ],
+    [
+      "discover_alchemancy:rooted"
+    ],
+    [
+      "discover_alchemancy:sensitive"
+    ],
+    [
+      "discover_alchemancy:interactable"
+    ],
+    [
+      "discover_alchemancy:fungal"
+    ],
+    [
+      "discover_alchemancy:sporadic"
+    ],
+    [
+      "discover_alchemancy:shattering"
+    ],
+    [
+      "discover_alchemancy:throwable"
+    ],
+    [
+      "discover_alchemancy:toggleable"
+    ],
+    [
+      "discover_alchemancy:ticking"
+    ],
+    [
+      "discover_alchemancy:hydrophobic"
+    ],
+    [
+      "discover_alchemancy:allergic"
+    ],
+    [
+      "discover_alchemancy:armor_pulse"
+    ],
+    [
+      "discover_alchemancy:levitating"
+    ],
+    [
+      "discover_alchemancy:swift"
+    ],
+    [
+      "discover_alchemancy:sluggish"
+    ],
+    [
+      "discover_alchemancy:poisonous"
+    ],
+    [
+      "discover_alchemancy:decaying"
+    ],
+    [
+      "discover_alchemancy:tipsy"
+    ],
+    [
+      "discover_alchemancy:blinding"
+    ],
+    [
+      "discover_alchemancy:nocturnal"
+    ],
+    [
+      "discover_alchemancy:aquatic"
+    ],
+    [
+      "discover_alchemancy:leaping"
+    ],
+    [
+      "discover_alchemancy:glowing_aura"
+    ],
+    [
+      "discover_alchemancy:ominous"
+    ],
+    [
+      "discover_alchemancy:hearty"
+    ],
+    [
+      "discover_alchemancy:grappling"
+    ],
+    [
+      "discover_alchemancy:spiking"
+    ],
+    [
+      "discover_alchemancy:launching"
+    ],
+    [
+      "discover_alchemancy:sharp"
+    ],
+    [
+      "discover_alchemancy:weak"
+    ],
+    [
+      "discover_alchemancy:dense"
+    ],
+    [
+      "discover_alchemancy:gambling"
+    ],
+    [
+      "discover_alchemancy:arcane"
+    ],
+    [
+      "discover_alchemancy:resized"
+    ],
+    [
+      "discover_alchemancy:exploding"
+    ],
+    [
+      "discover_alchemancy:wind_charged"
+    ],
+    [
+      "discover_alchemancy:cozy"
+    ],
+    [
+      "discover_alchemancy:waxed"
+    ],
+    [
+      "discover_alchemancy:fire_resistant"
+    ],
+    [
+      "discover_alchemancy:blast_resistant"
+    ],
+    [
+      "discover_alchemancy:insulated"
+    ],
+    [
+      "discover_alchemancy:warding"
+    ],
+    [
+      "discover_alchemancy:eternal"
+    ],
+    [
+      "discover_alchemancy:muffled"
+    ],
+    [
+      "discover_alchemancy:magic_resistant"
+    ],
+    [
+      "discover_alchemancy:soulbind"
+    ],
+    [
+      "discover_alchemancy:loyal"
+    ],
+    [
+      "discover_alchemancy:vengeful"
+    ],
+    [
+      "discover_alchemancy:vampiric"
+    ],
+    [
+      "discover_alchemancy:energy_sapper"
+    ],
+    [
+      "discover_alchemancy:relentless"
+    ],
+    [
+      "discover_alchemancy:spirit_bond"
+    ],
+    [
+      "discover_alchemancy:phasing"
+    ],
+    [
+      "discover_alchemancy:nonlethal"
+    ],
+    [
+      "discover_alchemancy:mending"
+    ],
+    [
+      "discover_alchemancy:flourish"
+    ],
+    [
+      "discover_alchemancy:undead"
+    ],
+    [
+      "discover_alchemancy:undying"
+    ],
+    [
+      "discover_alchemancy:infected"
+    ],
+    [
+      "discover_alchemancy:dead"
+    ],
+    [
+      "discover_alchemancy:sanitized"
+    ],
+    [
+      "discover_alchemancy:sweet"
+    ],
+    [
+      "discover_alchemancy:scary"
+    ],
+    [
+      "discover_alchemancy:seeded"
+    ],
+    [
+      "discover_alchemancy:conductive"
+    ],
+    [
+      "discover_alchemancy:clueless"
+    ],
+    [
+      "discover_alchemancy:enchanting"
+    ],
+    [
+      "discover_alchemancy:wise"
+    ],
+    [
+      "discover_alchemancy:experienced"
+    ],
+    [
+      "discover_alchemancy:ender"
+    ],
+    [
+      "discover_alchemancy:sculking"
+    ],
+    [
+      "discover_alchemancy:loose"
+    ],
+    [
+      "discover_alchemancy:sparking"
+    ],
+    [
+      "discover_alchemancy:extended"
+    ],
+    [
+      "discover_alchemancy:calcareous"
+    ],
+    [
+      "discover_alchemancy:musical"
+    ],
+    [
+      "discover_alchemancy:targeted"
+    ],
+    [
+      "discover_alchemancy:repelled"
+    ],
+    [
+      "discover_alchemancy:light_seeking"
+    ],
+    [
+      "discover_alchemancy:flimsy"
+    ],
+    [
+      "discover_alchemancy:compact"
+    ],
+    [
+      "discover_alchemancy:revealed"
+    ],
+    [
+      "discover_alchemancy:revealing"
+    ],
+    [
+      "discover_alchemancy:scrambled"
+    ],
+    [
+      "discover_alchemancy:concealed"
+    ],
+    [
+      "discover_alchemancy:disguised"
+    ],
+    [
+      "discover_alchemancy:seethrough"
+    ],
+    [
+      "discover_alchemancy:tinted"
+    ],
+    [
+      "discover_alchemancy:flattened"
+    ],
+    [
+      "discover_alchemancy:awakened"
+    ],
+    [
+      "discover_alchemancy:paradoxical"
+    ],
+    [
+      "discover_alchemancy:limit_break"
+    ],
+    [
+      "discover_alchemancy:dirty"
+    ],
+    [
+      "discover_alchemancy:awkward"
+    ],
+    [
+      "discover_alchemancy:warped"
+    ],
+    [
+      "discover_alchemancy:eternal_glow"
+    ],
+    [
+      "discover_alchemancy:phase_step"
+    ],
+    [
+      "discover_alchemancy:death_ward"
+    ],
+    [
+      "discover_alchemancy:friendly"
+    ],
+    [
+      "discover_alchemancy:wayward_warp"
+    ],
+    [
+      "discover_alchemancy:rocket_powered"
+    ]
+  ],
+  "rewards": {
+    "experience": 1000
+  }
+}
