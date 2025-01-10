@@ -81,9 +81,9 @@ public class RocketPoweredProperty extends Property
 		RandomSource randomSource = source.getRandom();
 		source.level().addParticle(
 				ParticleTypes.FLAME,
-				pos.x(),
+				pos.x() - Math.cos((source.getXRot()+90)*Math.PI/180f) * 0.2f,
 				source.getEyeY() - 0.2f,
-				pos.z(),
+				pos.z() - Math.sin((source.getXRot()+90)*Math.PI/180f) * 0.2f,
 				-source.getDeltaMovement().x * 0.5 + randomSource.nextGaussian() * 0.05,
 				-source.getDeltaMovement().y * 0.5 + randomSource.nextGaussian() * 0.05,
 				-source.getDeltaMovement().z * 0.5 + randomSource.nextGaussian() * 0.05
