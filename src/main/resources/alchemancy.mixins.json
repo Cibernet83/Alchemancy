@@ -40,7 +40,9 @@
     "client.HumanoidArmorLayerMixin",
     "client.ItemRendererMixin",
     "client.LocalPlayerMixin",
-    "client.MouseHandlerMixin"
+    "client.MouseHandlerMixin",
+    "client.SodiumCompat$ItemRendererMixin",
+    "client.SodiumCompat$BakedModelEncoderMixin"
   ],
   "injectors": {
     "defaultRequire": 1

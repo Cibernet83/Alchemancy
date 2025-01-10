@@ -3,6 +3,7 @@ package net.cibernet.alchemancy.util;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.ITintModifier;
+import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.Entity;
@@ -74,6 +75,11 @@ public class CommonUtils
 		});
 
 		return translucent.get();
+	}
+
+	public static boolean hasPropertyDrivenTint(ItemStack stack)
+	{
+		return InfusedPropertiesHelper.getInfusedProperties(stack).stream().anyMatch(propertyHolder -> propertyHolder.value() instanceof ITintModifier);
 	}
 
 	public static int getPropertyDrivenTint(ItemStack itemStack)

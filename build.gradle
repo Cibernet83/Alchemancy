@@ -115,6 +115,10 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.dev"
     }
+
+    flatDir {
+        dir 'libs'
+    }
 }
 
 dependencies {
@@ -139,6 +143,8 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
+
+    compileOnly "net.caffeinemc:sodium:0.6.5"
 
     compileOnly "vazkii.patchouli:Patchouli:${patchouli_version}:api"
     runtimeOnly "vazkii.patchouli:Patchouli:${patchouli_version}"
