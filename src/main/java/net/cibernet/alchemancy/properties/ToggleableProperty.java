@@ -5,6 +5,7 @@ import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.registries.AlchemancySoundEvents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -35,14 +36,20 @@ public class ToggleableProperty extends Property implements IDataHolder<Boolean>
 	}
 
 	@Override
-	public void onRightClickItemPost(PlayerInteractEvent.RightClickItem event) {
-		if(!event.isCanceled())
+	public void onRightClickItem(PlayerInteractEvent.RightClickItem event)
+	{
+		if(event.getEntity().isShiftKeyDown())
+		{
 			toggle(event.getItemStack(), event.getEntity());
+			event.setCancellationResult(InteractionResult.SUCCESS);
+			event.setCanceled(true);
+		}
 	}
 
 	@Override
-	public int getPriority() {
-		return Priority.LOWEST;
+	public void onRightClickItemPost(PlayerInteractEvent.RightClickItem event) {
+		if(!event.isCanceled() && !event.getEntity().isShiftKeyDown())
+			toggle(event.getItemStack(), event.getEntity());
 	}
 
 	public void toggle(ItemStack stack, @Nullable Entity entity)
