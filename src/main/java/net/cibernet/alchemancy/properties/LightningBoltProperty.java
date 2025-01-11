@@ -17,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-@EventBusSubscriber
+@EventBusSubscriber(Dist.CLIENT)
 public class LightningBoltProperty extends Property
 {
 
