@@ -50,12 +50,12 @@ public class ResizedProperty extends Property implements IDataHolder<Float>
 		float currentSize = getData(stack);
 		float newSize;
 
-		if(propertySource.is(AlchemancyTags.Items.INCREASES_RESIZED) && currentSize < MAX)
+		if (!getData(propertySource).equals(getDefaultData()))
+			newSize = getData(propertySource);
+		else if(propertySource.is(AlchemancyTags.Items.INCREASES_RESIZED) && currentSize < MAX)
 			newSize = Math.min(MAX, currentSize + 0.1f);
 		else if(propertySource.is(AlchemancyTags.Items.DECREASES_RESIZED) && currentSize > MIN)
 			newSize = Math.max(MIN, currentSize - 0.1f);
-		else if (!getData(propertySource).equals(getDefaultData()))
-			newSize = getData(propertySource);
 		else return false;
 
 		setData(stack, newSize);
