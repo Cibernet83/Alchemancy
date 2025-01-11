@@ -46,9 +46,10 @@ public class ExplodingProperty extends Property
 		return (user, stack, target, level, radius) ->
 		{
 			Level.ExplosionInteraction interaction = EventHooks.canEntityGrief(level, user) ? Level.ExplosionInteraction.TNT : Level.ExplosionInteraction.NONE;
+			//target.invulnerableTime = 0;
 
 			level.explode(
-					null,
+					user,
 					Explosion.getDefaultDamageSource(level, user),
 					null,
 					target.getX(), target.getEyeY(), target.getZ(),
@@ -60,7 +61,7 @@ public class ExplodingProperty extends Property
 					SoundEvents.GENERIC_EXPLODE
 			);
 
-			//target.hurt(Explosion.getDefaultDamageSource(level, user), radius * 2);
+			target.hurt(Explosion.getDefaultDamageSource(level, user), radius * 14 + 1);
 		};
 	}
 
