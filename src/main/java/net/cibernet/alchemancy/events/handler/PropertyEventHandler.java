@@ -169,7 +169,7 @@ public class PropertyEventHandler
 		else if(event.getEntity() instanceof Projectile projectile)
 		{
 			ItemStack stack = getProjectileItemStack(projectile);
-			if(!stack.isEmpty())
+			if(stack != null && !stack.isEmpty())
 				InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onProjectileTick(stack, projectile));
 		}
 	}
@@ -189,11 +189,12 @@ public class PropertyEventHandler
 
 	public static ItemStack getProjectileItemStack(Projectile entity)
 	{
+		ItemStack result = null;
 		if(entity instanceof ItemSupplier itemSupplier)
-			return itemSupplier.getItem();
-		if(entity instanceof AbstractArrow arrow)
-			return arrow.getPickupItemStackOrigin();
-		return ItemStack.EMPTY;
+			result = itemSupplier.getItem();
+		else if(entity instanceof AbstractArrow arrow)
+			result =  arrow.getPickupItemStackOrigin();
+		return result == null ? ItemStack.EMPTY : result;
 	}
 
 	@SubscribeEvent
