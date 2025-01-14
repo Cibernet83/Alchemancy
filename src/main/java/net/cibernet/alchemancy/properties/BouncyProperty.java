@@ -30,7 +30,7 @@ public class BouncyProperty extends Property
 		if(target == null || target.level().isClientSide())
 			return;
 
-		if(source == target && source instanceof LivingEntity user)
+		if(source == target && source instanceof Player user)
 		{
 			if(CommonUtils.calculateHitResult(user).getType() != HitResult.Type.MISS)
 				knockBack(user, user.position().add(user.getLookAngle()));
