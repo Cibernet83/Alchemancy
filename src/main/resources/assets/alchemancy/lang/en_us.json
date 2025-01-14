@@ -387,6 +387,8 @@
   "dataPack.alchemancy.infused_loot": "Infused Loot",
   "dataPack.alchemancy.infused_loot.description": "Gives a chance for mob equipment and chest loot to have Infused Properties",
 
+  "alchemancy.journal.landing_text": "$(o)This book will be your guide to the limitless world of $(thing)Alchemancy$()$(o): a magic mod focused around granting the functionality and properties of any item to any other item with the power of Alchemy and Artifice.",
+
   "alchemancy.category.basics": "Fundamentals",
   "alchemancy.category.properties": "Infusion Properties",
   "alchemancy.category.trinkets": "Gadgets and Trinkets",
