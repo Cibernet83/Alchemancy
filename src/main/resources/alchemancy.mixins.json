@@ -13,6 +13,7 @@
     "DataComponentHolderMixin",
     "DispenserBlockMixin",
     "EntityMixin",
+    "HorseMixin",
     "ItemEntityMixin",
     "ItemMixin",
     "ItemStackExtensionMixin",
@@ -41,8 +42,8 @@
     "client.ItemRendererMixin",
     "client.LocalPlayerMixin",
     "client.MouseHandlerMixin",
-    "client.SodiumCompat$ItemRendererMixin",
-    "client.SodiumCompat$BakedModelEncoderMixin"
+    "client.SodiumCompat$BakedModelEncoderMixin",
+    "client.SodiumCompat$ItemRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
