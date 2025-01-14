@@ -66,7 +66,7 @@ public class DenseProperty extends Property
 	@Override
 	public void onFall(LivingEntity entity, ItemStack stack, EquipmentSlot slot, LivingFallEvent event)
 	{
-		if(slot == EquipmentSlot.FEET && MaceItem.canSmashAttack(entity))
+		if((slot == EquipmentSlot.FEET || slot == EquipmentSlot.BODY) && MaceItem.canSmashAttack(entity))
 		{
 			entity.playSound(entity.fallDistance > 5.0F ? SoundEvents.MACE_SMASH_GROUND_HEAVY : SoundEvents.MACE_SMASH_GROUND, 1, 1);
 

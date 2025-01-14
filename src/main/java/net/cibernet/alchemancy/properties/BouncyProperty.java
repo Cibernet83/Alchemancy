@@ -7,6 +7,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.HitResult;
@@ -86,10 +87,10 @@ public class BouncyProperty extends Property
 	@Override
 	public void onFall(LivingEntity user, ItemStack stack, EquipmentSlot slot, LivingFallEvent event)
 	{
-		if(slot == EquipmentSlot.FEET && event.getDistance() >= 0.2f && !user.isShiftKeyDown())
+		if((slot == EquipmentSlot.FEET || slot == EquipmentSlot.BODY) && event.getDistance() >= 0.2f && !user.isShiftKeyDown())
 		{
 			event.setDamageMultiplier(0);
-			if(user.level().isClientSide())
+			if(!(user instanceof Player) || user.level().isClientSide())
 				BOUNCE_TARGETS.put(user.getUUID(), user.getDeltaMovement());
 		}
 	}
