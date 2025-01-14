@@ -57,7 +57,7 @@ public class InfusedPropertiesHelper
 
 	public static boolean hasProperty(ItemStack stack, Holder<Property> property)
 	{
-		if(stack.isEmpty() || property == null || property.is(AlchemancyTags.Properties.DISABLED))
+		if(stack == null || stack.isEmpty() || property == null || property.is(AlchemancyTags.Properties.DISABLED))
 			return false;
 
 		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().getData(stack);
@@ -71,7 +71,7 @@ public class InfusedPropertiesHelper
 
 	public static boolean hasProperty(ItemStack stack, TagKey<Property> propertyTag)
 	{
-		if(stack.isEmpty() || propertyTag == null)
+		if(stack == null || stack.isEmpty() || propertyTag == null)
 			return false;
 
 		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().    getData(stack);
@@ -83,7 +83,7 @@ public class InfusedPropertiesHelper
 
 	public static boolean hasProperties(ItemStack stack, List<Holder<Property>> properties, boolean matchesAll)
 	{
-		if(stack.isEmpty())
+		if(stack == null || stack.isEmpty())
 			return false;
 
 		for (Holder<Property> property : properties)
@@ -97,32 +97,32 @@ public class InfusedPropertiesHelper
 
 	public static boolean hasInfusedProperty(ItemStack stack, Holder<Property> property)
 	{
-		return !stack.isEmpty() && stack.has(INFUSED_PROPERTIES.get()) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(property);
+		return stack != null &&  !stack.isEmpty() && stack.has(INFUSED_PROPERTIES.get()) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(property);
 	}
 
 	public static boolean hasInnateProperty(ItemStack stack, Holder<Property> property)
 	{
-		return !stack.isEmpty() && stack.has(INNATE_PROPERTIES.get()) && stack.get(INNATE_PROPERTIES.get()).hasProperty(property);
+		return stack != null &&  !stack.isEmpty() && stack.has(INNATE_PROPERTIES.get()) && stack.get(INNATE_PROPERTIES.get()).hasProperty(property);
 	}
 
 	public static boolean hasDormantProperty(ItemStack stack, Holder<Property> property)
 	{
-		return !stack.isEmpty() && AlchemancyProperties.getDormantProperties(stack).contains(property);
+		return stack != null &&  !stack.isEmpty() && AlchemancyProperties.getDormantProperties(stack).contains(property);
 	}
 
 	public static boolean hasInfusedProperty(ItemStack stack, TagKey<Property> propertyTag)
 	{
-		return !stack.isEmpty() && stack.has(INFUSED_PROPERTIES.get()) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(propertyTag);
+		return stack != null &&  !stack.isEmpty() && stack.has(INFUSED_PROPERTIES.get()) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(propertyTag);
 	}
 
 	public static boolean hasInnateProperty(ItemStack stack, TagKey<Property> propertyTag)
 	{
-		return !stack.isEmpty() && stack.has(INNATE_PROPERTIES.get()) && stack.get(INNATE_PROPERTIES.get()).hasProperty(propertyTag);
+		return stack != null && !stack.isEmpty() && stack.has(INNATE_PROPERTIES.get()) && stack.get(INNATE_PROPERTIES.get()).hasProperty(propertyTag);
 	}
 
 	public static boolean hasDormantProperty(ItemStack stack, TagKey<Property> propertyTag)
 	{
-		return !stack.isEmpty() && AlchemancyProperties.getDormantProperties(stack).stream().anyMatch(property -> property.is(propertyTag));
+		return stack != null &&  !stack.isEmpty() && AlchemancyProperties.getDormantProperties(stack).stream().anyMatch(property -> property.is(propertyTag));
 	}
 
 	public static boolean modifyInfusions(ItemStack stack, Function<InfusedPropertiesComponent.Mutable, Boolean> consumer)
@@ -135,7 +135,7 @@ public class InfusedPropertiesHelper
 
 	public static void forEachProperty(ItemStack stack, Consumer<Holder<Property>> consumer)
 	{
-		if(stack.isEmpty())
+		if(stack == null || stack.isEmpty())
 			return;
 
 		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().getData(stack);
@@ -158,6 +158,9 @@ public class InfusedPropertiesHelper
 
 	public static void forEachInnateProperty(ItemStack stack, Consumer<Holder<Property>> consumer)
 	{
+		if(stack == null || stack.isEmpty())
+			return;
+
 		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().getData(stack);
 
 		if (stack.has(INNATE_PROPERTIES.get()))
