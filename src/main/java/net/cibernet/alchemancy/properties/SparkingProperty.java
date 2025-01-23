@@ -42,7 +42,7 @@ public class SparkingProperty extends Property
 	@Override
 	public void onFall(LivingEntity entity, ItemStack stack, EquipmentSlot slot, LivingFallEvent event)
 	{
-		if(event.getDistance() > 3f)
+		if((slot == EquipmentSlot.FEET || slot == EquipmentSlot.BODY) && event.getDistance() > 3f)
 			ignite(entity.level(), entity.blockPosition(), Direction.DOWN);
 	}
 

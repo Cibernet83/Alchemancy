@@ -43,7 +43,8 @@ public class HeavyProperty extends Property
 	@Override
 	public void onFall(LivingEntity entity, ItemStack stack, EquipmentSlot slot, LivingFallEvent event)
 	{
-		entity.playSound(AlchemancySoundEvents.HEAVY.value(), Mth.lerp(entity.fallDistance / 23f, 0.1f, 1f), Mth.lerp(event.getDistance() / entity.getMaxFallDistance(), 1f, 0.5f));
+		if(slot == EquipmentSlot.FEET || slot == EquipmentSlot.BODY)
+			entity.playSound(AlchemancySoundEvents.HEAVY.value(), Mth.lerp(entity.fallDistance / 23f, 0.1f, 1f), Mth.lerp(event.getDistance() / entity.getMaxFallDistance(), 1f, 0.5f));
 	}
 
 	@Override
