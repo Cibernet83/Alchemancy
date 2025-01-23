@@ -44,7 +44,7 @@ public class MobTemptHandler
 	{
 		for (Map.Entry<Holder<Property>, Predicate<Entity>> entry : PROPERTY_MAP.entrySet())
 		{
-			if(InfusedPropertiesHelper.hasInfusedProperty(stack, entry.getKey()) && entry.getValue().test(entity))
+			if(!entry.getKey().is(AlchemancyTags.Properties.DISABLED) && InfusedPropertiesHelper.hasInfusedProperty(stack, entry.getKey()) && entry.getValue().test(entity))
 			{
 				action.perform();
 				return;

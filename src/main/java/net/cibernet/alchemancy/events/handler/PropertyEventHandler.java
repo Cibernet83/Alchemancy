@@ -399,6 +399,8 @@ public class PropertyEventHandler
 				burnMultiplier *= durability;
 			}
 
+			Player
+
 			event.setBurnTime((int) (Math.max(burnTime, 300) * burnMultiplier));
 		}
 	}
@@ -432,9 +434,9 @@ public class PropertyEventHandler
 	{
 		if(event.getEntity() instanceof PathfinderMob mob)
 		{
-			if(mob.getType().is(AlchemancyTags.EntityTypes.SCARED_BY_SCARY))
+			if(!AlchemancyProperties.SCARY.is(AlchemancyTags.Properties.DISABLED) && mob.getType().is(AlchemancyTags.EntityTypes.SCARED_BY_SCARY))
 				mob.goalSelector.addGoal(0, new ScareGoal(mob, 2, AlchemancyProperties.SCARY));
-			if(mob.getType().is(AlchemancyTags.EntityTypes.AGGROED_BY_SEEDED) && mob.getAttributes().hasAttribute(Attributes.ATTACK_DAMAGE))
+			if(!AlchemancyProperties.SEEDED.is(AlchemancyTags.Properties.DISABLED) && mob.getType().is(AlchemancyTags.EntityTypes.AGGROED_BY_SEEDED) && mob.getAttributes().hasAttribute(Attributes.ATTACK_DAMAGE))
 			{
 				mob.goalSelector.addGoal(3, new MeleeAttackGoal(mob, 1.6, true));
 				mob.targetSelector.addGoal(0, targetLivingHoldingProperty(mob, AlchemancyProperties.SEEDED, EquipmentSlotGroup.ARMOR));
