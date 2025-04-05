@@ -3,6 +3,7 @@ package net.cibernet.alchemancy.properties;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ExperienceOrb;
@@ -10,16 +11,17 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 
 public class ExperiencedProperty extends Property
 {
 
 	@Override
-	public int modifyDurabilityConsumed(ItemStack stack, LivingEntity user, int originalAmount, int resultingAmount)
+	public int modifyDurabilityConsumed(ItemStack stack, ServerLevel level, @Nullable LivingEntity user, int originalAmount, int resultingAmount, RandomSource random)
 	{
-		if(resultingAmount > 0 && user.getRandom().nextFloat() < 0.3f)
-			createXp(stack, user.level(), user.position(), Math.max(1, user.getRandom().nextInt(resultingAmount)));
-		return super.modifyDurabilityConsumed(stack, user, originalAmount, resultingAmount);
+		if(user != null && resultingAmount > 0 && random.nextFloat() < 0.3f)
+			createXp(stack, level, user.position(), Math.max(1, user.getRandom().nextInt(resultingAmount)));
+		return resultingAmount;
 	}
 
 	@Override

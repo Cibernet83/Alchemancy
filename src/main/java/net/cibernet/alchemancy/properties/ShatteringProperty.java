@@ -11,6 +11,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -20,10 +21,10 @@ public class ShatteringProperty extends Property implements IDataHolder<Boolean>
 	private static final float RADIUS = 3;
 
 	@Override
-	public int modifyDurabilityConsumed(ItemStack stack, LivingEntity user, int originalAmount, int resultingAmount)
+	public int modifyDurabilityConsumed(ItemStack stack, ServerLevel level, @Nullable LivingEntity user, int originalAmount, int resultingAmount, RandomSource random)
 	{
-		if(stack.getMaxDamage() <= stack.getDamageValue() + resultingAmount)
-			shatter(user.level(), user, stack);
+		if(user != null && stack.getMaxDamage() <= stack.getDamageValue() + resultingAmount)
+			shatter(level, user, stack);
 
 		return resultingAmount;
 	}

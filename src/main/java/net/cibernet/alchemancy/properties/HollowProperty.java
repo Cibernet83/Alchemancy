@@ -13,6 +13,7 @@ import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -365,9 +366,9 @@ public class HollowProperty extends Property implements IDataHolder<ItemStack>
 	}
 
 	@Override
-	public int modifyDurabilityConsumed(ItemStack stack, LivingEntity user, int originalAmount, int resultingAmount)
+	public int modifyDurabilityConsumed(ItemStack stack, ServerLevel level, @Nullable LivingEntity user, int originalAmount, int resultingAmount, RandomSource random)
 	{
-		if(stack.getMaxDamage() <= stack.getDamageValue() + resultingAmount)
+		if(user != null && stack.getMaxDamage() <= stack.getDamageValue() + resultingAmount)
 			dropItems(stack, user);
 
 		return resultingAmount;
