@@ -49,7 +49,7 @@ public interface ItemStackExtensionMixin
 	@WrapOperation(method = "canElytraFly", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/Item;canElytraFly(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/LivingEntity;)Z"))
 	default boolean canElytryFly(Item instance, ItemStack stack, LivingEntity living, Operation<Boolean> original)
 	{
-		return (InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.GLIDER) && ElytraItem.isFlyEnabled(stack)) || original.call(instance, stack, living);
+		return (InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.GLIDER) && (!stack.isDamageableItem() || ElytraItem.isFlyEnabled(stack))) || original.call(instance, stack, living);
 	}
 
 	@WrapOperation(method = "elytraFlightTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/Item;elytraFlightTick(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/entity/LivingEntity;I)Z"))
