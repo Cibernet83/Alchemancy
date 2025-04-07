@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.properties.*;
 import net.cibernet.alchemancy.properties.data.modifiers.PropertyModifierType;
+import net.cibernet.alchemancy.properties.entangled.*;
 import net.cibernet.alchemancy.properties.soulbind.*;
 import net.cibernet.alchemancy.properties.special.*;
 import net.minecraft.core.Holder;
@@ -256,11 +257,11 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, Property> PARADOXICAL = REGISTRY.register("paradoxical", () -> Property.simpleInterpolated(true, 0.2f, 0xFFFF0000, 0xFFFFFF00, 0xFF00FF00, 0xFF0000FF, 0xFFA100FF));
 	public static final DeferredHolder<Property, Property> LIMIT_BREAK = REGISTRY.register("limit_break", () -> IncreaseInfuseSlotsProperty.simple(1, (style) -> style.withBold(true), IncreaseInfuseSlotsProperty::limitBreakColors, IncreaseInfuseSlotsProperty::limitBreakCreativeTab));
 
-	public static final DeferredHolder<Property, AbstractEntangledProperty> ENTANGLED = REGISTRY.register("entangled", ActivationEntangledProperty::new);
-	public static final DeferredHolder<Property, AbstractEntangledProperty> USE_ENTANGLED = REGISTRY.register("use_entangled", InteractEntangledProperty::new);
-	public static final DeferredHolder<Property, AbstractEntangledProperty> CROUCH_ENTANGLED = REGISTRY.register("crouch_entangled", CrouchEntangledProperty::new);
-	public static final DeferredHolder<Property, AbstractEntangledProperty> JUMP_ENTANGLED = REGISTRY.register("jump_entangled", JumpEntangledProperty::new);
-	public static final DeferredHolder<Property, AbstractEntangledProperty> SPRINT_ENTANGLED = REGISTRY.register("sprint_entangled", SprintEntangledProperty::new);
+	public static final DeferredHolder<Property, ActivationEntangledProperty> ENTANGLED = REGISTRY.register("entangled", ActivationEntangledProperty::new);
+	public static final DeferredHolder<Property, InteractEntangledProperty> USE_ENTANGLED = REGISTRY.register("use_entangled", InteractEntangledProperty::new);
+	public static final DeferredHolder<Property, CrouchEntangledProperty> CROUCH_ENTANGLED = REGISTRY.register("crouch_entangled", CrouchEntangledProperty::new);
+	public static final DeferredHolder<Property, JumpEntangledProperty> JUMP_ENTANGLED = REGISTRY.register("jump_entangled", JumpEntangledProperty::new);
+	public static final DeferredHolder<Property, SprintEntangledProperty> SPRINT_ENTANGLED = REGISTRY.register("sprint_entangled", SprintEntangledProperty::new);
 
 	public static final DeferredHolder<Property, Property> DIRTY = REGISTRY.register("dirty", () -> Property.simple(0x96592E));
 	public static final DeferredHolder<Property, Property> AWKWARD = REGISTRY.register("awkward", () -> Property.simple(0xA5266C));
@@ -283,6 +284,10 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, WaywardWarpProperty> WAYWARD_WARP = REGISTRY.register("wayward_warp", WaywardWarpProperty::new);
 	public static final DeferredHolder<Property, RocketPoweredProperty> ROCKET_POWERED = REGISTRY.register("rocket_powered", RocketPoweredProperty::new);
 	public static final DeferredHolder<Property, BindingProperty> BINDING = REGISTRY.register("binding", BindingProperty::new);
+	public static final DeferredHolder<Property, RemoveInfusionsProperty> INFUSION_CLEANSE = REGISTRY.register("infusion_cleanse", RemoveInfusionsProperty::new);
+	public static final DeferredHolder<Property, FlameWakerProperty> FLAME_STEP = REGISTRY.register("flame_step", FlameWakerProperty::new);
+	public static final DeferredHolder<Property, FlameEmperorProperty> FLAME_EMPEROR = REGISTRY.register("flame_emperor", FlameEmperorProperty::new);
+	public static final DeferredHolder<Property, ArmoredBastionProperty> ARMORED_BASTION = REGISTRY.register("armored_bastion", ArmoredBastionProperty::new);
 
 	//TODO
 	//Tethered: On Right Click leashes the user to the targeted entity or fence block. - Leash

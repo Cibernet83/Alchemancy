@@ -331,11 +331,21 @@
   "property.alchemancy.death_ward": "Death Ward",
   "property.alchemancy.friendly": "Friendly",
 
+  "property.alchemancy.flame_step": "Flame Step",
+  "property.alchemancy.flame_emperor": "Flame Emperor",
+  "property.alchemancy.wave_rider": "Wave Rider",
+  "property.alchemancy.armored_bastion": "Armored Bastion",
+
   "property.alchemancy.rocket_powered": "Rocket-Powered",
   "property.alchemancy.wayward_warp": "Wayward Warp",
   "property.alchemancy.wayward_warp.dimension_missmatch": "The destination appears to be in another dimension...",
   "property.alchemancy.wayward_warp.missing_destination": "The destination appears to be missing...",
   "property.alchemancy.wayward_warp.obstructed_destination": "The destination appears to be obstructed...",
+
+  "property.alchemancy.rotating": "Rotating",
+  "property.alchemancy.infusion_cleanse": "Infusion Cleanse",
+  "property.alchemancy.binding": "Binding",
+  "property.alchemancy.unmovable": "Unmovable",
 
   "property.alchemancy.entangled": "Entangled",
   "property.alchemancy.jump_entangled": "Jump-Entangled",
