@@ -256,6 +256,12 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, Property> PARADOXICAL = REGISTRY.register("paradoxical", () -> Property.simpleInterpolated(true, 0.2f, 0xFFFF0000, 0xFFFFFF00, 0xFF00FF00, 0xFF0000FF, 0xFFA100FF));
 	public static final DeferredHolder<Property, Property> LIMIT_BREAK = REGISTRY.register("limit_break", () -> IncreaseInfuseSlotsProperty.simple(1, (style) -> style.withBold(true), IncreaseInfuseSlotsProperty::limitBreakColors, IncreaseInfuseSlotsProperty::limitBreakCreativeTab));
 
+	public static final DeferredHolder<Property, AbstractEntangledProperty> ENTANGLED = REGISTRY.register("entangled", ActivationEntangledProperty::new);
+	public static final DeferredHolder<Property, AbstractEntangledProperty> USE_ENTANGLED = REGISTRY.register("use_entangled", InteractEntangledProperty::new);
+	public static final DeferredHolder<Property, AbstractEntangledProperty> CROUCH_ENTANGLED = REGISTRY.register("crouch_entangled", CrouchEntangledProperty::new);
+	public static final DeferredHolder<Property, AbstractEntangledProperty> JUMP_ENTANGLED = REGISTRY.register("jump_entangled", JumpEntangledProperty::new);
+	public static final DeferredHolder<Property, AbstractEntangledProperty> SPRINT_ENTANGLED = REGISTRY.register("sprint_entangled", SprintEntangledProperty::new);
+
 	public static final DeferredHolder<Property, Property> DIRTY = REGISTRY.register("dirty", () -> Property.simple(0x96592E));
 	public static final DeferredHolder<Property, Property> AWKWARD = REGISTRY.register("awkward", () -> Property.simple(0xA5266C));
 	public static final DeferredHolder<Property, Property> WARPED = REGISTRY.register("warped", () -> Property.simple(0x14B485));

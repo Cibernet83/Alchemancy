@@ -337,6 +337,12 @@
   "property.alchemancy.wayward_warp.missing_destination": "The destination appears to be missing...",
   "property.alchemancy.wayward_warp.obstructed_destination": "The destination appears to be obstructed...",
 
+  "property.alchemancy.entangled": "Entangled",
+  "property.alchemancy.jump_entangled": "Jump-Entangled",
+  "property.alchemancy.crouch_entangled": "Crouch-Entangled",
+  "property.alchemancy.sprint_entangled": "Sprint-Entangled",
+  "property.alchemancy.use_entangled": "Use-Entangled",
+
   "death.attack.alchemancy.shock": "%s had a shock to their system",
   "death.attack.alchemancy.shock.player": "%1$s was electrocuted by %2$s",
   "death.attack.alchemancy.shock.item": "%1$s was electrocuted by %2$s using %3$s",
