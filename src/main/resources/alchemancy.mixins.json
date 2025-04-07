@@ -10,6 +10,7 @@
     "BlockMixin",
     "BlockStateBaseMixin",
     "BlockStateExtensionMixin",
+    "ContainerMenuMixin",
     "DataComponentHolderMixin",
     "DispenserBlockMixin",
     "EntityMixin",
@@ -36,6 +37,7 @@
     "client.RenderTypeHelperMixin"
   ],
   "client": [
+    "client.CreativeScreenMixin",
     "client.CustomHeadLayerMixin",
     "client.ElytraLayerMixin",
     "client.HumanoidArmorLayerMixin",

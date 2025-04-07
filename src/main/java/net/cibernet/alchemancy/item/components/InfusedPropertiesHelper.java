@@ -217,11 +217,16 @@ public class InfusedPropertiesHelper
 			while(true)
 			{
 				truncateProperties(stack, getInfusionSlots(stack));
-				List<Holder<Property>> infusedProperties = getInfusedProperties(stack);
-				if(getInfusionSlots(stack) >= infusedProperties.size() - infusedProperties.stream().filter(propertyHolder -> propertyHolder.is(AlchemancyTags.Properties.SLOTLESS)).count())
+				if(getRemainingInfusionSlots(stack) >= 0)
 					return stack;
 			}
 		return stack;
+	}
+
+	public static int getRemainingInfusionSlots(ItemStack stack)
+	{
+		List<Holder<Property>> infusedProperties = getInfusedProperties(stack);
+		return getInfusionSlots(stack) - (infusedProperties.size() - (int) infusedProperties.stream().filter(propertyHolder -> propertyHolder.is(AlchemancyTags.Properties.SLOTLESS)).count());
 	}
 
 	public static ItemStack truncateProperties(ItemStack stack, int limit)
