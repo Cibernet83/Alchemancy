@@ -105,7 +105,12 @@ public class InfusedItemProjectile extends ThrowableItemProjectile
 				InfusedPropertiesHelper.forEachProperty(copyStack, propertyHolder -> propertyHolder.value().onEntityItemDestroyed(copyStack, this, damageSources().generic()));
 				this.level().broadcastEntityEvent(this, (byte) 3);
 			}
-			else level().addFreshEntity(new ItemEntity(level(), position().x, position().y, position().z, stack));
+			else
+			{
+				ItemEntity itemEntity = new ItemEntity(level(), position().x, position().y, position().z, stack);
+				itemEntity.setThrower(getOwner());
+				level().addFreshEntity(itemEntity);
+			}
 
 			this.discard();
 		}
