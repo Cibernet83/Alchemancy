@@ -53,6 +53,7 @@ public class AlchemancyCreativeTabs
 				output.accept(DREAMSTEEL_PICKAXE.get());
 				output.accept(DREAMSTEEL_AXE.get());
 				output.accept(DREAMSTEEL_HOE.get());
+				output.accept(DREAMSTEEL_BOW.get());
 
 				output.accept(BLANK_PEARL.get());
 				output.accept(REVEALING_PEARL.get());
@@ -96,6 +97,7 @@ public class AlchemancyCreativeTabs
 		{
 			event.insertAfter(Items.GOLDEN_SWORD.getDefaultInstance(), LEAD_SWORD.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 			event.insertAfter(Items.NETHERITE_SWORD.getDefaultInstance(), DREAMSTEEL_SWORD.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+			event.insertAfter(Items.BOW.getDefaultInstance(), DREAMSTEEL_BOW.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 
 			event.insertAfter(Items.MACE.getDefaultInstance(), ROCKET_POWERED_HAMMER.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 
