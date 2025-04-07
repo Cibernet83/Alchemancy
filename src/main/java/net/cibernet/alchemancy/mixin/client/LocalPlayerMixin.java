@@ -24,7 +24,7 @@ public class LocalPlayerMixin
 	{
 		ItemStack selectedItem = ((LocalPlayer)(Object)this).getInventory().getSelected();
 		if(InfusedPropertiesHelper.hasInfusedProperty(selectedItem, AlchemancyProperties.STICKY) ||
-				InfusedPropertiesHelper.hasInfusedProperty(selectedItem, AlchemancyProperties.QUANTUM_BIND))
+				InfusedPropertiesHelper.hasInfusedProperty(selectedItem, AlchemancyProperties.UNMOVABLE))
 			cir.setReturnValue(false);
 	}
 

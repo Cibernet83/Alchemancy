@@ -271,22 +271,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, BlockVacuumProperty> BLOCK_VACUUM = REGISTRY.register("block_vacuum", BlockVacuumProperty::new);
 	public static final DeferredHolder<Property, BigSuckProperty> CEASELESS_VOID = REGISTRY.register("ceaseless_void", BigSuckProperty::new);
 	public static final DeferredHolder<Property, VoidtouchProperty> VOIDTOUCH = REGISTRY.register("voidtouch", VoidtouchProperty::new);
-	public static final DeferredHolder<Property, Property> QUANTUM_BIND = REGISTRY.register("quantum_bind", () -> new Property() {
-		@Override
-		public int getColor(ItemStack stack) {
-			return 0xE8FF00;
-		}
-
-		@Override
-		public Collection<ItemStack> populateCreativeTab(DeferredItem<Item> capsuleItem, Holder<Property> holder) {
-			return List.of();
-		}
-
-		@Override
-		public boolean hasJournalEntry() {
-			return false;
-		}
-	});
+	public static final DeferredHolder<Property, Property> UNMOVABLE = REGISTRY.register("unmovable", UnmovableProperty::new);
 	public static final DeferredHolder<Property, ItemMagnetProperty> ITEM_MAGNET = REGISTRY.register("item_magnet", ItemMagnetProperty::new);
 
 	//Innate Properties
@@ -297,6 +282,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, FriendlyProperty> FRIENDLY = REGISTRY.register("friendly", FriendlyProperty::new);
 	public static final DeferredHolder<Property, WaywardWarpProperty> WAYWARD_WARP = REGISTRY.register("wayward_warp", WaywardWarpProperty::new);
 	public static final DeferredHolder<Property, RocketPoweredProperty> ROCKET_POWERED = REGISTRY.register("rocket_powered", RocketPoweredProperty::new);
+	public static final DeferredHolder<Property, BindingProperty> BINDING = REGISTRY.register("binding", BindingProperty::new);
 
 	//TODO
 	//Tethered: On Right Click leashes the user to the targeted entity or fence block. - Leash

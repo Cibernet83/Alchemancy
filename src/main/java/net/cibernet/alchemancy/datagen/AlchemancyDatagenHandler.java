@@ -4,7 +4,6 @@ import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.advancements.criterion.DiscoverPropertyTrigger;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
-import net.cibernet.alchemancy.registries.AlchemancyCreativeTabs;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.advancements.*;
@@ -78,7 +77,7 @@ public class AlchemancyDatagenHandler
 			AlchemancyProperties.AUXILIARY,
 			AlchemancyProperties.RANDOM,
 			AlchemancyProperties.ITEM_MAGNET,
-			AlchemancyProperties.QUANTUM_BIND,
+			AlchemancyProperties.UNMOVABLE,
 			AlchemancyProperties.BLOCK_VACUUM,
 			AlchemancyProperties.VOIDTOUCH,
 			AlchemancyProperties.CEASELESS_VOID
