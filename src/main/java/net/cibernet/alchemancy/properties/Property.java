@@ -23,6 +23,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.RegistryFixedCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
@@ -287,9 +288,14 @@ public abstract class Property
 	public void modifyKnockBackApplied(LivingEntity user, ItemStack weapon, LivingEntity target, LivingKnockBackEvent event) {
 	}
 
-	public int modifyDurabilityConsumed(ItemStack stack, LivingEntity user, int originalAmount, int resultingAmount) {
+	public int modifyDurabilityConsumed(ItemStack stack, ServerLevel level, @Nullable LivingEntity user, int originalAmount, int resultingAmount, RandomSource random) {
 		return resultingAmount;
 	}
+
+	public final int modifyDurabilityConsumed(ItemStack stack, ServerLevel level, @Nullable LivingEntity user, int originalAmount, int resultingAmount) {
+		return modifyDurabilityConsumed(stack, level, user, originalAmount, resultingAmount, user == null ? level.getRandom() : user.getRandom());
+	}
+
 
 	public TriState isItemInTag(ItemStack stack, TagKey<Item> tagKey)
 	{

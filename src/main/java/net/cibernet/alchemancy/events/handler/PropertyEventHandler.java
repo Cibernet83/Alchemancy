@@ -399,8 +399,6 @@ public class PropertyEventHandler
 				burnMultiplier *= durability;
 			}
 
-			Player
-
 			event.setBurnTime((int) (Math.max(burnTime, 300) * burnMultiplier));
 		}
 	}

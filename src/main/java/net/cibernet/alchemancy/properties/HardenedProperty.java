@@ -3,6 +3,8 @@ package net.cibernet.alchemancy.properties;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.food.FoodProperties;
@@ -14,10 +16,10 @@ import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 public class HardenedProperty extends Property
 {
 	@Override
-	public int modifyDurabilityConsumed(ItemStack stack, LivingEntity user, int originalAmount, int resultingAmount)
+	public int modifyDurabilityConsumed(ItemStack stack, ServerLevel level, LivingEntity user, int originalAmount, int resultingAmount, RandomSource random)
 	{
 		if(resultingAmount == 1)
-			return user.getRandom().nextFloat() < 0.1f ? 0 : resultingAmount;
+			return random.nextFloat() < 0.1f ? 0 : resultingAmount;
 		else return resultingAmount / 2;
 	}
 

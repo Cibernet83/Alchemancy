@@ -53,7 +53,7 @@ public abstract class ItemStackMixin
 		ItemStack stack = alchemancy$self();
 		int originalResult = newDamageAmount.get();
 		InfusedPropertiesHelper.forEachProperty(stack, propertyHolder ->
-				newDamageAmount.set(propertyHolder.value().modifyDurabilityConsumed(stack, user, originalResult, newDamageAmount.get())));
+				newDamageAmount.set(propertyHolder.value().modifyDurabilityConsumed(stack, level, user, originalResult, newDamageAmount.get())));
 	}
 
 	@WrapOperation(method = "is(Lnet/minecraft/tags/TagKey;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/Holder$Reference;is(Lnet/minecraft/tags/TagKey;)Z"))
