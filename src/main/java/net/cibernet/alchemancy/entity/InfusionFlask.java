@@ -84,6 +84,10 @@ public class InfusionFlask extends ThrowableItemProjectile implements ItemSuppli
 	}
 
 	private ItemStack infuseItem(ItemStack itemStack, List<Holder<Property>> infusions) {
+
+		if(itemStack.is(AlchemancyTags.Items.IMMUNE_TO_INFUSIONS))
+			return itemStack;
+
 		boolean perform = false;
 		var grid = new ForgeRecipeGrid(itemStack);
 
