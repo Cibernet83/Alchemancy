@@ -73,6 +73,7 @@
   "item.alchemancy.blank_pearl": "Blank Pearl",
   "item.alchemancy.revealing_pearl": "Revealing Pearl",
   "item.alchemancy.paradox_pearl": "Paradox Pearl",
+  "item.alchemancy.void_pearl": "Void Pearl",
 
   "item.alchemancy.microscopic_lens": "Microscopic Lens",
   "item.alchemancy.macroscopic_lens": "Macroscopic Lens",
@@ -322,6 +323,7 @@
   "property.alchemancy.dirty": "Dirty",
   "property.alchemancy.random": "Random",
 
+  "property.alchemancy.voidborn": "Voidborn",
   "property.alchemancy.block_vacuum": "Vacuuming",
   "property.alchemancy.voidtouch": "Voidtouch",
   "property.alchemancy.ceaseless_void": "Ceaseless Void",

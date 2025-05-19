@@ -85,6 +85,7 @@ public class AlchemancyItems
 	public static final DeferredItem<Item> BLANK_PEARL = REGISTRY.registerSimpleItem("blank_pearl");
 	public static final DeferredItem<Item> REVEALING_PEARL = REGISTRY.registerSimpleItem("revealing_pearl");
 	public static final DeferredItem<Item> PARADOX_PEARL = REGISTRY.registerSimpleItem("paradox_pearl");
+	public static final DeferredItem<InnatePropertyItem> VOID_PEARL = REGISTRY.register("void_pearl", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.VOIDBORN).build());
 	public static final DeferredItem<Item> GLOWING_ORB = REGISTRY.register("glowing_orb", () -> new BlockItem(AlchemancyBlocks.GLOWING_ORB.get(), new Item.Properties()));
 
 	public static final DeferredItem<Item> MICROSCOPIC_LENS = REGISTRY.registerSimpleItem("microscopic_lens");

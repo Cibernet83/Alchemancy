@@ -59,6 +59,7 @@ public class AlchemancyCreativeTabs
 				output.accept(BLANK_PEARL.get());
 				output.accept(REVEALING_PEARL.get());
 				output.accept(PARADOX_PEARL.get());
+				output.accept(VOID_PEARL.get());
 
 				output.accept(MICROSCOPIC_LENS.get());
 				output.accept(MACROSCOPIC_LENS.get());

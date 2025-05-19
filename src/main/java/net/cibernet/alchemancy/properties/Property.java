@@ -510,6 +510,10 @@ public abstract class Property
 
 	}
 
+	public boolean onEntityItemBelowWorld(ItemStack stack, ItemEntity itemEntity) {
+		return false;
+	}
+
 	public static class Priority
 	{
 		public static final int LOWEST = Integer.MAX_VALUE;

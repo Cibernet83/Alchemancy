@@ -1,12 +1,16 @@
 package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.Alchemancy;
+import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.properties.voidborn.VoidbornProperty;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.cibernet.alchemancy.util.ClientUtil;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.dedicated.DedicatedServer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
@@ -15,7 +19,10 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.ItemSupplier;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -102,5 +109,19 @@ public class DepthDwellerProperty extends Property
 			else return FastColor.ARGB32.lerp(scale, 0x646464, 0x2F2F37);
 		}
 		else return 0x646464;
+	}
+
+	@Override
+	public boolean onEntityItemBelowWorld(ItemStack stack, ItemEntity itemEntity) {
+		if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.UNDYING)) {
+			InfusedPropertiesHelper.removeProperty(stack, AlchemancyProperties.UNDYING);
+			InfusedPropertiesHelper.removeProperty(stack, asHolder());
+			itemEntity.level().playSound(null, itemEntity.position().x, itemEntity.position().y, itemEntity.position().z, SoundEvents.TOTEM_USE, SoundSource.BLOCKS, 0.65f, 0.5f);
+
+			InfusedPropertiesHelper.addProperty(stack, AlchemancyProperties.VOIDBORN);
+			itemEntity.setItem(ForgeRecipeGrid.resolveInteractions(stack, itemEntity.level()));
+			return true;
+		}
+		return false;
 	}
 }

@@ -7,6 +7,7 @@ import net.cibernet.alchemancy.properties.data.modifiers.PropertyModifierType;
 import net.cibernet.alchemancy.properties.entangled.*;
 import net.cibernet.alchemancy.properties.soulbind.*;
 import net.cibernet.alchemancy.properties.special.*;
+import net.cibernet.alchemancy.properties.voidborn.VoidbornProperty;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -208,6 +209,11 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, SpiritBondProperty> SPIRIT_BOND = REGISTRY.register("spirit_bond", SpiritBondProperty::new);
 	public static final DeferredHolder<Property, PhasingProperty> PHASING = REGISTRY.register("phasing", PhasingProperty::new);
 
+	//Voidborn
+	public static final DeferredHolder<Property, VoidbornProperty> VOIDBORN = REGISTRY.register("voidborn", VoidbornProperty::new);
+	public static final DeferredHolder<Property, BigSuckProperty> CEASELESS_VOID = REGISTRY.register("ceaseless_void", BigSuckProperty::new);
+	public static final DeferredHolder<Property, VoidtouchProperty> VOIDTOUCH = REGISTRY.register("voidtouch", VoidtouchProperty::new);
+
 	//Misc
 	public static final DeferredHolder<Property, NonlethalProperty> NONLETHAL = REGISTRY.register("nonlethal", NonlethalProperty::new);
 	public static final DeferredHolder<Property, MendingProperty> MENDING = REGISTRY.register("mending", MendingProperty::new);
@@ -251,7 +257,6 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, TintedProperty> TINTED = REGISTRY.register("tinted", TintedProperty::new);
 	public static final DeferredHolder<Property, FlattenedProperty> FLATTENED = REGISTRY.register("flattened", FlattenedProperty::new);
 
-
 	//Special
 	public static final DeferredHolder<Property, Property> AWAKENED = REGISTRY.register("awakened", () -> Property.simpleInterpolated(false, 0.5f, 0xFF91EAE3, 0xFF91EAE3, 0xFFEDF2F8, 0xFFEBBBDB, 0xFFEBBBDB, 0xFFEDF2F8));
 	public static final DeferredHolder<Property, Property> PARADOXICAL = REGISTRY.register("paradoxical", () -> Property.simpleInterpolated(true, 0.2f, 0xFFFF0000, 0xFFFFFF00, 0xFF00FF00, 0xFF0000FF, 0xFFA100FF));
@@ -270,8 +275,6 @@ public class AlchemancyProperties
 	//Stuff to goof around
 	public static final DeferredHolder<Property, RandomEffectProperty> RANDOM = REGISTRY.register("random", RandomEffectProperty::new);
 	public static final DeferredHolder<Property, BlockVacuumProperty> BLOCK_VACUUM = REGISTRY.register("block_vacuum", BlockVacuumProperty::new);
-	public static final DeferredHolder<Property, BigSuckProperty> CEASELESS_VOID = REGISTRY.register("ceaseless_void", BigSuckProperty::new);
-	public static final DeferredHolder<Property, VoidtouchProperty> VOIDTOUCH = REGISTRY.register("voidtouch", VoidtouchProperty::new);
 	public static final DeferredHolder<Property, Property> UNMOVABLE = REGISTRY.register("unmovable", UnmovableProperty::new);
 	public static final DeferredHolder<Property, ItemMagnetProperty> ITEM_MAGNET = REGISTRY.register("item_magnet", ItemMagnetProperty::new);
 

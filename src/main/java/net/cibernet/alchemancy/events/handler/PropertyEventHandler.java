@@ -15,6 +15,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
@@ -56,8 +57,19 @@ public class PropertyEventHandler
 	@SubscribeEvent
 	public static void onEntityInvulnerableCheck(EntityInvulnerabilityCheckEvent event)
 	{
-		if(event.getSource().is(DamageTypeTags.IS_EXPLOSION) && event.getEntity() instanceof ItemEntity itemEntity && InfusedPropertiesHelper.hasProperty(itemEntity.getItem(), AlchemancyProperties.BLAST_RESISTANT))
-			event.setInvulnerable(true);
+		ItemStack stack = ItemStack.EMPTY;
+		if(event.getEntity() instanceof ItemEntity itemEntity)
+			stack = itemEntity.getItem();
+		else if(event.getEntity() instanceof ItemSupplier itemSupplier)
+			stack = itemSupplier.getItem();
+
+		if(!stack.isEmpty())
+		{
+			if (event.getSource().is(DamageTypeTags.IS_EXPLOSION) && InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.BLAST_RESISTANT))
+				event.setInvulnerable(true);
+			if(event.getSource().is(DamageTypes.FELL_OUT_OF_WORLD) && InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.VOIDBORN))
+				event.setInvulnerable(true);
+		}
 	}
 
 	@SubscribeEvent
