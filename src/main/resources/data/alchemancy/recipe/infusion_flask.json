@@ -1,0 +1,23 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:shattering",
+    "alchemancy:awakened"
+  ],
+
+  "infusables": [
+    {
+      "item": "alchemancy:blank_pearl"
+    }
+  ],
+
+  "catalyst": {
+    "item": "alchemancy:alchemical_extract"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:infusion_flask"
+  }
+}

@@ -23,8 +23,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import static net.cibernet.alchemancy.registries.AlchemancyItems.Components.INFUSED_PROPERTIES;
-import static net.cibernet.alchemancy.registries.AlchemancyItems.Components.INNATE_PROPERTIES;
+import static net.cibernet.alchemancy.registries.AlchemancyItems.Components.*;
 
 public class InfusedPropertiesHelper
 {
@@ -57,11 +56,10 @@ public class InfusedPropertiesHelper
 
 	public static boolean hasProperty(ItemStack stack, Holder<Property> property)
 	{
-		if(stack == null || stack.isEmpty() || property == null || property.is(AlchemancyTags.Properties.DISABLED))
+		if(stack == null || stack.isEmpty() || stack.is(AlchemancyTags.Items.DISABLES_INFUSION_ABILITIES) || property == null || property.is(AlchemancyTags.Properties.DISABLED))
 			return false;
 
 		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().getData(stack);
-
 
 
 		return ((toggled || !hasInfusedProperty(stack, AlchemancyProperties.TOGGLEABLE)) && hasInfusedProperty(stack, property))
@@ -74,7 +72,7 @@ public class InfusedPropertiesHelper
 		if(stack == null || stack.isEmpty() || propertyTag == null)
 			return false;
 
-		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().    getData(stack);
+		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().getData(stack);
 
 		return ((toggled || !hasInfusedProperty(stack, AlchemancyProperties.TOGGLEABLE)) && hasInfusedProperty(stack, propertyTag))
 			|| ((toggled || !hasInnateProperty(stack, AlchemancyProperties.TOGGLEABLE)) && hasInnateProperty(stack, propertyTag))
@@ -135,7 +133,7 @@ public class InfusedPropertiesHelper
 
 	public static void forEachProperty(ItemStack stack, Consumer<Holder<Property>> consumer)
 	{
-		if(stack == null || stack.isEmpty())
+		if(stack == null || stack.isEmpty() || stack.is(AlchemancyTags.Items.DISABLES_INFUSION_ABILITIES))
 			return;
 
 		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().getData(stack);
@@ -248,6 +246,10 @@ public class InfusedPropertiesHelper
 
 	public static List<Holder<Property>> getInfusedProperties(ItemStack stack) {
 		return stack.getOrDefault(INFUSED_PROPERTIES, InfusedPropertiesComponent.EMPTY).properties();
+	}
+
+	public static List<Holder<Property>> getStoredProperties(ItemStack stack) {
+		return stack.getOrDefault(STORED_PROPERTIES, InfusedPropertiesComponent.EMPTY).properties();
 	}
 
 	public static ItemStack storeProperties(ItemStack stack, List<Holder<Property>> properties)

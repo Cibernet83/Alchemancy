@@ -2,6 +2,7 @@ package net.cibernet.alchemancy.registries;
 
 import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.item.DreamsteelBowItem;
+import net.cibernet.alchemancy.item.InfusionFlaskItem;
 import net.cibernet.alchemancy.item.InnatePropertyItem;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
 import net.cibernet.alchemancy.item.components.PropertyDataComponent;
@@ -70,6 +71,12 @@ public class AlchemancyItems
 			.attributes(AxeItem.createAttributes(Materials.DREAMSTEEL_TOOLS, -2.0F, -1.0F))));
 	public static final DeferredItem<DreamsteelBowItem> DREAMSTEEL_BOW = REGISTRY.register("dreamsteel_bow", () -> new DreamsteelBowItem(new Item.Properties().durability(576)));
 
+	public static final DeferredItem<InfusionFlaskItem> INFUSION_FLASK = REGISTRY.register("infusion_flask", () -> new InfusionFlaskItem(new Item.Properties()
+			.stacksTo(1)
+			.component(Components.INFUSION_SLOTS, 2))
+	);
+
+
 	public static final DeferredItem<ArmorItem> LEAD_HELMET = REGISTRY.register("lead_helmet", () -> new ArmorItem(Materials.LEAD_ARMOR, ArmorItem.Type.HELMET, new Item.Properties().durability(ArmorItem.Type.HELMET.getDurability(60))));
 	public static final DeferredItem<ArmorItem> LEAD_CHESTPLATE = REGISTRY.register("lead_chestplate", () -> new ArmorItem(Materials.LEAD_ARMOR, ArmorItem.Type.CHESTPLATE, new Item.Properties().durability(ArmorItem.Type.CHESTPLATE.getDurability(60))));
 	public static final DeferredItem<ArmorItem> LEAD_LEGGINGS = REGISTRY.register("lead_leggings", () -> new ArmorItem(Materials.LEAD_ARMOR, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(ArmorItem.Type.LEGGINGS.getDurability(60))));
@@ -116,6 +123,7 @@ public class AlchemancyItems
 					.rarity(Rarity.EPIC)
 					.attributes(MaceItem.createAttributes())
 					.component(DataComponents.TOOL, MaceItem.createToolProperties())));
+
 	public static final DeferredItem<InnatePropertyItem> UNSHAPED_CLAY = REGISTRY.register("unshaped_clay", () -> new InnatePropertyItem.Builder()
 			.withProperties(AlchemancyProperties.CLAY_MOLD)
 			.tooltip(ClayMoldProperty.ITEM_TOOLTIP)

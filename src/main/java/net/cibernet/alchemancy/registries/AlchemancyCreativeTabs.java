@@ -54,6 +54,7 @@ public class AlchemancyCreativeTabs
 				output.accept(DREAMSTEEL_AXE.get());
 				output.accept(DREAMSTEEL_HOE.get());
 				output.accept(DREAMSTEEL_BOW.get());
+				output.accept(INFUSION_FLASK.get());
 
 				output.accept(BLANK_PEARL.get());
 				output.accept(REVEALING_PEARL.get());

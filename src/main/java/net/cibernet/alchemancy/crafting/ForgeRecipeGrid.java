@@ -53,7 +53,12 @@ public class ForgeRecipeGrid implements RecipeInput
 				grid.processRecipe(recipe.get().value(), level.registryAccess());
 			else break;
 		}
-		return grid.getCurrentOutput();
+
+		ItemStack result = grid.getCurrentOutput();
+		if(!result.isEmpty())
+			result.setCount(result.getCount() * input.getCount());
+
+		return result;
 	}
 
 	private static RecipeManager.CachedCheck<ForgeRecipeGrid, AbstractForgeRecipe<?>> OUT_OF_FORGE_INTERACTIONS_CHECK = (input, level) -> level.getRecipeManager().getRecipesFor(AlchemancyRecipeTypes.ALCHEMANCY_FORGE.get(), input, level).stream().filter(recipe -> recipe.value().matches(input, level) && !recipe.value().isTransmutation())
@@ -71,7 +76,7 @@ public class ForgeRecipeGrid implements RecipeInput
 					new Pair<>(-1, 0), new Pair<>(-1, -1), new Pair<>(0, -1), new Pair<>(1, -1)
 			};
 
-	private ForgeRecipeGrid(ItemStack stack)
+	public ForgeRecipeGrid(ItemStack stack)
 	{
 		forge = new ItemStackHolderBlockEntity(BlockPos.ZERO, AlchemancyBlocks.ALCHEMANCY_FORGE.get().defaultBlockState());
 		forge.setItem(stack);

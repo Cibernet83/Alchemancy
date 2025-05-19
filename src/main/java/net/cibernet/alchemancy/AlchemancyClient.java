@@ -52,6 +52,7 @@ public class AlchemancyClient
 		BlockEntityRenderers.register(AlchemancyBlockEntities.ROOTED_ITEM.get(), RootedItemRenderer::new);
 		BlockEntityRenderers.register(AlchemancyBlockEntities.ALCHEMANCY_CATALYST.get(), AlchemancyCatalystRenderer::new);
 
+		EntityRenderers.register(AlchemancyEntities.INFUSION_FLASK.get(), ThrownItemRenderer::new);
 		EntityRenderers.register(AlchemancyEntities.ITEM_PROJECTILE.get(), ThrownItemRenderer::new);
 		EntityRenderers.register(AlchemancyEntities.FALLING_BLOCK.get(), FallingBlockRenderer::new);
 
@@ -89,7 +90,7 @@ public class AlchemancyClient
 				return -1;
 			List<Integer> colors = stack.getOrDefault(AlchemancyItems.Components.INFUSED_PROPERTIES, InfusedPropertiesComponent.EMPTY).properties().stream().filter(p -> !(p.value() instanceof IncreaseInfuseSlotsProperty)).map(propertyHolder -> propertyHolder.value().getColor(stack)).toList();
 			return colors.isEmpty() ? -1 : FastColor.ARGB32.color(255, colors.get((int) Math.abs((System.currentTimeMillis() / 2000) % colors.size())));
-		}), AlchemancyItems.IRON_RING);
+		}), AlchemancyItems.IRON_RING, AlchemancyItems.INFUSION_FLASK);
 
 		event.register(((stack, tintIndex) -> tintIndex == 1 ? AlchemancyProperties.AWAKENED.value().getColor(stack) : -1),
 				AlchemancyItems.PROPERTY_VISOR,
