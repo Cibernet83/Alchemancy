@@ -1,0 +1,19 @@
+{
+  "type": "alchemancy:forged_item",
+
+
+  "infusables": [
+    {
+      "item": "minecraft:firework_rocket"
+    }
+  ],
+
+  "catalyst": {
+    "item": "alchemancy:pearlescent_ring"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:sparkling_band"
+  }
+}

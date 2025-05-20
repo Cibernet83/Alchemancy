@@ -84,6 +84,8 @@
   "item.alchemancy.undying_ring": "Ring of Undying",
   "item.alchemancy.friendship_ring": "Ring of Friendship",
 
+  "item.alchemancy.sparkling_band": "Band of Sparkling",
+
   "item.alchemancy.property_visor": "Property Visor",
 
   "item.alchemancy.wayward_medallion": "Wayward Medallion",
@@ -150,6 +152,7 @@
   "property.alchemancy.seethrough": "Seethrough",
   "property.alchemancy.concealed": "Concealed",
   "property.alchemancy.disguised": "Disguised",
+  "property.alchemancy.sparkling": "Sparkling",
 
   "property.alchemancy.burning": "Burning",
   "property.alchemancy.frosted": "Frosted",

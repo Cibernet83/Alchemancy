@@ -21,14 +21,11 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.ItemAbilities;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jetbrains.annotations.Nullable;
 
@@ -256,6 +253,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, SeethroughProperty> SEETHROUGH = REGISTRY.register("seethrough", SeethroughProperty::new);
 	public static final DeferredHolder<Property, TintedProperty> TINTED = REGISTRY.register("tinted", TintedProperty::new);
 	public static final DeferredHolder<Property, FlattenedProperty> FLATTENED = REGISTRY.register("flattened", FlattenedProperty::new);
+	public static final DeferredHolder<Property, SparklingProperty> SPARKLING = REGISTRY.register("sparkling", SparklingProperty::new);
 
 	//Special
 	public static final DeferredHolder<Property, Property> AWAKENED = REGISTRY.register("awakened", () -> Property.simpleInterpolated(false, 0.5f, 0xFF91EAE3, 0xFF91EAE3, 0xFFEDF2F8, 0xFFEBBBDB, 0xFFEBBBDB, 0xFFEDF2F8));

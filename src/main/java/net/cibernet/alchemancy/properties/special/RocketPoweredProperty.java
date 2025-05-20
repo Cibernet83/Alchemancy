@@ -2,8 +2,10 @@ package net.cibernet.alchemancy.properties.special;
 
 import net.cibernet.alchemancy.mixin.accessors.LivingEntityAccessor;
 import net.cibernet.alchemancy.properties.Property;
+import net.cibernet.alchemancy.properties.SparklingProperty;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ServerboundPlayerInputPacket;
@@ -35,7 +37,7 @@ public class RocketPoweredProperty extends Property
 			else consumeItem(user, stack, slot);
 		}
 
-		playParticles(user);
+		playParticles(user, stack);
 		user.moveRelative(user.isFallFlying() ? 0.05f : 0.2f, new Vec3(0, (float)Math.cos((user.getXRot()+90)*Math.PI/180f), (float)Math.sin((user.getXRot()+90)*Math.PI/180f)));
 
 		if(!user.isFallFlying() && !(user instanceof Player player && player.getAbilities().flying))
@@ -63,7 +65,7 @@ public class RocketPoweredProperty extends Property
 
 			if(jumping)
 			{
-				playBootParticles(user);
+				playBootParticles(user, stack);
 				user.moveRelative(0.125f, user.isFallFlying() ?
 						new Vec3(0, (float) Math.cos((user.getXRot() + 90) * Math.PI / 180f), (float) Math.sin((user.getXRot() + 90) * Math.PI / 180f)) :
 						new Vec3(0, 1, 0));
@@ -75,12 +77,17 @@ public class RocketPoweredProperty extends Property
 		}
 	}
 
-	public static void playParticles(Entity source)
+	public static ParticleOptions getParticles(ItemStack stack)
+	{
+		return SparklingProperty.getParticles(stack).orElse(ParticleTypes.FLAME);
+	}
+
+	public static void playParticles(Entity source, ItemStack stack)
 	{
 		Vec3 pos = source.position();
 		RandomSource randomSource = source.getRandom();
 		source.level().addParticle(
-				ParticleTypes.FLAME,
+				getParticles(stack),
 				pos.x() - Math.cos((source.getXRot()+90)*Math.PI/180f) * 0.2f,
 				source.getEyeY() - 0.2f,
 				pos.z() - Math.sin((source.getXRot()+90)*Math.PI/180f) * 0.2f,
@@ -91,12 +98,12 @@ public class RocketPoweredProperty extends Property
 
 	}
 
-	public static void playBootParticles(Entity source)
+	public static void playBootParticles(Entity source, ItemStack stack)
 	{
 		Vec3 pos = source.position();
 		RandomSource randomSource = source.getRandom();
 		source.level().addParticle(
-				ParticleTypes.FLAME,
+				getParticles(stack),
 				pos.x(),
 				pos.y(),
 				pos.z(),

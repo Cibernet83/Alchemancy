@@ -2,6 +2,7 @@ package net.cibernet.alchemancy.registries;
 
 import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.properties.Property;
+import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
@@ -82,6 +83,7 @@ public class AlchemancyTags
 		public static final TagKey<Property> DISABLED = registerTag(AlchemancyProperties.REGISTRY_KEY, "disabled");
 
 		public static final TagKey<Property> RETAINED_BY_UNSHAPED_CLAY = registerTag(AlchemancyProperties.REGISTRY_KEY, "retained_by_unshaped_clay");
+		public static final TagKey<Property> DISABLES_SPARKLING = registerTag(AlchemancyProperties.REGISTRY_KEY, "disables_sparkling");
 	}
 
 	public static class DataComponents

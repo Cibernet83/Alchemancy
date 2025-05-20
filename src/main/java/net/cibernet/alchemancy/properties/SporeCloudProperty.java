@@ -55,7 +55,7 @@ public class SporeCloudProperty extends AbstractTimerProperty
 		if(level instanceof ServerLevel serverLevel)
 			for(int i = 0; i < RADIUS * 20; i++)
 			{
-				serverLevel.sendParticles(ParticleTypes.FALLING_SPORE_BLOSSOM, source.position().x, source.position().y, source.position().z, 1,
+				serverLevel.sendParticles(SparklingProperty.getParticles(stack).orElse(ParticleTypes.FALLING_SPORE_BLOSSOM), source.position().x, source.position().y, source.position().z, 1,
 						rand.nextDouble() * RADIUS, 0, rand.nextDouble() * RADIUS, 0);
 			}
 
