@@ -99,7 +99,13 @@ public class SparklingProperty extends Property implements IDataHolder<Holder<Pr
 	@Override
 	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid, List<Holder<Property>> propertiesToAdd) {
 
-		for (Holder<Property> infusedProperty : InfusedPropertiesHelper.getInfusedProperties(propertySource)) {
+
+		if (getData(propertySource) != null)
+		{
+			setData(stack, getData(propertySource));
+			return true;
+		}
+		else for (Holder<Property> infusedProperty : InfusedPropertiesHelper.getInfusedProperties(propertySource)) {
 			if (PARTICLE_MAP.containsKey(infusedProperty)) {
 				setData(stack, infusedProperty);
 				return true;
