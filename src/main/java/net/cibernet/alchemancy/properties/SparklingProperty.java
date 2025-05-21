@@ -5,6 +5,7 @@ import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
+import net.cibernet.alchemancy.properties.special.AirWalkingProperty;
 import net.cibernet.alchemancy.registries.AlchemancyParticles;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
@@ -70,6 +71,7 @@ public class SparklingProperty extends Property implements IDataHolder<Holder<Pr
 		put(AlchemancyProperties.EXPLODING, () -> ParticleTypes.EXPLOSION);
 		put(AlchemancyProperties.WIND_CHARGED, () -> ParticleTypes.SMALL_GUST);
 		put(AlchemancyProperties.FLOURISH, () -> ParticleTypes.CHERRY_LEAVES);
+		put(AlchemancyProperties.AIR_WALKER, () -> AirWalkingProperty.PARTICLES);
 		put(AlchemancyProperties.ROCKET_POWERED, AlchemancyParticles.WARHAMMER_FLAME::get);
 
 		put(AlchemancyProperties.DIRTY, () -> new BlockParticleOption(ParticleTypes.BLOCK, Blocks.DIRT.defaultBlockState()));

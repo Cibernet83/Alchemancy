@@ -110,6 +110,8 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, HeavyProperty> HEAVY = REGISTRY.register("heavy", HeavyProperty::new);
 	public static final DeferredHolder<Property, AntigravProperty> ANTIGRAV = REGISTRY.register("antigrav", AntigravProperty::new);
 	public static final DeferredHolder<Property, Property> DEXTEROUS = REGISTRY.register("dexterous", () -> Property.simple(0x00EAA8));
+	public static final DeferredHolder<Property, WaterWalkingProperty> WAVE_RIDER = REGISTRY.register("wave_rider", WaterWalkingProperty::new);
+	public static final DeferredHolder<Property, AirWalkingProperty> AIR_WALKER = REGISTRY.register("air_walker", AirWalkingProperty::new);
 
 	//Tools
 	public static final DeferredHolder<Property, ToolProperty> MINING = REGISTRY.register("mining", () -> new ToolProperty(0x888788, BlockTags.MINEABLE_WITH_PICKAXE, ItemAbilities.DEFAULT_PICKAXE_ACTIONS));

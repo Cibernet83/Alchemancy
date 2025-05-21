@@ -1,0 +1,12 @@
+{
+  "type": "alchemancy:forged_property",
+
+  "properties": [
+    "alchemancy:antigrav",
+    "alchemancy:binding",
+    "alchemancy:wave_rider",
+    "alchemancy:voidborn"
+  ],
+
+  "result": "alchemancy:air_walker"
+}
