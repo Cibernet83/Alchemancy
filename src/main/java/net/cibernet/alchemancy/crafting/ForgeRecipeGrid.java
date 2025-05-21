@@ -44,7 +44,9 @@ public class ForgeRecipeGrid implements RecipeInput
 
 	public static ItemStack resolveInteractions(ItemStack input, Level level)
 	{
-		ForgeRecipeGrid grid = new ForgeRecipeGrid(input);
+		ItemStack gridInput = input.copy();
+		gridInput.setCount(1);
+		ForgeRecipeGrid grid = new ForgeRecipeGrid(gridInput);
 
 		for(int i = 0; i < 128; i++)
 		{
