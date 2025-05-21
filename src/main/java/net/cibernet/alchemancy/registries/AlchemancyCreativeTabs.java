@@ -79,6 +79,8 @@ public class AlchemancyCreativeTabs
 
 				output.accept(ROCKET_POWERED_HAMMER.get());
 
+				output.accept(POCKET_BLACK_HOLE.get());
+
 			}).build());
 
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> PROPERTIES = REGISTRY.register("alchemancy_properties", () -> CreativeModeTab.builder()

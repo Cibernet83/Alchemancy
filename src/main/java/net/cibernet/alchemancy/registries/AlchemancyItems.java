@@ -128,6 +128,8 @@ public class AlchemancyItems
 					.attributes(MaceItem.createAttributes())
 					.component(DataComponents.TOOL, MaceItem.createToolProperties())));
 
+
+	public static final DeferredItem<Item> POCKET_BLACK_HOLE = REGISTRY.register("pocket_black_hole", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.THROWABLE, AlchemancyProperties.VOIDTOUCH).stacksTo(8).build());
 	public static final DeferredItem<InnatePropertyItem> UNSHAPED_CLAY = REGISTRY.register("unshaped_clay", () -> new InnatePropertyItem.Builder()
 			.withProperties(AlchemancyProperties.CLAY_MOLD)
 			.tooltip(ClayMoldProperty.ITEM_TOOLTIP)
