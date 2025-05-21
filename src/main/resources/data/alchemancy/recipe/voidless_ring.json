@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:voidborn"
+  ],
+
+  "catalyst": {
+    "item": "alchemancy:pearlescent_ring"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:voidless_ring"
+  }
+}

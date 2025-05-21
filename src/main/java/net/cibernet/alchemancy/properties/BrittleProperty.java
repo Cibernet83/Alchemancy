@@ -69,7 +69,7 @@ public class BrittleProperty extends DurabilityMultiplierProperty
 		}
 	}
 
-	private static void spawnItemParticles(ItemStack stack, int amount, Entity itemEntity, ServerLevel level)
+	public static void spawnItemParticles(ItemStack stack, int amount, Entity itemEntity, ServerLevel level)
 	{
 		for (int i = 0; i < amount; i++) {
 			Vec3 vec3 = new Vec3(((double)itemEntity.getRandom().nextFloat() - 0.5) * 0.1, Math.random() * 0.1 + 0.1, 0.0);

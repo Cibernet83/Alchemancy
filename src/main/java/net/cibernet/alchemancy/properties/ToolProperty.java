@@ -141,14 +141,15 @@ public class ToolProperty extends Property
 				{
 					if (projectile.level() instanceof ServerLevel serverLevel)
 						stack.hurtAndBreak(2, serverLevel, null, (item) -> {
+							BrittleProperty.spawnItemParticles(stack, 5, projectile, serverLevel);
 						});
 				}
 
-				if(stack.isEmpty())
-				{
-					InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onEntityItemDestroyed(stack, projectile, projectile.damageSources().generic()));
-					projectile.level().broadcastEntityEvent(projectile, (byte) 3);
-				}
+//				if(stack.isEmpty())
+//				{
+//					InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onEntityItemDestroyed(stack, projectile, projectile.damageSources().generic()));
+//					projectile.level().broadcastEntityEvent(projectile, (byte) 3);
+//				}
 			}
 			else for(int i = 0; i < 16; i++)
 			{

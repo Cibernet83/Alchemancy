@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "alchemancy:soul_escaped",
+    "alchemancy:voidtouch",
     "#alchemancy:arcane_damage"
   ]
 }

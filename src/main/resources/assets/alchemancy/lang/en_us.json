@@ -83,6 +83,7 @@
   "item.alchemancy.phasing_ring": "Ring of Phasing",
   "item.alchemancy.undying_ring": "Ring of Undying",
   "item.alchemancy.friendship_ring": "Ring of Friendship",
+  "item.alchemancy.voidless_ring": "Ring of the Voidless",
 
   "item.alchemancy.sparkling_band": "Band of Sparkling",
 
@@ -362,12 +363,18 @@
   "property.alchemancy.use_entangled": "Use-Entangled",
 
   "death.attack.alchemancy.shock": "%s had a shock to their system",
+  "death.attack.alchemancy.shock.mob": "%1$s was electrocuted by %2$s",
   "death.attack.alchemancy.shock.player": "%1$s was electrocuted by %2$s",
   "death.attack.alchemancy.shock.item": "%1$s was electrocuted by %2$s using %3$s",
   "death.attack.alchemancy.gamble": "%s died from a gambling addiction",
+  "death.attack.alchemancy.gamble.mob": "%1$s gambled too hard whilst fighting %2$s",
   "death.attack.alchemancy.gamble.player": "%1$s gambled too hard whilst fighting %2$s",
   "death.attack.alchemancy.gamble.item": "%1$s gambled too hard whilst fighting %2$s",
   "death.attack.alchemancy.soul_escaped": "%s felt the wrath of a fleeing soul",
+  "death.attack.alchemancy.voidtouch": "%s no longer exists",
+  "death.attack.alchemancy.voidtouch.mob": "%1$s was removed from existence by %2$s",
+  "death.attack.alchemancy.voidtouch.player": "%1$s was removed from existence by %2$s",
+  "death.attack.alchemancy.voidtouch.item": "%1$s was removed from existence by %2$s using %3$s",
 
   "advancements.alchemancy:discovery.root.title": "Infusion Discovery",
   "advancements.alchemancy:discovery.root.description": "Every Property you Infuse yourself will be catalogued here",
