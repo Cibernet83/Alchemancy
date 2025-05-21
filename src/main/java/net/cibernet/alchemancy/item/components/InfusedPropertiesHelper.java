@@ -56,7 +56,7 @@ public class InfusedPropertiesHelper
 
 	public static boolean hasProperty(ItemStack stack, Holder<Property> property)
 	{
-		if(stack == null || stack.isEmpty() || stack.is(AlchemancyTags.Items.DISABLES_INFUSION_ABILITIES) || property == null || property.is(AlchemancyTags.Properties.DISABLED))
+		if(stack == null || stack.isEmpty()|| property == null || property.is(AlchemancyTags.Properties.DISABLED))
 			return false;
 
 		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().getData(stack);
@@ -95,7 +95,7 @@ public class InfusedPropertiesHelper
 
 	public static boolean hasInfusedProperty(ItemStack stack, Holder<Property> property)
 	{
-		return stack != null &&  !stack.isEmpty() && stack.has(INFUSED_PROPERTIES.get()) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(property);
+		return stack != null && !stack.isEmpty() && !stack.is(AlchemancyTags.Items.DISABLES_INFUSION_ABILITIES)  && stack.has(INFUSED_PROPERTIES.get()) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(property);
 	}
 
 	public static boolean hasInnateProperty(ItemStack stack, Holder<Property> property)
@@ -110,7 +110,7 @@ public class InfusedPropertiesHelper
 
 	public static boolean hasInfusedProperty(ItemStack stack, TagKey<Property> propertyTag)
 	{
-		return stack != null &&  !stack.isEmpty() && stack.has(INFUSED_PROPERTIES.get()) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(propertyTag);
+		return stack != null && !stack.isEmpty() && !stack.is(AlchemancyTags.Items.DISABLES_INFUSION_ABILITIES) && stack.has(INFUSED_PROPERTIES.get()) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(propertyTag);
 	}
 
 	public static boolean hasInnateProperty(ItemStack stack, TagKey<Property> propertyTag)
@@ -133,12 +133,12 @@ public class InfusedPropertiesHelper
 
 	public static void forEachProperty(ItemStack stack, Consumer<Holder<Property>> consumer)
 	{
-		if(stack == null || stack.isEmpty() || stack.is(AlchemancyTags.Items.DISABLES_INFUSION_ABILITIES))
+		if(stack == null || stack.isEmpty())
 			return;
 
 		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().getData(stack);
 
-		if (stack.has(INFUSED_PROPERTIES.get()))
+		if (stack.has(INFUSED_PROPERTIES.get()) && !stack.is(AlchemancyTags.Items.DISABLES_INFUSION_ABILITIES))
 		{
 			if(!toggled && hasInfusedProperty(stack, AlchemancyProperties.TOGGLEABLE))
 				consumer.accept(AlchemancyProperties.TOGGLEABLE);
