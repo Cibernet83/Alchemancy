@@ -2,6 +2,8 @@ package net.cibernet.alchemancy.registries;
 
 import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.client.particle.GlowingOrbParticle;
+import net.minecraft.client.particle.FlameParticle;
+import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -18,10 +20,12 @@ public class AlchemancyParticles
 	public static final DeferredRegister<ParticleType<?>> REGISTRY = DeferredRegister.create(Registries.PARTICLE_TYPE, Alchemancy.MODID);
 
 	public static final DeferredHolder<ParticleType<?>, SimpleParticleType> GLOWING_ORB = REGISTRY.register("glowing_orb", () -> new SimpleParticleType(true));
+	public static final DeferredHolder<ParticleType<?>, SimpleParticleType> WARHAMMER_FLAME = REGISTRY.register("warhammer_flame", () -> new SimpleParticleType(true));
 
 	@SubscribeEvent
 	public static void registerParticles(RegisterParticleProvidersEvent event)
 	{
 		event.registerSpriteSet(GLOWING_ORB.get(), GlowingOrbParticle.Provider::new);
+		event.registerSpriteSet(WARHAMMER_FLAME.get(), FlameParticle.Provider::new);
 	}
 }

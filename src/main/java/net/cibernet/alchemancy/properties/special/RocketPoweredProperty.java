@@ -3,6 +3,8 @@ package net.cibernet.alchemancy.properties.special;
 import net.cibernet.alchemancy.mixin.accessors.LivingEntityAccessor;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.properties.SparklingProperty;
+import net.cibernet.alchemancy.registries.AlchemancyItems;
+import net.cibernet.alchemancy.registries.AlchemancyParticles;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.particles.ParticleOptions;
@@ -79,7 +81,8 @@ public class RocketPoweredProperty extends Property
 
 	public static ParticleOptions getParticles(ItemStack stack)
 	{
-		return SparklingProperty.getParticles(stack).orElse(ParticleTypes.FLAME);
+		return SparklingProperty.getParticles(stack).orElse(stack.is(AlchemancyItems.BARRELS_WARHAMMER) ?
+				AlchemancyParticles.WARHAMMER_FLAME.get() : ParticleTypes.FLAME);
 	}
 
 	public static void playParticles(Entity source, ItemStack stack)

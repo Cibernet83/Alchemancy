@@ -70,6 +70,7 @@ public class SparklingProperty extends Property implements IDataHolder<Holder<Pr
 		put(AlchemancyProperties.EXPLODING, () -> ParticleTypes.EXPLOSION);
 		put(AlchemancyProperties.WIND_CHARGED, () -> ParticleTypes.SMALL_GUST);
 		put(AlchemancyProperties.FLOURISH, () -> ParticleTypes.CHERRY_LEAVES);
+		put(AlchemancyProperties.ROCKET_POWERED, AlchemancyParticles.WARHAMMER_FLAME::get);
 
 		put(AlchemancyProperties.DIRTY, () -> new BlockParticleOption(ParticleTypes.BLOCK, Blocks.DIRT.defaultBlockState()));
 		put(AlchemancyProperties.MALLEABLE, () -> new BlockParticleOption(ParticleTypes.BLOCK, Blocks.CLAY.defaultBlockState()));
