@@ -76,7 +76,7 @@ public class SparklingProperty extends Property implements IDataHolder<Holder<Pr
 		put(AlchemancyProperties.MALLEABLE, () -> new BlockParticleOption(ParticleTypes.BLOCK, Blocks.CLAY.defaultBlockState()));
 
 		put(AlchemancyProperties.RANDOM, () -> PARTICLE_MAP.values().stream()
-				.skip((int) (PARTICLE_MAP.size() * Math.random()))
+				.skip((int) ((PARTICLE_MAP.size() - 1) * Math.random()))
 				.findFirst().get().get());
 	}};
 
