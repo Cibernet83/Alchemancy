@@ -5,6 +5,7 @@ import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.properties.special.AuxiliaryProperty;
+import net.cibernet.alchemancy.properties.voidborn.VoidtouchProperty;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
@@ -73,7 +74,9 @@ public class PropertyEventHandler
 		}
 		if(event.getEntity() instanceof LivingEntity living)
 		{
-			if (InfusedPropertiesHelper.hasItemWithProperty(living, AlchemancyProperties.VOIDBORN, true) && event.getSource().is(DamageTypes.FELL_OUT_OF_WORLD))
+			if (InfusedPropertiesHelper.hasItemWithProperty(living, AlchemancyProperties.VOIDBORN, true) &&
+					(event.getSource().is(DamageTypes.FELL_OUT_OF_WORLD) ||
+					event.getSource().is(VoidtouchProperty.VOIDTOUCH_DAMAGE_KEY)))
 				event.setInvulnerable(true);
 		}
 	}

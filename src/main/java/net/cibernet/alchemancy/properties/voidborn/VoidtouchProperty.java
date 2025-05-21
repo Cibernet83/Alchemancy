@@ -1,6 +1,7 @@
 package net.cibernet.alchemancy.properties.voidborn;
 
 import net.cibernet.alchemancy.Alchemancy;
+import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
 import net.cibernet.alchemancy.properties.BrittleProperty;
 import net.cibernet.alchemancy.properties.Property;
@@ -29,8 +30,8 @@ import org.jetbrains.annotations.Nullable;
 
 public class VoidtouchProperty extends Property {
 
-	private static final int DURABILITY_CONSUMED = 800;
-	private static final ResourceKey<DamageType> VOIDTOUCH_DAMAGE_KEY = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "voidtouch"));
+	public static final int DURABILITY_CONSUMED = 800;
+	public static final ResourceKey<DamageType> VOIDTOUCH_DAMAGE_KEY = ResourceKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "voidtouch"));
 
 	@Override
 	public void onAttack(@Nullable Entity user, ItemStack weapon, DamageSource damageSource, LivingEntity target) {
@@ -75,6 +76,9 @@ public class VoidtouchProperty extends Property {
 	}
 
 	private void destroyEntity(Entity target, @Nullable Entity user, @Nullable Entity directSource) {
+
+		if(target instanceof LivingEntity living && InfusedPropertiesHelper.hasItemWithProperty(living, AlchemancyProperties.VOIDBORN, true))
+			return;
 
 		switch (target) {
 			case EnderDragon enderDragon -> destroyEnderDragon(enderDragon, user, directSource);
