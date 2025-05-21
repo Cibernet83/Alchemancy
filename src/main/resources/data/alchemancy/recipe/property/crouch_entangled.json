@@ -1,0 +1,15 @@
+{
+  "type": "alchemancy:forged_property",
+
+  "properties": [
+    "alchemancy:muffled"
+  ],
+
+  "infusables": [
+    {
+      "item": "alchemancy:entangled_singularity"
+    }
+  ],
+
+  "result": "alchemancy:crouch_entangled"
+}

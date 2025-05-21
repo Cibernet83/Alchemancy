@@ -1,0 +1,12 @@
+{
+  "type": "alchemancy:item_transmutation",
+
+  "catalyst": {
+    "item": "minecraft:golden_apple"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:leaden_apple"
+  }
+}

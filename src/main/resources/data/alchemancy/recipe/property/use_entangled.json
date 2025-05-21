@@ -1,0 +1,15 @@
+{
+  "type": "alchemancy:forged_property",
+
+  "properties": [
+    "alchemancy:interactable"
+  ],
+
+  "infusables": [
+    {
+      "item": "alchemancy:entangled_singularity"
+    }
+  ],
+
+  "result": "alchemancy:use_entangled"
+}

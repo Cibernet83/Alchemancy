@@ -1,0 +1,25 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:sticky"
+  ],
+
+  "infusables": [
+    {
+      "item": "minecraft:chain"
+    },
+    {
+      "item": "minecraft:chain"
+    }
+  ],
+
+  "catalyst": {
+    "item": "minecraft:trial_key"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:binding_key"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:binding",
+    "alchemancy:hollow",
+    "alchemancy:toggleable"
+  ],
+
+  "catalyst": {
+    "item": "alchemancy:void_pearl"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:entangled_singularity"
+  }
+}

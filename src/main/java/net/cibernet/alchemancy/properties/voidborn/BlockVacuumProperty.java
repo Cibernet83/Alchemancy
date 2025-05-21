@@ -1,4 +1,4 @@
-package net.cibernet.alchemancy.properties.special;
+package net.cibernet.alchemancy.properties.voidborn;
 
 import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
 import net.cibernet.alchemancy.properties.Property;

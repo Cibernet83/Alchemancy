@@ -1,0 +1,15 @@
+{
+  "type": "alchemancy:forged_property",
+
+  "properties": [
+    "alchemancy:swift"
+  ],
+
+  "infusables": [
+    {
+      "item": "alchemancy:entangled_singularity"
+    }
+  ],
+
+  "result": "alchemancy:sprint_entangled"
+}

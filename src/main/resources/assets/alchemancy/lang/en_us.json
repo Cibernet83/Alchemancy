@@ -74,6 +74,7 @@
   "item.alchemancy.revealing_pearl": "Revealing Pearl",
   "item.alchemancy.paradox_pearl": "Paradox Pearl",
   "item.alchemancy.void_pearl": "Void Pearl",
+  "item.alchemancy.entangled_singularity": "Entangled Singularity",
 
   "item.alchemancy.microscopic_lens": "Microscopic Lens",
   "item.alchemancy.macroscopic_lens": "Macroscopic Lens",
@@ -93,6 +94,10 @@
   "item.alchemancy.wayward_medallion.bound_to_player": "Bound to: %s",
   "item.alchemancy.wayward_medallion.bound_to_position": "Bound to: (%s, %s, %s)",
   "item.alchemancy.wayward_medallion.in": "in \"%s\"",
+
+  "item.alchemancy.leaden_apple": "Leaden Apple",
+  "item.alchemancy.leaden_cloth": "Leaden Cloth",
+  "item.alchemancy.binding_key": "Key of Binding",
 
   "item.alchemancy.unshaped_clay": "Unshaped Clay",
   "item.alchemancy.unshaped_clay.tooltip": "Smelt or combine with a Clay Ball to restore [%s]",

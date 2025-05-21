@@ -60,6 +60,7 @@ public class AlchemancyCreativeTabs
 				output.accept(REVEALING_PEARL.get());
 				output.accept(PARADOX_PEARL.get());
 				output.accept(VOID_PEARL.get());
+				output.accept(ENTANGLED_SINGULARITY.get());
 
 				output.accept(MICROSCOPIC_LENS.get());
 				output.accept(MACROSCOPIC_LENS.get());
@@ -71,15 +72,20 @@ public class AlchemancyCreativeTabs
 				output.accept(PHASING_RING.get());
 				output.accept(UNDYING_RING.get());
 				output.accept(FRIENDSHIP_RING.get());
+				output.accept(VOIDLESS_RING.get());
 				output.accept(SPARKLING_BAND.get());
 
 				output.accept(PROPERTY_VISOR.get());
 
+				output.accept(LEADEN_APPLE.get());
+				output.accept(LEADEN_CLOTH.get());
 				output.accept(WAYWARD_MEDALLION.get());
+				output.accept(BINDING_KEY.get());
 
 				output.accept(ROCKET_POWERED_HAMMER.get());
 
 				output.accept(POCKET_BLACK_HOLE.get());
+				output.accept(CEASELESS_VOID_BAG.get());
 
 			}).build());
 
@@ -98,6 +104,10 @@ public class AlchemancyCreativeTabs
 	@SubscribeEvent
 	public static void addCreative(BuildCreativeModeTabContentsEvent event)
 	{
+		if(event.getTabKey().equals(CreativeModeTabs.FOOD_AND_DRINKS))
+		{
+			event.insertAfter(Items.ENCHANTED_GOLDEN_APPLE.getDefaultInstance(), LEADEN_APPLE.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+		}
 		if(event.getTabKey().equals(CreativeModeTabs.COMBAT))
 		{
 			event.insertAfter(Items.GOLDEN_SWORD.getDefaultInstance(), LEAD_SWORD.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);

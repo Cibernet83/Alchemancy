@@ -20,6 +20,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.Unit;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.SimpleTier;
@@ -85,6 +88,7 @@ public class AlchemancyItems
 	public static final DeferredItem<Item> BLANK_PEARL = REGISTRY.registerSimpleItem("blank_pearl");
 	public static final DeferredItem<Item> REVEALING_PEARL = REGISTRY.registerSimpleItem("revealing_pearl");
 	public static final DeferredItem<Item> PARADOX_PEARL = REGISTRY.registerSimpleItem("paradox_pearl");
+	public static final DeferredItem<Item> ENTANGLED_SINGULARITY = REGISTRY.registerSimpleItem("entangled_singularity");
 	public static final DeferredItem<InnatePropertyItem> VOID_PEARL = REGISTRY.register("void_pearl", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.VOIDBORN).build());
 	public static final DeferredItem<Item> GLOWING_ORB = REGISTRY.register("glowing_orb", () -> new BlockItem(AlchemancyBlocks.GLOWING_ORB.get(), new Item.Properties()));
 
@@ -128,8 +132,23 @@ public class AlchemancyItems
 					.attributes(MaceItem.createAttributes())
 					.component(DataComponents.TOOL, MaceItem.createToolProperties())));
 
+	public static final DeferredItem<Item> LEADEN_APPLE = REGISTRY.registerSimpleItem("leaden_apple", new Item.Properties().rarity(Rarity.RARE).food(Foods.LEADEN_APPLE));
+	public static final DeferredItem<InnatePropertyItem> LEADEN_CLOTH = REGISTRY.register("leaden_cloth", () -> new InnatePropertyItem.Builder()
+			.withProperties(AlchemancyProperties.INFUSION_CLEANSE)
+			.stacksTo(1)
+			.build());
+	public static final DeferredItem<InnatePropertyItem> BINDING_KEY = REGISTRY.register("binding_key", () -> new InnatePropertyItem.Builder()
+			.withProperties(AlchemancyProperties.BINDING)
+			.stacksTo(1)
+			.build());
+
 
 	public static final DeferredItem<Item> POCKET_BLACK_HOLE = REGISTRY.register("pocket_black_hole", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.THROWABLE, AlchemancyProperties.VOIDTOUCH).stacksTo(8).build());
+	public static final DeferredItem<Item> CEASELESS_VOID_BAG = REGISTRY.register("ceaseless_void_bag", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.CEASELESS_VOID).stacksTo(1)
+			.use(60, UseAnim.BOW)
+			.durability(16, Ingredient.of(AlchemancyItems.VOID_PEARL))
+			.build());
+
 	public static final DeferredItem<InnatePropertyItem> UNSHAPED_CLAY = REGISTRY.register("unshaped_clay", () -> new InnatePropertyItem.Builder()
 			.withProperties(AlchemancyProperties.CLAY_MOLD)
 			.tooltip(ClayMoldProperty.ITEM_TOOLTIP)
@@ -160,6 +179,16 @@ public class AlchemancyItems
 			return ARMOR_MATERIAL_REGISTRY.register(key, () -> new ArmorMaterial(defenseMap, enchantmentValue, SoundEvents.ARMOR_EQUIP_IRON, repairMaterial, List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, key))),
 					toughness, knockbackResistance));
 		}
+	}
+
+	public static class Foods
+	{
+		public static final FoodProperties LEADEN_APPLE = new FoodProperties.Builder()
+				.nutrition(4)
+				.saturationModifier(1.2F)
+				.effect(new MobEffectInstance(MobEffects.POISON, 200, 9), 1.0F)
+				.alwaysEdible()
+				.build();
 	}
 
 	public static class Components

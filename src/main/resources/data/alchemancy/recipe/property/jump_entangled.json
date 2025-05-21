@@ -1,0 +1,15 @@
+{
+  "type": "alchemancy:forged_property",
+
+  "properties": [
+    "alchemancy:leaping"
+  ],
+
+  "infusables": [
+    {
+      "item": "alchemancy:entangled_singularity"
+    }
+  ],
+
+  "result": "alchemancy:jump_entangled"
+}
