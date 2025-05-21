@@ -221,7 +221,7 @@ public class PropertyEventHandler
 		InfusedPropertiesHelper.forEachProperty(event.getItemEntity().getItem(), propertyHolder -> propertyHolder.value().onItemPickedUp(event.getPlayer(), event.getItemEntity().getItem(), event.getItemEntity()));
 		for (EquipmentSlot slot : EquipmentSlot.values()) {
 			ItemStack stack = event.getPlayer().getItemBySlot(slot);
-			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onPickUpAnyItem(event.getPlayer(), stack, slot, event.getItemEntity(), event.getItemEntity().hasPickUpDelay(), event));
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onPickUpAnyItem(event.getPlayer(), stack, slot, event.getItemEntity(), !event.getItemEntity().hasPickUpDelay(), event));
 		}
 	}
 
