@@ -7,10 +7,7 @@ import net.cibernet.alchemancy.properties.data.modifiers.PropertyModifierType;
 import net.cibernet.alchemancy.properties.entangled.*;
 import net.cibernet.alchemancy.properties.soulbind.*;
 import net.cibernet.alchemancy.properties.special.*;
-import net.cibernet.alchemancy.properties.voidborn.BigSuckProperty;
-import net.cibernet.alchemancy.properties.voidborn.BlockVacuumProperty;
-import net.cibernet.alchemancy.properties.voidborn.VoidbornProperty;
-import net.cibernet.alchemancy.properties.voidborn.VoidtouchProperty;
+import net.cibernet.alchemancy.properties.voidborn.*;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -215,6 +212,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, VoidbornProperty> VOIDBORN = REGISTRY.register("voidborn", VoidbornProperty::new);
 	public static final DeferredHolder<Property, BigSuckProperty> CEASELESS_VOID = REGISTRY.register("ceaseless_void", BigSuckProperty::new);
 	public static final DeferredHolder<Property, VoidtouchProperty> VOIDTOUCH = REGISTRY.register("voidtouch", VoidtouchProperty::new);
+	public static final DeferredHolder<Property, TelekineticProperty> KINETIC_GRAB = REGISTRY.register("kinetic_grab", TelekineticProperty::new);
 
 	//Misc
 	public static final DeferredHolder<Property, NonlethalProperty> NONLETHAL = REGISTRY.register("nonlethal", NonlethalProperty::new);
