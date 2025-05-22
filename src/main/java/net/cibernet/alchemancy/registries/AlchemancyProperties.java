@@ -243,7 +243,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, ExtendedProperty> EXTENDED = REGISTRY.register("extended", ExtendedProperty::new);
 	public static final DeferredHolder<Property, CalciumProperty> CALCAREOUS = REGISTRY.register("calcareous", CalciumProperty::new);
 	public static final DeferredHolder<Property, MusicalProperty> MUSICAL = REGISTRY.register("musical", MusicalProperty::new);
-	public static final DeferredHolder<Property, EntityPullProperty<Projectile>> TARGETED = REGISTRY.register("targeted", () -> new EntityPullProperty<>(0xDC4A4A, Projectile.class, 12, false));
+	public static final DeferredHolder<Property, EntityPullProperty<Projectile>> TARGETED = REGISTRY.register("targeted", () -> new EntityPullProperty<>(0xDC4A4A, Projectile.class, 16, false));
 	public static final DeferredHolder<Property, RepelledProperty<Entity>> REPELLED = REGISTRY.register("repelled", () -> new RepelledProperty<>(0x4ADCDC, Entity.class, 8, false));
 	public static final DeferredHolder<Property, HomingProperty<LivingEntity>> LIGHT_SEEKING = REGISTRY.register("light_seeking", () -> new HomingProperty<>(0xFFFF00, LivingEntity.class, 24, 1f, HomingProperty.EffectType.PROJECTILE_ONLY, (e) -> e.isOnFire() || e.isCurrentlyGlowing()));
 	public static final DeferredHolder<Property, Property> FLIMSY = REGISTRY.register("flimsy", () -> Property.simple(0xC0C49D));

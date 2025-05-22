@@ -100,7 +100,7 @@ public class EntityPullProperty<E extends Entity> extends Property
 			Vec3 vec3 = target.getDeltaMovement();
 			Vec3 vec31 = target.position().subtract(center).normalize().scale(strength);
 
-			target.setDeltaMovement(vec3.scale(0.5).subtract(vec31));
+			target.setDeltaMovement(vec3.scale(1 - 0.5 * (1 - distanceTo / radius)).subtract(vec31));
 		}
 	}
 
