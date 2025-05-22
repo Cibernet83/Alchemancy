@@ -16,6 +16,8 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.dimension.DimensionType;
 
+import java.util.function.Predicate;
+
 public class AlchemancyTags
 {
 	public static class Items
@@ -49,6 +51,7 @@ public class AlchemancyTags
 		public static final TagKey<Block> REQUIRED_FOR_BLAZEBLOOM_GENERATION = registerTag(Registries.BLOCK, "required_for_blazebloom_generation");
 		public static final TagKey<Block> WAYFINDING_TARGETABLE = registerTag(Registries.BLOCK, "wayfinding_targetable");
 		public static final TagKey<Block> BROKEN_BY_HARDENED = registerTag(Registries.BLOCK, "broken_by_hardened");
+		public static final TagKey<Block> MAGNETIC_STICKS_TO = registerTag(Registries.BLOCK, "magnetic_sticks_to");
 	}
 
 	public static class DamageTypes
@@ -84,6 +87,7 @@ public class AlchemancyTags
 
 		public static final TagKey<Property> RETAINED_BY_UNSHAPED_CLAY = registerTag(AlchemancyProperties.REGISTRY_KEY, "retained_by_unshaped_clay");
 		public static final TagKey<Property> DISABLES_SPARKLING = registerTag(AlchemancyProperties.REGISTRY_KEY, "disables_sparkling");
+		public static final TagKey<Property> AFFECTED_BY_MAGNETIC = registerTag(AlchemancyProperties.REGISTRY_KEY, "affected_by_magnetic");
 	}
 
 	public static class DataComponents

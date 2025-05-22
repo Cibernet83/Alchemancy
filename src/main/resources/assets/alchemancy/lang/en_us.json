@@ -226,6 +226,10 @@
   "property.alchemancy.targeted": "Targeted",
   "property.alchemancy.repelled": "Repelled",
   "property.alchemancy.light_seeking": "Light-Seeking",
+  "property.alchemancy.magnetic": "Magnetic",
+  "property.alchemancy.magnetic.format": "%s%s",
+  "property.alchemancy.magnetic.a": "Magn",
+  "property.alchemancy.magnetic.b": "etic",
 
   "property.alchemancy.bouncy": "Bouncy",
   "property.alchemancy.sticky": "Sticky",
