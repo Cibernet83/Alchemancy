@@ -3,6 +3,8 @@ package net.cibernet.alchemancy.properties.special;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.properties.SparklingProperty;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -25,10 +27,14 @@ public class WaterWalkingProperty extends Property {
 			user.setDeltaMovement(new Vec3(vec.x, Math.max(hit.getLocation().y() - user.getY(), vec.y), vec.z));
 			user.resetFallDistance();
 
-			for(int i = 0; i < 2; i++)
-				user.level().addParticle(SparklingProperty.getParticles(stack).orElse(ParticleTypes.SPLASH), user.getRandomX(1), user.getY(), user.getRandomZ(1), 0, 0, 0);
+			playParticles(user, user.getY(), stack, 2);
 		}
 
+	}
+
+	public static void playParticles(Entity user, double y, ItemStack stack, int amount) {
+		if (user.level() instanceof ServerLevel serverLevel)
+			serverLevel.sendParticles(SparklingProperty.getParticles(stack).orElse(ParticleTypes.SPLASH), user.getX(), y, user.getZ(), amount, user.getBbWidth() * 0.5f, 0, user.getBbWidth() * 0.5f, 0);
 	}
 
 	@Override

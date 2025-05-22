@@ -4,7 +4,9 @@ import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.properties.SparklingProperty;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.minecraft.core.particles.DustParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -58,11 +60,19 @@ public class AirWalkingProperty extends Property implements IDataHolder<Double> 
 				user.resetFallDistance();
 				user.setOnGround(user.getY() <= y);
 				user.setDeltaMovement(new Vec3(vec.x, Math.min(Math.max(y - user.getY(), vec.y), 1), vec.z));
-				for(int i = 0; i < 5; i++)
-					user.level().addParticle(SparklingProperty.getParticles(stack).orElse(PARTICLES), user.getRandomX(1), y, user.getRandomZ(1), 0, 0, 0);
+
+				playParticles(user, y, stack, 5);
+
+//				for(int i = 0; i < 5; i++)
+//					user.level().addParticle(SparklingProperty.getParticles(stack).orElse(PARTICLES), user.getRandomX(1), y, user.getRandomZ(1), 0, 0, 0);
 			}
 		}
 
+	}
+
+	public static void playParticles(Entity user, double y, ItemStack stack, int amount) {
+		if (user.level() instanceof ServerLevel serverLevel)
+			serverLevel.sendParticles(SparklingProperty.getParticles(stack).orElse(PARTICLES), user.getX(), y, user.getZ(), amount, user.getBbWidth() * 0.5f, 0, user.getBbWidth() * 0.5f, 0);
 	}
 
 	@Override

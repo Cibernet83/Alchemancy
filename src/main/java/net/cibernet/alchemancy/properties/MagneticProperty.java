@@ -93,7 +93,7 @@ public class MagneticProperty extends Property {
 
 	public static void playParticles(Entity user, double y, ItemStack stack, int amount) {
 		if (user.level() instanceof ServerLevel serverLevel)
-			serverLevel.sendParticles(SparklingProperty.getParticles(stack).orElse(ParticleTypes.ELECTRIC_SPARK), user.getRandomX(1), y, user.getRandomZ(1), amount, 0, 0, 0, 0);
+			serverLevel.sendParticles(SparklingProperty.getParticles(stack).orElse(ParticleTypes.ELECTRIC_SPARK), user.getX(), y, user.getZ(), amount, user.getBbWidth() * 0.45f, 0, user.getBbWidth() * 0.45f, 0);
 	}
 
 	@Override
