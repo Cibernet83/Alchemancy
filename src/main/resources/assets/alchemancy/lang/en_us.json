@@ -374,6 +374,7 @@
   "property.alchemancy.crouch_entangled": "Crouch-Entangled",
   "property.alchemancy.sprint_entangled": "Sprint-Entangled",
   "property.alchemancy.use_entangled": "Use-Entangled",
+  "property.alchemancy.quantum_shift": "Quantum Shift",
 
   "death.attack.alchemancy.shock": "%s had a shock to their system",
   "death.attack.alchemancy.shock.mob": "%1$s was electrocuted by %2$s",

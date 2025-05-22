@@ -271,6 +271,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, CrouchEntangledProperty> CROUCH_ENTANGLED = REGISTRY.register("crouch_entangled", CrouchEntangledProperty::new);
 	public static final DeferredHolder<Property, JumpEntangledProperty> JUMP_ENTANGLED = REGISTRY.register("jump_entangled", JumpEntangledProperty::new);
 	public static final DeferredHolder<Property, SprintEntangledProperty> SPRINT_ENTANGLED = REGISTRY.register("sprint_entangled", SprintEntangledProperty::new);
+	public static final DeferredHolder<Property, QuantumShiftProperty> QUANTUM_SHIFT = REGISTRY.register("quantum_shift", QuantumShiftProperty::new);
 
 	public static final DeferredHolder<Property, Property> DIRTY = REGISTRY.register("dirty", () -> Property.simple(0x96592E));
 	public static final DeferredHolder<Property, Property> AWKWARD = REGISTRY.register("awkward", () -> Property.simple(0xA5266C));
