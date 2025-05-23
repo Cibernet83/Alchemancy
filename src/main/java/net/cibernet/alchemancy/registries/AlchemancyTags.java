@@ -3,6 +3,7 @@ package net.cibernet.alchemancy.registries;
 import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.properties.Property;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
@@ -71,6 +72,7 @@ public class AlchemancyTags
         public static final TagKey<EntityType<?>> AGGROED_BY_SEEDED = registerTag(Registries.ENTITY_TYPE, "aggroed_by_seeded_property");
         public static final TagKey<EntityType<?>> CANNOT_CAPTURE = registerTag(Registries.ENTITY_TYPE, "cannot_capture");
 		public static final TagKey<EntityType<?>> AFFECTED_BY_FRIENDLY = registerTag(Registries.ENTITY_TYPE, "affected_by_friendly");
+		public static final TagKey<EntityType<?>> PULLED_IN_BY_MAGNETIC = registerTag(Registries.ENTITY_TYPE, "pulled_in_by_magnetic");
 	}
 
 	public static class Dimensions

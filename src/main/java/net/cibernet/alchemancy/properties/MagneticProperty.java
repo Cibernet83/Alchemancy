@@ -2,6 +2,7 @@ package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.blocks.blockentities.RootedItemBlockEntity;
 import net.cibernet.alchemancy.client.particle.SparkParticle;
+import net.cibernet.alchemancy.events.handler.PropertyEventHandler;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.mixin.accessors.AbstractArrowAccessor;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
@@ -94,6 +95,18 @@ public class MagneticProperty extends Property {
 				}
 			}
 		}
+
+		repelUser(user);
+	}
+
+	@Override
+	public void onProjectileTick(ItemStack stack, Projectile projectile) {
+		repelUser(projectile);
+	}
+
+	@Override
+	public void onEntityItemTick(ItemStack stack, ItemEntity itemEntity) {
+		repelUser(itemEntity);
 	}
 
 	public static void playParticles(LivingEntity user, double y, ItemStack stack) {
@@ -126,6 +139,35 @@ public class MagneticProperty extends Property {
 	public void onRootedAnimateTick(RootedItemBlockEntity root, RandomSource randomSource) {
 		playRootedParticles(root, randomSource, PARTICLE_A);
 		playRootedParticles(root, randomSource, PARTICLE_B);
+	}
+
+	private static <E extends Entity> void repelUser(Entity user, Class<E> targetEntities, float strength, Predicate<E> predicate)
+	{
+		float radius = RADIUS * 0.25f;
+		int count = 0;
+
+		for(E target : user.level().getEntitiesOfClass(targetEntities, CommonUtils.boundingBoxAroundPoint(user.position(), radius), predicate))
+		{
+			if(target.equals(user))
+				continue;
+
+			double distanceTo = target.position().distanceTo(user.position());
+
+			float str = (float) Math.max(0, radius - distanceTo) * .05f * strength;
+
+			user.hasImpulse = true;
+			Vec3 vec3 = user.getDeltaMovement();
+			Vec3 vec31 = target.position().subtract(user.position()).normalize().scale(str);
+
+			user.setDeltaMovement(vec3.subtract(vec31));
+
+			if(target.level() instanceof ServerLevel serverLevel)
+				serverLevel.sendParticles(PARTICLE_B, target.getX(), target.getY(0.5f), target.getZ(), 1, target.getBbWidth() * 0.5f, target.getBbHeight() * 0.25f, target.getBbWidth() * 0.25f, 0);
+			count++;
+		}
+
+		if(count > 0 && user.level() instanceof ServerLevel serverLevel)
+			serverLevel.sendParticles(PARTICLE_B, user.getX(), user.getY(0.5f), user.getZ(), count, user.getBbWidth() * 0.5f, user.getBbHeight() * 0.25f, user.getBbWidth() * 0.25f, 0);
 	}
 
 	public static void magnetize(Level level, @Nullable Entity user, Vec3 center, ItemStack stack) {
@@ -161,6 +203,20 @@ public class MagneticProperty extends Property {
 			projectile.level().addFreshEntity(droppedItem);
 			projectile.discard();
 		});
+		pullEntities(user, stack, level, center, LivingEntity.class, entity -> entity.getType().is(AlchemancyTags.EntityTypes.PULLED_IN_BY_MAGNETIC), e -> {}, 0.075f);
+	}
+
+	public static void repelUser(Entity user)
+	{
+		repelUser(user, LivingEntity.class, 0.5f, target -> {
+			for (EquipmentSlot slot : EquipmentSlot.values()) {
+				if(InfusedPropertiesHelper.hasProperty(target.getItemBySlot(slot), AlchemancyProperties.MAGNETIC))
+					return true;
+			}
+			return false;
+		});
+
+		repelUser(user, Projectile.class, 0.25f, target -> InfusedPropertiesHelper.hasProperty(PropertyEventHandler.getProjectileItemStack(target), AlchemancyProperties.MAGNETIC));
 	}
 
 	private static <E extends Entity> int forEachInRadius(@Nullable Entity user, Level level, Vec3 center, Class<E> targetClass, Predicate<E> targetCondition, Consumer<E> consumer) {
@@ -175,20 +231,24 @@ public class MagneticProperty extends Property {
 	}
 
 	private static <E extends Entity> int pullEntities(@Nullable Entity user, ItemStack stack, Level level, Vec3 center, Class<E> targetClass, Predicate<E> targetCondition, Consumer<E> whenCloseEnough) {
+		return pullEntities(user, stack, level, center, targetClass, targetCondition, whenCloseEnough, 1);
+	}
+
+	private static <E extends Entity> int pullEntities(@Nullable Entity user, ItemStack stack, Level level, Vec3 center, Class<E> targetClass, Predicate<E> targetCondition, Consumer<E> whenCloseEnough, float strength) {
 		return forEachInRadius(user, level, center, targetClass, targetCondition, target -> {
 			double distanceTo = target.position().distanceTo(center);
 
 			if (distanceTo < (user == null ? 0.5 : user.getBbWidth() * 0.5 + 1))
 				whenCloseEnough.accept(target);
 
-			float strength = (float) Math.max(0, RADIUS - distanceTo) * .05f;
+			float str = (float) Math.max(0, RADIUS - distanceTo) * .05f * strength;
 
 			if (target instanceof AbstractArrowAccessor arrow)
 				arrow.setInGround(false);
 
 			target.hasImpulse = true;
 			Vec3 vec3 = target.getDeltaMovement();
-			Vec3 vec31 = target.position().subtract(center).normalize().scale(strength);
+			Vec3 vec31 = target.position().subtract(center).normalize().scale(str);
 
 			target.setDeltaMovement(vec3.scale(1 - 0.5 * (1 - distanceTo / RADIUS)).subtract(vec31));
 			playParticles(target, target.getRandomY(), stack, 1);
