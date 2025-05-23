@@ -17,7 +17,7 @@ public class WaterWalkingProperty extends Property {
 	@Override
 	public void onEquippedTick(LivingEntity user, EquipmentSlot slot, ItemStack stack) {
 
-		if (slot != EquipmentSlot.FEET) return;
+		if (!(slot == EquipmentSlot.FEET || slot == EquipmentSlot.BODY)) return;
 
 		if (user.level().getFluidState(user.getBlockPosBelowThatAffectsMyMovement()).is(Fluids.WATER)) {
 			user.setOnGround(true);

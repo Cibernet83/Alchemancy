@@ -40,7 +40,7 @@ public class AirWalkingProperty extends Property implements IDataHolder<Double> 
 	@Override
 	public void onEquippedTick(LivingEntity user, EquipmentSlot slot, ItemStack stack) {
 
-		if (slot != EquipmentSlot.FEET || user.isShiftKeyDown()) {
+		if (!(slot == EquipmentSlot.FEET || slot == EquipmentSlot.BODY) || user.isShiftKeyDown()) {
 			removeData(stack);
 			return;
 		}
