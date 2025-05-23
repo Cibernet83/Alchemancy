@@ -294,6 +294,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, FlameWakerProperty> FLAME_STEP = REGISTRY.register("flame_step", FlameWakerProperty::new);
 	public static final DeferredHolder<Property, FlameEmperorProperty> FLAME_EMPEROR = REGISTRY.register("flame_emperor", FlameEmperorProperty::new);
 	public static final DeferredHolder<Property, ArmoredBastionProperty> ARMORED_BASTION = REGISTRY.register("armored_bastion", ArmoredBastionProperty::new);
+	public static final DeferredHolder<Property, BlinkingProperty> BLINKING = REGISTRY.register("blinking", BlinkingProperty::new);
 
 	//TODO
 	//Tethered: On Right Click leashes the user to the targeted entity or fence block. - Leash
