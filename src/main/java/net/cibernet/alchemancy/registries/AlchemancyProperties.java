@@ -281,6 +281,8 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, Property> UNMOVABLE = REGISTRY.register("unmovable", UnmovableProperty::new);
 	public static final DeferredHolder<Property, ItemMagnetProperty> ITEM_MAGNET = REGISTRY.register("item_magnet", ItemMagnetProperty::new);
 
+	public static final DeferredHolder<Property, SoundEffectProperty> BADA_QUIP = REGISTRY.register("bada_quip", () -> new SoundEffectProperty(0x7289DA, AlchemancySoundEvents.BADA_QUIP.value(), true));
+
 	//Innate Properties
 	public static final DeferredHolder<Property, AuxiliaryProperty> AUXILIARY = REGISTRY.register("auxiliary", AuxiliaryProperty::new);
 	public static final DeferredHolder<Property, GlowRingProperty> ETERNAL_GLOW = REGISTRY.register("eternal_glow", GlowRingProperty::new);
@@ -295,6 +297,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, FlameEmperorProperty> FLAME_EMPEROR = REGISTRY.register("flame_emperor", FlameEmperorProperty::new);
 	public static final DeferredHolder<Property, ArmoredBastionProperty> ARMORED_BASTION = REGISTRY.register("armored_bastion", ArmoredBastionProperty::new);
 	public static final DeferredHolder<Property, BlinkingProperty> BLINKING = REGISTRY.register("blinking", BlinkingProperty::new);
+	public static final DeferredHolder<Property, HomeRunProperty> HOME_RUN = REGISTRY.register("home_run", HomeRunProperty::new);
 
 	//TODO
 	//Tethered: On Right Click leashes the user to the targeted entity or fence block. - Leash

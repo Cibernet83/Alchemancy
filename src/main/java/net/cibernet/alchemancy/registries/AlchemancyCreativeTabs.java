@@ -83,6 +83,7 @@ public class AlchemancyCreativeTabs
 				output.accept(BINDING_KEY.get());
 
 				output.accept(ROCKET_POWERED_HAMMER.get());
+				output.accept(HOME_RUN_BAT.get());
 
 				output.accept(POCKET_BLACK_HOLE.get());
 				output.accept(CEASELESS_VOID_BAG.get());
@@ -115,6 +116,7 @@ public class AlchemancyCreativeTabs
 			event.insertAfter(Items.BOW.getDefaultInstance(), DREAMSTEEL_BOW.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 
 			event.insertAfter(Items.MACE.getDefaultInstance(), ROCKET_POWERED_HAMMER.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+			event.insertAfter(ROCKET_POWERED_HAMMER.get().getDefaultInstance(), HOME_RUN_BAT.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 
 			event.insertAfter(Items.GOLDEN_BOOTS.getDefaultInstance(), LEAD_HELMET.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 			event.insertAfter(LEAD_HELMET.get().getDefaultInstance(), LEAD_CHESTPLATE.get().getDefaultInstance(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);

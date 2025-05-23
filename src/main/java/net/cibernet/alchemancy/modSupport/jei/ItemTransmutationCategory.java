@@ -69,6 +69,10 @@ public class ItemTransmutationCategory implements IRecipeCategory<ItemTransmutat
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, ItemTransmutationRecipe recipe, IFocusGroup focuses)
 	{
+		ItemStack output = recipe.getResultItem(Minecraft.getInstance().level.registryAccess());
+		if(AlchemancyItems.SECRET_TRANSMUTATIONS.stream().anyMatch(itemHolder -> itemHolder.value().equals(output.getItem())))
+			return;
+
 		Optional<Ingredient> catalystIngredient = recipe.getCatalyst();
 
 		if(catalystIngredient.isPresent() && recipe.getCatalystName().isPresent())
@@ -82,6 +86,6 @@ public class ItemTransmutationCategory implements IRecipeCategory<ItemTransmutat
 			builder.addInputSlot(0, 0).addItemStacks(Arrays.stream(catalystItems).toList());
 		}
 		else builder.addInputSlot(0, 0).addIngredients(catalystIngredient.orElse(Ingredient.EMPTY));
-		builder.addOutputSlot(48, 0).addItemStack(recipe.getResultItem(Minecraft.getInstance().level.registryAccess()));
+		builder.addOutputSlot(48, 0).addItemStack(output);
 	}
 }

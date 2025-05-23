@@ -8,6 +8,7 @@ import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
 import net.cibernet.alchemancy.item.components.PropertyDataComponent;
 import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
 import net.cibernet.alchemancy.properties.special.ClayMoldProperty;
+import net.cibernet.alchemancy.properties.special.HomeRunProperty;
 import net.cibernet.alchemancy.properties.special.WaywardWarpProperty;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
@@ -131,6 +132,20 @@ public class AlchemancyItems
 					.rarity(Rarity.EPIC)
 					.attributes(MaceItem.createAttributes())
 					.component(DataComponents.TOOL, MaceItem.createToolProperties())));
+	public static final DeferredItem<InnatePropertyItem> HOME_RUN_BAT = REGISTRY.register("home_run_bat", () -> new InnatePropertyItem.Builder()
+			.withProperties(AlchemancyProperties.HOME_RUN)
+			.durability(800)
+			.stacksTo(1)
+			.build(new Item.Properties()
+					.rarity(Rarity.EPIC)
+					.attributes(HomeRunProperty.createAttributes())));
+	public static final DeferredItem<InnatePropertyItem> BADA_BAT = REGISTRY.register("bada_bat", () -> new InnatePropertyItem.Builder()
+			.withProperties(AlchemancyProperties.HOME_RUN, AlchemancyProperties.BADA_QUIP)
+			.durability(800)
+			.stacksTo(1)
+			.build(new Item.Properties()
+					.rarity(Rarity.EPIC)
+					.attributes(HomeRunProperty.createAttributes())));
 
 	public static final DeferredItem<Item> LEADEN_APPLE = REGISTRY.registerSimpleItem("leaden_apple", new Item.Properties().rarity(Rarity.RARE).food(Foods.LEADEN_APPLE));
 	public static final DeferredItem<InnatePropertyItem> LEADEN_CLOTH = REGISTRY.register("leaden_cloth", () -> new InnatePropertyItem.Builder()
@@ -155,6 +170,7 @@ public class AlchemancyItems
 			.build());
 
 	public static final DeferredItem<Item> PROPERTY_CAPSULE = REGISTRY.registerItem("property_capsule", properties -> new Item(properties.rarity(Rarity.EPIC)));
+	public static final List<Holder<Item>> SECRET_TRANSMUTATIONS = List.of(HOME_RUN_BAT, BADA_BAT);
 
 	public static class Materials
 	{

@@ -1,0 +1,14 @@
+{
+  "type": "alchemancy:item_transmutation",
+
+  "catalyst": {
+    "item": "alchemancy:home_run_bat"
+  },
+
+  "catalyst_name": "Badadamadaba",
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:bada_bat"
+  }
+}

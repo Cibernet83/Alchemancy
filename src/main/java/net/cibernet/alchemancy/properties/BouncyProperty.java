@@ -33,7 +33,7 @@ public class BouncyProperty extends Property
 		if(source == target && source instanceof Player user)
 		{
 			if(CommonUtils.calculateHitResult(user).getType() != HitResult.Type.MISS)
-				knockBack(user, user.position().add(user.getLookAngle()));
+				knockBack(user, user.position().add(user.getLookAngle()), 1);
 			return;
 		}
 
@@ -42,7 +42,7 @@ public class BouncyProperty extends Property
 				damageSource.getDirectEntity() != null ? damageSource.getDirectEntity().position() : null;
 
 		if(sourcePos != null)
-			knockBack(target, sourcePos);
+			knockBack(target, sourcePos, 1);
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class BouncyProperty extends Property
 				attackPos = damageSource.getDirectEntity().position();
 
 			if(attackPos != null)
-				knockBack(user, attackPos);
+				knockBack(user, attackPos, 1);
 		}
 	}
 
@@ -69,15 +69,14 @@ public class BouncyProperty extends Property
 		if(attackPos == null && user != null)
 			attackPos = user.position();
 		if(attackPos != null)
-			knockBack(target, attackPos);
+			knockBack(target, attackPos, 1);
 	}
 
-	public static void knockBack(Entity target, Vec3 sourcePos)
+	public static void knockBack(Entity target, Vec3 sourcePos, float strength)
 	{
 		target.hurtMarked = true;
 		target.hasImpulse = true;
 		Vec3 vec3 = target.getDeltaMovement();
-		float strength = 1;
 		Vec3 vec31 = sourcePos.subtract(target.position()).normalize().scale(strength);
 		target.setDeltaMovement(vec3.x * 0.5 - vec31.x, vec3.y * 0.5 - vec31.y, vec3.z * 0.5 - vec31.z);
 	}

@@ -116,6 +116,8 @@ public class MusicalProperty extends Property
 	{
 		if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.CLUELESS))
 			return AlchemancySoundEvents.CLUELESS.value();
+		if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.HOME_RUN))
+			return AlchemancySoundEvents.HOME_RUN_FAIL.value();
 
 		for(TagKey<Item> tag : ON_CLICK_SOUNDS.keySet())
 			if(stack.is(tag))

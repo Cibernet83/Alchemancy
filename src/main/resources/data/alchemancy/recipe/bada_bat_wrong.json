@@ -1,0 +1,17 @@
+{
+  "type": "alchemancy:item_transmutation",
+
+  "catalyst": {
+    "item": "alchemancy:home_run_bat"
+  },
+
+  "catalyst_name": "Badabamadaba",
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:home_run_bat",
+    "components": {
+      "minecraft:custom_name": "{\"text\": \"That's not how you spell it\"}"
+    }
+  }
+}

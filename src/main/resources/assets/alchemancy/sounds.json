@@ -233,5 +233,26 @@
       "dig/gravel4"
     ],
     "subtitle": "property.clay_mold"
+  },
+  "property.home_run.hit": {
+    "sounds": [
+      "alchemancy:random/home_run_hit"
+    ],
+    "subtitle": "subtitles.property.home_run.hit",
+    "volume": 0.8
+  },
+  "property.home_run.fail": {
+    "sounds": [
+      "alchemancy:random/home_run_fail"
+    ],
+    "subtitle": "subtitles.property.home_run.fail",
+    "volume": 0.65
+  },
+  "property.bada_quip": {
+    "sounds": [
+      "alchemancy:random/bada1",
+      "alchemancy:random/bada2"
+    ],
+    "subtitle": "subtitles.property.bada_quip"
   }
 }

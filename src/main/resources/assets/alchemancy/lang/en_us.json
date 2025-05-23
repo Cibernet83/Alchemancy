@@ -104,6 +104,8 @@
 
   "item.alchemancy.rocket_powered_hammer": "Rocket-Powered Hammer",
   "item.alchemancy.barrels_warhammer": "Barrel's Warhammer",
+  "item.alchemancy.home_run_bat": "Home Run Bat",
+  "item.alchemancy.bada_bat": "Badadamadabat",
 
   "item.alchemancy.pocket_black_hole": "Pocket Black Hole",
   "item.alchemancy.ceaseless_void_bag": "Bag of the Ceaseless Void",
@@ -360,6 +362,7 @@
   "property.alchemancy.air_walker": "Air Walker",
 
   "property.alchemancy.blinking": "Blinking",
+  "property.alchemancy.home_run": "Home Run!",
   "property.alchemancy.rocket_powered": "Rocket-Powered",
   "property.alchemancy.wayward_warp": "Wayward Warp",
   "property.alchemancy.wayward_warp.dimension_missmatch": "The destination appears to be in another dimension...",
@@ -430,6 +433,10 @@
   "subtitles.property.wayfinding": "Wayfinding item locks onto target",
   "subtitles.property.allergic": "Allergic item sneezes",
   "subtitles.property.clay_mold": "Unshaped Clay is restored",
+  "subtitles.property.home_run.hit": "Home Run!!!",
+  "subtitles.property.home_run.fail": "Foul Ball...",
+
+  "subtitles.property.bada_quip": "Bada says something funny B)",
 
   "dataPack.alchemancy.infused_loot": "Infused Loot",
   "dataPack.alchemancy.infused_loot.description": "Gives a chance for mob equipment and chest loot to have Infused Properties",
