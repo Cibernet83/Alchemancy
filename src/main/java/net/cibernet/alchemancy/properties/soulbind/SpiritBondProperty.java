@@ -23,7 +23,7 @@ public class SpiritBondProperty extends Property
 	public void onHeal(LivingEntity user, ItemStack stack, EquipmentSlot slot, float amount)
 	{
 		if(stack.isDamaged())
-			stack.setDamageValue(stack.getDamageValue() - (int)(amount * 10));
+			repairItem(stack, (int)(amount * 10));
 	}
 
 	@Override

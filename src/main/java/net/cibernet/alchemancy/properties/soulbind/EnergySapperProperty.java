@@ -17,7 +17,7 @@ public class EnergySapperProperty extends Property
 		if(!user.level().isClientSide() && user.getRandom().nextFloat() < 0.01f && stack.getDamageValue() > 10 && user instanceof Player player && player.getFoodData().getFoodLevel() > 0)
 		{
 			player.causeFoodExhaustion(10f);
-			stack.setDamageValue(stack.getDamageValue() - 10);
+			repairItem(stack, 1);
 		}
 	}
 

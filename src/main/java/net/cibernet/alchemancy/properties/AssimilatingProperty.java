@@ -14,9 +14,7 @@ public class AssimilatingProperty extends Property
 	{
 		if(stack.isDamaged() && stack != otherStack && ItemStack.isSameItem(stack, otherStack))
 		{
-			if(!otherStack.isDamaged())
-				stack.setDamageValue(0);
-			else stack.setDamageValue(Math.max(0, stack.getDamageValue() - (stack.getMaxDamage() - otherStack.getDamageValue())));
+			repairItem(stack, (stack.getMaxDamage() - otherStack.getDamageValue()));
 			otherStack.shrink(1);
 			event.setCanceled(true);
 		}
@@ -32,7 +30,7 @@ public class AssimilatingProperty extends Property
 				ItemStack otherStack = player.getInventory().getItem(i);
 				if(stack != otherStack && ItemStack.isSameItem(stack, otherStack) && (shouldRepair(stack) || stack.getDamageValue() >= stack.getMaxDamage() - otherStack.getDamageValue()))
 				{
-					stack.setDamageValue(Math.max(0, stack.getDamageValue() - (stack.getMaxDamage() - otherStack.getDamageValue())));
+					repairItem(stack, (stack.getMaxDamage() - otherStack.getDamageValue()));
 					player.getInventory().removeItem(i, 1);
 					return;
 				}

@@ -514,6 +514,11 @@ public abstract class Property
 		return false;
 	}
 
+	public static void repairItem(ItemStack stack, int amount) {
+		if(stack.isDamaged())
+			stack.setDamageValue(Math.max(0, stack.getDamageValue()-amount));
+	}
+
 	public static class Priority
 	{
 		public static final int LOWEST = Integer.MAX_VALUE;

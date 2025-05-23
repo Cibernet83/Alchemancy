@@ -22,7 +22,7 @@ public class UndyingProperty extends Property
 		if(stack.getMaxDamage() >= stack.getDamageValue() + resultingAmount)
 		{
 			InfusedPropertiesHelper.removeProperty(stack, AlchemancyProperties.UNDYING);
-			stack.setDamageValue((int) (stack.getMaxDamage() * 0.6f));
+			repairItem(stack, (int) (stack.getMaxDamage() * 0.4f));
 
 			if(user != null)
 				level.playSound(user instanceof Player player ? player : null, user.position().x, user.position().y, user.position().z, SoundEvents.TOTEM_USE, SoundSource.PLAYERS, 0.65f, 1f);
