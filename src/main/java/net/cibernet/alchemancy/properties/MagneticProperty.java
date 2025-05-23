@@ -1,14 +1,18 @@
 package net.cibernet.alchemancy.properties;
 
+import net.cibernet.alchemancy.blocks.blockentities.RootedItemBlockEntity;
+import net.cibernet.alchemancy.client.particle.SparkParticle;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.mixin.accessors.AbstractArrowAccessor;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -29,6 +33,7 @@ import net.neoforged.neoforge.event.entity.living.LivingKnockBackEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -38,6 +43,10 @@ public class MagneticProperty extends Property {
 
 	private static final float RADIUS = 20;
 	private static final float ARMOR_RANGE = 0.25f;
+
+
+	public static final ParticleOptions PARTICLE_A = new SparkParticle.Options(Vec3.fromRGB24(0xFF8484).toVector3f(), 0.65f);
+	public static final ParticleOptions PARTICLE_B = new SparkParticle.Options(Vec3.fromRGB24(0x8484FF).toVector3f(), 0.65f);
 
 	@Override
 	public void modifyKnockBackReceived(LivingEntity user, ItemStack stack, EquipmentSlot slot, LivingKnockBackEvent event) {
@@ -99,19 +108,37 @@ public class MagneticProperty extends Property {
 	@Override
 	public void onItemUseTick(LivingEntity user, ItemStack stack, LivingEntityUseItemEvent.Tick event) {
 
-		Level level = user.level();
-		Vec3 center = user.getEyePosition();
+		magnetize(user.level(), user, user.getEyePosition(), stack);
 
-		if (!user.level().isClientSide())
+		if (user.level() instanceof ServerLevel serverLevel)
+		{
+			serverLevel.sendParticles(SparklingProperty.getParticles(stack).orElse(PARTICLE_A), user.getX(), user.getY(0.5f), user.getZ(), 1, user.getBbWidth() * 0.5f, user.getBbHeight() * 0.25f, user.getBbWidth() * 0.5f, 0);
+			serverLevel.sendParticles(SparklingProperty.getParticles(stack).orElse(PARTICLE_B), user.getX(), user.getY(0.5f), user.getZ(), 1, user.getBbWidth() * 0.5f, user.getBbHeight() * 0.25f, user.getBbWidth() * 0.5f, 0);
+		}
+	}
+
+	@Override
+	public void onRootedTick(RootedItemBlockEntity root, List<LivingEntity> entitiesInBounds) {
+		magnetize(root.getLevel(), null, root.getBlockPos().getCenter(), root.getItem());
+	}
+
+	@Override
+	public void onRootedAnimateTick(RootedItemBlockEntity root, RandomSource randomSource) {
+		playRootedParticles(root, randomSource, PARTICLE_A);
+		playRootedParticles(root, randomSource, PARTICLE_B);
+	}
+
+	public static void magnetize(Level level, @Nullable Entity user, Vec3 center, ItemStack stack) {
+		if (!level.isClientSide())
 			forEachInRadius(user, level, center, LivingEntity.class, entity -> true, target ->
 			{
 				for (EquipmentSlot slot : EquipmentSlot.values()) {
 					ItemStack stackInSlot = target.getItemBySlot(slot);
 					if (canBeMagnetized(stackInSlot)) {
-						target.move(MoverType.PLAYER, user.position().subtract(target.position()).normalize().scale(0.05f));
+						target.move(MoverType.PLAYER, center.subtract(target.position()).normalize().scale(0.05f));
 						playParticles(target, target.getRandomY(), stack, 1);
 
-						if (user.getRandom().nextFloat() < 0.005f) {
+						if (level.getRandom().nextFloat() < 0.005f) {
 							if (target instanceof Player player)
 								player.drop(stackInSlot, true);
 							else HollowProperty.nonPlayerDrop(target, stackInSlot, false, true);

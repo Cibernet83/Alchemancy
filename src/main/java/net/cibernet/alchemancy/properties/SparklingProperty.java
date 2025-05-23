@@ -76,6 +76,7 @@ public class SparklingProperty extends Property implements IDataHolder<Holder<Pr
 		put(AlchemancyProperties.AIR_WALKER, () -> AirWalkingProperty.PARTICLES);
 		put(AlchemancyProperties.KINETIC_GRAB, () -> TelekineticProperty.PARTICLES);
 		put(AlchemancyProperties.BLINKING, () -> BlinkingProperty.PARTICLES);
+		put(AlchemancyProperties.MAGNETIC, () -> Math.random() > 0.5 ? MagneticProperty.PARTICLE_A : MagneticProperty.PARTICLE_B);
 		put(AlchemancyProperties.ROCKET_POWERED, AlchemancyParticles.WARHAMMER_FLAME::get);
 
 		put(AlchemancyProperties.DIRTY, () -> new BlockParticleOption(ParticleTypes.BLOCK, Blocks.DIRT.defaultBlockState()));
