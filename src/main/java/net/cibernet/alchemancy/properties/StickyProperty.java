@@ -56,14 +56,17 @@ public class StickyProperty extends Property
 	@Override
 	public void onEquippedTick(LivingEntity user, EquipmentSlot slot, ItemStack stack)
 	{
+
+		if(slot != EquipmentSlot.FEET && user.hurtTime > 0) return;
+
 		Vec3 delta = user.getDeltaMovement();
 		float halfWidth = user.getBbWidth()/2f;
 		Level level = user.level();
 
 		if(slot == EquipmentSlot.HEAD)
 		{
-			if(level.getBlockCollisions(user, new AABB(user.getX()-halfWidth, user.getY()+user.getBbHeight(), user.getZ()-halfWidth,
-					user.getX()+halfWidth, user.getY()+user.getBbHeight() + 0.1f, user.getZ()+halfWidth)).iterator().hasNext())
+			if(!level.noBlockCollision(user, new AABB(user.getX()-halfWidth, user.getY()+user.getBbHeight(), user.getZ()-halfWidth,
+					user.getX()+halfWidth, user.getY()+user.getBbHeight() + 0.1f, user.getZ()+halfWidth)))
 			{
 				user.setDeltaMovement(delta.x, Math.max(delta.y, 0), delta.z);
 				user.resetFallDistance();
@@ -71,15 +74,15 @@ public class StickyProperty extends Property
 		}
 		else if (slot == EquipmentSlot.FEET)
 		{
-			if(level.getBlockCollisions(user, new AABB(user.getX()-halfWidth, user.getY(), user.getZ()-halfWidth,
-								user.getX()+halfWidth, user.getY() - 0.1f, user.getZ()+halfWidth)).iterator().hasNext())
+			if(!level.noBlockCollision(user, new AABB(user.getX()-halfWidth, user.getY(), user.getZ()-halfWidth,
+								user.getX()+halfWidth, user.getY() - 0.1f, user.getZ()+halfWidth)))
 				user.setDeltaMovement(delta.x, Math.min(delta.y, 0.05), delta.z);
 		}
 		else if(slot == EquipmentSlot.CHEST)
 		{
 			halfWidth += 0.05f;
-			if(level.getBlockCollisions(user, new AABB(user.getX()-halfWidth, user.getY() + user.getBbHeight() * 0.5f, user.getZ()-halfWidth,
-					user.getX()+halfWidth, user.getY() + user.getBbHeight(), user.getZ()+halfWidth)).iterator().hasNext())
+			if(!level.noBlockCollision(user, new AABB(user.getX()-halfWidth, user.getY() + user.getBbHeight() * 0.5f, user.getZ()-halfWidth,
+					user.getX()+halfWidth, user.getY() + user.getBbHeight(), user.getZ()+halfWidth)))
 			{
 				user.setDeltaMovement(delta.x, Math.max(delta.y, 0), delta.z);
 				user.resetFallDistance();
@@ -87,8 +90,8 @@ public class StickyProperty extends Property
 		} if(slot == EquipmentSlot.LEGS)
 		{
 			halfWidth += 0.05f;
-			if(level.getBlockCollisions(user, new AABB(user.getX()-halfWidth, user.getY(), user.getZ()-halfWidth,
-					user.getX()+halfWidth, user.getY() + user.getBbHeight() * 0.5f, user.getZ()+halfWidth)).iterator().hasNext())
+			if(!level.noBlockCollision(user, new AABB(user.getX()-halfWidth, user.getY(), user.getZ()-halfWidth,
+					user.getX()+halfWidth, user.getY() + user.getBbHeight() * 0.5f, user.getZ()+halfWidth)))
 			{
 				user.setDeltaMovement(delta.x, Math.max(delta.y, 0), delta.z);
 				user.resetFallDistance();
@@ -111,8 +114,8 @@ public class StickyProperty extends Property
 		float halfWidth = user.getBbWidth()/2f;
 		Vec3 delta = user.getDeltaMovement();
 
-		if(slot == EquipmentSlot.FEET && user.level().getBlockCollisions(user, new AABB(user.getX()-halfWidth, user.getY(), user.getZ()-halfWidth,
-				user.getX()+halfWidth, user.getY() - 0.1f, user.getZ()+halfWidth)).iterator().hasNext())
+		if(slot == EquipmentSlot.FEET && !user.level().noBlockCollision(user, new AABB(user.getX()-halfWidth, user.getY(), user.getZ()-halfWidth,
+				user.getX()+halfWidth, user.getY() - 0.1f, user.getZ()+halfWidth)))
 			user.setDeltaMovement(delta.x, Math.min(delta.y, 0.05), delta.z);
 	}
 
@@ -121,8 +124,8 @@ public class StickyProperty extends Property
 	{
 		float halfWidth = user.getBbWidth()/2f;
 
-		if(slot == EquipmentSlot.FEET && user.level().getBlockCollisions(user, new AABB(user.getX()-halfWidth, user.getY(), user.getZ()-halfWidth,
-				user.getX()+halfWidth, user.getY() - 0.1f, user.getZ()+halfWidth)).iterator().hasNext())
+		if(slot == EquipmentSlot.FEET && !user.level().noBlockCollision(user, new AABB(user.getX()-halfWidth, user.getY(), user.getZ()-halfWidth,
+				user.getX()+halfWidth, user.getY() - 0.1f, user.getZ()+halfWidth)))
 			event.setCanceled(true);
 	}
 
