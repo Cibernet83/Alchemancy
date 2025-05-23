@@ -142,12 +142,14 @@
   "essence.alchemancy.crea": "Crea",
 
   "property.detail": "%s [%s]",
+  "property.crackling_detail": "%s [%s %s]",
   "property.detail.percentage": "%s%%",
   "property.detail.item_count": "%s x%s",
   "property.detail.uses_left": "%s uses",
   "property.detail.needs_refueling": "Needs refueling!",
   "property.detail.global_position": "(%s, %s, %s) in \"%s\"",
   "property.detail.block_position": "%s, %s, %s",
+  "property.detail.star": "★",
 
   "property.disabled": "%s (Disabled)",
 
@@ -170,6 +172,7 @@
   "property.alchemancy.frosted": "Frosted",
   "property.alchemancy.wet": "Wet",
   "property.alchemancy.shocking": "Shocking",
+  "property.alchemancy.crackling": "Crackling",
 
   "property.alchemancy.flammable": "Flammable",
   "property.alchemancy.charred": "Charred",

@@ -182,6 +182,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, ArcaneProperty> ARCANE = REGISTRY.register("arcane", ArcaneProperty::new);
 	public static final DeferredHolder<Property, ResizedProperty> RESIZED = REGISTRY.register("resized", ResizedProperty::new);
 	public static final DeferredHolder<Property, FeralProperty> FERAL = REGISTRY.register("feral", FeralProperty::new);
+	public static final DeferredHolder<Property, CracklingProperty> CRACKLING = REGISTRY.register("crackling", CracklingProperty::new);
 
 	//On Crit
 	public static final DeferredHolder<Property, ExplodingProperty> EXPLODING = REGISTRY.register("exploding", () -> new ExplodingProperty(0xDB2F1A, 3, 5, ExplodingProperty.destroyBlocks()));

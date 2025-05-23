@@ -34,9 +34,9 @@ public class ShatteringProperty extends Property implements IDataHolder<Boolean>
 	{
 		if(!itemEntity.isRemoved())
 		{
-			itemEntity.discard();
 			Level level = itemEntity.level();
 			shatter(level, itemEntity, stack);
+			itemEntity.discard();
 		}
 	}
 
