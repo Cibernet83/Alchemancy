@@ -7,6 +7,7 @@ import net.cibernet.alchemancy.item.InnatePropertyItem;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
 import net.cibernet.alchemancy.item.components.PropertyDataComponent;
 import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
+import net.cibernet.alchemancy.properties.FeralProperty;
 import net.cibernet.alchemancy.properties.special.ClayMoldProperty;
 import net.cibernet.alchemancy.properties.special.HomeRunProperty;
 import net.cibernet.alchemancy.properties.special.WaywardWarpProperty;
@@ -23,6 +24,8 @@ import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.Unit;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -146,6 +149,8 @@ public class AlchemancyItems
 			.build(new Item.Properties()
 					.rarity(Rarity.EPIC)
 					.attributes(HomeRunProperty.createAttributes())));
+	public static final DeferredItem<SwordItem> FERAL_BLADE = REGISTRY.register("feral_blade", () -> new SwordItem(Tiers.IRON, new Item.Properties()
+			.attributes(SwordItem.createAttributes(Tiers.IRON, 2, -1.2f).withModifierAdded(Attributes.ATTACK_SPEED, FeralProperty.OFFHAND_BONUS, EquipmentSlotGroup.OFFHAND))));
 
 	public static final DeferredItem<Item> LEADEN_APPLE = REGISTRY.registerSimpleItem("leaden_apple", new Item.Properties().rarity(Rarity.RARE).food(Foods.LEADEN_APPLE));
 	public static final DeferredItem<InnatePropertyItem> LEADEN_CLOTH = REGISTRY.register("leaden_cloth", () -> new InnatePropertyItem.Builder()
@@ -176,7 +181,6 @@ public class AlchemancyItems
 	{
 		public static final Tier LEAD_TOOLS = new SimpleTier(AlchemancyTags.Blocks.INCORRECT_FOR_LEAD_TOOL, 1000, 6, 1.5f, 10, () -> Ingredient.of(AlchemancyTags.Items.REPAIRS_LEAD));
 		public static final Tier DREAMSTEEL_TOOLS = new SimpleTier(AlchemancyTags.Blocks.INCORRECT_FOR_DREAMSTEEL_TOOL, 1561, 9.0F, 4.0F, 15, () -> Ingredient.of(AlchemancyTags.Items.REPAIRS_DREAMSTEEL));
-
 
 		public static final DeferredRegister<ArmorMaterial> ARMOR_MATERIAL_REGISTRY = DeferredRegister.create(Registries.ARMOR_MATERIAL, MODID);
 

@@ -15,6 +15,7 @@ import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 public class SwiftProperty extends Property
 {
 	private static final AttributeModifier SPEED_MOD = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "swift_property_modifier"), 0.55F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+	private static final AttributeModifier ATTACK_SPEED_MOD = new AttributeModifier(ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "swift_property_modifier"), 0.25F, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
 
 	@Override
 	public void applyAttributes(ItemAttributeModifierEvent event)
@@ -23,7 +24,7 @@ public class SwiftProperty extends Property
 			event.addModifier(Attributes.MOVEMENT_SPEED, SPEED_MOD, EquipmentSlotGroup.LEGS);
 		else if(getEquipmentSlotForItem(event.getItemStack()) == EquipmentSlot.BODY)
 			event.addModifier(Attributes.MOVEMENT_SPEED, SPEED_MOD, EquipmentSlotGroup.BODY);
-		event.addModifier(Attributes.ATTACK_SPEED, SPEED_MOD, EquipmentSlotGroup.MAINHAND);
+		event.addModifier(Attributes.ATTACK_SPEED, ATTACK_SPEED_MOD, EquipmentSlotGroup.MAINHAND);
 	}
 
 	@Override

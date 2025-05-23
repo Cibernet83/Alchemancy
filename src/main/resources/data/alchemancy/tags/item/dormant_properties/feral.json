@@ -1,8 +1,6 @@
 {
   "replace": false,
   "values": [
-    "alchemancy:lead_sword",
-    "alchemancy:dreamsteel_sword",
     "alchemancy:feral_blade"
   ]
 }

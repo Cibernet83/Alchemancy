@@ -106,6 +106,7 @@
   "item.alchemancy.barrels_warhammer": "Barrel's Warhammer",
   "item.alchemancy.home_run_bat": "Home Run Bat",
   "item.alchemancy.bada_bat": "Badadamadabat",
+  "item.alchemancy.feral_blade": "Feral Blade",
 
   "item.alchemancy.pocket_black_hole": "Pocket Black Hole",
   "item.alchemancy.ceaseless_void_bag": "Bag of the Ceaseless Void",
@@ -202,6 +203,7 @@
   "property.alchemancy.experienced": "Experienced",
   "property.alchemancy.wise": "Wise",
   "property.alchemancy.clueless": "Clueless?",
+  "property.alchemancy.feral": "Feral",
 
   "property.alchemancy.cozy": "Cozy",
   "property.alchemancy.insulated": "Insulated",
