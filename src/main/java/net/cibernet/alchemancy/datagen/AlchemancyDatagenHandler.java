@@ -78,7 +78,7 @@ public class AlchemancyDatagenHandler
 			AlchemancyProperties.RANDOM,
 			AlchemancyProperties.ITEM_MAGNET,
 			AlchemancyProperties.UNMOVABLE,
-			AlchemancyProperties.BLOCK_VACUUM,
+			AlchemancyProperties.WORLD_OBLITERATOR,
 			AlchemancyProperties.VOIDTOUCH,
 			AlchemancyProperties.CEASELESS_VOID
 	);

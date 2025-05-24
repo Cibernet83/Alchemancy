@@ -9,6 +9,7 @@ import net.cibernet.alchemancy.properties.data.modifiers.PropertyModifierType;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.core.Holder;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -101,7 +102,7 @@ public class InnatePropertyItem extends Item
 		private Ingredient repairMaterial = Ingredient.EMPTY;
 
 		private final Map<Holder<Property>, Map<Holder<PropertyModifierType<?>>, Object>> modifiers = new HashMap<>();
-		private final PropertyDataComponent propertyData = new PropertyDataComponent(new HashMap<>());
+		private PropertyDataComponent propertyData = new PropertyDataComponent(new HashMap<>());
 
 		@SafeVarargs
 		public final Builder withProperties(Holder<Property>... properties)
@@ -156,9 +157,11 @@ public class InnatePropertyItem extends Item
 			return this;
 		}
 
-		public <T, P extends Property & IDataHolder<T>> Builder addData(DeferredHolder<Property, P> property, T value)
+		public <T, P extends Property & IDataHolder<T>> Builder addData(DeferredHolder<Property, P> property, CompoundTag value)
 		{
-			property.value().setData(propertyData, value);
+			PropertyDataComponent.Mutable data = new PropertyDataComponent.Mutable(propertyData);
+			data.setDataNbt(property, value);
+			propertyData = data.toImmutable();
 			return this;
 		}
 
@@ -166,7 +169,7 @@ public class InnatePropertyItem extends Item
 		{
 			withProperties(AlchemancyProperties.TOGGLEABLE);
 			if(!enabledByDefault)
-				addData(AlchemancyProperties.TOGGLEABLE, false);
+				addData(AlchemancyProperties.TOGGLEABLE, new CompoundTag(){{putBoolean("active", false);}});
 			return this;
 		}
 

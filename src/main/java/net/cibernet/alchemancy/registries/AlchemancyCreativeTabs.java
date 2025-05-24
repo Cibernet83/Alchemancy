@@ -86,6 +86,11 @@ public class AlchemancyCreativeTabs
 				output.accept(HOME_RUN_BAT.get());
 				output.accept(FERAL_BLADE.get());
 
+				output.accept(BLACK_HOLE_PICKAXE.get());
+				output.accept(BLACK_HOLE_AXE.get());
+				output.accept(BLACK_HOLE_SHOVEL.get());
+				output.accept(BLACK_HOLE_HOE.get());
+
 				output.accept(POCKET_BLACK_HOLE.get());
 				output.accept(CEASELESS_VOID_BAG.get());
 

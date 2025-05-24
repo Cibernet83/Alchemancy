@@ -7,6 +7,7 @@ import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.properties.special.AirWalkingProperty;
 import net.cibernet.alchemancy.properties.special.BlinkingProperty;
+import net.cibernet.alchemancy.properties.voidborn.BlockVacuumProperty;
 import net.cibernet.alchemancy.properties.voidborn.TelekineticProperty;
 import net.cibernet.alchemancy.registries.AlchemancyParticles;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
@@ -75,6 +76,7 @@ public class SparklingProperty extends Property implements IDataHolder<Holder<Pr
 		put(AlchemancyProperties.FLOURISH, () -> ParticleTypes.CHERRY_LEAVES);
 		put(AlchemancyProperties.CRACKLING, () -> ParticleTypes.FIREWORK);
 
+		put(AlchemancyProperties.WORLD_OBLITERATOR, () -> BlockVacuumProperty.PARTICLES);
 		put(AlchemancyProperties.AIR_WALKER, () -> AirWalkingProperty.PARTICLES);
 		put(AlchemancyProperties.KINETIC_GRAB, () -> TelekineticProperty.PARTICLES);
 		put(AlchemancyProperties.BLINKING, () -> BlinkingProperty.PARTICLES);

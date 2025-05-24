@@ -11,6 +11,7 @@ import net.cibernet.alchemancy.properties.FeralProperty;
 import net.cibernet.alchemancy.properties.special.ClayMoldProperty;
 import net.cibernet.alchemancy.properties.special.HomeRunProperty;
 import net.cibernet.alchemancy.properties.special.WaywardWarpProperty;
+import net.cibernet.alchemancy.properties.voidborn.BlockVacuumProperty;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
@@ -20,6 +21,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.Unit;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -162,6 +164,38 @@ public class AlchemancyItems
 			.stacksTo(1)
 			.build());
 
+	public static final DeferredItem<InnatePropertyItem> BLACK_HOLE_PICKAXE = REGISTRY.register("black_hole_pickaxe", () -> new InnatePropertyItem.Builder()
+			.withProperties(AlchemancyProperties.WORLD_OBLITERATOR)
+			.addData(AlchemancyProperties.WORLD_OBLITERATOR, new BlockVacuumProperty.Data(BlockTags.MINEABLE_WITH_PICKAXE).save())
+			.tooltip(BlockVacuumProperty.TOOL_TOOLTIP)
+			.durability(3000)
+			.stacksTo(1)
+			.build(new Item.Properties()
+					.rarity(Rarity.EPIC)));
+	public static final DeferredItem<InnatePropertyItem> BLACK_HOLE_AXE = REGISTRY.register("black_hole_axe", () -> new InnatePropertyItem.Builder()
+			.withProperties(AlchemancyProperties.WORLD_OBLITERATOR)
+			.addData(AlchemancyProperties.WORLD_OBLITERATOR, new BlockVacuumProperty.Data(BlockTags.LOGS).save())
+			.tooltip(BlockVacuumProperty.TOOL_TOOLTIP)
+			.durability(3000)
+			.stacksTo(1)
+			.build(new Item.Properties()
+					.rarity(Rarity.EPIC)));
+	public static final DeferredItem<InnatePropertyItem> BLACK_HOLE_SHOVEL = REGISTRY.register("black_hole_shovel", () -> new InnatePropertyItem.Builder()
+			.withProperties(AlchemancyProperties.WORLD_OBLITERATOR)
+			.addData(AlchemancyProperties.WORLD_OBLITERATOR, new BlockVacuumProperty.Data(BlockTags.MINEABLE_WITH_SHOVEL).save())
+			.tooltip(BlockVacuumProperty.TOOL_TOOLTIP)
+			.durability(3000)
+			.stacksTo(1)
+			.build(new Item.Properties()
+					.rarity(Rarity.EPIC)));
+	public static final DeferredItem<InnatePropertyItem> BLACK_HOLE_HOE = REGISTRY.register("black_hole_hoe", () -> new InnatePropertyItem.Builder()
+			.withProperties(AlchemancyProperties.WORLD_OBLITERATOR)
+			.addData(AlchemancyProperties.WORLD_OBLITERATOR, new BlockVacuumProperty.Data(BlockTags.MINEABLE_WITH_HOE).save())
+			.tooltip(BlockVacuumProperty.TOOL_TOOLTIP)
+			.durability(3000)
+			.stacksTo(1)
+			.build(new Item.Properties()
+					.rarity(Rarity.EPIC)));
 
 	public static final DeferredItem<Item> POCKET_BLACK_HOLE = REGISTRY.register("pocket_black_hole", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.THROWABLE, AlchemancyProperties.VOIDTOUCH).stacksTo(8).build());
 	public static final DeferredItem<Item> CEASELESS_VOID_BAG = REGISTRY.register("ceaseless_void_bag", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.CEASELESS_VOID).stacksTo(1)

@@ -280,7 +280,7 @@ public class AlchemancyProperties
 
 	//Stuff to goof around
 	public static final DeferredHolder<Property, RandomEffectProperty> RANDOM = REGISTRY.register("random", RandomEffectProperty::new);
-	public static final DeferredHolder<Property, BlockVacuumProperty> BLOCK_VACUUM = REGISTRY.register("block_vacuum", BlockVacuumProperty::new);
+	public static final DeferredHolder<Property, BlockVacuumProperty> WORLD_OBLITERATOR = REGISTRY.register("world_obliterator", BlockVacuumProperty::new);
 	public static final DeferredHolder<Property, Property> UNMOVABLE = REGISTRY.register("unmovable", UnmovableProperty::new);
 	public static final DeferredHolder<Property, ItemMagnetProperty> ITEM_MAGNET = REGISTRY.register("item_magnet", ItemMagnetProperty::new);
 

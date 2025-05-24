@@ -70,6 +70,13 @@
   "item.alchemancy.dreamsteel_bow": "Dreamsteel Bow",
   "item.alchemancy.infusion_flask": "Infusion Flask",
 
+  "item.alchemancy.black_hole_sword": "Black Hole Cleaver",
+  "item.alchemancy.black_hole_pickaxe": "Black Hole Perforator",
+  "item.alchemancy.black_hole_axe": "Black Hole Deforester",
+  "item.alchemancy.black_hole_shovel": "Black Hole Excavator",
+  "item.alchemancy.black_hole_hoe": "Black Hole Reaper",
+  "item.alchemancy.black_hole_tool.bound_to_block": "Target Block: [%s]",
+
   "item.alchemancy.blank_pearl": "Blank Pearl",
   "item.alchemancy.revealing_pearl": "Revealing Pearl",
   "item.alchemancy.paradox_pearl": "Paradox Pearl",
@@ -348,7 +355,7 @@
   "property.alchemancy.random": "Random",
 
   "property.alchemancy.voidborn": "Voidborn",
-  "property.alchemancy.block_vacuum": "Vacuuming",
+  "property.alchemancy.world_obliterator": "World Obliterator",
   "property.alchemancy.voidtouch": "Voidtouch",
   "property.alchemancy.ceaseless_void": "Ceaseless Void",
   "property.alchemancy.kinetic_grab": "Kinetic Grab",
