@@ -80,6 +80,7 @@ public class AlchemancyCreativeTabs
 				output.accept(LEADEN_APPLE.get());
 				output.accept(LEADEN_CLOTH.get());
 				output.accept(WAYWARD_MEDALLION.get());
+				output.accept(VAULT_LOCKPICK.get());
 				output.accept(BINDING_KEY.get());
 
 				output.accept(ROCKET_POWERED_HAMMER.get());

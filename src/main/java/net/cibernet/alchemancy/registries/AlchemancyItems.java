@@ -159,6 +159,12 @@ public class AlchemancyItems
 			.withProperties(AlchemancyProperties.INFUSION_CLEANSE)
 			.stacksTo(1)
 			.build());
+	public static final DeferredItem<InnatePropertyItem> VAULT_LOCKPICK = REGISTRY.register("vaultpick", () -> new InnatePropertyItem.Builder()
+			.withProperties(AlchemancyProperties.VAULTPICKING)
+			.durability(4)
+			.addModifier(AlchemancyProperties.VAULTPICKING, AlchemancyProperties.Modifiers.DURABILITY_CONSUMPTION, 1)
+			.stacksTo(1)
+			.build());
 	public static final DeferredItem<InnatePropertyItem> BINDING_KEY = REGISTRY.register("binding_key", () -> new InnatePropertyItem.Builder()
 			.withProperties(AlchemancyProperties.BINDING)
 			.stacksTo(1)

@@ -104,6 +104,7 @@
 
   "item.alchemancy.leaden_apple": "Leaden Apple",
   "item.alchemancy.leaden_cloth": "Leaden Cloth",
+  "item.alchemancy.vaultpick": "Vault-Pick",
   "item.alchemancy.binding_key": "Key of Binding",
 
   "item.alchemancy.unshaped_clay": "Unshaped Clay",
@@ -385,6 +386,7 @@
   "property.alchemancy.rotating": "Rotating",
   "property.alchemancy.infusion_cleanse": "Infusion Cleanse",
   "property.alchemancy.binding": "Binding",
+  "property.alchemancy.vaultpicking": "Vault-Picking",
   "property.alchemancy.unmovable": "Unmovable",
 
   "property.alchemancy.entangled": "Entangled",

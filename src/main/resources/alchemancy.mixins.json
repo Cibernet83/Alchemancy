@@ -33,6 +33,7 @@
     "accessors.FallingBlockEntityAccessor",
     "accessors.LivingEntityAccessor",
     "accessors.ProjectileAccessor",
+    "accessors.VaultServerDataAccessor",
     "client.ClientItemExtensionsMixin",
     "client.RenderTypeHelperMixin"
   ],

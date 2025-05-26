@@ -110,6 +110,7 @@ public class BlockVacuumProperty extends Property implements IDataHolder<BlockVa
 		{
 			BlockPos pos = validPos.getFirst();
 			int durabilityConsumed = 0;
+			int durabilityConsumedPerBlock = PropertyModifierComponent.getOrElse(stack, asHolder(), AlchemancyProperties.Modifiers.DURABILITY_CONSUMPTION, 1);
 
 			for (int i = 5; i > 0 && pos != null; pos = validPos.isEmpty() ? null : validPos.getFirst()) {
 				validPos.removeFirst();
@@ -124,7 +125,7 @@ public class BlockVacuumProperty extends Property implements IDataHolder<BlockVa
 					((ServerLevel)level).sendParticles(PARTICLES, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, 5, 0.5, 0.5, 0.5, 0);
 
 					i--;
-					durabilityConsumed++;
+					durabilityConsumed += durabilityConsumedPerBlock;
 				}
 			}
 
