@@ -8,7 +8,6 @@ import net.cibernet.alchemancy.registries.AlchemancySoundEvents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -53,8 +52,7 @@ public class HomeRunProperty extends Property {
 		DamageSource damageSource = event.getSource();
 		LivingEntity target = event.getEntity();
 
-		if((user instanceof LivingEntity living ? living.getAttributeValue(Attributes.ATTACK_DAMAGE) : getItemAttackDamage(weapon)) > event.getNewDamage() * 1.25f)
-		{
+		if ((user instanceof LivingEntity living ? living.getAttributeValue(Attributes.ATTACK_DAMAGE) : getItemAttackDamage(weapon)) > event.getNewDamage() * 1.25f) {
 			user.level().playSound(null, user, AlchemancySoundEvents.HOME_RUN_FAIL.value(), user.getSoundSource(), 1, 1);
 			return;
 		}
@@ -62,21 +60,21 @@ public class HomeRunProperty extends Property {
 		user.level().playSound(null, user, AlchemancySoundEvents.HOME_RUN_HIT.value(), user.getSoundSource(), 1, 1);
 
 		Vec3 attackPos = damageSource.getSourcePosition();
-		if(attackPos == null && damageSource.getDirectEntity() != null)
+		if (attackPos == null && damageSource.getDirectEntity() != null)
 			attackPos = damageSource.getDirectEntity().position();
-		if(attackPos == null && user != null)
+		if (attackPos == null && user != null)
 			attackPos = user.position();
-		if(attackPos != null) {
+		if (attackPos != null) {
 			BouncyProperty.knockBack(target, attackPos, target.onGround() ? 10 : 4);
 
-			if(PropertyModifierComponent.getOrElse(weapon, asHolder(), AlchemancyProperties.Modifiers.PREVENT_CONSUMPTION, weapon.isDamageableItem()))
-			{
+			if (PropertyModifierComponent.getOrElse(weapon, asHolder(), AlchemancyProperties.Modifiers.PREVENT_CONSUMPTION, weapon.isDamageableItem())) {
 				int durabilityConsumed = PropertyModifierComponent.getOrElse(weapon, asHolder(), AlchemancyProperties.Modifiers.DURABILITY_CONSUMPTION, 10);
-				if(user instanceof LivingEntity living)
+				if (user instanceof LivingEntity living)
 					weapon.hurtAndBreak(durabilityConsumed, living, EquipmentSlot.MAINHAND);
-				else if(target.level() instanceof ServerLevel serverLevel) weapon.hurtAndBreak(durabilityConsumed, serverLevel, null, (item) -> {});
-			}
-			else consumeItem(user, weapon, EquipmentSlot.MAINHAND);
+				else if (target.level() instanceof ServerLevel serverLevel)
+					weapon.hurtAndBreak(durabilityConsumed, serverLevel, null, (item) -> {
+					});
+			} else consumeItem(user, weapon, EquipmentSlot.MAINHAND);
 		}
 	}
 
@@ -88,7 +86,7 @@ public class HomeRunProperty extends Property {
 
 	@Override
 	public int getColor(ItemStack stack) {
-		return 0xFFFF00;
+		return 0xFFF94A;
 	}
 
 	@Override
