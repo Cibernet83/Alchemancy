@@ -1,0 +1,18 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:burning",
+    "alchemancy:smelting",
+    "alchemancy:gilded"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:diamond_pickaxe"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:molten_core_perforator"
+  }
+}

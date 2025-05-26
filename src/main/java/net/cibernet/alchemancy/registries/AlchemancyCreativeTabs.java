@@ -86,6 +86,8 @@ public class AlchemancyCreativeTabs
 				output.accept(ROCKET_POWERED_HAMMER.get());
 				output.accept(HOME_RUN_BAT.get());
 				output.accept(FERAL_BLADE.get());
+				output.accept(HOT_ROD.get());
+				output.accept(MOLTEN_CORE_PERFORATOR.get());
 
 				output.accept(BLACK_HOLE_PICKAXE.get());
 				output.accept(BLACK_HOLE_AXE.get());
@@ -121,7 +123,8 @@ public class AlchemancyCreativeTabs
 			event.insertAfter(Items.GOLDEN_SWORD.getDefaultInstance(), LEAD_SWORD.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 			event.insertAfter(Items.NETHERITE_SWORD.getDefaultInstance(), DREAMSTEEL_SWORD.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 			event.insertAfter(DREAMSTEEL_SWORD.toStack(), FERAL_BLADE.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-			
+			event.insertAfter(FERAL_BLADE.toStack(), HOT_ROD.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+
 			event.insertAfter(Items.BOW.getDefaultInstance(), DREAMSTEEL_BOW.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 
 			event.insertAfter(Items.MACE.getDefaultInstance(), ROCKET_POWERED_HAMMER.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
@@ -143,6 +146,7 @@ public class AlchemancyCreativeTabs
 			event.insertAfter(DREAMSTEEL_SHOVEL.toStack(), DREAMSTEEL_PICKAXE.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 			event.insertAfter(DREAMSTEEL_PICKAXE.toStack(), DREAMSTEEL_AXE.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 			event.insertAfter(DREAMSTEEL_AXE.toStack(), DREAMSTEEL_HOE.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+			event.insertAfter(DREAMSTEEL_HOE.toStack(), MOLTEN_CORE_PERFORATOR.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 		}
 		else if(event.getTabKey().equals(CreativeModeTabs.INGREDIENTS))
 		{

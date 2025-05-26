@@ -25,6 +25,7 @@ public class AlchemancyTags
 	{
 		public static final TagKey<Item> REPAIRS_LEAD = registerTag(Registries.ITEM, "repairs_lead");
 		public static final TagKey<Item> REPAIRS_DREAMSTEEL = registerTag(Registries.ITEM, "repairs_dreamsteel");
+		public static final TagKey<Item> REPAIRS_FLAME_EMPEROR_TOOL = registerTag(Registries.ITEM, "repairs_flame_emperor_tool");
 		public static final TagKey<Item> REPAIRS_UNSHAPED_CLAY = registerTag(Registries.ITEM, "repairs_unshaped_clay");
 
         public static final TagKey<Item> IMMUNE_TO_INFUSIONS = registerTag(Registries.ITEM, "immune_to_infusions");
@@ -48,6 +49,7 @@ public class AlchemancyTags
 		public static final TagKey<Block> ALCHEMANCY_CRYSTAL_CATALYSTS = registerTag(Registries.BLOCK, "alchemancy_crystal_catalysts");
 		public static final TagKey<Block> INCORRECT_FOR_LEAD_TOOL = registerTag(Registries.BLOCK, "incorrect_for_lead_tool");
 		public static final TagKey<Block> INCORRECT_FOR_DREAMSTEEL_TOOL = registerTag(Registries.BLOCK, "incorrect_for_dreamsteel_tool");
+		public static final TagKey<Block> INCORRECT_FOR_FLAME_EMPEROR_TOOL = registerTag(Registries.BLOCK, "incorrect_for_flame_emperor_tool");
 		public static final TagKey<Block> SUPPORTS_BLAZEBLOOM = registerTag(Registries.BLOCK, "supports_blazebloom");
 		public static final TagKey<Block> REQUIRED_FOR_BLAZEBLOOM_GENERATION = registerTag(Registries.BLOCK, "required_for_blazebloom_generation");
 		public static final TagKey<Block> WAYFINDING_TARGETABLE = registerTag(Registries.BLOCK, "wayfinding_targetable");

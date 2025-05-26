@@ -1,0 +1,18 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:burning",
+    "alchemancy:smelting",
+    "alchemancy:gilded"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:diamond_sword"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:hot_rod"
+  }
+}

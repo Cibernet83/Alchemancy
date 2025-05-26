@@ -3,7 +3,8 @@
 
   "properties": [
     "alchemancy:sharp",
-    "alchemancy:swift"
+    "alchemancy:swift",
+    "alchemancy:dexterous"
   ],
 
   "infusables": [

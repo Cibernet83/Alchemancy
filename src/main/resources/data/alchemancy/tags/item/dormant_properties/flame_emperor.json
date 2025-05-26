@@ -1,8 +1,7 @@
 {
   "replace": false,
   "values": [
-    "alchemancy:lead_pickaxe",
-    "alchemancy:dreamsteel_pickaxe",
+    "alchemancy:hot_rod",
     "alchemancy:molten_core_perforator"
   ]
 }

@@ -153,6 +153,12 @@ public class AlchemancyItems
 					.attributes(HomeRunProperty.createAttributes())));
 	public static final DeferredItem<SwordItem> FERAL_BLADE = REGISTRY.register("feral_blade", () -> new SwordItem(Tiers.IRON, new Item.Properties()
 			.attributes(SwordItem.createAttributes(Tiers.IRON, 2, -1.2f).withModifierAdded(Attributes.ATTACK_SPEED, FeralProperty.OFFHAND_BONUS, EquipmentSlotGroup.OFFHAND))));
+	public static final DeferredItem<SwordItem> HOT_ROD = REGISTRY.register("hot_rod", () -> new SwordItem(Materials.FLAME_EMPEROR_TOOLS, new Item.Properties()
+			.attributes(SwordItem.createAttributes(Materials.FLAME_EMPEROR_TOOLS, 3, -2.4f))
+			.component(Components.INNATE_PROPERTIES.get(), new InfusedPropertiesComponent(List.of(AlchemancyProperties.FLAME_EMPEROR)))));
+	public static final DeferredItem<PickaxeItem> MOLTEN_CORE_PERFORATOR = REGISTRY.register("molten_core_perforator", () -> new PickaxeItem(Materials.FLAME_EMPEROR_TOOLS, new Item.Properties()
+			.attributes(PickaxeItem.createAttributes(Materials.FLAME_EMPEROR_TOOLS, 1.0F, -2.8F))
+			.component(Components.INNATE_PROPERTIES.get(), new InfusedPropertiesComponent(List.of(AlchemancyProperties.FLAME_EMPEROR)))));
 
 	public static final DeferredItem<Item> LEADEN_APPLE = REGISTRY.registerSimpleItem("leaden_apple", new Item.Properties().rarity(Rarity.RARE).food(Foods.LEADEN_APPLE));
 	public static final DeferredItem<InnatePropertyItem> LEADEN_CLOTH = REGISTRY.register("leaden_cloth", () -> new InnatePropertyItem.Builder()
@@ -221,6 +227,7 @@ public class AlchemancyItems
 	{
 		public static final Tier LEAD_TOOLS = new SimpleTier(AlchemancyTags.Blocks.INCORRECT_FOR_LEAD_TOOL, 1000, 6, 1.5f, 10, () -> Ingredient.of(AlchemancyTags.Items.REPAIRS_LEAD));
 		public static final Tier DREAMSTEEL_TOOLS = new SimpleTier(AlchemancyTags.Blocks.INCORRECT_FOR_DREAMSTEEL_TOOL, 1561, 9.0F, 4.0F, 15, () -> Ingredient.of(AlchemancyTags.Items.REPAIRS_DREAMSTEEL));
+		public static final Tier FLAME_EMPEROR_TOOLS = new SimpleTier(AlchemancyTags.Blocks.INCORRECT_FOR_FLAME_EMPEROR_TOOL, 1561, 8.0F, 3.0F, 15, () -> Ingredient.of(AlchemancyTags.Items.REPAIRS_FLAME_EMPEROR_TOOL));
 
 		public static final DeferredRegister<ArmorMaterial> ARMOR_MATERIAL_REGISTRY = DeferredRegister.create(Registries.ARMOR_MATERIAL, MODID);
 
