@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "alchemancy:block/gust_basket",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "alchemancy:block/gust_basket",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "alchemancy:block/gust_basket",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "alchemancy:block/gust_basket",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "alchemancy:block/gust_basket"
+    },
+    "facing=west": {
+      "model": "alchemancy:block/gust_basket",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

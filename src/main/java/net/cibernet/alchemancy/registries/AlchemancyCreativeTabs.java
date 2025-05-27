@@ -83,6 +83,8 @@ public class AlchemancyCreativeTabs
 				output.accept(VAULT_LOCKPICK.get());
 				output.accept(BINDING_KEY.get());
 
+				output.accept(GUST_BASKET.get());
+
 				output.accept(ROCKET_POWERED_HAMMER.get());
 				output.accept(HOME_RUN_BAT.get());
 				output.accept(FERAL_BLADE.get());
