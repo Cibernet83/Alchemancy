@@ -17,6 +17,7 @@ public class AlchemancySoundEvents
 	public static final Holder<SoundEvent> ALCHEMANCY_CRYSTAL_ACTIVATE = register("block.alchemancy_catalyst.activate");
 	public static final Holder<SoundEvent> ALCHEMANCY_CRYSTAL_FIRE = register("block.alchemancy_catalyst.use");
 	public static final Holder<SoundEvent> GLOWING_ORB_EXTINGUISH = register("block.glowing_orb.extinguish");
+	public static final Holder<SoundEvent> GUST_BASKET = register("block.gust_basket.blow");
 
 	public static final Holder<SoundEvent> HEAVY = register("property.heavy");
 	public static final Holder<SoundEvent> BOUNCY = register("property.bouncy.jump");
@@ -36,6 +37,8 @@ public class AlchemancySoundEvents
 	public static final Holder<SoundEvent> CLAY_MOLD = register("property.clay_mold");
 	public static final Holder<SoundEvent> HOME_RUN_HIT = register("property.home_run.hit");
 	public static final Holder<SoundEvent> HOME_RUN_FAIL = register("property.home_run.fail");
+	public static final Holder<SoundEvent> GUST_JET = register("property.gust_jet");
+
 
 	public static final Holder<SoundEvent> BADA_QUIP = register("property.bada_quip");
 

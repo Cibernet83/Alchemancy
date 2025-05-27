@@ -381,6 +381,7 @@
 
   "property.alchemancy.blinking": "Blinking",
   "property.alchemancy.home_run": "Home Run!",
+  "property.alchemancy.gust_jet": "Gust Jet",
   "property.alchemancy.rocket_powered": "Rocket-Powered",
   "property.alchemancy.wayward_warp": "Wayward Warp",
   "property.alchemancy.wayward_warp.dimension_missmatch": "The destination appears to be in another dimension...",
@@ -436,6 +437,7 @@
   "subtitles.block.alchemancy_catalyst.activate": "Alchemancy Catalyst activates",
   "subtitles.block.alchemancy_catalyst.use": "Alchemancy Catalyst fires",
   "subtitles.block.glowing_orb.extinguish": "Glowing Orb extinguished",
+  "subtitles.block.gust_basket.blow": "Gust Basket blows",
 
   "subtitles.property.heavy": "Heavy item landed",
   "subtitles.property.bouncy": "Bouncy item bounces",
@@ -454,6 +456,7 @@
   "subtitles.property.clay_mold": "Unshaped Clay is restored",
   "subtitles.property.home_run.hit": "Home Run!!!",
   "subtitles.property.home_run.fail": "Foul Ball...",
+  "subtitles.property.gust_jet": "Gust Jet item blows",
 
   "subtitles.property.bada_quip": "Bada says something funny B)",
 

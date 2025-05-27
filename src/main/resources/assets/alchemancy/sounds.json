@@ -19,6 +19,15 @@
   ],
   "subtitle": "subtitles.block.glowing_orb.extinguish"
 },
+  "block.gust_basket.blow": {
+    "sounds": [
+      "mob/breeze/slide1",
+      "mob/breeze/slide2",
+      "mob/breeze/slide3",
+      "mob/breeze/slide4"
+    ],
+    "subtitle": "subtitles.block.gust_basket.blow"
+  },
   "property.heavy": {
     "sounds": [
       "random/anvil_land"
@@ -254,5 +263,14 @@
       "alchemancy:random/bada2"
     ],
     "subtitle": "subtitles.property.bada_quip"
+  },
+  "property.gust_jet": {
+    "sounds": [
+      "mob/breeze/slide1",
+      "mob/breeze/slide2",
+      "mob/breeze/slide3",
+      "mob/breeze/slide4"
+    ],
+    "subtitle": "subtitles.property.gust_jet"
   }
 }

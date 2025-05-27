@@ -1,7 +1,9 @@
 package net.cibernet.alchemancy.blocks;
 
 import com.mojang.serialization.MapCodec;
+import net.cibernet.alchemancy.properties.special.GustJetProperty;
 import net.cibernet.alchemancy.registries.AlchemancyBlocks;
+import net.cibernet.alchemancy.registries.AlchemancySoundEvents;
 import net.cibernet.alchemancy.util.ClientUtil;
 import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.core.BlockPos;
@@ -99,13 +101,13 @@ public class GustBasketBlock extends DirectionalBlock {
 						double xOff = random.nextDouble() * (1 - Math.abs(facing.getStepX()));
 						double yOff = random.nextDouble() * (1 - Math.abs(facing.getStepY()));
 						double zOff = random.nextDouble() * (1 - Math.abs(facing.getStepZ()));
-						level.addParticle(ParticleTypes.DUST_PLUME, pos.getX() + xOff + facing.getStepX(), pos.getY() + yOff + facing.getStepY(), pos.getZ() + zOff + facing.getStepZ(),
+						level.addParticle(GustJetProperty.PARTICLES, pos.getX() + xOff + facing.getStepX(), pos.getY() + yOff + facing.getStepY(), pos.getZ() + zOff + facing.getStepZ(),
 								facing.getStepX() * speed, facing.getStepY() * speed, facing.getStepZ() * speed);
 					}
 
 
 					if(random.nextFloat() > 0.15f)
-						level.playLocalSound(pos, SoundEvents.BREEZE_SLIDE, SoundSource.BLOCKS, 0.25f, (float) (distance / DISTANCE),false);
+						level.playLocalSound(pos, AlchemancySoundEvents.GUST_BASKET.value(), SoundSource.BLOCKS, 0.25f, (float) (distance / DISTANCE),false);
 
 					//this is probably the worst solution ever >_>
 					if(!PARTICLE_PROCESSED_GUST_BASKETS.containsKey(level.dimension()))

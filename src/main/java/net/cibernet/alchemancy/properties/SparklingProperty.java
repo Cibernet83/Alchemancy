@@ -7,6 +7,7 @@ import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.properties.special.AirWalkingProperty;
 import net.cibernet.alchemancy.properties.special.BlinkingProperty;
+import net.cibernet.alchemancy.properties.special.GustJetProperty;
 import net.cibernet.alchemancy.properties.voidborn.BlockVacuumProperty;
 import net.cibernet.alchemancy.properties.voidborn.TelekineticProperty;
 import net.cibernet.alchemancy.registries.AlchemancyParticles;
@@ -19,13 +20,17 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -75,7 +80,9 @@ public class SparklingProperty extends Property implements IDataHolder<Holder<Pr
 		put(AlchemancyProperties.WIND_CHARGED, () -> ParticleTypes.SMALL_GUST);
 		put(AlchemancyProperties.FLOURISH, () -> ParticleTypes.CHERRY_LEAVES);
 		put(AlchemancyProperties.CRACKLING, () -> ParticleTypes.FIREWORK);
+		put(AlchemancyProperties.GLOWING_AURA, () -> ParticleTypes.END_ROD);
 
+		put(AlchemancyProperties.GUST_JET, () -> GustJetProperty.PARTICLES);
 		put(AlchemancyProperties.WORLD_OBLITERATOR, () -> BlockVacuumProperty.PARTICLES);
 		put(AlchemancyProperties.AIR_WALKER, () -> AirWalkingProperty.PARTICLES);
 		put(AlchemancyProperties.KINETIC_GRAB, () -> TelekineticProperty.PARTICLES);
@@ -83,8 +90,15 @@ public class SparklingProperty extends Property implements IDataHolder<Holder<Pr
 		put(AlchemancyProperties.MAGNETIC, () -> Math.random() > 0.5 ? MagneticProperty.PARTICLE_A : MagneticProperty.PARTICLE_B);
 		put(AlchemancyProperties.ROCKET_POWERED, AlchemancyParticles.WARHAMMER_FLAME::get);
 
+		put(AlchemancyProperties.SWIFT, () -> MobEffects.MOVEMENT_SPEED.value().createParticleOptions(new MobEffectInstance(MobEffects.MOVEMENT_SPEED)));
+		put(AlchemancyProperties.SLUGGISH, () -> MobEffects.MOVEMENT_SPEED.value().createParticleOptions(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN)));
+		put(AlchemancyProperties.POISONOUS, () -> MobEffects.MOVEMENT_SPEED.value().createParticleOptions(new MobEffectInstance(MobEffects.POISON)));
+		put(AlchemancyProperties.DECAYING, () -> MobEffects.WITHER.value().createParticleOptions(new MobEffectInstance(MobEffects.WITHER)));
+		put(AlchemancyProperties.TIPSY, () -> MobEffects.CONFUSION.value().createParticleOptions(new MobEffectInstance(MobEffects.CONFUSION)));
+
 		put(AlchemancyProperties.DIRTY, () -> new BlockParticleOption(ParticleTypes.BLOCK, Blocks.DIRT.defaultBlockState()));
 		put(AlchemancyProperties.MALLEABLE, () -> new BlockParticleOption(ParticleTypes.BLOCK, Blocks.CLAY.defaultBlockState()));
+		put(AlchemancyProperties.SEEDED, () -> new ItemParticleOption(ParticleTypes.ITEM, Items.WHEAT_SEEDS.getDefaultInstance()));
 
 		put(AlchemancyProperties.RANDOM, () -> PARTICLE_MAP.values().stream()
 				.skip((int) ((PARTICLE_MAP.size() - 1) * Math.random()))
@@ -174,6 +188,17 @@ public class SparklingProperty extends Property implements IDataHolder<Holder<Pr
 		}
 
 		return result == null || !PARTICLE_MAP.containsKey(result) ? Optional.empty() : Optional.of(PARTICLE_MAP.get(result).get());
+	}
+
+	public static List<ParticleOptions> getAllParticlesForProperties(ItemStack stack) {
+
+		List<ParticleOptions> result = new ArrayList<>();
+		InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> {
+			if(PARTICLE_MAP.containsKey(propertyHolder))
+				result.add(PARTICLE_MAP.get(propertyHolder).get());
+		});
+
+		return result;
 	}
 
 	@Override

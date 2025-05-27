@@ -25,7 +25,8 @@ public class AlchemancyParticles
 
 	public static final DeferredHolder<ParticleType<?>, SimpleParticleType> GLOWING_ORB = REGISTRY.register("glowing_orb", () -> new SimpleParticleType(true));
 	public static final DeferredHolder<ParticleType<?>, SimpleParticleType> WARHAMMER_FLAME = REGISTRY.register("warhammer_flame", () -> new SimpleParticleType(true));
-	public static final DeferredHolder<ParticleType<?>, ParticleType<SparkParticle.Options>> SPARK = register("spark", true, p_337461_ -> SparkParticle.Options.CODEC, p_319435_ -> SparkParticle.Options.STREAM_CODEC);
+	public static final DeferredHolder<ParticleType<?>, ParticleType<SparkParticle.Options>> SPARK = register("spark", true, SparkParticle.Options::codec, SparkParticle.Options::streamCodec);
+	public static final DeferredHolder<ParticleType<?>, ParticleType<SparkParticle.Options>> GUST_DUST = register("gust_dust", true, SparkParticle.Options::codec, SparkParticle.Options::streamCodec);
 
 	@SubscribeEvent
 	public static void registerParticles(RegisterParticleProvidersEvent event)
@@ -33,6 +34,7 @@ public class AlchemancyParticles
 		event.registerSpriteSet(GLOWING_ORB.get(), GlowingOrbParticle.Provider::new);
 		event.registerSpriteSet(WARHAMMER_FLAME.get(), FlameParticle.Provider::new);
 		event.registerSpriteSet(SPARK.get(), SparkParticle.Provider::new);
+		event.registerSpriteSet(GUST_DUST.get(), SparkParticle.Provider::new);
 	}
 
 	private static <T extends ParticleOptions> DeferredHolder<ParticleType<?>, ParticleType<T>> register(
