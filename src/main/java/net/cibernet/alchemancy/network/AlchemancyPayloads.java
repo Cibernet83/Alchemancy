@@ -18,5 +18,7 @@ public class AlchemancyPayloads
 		PayloadRegistrar registrar = event.registrar("1");
 
 		registrar.playToClient(S2CPlayFireworksPacket.TYPE, S2CPlayFireworksPacket.STREAM_CODEC, S2CPlayFireworksPacket::handleDataOnMain);
+		registrar.playToClient(S2CPlayGustBasketEffectsPacket.TYPE, S2CPlayGustBasketEffectsPacket.STREAM_CODEC, S2CPlayGustBasketEffectsPacket::handleDataOnMain);
+		registrar.playToClient(S2CAddPlayerMovementPacket.TYPE, S2CAddPlayerMovementPacket.STREAM_CODEC, S2CAddPlayerMovementPacket::handleDataOnMain);
 	}
 }

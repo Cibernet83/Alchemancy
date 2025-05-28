@@ -43,6 +43,7 @@ public class Alchemancy {
 		AlchemancyIngredients.REGISTRY.register(modEventBus);
 		AlchemancyCriteriaTriggers.REGISTRY.register(modEventBus);
 		AlchemancySoundEvents.REGISTRY.register(modEventBus);
+		AlchemancyPoiTypes.REGISTRY.register(modEventBus);
 
 		// Register our mod's ModConfigSpec so that FML can create and load the config file for us
 		//modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);

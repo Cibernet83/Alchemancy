@@ -1,22 +1,22 @@
 package net.cibernet.alchemancy.blocks;
 
 import com.mojang.serialization.MapCodec;
+import net.cibernet.alchemancy.network.S2CAddPlayerMovementPacket;
+import net.cibernet.alchemancy.network.S2CPlayGustBasketEffectsPacket;
 import net.cibernet.alchemancy.properties.special.GustJetProperty;
 import net.cibernet.alchemancy.registries.AlchemancyBlocks;
 import net.cibernet.alchemancy.registries.AlchemancySoundEvents;
-import net.cibernet.alchemancy.util.ClientUtil;
 import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LightningBolt;
-import net.minecraft.world.entity.ai.village.poi.PoiSection;
-import net.minecraft.world.entity.ai.village.poi.PoiTypes;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
@@ -26,10 +26,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+import org.joml.Vector3f;
 
 public class GustBasketBlock extends DirectionalBlock {
 
@@ -52,8 +52,7 @@ public class GustBasketBlock extends DirectionalBlock {
 
 		Direction facing = state.getValue(FACING);
 		int amount = random.nextInt(5);
-		for (int i = 0; i < amount; i++)
-		{
+		for (int i = 0; i < amount; i++) {
 
 			double xOff = facing.getStepX() < 0 ? 0 : random.nextDouble() * (1 - facing.getStepX());
 			double yOff = facing.getStepY() < 0 ? 0 : random.nextDouble() * (1 - facing.getStepY());
@@ -66,62 +65,86 @@ public class GustBasketBlock extends DirectionalBlock {
 		}
 	}
 
-	private static final HashMap<ResourceKey<Level>, ArrayList<BlockPos>> PARTICLE_PROCESSED_GUST_BASKETS = new HashMap<>();
+	public static void tick(ServerLevel level, BlockPos pos) {
 
-	public static void doWindyThing(Entity entity)
-	{
-		Level level = entity.level();
+		BlockState state = level.getBlockState(pos);
+		var facing = state.getValue(FACING);
+		Vec3 facingStep = new Vec3(facing.getStepX(), facing.getStepY(), facing.getStepZ());
 
-		BlockPos.betweenClosedStream(CommonUtils.boundingBoxAroundPoint(entity.position(), DISTANCE)).filter(pos -> level.getBlockState(pos).is(AlchemancyBlocks.GUST_BASKET)).forEach(pos ->
-		{
+		var offset = facingStep.scale(0.5f);
+		Vec3 startVec = pos.getCenter().add(offset.x(), offset.y(), offset.z());
+
+		//FIXME: figure out a smart way to clip 4 more times, one for each corner
+		var clipPos = level.clip(new ClipContext(startVec, startVec.add(facingStep.scale(DISTANCE)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, CollisionContext.empty())).getBlockPos();
+		double distance = pos.distSqr(clipPos);
+		if (distance <= 0) return;
+
+		distance = Math.min(DISTANCE, Math.sqrt(distance));
+		boolean playEffects = false;
+
+		for (Entity target : level.getEntities(null, new AABB(pos).expandTowards(facingStep.scale(distance - 1)))) {
+			playEffects = true;
+
+			var movement = facingStep.scale((1 - target.position().distanceTo(pos.getCenter()) / DISTANCE) * 0.25f);
+
+			if (facing != Direction.UP && target instanceof ServerPlayer player) {
+				PacketDistributor.sendToPlayer(player, new S2CAddPlayerMovementPacket(movement));
+			}
+			target.setDeltaMovement(target.getDeltaMovement().add(movement));
+
+			target.hasImpulse = true;
+			target.fallDistance = Math.max(0, target.fallDistance - 2);
+		}
+
+		if (playEffects)
+			PacketDistributor.sendToPlayersTrackingChunk(level, level.getChunk(pos).getPos(), new S2CPlayGustBasketEffectsPacket(pos, distance));
+	}
+
+	public static void clientPlayerTick(Player player) {
+
+		Level level = player.level();
+		BlockPos.betweenClosedStream(CommonUtils.boundingBoxAroundPoint(player.position(), player.getBbWidth() * 0.45f).expandTowards(0, -DISTANCE, 0)).forEach(pos -> {
 			BlockState state = level.getBlockState(pos);
-			var facing = state.getValue(FACING);
+			if(!(state.is(AlchemancyBlocks.GUST_BASKET) && state.getValue(FACING) == Direction.UP))
+				return;
+
+			var facing = Direction.UP;
 			Vec3 facingStep = new Vec3(facing.getStepX(), facing.getStepY(), facing.getStepZ());
 
-			var clipPos = level.clip(new ClipContext(pos.getCenter().add(facingStep.scale(0.5f)), pos.getCenter().add(facingStep.scale(DISTANCE + 0.5f)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, entity)).getBlockPos();
+			var offset = facingStep.scale(0.5f);
+			Vec3 startVec = pos.getCenter().add(offset.x(), offset.y(), offset.z());
+
+			//FIXME: figure out a smart way to clip 4 more times, one for each corner
+			var clipPos = level.clip(new ClipContext(startVec, startVec.add(facingStep.scale(DISTANCE)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, CollisionContext.empty())).getBlockPos();
 			double distance = pos.distSqr(clipPos);
-			distance = Math.sqrt(distance);
+			//if (distance <= 0) return;
 
-			if(new AABB(pos).expandTowards(facingStep.scale(distance - 1)).intersects(entity.getBoundingBox()))
-			{
-				var oldDelta = entity.getDeltaMovement();
-				var newDelta = oldDelta.add(facingStep.scale((1 - entity.position().distanceTo(pos.getCenter()) / DISTANCE) * 0.25f));
-
-				entity.setDeltaMovement(newDelta);
-				entity.hasImpulse = true;
-				entity.fallDistance = Math.max(0, entity.fallDistance - 2);
-
-				if(level.isClientSide() && !(PARTICLE_PROCESSED_GUST_BASKETS.containsKey(level.dimension()) && PARTICLE_PROCESSED_GUST_BASKETS.get(level.dimension()).contains(pos)))
-				{
-					RandomSource random = level.getRandom();
-					double speed = distance / 6f;
-					int amount = random.nextInt(5);
-					for (int i = 0; i < amount; i++)
-					{
-						double xOff = random.nextDouble() * (1 - Math.abs(facing.getStepX()));
-						double yOff = random.nextDouble() * (1 - Math.abs(facing.getStepY()));
-						double zOff = random.nextDouble() * (1 - Math.abs(facing.getStepZ()));
-						level.addParticle(GustJetProperty.PARTICLES, pos.getX() + xOff + facing.getStepX(), pos.getY() + yOff + facing.getStepY(), pos.getZ() + zOff + facing.getStepZ(),
-								facing.getStepX() * speed, facing.getStepY() * speed, facing.getStepZ() * speed);
-					}
-
-
-					if(random.nextFloat() > 0.15f)
-						level.playLocalSound(pos, AlchemancySoundEvents.GUST_BASKET.value(), SoundSource.BLOCKS, 0.25f, (float) (distance / DISTANCE),false);
-
-					//this is probably the worst solution ever >_>
-					if(!PARTICLE_PROCESSED_GUST_BASKETS.containsKey(level.dimension()))
-						PARTICLE_PROCESSED_GUST_BASKETS.put(level.dimension(), new ArrayList<>());
-					PARTICLE_PROCESSED_GUST_BASKETS.get(level.dimension()).add(new BlockPos(pos));
-				}
-
-			}
+			var movement = facingStep.scale((1 - player.position().distanceTo(pos.getCenter()) / DISTANCE) * 0.25f);
+			player.setDeltaMovement(player.getDeltaMovement().add(movement));
+			player.hasImpulse = true;
 		});
 	}
 
-	public static void resetParticleTrackers(Level level) {
-		if(level.isClientSide() && PARTICLE_PROCESSED_GUST_BASKETS.containsKey(level.dimension()))
-			PARTICLE_PROCESSED_GUST_BASKETS.get(level.dimension()).clear();
+	public static void playGustEffects(Level level, BlockPos pos, double distance) {
+
+		RandomSource random = level.getRandom();
+		var facing = level.getBlockState(pos).getValue(FACING);
+
+		double speed = 0.33f;
+		int amount = random.nextInt(5);
+		for (int i = 0; i < amount; i++) {
+			double xOff = facing.getStepX() < 0 ? 0 : random.nextDouble() * (1 - facing.getStepX());
+			double yOff = facing.getStepY() < 0 ? 0 : random.nextDouble() * (1 - facing.getStepY());
+			double zOff = facing.getStepZ() < 0 ? 0 : random.nextDouble() * (1 - facing.getStepZ());
+			level.addParticle(GustJetProperty.PARTICLES,
+					pos.getX() + xOff + Math.max(0, facing.getStepX()),
+					pos.getY() + yOff + Math.max(0, facing.getStepY()),
+					pos.getZ() + zOff + Math.max(0, facing.getStepZ()),
+					facing.getStepX() * speed, facing.getStepY() * speed, facing.getStepZ() * speed);
+		}
+
+		if (random.nextFloat() > 0.15f)
+			level.playLocalSound(pos, AlchemancySoundEvents.GUST_BASKET.value(), SoundSource.BLOCKS, 0.25f, (float) (distance / DISTANCE), false);
 	}
 
 	@Nullable
