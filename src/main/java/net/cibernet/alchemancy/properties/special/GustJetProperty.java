@@ -6,7 +6,9 @@ import net.cibernet.alchemancy.mixin.accessors.LivingEntityAccessor;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.properties.SparklingProperty;
 import net.cibernet.alchemancy.registries.AlchemancyParticles;
+import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancySoundEvents;
+import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.particles.ParticleOptions;
@@ -36,24 +38,25 @@ public class GustJetProperty extends Property {
 
 	private static final float PARTICLE_SCALE = 1.2f;
 	public static final ParticleOptions PARTICLES = new SparkParticle.Options(AlchemancyParticles.GUST_DUST.get(), Vec3.fromRGB24(0xE0E6FF).toVector3f(), PARTICLE_SCALE, false);
-	private static final float DISTANCE = 6;
+	//private static final float DISTANCE = 6;
 
 	@Override
 	public void onItemUseTick(LivingEntity user, ItemStack stack, LivingEntityUseItemEvent.Tick event) {
 		Level level = user.level();
 		Vec3 eyePos = user.getEyePosition();
+		float maxDistance = getMaxDistance(stack);
 
 		var distance = level.clip(new ClipContext(eyePos, eyePos
-						.add(user.getLookAngle().scale(DISTANCE)), ClipContext.Block.COLLIDER, ClipContext.Fluid.ANY, user)).getLocation()
+						.add(user.getLookAngle().scale(maxDistance)), ClipContext.Block.COLLIDER, ClipContext.Fluid.ANY, user)).getLocation()
 				.distanceTo(eyePos);
-		var pow = Mth.lerp(Mth.clamp(distance / DISTANCE, 0, 1), 0.35f, 0.085f);
+		var pow = Mth.lerp(Mth.clamp(distance / maxDistance, 0, 1), 0.35f, 0.085f);
 
-		playEffects(level, user, stack, eyePos.add(user.getLookAngle()), user.getLookAngle(), (1 - distance / DISTANCE) * 1.5f + 0.75f, (float) (distance / DISTANCE), 0.1f, 0.1f);
+		playEffects(level, user, stack, eyePos.add(user.getLookAngle()), user.getLookAngle(), (1 - distance / maxDistance) * 1.5f + 0.75f, (float) (distance / maxDistance), 0.1f, 0.1f);
 		Vec3 movementVector = user.getLookAngle().scale(pow);
 
-		pushEntities(level, user, eyePos, user.getLookAngle(), stack);
+		pushEntities(level, user, maxDistance, eyePos, user.getLookAngle(), stack);
 
-		if (user.isShiftKeyDown() && user.onGround()) return;
+		if ((user.isShiftKeyDown() && user.onGround()) || shouldPull(stack)) return;
 
 		user.setDeltaMovement(user.getDeltaMovement().subtract(movementVector));
 		user.hasImpulse = true;
@@ -74,6 +77,8 @@ public class GustJetProperty extends Property {
 
 		if (user.isPassenger() || (slot != EquipmentSlot.FEET && slot != EquipmentSlot.BODY)) return;
 
+		float maxDistance = getMaxDistance(stack);
+
 		boolean jumping = ((LivingEntityAccessor) user).isJumping();
 		if (user.level().isClientSide() && user instanceof LocalPlayer localPlayer) //Dumbest way to check for jump input serverside
 			localPlayer.connection.send(new ServerboundPlayerInputPacket(localPlayer.xxa, localPlayer.zza, jumping, localPlayer.isShiftKeyDown()));
@@ -91,14 +96,14 @@ public class GustJetProperty extends Property {
 			Vec3 down = new Vec3(0, -1, 0);
 
 			var distance = level.clip(new ClipContext(pos, pos
-							.add(down.scale(DISTANCE)), ClipContext.Block.COLLIDER, ClipContext.Fluid.ANY, user)).getLocation()
+							.add(down.scale(maxDistance)), ClipContext.Block.COLLIDER, ClipContext.Fluid.ANY, user)).getLocation()
 					.distanceTo(pos);
-			var pow = Mth.lerp(Mth.clamp(distance / DISTANCE, 0, 1), 0.25f, 0.065f);
+			var pow = Mth.lerp(Mth.clamp(distance / maxDistance, 0, 1), 0.25f, 0.065f);
 			Vec3 movementVector = down.scale(pow);
 
-			playEffects(level, user, stack, pos, down, 1 - (distance / DISTANCE), (float) (distance / DISTANCE), user.getBbWidth(), 0);
+			playEffects(level, user, stack, pos, down, 1 - (distance / maxDistance), (float) (distance / maxDistance), user.getBbWidth(), 0);
 
-			pushEntities(level, user, pos, down, stack);
+			pushEntities(level, user, maxDistance, pos, down, stack);
 
 			user.setDeltaMovement(user.getDeltaMovement().subtract(movementVector));
 			user.hasImpulse = true;
@@ -114,25 +119,38 @@ public class GustJetProperty extends Property {
 		}
 	}
 
-	private void pushEntities(Level level, LivingEntity user, Vec3 startPos, Vec3 angle, ItemStack stack) {
+	private void pushEntities(Level level, LivingEntity user, float pushDistance, Vec3 startPos, Vec3 angle, ItemStack stack) {
 
-		var entities = level.getEntities(user, CommonUtils.boundingBoxAroundPoint(startPos, DISTANCE), entity ->
-				entity.position().distanceToSqr(startPos) <= DISTANCE * DISTANCE &&
+		var entities = level.getEntities(user, CommonUtils.boundingBoxAroundPoint(startPos, pushDistance), entity ->
+				entity.position().distanceToSqr(startPos) <= pushDistance * pushDistance &&
 						entity.position().vectorTo(user.position()).normalize().dot(angle) < -0.75);
+
+		boolean pull = shouldPull(stack);
 
 		for (Entity entity : entities) {
 
-			var vec = entity.position().subtract(startPos).normalize().scale(Mth.lerp(Mth.clamp(entity.position().distanceTo(startPos) / DISTANCE, 0, 1), 0.35f, 0.85f));
+			var vec = pull ?
+					entity.position().subtract(startPos).normalize().scale(Mth.lerp(Mth.clamp(entity.position().distanceTo(startPos) / pushDistance, 0, 1), -0.15f, -0.25f)) :
+					entity.position().subtract(startPos).normalize().scale(Mth.lerp(Mth.clamp(entity.position().distanceTo(startPos) / pushDistance, 0, 1), 0.35f, 0.85f));
+
 			entity.setDeltaMovement(user.getDeltaMovement().add(vec));
 			entity.hasImpulse = true;
-
-			if (user.getRandom().nextFloat() < 0.1f && entity instanceof LivingEntity living)
-				InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onAttack(user, stack, user.damageSources().generic(), living));
-
 			if (vec.y() > 0.005f)
 				entity.fallDistance = Math.max(0, user.fallDistance - 10);
+
+			if (!level.isClientSide() && user.getRandom().nextFloat() < 0.2f && entity instanceof LivingEntity living)
+				InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onAttack(user, stack, user.damageSources().generic(), living));
+
 		}
 
+	}
+
+	private boolean shouldPull(ItemStack stack) {
+		return InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.GRAPPLING);
+	}
+
+	private float getMaxDistance(ItemStack stack) {
+		return InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.EXTENDED) ? 10 : 6;
 	}
 
 	private void playEffects(Level level, LivingEntity user, ItemStack stack, Vec3 effectPosition, Vec3 movementVector, double pow, float soundPitch, float hOff, float vOff) {
@@ -146,7 +164,7 @@ public class GustJetProperty extends Property {
 
 			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder ->
 			{
-				if (propertyHolder.equals(asHolder())) return;
+				if (!propertyHolder.is(AlchemancyTags.Properties.CHANGES_GUST_JET_WIND_COLOR)) return;
 				propertyParticles.add(new SparkParticle.Options(AlchemancyParticles.GUST_DUST.get(), Vec3.fromRGB24(propertyHolder.value().getColor(stack)).toVector3f(), PARTICLE_SCALE, false));
 			});
 
