@@ -14,6 +14,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -116,8 +117,8 @@ public class GustBasketBlock extends DirectionalBlock {
 
 			//FIXME: figure out a smart way to clip 4 more times, one for each corner
 			var clipPos = level.clip(new ClipContext(startVec, startVec.add(facingStep.scale(DISTANCE)), ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, CollisionContext.empty())).getBlockPos();
-			double distance = pos.distSqr(clipPos);
-			//if (distance <= 0) return;
+			float distance = Mth.sqrt((float) pos.distSqr(clipPos));
+			if (pos.getY() + distance < player.getY()) return;
 
 			var movement = facingStep.scale((1 - player.position().distanceTo(pos.getCenter()) / DISTANCE) * 0.25f);
 			player.setDeltaMovement(player.getDeltaMovement().add(movement));
