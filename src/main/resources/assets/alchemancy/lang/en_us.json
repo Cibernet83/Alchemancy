@@ -369,6 +369,8 @@
   "property.alchemancy.quantum_bind": "Quantum Bind",
   "property.alchemancy.item_magnet": "Item Vacuum",
 
+  "property.alchemancy.infusion_codex": "Infusion Codex",
+
   "property.alchemancy.auxiliary": "Auxiliary",
   "property.alchemancy.eternal_glow": "Eternal Glow",
   "property.alchemancy.phase_step": "Phase Step",
@@ -464,6 +466,26 @@
 
   "dataPack.alchemancy.infused_loot": "Infused Loot",
   "dataPack.alchemancy.infused_loot.description": "Gives a chance for mob equipment and chest loot to have Infused Properties",
+
+  "screen.infusion_codex.search_bar": "Search...",
+
+  "screen.infusion_codex.on_attack": "On Attack",
+  "screen.infusion_codex.while_worn": "While Worn",
+  "screen.infusion_codex.while_equipped": "While Equipped",
+  "screen.infusion_codex.while_held": "While Held",
+  "screen.infusion_codex.while_rooted": "While {property alchemancy:rooted}",
+  "screen.infusion_codex.when_shot": "When shot as a Projectile",
+  "screen.infusion_codex.when_used": "When Used",
+  "screen.infusion_codex.when_used_block": "When used on a Block",
+  "screen.infusion_codex.when_used_entity": "When used on an Entity",
+
+  "infusion_codex.alchemancy:burning.flavor": "Turning up the heat",
+  "infusion_codex.alchemancy:burning.on_attack": "Sets the target on fire for 5 seconds. Duration is multiplied by the item's level of {enchantment minecraft:fire_aspect}.",
+  "infusion_codex.alchemancy:burning.while_worn": "Constantly sets the user on fire every half a second.",
+  "infusion_codex.alchemancy:burning.while_rooted": "Sets entities inside of the item on fire for 4 seconds. Duration is multiplied by the item's level of {enchantment minecraft:fire_aspect}.",
+  "infusion_codex.alchemancy:burning.when_shot": "Sets the shot projectile on fire for 4 seconds.",
+
+  "narrator.infusion_codex.search_bar": "Search for infusions",
 
   "alchemancy.journal.landing_text": "$(o)This book will be your guide to the limitless world of $(thing)Alchemancy$()$(o): a magic mod focused around granting the functionality and properties of any item to any other item with the power of Alchemy and Artifice.",
 

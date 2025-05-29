@@ -1,0 +1,302 @@
+package net.cibernet.alchemancy.client.screen;
+
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.properties.Property;
+import net.cibernet.alchemancy.registries.AlchemancyProperties;
+import net.cibernet.alchemancy.util.CommonUtils;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.AbstractWidget;
+import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.StringWidget;
+import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
+import net.minecraft.client.gui.layouts.LinearLayout;
+import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.level.block.Block;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class InfusionCodexEntryScreen extends Screen {
+
+	private static final ResourceLocation INWORLD_MENU_LIST_BACKGROUND = ResourceLocation.withDefaultNamespace("textures/gui/inworld_menu_list_background.png");
+
+	private final Holder<Property> property;
+	protected final Screen lastScreen;
+
+	private HeaderAndFooterLayout layout;
+
+	protected InfusionCodexEntryScreen(Holder<Property> property, Screen lastScreen) {
+		super(property.value().getName());
+		this.property = property;
+		this.lastScreen = lastScreen;
+	}
+
+	@Override
+	protected void init() {
+		super.init();
+
+		layout = new HeaderAndFooterLayout(this, 40, 24);
+		LinearLayout footer = layout.addToFooter(LinearLayout.vertical()).spacing(5);
+		footer.defaultCellSetting().alignHorizontallyCenter();
+		footer.addChild(Button.builder(CommonComponents.GUI_DONE, p_329727_ -> this.onClose()).width(200).build());
+
+		LinearLayout header = layout.addToHeader(LinearLayout.vertical()).spacing(5);
+		header.addChild(new TitleWidget(200, 16, title, this.font, InfusedPropertiesHelper.createPropertyCapsule(property)).alignCenter());
+
+		if(hasTranslation("flavor"))
+			header.addChild(new StringWidget(200, 9, translated("flavor").withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY), this.font).alignCenter());
+
+		layout.addToContents(new EntryBox(0, 0, width, height - layout.getHeaderHeight() - layout.getFooterHeight(), 8, 8));
+
+		layout.visitWidgets(this::addRenderableWidget);
+		layout.arrangeElements();
+	}
+
+	private MutableComponent translated(String key)
+	{
+		return Component.translatable("infusion_codex.%s.%s".formatted(property.getRegisteredName(), key));
+	}
+
+	private boolean hasTranslation(String key)
+	{
+		return I18n.exists("infusion_codex.%s.%s".formatted(property.getRegisteredName(), key));
+	}
+
+	@Override
+	public void onClose() {
+		this.minecraft.setScreen(this.lastScreen);
+	}
+
+	class EntryBox extends AbstractWidget {
+
+		final int xPadding;
+		final int yPadding;
+
+		public EntryBox(int x, int y, int width, int height, int xPadding, int yPadding) {
+			super(x, y, width, height, Component.empty());
+			this.xPadding = xPadding;
+			this.yPadding = yPadding;
+		}
+
+		private float textYPointer = 0;
+
+		@Override
+		protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+
+			renderListBackground(guiGraphics);
+			guiGraphics.enableScissor(getX(), getY(), getRight(), getBottom());
+
+			textYPointer = yPadding;
+
+			renderTextLine(guiGraphics, Component.translatable("screen.infusion_codex.on_attack"), 1.25f, 5592575);
+			renderTextLine(guiGraphics, translated("on_attack"), 1, 0xFFFFFF);
+			textYPointer += 10;
+
+			renderTextLine(guiGraphics, Component.translatable("screen.infusion_codex.while_worn"), 1.25f, 5592575);
+			renderTextLine(guiGraphics, translated("while_worn"), 1, 0xFFFFFF);
+			textYPointer += 10;
+
+			renderTextLine(guiGraphics, Component.translatable("screen.infusion_codex.while_rooted"), 1.25f, 5592575);
+			renderTextLine(guiGraphics, translated("while_rooted"), 1, 0xFFFFFF);
+			textYPointer += 10;
+
+			renderTextLine(guiGraphics, Component.translatable("screen.infusion_codex.when_shot"), 1.25f, 5592575);
+			renderTextLine(guiGraphics, translated("when_shot"), 1, 0xFFFFFF);
+
+
+			//renderTextLine(guiGraphics, Component.literal("{item alchemancy:dreamsteel_ingot} is simply {property alchemancy:paradoxical} text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."), 1, 0xFFFFFF);
+
+			guiGraphics.disableScissor();
+
+			renderListSeparators(guiGraphics);
+		}
+
+		private static final String FORMAT_REGEX = "\\{([^\\}]*)\\}";
+
+		public Component processFormatting(String formatType, String value) {
+
+			return switch (formatType.toLowerCase()) {
+				case "property" -> {
+					Optional<Property> property = CommonUtils.registryAccessStatic().registryOrThrow(AlchemancyProperties.REGISTRY_KEY).getOptional(ResourceLocation.parse(value));
+					yield property.map(Property::getName).orElse(Component.literal(value).withColor(0xFF0000));
+				}
+				case "item" -> {
+					Optional<Item> property = CommonUtils.registryAccessStatic().registryOrThrow(Registries.ITEM).getOptional(ResourceLocation.parse(value));
+					yield property.map(item -> item.getName(item.getDefaultInstance()).copy().withStyle(ChatFormatting.GREEN)).orElse(Component.literal(value).withColor(0xFF0000));
+				}
+				case "block" -> {
+					Optional<Block> property = CommonUtils.registryAccessStatic().registryOrThrow(Registries.BLOCK).getOptional(ResourceLocation.parse(value));
+					yield property.map(block -> block.getName().copy().withStyle(ChatFormatting.GREEN)).orElse(Component.literal(value).withColor(0xFF0000));
+				}
+				case "enchantment" -> {
+					Optional<Enchantment> property = CommonUtils.registryAccessStatic().registryOrThrow(Registries.ENCHANTMENT).getOptional(ResourceLocation.parse(value));
+					yield property.map(block -> block.description().copy().withStyle(ChatFormatting.LIGHT_PURPLE)).orElse(Component.literal(value).withColor(0xFF0000));
+				}
+
+				case "hint" -> Component.literal(value).withColor(0x00FFFF);
+				default -> Component.literal(value);
+			};
+		}
+
+		public void renderTextLine(GuiGraphics guiGraphics, Component text, float scale, int color) {
+			PoseStack poseStack = guiGraphics.pose();
+
+			poseStack.pushPose();
+			if(scale != 1)
+				poseStack.scale(scale, scale, 1);
+
+			ArrayList<Component> things = new ArrayList<>();
+
+			String str = text.getString();
+			str = str.replace("%s", "");
+			str = Pattern.compile(FORMAT_REGEX).matcher(str).replaceAll(matchResult ->
+			{
+				String found = matchResult.group();
+				found = found.substring(1, found.length() - 1);
+
+				String[] params = found.split(" ", 2);
+				things.add(processFormatting(params.length < 2 ? "" : params[0], params[params.length-1]));
+				return "%s";
+			});
+
+			MutableComponent newText = Component.empty();
+
+			int i = 0;
+			for (String s : str.split("%s")) {
+
+				newText = newText.append(s);
+				if(i < things.size())
+					newText = newText.append(things.get(i));
+
+				i++;
+			}
+
+			for (FormattedCharSequence t : font.split(newText, width - xPadding * 2)) {
+				guiGraphics.drawString(font, t, getX() + xPadding, ((getY() + textYPointer) / scale), color, true);
+				textYPointer += font.lineHeight * scale;
+			}
+
+			textYPointer += font.lineHeight * 0.5f;
+
+			poseStack.popPose();
+		}
+
+		@Override
+		protected void updateWidgetNarration(NarrationElementOutput narrationElementOutput) {
+
+		}
+
+		protected void renderListBackground(GuiGraphics guiGraphics) {
+			RenderSystem.enableBlend();
+			ResourceLocation resourcelocation = INWORLD_MENU_LIST_BACKGROUND;
+			guiGraphics.blit(
+					resourcelocation,
+					this.getX(),
+					this.getY(),
+					(float)this.getRight(),
+					(float)(this.getBottom()),// + (int)this.getScrollAmount()),
+					this.getWidth(),
+					this.getHeight(),
+					32,
+					32
+			);
+			RenderSystem.disableBlend();
+		}
+
+
+		protected void renderListSeparators(GuiGraphics guiGraphics) {
+			RenderSystem.enableBlend();
+			guiGraphics.blit(Screen.INWORLD_HEADER_SEPARATOR, this.getX(), this.getY() - 2, 0.0F, 0.0F, this.getWidth(), 2, 32, 2);
+			guiGraphics.blit(Screen.INWORLD_FOOTER_SEPARATOR, this.getX(), this.getBottom(), 0.0F, 0.0F, this.getWidth(), 2, 32, 2);
+			RenderSystem.disableBlend();
+		}
+
+		interface TooltipRendering {
+			void apply(GuiGraphics guiGraphics, Font font, int mouseX, int mouseY);
+		}
+
+
+		record TextTooltip(int x, int y, int width, int height, List<Component> lines) implements TooltipRendering {
+			@Override
+			public void apply(GuiGraphics guiGraphics, Font font, int mouseX, int mouseY) {
+				if(mouseX >= x && mouseY >= y && mouseX < mouseX + width && mouseY < mouseY + height)
+					guiGraphics.renderTooltip(font, lines().stream().map(Component::getVisualOrderText).toList(), mouseX, mouseY);
+			}
+		}
+		record ItemTooltip(int x, int y, int width, int height, ItemStack stack) implements TooltipRendering {
+			@Override
+			public void apply(GuiGraphics guiGraphics, Font font, int mouseX, int mouseY) {
+				if(mouseX >= x && mouseY >= y && mouseX < mouseX + width && mouseY < mouseY + height)
+					guiGraphics.renderTooltip(font, stack(), mouseX, mouseY);
+			}
+		}
+	}
+
+	private static class TitleWidget extends StringWidget {
+
+		private final ItemStack stack;
+		private final float alignX = 0.5f;
+
+		public TitleWidget(int width, int height, Component message, Font font, ItemStack stack) {
+			super(width, height, message, font);
+			this.stack = stack;
+		}
+
+		@Override
+		public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+
+			PoseStack poseStack = guiGraphics.pose();
+			poseStack.pushPose();
+
+			int scale = 2;
+			int yOff = 0;
+
+			poseStack.scale(scale, scale, 1);
+
+			setX(getX() / scale);
+			setY(getY() / scale + yOff);
+			setWidth(getWidth() / scale);
+			setHeight(getHeight() / scale);
+
+			super.renderWidget(guiGraphics, mouseX, mouseY, partialTick);
+			setX(getX() * scale);
+			setY((getY() - yOff) * scale);
+			setWidth(getWidth() * scale);
+			setHeight(getHeight() * scale);
+
+
+			poseStack.popPose();
+
+			Component component = this.getMessage();
+			Font font = this.getFont();
+			int i = this.getWidth();
+			int j = font.width(component) * scale;
+			int k = this.getX() + Math.round(this.alignX * (float)(i - j));
+			int l = this.getY() + (this.getHeight() - 9) / 2;
+
+			guiGraphics.renderFakeItem(stack, k - 20, l - 4 + (yOff * scale));
+			guiGraphics.renderFakeItem(stack, k + j + 4, l - 4 + (yOff * scale));
+		}
+	}
+}
