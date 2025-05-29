@@ -67,7 +67,7 @@ public class InfusionCodexEntryScreen extends Screen {
 		if(hasTranslation("flavor"))
 			header.addChild(new StringWidget(200, 9, translated("flavor").withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY), this.font).alignCenter());
 
-		layout.addToContents(new EntryBox(0, 0, width, height - layout.getHeaderHeight() - layout.getFooterHeight(), 8, 8));
+		layout.addToContents(new EntryBox(0, 0, width, height - layout.getHeaderHeight() - layout.getFooterHeight(), 32, 8));
 
 		layout.visitWidgets(this::addRenderableWidget);
 		layout.arrangeElements();
@@ -168,6 +168,8 @@ public class InfusionCodexEntryScreen extends Screen {
 
 			ArrayList<Component> things = new ArrayList<>();
 
+			//TODO pool these on init
+
 			String str = text.getString();
 			str = str.replace("%s", "");
 			str = Pattern.compile(FORMAT_REGEX).matcher(str).replaceAll(matchResult ->
@@ -193,7 +195,7 @@ public class InfusionCodexEntryScreen extends Screen {
 			}
 
 			for (FormattedCharSequence t : font.split(newText, width - xPadding * 2)) {
-				guiGraphics.drawString(font, t, getX() + xPadding, ((getY() + textYPointer) / scale), color, true);
+				guiGraphics.drawString(font, t, (getX() + xPadding) / scale, ((getY() + textYPointer) / scale), color, true);
 				textYPointer += font.lineHeight * scale;
 			}
 
