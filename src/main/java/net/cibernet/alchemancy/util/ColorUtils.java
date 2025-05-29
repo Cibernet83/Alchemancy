@@ -21,4 +21,8 @@ public class ColorUtils
 		float partialSecond = ((System.currentTimeMillis() % (1000L * (long) time)) / 1000f);
 		return FastColor.ARGB32.lerp(Mth.sin((Mth.DEG_TO_RAD * 360 * (partialSecond / time))) * 0.5f + 0.5f, colorA, colorB);
 	}
+
+	public static String colorToHexString(int color) {
+		return String.format("%06X", color).toUpperCase();
+	}
 }

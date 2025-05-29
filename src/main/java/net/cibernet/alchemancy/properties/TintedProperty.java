@@ -1,18 +1,21 @@
 package net.cibernet.alchemancy.properties;
 
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
+import net.cibernet.alchemancy.item.InnatePropertyItem;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.mixin.accessors.AbstractCauldronAccessor;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
+import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
+import net.cibernet.alchemancy.util.ColorUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FastColor;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.DyeItem;
@@ -21,17 +24,31 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.AbstractCauldronBlock;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import net.neoforged.neoforge.registries.DeferredItem;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 
 public class TintedProperty extends Property implements IDataHolder<Integer>, ITintModifier
 {
 	public static final int DEFAULT_COLOR = FastColor.ARGB32.opaque(0xFFFFFF);
+
+	public static final InnatePropertyItem.Tooltip CHROMA_LENS_TOOLTIP = (stack, context, tooltipComponents, tooltipFlag) ->
+	{
+		tooltipComponents.add(getColorName(AlchemancyProperties.TINTED.get().getDyeColor(stack)));
+	};
+
+	private static final Int2ObjectOpenHashMap<DyeColor> TINT_TO_DYE_MAP = new Int2ObjectOpenHashMap<>(
+			Arrays.stream(DyeColor.values()).collect(Collectors.toMap(DyeColor::getTextureDiffuseColor, dye -> dye))
+	);
+
+	private static Component getColorName(int color) {
+		DyeColor dyecolor = TINT_TO_DYE_MAP.get(color);
+		return dyecolor == null ? Component.translatable("property.detail.color", ColorUtils.colorToHexString(color)).withColor(color) :
+				Component.translatable("color.minecraft." + dyecolor.getName()).withColor(color);
+	}
 
 	@Override
 	public boolean cluelessCanReset() {
@@ -39,17 +56,19 @@ public class TintedProperty extends Property implements IDataHolder<Integer>, IT
 	}
 
 	@Override
-	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid, List<Holder<Property>> propertiesToAdd)
+	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid, List<Holder<Property>> propertiesToAdd, AtomicBoolean consumeItem)
 	{
 		int base = getData(stack);
 		int color = getDyeColor(propertySource);
 
-
-
 		if(color == -1)
-			return super.onInfusedByDormantProperty(stack, propertySource, grid, propertiesToAdd);
+			return super.onInfusedByDormantProperty(stack, propertySource, grid, propertiesToAdd, consumeItem);
 
 		setData(stack, base == getDefaultData() ? FastColor.ARGB32.color(255, color) :  mixColors(base, List.of(color)));
+
+		if(propertySource.is(AlchemancyItems.CHROMA_LENS))
+			consumeItem.set(false);
+
 		return true;
 	}
 

@@ -43,6 +43,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class WaywardWarpProperty extends Property implements IDataHolder<WayfindingProperty.WayfindData>
 {
@@ -84,12 +85,12 @@ public class WaywardWarpProperty extends Property implements IDataHolder<Wayfind
 	}
 
 	@Override
-	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid, List<Holder<Property>> propertiesToAdd)
+	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid, List<Holder<Property>> propertiesToAdd, AtomicBoolean consumeItem)
 	{
 		WayfindingProperty.WayfindData wayfindData = AlchemancyProperties.WAYFINDING.get().getData(stack).getA();
 		if(wayfindData.hasTarget())
 			setData(stack, wayfindData);
-		return super.onInfusedByDormantProperty(stack, propertySource, grid, propertiesToAdd);
+		return super.onInfusedByDormantProperty(stack, propertySource, grid, propertiesToAdd, consumeItem);
 	}
 
 	@Override

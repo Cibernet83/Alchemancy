@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "#c:dyes"
+    "#c:dyes",
+    "alchemancy:chroma_lens"
   ]
 }

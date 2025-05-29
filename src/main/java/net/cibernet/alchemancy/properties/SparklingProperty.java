@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 
 public class SparklingProperty extends Property implements IDataHolder<Holder<Property>> {
@@ -122,7 +123,7 @@ public class SparklingProperty extends Property implements IDataHolder<Holder<Pr
 	}
 
 	@Override
-	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid, List<Holder<Property>> propertiesToAdd) {
+	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid, List<Holder<Property>> propertiesToAdd, AtomicBoolean consumeItem) {
 
 
 		if (getData(propertySource) != null)
@@ -137,7 +138,7 @@ public class SparklingProperty extends Property implements IDataHolder<Holder<Pr
 			}
 		}
 
-		return super.onInfusedByDormantProperty(stack, propertySource, grid, propertiesToAdd);
+		return super.onInfusedByDormantProperty(stack, propertySource, grid, propertiesToAdd, consumeItem);
 	}
 
 	@Override

@@ -64,6 +64,7 @@ public class AlchemancyCreativeTabs
 
 				output.accept(MICROSCOPIC_LENS.get());
 				output.accept(MACROSCOPIC_LENS.get());
+				output.accept(CHROMA_LENS.get());
 
 				output.accept(GLOWING_ORB.get());
 

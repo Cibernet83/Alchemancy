@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "alchemancy:item/chroma_lens_tint",
+    "layer1": "alchemancy:item/chroma_lens"
+  }
+}

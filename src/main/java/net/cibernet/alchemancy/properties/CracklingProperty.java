@@ -12,7 +12,6 @@ import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.chat.Component;
@@ -33,6 +32,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class CracklingProperty extends Property implements IDataHolder<Fireworks> {
 
@@ -83,7 +83,7 @@ public class CracklingProperty extends Property implements IDataHolder<Fireworks
 	}
 
 	@Override
-	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid, List<Holder<Property>> propertiesToAdd) {
+	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid, List<Holder<Property>> propertiesToAdd, AtomicBoolean consumeItem) {
 
 		Fireworks stackFireworks = propertySource.get(DataComponents.FIREWORKS);
 		if (stackFireworks == null && propertySource.has(DataComponents.FIREWORK_EXPLOSION))

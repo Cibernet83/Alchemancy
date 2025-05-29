@@ -20,6 +20,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class InfusionFlask extends ThrowableItemProjectile implements ItemSupplier {
 
@@ -92,7 +93,7 @@ public class InfusionFlask extends ThrowableItemProjectile implements ItemSuppli
 		var grid = new ForgeRecipeGrid(itemStack);
 
 		for (Holder<Property> property : List.copyOf(infusions)) {
-			if (property.value().onInfusedByDormantProperty(itemStack, getItem(), grid, infusions))
+			if (property.value().onInfusedByDormantProperty(itemStack, getItem(), grid, infusions, new AtomicBoolean(false)))
 				perform = true;
 		}
 

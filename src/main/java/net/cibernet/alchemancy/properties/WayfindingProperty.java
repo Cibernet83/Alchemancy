@@ -44,14 +44,15 @@ import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 @EventBusSubscriber
 public class WayfindingProperty extends Property implements IDataHolder<Tuple<WayfindingProperty.WayfindData, WayfindingProperty.RotationData>>
 {
 	@Override
-	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid, List<Holder<Property>> propertiesToAdd)
+	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid, List<Holder<Property>> propertiesToAdd, AtomicBoolean consumeItem)
 	{
-		if(super.onInfusedByDormantProperty(stack, propertySource, grid, propertiesToAdd))
+		if(super.onInfusedByDormantProperty(stack, propertySource, grid, propertiesToAdd, consumeItem))
 		{
 			if(propertySource.has(DataComponents.LODESTONE_TRACKER))
 			{

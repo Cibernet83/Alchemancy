@@ -1,8 +1,6 @@
 package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
-import net.cibernet.alchemancy.item.InnatePropertyItem;
-import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
@@ -18,9 +16,9 @@ import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiFunction;
 import java.util.function.Function;
-import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
 public abstract class IncreaseInfuseSlotsProperty extends Property
@@ -76,9 +74,9 @@ public abstract class IncreaseInfuseSlotsProperty extends Property
 	}
 
 	@Override
-	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid, List<Holder<Property>> propertiesToAdd)
+	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid, List<Holder<Property>> propertiesToAdd, AtomicBoolean consumeItem)
 	{
-		if(super.onInfusedByDormantProperty(stack, propertySource, grid, propertiesToAdd))
+		if(super.onInfusedByDormantProperty(stack, propertySource, grid, propertiesToAdd, consumeItem))
 		{
 			PropertyModifierComponent.set(stack, asHolder(), AlchemancyProperties.Modifiers.BONUS_SLOTS, PropertyModifierComponent.get(propertySource, asHolder(), AlchemancyProperties.Modifiers.BONUS_SLOTS));
 			return true;

@@ -16,6 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PristineProperty extends Property implements IDataHolder<Integer>, ITintModifier
 {
@@ -25,14 +26,14 @@ public class PristineProperty extends Property implements IDataHolder<Integer>, 
 	}
 
 	@Override
-	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid, List<Holder<Property>> propertiesToAdd)
+	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid, List<Holder<Property>> propertiesToAdd, AtomicBoolean consumeItem)
 	{
 		if(!getData(stack).equals(getDefaultData()))
 		{
 			removeData(stack);
 			return true;
 		}
-		return super.onInfusedByDormantProperty(stack, propertySource, grid, propertiesToAdd);
+		return super.onInfusedByDormantProperty(stack, propertySource, grid, propertiesToAdd, consumeItem);
 	}
 
 	@Override

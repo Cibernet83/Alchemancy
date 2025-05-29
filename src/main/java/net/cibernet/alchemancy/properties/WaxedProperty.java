@@ -15,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class WaxedProperty extends Property implements IDataHolder<Integer>
 {
@@ -26,12 +27,12 @@ public class WaxedProperty extends Property implements IDataHolder<Integer>
 
 
 	@Override
-	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid, List<Holder<Property>> propertiesToAdd) {
+	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid, List<Holder<Property>> propertiesToAdd, AtomicBoolean consumeItem) {
 		if (!getData(stack).equals(getDefaultData())) {
 			removeData(stack);
 			return true;
 		}
-		return super.onInfusedByDormantProperty(stack, propertySource, grid, propertiesToAdd);
+		return super.onInfusedByDormantProperty(stack, propertySource, grid, propertiesToAdd, consumeItem);
 	}
 
 	@Override

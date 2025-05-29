@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ForgeRecipeGrid implements RecipeInput
 {
@@ -401,9 +402,10 @@ public class ForgeRecipeGrid implements RecipeInput
 				continue;
 
 			boolean perform = false;
+			AtomicBoolean consumeItem = new AtomicBoolean(true);
 			for (Holder<Property> property : List.copyOf(properties))
 			{
-				if(property.value().onInfusedByDormantProperty(target, stack, this, properties))
+				if(property.value().onInfusedByDormantProperty(target, stack, this, properties, consumeItem))
 					perform = true;
 			}
 
@@ -412,8 +414,11 @@ public class ForgeRecipeGrid implements RecipeInput
 				if(consume)
 				{
 					InfusedPropertiesHelper.addProperties(target, properties);
-					items.remove(pedestal);
-					consumeItem(pedestal);
+					if(consumeItem.get())
+					{
+						items.remove(pedestal);
+						consumeItem(pedestal);
+					}
 				}
 
 				success = true;
@@ -454,7 +459,7 @@ public class ForgeRecipeGrid implements RecipeInput
 
 			boolean perform = false;
 			for (Holder<Property> property : properties) {
-				if(property.value().onInfusedByDormantProperty(target, stack, this, properties))
+				if(property.value().onInfusedByDormantProperty(target, stack, this, properties, new AtomicBoolean(false)))
 					perform = true;
 			}
 
