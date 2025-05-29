@@ -101,6 +101,51 @@ public class InfusionCodexEntryScreen extends Screen {
 
 		private float textYPointer = 0;
 
+		private static final String[] functions = new String[] {
+				"on_attack",
+				"modify_damage",
+				"on_kill",
+				"activate",
+				"activate_by_block",
+				"when_hit_held",
+				"when_hit_worn",
+				"when_hit_equipped",
+				"when_hit_using",
+				"receive_damage_held",
+				"receive_damage_worn",
+				"receive_damage_equipped",
+				"receive_damage_using",
+				"when_hit_worn_or_using",
+				"while_worn_helmet",
+				"while_worn_chestplate",
+				"while_worn_leggings",
+				"while_worn_boots",
+				"while_worn_lower",
+				"while_worn",
+				"while_equipped",
+				"while_held",
+				"while_held_mainhand",
+				"while_held_offhand",
+				"while_in_inventory",
+				"while_rooted",
+				"when_shot",
+				"when_shot_from_dispenser",
+				"when_dropped",
+				"when_used",
+				"when_used_block",
+				"when_used_entity",
+				"while_used",
+				"after_use",
+				"on_destroy",
+				"stacked_over",
+				"stacked_on",
+				"pick_up",
+				"pick_up_while_equipped",
+				"pick_up_while_worn",
+				"pick_up_while_held",
+				"other_effects"
+		};
+
 		@Override
 		protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
 
@@ -109,20 +154,9 @@ public class InfusionCodexEntryScreen extends Screen {
 
 			textYPointer = yPadding;
 
-			renderTextLine(guiGraphics, Component.translatable("screen.infusion_codex.on_attack"), 1.25f, 5592575);
-			renderTextLine(guiGraphics, translated("on_attack"), 1, 0xFFFFFF);
-			textYPointer += 10;
-
-			renderTextLine(guiGraphics, Component.translatable("screen.infusion_codex.while_worn"), 1.25f, 5592575);
-			renderTextLine(guiGraphics, translated("while_worn"), 1, 0xFFFFFF);
-			textYPointer += 10;
-
-			renderTextLine(guiGraphics, Component.translatable("screen.infusion_codex.while_rooted"), 1.25f, 5592575);
-			renderTextLine(guiGraphics, translated("while_rooted"), 1, 0xFFFFFF);
-			textYPointer += 10;
-
-			renderTextLine(guiGraphics, Component.translatable("screen.infusion_codex.when_shot"), 1.25f, 5592575);
-			renderTextLine(guiGraphics, translated("when_shot"), 1, 0xFFFFFF);
+			for (String function : functions) {
+				renderFunctionParagraph(guiGraphics, function);
+			}
 
 
 			//renderTextLine(guiGraphics, Component.literal("{item alchemancy:dreamsteel_ingot} is simply {property alchemancy:paradoxical} text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."), 1, 0xFFFFFF);
@@ -130,6 +164,16 @@ public class InfusionCodexEntryScreen extends Screen {
 			guiGraphics.disableScissor();
 
 			renderListSeparators(guiGraphics);
+		}
+
+		private void renderFunctionParagraph(GuiGraphics guiGraphics, String functionKey) {
+
+			if(hasTranslation(functionKey))
+			{
+				renderTextLine(guiGraphics, Component.translatable("screen.infusion_codex." + functionKey), 1.25f, 5592575);
+				renderTextLine(guiGraphics, translated(functionKey), 1, 0xFFFFFF);
+				textYPointer += 10;
+			}
 		}
 
 		private static final String FORMAT_REGEX = "\\{([^\\}]*)\\}";
@@ -154,9 +198,18 @@ public class InfusionCodexEntryScreen extends Screen {
 					yield property.map(block -> block.description().copy().withStyle(ChatFormatting.LIGHT_PURPLE)).orElse(Component.literal(value).withColor(0xFF0000));
 				}
 
+				case "shock" -> Component.literal(value).withColor(AlchemancyProperties.SHOCKING.get().getColor(ItemStack.EMPTY));
+				case "arcane" -> Component.literal(value).withColor(AlchemancyProperties.ARCANE.get().getColor(ItemStack.EMPTY));
+				case "activate" -> Component.literal(value).withColor(0xFF6366);
+				case "function" -> Component.literal(value).withColor(5592575);
 				case "hint" -> Component.literal(value).withColor(0x00FFFF);
 				default -> Component.literal(value);
 			};
+		}
+
+		@Override
+		public boolean mouseClicked(double mouseX, double mouseY, int button) {
+			return false;//super.mouseClicked(mouseX, mouseY, button);
 		}
 
 		public void renderTextLine(GuiGraphics guiGraphics, Component text, float scale, int color) {
