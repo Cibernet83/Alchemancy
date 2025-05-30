@@ -26,12 +26,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
-import net.minecraft.world.item.Item;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.level.block.Block;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,6 +41,8 @@ import java.util.regex.Pattern;
 public class InfusionCodexEntryScreen extends Screen {
 
 	private static final ResourceLocation INWORLD_MENU_LIST_BACKGROUND = ResourceLocation.withDefaultNamespace("textures/gui/inworld_menu_list_background.png");
+	private static final ResourceLocation SCROLLER_SPRITE = ResourceLocation.withDefaultNamespace("widget/scroller");
+	private static final ResourceLocation SCROLLER_BACKGROUND_SPRITE = ResourceLocation.withDefaultNamespace("widget/scroller_background");
 
 	private final Holder<Property> property;
 	private final CodexEntryReloadListenener.CodexEntry entry;
@@ -107,8 +108,58 @@ public class InfusionCodexEntryScreen extends Screen {
 			this.yPadding = yPadding;
 		}
 
-		private float textYPointer = 0;
-		private static final int itemSize = 20;
+		private static final int itemPadding = 2;
+		private static final int itemSize = itemPadding * 2 + 16;
+		private static final int SCROLLBAR_WIDTH = 6;
+
+		private float textYPointer, entryHeight, scrollAmount;
+		private boolean scrolling;
+
+		@Override
+		public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY) {
+
+			float oldAmount = scrollAmount;
+			scrollAmount = Mth.clamp(scrollAmount - (float) (scrollY * font.lineHeight), 0, getMaxScroll());
+
+			return oldAmount != scrollAmount;
+		}
+
+		public float getMaxScroll() {
+			return Math.max(0, this.entryHeight - getHeight());
+		}
+
+		public boolean scrollbarVisible() {
+			return getMaxScroll() > 0;
+		}
+
+		@Override
+		public boolean mouseClicked(double mouseX, double mouseY, int button) {
+
+			scrolling = (button == 0 && mouseX >= (double)this.getScrollbarPosition() && mouseX < (double)(this.getScrollbarPosition() + SCROLLBAR_WIDTH));
+			return scrolling;//super.mouseClicked(mouseX, mouseY, button);
+		}
+
+
+		@Override
+		public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
+			if (button == 0 && this.scrolling) {
+				if (mouseY < (double)this.getY()) {
+					scrollAmount = 0.0f;
+				} else if (mouseY > (double)this.getBottom()) {
+					scrollAmount = this.getMaxScroll();
+				} else {
+					float d0 = Math.max(1, this.getMaxScroll());
+					int i = this.height;
+					int j = Mth.clamp((int)((float)(i * i) / (this.entryHeight - getHeight())), 32, i - 8);
+					float d1 = Math.max(1, d0 / (float)(i - j));
+					scrollAmount = (float) Math.clamp(scrollAmount + dragY * d1, 0, getMaxScroll());
+				}
+
+				return true;
+			} else {
+				return false;
+			}
+		}
 
 		@Override
 		protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
@@ -116,7 +167,7 @@ public class InfusionCodexEntryScreen extends Screen {
 			renderListBackground(guiGraphics);
 			guiGraphics.enableScissor(getX(), getY(), getRight(), getBottom());
 
-			textYPointer = yPadding;
+			textYPointer = yPadding - scrollAmount;
 
 			for (PropertyFunction function : entry.functions()) {
 				renderFunctionParagraph(guiGraphics, function.localizationKey);
@@ -135,17 +186,42 @@ public class InfusionCodexEntryScreen extends Screen {
 					int yy = getY() + (int) textYPointer + ((i / itemsPerRow) * itemSize);
 					guiGraphics.renderFakeItem(stack, xx, yy);
 
-					if(mouseX >= xx && mouseX < xx + 16 && mouseY >= yy && mouseY < yy + 16)
+					if(mouseX >= xx - itemPadding && mouseX < xx - itemPadding + itemSize && mouseY >= yy - itemPadding && mouseY < yy - itemPadding + itemSize)
 						hoveredItem = stack;
 				}
+
+				textYPointer += (((dormantItems.length - 1) / itemsPerRow) * itemSize) + 10;
 			}
 
 			guiGraphics.disableScissor();
 
 			renderListSeparators(guiGraphics);
 
-			if(!hoveredItem.isEmpty())
-				guiGraphics.renderTooltip(font, hoveredItem, mouseX, mouseY);
+			if (this.scrollbarVisible()) {
+				int l = getScrollbarPosition();
+				int i1 = (int)((float)(this.height * this.height) / (float)this.getMaxScroll());
+				i1 = Mth.clamp(i1, 32, this.height - 8);
+				float k = (int)this.scrollAmount * (this.height - i1) / this.getMaxScroll() + this.getY();
+				if (k < this.getY()) {
+					k = this.getY();
+				}
+
+				RenderSystem.enableBlend();
+				guiGraphics.blitSprite(SCROLLER_BACKGROUND_SPRITE, l, this.getY(), 6, this.getHeight());
+				guiGraphics.blitSprite(SCROLLER_SPRITE, l, (int) k, 6, i1);
+				RenderSystem.disableBlend();
+			}
+
+			if(mouseX >= getX() && mouseX <= getRight() && mouseY >= getY() && mouseY <= getBottom())
+			{
+				if (!hoveredItem.isEmpty())
+					guiGraphics.renderTooltip(font, hoveredItem, mouseX, mouseY);
+			}
+			entryHeight = textYPointer + 10 + scrollAmount;
+		}
+
+		private int getScrollbarPosition() {
+			return getWidth() - xPadding;
 		}
 
 		private void renderFunctionParagraph(GuiGraphics guiGraphics, String functionKey) {
@@ -185,11 +261,6 @@ public class InfusionCodexEntryScreen extends Screen {
 				case "hint" -> Component.literal(value).withColor(0x00FFFF);
 				default -> Component.literal(value);
 			};
-		}
-
-		@Override
-		public boolean mouseClicked(double mouseX, double mouseY, int button) {
-			return false;//super.mouseClicked(mouseX, mouseY, button);
 		}
 
 		public void renderTextLine(GuiGraphics guiGraphics, Component text, float scale, int color) {
