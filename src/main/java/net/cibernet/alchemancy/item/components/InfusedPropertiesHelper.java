@@ -248,6 +248,10 @@ public class InfusedPropertiesHelper
 		return stack.getOrDefault(INFUSED_PROPERTIES, InfusedPropertiesComponent.EMPTY).properties();
 	}
 
+	public static List<Holder<Property>> getInnateProperties(ItemStack stack) {
+		return stack.getOrDefault(INNATE_PROPERTIES, InfusedPropertiesComponent.EMPTY).properties();
+	}
+
 	public static List<Holder<Property>> getStoredProperties(ItemStack stack) {
 		return stack.getOrDefault(STORED_PROPERTIES, InfusedPropertiesComponent.EMPTY).properties();
 	}

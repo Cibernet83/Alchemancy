@@ -4,6 +4,7 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.cibernet.alchemancy.client.data.CodexEntryReloadListenener;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
+import net.cibernet.alchemancy.properties.special.InfusionCodexProperty;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -31,9 +32,24 @@ public class InfusionCodexIndexScreen extends Screen {
 	private EditBox searchBar;
 	private HeaderAndFooterLayout layout;
 
+	private final ItemStack inspectedItem;
+	private final Screen previousScreen;
+
 	public InfusionCodexIndexScreen(Component title) {
 		super(title);
+		inspectedItem = ItemStack.EMPTY;
+		this.previousScreen = Minecraft.getInstance().screen;
+	}
 
+	public InfusionCodexIndexScreen(ItemStack inspectedItem) {
+		super(inspectedItem.getDisplayName());
+		this.inspectedItem = inspectedItem;
+		this.previousScreen = Minecraft.getInstance().screen;
+	}
+
+	@Override
+	public void onClose() {
+		minecraft.setScreen(previousScreen);
 	}
 
 	@Override
@@ -42,15 +58,12 @@ public class InfusionCodexIndexScreen extends Screen {
 		layout = new HeaderAndFooterLayout(this, 48, 32);
 		LinearLayout footer = layout.addToFooter(LinearLayout.vertical()).spacing(5);
 		footer.defaultCellSetting().alignHorizontallyCenter();
-		LinearLayout linearlayout1 = footer.addChild(LinearLayout.horizontal()).spacing(5);
-		//linearlayout1.addChild(Button.builder(GENERAL_BUTTON, p_96963_ -> this.setActiveList(this.statsList)).width(120).build());
-		//Button button = linearlayout1.addChild(Button.builder(ITEMS_BUTTON, p_96959_ -> this.setActiveList(this.itemStatsList)).width(120).build());
-		//Button button1 = linearlayout1.addChild(Button.builder(MOBS_BUTTON, p_96949_ -> this.setActiveList(this.mobsStatsList)).width(120).build());
 		footer.addChild(Button.builder(CommonComponents.GUI_DONE, p_329727_ -> this.onClose()).width(200).build());
 
-		LinearLayout header = layout.addToHeader(LinearLayout.vertical()).spacing(5);
-		header.addChild(new StringWidget(200, 18, title, this.font).alignCenter());
-
+		LinearLayout header = layout.addToHeader(LinearLayout.vertical()).spacing(2);
+		if(!inspectedItem.isEmpty())
+			header.addChild(new StringWidget(200, 9, Component.translatable("screen.infusion_codex.inspecting").withStyle(ChatFormatting.GRAY), this.font).alignCenter());
+		header.addChild(new StringWidget(200, inspectedItem.isEmpty() ? 18 : 9, title, this.font).alignCenter());
 
 		if(searchBar == null) {
 			searchBar = new EditBox(font, 200, 16, Component.translatable("narrator.infusion_codex.search_bar")){
@@ -103,7 +116,10 @@ public class InfusionCodexIndexScreen extends Screen {
 
 		public PropertyList(Minecraft minecraft) {
 			super(minecraft, InfusionCodexIndexScreen.this.width, InfusionCodexIndexScreen.this.height - 33 - 58, 33, 16);
-			var objectarraylist = new ObjectArrayList<>(CodexEntryReloadListenener.getEntries().entrySet().stream()
+
+			var entrySet = inspectedItem.isEmpty() ? CodexEntryReloadListenener.getEntries() : InfusionCodexProperty.inspectItem(minecraft.player, inspectedItem);
+
+			var objectarraylist = new ObjectArrayList<>(entrySet.entrySet().stream()
 					.filter(propertyHolder -> propertyHolder.getKey().value().getName().getString().toLowerCase().contains(searchBar.getValue().toLowerCase()))
 					.toList());
 			objectarraylist.sort(Comparator.comparing(entry -> entry.getKey().getKey()));
