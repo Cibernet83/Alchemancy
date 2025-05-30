@@ -3,6 +3,7 @@ package net.cibernet.alchemancy.client.screen;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.cibernet.alchemancy.client.data.CodexEntryReloadListenener;
+import net.cibernet.alchemancy.data.save.InfusionCodexSaveData;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
@@ -60,6 +61,8 @@ public class InfusionCodexEntryScreen extends Screen {
 
 		Ingredient ingredient = Ingredient.of(property.value().getDormantPropertyTag());
 		dormantItems = ingredient.isEmpty() ? new ItemStack[0] : Arrays.stream(ingredient.getItems()).filter(stack -> !stack.is(Items.BARRIER)).toArray(ItemStack[]::new);
+
+		InfusionCodexSaveData.read(property);
 	}
 
 	@Override
