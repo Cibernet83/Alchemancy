@@ -6,6 +6,7 @@ import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.util.CommonUtils;
+import net.cibernet.alchemancy.util.PropertyFunction;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -24,17 +25,14 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InfusionCodexEntryScreen extends Screen {
@@ -62,10 +60,10 @@ public class InfusionCodexEntryScreen extends Screen {
 		footer.addChild(Button.builder(CommonComponents.GUI_DONE, p_329727_ -> this.onClose()).width(200).build());
 
 		LinearLayout header = layout.addToHeader(LinearLayout.vertical()).spacing(5);
-		header.addChild(new TitleWidget(200, 16, title, this.font, InfusedPropertiesHelper.createPropertyCapsule(property)).alignCenter());
+		header.addChild(new TitleWidget(width, 16, this.font, property).alignCenter());
 
 		if(hasTranslation("flavor"))
-			header.addChild(new StringWidget(200, 9, translated("flavor").withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY), this.font).alignCenter());
+			header.addChild(new StringWidget(width, 9, translated("flavor").withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY), this.font).alignCenter());
 
 		layout.addToContents(new EntryBox(0, 0, width, height - layout.getHeaderHeight() - layout.getFooterHeight(), 32, 8));
 
@@ -101,51 +99,6 @@ public class InfusionCodexEntryScreen extends Screen {
 
 		private float textYPointer = 0;
 
-		private static final String[] functions = new String[] {
-				"on_attack",
-				"modify_damage",
-				"on_kill",
-				"activate",
-				"activate_by_block",
-				"when_hit_held",
-				"when_hit_worn",
-				"when_hit_equipped",
-				"when_hit_using",
-				"receive_damage_held",
-				"receive_damage_worn",
-				"receive_damage_equipped",
-				"receive_damage_using",
-				"when_hit_worn_or_using",
-				"while_worn_helmet",
-				"while_worn_chestplate",
-				"while_worn_leggings",
-				"while_worn_boots",
-				"while_worn_lower",
-				"while_worn",
-				"while_equipped",
-				"while_held",
-				"while_held_mainhand",
-				"while_held_offhand",
-				"while_in_inventory",
-				"while_rooted",
-				"when_shot",
-				"when_shot_from_dispenser",
-				"when_dropped",
-				"when_used",
-				"when_used_block",
-				"when_used_entity",
-				"while_used",
-				"after_use",
-				"on_destroy",
-				"stacked_over",
-				"stacked_on",
-				"pick_up",
-				"pick_up_while_equipped",
-				"pick_up_while_worn",
-				"pick_up_while_held",
-				"other_effects"
-		};
-
 		@Override
 		protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
 
@@ -154,8 +107,8 @@ public class InfusionCodexEntryScreen extends Screen {
 
 			textYPointer = yPadding;
 
-			for (String function : functions) {
-				renderFunctionParagraph(guiGraphics, function);
+			for (PropertyFunction function : PropertyFunction.values()) {
+				renderFunctionParagraph(guiGraphics, function.localizationKey);
 			}
 
 
@@ -185,23 +138,21 @@ public class InfusionCodexEntryScreen extends Screen {
 					Optional<Property> property = CommonUtils.registryAccessStatic().registryOrThrow(AlchemancyProperties.REGISTRY_KEY).getOptional(ResourceLocation.parse(value));
 					yield property.map(Property::getName).orElse(Component.literal(value).withColor(0xFF0000));
 				}
-				case "item" -> {
-					Optional<Item> property = CommonUtils.registryAccessStatic().registryOrThrow(Registries.ITEM).getOptional(ResourceLocation.parse(value));
-					yield property.map(item -> item.getName(item.getDefaultInstance()).copy().withStyle(ChatFormatting.GREEN)).orElse(Component.literal(value).withColor(0xFF0000));
-				}
-				case "block" -> {
-					Optional<Block> property = CommonUtils.registryAccessStatic().registryOrThrow(Registries.BLOCK).getOptional(ResourceLocation.parse(value));
-					yield property.map(block -> block.getName().copy().withStyle(ChatFormatting.GREEN)).orElse(Component.literal(value).withColor(0xFF0000));
-				}
 				case "enchantment" -> {
 					Optional<Enchantment> property = CommonUtils.registryAccessStatic().registryOrThrow(Registries.ENCHANTMENT).getOptional(ResourceLocation.parse(value));
 					yield property.map(block -> block.description().copy().withStyle(ChatFormatting.LIGHT_PURPLE)).orElse(Component.literal(value).withColor(0xFF0000));
 				}
 
+				case "function" -> Component.translatable("screen.infusion_codex."+value).withStyle(ChatFormatting.BLUE);
+
 				case "shock" -> Component.literal(value).withColor(AlchemancyProperties.SHOCKING.get().getColor(ItemStack.EMPTY));
 				case "arcane" -> Component.literal(value).withColor(AlchemancyProperties.ARCANE.get().getColor(ItemStack.EMPTY));
+				case "item" -> Component.literal(value).withStyle(ChatFormatting.GREEN);
+				case "attribute" -> Component.literal(value).withStyle(ChatFormatting.DARK_AQUA);
+				case "system" -> Component.literal(value).withStyle(ChatFormatting.AQUA);
+				case "nether" -> Component.literal(value).withStyle(ChatFormatting.RED);
+				case "end" -> Component.literal(value).withStyle(ChatFormatting.DARK_PURPLE);
 				case "activate" -> Component.literal(value).withColor(0xFF6366);
-				case "function" -> Component.literal(value).withColor(5592575);
 				case "hint" -> Component.literal(value).withColor(0x00FFFF);
 				default -> Component.literal(value);
 			};
@@ -311,11 +262,18 @@ public class InfusionCodexEntryScreen extends Screen {
 	private static class TitleWidget extends StringWidget {
 
 		private final ItemStack stack;
+		private final Holder<Property> propertyHolder;
 		private final float alignX = 0.5f;
 
-		public TitleWidget(int width, int height, Component message, Font font, ItemStack stack) {
-			super(width, height, message, font);
-			this.stack = stack;
+		public TitleWidget(int width, int height, Font font, Holder<Property> propertyHolder) {
+			super(width, height, Component.empty(), font);
+			this.stack = InfusedPropertiesHelper.createPropertyCapsule(propertyHolder);
+			this.propertyHolder = propertyHolder;
+		}
+
+		@Override
+		public Component getMessage() {
+			return propertyHolder.value().getName(stack);
 		}
 
 		@Override
