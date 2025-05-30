@@ -28,10 +28,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.regex.Pattern;
@@ -42,6 +45,8 @@ public class InfusionCodexEntryScreen extends Screen {
 
 	private final Holder<Property> property;
 	private final CodexEntryReloadListenener.CodexEntry entry;
+	private final ItemStack[] dormantItems;
+
 	protected final Screen lastScreen;
 
 	private HeaderAndFooterLayout layout;
@@ -51,6 +56,9 @@ public class InfusionCodexEntryScreen extends Screen {
 		this.property = property;
 		this.entry = entry;
 		this.lastScreen = lastScreen;
+
+		Ingredient ingredient = Ingredient.of(property.value().getDormantPropertyTag());
+		dormantItems = ingredient.isEmpty() ? new ItemStack[0] : Arrays.stream(ingredient.getItems()).filter(stack -> !stack.is(Items.BARRIER)).toArray(ItemStack[]::new);
 	}
 
 	@Override
@@ -100,6 +108,7 @@ public class InfusionCodexEntryScreen extends Screen {
 		}
 
 		private float textYPointer = 0;
+		private static final int itemSize = 20;
 
 		@Override
 		protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
@@ -113,12 +122,30 @@ public class InfusionCodexEntryScreen extends Screen {
 				renderFunctionParagraph(guiGraphics, function.localizationKey);
 			}
 
+			ItemStack hoveredItem = ItemStack.EMPTY;
+			if(dormantItems.length > 0)
 
-			//renderTextLine(guiGraphics, Component.literal("{item alchemancy:dreamsteel_ingot} is simply {property alchemancy:paradoxical} text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."), 1, 0xFFFFFF);
+			{
+				renderTextLine(guiGraphics, Component.translatable("screen.infusion_codex.dormant_properties"), 1.25f, 5592575);
+
+				int itemsPerRow = (width - xPadding * 2) / itemSize;
+				for (int i = 0; i < dormantItems.length; i++) {
+					ItemStack stack = dormantItems[i];
+					int xx = getX() + xPadding + ((i % itemsPerRow) * itemSize);
+					int yy = getY() + (int) textYPointer + ((i / itemsPerRow) * itemSize);
+					guiGraphics.renderFakeItem(stack, xx, yy);
+
+					if(mouseX >= xx && mouseX < xx + 16 && mouseY >= yy && mouseY < yy + 16)
+						hoveredItem = stack;
+				}
+			}
 
 			guiGraphics.disableScissor();
 
 			renderListSeparators(guiGraphics);
+
+			if(!hoveredItem.isEmpty())
+				guiGraphics.renderTooltip(font, hoveredItem, mouseX, mouseY);
 		}
 
 		private void renderFunctionParagraph(GuiGraphics guiGraphics, String functionKey) {
