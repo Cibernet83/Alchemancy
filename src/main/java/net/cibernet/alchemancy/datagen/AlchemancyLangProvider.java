@@ -83,7 +83,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.REINFORCED, PropertyFunction.ATTRIBUTE_MODIFIER, "Increases the item's {attribute Armor} value by 3 and its {attribute Armor Toughness} by 1.");
 
 		addCodexFlavor(AlchemancyProperties.PRISTINE, "");
-		addCodexFunction(AlchemancyProperties.PRISTINE, PropertyFunction.DURABILITY_CONSUMED, "Consumes 1 Pristine point instead of taking damage. The Infusion is removed after 100 Pristine points are consumed.");
+		addCodexFunction(AlchemancyProperties.PRISTINE, PropertyFunction.DURABILITY_CONSUMED, "Consumes 1 {property alchemancy:pristine} point instead of taking damage. The Infusion is removed after 100 {property alchemancy:pristine} points are consumed.");
 
 		addCodexFlavor(AlchemancyProperties.HELLBENT, "");
 		addCodexFunction(AlchemancyProperties.HELLBENT, PropertyFunction.MODIFY_DAMAGE, "Makes attacks always crit, triggering {function on_crit} effects.");
@@ -111,7 +111,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 
 		addCodexFlavor(AlchemancyProperties.CHOPPING, "");
 		addCodexFunction(AlchemancyProperties.CHOPPING, PropertyFunction.ATTRIBUTE_MODIFIER, "Allows the item to break Axe-related blocks, starting at wooden tier if the item isn't already a tool.");
-		addCodexFunction(AlchemancyProperties.CHOPPING, PropertyFunction.WHEN_USED_BLOCK, "Strips {item Logs and} removes wax from {item Copper Blocks}");
+		addCodexFunction(AlchemancyProperties.CHOPPING, PropertyFunction.WHEN_USED_BLOCK, "Strips {item Logs} and removes wax from {item Copper Blocks}");
 		addCodexFunction(AlchemancyProperties.CHOPPING, PropertyFunction.WHEN_SHOT, "Breaks Axe-related blocks on impact. The faster the projectile goes, the more likely it is to continue its trajectory after breaking a block.");
 
 		addCodexFlavor(AlchemancyProperties.DIGGING, "Diggy diggy hole, digging a hole");
@@ -127,7 +127,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFlavor(AlchemancyProperties.SHEARING, "Beats paper");
 		addCodexFunction(AlchemancyProperties.SHEARING, PropertyFunction.ATTRIBUTE_MODIFIER, "Allows the item to swiftly break Leaves, Cobwebs, and Wool.");
 		addCodexFunction(AlchemancyProperties.SHEARING, PropertyFunction.WHEN_USED_ENTITY, "Can shear Sheep.");
-		addCodexFunction(AlchemancyProperties.SHEARING, PropertyFunction.WHEN_SHOT_FROM_DISPENSER, "Can shear Sheep in front of the {item Doispenser}.");
+		addCodexFunction(AlchemancyProperties.SHEARING, PropertyFunction.WHEN_SHOT_FROM_DISPENSER, "Can shear Sheep in front of the {item Dispenser}.");
 
 		addCodexFlavor(AlchemancyProperties.SLASHING, "Got my sword. Got my hat. What else do I need?");
 		addCodexFunction(AlchemancyProperties.SLASHING, PropertyFunction.ATTRIBUTE_MODIFIER, "Allows the item to swiftly break bamboo and cobwebs.");
