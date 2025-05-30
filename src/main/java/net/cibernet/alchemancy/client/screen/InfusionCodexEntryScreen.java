@@ -2,6 +2,7 @@ package net.cibernet.alchemancy.client.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.cibernet.alchemancy.client.data.CodexEntryReloadListenener;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
@@ -40,13 +41,15 @@ public class InfusionCodexEntryScreen extends Screen {
 	private static final ResourceLocation INWORLD_MENU_LIST_BACKGROUND = ResourceLocation.withDefaultNamespace("textures/gui/inworld_menu_list_background.png");
 
 	private final Holder<Property> property;
+	private final CodexEntryReloadListenener.CodexEntry entry;
 	protected final Screen lastScreen;
 
 	private HeaderAndFooterLayout layout;
 
-	protected InfusionCodexEntryScreen(Holder<Property> property, Screen lastScreen) {
+	protected InfusionCodexEntryScreen(Holder<Property> property, CodexEntryReloadListenener.CodexEntry entry, Screen lastScreen) {
 		super(property.value().getName());
 		this.property = property;
+		this.entry = entry;
 		this.lastScreen = lastScreen;
 	}
 
@@ -62,8 +65,7 @@ public class InfusionCodexEntryScreen extends Screen {
 		LinearLayout header = layout.addToHeader(LinearLayout.vertical()).spacing(5);
 		header.addChild(new TitleWidget(width, 16, this.font, property).alignCenter());
 
-		if(hasTranslation("flavor"))
-			header.addChild(new StringWidget(width, 9, translated("flavor").withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY), this.font).alignCenter());
+		header.addChild(new StringWidget(width, 9, entry.flavor().copy().withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY), this.font).alignCenter());
 
 		layout.addToContents(new EntryBox(0, 0, width, height - layout.getHeaderHeight() - layout.getFooterHeight(), 32, 8));
 
@@ -107,7 +109,7 @@ public class InfusionCodexEntryScreen extends Screen {
 
 			textYPointer = yPadding;
 
-			for (PropertyFunction function : PropertyFunction.values()) {
+			for (PropertyFunction function : entry.functions()) {
 				renderFunctionParagraph(guiGraphics, function.localizationKey);
 			}
 
@@ -121,7 +123,7 @@ public class InfusionCodexEntryScreen extends Screen {
 
 		private void renderFunctionParagraph(GuiGraphics guiGraphics, String functionKey) {
 
-			if(hasTranslation(functionKey))
+			//if(hasTranslation(functionKey))
 			{
 				renderTextLine(guiGraphics, Component.translatable("screen.infusion_codex." + functionKey), 1.25f, 5592575);
 				renderTextLine(guiGraphics, translated(functionKey), 1, 0xFFFFFF);

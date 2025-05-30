@@ -1,6 +1,7 @@
 package net.cibernet.alchemancy.client.screen;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.cibernet.alchemancy.client.data.CodexEntryReloadListenener;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
@@ -20,6 +21,8 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.common.extensions.IHolderExtension;
 
 import java.util.Comparator;
+import java.util.Map;
+import java.util.Set;
 
 public class InfusionCodexIndexScreen extends Screen {
 
@@ -100,13 +103,13 @@ public class InfusionCodexIndexScreen extends Screen {
 
 		public PropertyList(Minecraft minecraft) {
 			super(minecraft, InfusionCodexIndexScreen.this.width, InfusionCodexIndexScreen.this.height - 33 - 58, 33, 16);
-			ObjectArrayList<Holder<Property>> objectarraylist = new ObjectArrayList<>(AlchemancyProperties.REGISTRY.getEntries().stream()
-					.filter(propertyHolder -> propertyHolder.value().getName().getString().toLowerCase().contains(searchBar.getValue().toLowerCase()))
+			var objectarraylist = new ObjectArrayList<>(CodexEntryReloadListenener.getEntries().entrySet().stream()
+					.filter(propertyHolder -> propertyHolder.getKey().value().getName().getString().toLowerCase().contains(searchBar.getValue().toLowerCase()))
 					.toList());
-			objectarraylist.sort(Comparator.comparing(IHolderExtension::getKey));
+			objectarraylist.sort(Comparator.comparing(entry -> entry.getKey().getKey()));
 
-			for (Holder<Property> propertyHolder : objectarraylist) {
-				this.addEntry(new PropertyList.Entry(propertyHolder));
+			for (Map.Entry<Holder<Property>, CodexEntryReloadListenener.CodexEntry> propertyHolder : objectarraylist) {
+				this.addEntry(new PropertyList.Entry(propertyHolder.getKey(), propertyHolder.getValue()));
 			}
 		}
 
@@ -124,13 +127,15 @@ public class InfusionCodexIndexScreen extends Screen {
 		@OnlyIn(Dist.CLIENT)
 		class Entry extends ObjectSelectionList.Entry<PropertyList.Entry> {
 			private final Holder<Property> property;
+			private final CodexEntryReloadListenener.CodexEntry entry;
 			private final Component textNarration;
 			private final ItemStack propertyCapsule;
 
-			Entry(Holder<Property> stat) {
-				this.property = stat;
-				this.textNarration = stat.value().getName();
-				this.propertyCapsule = InfusedPropertiesHelper.createPropertyCapsule(property);
+			Entry(Holder<Property> property, CodexEntryReloadListenener.CodexEntry entry) {
+				this.property = property;
+				this.textNarration = property.value().getName();
+				this.entry = entry;
+				this.propertyCapsule = InfusedPropertiesHelper.createPropertyCapsule(this.property);
 			}
 
 			private String getValueText() {
@@ -170,7 +175,7 @@ public class InfusionCodexIndexScreen extends Screen {
 			@Override
 			public boolean mouseClicked(double mouseX, double mouseY, int button) {
 				if(equals(getSelected()))
-					minecraft.setScreen(new InfusionCodexEntryScreen(property, InfusionCodexIndexScreen.this));
+					minecraft.setScreen(new InfusionCodexEntryScreen(property, entry, InfusionCodexIndexScreen.this));
 				return true;
 			}
 

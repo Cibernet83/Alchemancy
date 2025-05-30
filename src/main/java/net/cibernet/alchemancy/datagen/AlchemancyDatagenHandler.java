@@ -43,6 +43,7 @@ public class AlchemancyDatagenHandler
 		)));
 
 		generator.addProvider(event.includeClient(), new AlchemancyLangProvider(output));
+		generator.addProvider(event.includeClient(), new CodexEntryProvider(lookupProvider, output));
 
 		//generator.addProvider(event.includeClient(), new PropertyEntryProvider(output, lookupProvider, AlchemancyProperties.WARPED));
 	}

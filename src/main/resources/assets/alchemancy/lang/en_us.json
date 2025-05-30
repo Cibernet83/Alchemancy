@@ -714,7 +714,7 @@
   "infusion_codex.alchemancy:hellbent.modify_damage": "Makes attacks always crit, triggering {function on_crit} effects.",
   "infusion_codex.alchemancy:hellbent.when_shot": "Triggers {function on_crit} effects when hitting an entity.",
   "infusion_codex.alchemancy:limit_break.flavor": "This is to go even further beyond!",
-  "infusion_codex.alchemancy:limit_break.other_effects": "Grants an additional {system Infusion Slot}",
+  "infusion_codex.alchemancy:limit_break.attribute_modifier": "Grants an additional {system Infusion Slot}",
   "infusion_codex.alchemancy:lustrous.attribute_modifier": "Sets the item's tool material to {item Diamond} tier. Doubles the item's durability up to a maximum total of 1600.",
   "infusion_codex.alchemancy:lustrous.flavor": "",
   "infusion_codex.alchemancy:malleable.flavor": "Great for Stop Motion Animation",

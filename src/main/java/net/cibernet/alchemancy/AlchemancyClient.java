@@ -1,5 +1,6 @@
 package net.cibernet.alchemancy;
 
+import net.cibernet.alchemancy.client.data.CodexEntryReloadListenener;
 import net.cibernet.alchemancy.client.render.AlchemancyCatalystItemRenderer;
 import net.cibernet.alchemancy.client.render.AlchemancyCatalystRenderer;
 import net.cibernet.alchemancy.client.render.ItemStackHolderRenderer;
@@ -27,6 +28,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
@@ -124,5 +126,10 @@ public class AlchemancyClient
 	public static void initAdditionalModels(ModelEvent.RegisterAdditional event)
 	{
 		event.register(AlchemancyCatalystItemRenderer.FRAME_LOCATION);
+	}
+
+	@SubscribeEvent
+	public static void registerReloadListeners(RegisterClientReloadListenersEvent event) {
+		event.registerReloadListener(CodexEntryReloadListenener.INSTANCE);
 	}
 }

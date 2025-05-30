@@ -1,6 +1,9 @@
 package net.cibernet.alchemancy.util;
 
-public enum PropertyFunction {
+import net.minecraft.core.Direction;
+import net.minecraft.util.StringRepresentable;
+
+public enum PropertyFunction implements StringRepresentable {
 	ATTRIBUTE_MODIFIER("attribute_modifier"),
 	ON_ATTACK("on_attack"),
 	MODIFY_DAMAGE("modify_damage"),
@@ -51,7 +54,14 @@ public enum PropertyFunction {
 	OTHER("other_effects");
 	public final String localizationKey;
 
+	public static final StringRepresentable.EnumCodec<PropertyFunction> CODEC = StringRepresentable.fromEnum(PropertyFunction::values);
+
 	PropertyFunction(String localizationKey) {
 		this.localizationKey = localizationKey;
+	}
+
+	@Override
+	public String getSerializedName() {
+		return localizationKey;
 	}
 }

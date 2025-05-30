@@ -1,12 +1,16 @@
 package net.cibernet.alchemancy.datagen;
 
 import net.cibernet.alchemancy.Alchemancy;
+import net.cibernet.alchemancy.client.data.CodexEntryReloadListenener;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.util.PropertyFunction;
 import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
+import net.minecraft.network.chat.Component;
 import net.neoforged.neoforge.common.data.LanguageProvider;
+
+import java.util.ArrayList;
 
 public class AlchemancyLangProvider extends LanguageProvider {
 
@@ -139,7 +143,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 //		addCodexFunction(AlchemancyProperties., PropertyFunction., "");
 
 		addCodexFlavor(AlchemancyProperties.LIMIT_BREAK, "This is to go even further beyond!");
-		addCodexFunction(AlchemancyProperties.LIMIT_BREAK, PropertyFunction.OTHER, "Grants an additional {system Infusion Slot}");
+		addCodexFunction(AlchemancyProperties.LIMIT_BREAK, PropertyFunction.ATTRIBUTE_MODIFIER, "Grants an additional {system Infusion Slot}");
 
 		addCodexFlavor(AlchemancyProperties.AWAKENED, "Unlock your True Potential");
 		addCodexFunction(AlchemancyProperties.AWAKENED, PropertyFunction.OTHER, "Makes {system Dormant Properties} act as if they were {system Infused} onto the item, triggering all related effects.");
@@ -149,9 +153,15 @@ public class AlchemancyLangProvider extends LanguageProvider {
 	}
 
 	protected void addCodexFlavor(Holder<Property> propertyHolder, String text) {
-		add("infusion_codex.%s.flavor".formatted(propertyHolder.getRegisteredName()), text);
+
+		String translationKey = "infusion_codex.%s.flavor".formatted(propertyHolder.getRegisteredName());
+		add(translationKey, text);
+		CodexEntryProvider.ENTRIES.put(propertyHolder, new CodexEntryReloadListenener.CodexEntry(Component.translatable(translationKey), new ArrayList<>()));
 	}
 	protected void addCodexFunction(Holder<Property> propertyHolder, PropertyFunction function, String text) {
 		add("infusion_codex.%s.%s".formatted(propertyHolder.getRegisteredName(), function.localizationKey), text);
+
+		if(CodexEntryProvider.ENTRIES.containsKey(propertyHolder))
+			CodexEntryProvider.ENTRIES.get(propertyHolder).functions().add(function);
 	}
 }
