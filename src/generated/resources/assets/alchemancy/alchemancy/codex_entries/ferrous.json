@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:ferrous.flavor"
+  },
+  "functions": [
+    "while_worn",
+    "attribute_modifier"
+  ]
+}

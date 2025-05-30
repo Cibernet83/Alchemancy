@@ -1,0 +1,10 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:frosted.flavor"
+  },
+  "functions": [
+    "on_attack",
+    "while_worn",
+    "while_rooted"
+  ]
+}

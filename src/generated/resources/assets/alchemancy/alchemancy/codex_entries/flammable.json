@@ -1,0 +1,10 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:flammable.flavor"
+  },
+  "functions": [
+    "on_attack",
+    "while_equipped",
+    "other_effects"
+  ]
+}

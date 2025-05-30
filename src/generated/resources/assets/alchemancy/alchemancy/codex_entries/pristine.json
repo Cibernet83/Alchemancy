@@ -1,0 +1,8 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:pristine.flavor"
+  },
+  "functions": [
+    "durability_consumed"
+  ]
+}

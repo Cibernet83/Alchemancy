@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:hardened.flavor"
+  },
+  "functions": [
+    "durability_consumed",
+    "when_shot"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:shearing.flavor"
+  },
+  "functions": [
+    "attribute_modifier",
+    "when_used_entity",
+    "when_shot_from_dispenser"
+  ]
+}

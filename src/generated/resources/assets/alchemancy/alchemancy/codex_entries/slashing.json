@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:slashing.flavor"
+  },
+  "functions": [
+    "attribute_modifier",
+    "modify_damage"
+  ]
+}

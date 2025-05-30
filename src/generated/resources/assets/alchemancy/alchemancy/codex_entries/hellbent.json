@@ -1,0 +1,10 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:hellbent.flavor"
+  },
+  "functions": [
+    "modify_damage",
+    "when_shot",
+    "block_destroyed"
+  ]
+}
