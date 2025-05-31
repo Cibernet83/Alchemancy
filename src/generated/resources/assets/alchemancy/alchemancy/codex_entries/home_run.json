@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:home_run.flavor"
+  },
+  "functions": [
+    "modify_damage",
+    "attribute_modifier"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:death_ward.flavor"
+  },
+  "functions": [
+    "while_equipped"
+  ]
+}

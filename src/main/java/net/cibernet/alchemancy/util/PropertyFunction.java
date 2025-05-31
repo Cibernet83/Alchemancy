@@ -51,6 +51,8 @@ public enum PropertyFunction implements StringRepresentable {
 	PICK_UP_WHILE_WORN("pick_up_while_worn"),
 	PICK_UP_WHILE_HELD("pick_up_while_held"),
 	DURABILITY_CONSUMED("durability_consumed"),
+	ON_FALL("on_fall"),
+	VISUAL("visual"),
 	OTHER("other_effects");
 	public final String localizationKey;
 

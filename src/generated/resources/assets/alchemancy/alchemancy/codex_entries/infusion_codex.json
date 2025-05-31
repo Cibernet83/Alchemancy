@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:infusion_codex.flavor"
+  },
+  "functions": [
+    "when_used",
+    "stacked_over"
+  ]
+}

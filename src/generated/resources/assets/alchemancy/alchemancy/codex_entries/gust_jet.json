@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:gust_jet.flavor"
+  },
+  "functions": [
+    "while_using",
+    "while_worn_boots"
+  ]
+}

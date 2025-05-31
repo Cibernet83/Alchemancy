@@ -1,0 +1,8 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:sharp.flavor"
+  },
+  "functions": [
+    "attribute_modifier"
+  ]
+}

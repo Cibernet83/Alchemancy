@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:resized.flavor"
+  },
+  "functions": [
+    "visual",
+    "attribute_modifier"
+  ]
+}

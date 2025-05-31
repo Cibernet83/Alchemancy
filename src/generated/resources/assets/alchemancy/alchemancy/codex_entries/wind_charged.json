@@ -1,0 +1,8 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:wind_charged.flavor"
+  },
+  "functions": [
+    "on_crit"
+  ]
+}

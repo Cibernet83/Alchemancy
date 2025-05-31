@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:dense.flavor"
+  },
+  "functions": [
+    "modify_damage",
+    "on_fall"
+  ]
+}

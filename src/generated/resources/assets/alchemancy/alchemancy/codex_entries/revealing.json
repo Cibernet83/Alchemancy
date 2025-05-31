@@ -1,8 +1,0 @@
-{
-  "flavor": {
-    "translate": "infusion_codex.alchemancy:revealed.flavor"
-  },
-  "functions": [
-    "while_worn_helmet"
-  ]
-}

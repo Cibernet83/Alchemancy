@@ -1,0 +1,8 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:launching.flavor"
+  },
+  "functions": [
+    "on_crit"
+  ]
+}

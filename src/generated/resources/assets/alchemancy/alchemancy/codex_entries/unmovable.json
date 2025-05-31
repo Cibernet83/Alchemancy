@@ -1,6 +1,6 @@
 {
   "flavor": {
-    "translate": "infusion_codex.alchemancy:revealed.flavor"
+    "translate": "infusion_codex.alchemancy:unmovable.flavor"
   },
   "functions": [
     "other_effects"
