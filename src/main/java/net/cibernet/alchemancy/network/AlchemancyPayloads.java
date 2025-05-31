@@ -21,5 +21,6 @@ public class AlchemancyPayloads
 		registrar.playToClient(S2CPlayGustBasketEffectsPacket.TYPE, S2CPlayGustBasketEffectsPacket.STREAM_CODEC, S2CPlayGustBasketEffectsPacket::handleDataOnMain);
 		registrar.playToClient(S2CAddPlayerMovementPacket.TYPE, S2CAddPlayerMovementPacket.STREAM_CODEC, S2CAddPlayerMovementPacket::handleDataOnMain);
 		registrar.playToClient(S2CUnlockCodexEntriesPacket.TYPE, S2CUnlockCodexEntriesPacket.STREAM_CODEC, S2CUnlockCodexEntriesPacket::handleDataOnMain);
+		registrar.playToClient(S2CDiscoverCodexIngredientsPacket.TYPE, S2CDiscoverCodexIngredientsPacket.STREAM_CODEC, S2CDiscoverCodexIngredientsPacket::handleDataOnMain);
 	}
 }

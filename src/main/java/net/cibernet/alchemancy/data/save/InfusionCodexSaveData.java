@@ -108,13 +108,21 @@ public class InfusionCodexSaveData {
 	}
 
 	public static boolean isItemDiscovered(ItemStack stack) {
-		return DISCOVERED_ITEMS.contains(getItemKey(stack));
+		return isItemDiscovered(getItemKey(stack));
 	}
 
 	public static void discoverItem(ItemStack stack) {
+		discoverItem(getItemKey(stack));
+	}
+
+	public static boolean isItemDiscovered(ResourceLocation stack) {
+		return bypassesUnlocks() || DISCOVERED_ITEMS.contains(stack);
+	}
+
+	public static void discoverItem(ResourceLocation stack) {
 		if (!isItemDiscovered(stack))
 		{
-			DISCOVERED_ITEMS.add(getItemKey(stack));
+			DISCOVERED_ITEMS.add(stack);
 			queueSave();
 		}
 	}
@@ -145,7 +153,7 @@ public class InfusionCodexSaveData {
 
 	public static void unlock(Holder<Property> propertyHolder) {
 		ResourceLocation key = getKey(propertyHolder);
-		if(key != null && !bypassesUnlocks() && !UNLOCKED_INFUSIONS.containsKey(key))
+		if(key != null && !isUnlocked(propertyHolder))
 		{
 			UNLOCKED_INFUSIONS.put(key, new EntryData(true));
 			InfusionCodexToast.addOrUpdate(Minecraft.getInstance().getToasts(), propertyHolder);

@@ -6,11 +6,13 @@ import net.cibernet.alchemancy.blocks.blockentities.ItemStackHolderBlockEntity;
 import net.cibernet.alchemancy.crafting.AbstractForgeRecipe;
 import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.network.S2CDiscoverCodexIngredientsPacket;
 import net.cibernet.alchemancy.network.S2CUnlockCodexEntriesPacket;
 import net.cibernet.alchemancy.registries.*;
 import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -118,6 +120,8 @@ public class AlchemancyCatalystBlock extends TransparentBlock implements EntityB
 		if(level.getBlockState(forgePos).is(AlchemancyBlocks.ALCHEMANCY_FORGE) && level.getBlockEntity(forgePos) instanceof ItemStackHolderBlockEntity forge)
 		{
 			ForgeRecipeGrid grid = new ForgeRecipeGrid(level, forgePos, forge);
+			var itemsToDiscover = grid.getItemPedestals().stream().filter(pedestal -> !pedestal.isEmpty()).map(pedestal -> BuiltInRegistries.ITEM.getKey(pedestal.getItem().getItem())).toList();
+
 
 			AtomicBoolean loop = new AtomicBoolean(true);
 			for(int i = 0; i < 128 && loop.get() && !grid.isPerformingTransmutation(); i++)
@@ -138,6 +142,8 @@ public class AlchemancyCatalystBlock extends TransparentBlock implements EntityB
 			{
 				AlchemancyCriteriaTriggers.DISCOVER_PROPERTY.get().trigger(serverPlayer, output);
 				PacketDistributor.sendToPlayer(serverPlayer, new S2CUnlockCodexEntriesPacket(output));
+				if(!itemsToDiscover.isEmpty())
+					PacketDistributor.sendToPlayer(serverPlayer, new S2CDiscoverCodexIngredientsPacket(itemsToDiscover));
 			}
 
 			if(grid.shouldConsumeWarped())

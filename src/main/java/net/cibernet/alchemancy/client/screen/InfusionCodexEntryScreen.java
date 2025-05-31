@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 
 public class InfusionCodexEntryScreen extends Screen {
@@ -48,6 +49,7 @@ public class InfusionCodexEntryScreen extends Screen {
 	private final Holder<Property> property;
 	private final CodexEntryReloadListenener.CodexEntry entry;
 	private final ItemStack[] dormantItems;
+	private final int undiscoveredItems;
 
 	protected final Screen lastScreen;
 
@@ -59,8 +61,19 @@ public class InfusionCodexEntryScreen extends Screen {
 		this.entry = entry;
 		this.lastScreen = lastScreen;
 
+		AtomicInteger undiscovered = new AtomicInteger();
+
 		Ingredient ingredient = Ingredient.of(property.value().getDormantPropertyTag());
-		dormantItems = ingredient.isEmpty() ? new ItemStack[0] : Arrays.stream(ingredient.getItems()).filter(stack -> !stack.is(Items.BARRIER)).toArray(ItemStack[]::new);
+		dormantItems = ingredient.isEmpty() ? new ItemStack[0] : Arrays.stream(ingredient.getItems())
+				.filter(stack -> !stack.is(Items.BARRIER))
+				.filter(stack -> {
+					if (InfusionCodexSaveData.isItemDiscovered(stack))
+						return true;
+					undiscovered.getAndIncrement();
+					return false;
+				})
+				.toArray(ItemStack[]::new);
+		undiscoveredItems = undiscovered.get();
 
 		InfusionCodexSaveData.read(property);
 	}
@@ -69,7 +82,7 @@ public class InfusionCodexEntryScreen extends Screen {
 	protected void init() {
 		super.init();
 
-		layout = new HeaderAndFooterLayout(this, 40, 24);
+		layout = new HeaderAndFooterLayout(this, 40, 32);
 		LinearLayout footer = layout.addToFooter(LinearLayout.vertical()).spacing(5);
 		footer.defaultCellSetting().alignHorizontallyCenter();
 		footer.addChild(Button.builder(CommonComponents.GUI_DONE, p_329727_ -> this.onClose()).width(200).build());
@@ -85,13 +98,11 @@ public class InfusionCodexEntryScreen extends Screen {
 		layout.arrangeElements();
 	}
 
-	private MutableComponent translated(String key)
-	{
+	private MutableComponent translated(String key) {
 		return Component.translatable("infusion_codex.%s.%s".formatted(property.getRegisteredName(), key));
 	}
 
-	private boolean hasTranslation(String key)
-	{
+	private boolean hasTranslation(String key) {
 		return I18n.exists("infusion_codex.%s.%s".formatted(property.getRegisteredName(), key));
 	}
 
@@ -138,7 +149,7 @@ public class InfusionCodexEntryScreen extends Screen {
 		@Override
 		public boolean mouseClicked(double mouseX, double mouseY, int button) {
 
-			scrolling = (button == 0 && mouseX >= (double)this.getScrollbarPosition() && mouseX < (double)(this.getScrollbarPosition() + SCROLLBAR_WIDTH));
+			scrolling = (button == 0 && mouseX >= (double) this.getScrollbarPosition() && mouseX < (double) (this.getScrollbarPosition() + SCROLLBAR_WIDTH));
 			return scrolling;//super.mouseClicked(mouseX, mouseY, button);
 		}
 
@@ -146,15 +157,15 @@ public class InfusionCodexEntryScreen extends Screen {
 		@Override
 		public boolean mouseDragged(double mouseX, double mouseY, int button, double dragX, double dragY) {
 			if (button == 0 && this.scrolling) {
-				if (mouseY < (double)this.getY()) {
+				if (mouseY < (double) this.getY()) {
 					scrollAmount = 0.0f;
-				} else if (mouseY > (double)this.getBottom()) {
+				} else if (mouseY > (double) this.getBottom()) {
 					scrollAmount = this.getMaxScroll();
 				} else {
 					float d0 = Math.max(1, this.getMaxScroll());
 					int i = this.height;
-					int j = Mth.clamp((int)((float)(i * i) / (this.entryHeight - getHeight())), 32, i - 8);
-					float d1 = Math.max(1, d0 / (float)(i - j));
+					int j = Mth.clamp((int) ((float) (i * i) / (this.entryHeight - getHeight())), 32, i - 8);
+					float d1 = Math.max(1, d0 / (float) (i - j));
 					scrollAmount = (float) Math.clamp(scrollAmount + dragY * d1, 0, getMaxScroll());
 				}
 
@@ -176,24 +187,34 @@ public class InfusionCodexEntryScreen extends Screen {
 				renderFunctionParagraph(guiGraphics, function.localizationKey);
 			}
 
-			ItemStack hoveredItem = ItemStack.EMPTY;
-			if(dormantItems.length > 0)
-
-			{
+			TooltipRendering tooltip = null;
+			if (dormantItems.length > 0 || undiscoveredItems > 0) {
 				renderTextLine(guiGraphics, Component.translatable("screen.infusion_codex.dormant_properties"), 1.25f, 5592575);
 
 				int itemsPerRow = (width - xPadding * 2) / itemSize;
-				for (int i = 0; i < dormantItems.length; i++) {
+				int itemCount = dormantItems.length;
+
+				for (int i = 0; i < itemCount; i++) {
 					ItemStack stack = dormantItems[i];
 					int xx = getX() + xPadding + ((i % itemsPerRow) * itemSize);
 					int yy = getY() + (int) textYPointer + ((i / itemsPerRow) * itemSize);
 					guiGraphics.renderFakeItem(stack, xx, yy);
 
-					if(mouseX >= xx - itemPadding && mouseX < xx - itemPadding + itemSize && mouseY >= yy - itemPadding && mouseY < yy - itemPadding + itemSize)
-						hoveredItem = stack;
+					if (mouseX >= xx - itemPadding && mouseX < xx - itemPadding + itemSize && mouseY >= yy - itemPadding && mouseY < yy - itemPadding + itemSize)
+						tooltip = new ItemTooltip(stack);
 				}
 
-				textYPointer += (((dormantItems.length - 1) / itemsPerRow) * itemSize) + 10;
+				if (undiscoveredItems > 0) {
+					int xx = getX() + xPadding + ((itemCount % itemsPerRow) * itemSize);
+					int yy = getY() + (int) textYPointer + ((itemCount / itemsPerRow) * itemSize);
+					guiGraphics.drawString(font, Component.translatable("screen.infusion_codex.undiscovered_items", undiscoveredItems), xx, yy + (itemSize / 2) - (font.lineHeight / 2), 0xFFFFFF);
+					itemCount++;
+
+					if (mouseX >= xx - itemPadding && mouseX < xx - itemPadding + itemSize && mouseY >= yy - itemPadding && mouseY < yy - itemPadding + itemSize)
+						tooltip = new TextTooltip(List.of(Component.translatable("screen.infusion_codex.undiscovered_items.tooltip", undiscoveredItems)));
+				}
+
+				textYPointer += (((itemCount - 1) / itemsPerRow) * itemSize) + 10;
 			}
 
 			guiGraphics.disableScissor();
@@ -202,9 +223,9 @@ public class InfusionCodexEntryScreen extends Screen {
 
 			if (this.scrollbarVisible()) {
 				int l = getScrollbarPosition();
-				int i1 = (int)((float)(this.height * this.height) / (float)this.getMaxScroll());
+				int i1 = (int) ((float) (this.height * this.height) / this.getMaxScroll());
 				i1 = Mth.clamp(i1, 32, this.height - 8);
-				float k = (int)this.scrollAmount * (this.height - i1) / this.getMaxScroll() + this.getY();
+				float k = (int) this.scrollAmount * (this.height - i1) / this.getMaxScroll() + this.getY();
 				if (k < this.getY()) {
 					k = this.getY();
 				}
@@ -215,11 +236,9 @@ public class InfusionCodexEntryScreen extends Screen {
 				RenderSystem.disableBlend();
 			}
 
-			if(mouseX >= getX() && mouseX <= getRight() && mouseY >= getY() && mouseY <= getBottom())
-			{
-				if (!hoveredItem.isEmpty())
-					guiGraphics.renderTooltip(font, hoveredItem, mouseX, mouseY);
-			}
+			if (tooltip != null && mouseX >= getX() && mouseX <= getRight() && mouseY >= getY() && mouseY <= getBottom())
+				tooltip.apply(guiGraphics, font, mouseX, mouseY);
+
 			entryHeight = textYPointer + 10 + scrollAmount;
 		}
 
@@ -251,10 +270,13 @@ public class InfusionCodexEntryScreen extends Screen {
 					yield property.map(block -> block.description().copy().withStyle(ChatFormatting.LIGHT_PURPLE)).orElse(Component.literal(value).withColor(0xFF0000));
 				}
 
-				case "function" -> Component.translatable("screen.infusion_codex."+value).withStyle(ChatFormatting.BLUE);
+				case "function" ->
+						Component.translatable("screen.infusion_codex." + value).withStyle(ChatFormatting.BLUE);
 
-				case "shock" -> Component.literal(value).withColor(AlchemancyProperties.SHOCKING.get().getColor(ItemStack.EMPTY));
-				case "arcane" -> Component.literal(value).withColor(AlchemancyProperties.ARCANE.get().getColor(ItemStack.EMPTY));
+				case "shock" ->
+						Component.literal(value).withColor(AlchemancyProperties.SHOCKING.get().getColor(ItemStack.EMPTY));
+				case "arcane" ->
+						Component.literal(value).withColor(AlchemancyProperties.ARCANE.get().getColor(ItemStack.EMPTY));
 				case "item" -> Component.literal(value).withStyle(ChatFormatting.GREEN);
 				case "attribute" -> Component.literal(value).withStyle(ChatFormatting.DARK_AQUA);
 				case "system" -> Component.literal(value).withStyle(ChatFormatting.AQUA);
@@ -270,7 +292,7 @@ public class InfusionCodexEntryScreen extends Screen {
 			PoseStack poseStack = guiGraphics.pose();
 
 			poseStack.pushPose();
-			if(scale != 1)
+			if (scale != 1)
 				poseStack.scale(scale, scale, 1);
 
 			ArrayList<Component> things = new ArrayList<>();
@@ -285,7 +307,7 @@ public class InfusionCodexEntryScreen extends Screen {
 				found = found.substring(1, found.length() - 1);
 
 				String[] params = found.split(" ", 2);
-				things.add(processFormatting(params.length < 2 ? "" : params[0], params[params.length-1]));
+				things.add(processFormatting(params.length < 2 ? "" : params[0], params[params.length - 1]));
 				return "%s";
 			});
 
@@ -295,7 +317,7 @@ public class InfusionCodexEntryScreen extends Screen {
 			for (String s : str.split("%s")) {
 
 				newText = newText.append(s);
-				if(i < things.size())
+				if (i < things.size())
 					newText = newText.append(things.get(i));
 
 				i++;
@@ -323,8 +345,8 @@ public class InfusionCodexEntryScreen extends Screen {
 					resourcelocation,
 					this.getX(),
 					this.getY(),
-					(float)this.getRight(),
-					(float)(this.getBottom()),// + (int)this.getScrollAmount()),
+					(float) this.getRight(),
+					(float) (this.getBottom()),// + (int)this.getScrollAmount()),
 					this.getWidth(),
 					this.getHeight(),
 					32,
@@ -345,19 +367,17 @@ public class InfusionCodexEntryScreen extends Screen {
 			void apply(GuiGraphics guiGraphics, Font font, int mouseX, int mouseY);
 		}
 
-
-		record TextTooltip(int x, int y, int width, int height, List<Component> lines) implements TooltipRendering {
+		record TextTooltip(List<Component> lines) implements TooltipRendering {
 			@Override
 			public void apply(GuiGraphics guiGraphics, Font font, int mouseX, int mouseY) {
-				if(mouseX >= x && mouseY >= y && mouseX < mouseX + width && mouseY < mouseY + height)
-					guiGraphics.renderTooltip(font, lines().stream().map(Component::getVisualOrderText).toList(), mouseX, mouseY);
+				guiGraphics.renderTooltip(font, lines().stream().map(Component::getVisualOrderText).toList(), mouseX, mouseY);
 			}
 		}
-		record ItemTooltip(int x, int y, int width, int height, ItemStack stack) implements TooltipRendering {
+
+		record ItemTooltip(ItemStack stack) implements TooltipRendering {
 			@Override
 			public void apply(GuiGraphics guiGraphics, Font font, int mouseX, int mouseY) {
-				if(mouseX >= x && mouseY >= y && mouseX < mouseX + width && mouseY < mouseY + height)
-					guiGraphics.renderTooltip(font, stack(), mouseX, mouseY);
+				guiGraphics.renderTooltip(font, stack(), mouseX, mouseY);
 			}
 		}
 	}
@@ -408,7 +428,7 @@ public class InfusionCodexEntryScreen extends Screen {
 			Font font = this.getFont();
 			int i = this.getWidth();
 			int j = font.width(component) * scale;
-			int k = this.getX() + Math.round(this.alignX * (float)(i - j));
+			int k = this.getX() + Math.round(this.alignX * (float) (i - j));
 			int l = this.getY() + (this.getHeight() - 9) / 2;
 
 			guiGraphics.renderFakeItem(stack, k - 20, l - 4 + (yOff * scale));

@@ -471,6 +471,8 @@
   "screen.infusion_codex.inspecting": "Inspecting Item",
   "screen.infusion_codex.locked_entry": "???",
   "screen.infusion_codex.locked_entry.tooltip": "This Infusion has not yet been discovered",
+  "screen.infusion_codex.undiscovered_items": "+%s",
+  "screen.infusion_codex.undiscovered_items.tooltip": "%s unknown items",
 
   "screen.infusion_codex.attribute_modifier": "Modifies Attributes",
   "screen.infusion_codex.on_attack": "On Attack",
