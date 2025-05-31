@@ -2,10 +2,10 @@ package net.cibernet.alchemancy.client.screen;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.cibernet.alchemancy.client.data.CodexEntryReloadListenener;
+import net.cibernet.alchemancy.data.save.InfusionCodexSaveData;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.properties.special.InfusionCodexProperty;
-import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -17,13 +17,12 @@ import net.minecraft.core.Holder;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.common.extensions.IHolderExtension;
 
 import java.util.Comparator;
 import java.util.Map;
-import java.util.Set;
 
 public class InfusionCodexIndexScreen extends Screen {
 
@@ -106,13 +105,21 @@ public class InfusionCodexIndexScreen extends Screen {
 		layout.arrangeElements();
 	}
 
+	private Component tooltip = null;
+
 	@Override
 	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
 		super.render(guiGraphics, mouseX, mouseY, partialTick);
+
+		if(tooltip != null)
+		{
+			guiGraphics.renderTooltip(font, tooltip, mouseX, mouseY);
+			tooltip = null;
+		}
 	}
 
 	@OnlyIn(Dist.CLIENT)
-	class PropertyList extends ObjectSelectionList<PropertyList.Entry> {
+	class PropertyList extends ObjectSelectionList<PropertyList.LockedEntry> {
 
 		public PropertyList(Minecraft minecraft) {
 			super(minecraft, InfusionCodexIndexScreen.this.width, InfusionCodexIndexScreen.this.height - 33 - 58, 33, 16);
@@ -124,8 +131,14 @@ public class InfusionCodexIndexScreen extends Screen {
 					.toList());
 			objectarraylist.sort(Comparator.comparing(entry -> entry.getKey().getKey()));
 
+			//objectarraylist.sort(Comparator.comparingInt(entry -> InfusionCodexSaveData.getRecencyIndex(entry.getKey())));
+
+			objectarraylist.sort(Comparator.comparing(entry -> !InfusionCodexSaveData.isUnlocked(entry.getKey())));
+
 			for (Map.Entry<Holder<Property>, CodexEntryReloadListenener.CodexEntry> propertyHolder : objectarraylist) {
-				this.addEntry(new PropertyList.Entry(propertyHolder.getKey(), propertyHolder.getValue()));
+				this.addEntry(InfusionCodexSaveData.isUnlocked(propertyHolder.getKey()) ?
+						new PropertyList.Entry(propertyHolder.getKey(), propertyHolder.getValue()) :
+						new PropertyList.LockedEntry());
 			}
 		}
 
@@ -141,9 +154,33 @@ public class InfusionCodexIndexScreen extends Screen {
 		}
 
 		@OnlyIn(Dist.CLIENT)
-		class Entry extends ObjectSelectionList.Entry<PropertyList.Entry> {
+		class LockedEntry extends ObjectSelectionList.Entry<LockedEntry> {
+
+			private static final Component NARRATOR_COMPONENT = Component.translatable("narrator.infusion_codex.locked_entry");
+			private static final Component TEXT_COMPONENT = Component.translatable("screen.infusion_codex.locked_entry");
+			private static final Component TOOLTIP_TEXT_COMPONENT = Component.translatable("screen.infusion_codex.locked_entry.tooltip");
+
+			@Override
+			public Component getNarration() {
+				return NARRATOR_COMPONENT;
+			}
+
+			@Override
+			public void render(GuiGraphics guiGraphics, int index, int top, int left, int width, int height, int mouseX, int mouseY, boolean hovering, float partialTick) {
+				int i = top + height / 2 - 9 / 2;
+				int j = index % 2 == 0 ? -1 : -4539718;
+				guiGraphics.drawString(InfusionCodexIndexScreen.this.font, TEXT_COMPONENT, left + 18, i, j);
+
+				if(hovering)
+					tooltip = TOOLTIP_TEXT_COMPONENT;
+			}
+		}
+
+		@OnlyIn(Dist.CLIENT)
+		class Entry extends LockedEntry {
 			private final Holder<Property> property;
 			private final CodexEntryReloadListenener.CodexEntry entry;
+			private final boolean read;
 			private final Component textNarration;
 			private final ItemStack propertyCapsule;
 
@@ -152,10 +189,7 @@ public class InfusionCodexIndexScreen extends Screen {
 				this.textNarration = property.value().getName();
 				this.entry = entry;
 				this.propertyCapsule = InfusedPropertiesHelper.createPropertyCapsule(this.property);
-			}
-
-			private String getValueText() {
-				return textNarration.getString();
+				this.read = InfusionCodexSaveData.isRead(property);
 			}
 
 			@Override
@@ -171,10 +205,6 @@ public class InfusionCodexIndexScreen extends Screen {
 					boolean hovering,
 					float partialTick
 			) {
-
-//				if(hovering)
-//					setSelected(this);
-
 				int i = top + height / 2 - 9 / 2;
 				int j = index % 2 == 0 ? -1 : -4539718;
 
@@ -183,15 +213,18 @@ public class InfusionCodexIndexScreen extends Screen {
 					name = name.copy().withColor(0xFFFFFF);
 
 				guiGraphics.renderFakeItem(propertyCapsule, left - 2, i - 4);
+//				if(!read)
+//					guiGraphics.renderFakeItem(Items.BLAZE_ROD.getDefaultInstance(), left - 2, i - 4);
 				guiGraphics.drawString(InfusionCodexIndexScreen.this.font, name, left + 18, i, j);
-				//String s = this.getValueText();
-				//guiGraphics.drawString(InfusionCodexScreen.this.font, s, left + width - InfusionCodexScreen.this.font.width(s) - 4, i, j);
 			}
 
 			@Override
 			public boolean mouseClicked(double mouseX, double mouseY, int button) {
 				if(equals(getSelected()))
+				{
 					minecraft.setScreen(new InfusionCodexEntryScreen(property, entry, InfusionCodexIndexScreen.this));
+					playDownSound(Minecraft.getInstance().getSoundManager());
+				}
 				return true;
 			}
 

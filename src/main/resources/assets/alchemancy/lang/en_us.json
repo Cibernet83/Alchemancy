@@ -469,6 +469,8 @@
 
   "screen.infusion_codex.search_bar": "Search...",
   "screen.infusion_codex.inspecting": "Inspecting Item",
+  "screen.infusion_codex.locked_entry": "???",
+  "screen.infusion_codex.locked_entry.tooltip": "This Infusion has not yet been discovered",
 
   "screen.infusion_codex.attribute_modifier": "Modifies Attributes",
   "screen.infusion_codex.on_attack": "On Attack",
@@ -525,6 +527,7 @@
   "infusion_codex.alchemancy:wayfinding.flavor": "Always know the way",
 
   "narrator.infusion_codex.search_bar": "Search for infusions",
+  "narrator.infusion_codex.locked_entry": "This entry is locked",
 
   "alchemancy.journal.landing_text": "$(o)This book will be your guide to the limitless world of $(thing)Alchemancy$()$(o): a magic mod focused around granting the functionality and properties of any item to any other item with the power of Alchemy and Artifice.",
 
@@ -839,5 +842,7 @@
   "infusion_codex.alchemancy:wet.while_rooted": "Extinguishes all entities standing inside of the item.",
   "infusion_codex.alchemancy:wet.while_worn": "Reduces the user's amount of time set on fire by half.",
   "infusion_codex.alchemancy:wind_charged.flavor": "Do the windy thing",
-  "infusion_codex.alchemancy:wind_charged.on_crit": "Creates a burst of wind around the target, greatly damaging the item or destroying it in the process."
+  "infusion_codex.alchemancy:wind_charged.on_crit": "Creates a burst of wind around the target, greatly damaging the item or destroying it in the process.",
+  "infusion_codex.toast.title": "New Infusions Discovered!",
+  "infusion_codex.toast.description": "Check your Infusion Codex"
 }

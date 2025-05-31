@@ -6,6 +6,7 @@ import net.cibernet.alchemancy.blocks.blockentities.ItemStackHolderBlockEntity;
 import net.cibernet.alchemancy.crafting.AbstractForgeRecipe;
 import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.network.S2CUnlockCodexEntriesPacket;
 import net.cibernet.alchemancy.registries.*;
 import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.core.BlockPos;
@@ -32,6 +33,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
@@ -133,7 +135,10 @@ public class AlchemancyCatalystBlock extends TransparentBlock implements EntityB
 
 
 			if(player instanceof ServerPlayer serverPlayer)
+			{
 				AlchemancyCriteriaTriggers.DISCOVER_PROPERTY.get().trigger(serverPlayer, output);
+				PacketDistributor.sendToPlayer(serverPlayer, new S2CUnlockCodexEntriesPacket(output));
+			}
 
 			if(grid.shouldConsumeWarped())
 				InfusedPropertiesHelper.removeProperty(output, AlchemancyProperties.WARPED);
