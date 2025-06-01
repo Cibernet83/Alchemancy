@@ -83,6 +83,7 @@ public class SparklingProperty extends Property implements IDataHolder<Holder<Pr
 		put(AlchemancyProperties.CRACKLING, () -> ParticleTypes.FIREWORK);
 		put(AlchemancyProperties.GLOWING_AURA, () -> ParticleTypes.END_ROD);
 
+		put(AlchemancyProperties.ETERNAL_GLOW, () -> GlowRingProperty.PARTICLES);
 		put(AlchemancyProperties.GUST_JET, () -> GustJetProperty.PARTICLES);
 		put(AlchemancyProperties.WORLD_OBLITERATOR, () -> BlockVacuumProperty.PARTICLES);
 		put(AlchemancyProperties.AIR_WALKER, () -> AirWalkingProperty.PARTICLES);

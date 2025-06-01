@@ -29,17 +29,44 @@ import java.util.List;
 
 public class InteractableProperty extends Property
 {
+
+	@Override
+	public void onRightClickItem(PlayerInteractEvent.RightClickItem event)
+	{
+		if(!event.isCanceled())
+		{
+			ItemStack stack = event.getItemStack();
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onActivation(event.getEntity(), event.getEntity(), stack));
+
+			if(event.getEntity() instanceof Player player)
+				applyCooldown(player, event.getItemStack());
+			event.setCancellationResult(InteractionResult.SUCCESS);
+			event.setCanceled(true);
+		}
+	}
+
 	@Override
 	public void onRightClickEntity(PlayerInteractEvent.EntityInteract event)
 	{
-		ItemStack stack = event.getItemStack();
-		InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onActivation(event.getEntity(), event.getTarget(), stack));
+		if(!event.isCanceled())
+		{
+			ItemStack stack = event.getItemStack();
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onActivation(event.getEntity(), event.getTarget(), stack));
+
+			if(event.getEntity() instanceof Player player)
+				applyCooldown(player, event.getItemStack());
+			event.setCancellationResult(InteractionResult.SUCCESS);
+			event.setCanceled(true);
+		}
+	}
+
+	protected static void applyCooldown(Player player, ItemStack stack) {
+		player.getCooldowns().addCooldown(stack.getItem(), 20);
 	}
 
 	@Override
 	public InfusionPropertyDispenseBehavior.DispenseResult onItemDispense(BlockSource blockSource, Direction direction, ItemStack stack, InfusionPropertyDispenseBehavior.DispenseResult currentResult)
 	{
-
 		ServerLevel serverlevel = blockSource.level();
 		BlockPos blockpos = blockSource.pos().relative(blockSource.state().getValue(DispenserBlock.FACING));
 		List<Entity> list = serverlevel.getEntitiesOfClass(Entity.class, new AABB(blockpos), EntitySelector.NO_SPECTATORS);
@@ -60,16 +87,6 @@ public class InteractableProperty extends Property
 		InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onActivationByBlock(user.level(), root.getBlockPos(), user, stack));
 
 		return super.onRootedRightClick(root, user, hand, hitResult);
-	}
-
-	@Override
-	public void onRightClickItem(PlayerInteractEvent.RightClickItem event)
-	{
-		ItemStack stack = event.getItemStack();
-		InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onActivation(event.getEntity(), event.getEntity(), stack));
-
-		event.setCancellationResult(InteractionResult.SUCCESS);
-		event.setCanceled(true);
 	}
 
 	@Override
