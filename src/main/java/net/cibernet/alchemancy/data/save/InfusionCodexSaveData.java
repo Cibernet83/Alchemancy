@@ -205,7 +205,7 @@ public class InfusionCodexSaveData {
 	}
 
 	public static boolean isRead(Holder<Property> propertyHolder) {
-		return bypassesUnlocks() || (UNLOCKED_INFUSIONS.containsKey(propertyHolder) && UNLOCKED_INFUSIONS.get(propertyHolder).read);
+		return bypassesUnlocks() || (UNLOCKED_INFUSIONS.containsKey(getKey(propertyHolder)) && UNLOCKED_INFUSIONS.get(getKey(propertyHolder)).read);
 	}
 
 	public static boolean bypassesUnlocks() {

@@ -1,6 +1,8 @@
 package net.cibernet.alchemancy.client.screen;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.client.data.CodexEntryReloadListenener;
 import net.cibernet.alchemancy.data.save.InfusionCodexSaveData;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
@@ -16,16 +18,17 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
 import java.util.Map;
 
 public class InfusionCodexIndexScreen extends Screen {
 
+	private static final ResourceLocation NEW_ENTRY_ICON = ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "infusion_codex/new_entry_icon");
 
 	private PropertyList propertyList;
 	private EditBox searchBar;
@@ -62,17 +65,16 @@ public class InfusionCodexIndexScreen extends Screen {
 		footer.addChild(Button.builder(CommonComponents.GUI_DONE, p_329727_ -> this.onClose()).width(200).build());
 
 		LinearLayout header = layout.addToHeader(LinearLayout.vertical()).spacing(2);
-		if(!inspectedItem.isEmpty())
+		if (!inspectedItem.isEmpty())
 			header.addChild(new StringWidget(200, 9, Component.translatable("screen.infusion_codex.inspecting").withStyle(ChatFormatting.GRAY), this.font).alignCenter());
 		header.addChild(new StringWidget(200, inspectedItem.isEmpty() ? 18 : 9, title, this.font).alignCenter());
 		LinearLayout searchDiv = header.addChild(LinearLayout.horizontal());
 
-		if(searchBar == null) {
-			searchBar = new EditBox(font, 200, 16, Component.translatable("narrator.infusion_codex.search_bar")){
+		if (searchBar == null) {
+			searchBar = new EditBox(font, 200, 16, Component.translatable("narrator.infusion_codex.search_bar")) {
 				@Override
 				public boolean charTyped(char codePoint, int modifiers) {
-					if(super.charTyped(codePoint, modifiers))
-					{
+					if (super.charTyped(codePoint, modifiers)) {
 						updatePropertyList();
 						return true;
 					}
@@ -82,7 +84,7 @@ public class InfusionCodexIndexScreen extends Screen {
 				@Override
 				public void deleteChars(int num) {
 					super.deleteChars(num);
-					if(num != 0)
+					if (num != 0)
 						updatePropertyList();
 				}
 			};
@@ -120,8 +122,7 @@ public class InfusionCodexIndexScreen extends Screen {
 	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
 		super.render(guiGraphics, mouseX, mouseY, partialTick);
 
-		if(tooltip != null)
-		{
+		if (tooltip != null) {
 			guiGraphics.renderTooltip(font, tooltip, mouseX, mouseY);
 			tooltip = null;
 		}
@@ -143,7 +144,7 @@ public class InfusionCodexIndexScreen extends Screen {
 		}
 
 		SortOrder(String key, Comparator<Holder<Property>> sortFunction) {
-			this(Component.translatable("screen.infusion_codex.sort_button."+key), Component.translatable("screen.infusion_codex.sort_order."+key), sortFunction);
+			this(Component.translatable("screen.infusion_codex.sort_button." + key), Component.translatable("screen.infusion_codex.sort_order." + key), sortFunction);
 		}
 	}
 
@@ -198,7 +199,7 @@ public class InfusionCodexIndexScreen extends Screen {
 				int j = index % 2 == 0 ? -1 : -4539718;
 				guiGraphics.drawString(InfusionCodexIndexScreen.this.font, TEXT_COMPONENT, left + 18, i, j);
 
-				if(hovering)
+				if (hovering)
 					tooltip = TOOLTIP_TEXT_COMPONENT;
 			}
 		}
@@ -234,21 +235,28 @@ public class InfusionCodexIndexScreen extends Screen {
 			) {
 				int i = top + height / 2 - 9 / 2;
 				int j = index % 2 == 0 ? -1 : -4539718;
+				PoseStack poseStack = guiGraphics.pose();
 
 				Component name = property.value().getName(propertyCapsule);
-				if(equals(getSelected()))
+				if (equals(getSelected()))
 					name = name.copy().withColor(0xFFFFFF);
 
 				guiGraphics.renderFakeItem(propertyCapsule, left - 2, i - 4);
-//				if(!read)
+
+
+				if (!read) {
+					poseStack.pushPose();
+					poseStack.translate(0, 0, 200);
+					guiGraphics.blitSprite(NEW_ENTRY_ICON, 16, 16, 0, 0, left - 2, i - 4, 16, 16);
+					poseStack.popPose();
+				}
 //					guiGraphics.renderFakeItem(Items.BLAZE_ROD.getDefaultInstance(), left - 2, i - 4);
 				guiGraphics.drawString(InfusionCodexIndexScreen.this.font, name, left + 18, i, j);
 			}
 
 			@Override
 			public boolean mouseClicked(double mouseX, double mouseY, int button) {
-				if(equals(getSelected()))
-				{
+				if (equals(getSelected())) {
 					minecraft.setScreen(new InfusionCodexEntryScreen(property, entry, InfusionCodexIndexScreen.this));
 					playDownSound(Minecraft.getInstance().getSoundManager());
 				}
