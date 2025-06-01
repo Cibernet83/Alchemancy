@@ -8,7 +8,11 @@ import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.client.InfusionCodexToast;
+import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
+import net.cibernet.alchemancy.registries.AlchemancyItems;
+import net.cibernet.alchemancy.registries.AlchemancyProperties;
+import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -149,6 +153,29 @@ public class InfusionCodexSaveData {
 	@Nullable
 	private static ResourceLocation getKey(Holder<Property> propertyHolder) {
 		return propertyHolder.unwrapKey().map(ResourceKey::location).orElse(null);
+	}
+
+	public static List<Holder<Property>> getPropertiesToUnlock(ItemStack stack) {
+
+		List<Holder<Property>> result = new ArrayList<>();
+		var innates = InfusedPropertiesHelper.getInnateProperties(stack);
+
+		result.addAll(innates);
+		result.addAll(InfusedPropertiesHelper.getInfusedProperties(stack));
+		result.addAll(InfusedPropertiesHelper.getStoredProperties(stack));
+
+		boolean includeDormants = stack.is(AlchemancyTags.Items.CODEX_DISCOVERY_ON_PICKUP);
+		boolean hasInnate = stack.has(AlchemancyItems.Components.INNATE_PROPERTIES);
+		List<Holder<Property>> dormants = List.of();
+
+		if(includeDormants || hasInnate)
+			dormants = AlchemancyProperties.getDormantProperties(stack);
+		if(hasInnate)
+			includeDormants = includeDormants || dormants.stream().anyMatch(innates::contains);
+
+		if(includeDormants)
+			result.addAll(AlchemancyProperties.getDormantProperties(stack));
+		return result;
 	}
 
 	public static void unlock(Holder<Property> propertyHolder) {

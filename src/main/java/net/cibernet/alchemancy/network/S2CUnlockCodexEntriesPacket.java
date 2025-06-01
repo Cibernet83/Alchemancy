@@ -25,21 +25,14 @@ public record S2CUnlockCodexEntriesPacket(List<Holder<Property>> propertiesToUnl
 	);
 
 	public S2CUnlockCodexEntriesPacket(ItemStack stack) {
-		this(getPropertiesToUnlock(stack));
+		this(InfusionCodexSaveData.getPropertiesToUnlock(stack));
 	}
 
-	private static List<Holder<Property>> getPropertiesToUnlock(ItemStack stack) {
 
-		List<Holder<Property>> result = new ArrayList<>();
-		result.addAll(InfusedPropertiesHelper.getInfusedProperties(stack));
-		result.addAll(InfusedPropertiesHelper.getInnateProperties(stack));
-		return result;
-	}
 
 	public static final Type<S2CUnlockCodexEntriesPacket> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "s2c/unlock_codex_entries"));
 
 	public void handleDataOnMain(final IPayloadContext context) {
-		Player player = context.player();
 		for (Holder<Property> propertyHolder : propertiesToUnlock) {
 			InfusionCodexSaveData.unlock(propertyHolder);
 		}
