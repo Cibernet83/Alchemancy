@@ -17,9 +17,9 @@ import net.minecraft.core.Holder;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Comparator;
 import java.util.Map;
@@ -33,6 +33,8 @@ public class InfusionCodexIndexScreen extends Screen {
 
 	private final ItemStack inspectedItem;
 	private final Screen previousScreen;
+
+	private SortOrder sortOrder = SortOrder.ALPHABETICAL;
 
 	public InfusionCodexIndexScreen(Component title) {
 		super(title);
@@ -63,6 +65,7 @@ public class InfusionCodexIndexScreen extends Screen {
 		if(!inspectedItem.isEmpty())
 			header.addChild(new StringWidget(200, 9, Component.translatable("screen.infusion_codex.inspecting").withStyle(ChatFormatting.GRAY), this.font).alignCenter());
 		header.addChild(new StringWidget(200, inspectedItem.isEmpty() ? 18 : 9, title, this.font).alignCenter());
+		LinearLayout searchDiv = header.addChild(LinearLayout.horizontal());
 
 		if(searchBar == null) {
 			searchBar = new EditBox(font, 200, 16, Component.translatable("narrator.infusion_codex.search_bar")){
@@ -85,7 +88,13 @@ public class InfusionCodexIndexScreen extends Screen {
 			};
 			searchBar.setHint(Component.translatable("screen.infusion_codex.search_bar").withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY));
 		}
-		header.addChild(searchBar);
+		searchDiv.addChild(searchBar);
+		searchDiv.addChild(Button.builder(sortOrder.buttonLabel, (button) -> {
+			sortOrder = SortOrder.values()[(sortOrder.ordinal() + 1) % SortOrder.values().length];
+			button.setMessage(sortOrder.buttonLabel);
+			button.setTooltip(sortOrder.tooltip);
+			updatePropertyList();
+		}).tooltip(sortOrder.tooltip).size(24, 16).build());
 
 		layout.visitWidgets(this::addRenderableWidget);
 
@@ -118,6 +127,26 @@ public class InfusionCodexIndexScreen extends Screen {
 		}
 	}
 
+	public enum SortOrder {
+		ALPHABETICAL("alphabetical", (o1, o2) -> 0),
+		RECENCY("recency", Comparator.comparingInt(InfusionCodexSaveData::getRecencyIndex)),
+		UNLOCK("unlock", Comparator.comparingInt(InfusionCodexSaveData::getUnlockIndex)),
+		;
+		final Component buttonLabel;
+		final Tooltip tooltip;
+		final Comparator<Holder<Property>> sortFunction;
+
+		SortOrder(Component buttonLabel, Component tooltip, Comparator<Holder<Property>> sortFunction) {
+			this.buttonLabel = buttonLabel;
+			this.tooltip = Tooltip.create(Component.translatable("screen.infusion_codex.sort_order", tooltip));
+			this.sortFunction = sortFunction;
+		}
+
+		SortOrder(String key, Comparator<Holder<Property>> sortFunction) {
+			this(Component.translatable("screen.infusion_codex.sort_button."+key), Component.translatable("screen.infusion_codex.sort_order."+key), sortFunction);
+		}
+	}
+
 	@OnlyIn(Dist.CLIENT)
 	class PropertyList extends ObjectSelectionList<PropertyList.LockedEntry> {
 
@@ -130,9 +159,7 @@ public class InfusionCodexIndexScreen extends Screen {
 					.filter(propertyHolder -> propertyHolder.getKey().value().getName().getString().toLowerCase().contains(searchBar.getValue().toLowerCase()))
 					.toList());
 			objectarraylist.sort(Comparator.comparing(entry -> entry.getKey().getKey()));
-
-			//objectarraylist.sort(Comparator.comparingInt(entry -> InfusionCodexSaveData.getRecencyIndex(entry.getKey())));
-
+			objectarraylist.sort((o1, o2) -> sortOrder.sortFunction.compare(o1.getKey(), o2.getKey()));
 			objectarraylist.sort(Comparator.comparing(entry -> !InfusionCodexSaveData.isUnlocked(entry.getKey())));
 
 			for (Map.Entry<Holder<Property>, CodexEntryReloadListenener.CodexEntry> propertyHolder : objectarraylist) {

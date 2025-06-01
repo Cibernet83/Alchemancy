@@ -474,6 +474,14 @@
   "screen.infusion_codex.undiscovered_items": "+%s",
   "screen.infusion_codex.undiscovered_items.tooltip": "%s unknown items",
 
+  "screen.infusion_codex.sort_order": "Sort by: %s",
+  "screen.infusion_codex.sort_order.alphabetical": "Alphabetical",
+  "screen.infusion_codex.sort_button.alphabetical": "AZ",
+  "screen.infusion_codex.sort_order.recency": "Last Read",
+  "screen.infusion_codex.sort_button.recency": "LR",
+  "screen.infusion_codex.sort_order.unlock": "Unlock Order",
+  "screen.infusion_codex.sort_button.unlock": "UO",
+
   "screen.infusion_codex.attribute_modifier": "Modifies Attributes",
   "screen.infusion_codex.on_attack": "On Attack",
   "screen.infusion_codex.on_crit": "On Critical Hit",
