@@ -24,6 +24,8 @@ import java.util.UUID;
 @EventBusSubscriber
 public class BouncyProperty extends Property
 {
+	private static final float ATTACK_BOUNCE_STRENGTH = 1.5f;
+
 	@Override
 	public void onActivation(@Nullable Entity source, Entity target, ItemStack stack, DamageSource damageSource)
 	{
@@ -33,7 +35,7 @@ public class BouncyProperty extends Property
 		if(source == target && source instanceof Player user)
 		{
 			if(CommonUtils.calculateHitResult(user).getType() != HitResult.Type.MISS)
-				knockBack(user, user.position().add(user.getLookAngle()), 1);
+				knockBack(user, user.position().add(user.getLookAngle()), ATTACK_BOUNCE_STRENGTH);
 			return;
 		}
 
@@ -42,7 +44,7 @@ public class BouncyProperty extends Property
 				damageSource.getDirectEntity() != null ? damageSource.getDirectEntity().position() : null;
 
 		if(sourcePos != null)
-			knockBack(target, sourcePos, 1);
+			knockBack(target, sourcePos, ATTACK_BOUNCE_STRENGTH);
 	}
 
 	@Override
@@ -69,7 +71,7 @@ public class BouncyProperty extends Property
 		if(attackPos == null && user != null)
 			attackPos = user.position();
 		if(attackPos != null)
-			knockBack(target, attackPos, 1);
+			knockBack(target, attackPos, ATTACK_BOUNCE_STRENGTH);
 	}
 
 	public static void knockBack(Entity target, Vec3 sourcePos, float strength)
