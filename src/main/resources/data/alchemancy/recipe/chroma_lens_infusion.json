@@ -1,0 +1,7 @@
+{
+  "type": "alchemancy:forged_chroma_tinting",
+
+  "infusable": {
+    "item": "alchemancy:chroma_lens"
+  }
+}
