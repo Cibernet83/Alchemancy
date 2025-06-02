@@ -2,6 +2,7 @@ package net.cibernet.alchemancy.properties.special;
 
 import net.cibernet.alchemancy.client.particle.SparkParticle;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.properties.SparklingProperty;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
@@ -50,7 +51,7 @@ public class BlinkingProperty extends Property implements IDataHolder<Boolean> {
 		if (!isCurrentItem && (inventorySlot < 36 || inventorySlot > 40)) removeData(stack);
 	}
 
-	public static void blink(LivingEntity user, ItemStack stack, EquipmentSlot slot) {
+	public void blink(LivingEntity user, ItemStack stack, EquipmentSlot slot) {
 		float range = 10 * (InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.EXTENDED) ? 2 : 1);
 
 		for (int i = 0; i < range; i++) {
@@ -63,6 +64,10 @@ public class BlinkingProperty extends Property implements IDataHolder<Boolean> {
 				playParticles(user, verticalHit.getLocation(), stack, 20, 5);
 				user.moveTo(verticalHit.getLocation());
 				user.setDeltaMovement(user.getLookAngle().normalize().scale(user.getDeltaMovement().length()));
+
+				if(PropertyModifierComponent.getOrElse(stack, asHolder(), AlchemancyProperties.Modifiers.PREVENT_CONSUMPTION, stack.isDamageableItem()))
+					stack.hurtAndBreak(PropertyModifierComponent.getOrElse(stack, asHolder(), AlchemancyProperties.Modifiers.DURABILITY_CONSUMPTION, 5), user, slot);
+				else consumeItem(user, stack, slot);
 
 				break;
 			}
