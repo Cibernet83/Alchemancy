@@ -1,0 +1,17 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:seethrough",
+    "alchemancy:light_seeking"
+  ],
+
+  "catalyst": {
+    "item": "alchemancy:blank_pearl"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:chroma_lens"
+  }
+}
