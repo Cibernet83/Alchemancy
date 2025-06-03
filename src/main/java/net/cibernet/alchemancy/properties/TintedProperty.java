@@ -129,7 +129,9 @@ public class TintedProperty extends Property implements IDataHolder<Integer[]>, 
 
 	@Override
 	public int getColor(ItemStack stack) {
-		return ColorUtils.interpolateColorsOverTime(1, Arrays.stream(getData(stack)).mapToInt(Integer::valueOf).toArray());
+		var colors = getData(stack);
+		return colors.length == 0 ? 0xFFFFFFFF :
+				ColorUtils.interpolateColorsOverTime(1, Arrays.stream(colors).mapToInt(Integer::valueOf).toArray());
 	}
 
 	private Integer[] toIntegerArray(int... numbers) {
