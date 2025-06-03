@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:blinking.flavor"
+  },
+  "functions": [
+    "while_worn",
+    "activate"
+  ]
+}

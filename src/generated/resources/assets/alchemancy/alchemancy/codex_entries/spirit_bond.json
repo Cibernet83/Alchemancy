@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:spirit_bond.flavor"
+  },
+  "functions": [
+    "on_heal",
+    "receive_damage_equipped"
+  ]
+}

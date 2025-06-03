@@ -67,15 +67,15 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.FERROUS, PropertyFunction.WHILE_WORN, "Increases the amount of {shock Electric} damage received by 25%.");
 		addCodexFunction(AlchemancyProperties.FERROUS, PropertyFunction.ATTRIBUTE_MODIFIER, "Increases the item's total durability by 150 points.");
 
-		addCodexFlavor(AlchemancyProperties.GILDED, ""); //TODO
+		addCodexFlavor(AlchemancyProperties.GILDED, "All that glitters");
 		addCodexFunction(AlchemancyProperties.GILDED, PropertyFunction.WHILE_HELD_MAINHAND, "Increases the user's {attribute Mining Speed} by 50%.");
 		addCodexFunction(AlchemancyProperties.GILDED, PropertyFunction.WHILE_WORN, "Prevents Piglins from immediately attacking the user.");
 		addCodexFunction(AlchemancyProperties.GILDED, PropertyFunction.WHEN_DROPPED, "Makes Piglins want to pick up the item.");
 
-		addCodexFlavor(AlchemancyProperties.LUSTROUS, "Funding for Schaffrillas is provided by...");
+		addCodexFlavor(AlchemancyProperties.LUSTROUS, "Funding for Schaffrillas is provided by");
 		addCodexFunction(AlchemancyProperties.LUSTROUS, PropertyFunction.ATTRIBUTE_MODIFIER, "Sets the item's tool material to {item Diamond} tier. Doubles the item's durability up to a maximum total of 1600.");
 
-		addCodexFlavor(AlchemancyProperties.WEALTHY, ""); //TODO
+		addCodexFlavor(AlchemancyProperties.WEALTHY, "Kaching!");
 		addCodexFunction(AlchemancyProperties.WEALTHY, PropertyFunction.WHILE_EQUIPPED, "Makes Villagers and Pillagers follow the user.");
 		addCodexFunction(AlchemancyProperties.WEALTHY, PropertyFunction.ATTRIBUTE_MODIFIER, "Increases the item's {enchantment minecraft:fortune} and {enchantment minecraft:looting} levels by 1.");
 
@@ -105,11 +105,11 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.CRACKED, PropertyFunction.DURABILITY_CONSUMED, "40% chance to consume double durability.");
 		addCodexFunction(AlchemancyProperties.CRACKED, PropertyFunction.ACTIVATE, "Breaks the item or consumes 1 durability point.");
 
-		addCodexFlavor(AlchemancyProperties.MINING, "");
+		addCodexFlavor(AlchemancyProperties.MINING, ""); //TODO
 		addCodexFunction(AlchemancyProperties.MINING, PropertyFunction.ATTRIBUTE_MODIFIER, "Allows the item to break Pickaxe-related blocks, starting at wooden tier if the item isn't already a tool.");
 		addCodexFunction(AlchemancyProperties.MINING, PropertyFunction.WHEN_SHOT, "Breaks Pickaxe-related blocks on impact. The faster the projectile goes, the more likely it is to continue its trajectory after breaking a block.");
 
-		addCodexFlavor(AlchemancyProperties.CHOPPING, "");
+		addCodexFlavor(AlchemancyProperties.CHOPPING, ""); //TODO
 		addCodexFunction(AlchemancyProperties.CHOPPING, PropertyFunction.ATTRIBUTE_MODIFIER, "Allows the item to break Axe-related blocks, starting at wooden tier if the item isn't already a tool.");
 		addCodexFunction(AlchemancyProperties.CHOPPING, PropertyFunction.WHEN_USED_BLOCK, "Strips {item Logs} and removes wax from {item Copper Blocks}");
 		addCodexFunction(AlchemancyProperties.CHOPPING, PropertyFunction.WHEN_SHOT, "Breaks Axe-related blocks on impact. The faster the projectile goes, the more likely it is to continue its trajectory after breaking a block.");
@@ -119,7 +119,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.DIGGING, PropertyFunction.WHEN_USED_BLOCK, "Can turn {item Dirt} into {item Dirt Path} and put out {item Campfires}");
 		addCodexFunction(AlchemancyProperties.DIGGING, PropertyFunction.WHEN_SHOT, "Breaks Shovel-related blocks on impact. The faster the projectile goes, the more likely it is to continue its trajectory after breaking a block.");
 
-		addCodexFlavor(AlchemancyProperties.REAPING, "");
+		addCodexFlavor(AlchemancyProperties.REAPING, ""); //TODO
 		addCodexFunction(AlchemancyProperties.REAPING, PropertyFunction.ATTRIBUTE_MODIFIER, "Allows the item to break Hoe-related blocks, starting at wooden tier if the item isn't already a tool.");
 		addCodexFunction(AlchemancyProperties.REAPING, PropertyFunction.WHEN_USED_BLOCK, "Can till {item Dirt} into {item Farmland}");
 		addCodexFunction(AlchemancyProperties.REAPING, PropertyFunction.WHEN_SHOT, "Breaks Hoe-related blocks on impact. The faster the projectile goes, the more likely it is to continue its trajectory after breaking a block.");
@@ -185,10 +185,25 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.SMITING, PropertyFunction.ON_CRIT, "Creates a {item Lightning Bolt} at the target's position, greatly damaging the item or destroying it in the process.");
 
 		addCodexFlavor(AlchemancyProperties.CRACKLING, "Be the light of the party");
-		addCodexFunction(AlchemancyProperties.CRACKLING, PropertyFunction.ON_CRIT, "Creates a {item Lightning Bolt} at the target's position, greatly damaging the item or destroying it in the process.");
+		addCodexFunction(AlchemancyProperties.CRACKLING, PropertyFunction.ON_CRIT, "Creates a Firework explosion at the target's position, damaging all nearby entities, including the user. The explosion's effects depend on the {item Firework Rocket} or {item Firework Star} used to obtain this {system Infusion}.");
 
 //		addCodexFlavor(AlchemancyProperties., "");
 //		addCodexFunction(AlchemancyProperties., PropertyFunction., "");
+
+		addCodexFlavor(AlchemancyProperties.SOULBIND, "Trapped Spirits");
+		addCodexFunction(AlchemancyProperties.INFUSION_CODEX, PropertyFunction.WHILE_IN_INVENTORY, "Has a 2% chance every second of the soul trapped inside of the item of escaping, removing the {system Infusion} and potentially damaging the holder.");
+		addCodexFunction(AlchemancyProperties.INFUSION_CODEX, PropertyFunction.OTHER, "Can be used to create multiple new {system Infusions}.");
+
+		addCodexFlavor(AlchemancyProperties.SPIRIT_BOND, "Your souls, unite");
+		addCodexFunction(AlchemancyProperties.SPIRIT_BOND, PropertyFunction.ON_HEAL, "Restores 10 durability points for each health point restored.");
+		addCodexFunction(AlchemancyProperties.SPIRIT_BOND, PropertyFunction.RECEIVE_DAMAGE_EQUIPPED, "Loses 1 durability point for each health point lost.");
+
+		addCodexFlavor(AlchemancyProperties.VENGEFUL, "An eye for an eye");
+		addCodexFunction(AlchemancyProperties.VENGEFUL, PropertyFunction.MODIFY_DAMAGE, "Deals 85% more damage against the entity that last damaged the user, and 35% less damage to everyone else.");
+
+		addCodexFlavor(AlchemancyProperties.LOYAL, "Always by your side");
+		addCodexFunction(AlchemancyProperties.LOYAL, PropertyFunction.WHEN_DROPPED, "Slowly floats back to the dropper after a short period of time.");
+		addCodexFunction(AlchemancyProperties.LOYAL, PropertyFunction.WHEN_SHOT, "Floats back to the shooter after impacting a block or an entity.");
 
 		addCodexFlavor(AlchemancyProperties.INFUSION_CODEX, "Quite the inception");
 		addCodexFunction(AlchemancyProperties.INFUSION_CODEX, PropertyFunction.WHEN_USED, "Opens the {item Infusion Codex}'s index menu.");
@@ -236,6 +251,13 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFlavor(AlchemancyProperties.GUST_JET, "Blow their socks off");
 		addCodexFunction(AlchemancyProperties.GUST_JET, PropertyFunction.WHILE_USING, "Blows the user backwards unless they're crouching while standing on solid ground. Knocks all entities in front of the user back, with a 20% chance every tick of triggering {function on_attack} effects on them. Consumes 1 durability point or the item itself every 2 seconds.");
 		addCodexFunction(AlchemancyProperties.GUST_JET, PropertyFunction.WHILE_WORN_BOOTS, "Blows the user a moderate distance away from the ground.. Knocks all entities under the user back, with a 20% chance every tick of triggering {function on_attack} effects on them. Consumes 1 durability point or the item itself every 2 seconds.");
+
+		addCodexFlavor(AlchemancyProperties.BLINKING, "Quick on our feet, hard to defeat!");
+		addCodexFunction(AlchemancyProperties.BLINKING, PropertyFunction.WHILE_WORN, "Phase up to 10 blocks forward after initiating a sprint, consuming 5 durability points or the item itself.");
+		addCodexFunction(AlchemancyProperties.BLINKING, PropertyFunction.ACTIVATE, "The user phases up to 10 blocks in the direction they're looking, consuming 5 durability points or the item itself.");
+
+		addCodexFlavor(AlchemancyProperties.VAULTPICKING, "Hack the system");
+		addCodexFunction(AlchemancyProperties.VAULTPICKING, PropertyFunction.WHEN_USED_BLOCK, "Resets a {item Trial Vault}'s inner mechanisms at the cost of 50 durability points or the item, allowing only the user to insert another key and gather additional loot.");
 
 		addCodexFlavor(AlchemancyProperties.WARPED, "A glimpse into my twisted mind");
 		addCodexFunction(AlchemancyProperties.WARPED, PropertyFunction.OTHER, "Alters every compatible {system Infusion} on the item at the end of the {system Infusion Process}, often turning them into an opposite, or related counterpart.");
