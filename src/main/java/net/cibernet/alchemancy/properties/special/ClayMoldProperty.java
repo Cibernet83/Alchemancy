@@ -15,8 +15,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -26,6 +28,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ClayMoldProperty extends Property implements IDataHolder<ItemStack>
 {
@@ -44,7 +47,7 @@ public class ClayMoldProperty extends Property implements IDataHolder<ItemStack>
 	}
 
 	@Override
-	public void onStackedOverMe(ItemStack carriedItem, ItemStack stackedOnItem, Player player, ClickAction clickAction, ItemStackedOnOtherEvent event)
+	public void onStackedOverMe(ItemStack carriedItem, ItemStack stackedOnItem, Player player, ClickAction clickAction, SlotAccess carriedSlot, Slot stackedOnSlot, AtomicBoolean isCancelled)
 	{
 		if(carriedItem.is(AlchemancyTags.Items.REPAIRS_UNSHAPED_CLAY))
 		{
@@ -54,14 +57,14 @@ public class ClayMoldProperty extends Property implements IDataHolder<ItemStack>
 			carriedItem.shrink(1);
 
 			if(stackedOnItem.isEmpty())
-				event.getSlot().set(storedItem);
+				stackedOnSlot.set(storedItem);
 			else if(carriedItem.isEmpty())
-				event.getCarriedSlotAccess().set(storedItem);
+				carriedSlot.set(storedItem);
 			else if(!player.addItem(storedItem))
 				player.drop(storedItem, true);
 
 			playRepairEffects(player);
-			event.setCanceled(true);
+			isCancelled.set(true);
 		}
 	}
 

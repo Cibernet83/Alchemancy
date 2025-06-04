@@ -9,9 +9,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -24,12 +26,13 @@ import net.neoforged.neoforge.event.level.BlockDropsEvent;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AutosmeltProperty extends Property implements IDataHolder<Integer>
 {
 
 	@Override
-	public void onStackedOverMe(ItemStack carriedItem, ItemStack stackedOnItem, Player player, ClickAction clickAction, ItemStackedOnOtherEvent event) {
+	public void onStackedOverMe(ItemStack carriedItem, ItemStack stackedOnItem, Player player, ClickAction clickAction, SlotAccess carriedSlot, Slot stackedOnSlot, AtomicBoolean isCancelled) {
 		if(clickAction == ClickAction.SECONDARY && getData(stackedOnItem) <= 0)
 		{
 			int fuel = carriedItem.getBurnTime(RecipeType.SMELTING) / 200;
@@ -44,13 +47,13 @@ public class AutosmeltProperty extends Property implements IDataHolder<Integer>
 						player.drop(remainder, true);
 						carriedItem.shrink(1);
 					}
-					else event.getCarriedSlotAccess().set(remainder.copy());
+					else carriedSlot.set(remainder.copy());
 				}
 				else carriedItem.shrink(1);
 
 				setData(stackedOnItem, fuel);
 				playRefuelSound(player);
-				event.setCanceled(true);
+				isCancelled.set(true);
 			}
 		}
 	}

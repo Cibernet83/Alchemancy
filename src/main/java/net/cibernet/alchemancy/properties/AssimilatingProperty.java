@@ -2,21 +2,25 @@ package net.cibernet.alchemancy.properties;
 
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AssimilatingProperty extends Property
 {
 	@Override
-	public void onStackedOverMe(ItemStack otherStack, ItemStack stack, Player player, ClickAction clickAction, ItemStackedOnOtherEvent event)
+	public void onStackedOverMe(ItemStack otherStack, ItemStack stack, Player player, ClickAction clickAction, SlotAccess carriedSlot, Slot stackedOnSlot, AtomicBoolean isCancelled)
 	{
 		if(stack.isDamaged() && stack != otherStack && ItemStack.isSameItem(stack, otherStack))
 		{
 			repairItem(stack, (stack.getMaxDamage() - otherStack.getDamageValue()));
 			otherStack.shrink(1);
-			event.setCanceled(true);
+			isCancelled.set(true);
 		}
 	}
 

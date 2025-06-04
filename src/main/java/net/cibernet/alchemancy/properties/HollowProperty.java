@@ -22,9 +22,11 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
@@ -35,6 +37,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class HollowProperty extends Property implements IDataHolder<ItemStack>
 {
@@ -101,7 +104,7 @@ public class HollowProperty extends Property implements IDataHolder<ItemStack>
 	}
 
 	@Override
-	public void onStackedOverItem(ItemStack hollowItem, ItemStack carriedItem, Player player, ClickAction clickAction, ItemStackedOnOtherEvent event)
+	public void onStackedOverItem(ItemStack hollowItem, ItemStack carriedItem, Player player, ClickAction clickAction, SlotAccess carriedSlot, Slot stackedOnSlot, AtomicBoolean isCancelled)
 	{
 		if(clickAction != ClickAction.SECONDARY)
 			return;
@@ -111,9 +114,9 @@ public class HollowProperty extends Property implements IDataHolder<ItemStack>
 		{
 			if(carriedItem.isEmpty())
 			{
-				event.getSlot().set(storedStack);
+				stackedOnSlot.set(storedStack);
 				setData(hollowItem, getDefaultData());
-				event.setCanceled(true);
+				isCancelled.set(true);
 				return;
 			}
 			else if (ItemStack.isSameItemSameComponents(storedStack, carriedItem))
@@ -123,21 +126,21 @@ public class HollowProperty extends Property implements IDataHolder<ItemStack>
 				carriedItem.shrink(mergeLimit);
 
 				setData(hollowItem, storedStack);
-				event.getSlot().set(carriedItem);
-				event.setCanceled(true);
+				stackedOnSlot.set(carriedItem);
+				isCancelled.set(true);
 			}
 		}
 		if(!carriedItem.isEmpty() && storeItem(player, hollowItem, carriedItem))
 		{
-			event.getSlot().set(carriedItem);
-			event.setCanceled(true);
+			stackedOnSlot.set(carriedItem);
+			isCancelled.set(true);
 		}
 	}
 
 
 
 	@Override
-	public void onStackedOverMe(ItemStack carriedItem, ItemStack stackedOnItem, Player player, ClickAction clickAction, ItemStackedOnOtherEvent event)
+	public void onStackedOverMe(ItemStack carriedItem, ItemStack stackedOnItem, Player player, ClickAction clickAction, SlotAccess carriedSlot, Slot stackedOnSlot, AtomicBoolean isCancelled)
 	{
 		if(clickAction != ClickAction.SECONDARY)
 			return;
@@ -147,9 +150,9 @@ public class HollowProperty extends Property implements IDataHolder<ItemStack>
 		{
 			if(carriedItem.isEmpty())
 			{
-				event.getCarriedSlotAccess().set(storedStack);
+				carriedSlot.set(storedStack);
 				setData(stackedOnItem, getDefaultData());
-				event.setCanceled(true);
+				isCancelled.set(true);
 				return;
 			}
 			else if(ItemStack.isSameItemSameComponents(storedStack, carriedItem))
@@ -159,15 +162,15 @@ public class HollowProperty extends Property implements IDataHolder<ItemStack>
 				carriedItem.shrink(mergeLimit);
 
 				setData(stackedOnItem, storedStack);
-				event.getCarriedSlotAccess().set(carriedItem);
-				event.setCanceled(true);
+				carriedSlot.set(carriedItem);
+				isCancelled.set(true);
 			}
 		}
 
 		if(!carriedItem.isEmpty() && storeItem(player, stackedOnItem, carriedItem))
 		{
-			event.getCarriedSlotAccess().set(carriedItem);
-			event.setCanceled(true);
+			carriedSlot.set(carriedItem);
+			isCancelled.set(true);
 		}
 	}
 

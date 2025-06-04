@@ -51,6 +51,7 @@ import net.neoforged.neoforge.event.tick.EntityTickEvent;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Predicate;
 
 @EventBusSubscriber
@@ -370,8 +371,15 @@ public class PropertyEventHandler
 	@SubscribeEvent
 	public static void onItemStacking(ItemStackedOnOtherEvent event)
 	{
-		InfusedPropertiesHelper.forEachProperty(event.getStackedOnItem(), propertyHolder -> propertyHolder.value().onStackedOverItem(event.getStackedOnItem(), event.getCarriedItem(), event.getPlayer(), event.getClickAction(), event));
-		InfusedPropertiesHelper.forEachProperty(event.getCarriedItem(), propertyHolder -> propertyHolder.value().onStackedOverMe(event.getStackedOnItem(), event.getCarriedItem(), event.getPlayer(), event.getClickAction(), event));
+		if(event.isCanceled()) return;
+
+		ItemStack carriedItem = event.getCarriedItem();
+		ItemStack stackedOnItem = event.getStackedOnItem();
+		AtomicBoolean canceled = new AtomicBoolean(false);
+		InfusedPropertiesHelper.forEachProperty(carriedItem, propertyHolder -> propertyHolder.value().onStackedOverItem(carriedItem, stackedOnItem, event.getPlayer(), event.getClickAction(), event.getCarriedSlotAccess(), event.getSlot(), canceled));
+		if(!canceled.get())
+			InfusedPropertiesHelper.forEachProperty(stackedOnItem, propertyHolder -> propertyHolder.value().onStackedOverMe(carriedItem, stackedOnItem, event.getPlayer(), event.getClickAction(), event.getCarriedSlotAccess(), event.getSlot(), canceled));
+		event.setCanceled(canceled.get());
 	}
 
 	@SubscribeEvent

@@ -7,9 +7,11 @@ import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -21,19 +23,20 @@ import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.*;
 import java.util.stream.Stream;
 
 public class AbsorbingProperty extends Property
 {
 	@Override
-	public void onStackedOverMe(ItemStack otherStack, ItemStack stack, Player player, ClickAction clickAction, ItemStackedOnOtherEvent event)
+	public void onStackedOverMe(ItemStack otherStack, ItemStack stack, Player player, ClickAction clickAction, SlotAccess carriedSlot, Slot stackedOnSlot, AtomicBoolean isCancelled)
 	{
 		if(shouldRepair(stack) && stack.getItem().isValidRepairItem(stack, otherStack))
 		{
 			repairItem(stack, stack.getMaxDamage() / 4);
 			otherStack.shrink(1);
-			event.setCanceled(true);
+			isCancelled.set(true);
 		}
 	}
 
