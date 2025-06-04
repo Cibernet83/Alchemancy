@@ -8,23 +8,27 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import org.checkerframework.checker.nullness.qual.Nullable;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class ToggleableProperty extends Property implements IDataHolder<Boolean>
 {
 	@Override
-	public void onStackedOverMe(ItemStack carriedItem, ItemStack stackedOnItem, Player player, ClickAction clickAction, ItemStackedOnOtherEvent event)
+	public void onStackedOverMe(ItemStack carriedItem, ItemStack stackedOnItem, Player player, ClickAction clickAction, SlotAccess carriedSlot, Slot stackedOnSlot, AtomicBoolean isCancelled)
 	{
 		if(carriedItem.isEmpty() && clickAction == ClickAction.SECONDARY)
 		{
-			toggle(stackedOnItem, event.getPlayer());
-			event.setCanceled(true);
+			toggle(stackedOnItem, player);
+			isCancelled.set(true);
 		}
 	}
 

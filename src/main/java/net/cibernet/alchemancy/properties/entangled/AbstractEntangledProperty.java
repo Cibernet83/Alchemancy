@@ -8,10 +8,14 @@ import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public abstract class AbstractEntangledProperty extends Property implements IDataHolder<AbstractEntangledProperty.EntangledData>
 {
@@ -21,16 +25,16 @@ public abstract class AbstractEntangledProperty extends Property implements IDat
 	}
 
 	@Override
-	public void onStackedOverMe(ItemStack carriedItem, ItemStack stackedOnItem, Player player, ClickAction clickAction, ItemStackedOnOtherEvent event)
+	public void onStackedOverMe(ItemStack carriedItem, ItemStack stack, Player player, ClickAction clickAction, SlotAccess carriedSlot, Slot stackedOnSlot, AtomicBoolean isCancelled)
 	{
-		EntangledData data = getData(stackedOnItem);
+		EntangledData data = getData(stack);
 		if(clickAction != ClickAction.SECONDARY || carriedItem.isEmpty() || !data.equals(getDefaultData()) || InfusedPropertiesHelper.getRemainingInfusionSlots(carriedItem) <= 0)
 			return;
 
 		InfusedPropertiesHelper.addProperty(carriedItem, asHolder());
-		setStoredItem(stackedOnItem, carriedItem.split(1));
+		setStoredItem(stack, carriedItem.split(1));
 
-		event.setCanceled(true);
+		isCancelled.set(true);
 	}
 
 	public boolean getToggle(ItemStack stack)

@@ -8,8 +8,10 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
 import org.jetbrains.annotations.Nullable;
@@ -19,15 +21,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class QuantumShiftProperty extends Property {
 
 	@Override
-	public void onStackedOverItem(ItemStack carriedItem, ItemStack stackedOnItem, Player player, ClickAction clickAction, ItemStackedOnOtherEvent event) {
+	public void onStackedOverItem(ItemStack stack, ItemStack stackedOnItem, Player player, ClickAction clickAction, SlotAccess carriedSlot, Slot stackedOnSlot, AtomicBoolean isCancelled) {
+
+		if(clickAction != ClickAction.SECONDARY || stackedOnItem.isEmpty()) return;
 
 		AtomicBoolean cont = new AtomicBoolean(true);
 		InfusedPropertiesHelper.forEachProperty(stackedOnItem, propertyHolder -> {
 			if(cont.get() && propertyHolder.value() instanceof AbstractEntangledProperty entangledProperty)
 			{
-				event.getSlot().set(entangledProperty.shift(stackedOnItem));
+				stackedOnSlot.set(entangledProperty.shift(stackedOnItem));
 				cont.set(false);
-				event.setCanceled(true);
+				isCancelled.set(true);
 			}
 		});
 	}
