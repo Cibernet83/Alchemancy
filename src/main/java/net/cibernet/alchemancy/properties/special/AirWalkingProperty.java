@@ -9,21 +9,25 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AirWalkingProperty extends Property implements IDataHolder<Double> {
 
 	public static final DustParticleOptions PARTICLES = new DustParticleOptions(Vec3.fromRGB24(0x47FFBE).toVector3f(), 1.5f);
 
 	@Override
-	public void onStackedOverMe(ItemStack carriedItem, ItemStack stackedOnItem, Player player, ClickAction clickAction, ItemStackedOnOtherEvent event) {
-		removeData(stackedOnItem);
+	public void onStackedOverMe(ItemStack carriedItem, ItemStack stack, Player player, ClickAction clickAction, SlotAccess carriedSlot, Slot stackedOnSlot, AtomicBoolean isCancelled) {
+		removeData(stack);
 	}
 
 	@Override

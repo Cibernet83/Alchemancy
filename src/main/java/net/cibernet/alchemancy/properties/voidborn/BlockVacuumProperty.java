@@ -3,14 +3,11 @@ package net.cibernet.alchemancy.properties.voidborn;
 import net.cibernet.alchemancy.item.InnatePropertyItem;
 import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
 import net.cibernet.alchemancy.properties.Property;
-import net.cibernet.alchemancy.properties.WayfindingProperty;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.util.ColorUtils;
-import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.GlobalPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.DustColorTransitionOptions;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -18,38 +15,35 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-public class BlockVacuumProperty extends Property implements IDataHolder<BlockVacuumProperty.Data>
-{
+public class BlockVacuumProperty extends Property implements IDataHolder<BlockVacuumProperty.Data> {
 
 	public static final DustColorTransitionOptions PARTICLES = new DustColorTransitionOptions(
 			Vec3.fromRGB24(0xEC8BF8).toVector3f(), Vec3.fromRGB24(0).toVector3f(), .75F
@@ -60,24 +54,22 @@ public class BlockVacuumProperty extends Property implements IDataHolder<BlockVa
 	{
 		Data data = AlchemancyProperties.WORLD_OBLITERATOR.value().getData(stack);
 
-		if(data.filterBlock() != null)
+		if (data.filterBlock() != null)
 			tooltipComponents.add(Component.translatable("item.alchemancy.black_hole_tool.bound_to_block", data.filterBlock().getName()).withColor(AlchemancyProperties.WORLD_OBLITERATOR.value().getColor(stack)));
 	};
 
 	@Override
-	public void onStackedOverMe(ItemStack carriedItem, ItemStack stackedOnItem, Player player, ClickAction clickAction, ItemStackedOnOtherEvent event) {
+	public void onStackedOverMe(ItemStack carriedItem, ItemStack stack, Player player, ClickAction clickAction, SlotAccess carriedSlot, Slot stackedOnSlot, AtomicBoolean isCancelled) {
 
-		if(clickAction != ClickAction.SECONDARY) return;
+		if (clickAction != ClickAction.SECONDARY) return;
 
-		var data = getData(stackedOnItem);
-		if(carriedItem.getItem() instanceof BlockItem blockItem && (data.tag() == null || blockItem.getBlock().defaultBlockState().is(data.tag())))
-		{
-			setData(stackedOnItem, new Data(data.tag(), blockItem.getBlock()));
-			event.setCanceled(true);
-		}
-		else if (carriedItem.isEmpty())
-		{
-			setData(stackedOnItem, new Data(data.tag()));
+		var data = getData(stack);
+		if (carriedItem.getItem() instanceof BlockItem blockItem && (data.tag() == null || blockItem.getBlock().defaultBlockState().is(data.tag()))) {
+			setData(stack, new Data(data.tag(), blockItem.getBlock()));
+			isCancelled.set(true);
+		} else if (carriedItem.isEmpty()) {
+			setData(stack, new Data(data.tag()));
+			isCancelled.set(true);
 		}
 	}
 
@@ -87,12 +79,11 @@ public class BlockVacuumProperty extends Property implements IDataHolder<BlockVa
 	}
 
 	@Override
-	public void onItemUseTick(LivingEntity user, ItemStack stack, LivingEntityUseItemEvent.Tick event)
-	{
+	public void onItemUseTick(LivingEntity user, ItemStack stack, LivingEntityUseItemEvent.Tick event) {
 		Level level = event.getEntity().level();
 		var data = getData(event.getItem());
 
-		if(level.isClientSide())
+		if (level.isClientSide())
 			return;
 
 		int radius = PropertyModifierComponent.getOrElse(stack, asHolder(), AlchemancyProperties.Modifiers.EFFECT_RADIUS, 5f).intValue();
@@ -100,14 +91,13 @@ public class BlockVacuumProperty extends Property implements IDataHolder<BlockVa
 
 		ArrayList<BlockPos> validPos = new ArrayList<>();
 		for (BlockPos pos : BlockPos.betweenClosed(user.blockPosition().offset(radius, radius, radius), user.blockPosition().offset(-radius, -radius, -radius))) {
-			if(user.blockPosition().distSqr(pos) <= radius * radius)
+			if (user.blockPosition().distSqr(pos) <= radius * radius)
 				validPos.add(new BlockPos(pos));
 		}
 
 		Collections.shuffle(validPos);
 
-		if(!validPos.isEmpty())
-		{
+		if (!validPos.isEmpty()) {
 			BlockPos pos = validPos.getFirst();
 			int durabilityConsumed = 0;
 			int durabilityConsumedPerBlock = PropertyModifierComponent.getOrElse(stack, asHolder(), AlchemancyProperties.Modifiers.DURABILITY_CONSUMPTION, 1);
@@ -122,18 +112,18 @@ public class BlockVacuumProperty extends Property implements IDataHolder<BlockVa
 					ItemEntity itemEntity = new ItemEntity(level, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, state.getBlock().asItem().getDefaultInstance(), 0, 0, 0);
 					itemEntity.setDefaultPickUpDelay();
 					level.addFreshEntity(itemEntity);
-					((ServerLevel)level).sendParticles(PARTICLES, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, 5, 0.5, 0.5, 0.5, 0);
+					((ServerLevel) level).sendParticles(PARTICLES, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, 5, 0.5, 0.5, 0.5, 0);
 
 					i--;
 					durabilityConsumed += durabilityConsumedPerBlock;
 				}
 			}
 
-			if(durabilityConsumed > 0)
+			if (durabilityConsumed > 0)
 				stack.hurtAndBreak(durabilityConsumed, user, EquipmentSlot.MAINHAND);
 		}
 
-		if(user instanceof Player player)
+		if (user instanceof Player player)
 			for (ItemEntity item : level.getEntitiesOfClass(ItemEntity.class, aabb, item -> item.getItem().getItem() instanceof BlockItem blockItem && data.matches(blockItem.getBlock().defaultBlockState()))) {
 				item.playerTouch(player);
 			}
@@ -168,8 +158,7 @@ public class BlockVacuumProperty extends Property implements IDataHolder<BlockVa
 	}
 
 	@Override
-	public BlockVacuumProperty.Data readData(CompoundTag tag)
-	{
+	public BlockVacuumProperty.Data readData(CompoundTag tag) {
 		return new Data(tag);
 	}
 
@@ -184,14 +173,13 @@ public class BlockVacuumProperty extends Property implements IDataHolder<BlockVa
 	}
 
 	@Override
-	public Component getDisplayText(ItemStack stack)
-	{
+	public Component getDisplayText(ItemStack stack) {
 		Component name = super.getDisplayText(stack).copy().withStyle(ChatFormatting.BOLD);
 		var data = getData(stack);
 
-		if(data.filterBlock() != null)
+		if (data.filterBlock() != null)
 			return Component.translatable("property.detail", name, data.filterBlock().getName()).withColor(getColor(stack));
-		else if(data.tag() != null)
+		else if (data.tag() != null)
 			return Component.translatable("property.detail", name, "#%s".formatted(data.tag().toString())).withColor(getColor(stack));
 		else return name;
 	}
@@ -201,7 +189,7 @@ public class BlockVacuumProperty extends Property implements IDataHolder<BlockVa
 		return false;
 	}
 
-	public record Data(@Nullable TagKey<Block> tag, @Nullable Block filterBlock){
+	public record Data(@Nullable TagKey<Block> tag, @Nullable Block filterBlock) {
 
 		public static final Data DEFAULT = new Data(null, null);
 
@@ -215,18 +203,18 @@ public class BlockVacuumProperty extends Property implements IDataHolder<BlockVa
 		}
 
 		public CompoundTag save() {
-			return new CompoundTag(){{
-				if(tag != null)
+			return new CompoundTag() {{
+				if (tag != null)
 					putString("tag", tag.location().toString());
-				if(filterBlock != null)
+				if (filterBlock != null)
 					putString("block", BuiltInRegistries.BLOCK.getKey(filterBlock).toString());
 			}};
 		}
 
 		public boolean matches(BlockState blockState) {
-			if(filterBlock() != null)
+			if (filterBlock() != null)
 				return blockState.is(filterBlock());
-			if(tag() != null)
+			if (tag() != null)
 				return blockState.is(tag());
 			return true;
 		}
