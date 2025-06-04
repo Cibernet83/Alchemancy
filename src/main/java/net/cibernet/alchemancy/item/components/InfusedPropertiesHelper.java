@@ -241,6 +241,7 @@ public class InfusedPropertiesHelper
 	public static ItemStack clearAllInfusions(ItemStack stack)
 	{
 		stack.remove(INFUSED_PROPERTIES);
+		stack.remove(PROPERTY_DATA);
 		return stack;
 	}
 
