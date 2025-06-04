@@ -10,8 +10,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class InfusionCodexProperty extends Property {
 
@@ -56,22 +59,22 @@ public class InfusionCodexProperty extends Property {
 	}
 
 	@Override
-	public void onStackedOverItem(ItemStack carriedItem, ItemStack stackedOnItem, Player player, ClickAction clickAction, ItemStackedOnOtherEvent event) {
+	public void onStackedOverItem(ItemStack stack, ItemStack stackedOnItem, Player player, ClickAction clickAction, SlotAccess carriedSlot, Slot stackedOnSlot, AtomicBoolean isCancelled) {
 
-		if(clickAction != ClickAction.SECONDARY || stackedOnItem.isEmpty() || ItemStack.isSameItemSameComponents(stackedOnItem, carriedItem)) return;
+		if(clickAction != ClickAction.SECONDARY || stackedOnItem.isEmpty() || ItemStack.isSameItemSameComponents(stackedOnItem, stack)) return;
 
 		if(player.level().isClientSide() && canInspect(player, stackedOnItem))
 			Minecraft.getInstance().setScreen(new InfusionCodexIndexScreen(stackedOnItem));
-		event.setCanceled(true);
+		isCancelled.set(true);
 	}
 
 	@Override
-	public void onStackedOverMe(ItemStack carriedItem, ItemStack stackedOnItem, Player player, ClickAction clickAction, ItemStackedOnOtherEvent event) {
+	public void onStackedOverMe(ItemStack carriedItem, ItemStack stackedOnItem, Player player, ClickAction clickAction, SlotAccess carriedSlot, Slot stackedOnSlot, AtomicBoolean isCancelled) {
 		if(clickAction != ClickAction.SECONDARY || carriedItem.isEmpty() || ItemStack.isSameItemSameComponents(stackedOnItem, carriedItem)) return;
 
 		if(player.level().isClientSide() && canInspect(player, carriedItem))
 			Minecraft.getInstance().setScreen(new InfusionCodexIndexScreen(carriedItem));
-		event.setCanceled(true);
+		isCancelled.set(true);
 	}
 
 	@Override
