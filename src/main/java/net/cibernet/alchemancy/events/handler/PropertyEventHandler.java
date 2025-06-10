@@ -435,7 +435,7 @@ public class PropertyEventHandler
 	@SubscribeEvent
 	public static void onEnderManAnger(EnderManAngerEvent event)
 	{
-		if(InfusedPropertiesHelper.hasProperty(event.getPlayer().getItemBySlot(EquipmentSlot.HEAD), AlchemancyProperties.SCARY))
+		if(InfusedPropertiesHelper.hasProperty(event.getPlayer().getItemBySlot(EquipmentSlot.HEAD), AlchemancyTags.Properties.PREVENTS_ENDERMAN_AGGRO))
 			event.setCanceled(true);
 	}
 
