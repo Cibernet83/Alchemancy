@@ -62,26 +62,33 @@ public class HomeRunProperty extends Property {
 		Vec3 attackPos = damageSource.getSourcePosition();
 		if (attackPos == null && damageSource.getDirectEntity() != null)
 			attackPos = damageSource.getDirectEntity().position();
-		if (attackPos == null && user != null)
+		if (attackPos == null)
 			attackPos = user.position();
-		if (attackPos != null) {
-			BouncyProperty.knockBack(target, attackPos, target.onGround() ? 10 : 4);
+		BouncyProperty.knockBack(target, attackPos, 20);
 
-			if (PropertyModifierComponent.getOrElse(weapon, asHolder(), AlchemancyProperties.Modifiers.PREVENT_CONSUMPTION, weapon.isDamageableItem())) {
-				int durabilityConsumed = PropertyModifierComponent.getOrElse(weapon, asHolder(), AlchemancyProperties.Modifiers.DURABILITY_CONSUMPTION, 10);
-				if (user instanceof LivingEntity living)
-					weapon.hurtAndBreak(durabilityConsumed, living, EquipmentSlot.MAINHAND);
-				else if (target.level() instanceof ServerLevel serverLevel)
-					weapon.hurtAndBreak(durabilityConsumed, serverLevel, null, (item) -> {
-					});
-			} else consumeItem(user, weapon, EquipmentSlot.MAINHAND);
-		}
+		if (PropertyModifierComponent.getOrElse(weapon, asHolder(), AlchemancyProperties.Modifiers.PREVENT_CONSUMPTION, weapon.isDamageableItem())) {
+			int durabilityConsumed = PropertyModifierComponent.getOrElse(weapon, asHolder(), AlchemancyProperties.Modifiers.DURABILITY_CONSUMPTION, 10);
+			if (user instanceof LivingEntity living)
+				weapon.hurtAndBreak(durabilityConsumed, living, EquipmentSlot.MAINHAND);
+			else if (target.level() instanceof ServerLevel serverLevel)
+				weapon.hurtAndBreak(durabilityConsumed, serverLevel, null, (item) -> {
+				});
+		} else consumeItem(user, weapon, EquipmentSlot.MAINHAND);
 	}
 
 
 	@Override
-	public void onActivationByBlock(Level level, BlockPos position, Entity target, ItemStack stack) {
+	public void onActivationByBlock(Level level, BlockPos position, Entity target, ItemStack weapon) {
 		BouncyProperty.knockBack(target, position.below().getBottomCenter(), 4);
+
+		if (PropertyModifierComponent.getOrElse(weapon, asHolder(), AlchemancyProperties.Modifiers.PREVENT_CONSUMPTION, weapon.isDamageableItem())) {
+			int durabilityConsumed = PropertyModifierComponent.getOrElse(weapon, asHolder(), AlchemancyProperties.Modifiers.DURABILITY_CONSUMPTION, 10);
+			if (target instanceof LivingEntity living)
+				weapon.hurtAndBreak(durabilityConsumed, living, EquipmentSlot.MAINHAND);
+			else if (target.level() instanceof ServerLevel serverLevel)
+				weapon.hurtAndBreak(durabilityConsumed, serverLevel, null, (item) -> {
+				});
+		} else consumeItem(target, weapon, EquipmentSlot.MAINHAND);
 	}
 
 	@Override

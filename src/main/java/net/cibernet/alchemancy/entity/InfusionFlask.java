@@ -65,28 +65,66 @@ public class InfusionFlask extends ThrowableItemProjectile implements ItemSuppli
 		return 0.05;
 	}
 
+	private static final int MAX_AFFECTED_ITEMS = 32; //FIXME maybe make this configurable
+
 	private void applySplash(List<Holder<Property>> infusions) {
 
 		AABB aabb = this.getBoundingBox().inflate(SPLASH_RANGE, SPLASH_RANGE * 0.5, SPLASH_RANGE);
 
-		for (ItemEntity itemEntity : this.level().getEntitiesOfClass(ItemEntity.class, aabb)) {
-			ItemStack itemStack = infuseItem(itemEntity.getItem(), infusions);
-
-			if (itemStack.isEmpty())
-				itemEntity.discard();
-			else itemEntity.setItem(itemStack);
-		}
+		int items = 0;
 
 		for (LivingEntity living : this.level().getEntitiesOfClass(LivingEntity.class, aabb)) {
 			for (EquipmentSlot slot : EquipmentSlot.values()) {
-				living.setItemSlot(slot, infuseItem(living.getItemBySlot(slot), infusions));
+
+				AtomicBoolean success = new AtomicBoolean(false);
+
+				ItemStack entityStack = living.getItemBySlot(slot);
+				ItemStack splitStack = entityStack.split(MAX_AFFECTED_ITEMS - items);
+				ItemStack itemStack = infuseItem(splitStack, infusions, success);
+
+				if (!entityStack.isEmpty()) {
+					if (!itemStack.isEmpty())
+						level().addFreshEntity(new ItemEntity(level(), living.getX(), living.getEyeY(), living.getZ(), itemStack));
+				} else living.setItemSlot(slot, itemStack);
+
+				if (success.get()) {
+					items += splitStack.getCount();
+					if (items >= MAX_AFFECTED_ITEMS)
+						return;
+				}
+			}
+		}
+
+		for (ItemEntity itemEntity : this.level().getEntitiesOfClass(ItemEntity.class, aabb)) {
+
+			AtomicBoolean success = new AtomicBoolean(false);
+
+			ItemStack entityStack = itemEntity.getItem();
+			ItemStack splitStack = entityStack.split(MAX_AFFECTED_ITEMS - items);
+			ItemStack itemStack = infuseItem(splitStack, infusions, success);
+
+			if (!entityStack.isEmpty()) {
+				if (!itemStack.isEmpty()) {
+					var newItem = new ItemEntity(level(), itemEntity.getX(), itemEntity.getY(), itemEntity.getZ(), itemStack);
+					newItem.setDefaultPickUpDelay();
+					level().addFreshEntity(newItem);
+				}
+			} else {
+				if (itemStack.isEmpty())
+					itemEntity.discard();
+				else itemEntity.setItem(itemStack);
+			}
+			if (success.get()) {
+				items += splitStack.getCount();
+				if (items >= MAX_AFFECTED_ITEMS)
+					return;
 			}
 		}
 	}
 
-	private ItemStack infuseItem(ItemStack itemStack, List<Holder<Property>> infusions) {
+	private ItemStack infuseItem(ItemStack itemStack, List<Holder<Property>> infusions, AtomicBoolean successful) {
 
-		if(itemStack.is(AlchemancyTags.Items.IMMUNE_TO_INFUSIONS))
+		if (itemStack.is(AlchemancyTags.Items.IMMUNE_TO_INFUSIONS))
 			return itemStack;
 
 		boolean perform = false;
@@ -100,6 +138,7 @@ public class InfusionFlask extends ThrowableItemProjectile implements ItemSuppli
 		if (perform) {
 			InfusedPropertiesHelper.addProperties(itemStack, infusions);
 			itemStack = ForgeRecipeGrid.resolveInteractions(itemStack, level());
+			successful.set(true);
 		}
 
 		return itemStack;

@@ -78,9 +78,13 @@ public class BouncyProperty extends Property
 	{
 		target.hurtMarked = true;
 		target.hasImpulse = true;
-		Vec3 vec3 = target.getDeltaMovement();
-		Vec3 vec31 = sourcePos.subtract(target.position()).normalize().scale(strength);
-		target.setDeltaMovement(vec3.x * 0.5 - vec31.x, vec3.y * 0.5 - vec31.y, vec3.z * 0.5 - vec31.z);
+		Vec3 targetDelta = target.getDeltaMovement();
+		Vec3 knockback = sourcePos.subtract(target.position()).normalize().scale(strength);
+
+		if(target.onGround())
+			knockback = new Vec3(knockback.x(), Math.max(0.02f, knockback.y()), knockback.z());
+
+		target.setDeltaMovement(targetDelta.x * 0.5 - knockback.x, targetDelta.y * 0.5 - knockback.y, targetDelta.z * 0.5 - knockback.z);
 	}
 
 	private static final HashMap<UUID, Vec3> BOUNCE_TARGETS = new HashMap<>();
