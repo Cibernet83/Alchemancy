@@ -1,0 +1,22 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:headwear"
+  ],
+
+  "infusables": [
+    {
+      "item": "minecraft:tinted_glass"
+    }
+  ],
+
+  "catalyst": {
+    "item": "alchemancy:chroma_lens"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:tinted_glasses"
+  }
+}

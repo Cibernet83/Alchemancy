@@ -91,6 +91,7 @@ public class AlchemancyTags
 		public static final TagKey<Property> DISABLES_SPARKLING = registerTag(AlchemancyProperties.REGISTRY_KEY, "disables_sparkling");
 		public static final TagKey<Property> AFFECTED_BY_MAGNETIC = registerTag(AlchemancyProperties.REGISTRY_KEY, "affected_by_magnetic");
 		public static final TagKey<Property> CHANGES_GUST_JET_WIND_COLOR = registerTag(AlchemancyProperties.REGISTRY_KEY, "changes_gust_jet_wind_color");
+		public static final TagKey<Property> PREVENTS_ENDERMAN_AGGRO = registerTag(AlchemancyProperties.REGISTRY_KEY, "prevents_enderman_aggro");
 	}
 
 	public static class DataComponents

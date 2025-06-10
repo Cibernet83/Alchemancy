@@ -122,6 +122,11 @@ public class AlchemancyItems
 			.addModifier(AlchemancyProperties.HEADWEAR, AlchemancyProperties.Modifiers.ON_RIGHT_CLICK, true)
 			.stacksTo(1)
 			.build());
+	public static final DeferredItem<InnatePropertyItem> TINTED_GLASSES = REGISTRY.register("tinted_glasses", () -> new InnatePropertyItem.Builder()
+			.withProperties(AlchemancyProperties.HEADWEAR, AlchemancyProperties.TINTED_LENS)
+			.addModifier(AlchemancyProperties.HEADWEAR, AlchemancyProperties.Modifiers.ON_RIGHT_CLICK, true)
+			.stacksTo(1)
+			.build());
 	public static final DeferredItem<InnatePropertyItem> WAYWARD_MEDALLION = REGISTRY.register("wayward_medallion", () -> new InnatePropertyItem.Builder()
 			.withProperties(AlchemancyProperties.WAYWARD_WARP)
 			.durability(160, Ingredient.of(Items.ENDER_PEARL))
