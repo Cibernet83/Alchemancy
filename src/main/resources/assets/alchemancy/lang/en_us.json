@@ -99,6 +99,7 @@
   "item.alchemancy.sparkling_band": "Band of Sparkling",
 
   "item.alchemancy.property_visor": "Property Visor",
+  "item.alchemancy.tinted_glasses": "Tinted Glasses",
 
   "item.alchemancy.wayward_medallion": "Wayward Medallion",
   "item.alchemancy.wayward_medallion.bound_to_player": "Bound to: %s",
@@ -174,6 +175,7 @@
   "property.alchemancy.flattened": "Flattened",
   "property.alchemancy.enchanted": "Foil",
   "property.alchemancy.magical_concealment": "Magical Concealment",
+  "property.alchemancy.tinted_lens": "Tinted Lens",
   "property.alchemancy.revealing": "Revealing",
   "property.alchemancy.revealed": "Revealed",
   "property.alchemancy.scrambled": "Scrambled",

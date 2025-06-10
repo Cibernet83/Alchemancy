@@ -92,6 +92,9 @@ public class AlchemancyClient
 			return colors.isEmpty() ? -1 : FastColor.ARGB32.color(255, colors.get((int) Math.abs((System.currentTimeMillis() / 2000) % colors.size())));
 		}), AlchemancyItems.IRON_RING, AlchemancyItems.INFUSION_FLASK);
 
+		event.register(((stack, tintIndex) -> tintIndex == 1 ? AlchemancyProperties.TINTED_LENS.value().getColor(stack) : -1),
+				AlchemancyItems.TINTED_GLASSES);
+
 		event.register(((stack, tintIndex) -> tintIndex == 1 ? AlchemancyProperties.AWAKENED.value().getColor(stack) : -1),
 				AlchemancyItems.PROPERTY_VISOR,
 				AlchemancyItems.DREAMSTEEL_INGOT,

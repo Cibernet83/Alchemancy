@@ -77,6 +77,7 @@ public class AlchemancyCreativeTabs
 				output.accept(SPARKLING_BAND.get());
 
 				output.accept(PROPERTY_VISOR.get());
+				output.accept(TINTED_GLASSES.get());
 
 				output.accept(LEADEN_APPLE.get());
 				output.accept(LEADEN_CLOTH.get());

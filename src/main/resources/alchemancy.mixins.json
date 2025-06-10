@@ -43,6 +43,7 @@
     "client.ElytraLayerMixin",
     "client.HumanoidArmorLayerMixin",
     "client.ItemRendererMixin",
+    "client.LevelRendererMixin",
     "client.LocalPlayerMixin",
     "client.MouseHandlerMixin",
     "client.SodiumCompat$BakedModelEncoderMixin",
