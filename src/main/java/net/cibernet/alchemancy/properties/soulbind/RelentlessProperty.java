@@ -28,7 +28,7 @@ public class RelentlessProperty extends Property
 	{
 		float newDamage = Mth.ceil(
 				Math.max(event.getOriginalDamage() * 0.5f,
-				event.getNewDamage() * (1 - getEffectScale(user) * 0.02f)));
+				event.getNewDamage() * (1 - getEffectScale(user) * 0.2f)));
 
 		if(event.getNewDamage() > newDamage)
 			event.setNewDamage(newDamage);
