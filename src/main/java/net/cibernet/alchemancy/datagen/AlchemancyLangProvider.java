@@ -196,7 +196,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.THROWABLE, PropertyFunction.WHEN_USED, "Throws the item like a Projectile, triggering {function when_shot} effects when appropriate. The thrown item takes 10 durability points or is destroyed when it hits a block or an entity.");
 		addCodexFunction(AlchemancyProperties.THROWABLE, PropertyFunction.WHEN_SHOT_FROM_DISPENSER, "Throws the item like a Projectile, triggering {function when_shot} effects when appropriate. The thrown item takes 10 durability points or is destroyed when it hits a block or an entity.");
 
-		addCodexFlavor(AlchemancyProperties.WAYFINDING, "Always know the way");
+		addCodexFlavor(AlchemancyProperties.WAYFINDING, "Always know the way back");
 		addCodexFunction(AlchemancyProperties.WAYFINDING, PropertyFunction.VISUAL, "Rotates the item to point towards the tracked position, or if none is present the user's spawn point, the exit portal in {end The End}, or the place the user entered the dimension from.");
 		addCodexFunction(AlchemancyProperties.WAYFINDING, PropertyFunction.WHEN_USED_BLOCK, "Saves the targeted {item Lodestone}'s position as a tracked position if none is present.");
 		addCodexFunction(AlchemancyProperties.WAYFINDING, PropertyFunction.WHEN_USED_ENTITY, "Saves the targeted Player as a tracked position if none is present.");
@@ -264,7 +264,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.NOCTURNAL, PropertyFunction.WHILE_WORN_HELMET, "Applies Night Vision to the user for 15 seconds.");
 
 		addCodexFlavor(AlchemancyProperties.AQUATIC, "Swim with the fishes");
-		addCodexFunction(AlchemancyProperties.AQUATIC, PropertyFunction.WHILE_WORN_HELMET, "Increases {attribute Oxygen Bonus} value by 2, granting a similar effect to {enchantment Respiration II}.");
+		addCodexFunction(AlchemancyProperties.AQUATIC, PropertyFunction.WHILE_WORN_HELMET, "Increases {attribute Oxygen Bonus} value by 2, granting a similar effect to {enchantment minecraft:respiration} II.");
 		addCodexFunction(AlchemancyProperties.AQUATIC, PropertyFunction.WHILE_WORN_CHESTPLATE, "Increases {attribute Mining Speed} by 200% while underwater.");
 		addCodexFunction(AlchemancyProperties.AQUATIC, PropertyFunction.WHILE_HELD_MAINHAND, "Increases {attribute Mining Speed} by 200% while underwater.");
 		addCodexFunction(AlchemancyProperties.AQUATIC, PropertyFunction.WHILE_WORN_LEGGINGS, "Increases {attribute Swim Speed} by 55%.");
