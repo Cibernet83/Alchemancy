@@ -283,6 +283,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, BlockVacuumProperty> WORLD_OBLITERATOR = REGISTRY.register("world_obliterator", BlockVacuumProperty::new);
 	public static final DeferredHolder<Property, Property> UNMOVABLE = REGISTRY.register("unmovable", UnmovableProperty::new);
 	public static final DeferredHolder<Property, ItemMagnetProperty> ITEM_MAGNET = REGISTRY.register("item_magnet", ItemMagnetProperty::new);
+	public static final DeferredHolder<Property, ChromatizeProperty> CHROMATIZE = REGISTRY.register("chromatize", ChromatizeProperty::new);
 
 	public static final DeferredHolder<Property, SoundEffectProperty> BADA_QUIP = REGISTRY.register("bada_quip", () -> new SoundEffectProperty(0x7289DA, AlchemancySoundEvents.BADA_QUIP.value(), true));
 

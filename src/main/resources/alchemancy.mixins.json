@@ -38,6 +38,7 @@
     "client.RenderTypeHelperMixin"
   ],
   "client": [
+    "LivingEntityRendererMixin",
     "client.CreativeScreenMixin",
     "client.CustomHeadLayerMixin",
     "client.ElytraLayerMixin",

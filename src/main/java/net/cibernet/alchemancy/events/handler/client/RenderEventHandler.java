@@ -5,7 +5,9 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.registries.AlchemancyDataAttachments;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
+import net.cibernet.alchemancy.util.ColorUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -23,15 +25,14 @@ import org.joml.Vector3f;
 
 @OnlyIn(Dist.CLIENT)
 @EventBusSubscriber(Dist.CLIENT)
-public class RenderEventHandler
-{
+public class RenderEventHandler {
+
 	@SubscribeEvent
-	public static void onRenderHand(RenderHandEvent event)
-	{
+	public static void onRenderHand(RenderHandEvent event) {
 		Player player = Minecraft.getInstance().player;
-		if(player != null && !player.getUseItem().canPerformAction(ItemAbilities.SHIELD_BLOCK) &&
-				InfusedPropertiesHelper.hasProperty(player.getUseItem(), AlchemancyProperties.SHIELDING) && player.getUsedItemHand() == event.getHand())
-		{
+
+		if (player != null && !player.getUseItem().canPerformAction(ItemAbilities.SHIELD_BLOCK) &&
+				InfusedPropertiesHelper.hasProperty(player.getUseItem(), AlchemancyProperties.SHIELDING) && player.getUsedItemHand() == event.getHand()) {
 
 			PoseStack poseStack = event.getPoseStack();
 
@@ -45,9 +46,21 @@ public class RenderEventHandler
 	}
 
 	@SubscribeEvent
+	public static void onRenderArm(RenderArmEvent event) {
+		var player = event.getPlayer();
+		if (!player.hasData(AlchemancyDataAttachments.ENTITY_TINT.get())) return;
+
+		var tint = player.getData(AlchemancyDataAttachments.ENTITY_TINT.get());
+		if (tint.isEmpty()) return;
+		Vector3f tintVec = Vec3.fromRGB24(ColorUtils.interpolateColorsOverTime(1, tint.stream().mapToInt(Integer::intValue).toArray())).toVector3f();
+
+		RenderSystem.setShaderColor(tintVec.x(), tintVec.y(), tintVec.z(), RenderSystem.getShaderColor()[3]);
+	}
+
+	@SubscribeEvent
 	public static void modifyFogColor(ViewportEvent.ComputeFogColor event) {
 		@Nullable Vector3f tint = getScreenTintColor();
-		if(tint == null) return;
+		if (tint == null) return;
 
 		event.setRed(event.getRed() * tint.x());
 		event.setGreen(event.getGreen() * tint.y());
@@ -56,18 +69,18 @@ public class RenderEventHandler
 
 	public static boolean modifySkyColor(float red, float green, float blue, float alpha, Operation<Void> original) {
 		@Nullable Vector3f tint = getScreenTintColor();
-		if(tint != null)
-		{
+		if (tint != null) {
 			original.call(red * tint.x(), green * tint.y(), blue * tint.z(), alpha);
 			return true;
-		} return false;
+		}
+		return false;
 	}
 
 	@SubscribeEvent
 	public static void onStageRender(RenderLevelStageEvent event) {
 
 		@Nullable Vector3f tint = getScreenTintColor();
-		if(tint == null) return;
+		if (tint == null) return;
 
 		var shaderColor = RenderSystem.getShaderColor();
 		RenderSystem.setShaderColor(tint.x(), tint.y(), tint.z(), shaderColor[3]);
@@ -77,7 +90,7 @@ public class RenderEventHandler
 	public static void onStageRender(RenderFrameEvent.Pre event) {
 
 		@Nullable Vector3f tint = getScreenTintColor();
-		if(tint == null) return;
+		if (tint == null) return;
 
 		var shaderColor = RenderSystem.getShaderColor();
 		//RenderSystem.setShaderColor(shaderColor[0] * tint.x(), shaderColor[1] * tint.y(), shaderColor[2] * tint.z(), shaderColor[3]);
@@ -87,10 +100,10 @@ public class RenderEventHandler
 	private static Vector3f getScreenTintColor() {
 		Player player = Minecraft.getInstance().player;
 
-		if(player == null)
+		if (player == null)
 			return null;
 		var stack = player.getItemBySlot(EquipmentSlot.HEAD);
-		if(!InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.TINTED_LENS))
+		if (!InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.TINTED_LENS))
 			return null;
 
 		return Vec3.fromRGB24(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.TINTED) ?
