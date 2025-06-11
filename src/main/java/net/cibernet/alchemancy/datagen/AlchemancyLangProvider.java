@@ -288,10 +288,45 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		add(translationKey, text);
 		CodexEntryProvider.ENTRIES.put(propertyHolder, new CodexEntryReloadListenener.CodexEntry(Component.translatable(translationKey), new ArrayList<>()));
 	}
+
 	protected void addCodexFunction(Holder<Property> propertyHolder, PropertyFunction function, String text) {
 		add("infusion_codex.%s.%s".formatted(propertyHolder.getRegisteredName(), function.localizationKey), text);
 
-		if(CodexEntryProvider.ENTRIES.containsKey(propertyHolder))
+		if (CodexEntryProvider.ENTRIES.containsKey(propertyHolder)) {
 			CodexEntryProvider.ENTRIES.get(propertyHolder).functions().add(function);
+			if (function == PropertyFunction.WHILE_ROOTED)
+				CodexEntryProvider.addRelatedProperties(AlchemancyProperties.ROOTED, List.of(propertyHolder));
+			else if (function == PropertyFunction.ON_ATTACK) {
+				CodexEntryProvider.addRelatedProperties(AlchemancyProperties.GUST_JET, List.of(propertyHolder));
+				CodexEntryProvider.addRelatedProperties(AlchemancyProperties.JAGGED, List.of(propertyHolder));
+			} else if (function == PropertyFunction.WHEN_SHOT) {
+				CodexEntryProvider.addRelatedProperties(AlchemancyProperties.THROWABLE, List.of(propertyHolder));
+				CodexEntryProvider.addRelatedProperties(AlchemancyProperties.SHARPSHOOTING, List.of(propertyHolder));
+			}
+			if (function == PropertyFunction.WHEN_HIT_WORN_OR_USING ||
+					function == PropertyFunction.WHEN_HIT_USING ||
+					function == PropertyFunction.RECEIVE_DAMAGE_USING ||
+					function == PropertyFunction.RECEIVE_DAMAGE_WORN_OR_USING) {
+				CodexEntryProvider.addRelatedProperties(propertyHolder, List.of(
+						AlchemancyProperties.ROCKET_POWERED, //TODO Maybe make this data driven or something
+						AlchemancyProperties.SHARPSHOOTING,
+						AlchemancyProperties.SHIELDING,
+						AlchemancyProperties.CEASELESS_VOID,
+						AlchemancyProperties.BRUSHING,
+						AlchemancyProperties.EDIBLE,
+						AlchemancyProperties.MAGNETIC));
+			}
+			if (function == PropertyFunction.WHILE_WORN_HELMET || function == PropertyFunction.WHILE_WORN ||
+					function == PropertyFunction.WHILE_EQUIPPED ||
+					function == PropertyFunction.RECEIVE_DAMAGE_EQUIPPED ||
+					function == PropertyFunction.RECEIVE_DAMAGE_WORN ||
+					function == PropertyFunction.RECEIVE_DAMAGE_WORN_OR_USING ||
+					function == PropertyFunction.WHEN_HIT_EQUIPPED ||
+					function == PropertyFunction.WHEN_HIT_WORN ||
+					function == PropertyFunction.WHEN_HIT_WORN_OR_USING ||
+					function == PropertyFunction.PICK_UP_WHILE_EQUIPPED) {
+				CodexEntryProvider.addRelatedProperties(AlchemancyProperties.HEADWEAR, List.of(propertyHolder));
+			}
+		}
 	}
 }

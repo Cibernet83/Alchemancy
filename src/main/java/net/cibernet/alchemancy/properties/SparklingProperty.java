@@ -30,10 +30,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 
@@ -106,6 +103,10 @@ public class SparklingProperty extends Property implements IDataHolder<Holder<Pr
 				.skip((int) ((PARTICLE_MAP.size() - 1) * Math.random()))
 				.findFirst().get().get());
 	}};
+
+	public static Collection<Holder<Property>> getAllParticleProviders() {
+		return PARTICLE_MAP.keySet();
+	}
 
 	@Override
 	public int getColor(ItemStack stack) {
