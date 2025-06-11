@@ -1,0 +1,8 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:sparkling.flavor"
+  },
+  "functions": [
+    "while_equipped"
+  ]
+}

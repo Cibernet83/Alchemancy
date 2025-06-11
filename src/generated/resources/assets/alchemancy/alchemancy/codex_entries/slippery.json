@@ -1,0 +1,10 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:slippery.flavor"
+  },
+  "functions": [
+    "on_attack",
+    "activate",
+    "while_worn_boots"
+  ]
+}

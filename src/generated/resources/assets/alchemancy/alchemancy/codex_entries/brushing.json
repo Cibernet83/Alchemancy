@@ -1,0 +1,10 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:brushing.flavor"
+  },
+  "functions": [
+    "when_used_block",
+    "when_used_entity",
+    "when_shot_from_dispenser"
+  ]
+}

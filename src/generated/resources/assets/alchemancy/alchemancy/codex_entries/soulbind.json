@@ -2,5 +2,8 @@
   "flavor": {
     "translate": "infusion_codex.alchemancy:soulbind.flavor"
   },
-  "functions": []
+  "functions": [
+    "while_in_inventory",
+    "other_effects"
+  ]
 }

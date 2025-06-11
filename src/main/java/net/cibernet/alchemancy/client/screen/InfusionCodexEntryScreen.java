@@ -277,6 +277,8 @@ public class InfusionCodexEntryScreen extends Screen {
 						Component.literal(value).withColor(AlchemancyProperties.SHOCKING.get().getColor(ItemStack.EMPTY));
 				case "arcane" ->
 						Component.literal(value).withColor(AlchemancyProperties.ARCANE.get().getColor(ItemStack.EMPTY));
+				case "fire" ->
+						Component.literal(value).withColor(AlchemancyProperties.BURNING.get().getColor(ItemStack.EMPTY));
 				case "item" -> Component.literal(value).withStyle(ChatFormatting.GREEN);
 				case "attribute" -> Component.literal(value).withStyle(ChatFormatting.DARK_AQUA);
 				case "system" -> Component.literal(value).withStyle(ChatFormatting.AQUA);

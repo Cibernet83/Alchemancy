@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:cozy.flavor"
+  },
+  "functions": [
+    "while_worn",
+    "while_rooted"
+  ]
+}

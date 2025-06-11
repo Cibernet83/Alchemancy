@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:scoping.flavor"
+  },
+  "functions": [
+    "while_held",
+    "while_worn_helmet"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:throwable.flavor"
+  },
+  "functions": [
+    "when_used",
+    "when_shot_from_dispenser"
+  ]
+}

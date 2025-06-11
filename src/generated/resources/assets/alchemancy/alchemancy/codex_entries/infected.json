@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:infected.flavor"
+  },
+  "functions": [
+    "while_in_inventory",
+    "on_attack"
+  ]
+}

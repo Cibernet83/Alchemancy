@@ -1,0 +1,8 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:glider.flavor"
+  },
+  "functions": [
+    "while_worn_chestplate"
+  ]
+}

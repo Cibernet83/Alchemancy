@@ -979,6 +979,12 @@
       },
       "trigger": "alchemancy:discover_property"
     },
+    "discover_alchemancy:tinted_lens": {
+      "conditions": {
+        "property": "alchemancy:tinted_lens"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
     "discover_alchemancy:tipsy": {
       "conditions": {
         "property": "alchemancy:tipsy"
@@ -1662,6 +1668,9 @@
     ],
     [
       "discover_alchemancy:gust_jet"
+    ],
+    [
+      "discover_alchemancy:tinted_lens"
     ]
   ],
   "rewards": {

@@ -1,0 +1,11 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:glowing_aura.flavor"
+  },
+  "functions": [
+    "on_attack",
+    "while_equipped",
+    "when_shot",
+    "when_dropped"
+  ]
+}

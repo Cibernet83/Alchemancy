@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:tipsy.flavor"
+  },
+  "functions": [
+    "on_attack",
+    "while_equipped"
+  ]
+}

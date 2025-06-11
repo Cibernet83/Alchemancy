@@ -1,0 +1,13 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:aquatic.flavor"
+  },
+  "functions": [
+    "while_worn_helmet",
+    "while_worn_chestplate",
+    "while_held_mainhand",
+    "while_worn_leggings",
+    "while_worn_boots",
+    "when_shot"
+  ]
+}

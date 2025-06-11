@@ -1,0 +1,11 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:smelting.flavor"
+  },
+  "functions": [
+    "block_destroyed",
+    "on_kill",
+    "stacked_over",
+    "other_effects"
+  ]
+}

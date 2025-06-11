@@ -1,0 +1,8 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:saddled.flavor"
+  },
+  "functions": [
+    "when_used_entity"
+  ]
+}

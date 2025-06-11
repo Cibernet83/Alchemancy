@@ -1,0 +1,10 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:antigrav.flavor"
+  },
+  "functions": [
+    "while_worn",
+    "when_shot",
+    "when_dropped"
+  ]
+}
