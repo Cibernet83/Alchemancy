@@ -18,6 +18,9 @@ public class AlchemancyPoiTypes {
 	public static final DeferredHolder<PoiType, PoiType> GUST_BASKET = REGISTRY.register("gust_basket", () -> new PoiType(
 			getBlockStates(AlchemancyBlocks.GUST_BASKET.get()), 0, 1
 	));
+	public static final DeferredHolder<PoiType, PoiType> ROOTED_ITEM = REGISTRY.register("rooted_item", () -> new PoiType(
+			getBlockStates(AlchemancyBlocks.ROOTED_ITEM.get()), 0, 1
+	));
 
 	private static Set<BlockState> getBlockStates(Block block) {
 		return ImmutableSet.copyOf(block.getStateDefinition().getPossibleStates());
