@@ -2,6 +2,7 @@ package net.cibernet.alchemancy.blocks.blockentities;
 
 import net.cibernet.alchemancy.registries.AlchemancyBlockEntities;
 import net.cibernet.alchemancy.registries.AlchemancySoundEvents;
+import net.cibernet.alchemancy.util.ColorUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -24,7 +25,7 @@ public class AlchemancyCatalystBlockEntity extends BlockEntity
 {
 	private float spinOffset = 0;
 	private String crystalTexture = DyeColor.LIME.getName();
-	private int tint = 0xFFFFFFFF;
+	private int[] tint = null;
 
 	private float rotationTime = 0;
 	private float prevRotationTime = 0;
@@ -48,7 +49,9 @@ public class AlchemancyCatalystBlockEntity extends BlockEntity
 		if(tag.contains("crystal_texture", Tag.TAG_STRING))
 			setCrystalTexture(tag.getString("crystal_texture"));
 
-		if(tag.contains("tint", Tag.TAG_INT))
+		if(tag.contains("tint", Tag.TAG_INT_ARRAY))
+			setTint(tag.getIntArray("tint").clone());
+		else if(tag.contains("tint", Tag.TAG_INT))
 			setTint(tag.getInt("tint"));
 
 		animationTicks = tag.getInt("animation_ticks");
@@ -61,7 +64,8 @@ public class AlchemancyCatalystBlockEntity extends BlockEntity
 		super.saveAdditional(tag, registries);
 		tag.putFloat("spin_offset", spinOffset);
 		tag.putString("crystal_texture", getCrystalTexture());
-		tag.putInt("tint", getTint());
+		if(tint != null)
+			tag.putIntArray("tint", tint.clone());
 
 		tag.putInt("animation_ticks", animationTicks);
 		tag.putBoolean("silent", silent);
@@ -76,14 +80,14 @@ public class AlchemancyCatalystBlockEntity extends BlockEntity
 	}
 
 	public int getTint() {
-		return tint;
+		return tint == null || tint.length == 0 ? 0xFFFFFFFF : ColorUtils.interpolateColorsOverTime(1, tint);
 	}
 
 	public String getCrystalTexture() {
 		return crystalTexture;
 	}
 
-	public void setTint(int tint) {
+	public void setTint(int... tint) {
 		this.tint = tint;
 		notifyColorUpdate();
 

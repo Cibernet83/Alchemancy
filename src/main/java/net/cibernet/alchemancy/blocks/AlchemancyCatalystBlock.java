@@ -11,6 +11,7 @@ import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
@@ -34,6 +35,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -72,7 +74,7 @@ public class AlchemancyCatalystBlock extends TransparentBlock implements EntityB
 	{
 		if(stack.getItem() instanceof DyeItem dye && level.getBlockEntity(pos) instanceof AlchemancyCatalystBlockEntity catalyst)
 		{
-			int tint = CommonUtils.getPropertyDrivenTint(stack);
+			int[] tint = getTint(stack);
 
 			if(!catalyst.getCrystalTexture().equals(dye.getDyeColor().getName()) ||
 					catalyst.getTint() != CommonUtils.getPropertyDrivenTint(stack) ||
@@ -87,6 +89,13 @@ public class AlchemancyCatalystBlock extends TransparentBlock implements EntityB
 			}
 		}
 		return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
+	}
+
+	private int[] getTint(ItemStack stack) {
+
+		int alpha = FastColor.ARGB32.alpha(CommonUtils.getPropertyDrivenTint(stack));
+		int[] tintedColors = Arrays.stream(AlchemancyProperties.TINTED.get().getData(stack)).mapToInt(c -> FastColor.ARGB32.color(alpha, c)).toArray();
+		return tintedColors.length == 0 ? new int[] {FastColor.ARGB32.color(alpha, 0xFFFFFF)} : tintedColors;
 	}
 
 	@Override
