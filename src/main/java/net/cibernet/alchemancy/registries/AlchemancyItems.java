@@ -56,6 +56,7 @@ public class AlchemancyItems
 	public static final DeferredItem<BlockItem> ALCHEMANCY_CATALYST = REGISTRY.registerSimpleBlockItem("alchemancy_catalyst", AlchemancyBlocks.ALCHEMANCY_CATALYST);
 
 	public static final DeferredItem<BlockItem> GUST_BASKET = REGISTRY.registerSimpleBlockItem("gust_basket", AlchemancyBlocks.GUST_BASKET);
+	public static final DeferredItem<BlockItem> CHROMACHINE = REGISTRY.registerSimpleBlockItem("chromachine", AlchemancyBlocks.CHROMACHINE);
 
 	public static final DeferredItem<Item> LEAD_INGOT = REGISTRY.registerSimpleItem("lead_ingot");
 	public static final DeferredItem<SwordItem> LEAD_SWORD = REGISTRY.register("lead_sword", () -> new SwordItem(Materials.LEAD_TOOLS, new Item.Properties().attributes(SwordItem.createAttributes(Materials.LEAD_TOOLS, 3, -2.4F))));

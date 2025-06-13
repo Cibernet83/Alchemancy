@@ -1,12 +1,8 @@
 package net.cibernet.alchemancy.network;
 
-import io.netty.buffer.ByteBuf;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
@@ -21,5 +17,8 @@ public class AlchemancyPayloads
 		registrar.playToClient(S2CPlayGustBasketEffectsPacket.TYPE, S2CPlayGustBasketEffectsPacket.STREAM_CODEC, S2CPlayGustBasketEffectsPacket::handleDataOnMain);
 		registrar.playToClient(S2CAddPlayerMovementPacket.TYPE, S2CAddPlayerMovementPacket.STREAM_CODEC, S2CAddPlayerMovementPacket::handleDataOnMain);
 		registrar.playToClient(EntitySyncTintColorS2CPayload.TYPE, EntitySyncTintColorS2CPayload.STREAM_CODEC, EntitySyncTintColorS2CPayload::handleDataOnMain);
+
+		registrar.playToServer(ChromatizeC2SPayload.TYPE, ChromatizeC2SPayload.STREAM_CODEC, ChromatizeC2SPayload::handleDataOnMain);
+		registrar.playToServer(ResetItemTintC2SPayload.TYPE, ResetItemTintC2SPayload.STREAM_CODEC, ResetItemTintC2SPayload::handleDataOnMain);
 	}
 }

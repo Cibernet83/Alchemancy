@@ -26,6 +26,7 @@
   "block.alchemancy.dreamsteel_block": "Block of Dreamsteel",
 
   "block.alchemancy.gust_basket": "Gust Basket",
+  "block.alchemancy.chromachine": "Chromachine",
 
   "block.alchemancy.rooted_item": "Rooted Item",
   "block.alchemancy.sculk_bud": "Sculk Bud",
@@ -176,6 +177,7 @@
   "property.alchemancy.enchanted": "Foil",
   "property.alchemancy.magical_concealment": "Magical Concealment",
   "property.alchemancy.tinted_lens": "Tinted Lens",
+  "property.alchemancy.chromatize": "Chromatize",
   "property.alchemancy.revealing": "Revealing",
   "property.alchemancy.revealed": "Revealed",
   "property.alchemancy.scrambled": "Scrambled",
@@ -442,6 +444,10 @@
   "subtitles.block.alchemancy_catalyst.use": "Alchemancy Catalyst fires",
   "subtitles.block.glowing_orb.extinguish": "Glowing Orb extinguished",
   "subtitles.block.gust_basket.blow": "Gust Basket blows",
+
+  "screen.chromachine.title": "Item Chromatizing",
+  "screen.chromachine.apply_hex": "Apply Hex",
+  "screen.chromachine.reset": "Reset Color",
 
   "subtitles.property.heavy": "Heavy item landed",
   "subtitles.property.bouncy": "Bouncy item bounces",

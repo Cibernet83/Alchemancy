@@ -3,7 +3,7 @@ package net.cibernet.alchemancy.util;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.ITintModifier;
-import net.cibernet.alchemancy.properties.data.IDataHolder;
+import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.Entity;
@@ -25,11 +25,9 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class CommonUtils
-{
+public class CommonUtils {
 
-	public static AABB boundingBoxAroundPoint(Vec3 center, float radius)
-	{
+	public static AABB boundingBoxAroundPoint(Vec3 center, float radius) {
 		return new AABB(center.x - radius, center.y - radius, center.z - radius, center.x + radius, center.y + radius, center.z + radius);
 	}
 
@@ -39,35 +37,30 @@ public class CommonUtils
 
 	}
 
-	public static LevelData getLevelData()
-	{
+	public static LevelData getLevelData() {
 		final MinecraftServer currentServer = ServerLifecycleHooks.getCurrentServer();
 		return currentServer != null ? currentServer.overworld().getLevelData() : ClientUtil.getCurrentLevel().getLevelData();
 	}
 
-	public static Optional<Player> getPlayerByUUID(UUID uuid)
-	{
+	public static Optional<Player> getPlayerByUUID(UUID uuid) {
 		final MinecraftServer currentServer = ServerLifecycleHooks.getCurrentServer();
 		return Optional.ofNullable(currentServer != null ? currentServer.overworld().getPlayerByUUID(uuid) : ClientUtil.getCurrentLevel().getPlayerByUUID(uuid));
 	}
 
-	public static void modifyTint(ItemStack itemStack, int tintIndex, LocalIntRef localTint)
-	{
+	public static void modifyTint(ItemStack itemStack, int tintIndex, LocalIntRef localTint) {
 		localTint.set(getPropertyDrivenTint(itemStack, tintIndex, localTint.get()));
 	}
 
-	public static int getPropertyDrivenTint(ItemStack itemStack, int tintIndex, int originalTint)
-	{
+	public static int getPropertyDrivenTint(ItemStack itemStack, int tintIndex, int originalTint) {
 		AtomicInteger localTint = new AtomicInteger(originalTint);
 		InfusedPropertiesHelper.forEachProperty(itemStack, propertyHolder -> {
-			if(propertyHolder.value() instanceof ITintModifier property)
+			if (propertyHolder.value() instanceof ITintModifier property)
 				localTint.set(property.getTint(itemStack, tintIndex, originalTint, localTint.get()));
 		});
 		return localTint.get();
 	}
 
-	public static boolean hasPropertyDrivenAlpha(ItemStack stack)
-	{
+	public static boolean hasPropertyDrivenAlpha(ItemStack stack) {
 		AtomicBoolean translucent = new AtomicBoolean(false);
 		InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> {
 			if (propertyHolder.value() instanceof ITintModifier tintModifier && tintModifier.modifiesAlpha())
@@ -77,49 +70,43 @@ public class CommonUtils
 		return translucent.get();
 	}
 
-	public static boolean hasPropertyDrivenTint(ItemStack stack)
-	{
+	public static boolean hasPropertyDrivenTint(ItemStack stack) {
 		return InfusedPropertiesHelper.getInfusedProperties(stack).stream().anyMatch(propertyHolder -> propertyHolder.value() instanceof ITintModifier);
 	}
 
-	public static int getPropertyDrivenTint(ItemStack itemStack)
-	{
+	public static int getPropertyDrivenTint(ItemStack itemStack) {
 		return getPropertyDrivenTint(itemStack, 0, 0xFFFFFFFF);
 	}
 
-	public static void tickInventoryItemProperties(Player player)
-	{
+	public static void tickInventoryItemProperties(Player player) {
 		for (EquipmentSlot slot : EquipmentSlot.values()) {
 			ItemStack stack = player.getItemBySlot(slot);
 			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onEquippedTick(player, slot, stack));
 		}
 
 		Inventory inventory = player.getInventory();
-		for(int slot = 0; slot < inventory.getContainerSize(); slot++)
-		{
+		for (int slot = 0; slot < inventory.getContainerSize(); slot++) {
 			ItemStack stack = inventory.getItem(slot);
 			final int currentSlot = slot;
-			if(!stack.isEmpty())
+			if (!stack.isEmpty())
 				InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onInventoryTick(player, stack, player.level(), currentSlot, inventory.selected == currentSlot));
 		}
 	}
 
 	private static void legacyElasticRangeLeashBehaviour(Entity entity, Entity leashHolder, float distance) {
-		double d0 = (leashHolder.getX() - entity.getX()) / (double)distance;
-		double d1 = (leashHolder.getY() - entity.getY()) / (double)distance;
-		double d2 = (leashHolder.getZ() - entity.getZ()) / (double)distance;
+		double d0 = (leashHolder.getX() - entity.getX()) / (double) distance;
+		double d1 = (leashHolder.getY() - entity.getY()) / (double) distance;
+		double d2 = (leashHolder.getZ() - entity.getZ()) / (double) distance;
 		entity.setDeltaMovement(
 				entity.getDeltaMovement().add(Math.copySign(d0 * d0 * 0.4, d0), Math.copySign(d1 * d1 * 0.4, d1), Math.copySign(d2 * d2 * 0.4, d2))
 		);
 	}
 
-	public static double lerpAngle(double amount, double start, double end)
-	{
+	public static double lerpAngle(double amount, double start, double end) {
 		return (((((end - start) % 1.0) + 1.5) % 1.0) - 0.5) * amount + start;
 	}
 
-	public static float lerpAngle(float amount, float start, float end)
-	{
+	public static float lerpAngle(float amount, float start, float end) {
 		return (((((end - start) % 1.0f) + 1.5f) % 1.0f) - 0.5f) * amount + start;
 	}
 
@@ -127,5 +114,18 @@ public class CommonUtils
 		return ProjectileUtil.getHitResultOnViewVector(
 				user, p_281111_ -> !p_281111_.isSpectator() && p_281111_.isPickable(), user.getAttributeValue(Attributes.BLOCK_INTERACTION_RANGE)
 		);
+	}
+
+	public static void applyChromaTint(ItemStack affectedItem, int color) {
+
+//		if((color & 0xFFFFFF) == 0xFFFFFF)
+//		{
+//			InfusedPropertiesHelper.removeProperty(affectedItem, AlchemancyProperties.TINTED);
+//			return;
+//		}
+		if (!InfusedPropertiesHelper.hasProperty(affectedItem, AlchemancyProperties.TINTED))
+			InfusedPropertiesHelper.addProperty(affectedItem, AlchemancyProperties.TINTED);
+		AlchemancyProperties.TINTED.value().setData(affectedItem, new Integer[]{color});
+
 	}
 }
