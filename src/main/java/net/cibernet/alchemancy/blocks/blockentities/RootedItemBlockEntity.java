@@ -2,17 +2,25 @@ package net.cibernet.alchemancy.blocks.blockentities;
 
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.registries.AlchemancyBlockEntities;
+import net.cibernet.alchemancy.registries.AlchemancyPoiTypes;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.level.ChunkHolder;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.village.poi.PoiManager;
+import net.minecraft.world.entity.ai.village.poi.PoiRecord;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.FarmlandWaterManager;
 import net.neoforged.neoforge.common.ticket.SimpleTicket;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.StreamSupport;
 
 public class RootedItemBlockEntity extends ItemStackHolderBlockEntity
 {
@@ -20,6 +28,23 @@ public class RootedItemBlockEntity extends ItemStackHolderBlockEntity
 
 	@Nullable
 	private SimpleTicket<Vec3> farmlandWaterManager;
+
+	private static final TreeMap<ResourceKey<Level>, Collection<RootedItemBlockEntity>> CACHED_ROOTED_ITEMS = new TreeMap<>();
+
+	public static void cahceRootedItems(ServerLevel level, List<LevelChunk> chunks) {
+		var key = level.dimension();
+		Collection<RootedItemBlockEntity> roots = CACHED_ROOTED_ITEMS.getOrDefault(key, new ArrayList<>());
+		roots.clear();
+		for (LevelChunk chunk : chunks) {
+			level.getPoiManager().getInChunk(type -> type.equals(AlchemancyPoiTypes.ROOTED_ITEM), chunk.getPos(), PoiManager.Occupancy.ANY)
+					.map(poiRecord -> (RootedItemBlockEntity) level.getBlockEntity(poiRecord.getPos())).forEach(roots::add);
+		}
+		CACHED_ROOTED_ITEMS.put(key, roots);
+	}
+
+	public static Collection<RootedItemBlockEntity> getCachedRoots(ServerLevel level) {
+		return CACHED_ROOTED_ITEMS.getOrDefault(level.dimension(), List.of());
+	}
 
 	public RootedItemBlockEntity(BlockPos pPos, BlockState pBlockState)
 	{

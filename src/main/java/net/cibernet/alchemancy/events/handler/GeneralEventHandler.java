@@ -1,6 +1,7 @@
 package net.cibernet.alchemancy.events.handler;
 
 import net.cibernet.alchemancy.blocks.GustBasketBlock;
+import net.cibernet.alchemancy.blocks.blockentities.RootedItemBlockEntity;
 import net.cibernet.alchemancy.registries.AlchemancyPoiTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ChunkHolder;
@@ -42,6 +43,9 @@ public class GeneralEventHandler
 			List<LevelChunk> chunks = StreamSupport.stream(serverLevel.getChunkSource().chunkMap.getChunks().spliterator(), false).map(ChunkHolder::getTickingChunk)
 					.filter(Objects::nonNull).toList();
 
+			if(chunks.isEmpty()) return;
+
+			RootedItemBlockEntity.cahceRootedItems(serverLevel, chunks);
 			for (LevelChunk chunk : chunks) {
 				poiManager.getInChunk(type -> type.equals(AlchemancyPoiTypes.GUST_BASKET), chunk.getPos(), PoiManager.Occupancy.ANY).map(PoiRecord::getPos).forEach(pos -> {
 					GustBasketBlock.tick(serverLevel, pos);

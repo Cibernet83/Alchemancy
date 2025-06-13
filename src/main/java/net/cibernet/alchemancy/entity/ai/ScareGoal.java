@@ -50,8 +50,8 @@ public class ScareGoal extends PanicGoal {
 
 	protected boolean isNearRootedScary(ServerLevel level) {
 
-
-		return level.getPoiManager().getInRange(poi -> poi.equals(AlchemancyPoiTypes.ROOTED_ITEM), mob.blockPosition(), RANGE, PoiManager.Occupancy.ANY)
-				.anyMatch(poiRecord -> level.getBlockEntity(poiRecord.getPos()) instanceof RootedItemBlockEntity root && itemStackPredicate.test(root.getItem()));
+		int distSqr = RANGE * RANGE;
+		return RootedItemBlockEntity.getCachedRoots(level).stream()
+				.anyMatch(root -> root.getBlockPos().distSqr(mob.blockPosition()) <= distSqr && itemStackPredicate.test(root.getItem()));
 	}
 }
