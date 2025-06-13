@@ -26,7 +26,7 @@ public class ScareGoal extends PanicGoal {
 	public ScareGoal(PathfinderMob mob, double speedModifier, Predicate<ItemStack> itemStackPredicate) {
 		super(mob, speedModifier);
 		this.itemStackPredicate = itemStackPredicate;
-		TARGETING = TargetingConditions.forNonCombat().range(10.0).ignoreLineOfSight().selector(living ->
+		TARGETING = TargetingConditions.forNonCombat().range(RANGE).ignoreLineOfSight().selector(living ->
 		{
 			for (EquipmentSlot slot : EquipmentSlot.values()) {
 				if (itemStackPredicate.test(living.getItemBySlot(slot)))
@@ -38,7 +38,7 @@ public class ScareGoal extends PanicGoal {
 	}
 
 	public ScareGoal(PathfinderMob mob, double speedModifier, Holder<Property> property) {
-		this(mob, speedModifier, stack -> InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.SCARY));
+		this(mob, speedModifier, stack -> InfusedPropertiesHelper.hasProperty(stack, property));
 	}
 
 	@Override

@@ -37,7 +37,7 @@ public class RootedItemBlockEntity extends ItemStackHolderBlockEntity
 		roots.clear();
 		for (LevelChunk chunk : chunks) {
 			level.getPoiManager().getInChunk(type -> type.equals(AlchemancyPoiTypes.ROOTED_ITEM), chunk.getPos(), PoiManager.Occupancy.ANY)
-					.map(poiRecord -> (RootedItemBlockEntity) level.getBlockEntity(poiRecord.getPos())).forEach(roots::add);
+					.forEach(poiRecord -> roots.add((RootedItemBlockEntity) level.getBlockEntity(poiRecord.getPos())));
 		}
 		CACHED_ROOTED_ITEMS.put(key, roots);
 	}
