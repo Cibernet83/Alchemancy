@@ -51,6 +51,8 @@ public class ForgeChromaTintingProperty extends AbstractForgeRecipe<Object> {
 					if(lensColors.isEmpty())
 						colors.add(TintedProperty.DEFAULT_COLOR);
 					else colors.addAll(lensColors);
+
+					grid.markAsProcessed(pedestal);
 				}
 			}
 

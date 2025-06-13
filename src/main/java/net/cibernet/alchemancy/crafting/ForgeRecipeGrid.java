@@ -269,11 +269,16 @@ public class ForgeRecipeGrid implements RecipeInput
 			applyGlint = Optional.of(false);
 
 		pedestal.removeItem(1);
-		slotOrder.remove(pedestal);
+		markAsProcessed(pedestal);
 
 		cachedDormantProperties = null;
 
 		return true;
+	}
+
+	public void markAsProcessed(ItemStackHolderBlockEntity pedestal) {
+		slotOrder.remove(pedestal);
+		items.remove(pedestal);
 	}
 
 	public boolean testInfusables(List<Ingredient> infusables, boolean consume)
