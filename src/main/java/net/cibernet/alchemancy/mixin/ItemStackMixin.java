@@ -1,17 +1,20 @@
 package net.cibernet.alchemancy.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
+import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
+import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -28,10 +31,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 @Mixin(value = ItemStack.class)
 public abstract class ItemStackMixin
@@ -56,19 +61,52 @@ public abstract class ItemStackMixin
 				newDamageAmount.set(propertyHolder.value().modifyDurabilityConsumed(stack, level, user, originalResult, newDamageAmount.get())));
 	}
 
-	@WrapOperation(method = "is(Lnet/minecraft/tags/TagKey;)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/core/Holder$Reference;is(Lnet/minecraft/tags/TagKey;)Z"))
-	public boolean isInTag(Holder.Reference<Item> instance, TagKey<Item> tagKey, Operation<Boolean> original)
+	@ModifyReturnValue(method = "is(Lnet/minecraft/tags/TagKey;)Z", at = @At(value = "RETURN"))
+	public boolean isInTag(boolean original, @Local(argsOnly = true) TagKey<Item> tagKey)
 	{
 		ItemStack stack = alchemancy$self();
 
 		for (Holder<Property> property : InfusedPropertiesHelper.getInfusedProperties(stack)) {
-			TriState result = property.value().isItemInTag(stack, tagKey);
 
+			if(tagKey.equals(AlchemancyTags.Items.IS_INFUSED))
+				return true;
+
+			TriState result = property.value().isItemInTag(stack, tagKey);
 			if(!result.isDefault())
 				return result.isTrue();
 		}
 
-		return original.call(instance, tagKey);
+		return original;
+	}
+
+	@ModifyReturnValue(method = "is(Lnet/minecraft/core/HolderSet;)Z", at = @At(value = "RETURN"))
+	public boolean isInTag(boolean original, @Local(argsOnly = true) HolderSet<Item> holder)
+	{
+		var optionalTagKey = holder.unwrapKey();
+		if(optionalTagKey.isEmpty())
+			return original;
+
+		ItemStack stack = alchemancy$self();
+		TagKey<Item> tagKey = optionalTagKey.get();
+
+		for (Holder<Property> property : InfusedPropertiesHelper.getInfusedProperties(stack)) {
+
+			if(tagKey.equals(AlchemancyTags.Items.IS_INFUSED))
+				return true;
+
+			TriState result = property.value().isItemInTag(stack, tagKey);
+			if(!result.isDefault())
+				return result.isTrue();
+		}
+		return original;
+	}
+
+	@ModifyReturnValue(method = "getTags", at = @At("RETURN"))
+	public Stream<TagKey<Item>> getTags(Stream<TagKey<Item>> original) {
+
+		if(!InfusedPropertiesHelper.getInfusedProperties(alchemancy$self()).isEmpty())
+			return Stream.concat(original, Stream.of(AlchemancyTags.Items.IS_INFUSED));
+		return original;
 	}
 
 	@Inject(method = "finishUsingItem", at = @At("HEAD"), cancellable = true)

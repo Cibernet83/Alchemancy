@@ -15,6 +15,8 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.dimension.DimensionType;
 
+import java.util.stream.Stream;
+
 public class AlchemancyTags
 {
 	public static class Items
@@ -38,6 +40,7 @@ public class AlchemancyTags
 
 		public static final TagKey<Item> DISABLES_COMPACT = registerTag(Registries.ITEM, "disables_compact");
 		public static final TagKey<Item> TRIGGERS_HEARTY = registerTag(Registries.ITEM, "triggers_hearty_on_use");
+		public static final TagKey<Item> IS_INFUSED = registerTag(Registries.ITEM, "is_infused");
 	}
 
 	public static class Blocks
