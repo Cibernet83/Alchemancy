@@ -85,9 +85,9 @@ public class HomingProperty<E extends Entity> extends Property
 
 		user.hasImpulse = true;
 		Vec3 vec3 = user.getDeltaMovement().scale(0.5);
-		Vec3 vec31 = target.getEyePosition().subtract(user.position()).normalize().scale(strength);
+		Vec3 vec31 = target.getEyePosition().subtract(user.position()).normalize().scale(-strength);
 
-		user.setDeltaMovement(vec3.add(vec31));
+		user.setDeltaMovement(vec3.scale(1 - 0.5 * (1 - distanceTo / radius)).subtract(vec31));
 	}
 
 	@Override
