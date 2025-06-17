@@ -2,6 +2,7 @@ package net.cibernet.alchemancy.registries;
 
 import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.blocks.*;
+import net.cibernet.alchemancy.blocks.blockentities.ItemStackHolderBlockEntity;
 import net.cibernet.alchemancy.blocks.blockentities.SculkBudBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.effect.MobEffects;
@@ -11,9 +12,14 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
 public class AlchemancyBlocks
 {
 	public static final DeferredRegister.Blocks REGISTRY = DeferredRegister.createBlocks(Alchemancy.MODID);
@@ -56,4 +62,14 @@ public class AlchemancyBlocks
 					.sound(AlchemancySoundEvents.GLOWING_ORB)
 					.lightLevel(state -> 15)));
 
+
+	@SubscribeEvent
+	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+		event.registerBlock(
+			Capabilities.ItemHandler.BLOCK, // capability to register for
+			(level, pos, state, blockEntity, side) -> blockEntity instanceof ItemStackHolderBlockEntity pedestal ? pedestal.wrapper : null,
+			INFUSION_PEDESTAL.get(),
+			ALCHEMANCY_FORGE.get()
+    );
+	}
 }

@@ -19,13 +19,15 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.items.wrapper.InvWrapper;
+import org.jetbrains.annotations.Nullable;
 
-public class ItemStackHolderBlockEntity extends BaseContainerBlockEntity
-{
+public class ItemStackHolderBlockEntity extends BaseContainerBlockEntity {
 	NonNullList<ItemStack> slot = NonNullList.withSize(1, ItemStack.EMPTY);
 
-	public ItemStackHolderBlockEntity(BlockPos pos, BlockState blockState)
-	{
+	public final InvWrapper wrapper = new InvWrapper(this);
+
+	public ItemStackHolderBlockEntity(BlockPos pos, BlockState blockState) {
 		super(AlchemancyBlockEntities.ITEMSTACK_HOLDER.get(), pos, blockState);
 	}
 
@@ -58,13 +60,11 @@ public class ItemStackHolderBlockEntity extends BaseContainerBlockEntity
 		return 1;
 	}
 
-	public ItemStack getItem()
-	{
+	public ItemStack getItem() {
 		return super.getItem(0);
 	}
 
-	public ItemStack removeItem(int amount)
-	{
+	public ItemStack removeItem(int amount) {
 		return removeItem(0, amount);
 	}
 
@@ -75,8 +75,7 @@ public class ItemStackHolderBlockEntity extends BaseContainerBlockEntity
 	}
 
 	@Override
-	public ItemStack removeItem(int slot, int amount)
-	{
+	public ItemStack removeItem(int slot, int amount) {
 		ItemStack result = super.removeItem(slot, amount);
 		notifyInventoryUpdate();
 		return result;
@@ -88,38 +87,34 @@ public class ItemStackHolderBlockEntity extends BaseContainerBlockEntity
 		notifyInventoryUpdate();
 	}
 
-	public void setItem(ItemStack stack)
-	{
+	public void setItem(ItemStack stack) {
 		setItem(0, stack);
 	}
 
-	public void notifyInventoryUpdate()
-	{
-		if(level != null)
+	public void notifyInventoryUpdate() {
+		if (level != null)
 			level.markAndNotifyBlock(getBlockPos(), level.getChunkAt(getBlockPos()), getBlockState(), getBlockState(), 2, 1);
 	}
 
-	public static void dropItem(Level pLevel, BlockPos pPos, ItemStack itemstack)
-	{
-		if (!pLevel.isClientSide)
-		{
-			if (!itemstack.isEmpty())
-			{
+	@Nullable
+	public static ItemEntity dropItem(Level pLevel, BlockPos pPos, ItemStack itemstack) {
+		if (!pLevel.isClientSide) {
+			if (!itemstack.isEmpty()) {
 				ItemStack itemstack1 = itemstack.copy();
-				ItemEntity itementity = new ItemEntity(pLevel, pPos.getX() +.5, pPos.getY() + 1, pPos.getZ() + .5, itemstack1);
+				ItemEntity itementity = new ItemEntity(pLevel, pPos.getX() + .5, pPos.getY() + 1, pPos.getZ() + .5, itemstack1);
 				itementity.setDeltaMovement(0, .15, 0);
 				itementity.setDefaultPickUpDelay();
 				itementity.getPersistentData().putBoolean(Alchemancy.MODID + ":from_pedestal", true);
 
 				pLevel.addFreshEntity(itementity);
+				return itementity;
 			}
-
 		}
+		return null;
 	}
 
 	@Override
-	protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
-	{
+	protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
 		super.saveAdditional(tag, registries);
 
 		ContainerHelper.saveAllItems(tag, this.slot, registries);
@@ -127,8 +122,7 @@ public class ItemStackHolderBlockEntity extends BaseContainerBlockEntity
 
 
 	@Override
-	protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
-	{
+	protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
 		super.loadAdditional(tag, registries);
 
 		slot.clear();
