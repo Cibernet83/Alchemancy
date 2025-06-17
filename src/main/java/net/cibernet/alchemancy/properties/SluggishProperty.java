@@ -9,6 +9,7 @@ import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.ItemEnchantments;
@@ -34,5 +35,10 @@ public class SluggishProperty extends MobEffectOnHitProperty
 	@Override
 	public int modifyUseDuration(ItemStack stack, int original, int result) {
 		return result * 2;
+	}
+
+	@Override
+	public void onProjectileTick(ItemStack stack, Projectile projectile) {
+		projectile.setDeltaMovement(projectile.getDeltaMovement().scale(0.85f));
 	}
 }
