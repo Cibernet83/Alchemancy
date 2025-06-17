@@ -4,6 +4,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.Vec3i;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -38,6 +39,8 @@ public class SlipperyProperty extends Property
 	public void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
 		event.getEntity().drop(event.getItemStack(), true);
 		event.getEntity().setItemInHand(event.getHand(), ItemStack.EMPTY);
+		event.setCancellationResult(InteractionResult.FAIL);
+		event.setCanceled(true);
 	}
 
 	@Override
