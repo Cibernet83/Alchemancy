@@ -1,6 +1,7 @@
 package net.cibernet.alchemancy.blocks;
 
 import com.mojang.serialization.MapCodec;
+import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.blocks.blockentities.ItemStackHolderBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Containers;
@@ -77,7 +78,11 @@ public class InfusionPedestalBlock extends BaseEntityBlock
 		{
 			if(!pedestal.getItem().isEmpty())
 			{
-				dropItem(level, pos, pedestal.getItem());
+				var itemEntity = dropItem(level, pos, pedestal.getItem());
+
+				if(itemEntity != null)
+					itemEntity.getPersistentData().putBoolean(Alchemancy.MODID + ":from_pedestal_click", true);
+
 				pedestal.clearContent();
 			}
 			else if(!stack.isEmpty())

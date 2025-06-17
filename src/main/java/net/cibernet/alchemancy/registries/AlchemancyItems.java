@@ -56,6 +56,7 @@ public class AlchemancyItems
 	public static final DeferredItem<BlockItem> ALCHEMANCY_CATALYST = REGISTRY.registerSimpleBlockItem("alchemancy_catalyst", AlchemancyBlocks.ALCHEMANCY_CATALYST);
 
 	public static final DeferredItem<BlockItem> GUST_BASKET = REGISTRY.registerSimpleBlockItem("gust_basket", AlchemancyBlocks.GUST_BASKET);
+	public static final DeferredItem<BlockItem> FLAT_HOPPER = REGISTRY.registerSimpleBlockItem("flat_hopper", AlchemancyBlocks.FLAT_HOPPER);
 	public static final DeferredItem<BlockItem> CHROMACHINE = REGISTRY.registerSimpleBlockItem("chromachine", AlchemancyBlocks.CHROMACHINE);
 
 	public static final DeferredItem<Item> LEAD_INGOT = REGISTRY.registerSimpleItem("lead_ingot");

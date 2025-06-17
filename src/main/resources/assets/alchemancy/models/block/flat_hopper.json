@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/carpet",
+  "ambientocclusion": false,
+  "render_type": "cutout",
+  "textures": {
+    "wool": "minecraft:block/hopper_top"
+  }
+}

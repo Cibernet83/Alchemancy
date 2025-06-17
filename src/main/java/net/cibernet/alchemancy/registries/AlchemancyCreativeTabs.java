@@ -86,6 +86,7 @@ public class AlchemancyCreativeTabs
 				output.accept(BINDING_KEY.get());
 
 				output.accept(GUST_BASKET.get());
+				output.accept(FLAT_HOPPER.get());
 				output.accept(CHROMACHINE.get());
 
 				output.accept(ROCKET_POWERED_HAMMER.get());

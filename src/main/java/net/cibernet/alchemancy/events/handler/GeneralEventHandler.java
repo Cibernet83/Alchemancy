@@ -5,31 +5,30 @@ import net.cibernet.alchemancy.blocks.blockentities.RootedItemBlockEntity;
 import net.cibernet.alchemancy.registries.AlchemancyPoiTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ChunkHolder;
-import net.minecraft.server.level.ServerChunkCache;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.ai.village.poi.PoiManager;
 import net.minecraft.world.entity.ai.village.poi.PoiRecord;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.chunk.LevelChunk;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.level.ChunkEvent;
-import net.neoforged.neoforge.event.level.ChunkTicketLevelUpdatedEvent;
-import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 import java.util.*;
+import java.util.function.BiConsumer;
 import java.util.stream.StreamSupport;
 
 @EventBusSubscriber
 public class GeneralEventHandler
 {
+	private static final HashMap<Block, BiConsumer<ServerLevel, BlockPos>> TICKING_BLOCK_FUNCTIONS = new HashMap<>();
+
+	public static void registerTickingBlockFunction(Block block, BiConsumer<ServerLevel, BlockPos> function) {
+		TICKING_BLOCK_FUNCTIONS.put(block, function);
+	}
+
 	@SubscribeEvent
 	public static void onLevelTick(LevelTickEvent.Pre event)
 	{
@@ -47,8 +46,14 @@ public class GeneralEventHandler
 
 			RootedItemBlockEntity.cahceRootedItems(serverLevel, chunks);
 			for (LevelChunk chunk : chunks) {
-				poiManager.getInChunk(type -> type.equals(AlchemancyPoiTypes.GUST_BASKET), chunk.getPos(), PoiManager.Occupancy.ANY).map(PoiRecord::getPos).forEach(pos -> {
-					GustBasketBlock.tick(serverLevel, pos);
+				poiManager.getInChunk(type -> type.equals(AlchemancyPoiTypes.TICKING_BLOCK), chunk.getPos(), PoiManager.Occupancy.ANY).map(PoiRecord::getPos).forEach(pos -> {
+
+					Block block = serverLevel.getBlockState(pos).getBlock();
+
+					if(TICKING_BLOCK_FUNCTIONS.containsKey(block))
+						TICKING_BLOCK_FUNCTIONS.get(block).accept(serverLevel, pos);
+
+					//GustBasketBlock.tick(serverLevel, pos);
 				});
 			}
 		}

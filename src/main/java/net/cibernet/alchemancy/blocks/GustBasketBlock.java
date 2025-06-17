@@ -1,6 +1,7 @@
 package net.cibernet.alchemancy.blocks;
 
 import com.mojang.serialization.MapCodec;
+import net.cibernet.alchemancy.events.handler.GeneralEventHandler;
 import net.cibernet.alchemancy.network.S2CAddPlayerMovementPacket;
 import net.cibernet.alchemancy.network.S2CPlayGustBasketEffectsPacket;
 import net.cibernet.alchemancy.properties.special.GustJetProperty;
@@ -41,6 +42,8 @@ public class GustBasketBlock extends DirectionalBlock {
 	public GustBasketBlock(Properties properties) {
 		super(properties);
 		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.UP));
+
+		GeneralEventHandler.registerTickingBlockFunction(this, GustBasketBlock::tick);
 	}
 
 	@Override
