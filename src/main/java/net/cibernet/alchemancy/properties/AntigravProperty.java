@@ -38,7 +38,11 @@ public class AntigravProperty extends Property
 		if(!projectile.onGround() && projectile.getKnownMovement().length() < 0.005f) {
 			List<Entity> targets = projectile.level().getEntitiesOfClass(Entity.class, projectile.getBoundingBox(), entity -> ((ProjectileAccessor) projectile).invokeCanHitEntity(entity));
 			if(!targets.isEmpty())
-				((ProjectileAccessor) projectile).invokeOnHit(new EntityHitResult(targets.getFirst()));
+			{
+				var hitresult = new EntityHitResult(targets.getFirst());
+				if (net.neoforged.neoforge.event.EventHooks.onProjectileImpact(projectile, hitresult))
+					((ProjectileAccessor) projectile).invokeOnHit(hitresult);
+			}
 		}
 	}
 
