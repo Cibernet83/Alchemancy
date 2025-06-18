@@ -1,0 +1,12 @@
+{
+  "speed": 2,
+  "textures": [
+    "alchemancy:cloud_smoke_0",
+    "alchemancy:cloud_smoke_1",
+    "alchemancy:cloud_smoke_2",
+    "alchemancy:cloud_smoke_3",
+    "alchemancy:cloud_smoke_4",
+    "alchemancy:cloud_smoke_5",
+    "alchemancy:cloud_smoke_6"
+  ]
+}

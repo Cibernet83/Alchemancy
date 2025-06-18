@@ -7,6 +7,7 @@ import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.properties.special.AirWalkingProperty;
 import net.cibernet.alchemancy.properties.special.BlinkingProperty;
+import net.cibernet.alchemancy.properties.special.DashingProperty;
 import net.cibernet.alchemancy.properties.special.GustJetProperty;
 import net.cibernet.alchemancy.properties.voidborn.BlockVacuumProperty;
 import net.cibernet.alchemancy.properties.voidborn.TelekineticProperty;
@@ -88,6 +89,8 @@ public class SparklingProperty extends Property implements IDataHolder<Holder<Pr
 		put(AlchemancyProperties.WORLD_OBLITERATOR, () -> BlockVacuumProperty.PARTICLES);
 		put(AlchemancyProperties.AIR_WALKER, () -> AirWalkingProperty.PARTICLES);
 		put(AlchemancyProperties.KINETIC_GRAB, () -> TelekineticProperty.PARTICLES);
+		put(AlchemancyProperties.CLOUD_DASH, () -> DashingProperty.CLOUD_PARTICLES);
+		put(AlchemancyProperties.CRYSTAL_DASH, () -> DashingProperty.CRYSTAL_PARTICLES);
 		put(AlchemancyProperties.BLINKING, () -> BlinkingProperty.PARTICLES);
 		put(AlchemancyProperties.MAGNETIC, () -> Math.random() > 0.5 ? MagneticProperty.PARTICLE_A : MagneticProperty.PARTICLE_B);
 		put(AlchemancyProperties.ROCKET_POWERED, AlchemancyParticles.WARHAMMER_FLAME::get);
