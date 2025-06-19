@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import net.cibernet.alchemancy.client.data.CodexEntryReloadListenener;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
+import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
@@ -27,7 +28,7 @@ public class InfusionCodexToast implements Toast {
 	private boolean changed;
 	private final List<Holder<Property>> properties = Lists.newArrayList();
 	
-	private static final ItemStack CODEX_ICON = Items.BOOK.getDefaultInstance();
+	private static final ItemStack CODEX_ICON = AlchemancyItems.INFUSION_CODEX.toStack();
 
 	public InfusionCodexToast(Holder<Property> property) {
 		properties.add(property);
