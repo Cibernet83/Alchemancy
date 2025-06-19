@@ -1,6 +1,7 @@
 package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.Alchemancy;
+import net.cibernet.alchemancy.properties.special.ChromatizeProperty;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -37,7 +38,10 @@ public class CalciumProperty extends Property
 	public void onActivation(@Nullable Entity source, Entity target, ItemStack stack, DamageSource damageSource)
 	{
 		if(target instanceof LivingEntity living)
+		{
 			living.removeAllEffects();
+			ChromatizeProperty.setLivingColor(living, 0xFFFFFFFF);
+		}
 	}
 
 	@Override
