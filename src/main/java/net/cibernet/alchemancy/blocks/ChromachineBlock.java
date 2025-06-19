@@ -1,6 +1,8 @@
 package net.cibernet.alchemancy.blocks;
 
 import net.cibernet.alchemancy.client.screen.ChromaTintingScreen;
+import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
@@ -21,7 +23,7 @@ public class ChromachineBlock extends Block {
 
 		ItemStack stack = player.getMainHandItem();
 
-		if(stack.isEmpty())
+		if(stack.isEmpty() || stack.is(AlchemancyTags.Items.IMMUNE_TO_INFUSIONS))
 			return InteractionResult.PASS;
 
 		if (level.isClientSide())
