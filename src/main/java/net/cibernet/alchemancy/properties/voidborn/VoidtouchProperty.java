@@ -77,7 +77,8 @@ public class VoidtouchProperty extends Property {
 
 	private void destroyEntity(Entity target, @Nullable Entity user, @Nullable Entity directSource) {
 
-		if(target instanceof LivingEntity living && InfusedPropertiesHelper.hasItemWithProperty(living, AlchemancyProperties.VOIDBORN, true))
+		if(target.level().isClientSide() ||
+				(target instanceof LivingEntity living && InfusedPropertiesHelper.hasItemWithProperty(living, AlchemancyProperties.VOIDBORN, true)))
 			return;
 
 		switch (target) {
