@@ -215,6 +215,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, BigSuckProperty> CEASELESS_VOID = REGISTRY.register("ceaseless_void", BigSuckProperty::new);
 	public static final DeferredHolder<Property, VoidtouchProperty> VOIDTOUCH = REGISTRY.register("voidtouch", VoidtouchProperty::new);
 	public static final DeferredHolder<Property, TelekineticProperty> KINETIC_GRAB = REGISTRY.register("kinetic_grab", TelekineticProperty::new);
+	public static final DeferredHolder<Property, EntityPullProperty<Entity>> VACUUMING = REGISTRY.register("vacuuming", () -> new EntityPullProperty<>(0x4722AD, Entity.class, 8, true));
 
 	//Misc
 	public static final DeferredHolder<Property, NonlethalProperty> NONLETHAL = REGISTRY.register("nonlethal", NonlethalProperty::new);
