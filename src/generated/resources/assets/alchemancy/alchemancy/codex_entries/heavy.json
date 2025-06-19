@@ -1,0 +1,10 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:heavy.flavor"
+  },
+  "functions": [
+    "while_equipped",
+    "when_shot",
+    "when_dropped"
+  ]
+}

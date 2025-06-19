@@ -1,8 +1,12 @@
 package net.cibernet.alchemancy.network;
 
+import io.netty.buffer.ByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
@@ -16,6 +20,8 @@ public class AlchemancyPayloads
 		registrar.playToClient(S2CPlayFireworksPacket.TYPE, S2CPlayFireworksPacket.STREAM_CODEC, S2CPlayFireworksPacket::handleDataOnMain);
 		registrar.playToClient(S2CPlayGustBasketEffectsPacket.TYPE, S2CPlayGustBasketEffectsPacket.STREAM_CODEC, S2CPlayGustBasketEffectsPacket::handleDataOnMain);
 		registrar.playToClient(S2CAddPlayerMovementPacket.TYPE, S2CAddPlayerMovementPacket.STREAM_CODEC, S2CAddPlayerMovementPacket::handleDataOnMain);
+		registrar.playToClient(S2CUnlockCodexEntriesPacket.TYPE, S2CUnlockCodexEntriesPacket.STREAM_CODEC, S2CUnlockCodexEntriesPacket::handleDataOnMain);
+		registrar.playToClient(S2CDiscoverCodexIngredientsPacket.TYPE, S2CDiscoverCodexIngredientsPacket.STREAM_CODEC, S2CDiscoverCodexIngredientsPacket::handleDataOnMain);
 		registrar.playToClient(EntitySyncTintColorS2CPayload.TYPE, EntitySyncTintColorS2CPayload.STREAM_CODEC, EntitySyncTintColorS2CPayload::handleDataOnMain);
 
 		registrar.playToServer(ChromatizeC2SPayload.TYPE, ChromatizeC2SPayload.STREAM_CODEC, ChromatizeC2SPayload::handleDataOnMain);

@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:blinding.flavor"
+  },
+  "functions": [
+    "on_attack",
+    "while_worn_helmet"
+  ]
+}

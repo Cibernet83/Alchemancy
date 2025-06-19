@@ -1,0 +1,11 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:bouncy.flavor"
+  },
+  "functions": [
+    "on_attack",
+    "when_hit_equipped",
+    "activate",
+    "on_fall"
+  ]
+}

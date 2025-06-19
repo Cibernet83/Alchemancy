@@ -1,0 +1,10 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:weak.flavor"
+  },
+  "functions": [
+    "attribute_modifier",
+    "modify_damage",
+    "while_worn"
+  ]
+}

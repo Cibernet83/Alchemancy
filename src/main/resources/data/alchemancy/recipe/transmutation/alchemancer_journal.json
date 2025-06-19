@@ -2,7 +2,7 @@
   "type": "alchemancy:item_transmutation",
 
   "catalyst": {
-    "item": "minecraft:book"
+    "item": "minecraft:written_book"
   },
 
   "result": {

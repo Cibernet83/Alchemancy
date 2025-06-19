@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:assimilating.flavor"
+  },
+  "functions": [
+    "while_equipped",
+    "stacked_over"
+  ]
+}

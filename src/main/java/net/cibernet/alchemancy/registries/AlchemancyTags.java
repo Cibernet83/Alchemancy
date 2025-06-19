@@ -40,6 +40,8 @@ public class AlchemancyTags
 
 		public static final TagKey<Item> DISABLES_COMPACT = registerTag(Registries.ITEM, "disables_compact");
 		public static final TagKey<Item> TRIGGERS_HEARTY = registerTag(Registries.ITEM, "triggers_hearty_on_use");
+
+		public static final TagKey<Item> CODEX_DISCOVERY_ON_PICKUP = registerTag(Registries.ITEM, "codex_discovery_on_pickup");
 		public static final TagKey<Item> IS_INFUSED = registerTag(Registries.ITEM, "is_infused");
 	}
 

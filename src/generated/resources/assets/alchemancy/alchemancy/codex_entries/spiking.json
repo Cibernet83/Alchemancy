@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:spiking.flavor"
+  },
+  "functions": [
+    "while_worn_boots",
+    "on_attack"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:arcane.flavor"
+  },
+  "functions": [
+    "modify_damage",
+    "attribute_modifier"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:vampiric.flavor"
+  },
+  "functions": [
+    "modify_damage",
+    "while_equipped"
+  ]
+}

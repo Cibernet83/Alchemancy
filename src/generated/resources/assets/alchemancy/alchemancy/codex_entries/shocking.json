@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:shocking.flavor"
+  },
+  "functions": [
+    "on_attack",
+    "while_rooted"
+  ]
+}

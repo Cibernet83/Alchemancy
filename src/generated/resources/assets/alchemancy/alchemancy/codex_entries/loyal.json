@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:loyal.flavor"
+  },
+  "functions": [
+    "when_dropped",
+    "when_shot"
+  ]
+}

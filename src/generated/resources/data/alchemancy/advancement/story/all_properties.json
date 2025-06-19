@@ -7,6 +7,12 @@
       },
       "trigger": "alchemancy:discover_property"
     },
+    "discover_alchemancy:air_walker": {
+      "conditions": {
+        "property": "alchemancy:air_walker"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
     "discover_alchemancy:allergic": {
       "conditions": {
         "property": "alchemancy:allergic"
@@ -61,6 +67,18 @@
       },
       "trigger": "alchemancy:discover_property"
     },
+    "discover_alchemancy:bada_quip": {
+      "conditions": {
+        "property": "alchemancy:bada_quip"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:binding": {
+      "conditions": {
+        "property": "alchemancy:binding"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
     "discover_alchemancy:blast_resistant": {
       "conditions": {
         "property": "alchemancy:blast_resistant"
@@ -70,6 +88,12 @@
     "discover_alchemancy:blinding": {
       "conditions": {
         "property": "alchemancy:blinding"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:blinking": {
+      "conditions": {
+        "property": "alchemancy:blinking"
       },
       "trigger": "alchemancy:discover_property"
     },
@@ -169,9 +193,21 @@
       },
       "trigger": "alchemancy:discover_property"
     },
+    "discover_alchemancy:crackling": {
+      "conditions": {
+        "property": "alchemancy:crackling"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
     "discover_alchemancy:crafty": {
       "conditions": {
         "property": "alchemancy:crafty"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:crouch_entangled": {
+      "conditions": {
+        "property": "alchemancy:crouch_entangled"
       },
       "trigger": "alchemancy:discover_property"
     },
@@ -271,6 +307,12 @@
       },
       "trigger": "alchemancy:discover_property"
     },
+    "discover_alchemancy:entangled": {
+      "conditions": {
+        "property": "alchemancy:entangled"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
     "discover_alchemancy:eternal": {
       "conditions": {
         "property": "alchemancy:eternal"
@@ -301,6 +343,12 @@
       },
       "trigger": "alchemancy:discover_property"
     },
+    "discover_alchemancy:feral": {
+      "conditions": {
+        "property": "alchemancy:feral"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
     "discover_alchemancy:ferrous": {
       "conditions": {
         "property": "alchemancy:ferrous"
@@ -316,6 +364,18 @@
     "discover_alchemancy:firestarting": {
       "conditions": {
         "property": "alchemancy:firestarting"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:flame_emperor": {
+      "conditions": {
+        "property": "alchemancy:flame_emperor"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:flame_step": {
+      "conditions": {
+        "property": "alchemancy:flame_step"
       },
       "trigger": "alchemancy:discover_property"
     },
@@ -391,6 +451,12 @@
       },
       "trigger": "alchemancy:discover_property"
     },
+    "discover_alchemancy:gust_jet": {
+      "conditions": {
+        "property": "alchemancy:gust_jet"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
     "discover_alchemancy:hardened": {
       "conditions": {
         "property": "alchemancy:hardened"
@@ -427,6 +493,12 @@
       },
       "trigger": "alchemancy:discover_property"
     },
+    "discover_alchemancy:home_run": {
+      "conditions": {
+        "property": "alchemancy:home_run"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
     "discover_alchemancy:hydrophobic": {
       "conditions": {
         "property": "alchemancy:hydrophobic"
@@ -436,6 +508,18 @@
     "discover_alchemancy:infected": {
       "conditions": {
         "property": "alchemancy:infected"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:infusion_cleanse": {
+      "conditions": {
+        "property": "alchemancy:infusion_cleanse"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:infusion_codex": {
+      "conditions": {
+        "property": "alchemancy:infusion_codex"
       },
       "trigger": "alchemancy:discover_property"
     },
@@ -454,6 +538,24 @@
     "discover_alchemancy:jagged": {
       "conditions": {
         "property": "alchemancy:jagged"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:jump_entangled": {
+      "conditions": {
+        "property": "alchemancy:jump_entangled"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:kinetic_grab": {
+      "conditions": {
+        "property": "alchemancy:kinetic_grab"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:kinetic_recharge": {
+      "conditions": {
+        "property": "alchemancy:kinetic_recharge"
       },
       "trigger": "alchemancy:discover_property"
     },
@@ -514,6 +616,12 @@
     "discover_alchemancy:magic_resistant": {
       "conditions": {
         "property": "alchemancy:magic_resistant"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:magnetic": {
+      "conditions": {
+        "property": "alchemancy:magnetic"
       },
       "trigger": "alchemancy:discover_property"
     },
@@ -598,6 +706,12 @@
     "discover_alchemancy:pristine": {
       "conditions": {
         "property": "alchemancy:pristine"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:quantum_shift": {
+      "conditions": {
+        "property": "alchemancy:quantum_shift"
       },
       "trigger": "alchemancy:discover_property"
     },
@@ -787,6 +901,12 @@
       },
       "trigger": "alchemancy:discover_property"
     },
+    "discover_alchemancy:sparkling": {
+      "conditions": {
+        "property": "alchemancy:sparkling"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
     "discover_alchemancy:spiking": {
       "conditions": {
         "property": "alchemancy:spiking"
@@ -802,6 +922,12 @@
     "discover_alchemancy:sporadic": {
       "conditions": {
         "property": "alchemancy:sporadic"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:sprint_entangled": {
+      "conditions": {
+        "property": "alchemancy:sprint_entangled"
       },
       "trigger": "alchemancy:discover_property"
     },
@@ -853,6 +979,12 @@
       },
       "trigger": "alchemancy:discover_property"
     },
+    "discover_alchemancy:tinted_lens": {
+      "conditions": {
+        "property": "alchemancy:tinted_lens"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
     "discover_alchemancy:tipsy": {
       "conditions": {
         "property": "alchemancy:tipsy"
@@ -877,15 +1009,33 @@
       },
       "trigger": "alchemancy:discover_property"
     },
+    "discover_alchemancy:use_entangled": {
+      "conditions": {
+        "property": "alchemancy:use_entangled"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
     "discover_alchemancy:vampiric": {
       "conditions": {
         "property": "alchemancy:vampiric"
       },
       "trigger": "alchemancy:discover_property"
     },
+    "discover_alchemancy:vaultpicking": {
+      "conditions": {
+        "property": "alchemancy:vaultpicking"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
     "discover_alchemancy:vengeful": {
       "conditions": {
         "property": "alchemancy:vengeful"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:voidborn": {
+      "conditions": {
+        "property": "alchemancy:voidborn"
       },
       "trigger": "alchemancy:discover_property"
     },
@@ -898,6 +1048,12 @@
     "discover_alchemancy:warped": {
       "conditions": {
         "property": "alchemancy:warped"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:wave_rider": {
+      "conditions": {
+        "property": "alchemancy:wave_rider"
       },
       "trigger": "alchemancy:discover_property"
     },
@@ -1053,6 +1209,12 @@
     ],
     [
       "discover_alchemancy:dexterous"
+    ],
+    [
+      "discover_alchemancy:wave_rider"
+    ],
+    [
+      "discover_alchemancy:air_walker"
     ],
     [
       "discover_alchemancy:mining"
@@ -1238,6 +1400,12 @@
       "discover_alchemancy:resized"
     ],
     [
+      "discover_alchemancy:feral"
+    ],
+    [
+      "discover_alchemancy:crackling"
+    ],
+    [
       "discover_alchemancy:exploding"
     ],
     [
@@ -1293,6 +1461,12 @@
     ],
     [
       "discover_alchemancy:phasing"
+    ],
+    [
+      "discover_alchemancy:voidborn"
+    ],
+    [
+      "discover_alchemancy:kinetic_grab"
     ],
     [
       "discover_alchemancy:nonlethal"
@@ -1379,6 +1553,12 @@
       "discover_alchemancy:compact"
     ],
     [
+      "discover_alchemancy:magnetic"
+    ],
+    [
+      "discover_alchemancy:kinetic_recharge"
+    ],
+    [
       "discover_alchemancy:revealed"
     ],
     [
@@ -1403,6 +1583,9 @@
       "discover_alchemancy:flattened"
     ],
     [
+      "discover_alchemancy:sparkling"
+    ],
+    [
       "discover_alchemancy:awakened"
     ],
     [
@@ -1412,6 +1595,24 @@
       "discover_alchemancy:limit_break"
     ],
     [
+      "discover_alchemancy:entangled"
+    ],
+    [
+      "discover_alchemancy:use_entangled"
+    ],
+    [
+      "discover_alchemancy:crouch_entangled"
+    ],
+    [
+      "discover_alchemancy:jump_entangled"
+    ],
+    [
+      "discover_alchemancy:sprint_entangled"
+    ],
+    [
+      "discover_alchemancy:quantum_shift"
+    ],
+    [
       "discover_alchemancy:dirty"
     ],
     [
@@ -1419,6 +1620,12 @@
     ],
     [
       "discover_alchemancy:warped"
+    ],
+    [
+      "discover_alchemancy:bada_quip"
+    ],
+    [
+      "discover_alchemancy:infusion_codex"
     ],
     [
       "discover_alchemancy:eternal_glow"
@@ -1437,6 +1644,33 @@
     ],
     [
       "discover_alchemancy:rocket_powered"
+    ],
+    [
+      "discover_alchemancy:binding"
+    ],
+    [
+      "discover_alchemancy:infusion_cleanse"
+    ],
+    [
+      "discover_alchemancy:flame_step"
+    ],
+    [
+      "discover_alchemancy:flame_emperor"
+    ],
+    [
+      "discover_alchemancy:blinking"
+    ],
+    [
+      "discover_alchemancy:home_run"
+    ],
+    [
+      "discover_alchemancy:vaultpicking"
+    ],
+    [
+      "discover_alchemancy:gust_jet"
+    ],
+    [
+      "discover_alchemancy:tinted_lens"
     ]
   ],
   "rewards": {

@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:energy_sapper.flavor"
+  },
+  "functions": [
+    "on_attack",
+    "while_equipped"
+  ]
+}

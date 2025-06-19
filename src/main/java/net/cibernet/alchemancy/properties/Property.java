@@ -15,6 +15,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -516,6 +517,11 @@ public abstract class Property
 	public static void repairItem(ItemStack stack, int amount) {
 		if(stack.isDamaged())
 			stack.setDamageValue(Math.max(0, stack.getDamageValue()-amount));
+	}
+
+	public final TagKey<Item> getDormantPropertyTag() {
+		ResourceLocation id = asHolder().getKey().location();
+		return TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(id.getNamespace(), "dormant_properties/" + id.getPath()));
 	}
 
 	public static class Priority

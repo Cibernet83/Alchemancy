@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:cracked.flavor"
+  },
+  "functions": [
+    "durability_consumed",
+    "activate"
+  ]
+}

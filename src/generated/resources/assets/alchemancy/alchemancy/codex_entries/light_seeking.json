@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:light_seeking.flavor"
+  },
+  "functions": [
+    "when_shot",
+    "when_dropped"
+  ]
+}

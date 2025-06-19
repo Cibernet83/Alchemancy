@@ -1,0 +1,10 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:gilded.flavor"
+  },
+  "functions": [
+    "while_held_mainhand",
+    "while_worn",
+    "when_dropped"
+  ]
+}

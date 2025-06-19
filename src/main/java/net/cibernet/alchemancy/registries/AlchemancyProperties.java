@@ -288,6 +288,8 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, SoundEffectProperty> BADA_QUIP = REGISTRY.register("bada_quip", () -> new SoundEffectProperty(0x7289DA, AlchemancySoundEvents.BADA_QUIP.value(), true));
 
 	//Innate Properties
+	public static final DeferredHolder<Property, InfusionCodexProperty> INFUSION_CODEX = REGISTRY.register("infusion_codex", InfusionCodexProperty::new);
+
 	public static final DeferredHolder<Property, AuxiliaryProperty> AUXILIARY = REGISTRY.register("auxiliary", AuxiliaryProperty::new);
 	public static final DeferredHolder<Property, GlowRingProperty> ETERNAL_GLOW = REGISTRY.register("eternal_glow", GlowRingProperty::new);
 	public static final DeferredHolder<Property, PhaseRingProperty> PHASE_STEP = REGISTRY.register("phase_step", PhaseRingProperty::new);

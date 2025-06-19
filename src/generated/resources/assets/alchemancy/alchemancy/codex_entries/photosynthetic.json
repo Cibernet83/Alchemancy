@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:photosynthetic.flavor"
+  },
+  "functions": [
+    "while_in_inventory",
+    "while_rooted"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:sluggish.flavor"
+  },
+  "functions": [
+    "while_worn",
+    "attribute_modifier",
+    "on_attack",
+    "while_using"
+  ]
+}

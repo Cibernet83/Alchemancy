@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:ominous.flavor"
+  },
+  "functions": [
+    "while_equipped",
+    "on_attack"
+  ]
+}

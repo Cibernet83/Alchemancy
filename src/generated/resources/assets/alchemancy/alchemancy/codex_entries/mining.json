@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:mining.flavor"
+  },
+  "functions": [
+    "attribute_modifier",
+    "when_shot"
+  ]
+}

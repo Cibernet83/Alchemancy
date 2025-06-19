@@ -3,7 +3,7 @@
   "criteria": {
     "discover_property": {
       "conditions": {
-        "property": "alchemancy:quantum_bind"
+        "property": "alchemancy:bada_quip"
       },
       "trigger": "alchemancy:discover_property"
     }
@@ -17,7 +17,7 @@
     "icon": {
       "components": {
         "alchemancy:stored_properties": [
-          "alchemancy:quantum_bind"
+          "alchemancy:bada_quip"
         ]
       },
       "count": 1,
@@ -25,7 +25,7 @@
     },
     "show_toast": false,
     "title": {
-      "translate": "property.alchemancy.quantum_bind"
+      "translate": "property.alchemancy.bada_quip"
     }
   },
   "requirements": [

@@ -1,0 +1,10 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:chopping.flavor"
+  },
+  "functions": [
+    "attribute_modifier",
+    "when_used_block",
+    "when_shot"
+  ]
+}

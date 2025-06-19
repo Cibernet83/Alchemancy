@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:relentless.flavor"
+  },
+  "functions": [
+    "durability_consumed",
+    "receive_damage_worn_or_using"
+  ]
+}

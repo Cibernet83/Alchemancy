@@ -1,0 +1,8 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:magic_resistant.flavor"
+  },
+  "functions": [
+    "receive_damage_worn_or_using"
+  ]
+}

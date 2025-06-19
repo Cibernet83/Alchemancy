@@ -103,6 +103,7 @@ public class AlchemancyCreativeTabs
 				output.accept(POCKET_BLACK_HOLE.get());
 				output.accept(CEASELESS_VOID_BAG.get());
 
+				output.accept(INFUSION_CODEX.get());
 			}).build());
 
 	public static final DeferredHolder<CreativeModeTab, CreativeModeTab> PROPERTIES = REGISTRY.register("alchemancy_properties", () -> CreativeModeTab.builder()

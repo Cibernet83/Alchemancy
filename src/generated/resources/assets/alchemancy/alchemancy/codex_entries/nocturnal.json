@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:nocturnal.flavor"
+  },
+  "functions": [
+    "modify_damage",
+    "while_worn_helmet"
+  ]
+}

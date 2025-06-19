@@ -1,0 +1,11 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:flame_emperor.flavor"
+  },
+  "functions": [
+    "while_held_mainhand",
+    "modify_damage",
+    "on_attack",
+    "block_destroyed"
+  ]
+}

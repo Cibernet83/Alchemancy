@@ -55,6 +55,10 @@ public class AlchemancyItems
 	public static final DeferredItem<BlockItem> ALCHEMANCY_FORGE = REGISTRY.registerSimpleBlockItem("alchemancy_forge", AlchemancyBlocks.ALCHEMANCY_FORGE);
 	public static final DeferredItem<BlockItem> ALCHEMANCY_CATALYST = REGISTRY.registerSimpleBlockItem("alchemancy_catalyst", AlchemancyBlocks.ALCHEMANCY_CATALYST);
 
+	public static final DeferredItem<InnatePropertyItem> INFUSION_CODEX = REGISTRY.register("infusion_codex", () -> new InnatePropertyItem.Builder()
+			.withProperties(AlchemancyProperties.INFUSION_CODEX)
+			.build(new Item.Properties().stacksTo(1)));
+
 	public static final DeferredItem<BlockItem> GUST_BASKET = REGISTRY.registerSimpleBlockItem("gust_basket", AlchemancyBlocks.GUST_BASKET);
 	public static final DeferredItem<BlockItem> FLAT_HOPPER = REGISTRY.registerSimpleBlockItem("flat_hopper", AlchemancyBlocks.FLAT_HOPPER);
 	public static final DeferredItem<BlockItem> CHROMACHINE = REGISTRY.registerSimpleBlockItem("chromachine", AlchemancyBlocks.CHROMACHINE);

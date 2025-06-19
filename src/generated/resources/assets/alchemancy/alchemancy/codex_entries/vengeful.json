@@ -1,0 +1,8 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:vengeful.flavor"
+  },
+  "functions": [
+    "modify_damage"
+  ]
+}

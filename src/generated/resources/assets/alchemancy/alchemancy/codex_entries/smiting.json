@@ -1,0 +1,8 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:smiting.flavor"
+  },
+  "functions": [
+    "on_crit"
+  ]
+}

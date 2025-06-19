@@ -449,10 +449,20 @@ public class PropertyEventHandler
 	}
 
 	public static boolean isScoping(Player player) {
-		return player.isShiftKeyDown() &&
-				(InfusedPropertiesHelper.hasProperty(player.getMainHandItem(), AlchemancyProperties.SCOPING) ||
-				InfusedPropertiesHelper.hasProperty(player.getOffhandItem(), AlchemancyProperties.SCOPING) ||
-				InfusedPropertiesHelper.hasProperty(player.getItemBySlot(EquipmentSlot.HEAD), AlchemancyProperties.SCOPING));
+
+		if(player.isShiftKeyDown())
+		{
+			AtomicBoolean hasAuxiliary = new AtomicBoolean();
+			AuxiliaryProperty.triggerAuxiliaryEffects(player, ((propertyHolder, stack) -> {
+				if(!hasAuxiliary.get() && propertyHolder.equals(AlchemancyProperties.SCOPING))
+					hasAuxiliary.set(true);
+			}));
+
+			return hasAuxiliary.get() || (InfusedPropertiesHelper.hasProperty(player.getMainHandItem(), AlchemancyProperties.SCOPING) ||
+					InfusedPropertiesHelper.hasProperty(player.getOffhandItem(), AlchemancyProperties.SCOPING) ||
+					InfusedPropertiesHelper.hasProperty(player.getItemBySlot(EquipmentSlot.HEAD), AlchemancyProperties.SCOPING));
+		}
+		return false;
 	}
 
 

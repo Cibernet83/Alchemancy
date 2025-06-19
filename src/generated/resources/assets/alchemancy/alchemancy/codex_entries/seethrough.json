@@ -1,0 +1,8 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:seethrough.flavor"
+  },
+  "functions": [
+    "visual"
+  ]
+}

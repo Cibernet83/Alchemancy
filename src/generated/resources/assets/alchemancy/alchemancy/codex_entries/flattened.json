@@ -1,0 +1,10 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:flattened.flavor"
+  },
+  "functions": [
+    "when_used_block",
+    "visual",
+    "other_effects"
+  ]
+}
