@@ -26,6 +26,7 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingKnockBackEvent;
 import org.jetbrains.annotations.Nullable;
 
 public class HomeRunProperty extends Property {
@@ -67,11 +68,10 @@ public class HomeRunProperty extends Property {
 			attackPos = damageSource.getDirectEntity().position();
 		if (attackPos == null)
 			attackPos = user.position();
-		BouncyProperty.knockBack(target, attackPos, 10);
+		BouncyProperty.knockBack(target, attackPos, 15);
 		user.level().playSound(null, user, AlchemancySoundEvents.HOME_RUN_HIT.value(), user.getSoundSource(), 1, 1);
 		damage(user.level(), user, weapon);
 	}
-
 
 	@Override
 	public void onActivation(@Nullable Entity source, Entity target, ItemStack stack, DamageSource damageSource)
