@@ -24,12 +24,14 @@ public class EntityPullProperty<E extends Entity> extends Property
 	final Class<E> targetEntities;
 	final float radius;
 	final boolean onUse;
+	final float pullStrength;
 
-	public EntityPullProperty(int color, Class<E> targetEntities, float radius, boolean onUse) {
+	public EntityPullProperty(int color, Class<E> targetEntities, float radius, boolean onUse, float pullStrength) {
 		this.color = color;
 		this.targetEntities = targetEntities;
 		this.radius = radius;
 		this.onUse = onUse;
+		this.pullStrength = pullStrength;
 	}
 
 	@Override
@@ -94,7 +96,7 @@ public class EntityPullProperty<E extends Entity> extends Property
 				}
 			}
 
-			float strength = (float) Math.max(0, radius - distanceTo) * .05f;
+			float strength = (float) Math.max(0, radius - distanceTo) * .05f * this.pullStrength;
 
 			target.hasImpulse = true;
 			Vec3 vec3 = target.getDeltaMovement();
