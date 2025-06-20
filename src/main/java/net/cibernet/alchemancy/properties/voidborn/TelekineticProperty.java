@@ -1,5 +1,6 @@
 package net.cibernet.alchemancy.properties.voidborn;
 
+import net.cibernet.alchemancy.mixin.accessors.AbstractArrowAccessor;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.properties.SparklingProperty;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
@@ -11,7 +12,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Shulker;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
@@ -60,10 +63,19 @@ public class TelekineticProperty extends Property implements IDataHolder<UUID> {
 		var eyePos = user.getEyePosition();
 		double distance = user instanceof Player player ? player.blockInteractionRange() : 5;
 
+		var newDelta = eyePos.add(user.getLookAngle().scale(distance).subtract(0, target.getBbHeight() * 0.5f, 0))
+				.subtract(target.position()).scale(0.3f);
+
+		if(target instanceof AbstractArrow arrow &&
+				((AbstractArrowAccessor)arrow).accessInGround() &&
+				level.noBlockCollision(arrow, arrow.getBoundingBox().move(newDelta)))
+			((AbstractArrowAccessor)arrow).setInGround(false);
+
 		target.resetFallDistance();
-		target.setDeltaMovement(eyePos.add(user.getLookAngle().scale(distance).subtract(0, target.getBbHeight() * 0.5f, 0))
-				.subtract(target.position()).scale(0.3f));
+		target.setDeltaMovement(newDelta);
 		target.hasImpulse = true;
+
+
 
 		level.sendParticles(SparklingProperty.getParticles(stack).orElse(PARTICLES), target.getRandomX(1), target.getRandomY(), target.getRandomZ(1), 3, 0.1, 0.1, 0.1, 0);
 	}
