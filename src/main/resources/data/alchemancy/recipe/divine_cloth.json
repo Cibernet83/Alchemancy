@@ -1,0 +1,18 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:undying",
+    "alchemancy:sanitized",
+    "alchemancy:gilded"
+  ],
+
+  "catalyst": {
+    "item": "alchemancy:leaden_cloth"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:divine_cloth"
+  }
+}

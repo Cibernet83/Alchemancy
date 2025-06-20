@@ -8,6 +8,7 @@ import net.cibernet.alchemancy.properties.entangled.*;
 import net.cibernet.alchemancy.properties.soulbind.*;
 import net.cibernet.alchemancy.properties.special.*;
 import net.cibernet.alchemancy.properties.voidborn.*;
+import net.cibernet.alchemancy.util.ColorUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -299,7 +300,8 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, WaywardWarpProperty> WAYWARD_WARP = REGISTRY.register("wayward_warp", WaywardWarpProperty::new);
 	public static final DeferredHolder<Property, RocketPoweredProperty> ROCKET_POWERED = REGISTRY.register("rocket_powered", RocketPoweredProperty::new);
 	public static final DeferredHolder<Property, BindingProperty> BINDING = REGISTRY.register("binding", BindingProperty::new);
-	public static final DeferredHolder<Property, RemoveInfusionsProperty> INFUSION_CLEANSE = REGISTRY.register("infusion_cleanse", RemoveInfusionsProperty::new);
+	public static final DeferredHolder<Property, RemoveInfusionsProperty> INFUSION_CLEANSE = REGISTRY.register("infusion_cleanse", () -> new RemoveInfusionsProperty(() -> 0x566E7F));
+	public static final DeferredHolder<Property, RemoveInfusionsProperty> DIVINE_CLEANSE = REGISTRY.register("divine_cleanse", () -> new RemoveInfusionsProperty(() -> ColorUtils.interpolateColorsOverTime(2f, 0x85ABC4, 0xF6FFAA), AlchemancyTags.Properties.AFFECTED_BY_DIVINE_CLEANSE));
 	public static final DeferredHolder<Property, FlameWakerProperty> FLAME_STEP = REGISTRY.register("flame_step", FlameWakerProperty::new);
 	public static final DeferredHolder<Property, FlameEmperorProperty> FLAME_EMPEROR = REGISTRY.register("flame_emperor", FlameEmperorProperty::new);
 	public static final DeferredHolder<Property, BlinkingProperty> BLINKING = REGISTRY.register("blinking", BlinkingProperty::new);

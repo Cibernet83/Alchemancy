@@ -1,0 +1,9 @@
+{
+  "values": [
+    "alchemancy:infected",
+    "alchemancy:dead",
+    "alchemancy:undead",
+    "alchemancy:vampiric",
+    "alchemancy:dirty"
+  ]
+}

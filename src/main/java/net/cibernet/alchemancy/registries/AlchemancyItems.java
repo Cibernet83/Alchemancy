@@ -179,6 +179,10 @@ public class AlchemancyItems
 			.withProperties(AlchemancyProperties.INFUSION_CLEANSE)
 			.stacksTo(1)
 			.build());
+	public static final DeferredItem<InnatePropertyItem> DIVINE_CLOTH = REGISTRY.register("divine_cloth", () -> new InnatePropertyItem.Builder()
+			.withProperties(AlchemancyProperties.DIVINE_CLEANSE)
+			.stacksTo(1)
+			.build());
 	public static final DeferredItem<InnatePropertyItem> VAULT_LOCKPICK = REGISTRY.register("vaultpick", () -> new InnatePropertyItem.Builder()
 			.withProperties(AlchemancyProperties.VAULTPICKING)
 			.durability(4)
