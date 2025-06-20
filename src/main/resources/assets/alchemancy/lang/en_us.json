@@ -142,6 +142,12 @@
   "recipe.alchemancy.dormant_properties": "Dormant Properties",
   "recipe.alchemancy.dormant_properties.info": "This property can be obtained through the infusion of an unknown item.",
 
+  "commands.alchemancy:infuse.failed": "Nothing changed. Targets either have no item in their hands or the infusion could not be applied",
+  "commands.alchemancy:infuse.failed.entity": "%s is not a valid entity for this command",
+  "commands.alchemancy:infuse.failed.itemless": "%s is not holding any item",
+  "commands.alchemancy:infuse.success.multiple": "Applied infusion %s to %s entities",
+  "commands.alchemancy:infuse.success.single": "Applied infusion %s to %s's item",
+
   "essence.alchemancy.pyro": "Pyro",
   "essence.alchemancy.aero": "Aero",
   "essence.alchemancy.terra": "Terra",

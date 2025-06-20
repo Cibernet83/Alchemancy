@@ -70,7 +70,7 @@ public class ResizedProperty extends Property implements IDataHolder<Float>
 
 	@Override
 	public Float readData(CompoundTag tag) {
-		return tag.getFloat("size");
+		return tag.contains("size", CompoundTag.TAG_FLOAT) ? tag.getFloat("size") : getDefaultData();
 	}
 
 	@Override
