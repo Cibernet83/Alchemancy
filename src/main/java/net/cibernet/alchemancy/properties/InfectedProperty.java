@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class InfectedProperty extends SpreadsOnHitProperty
+public class InfectedProperty extends SpreadsOnHitProperty implements ITintModifier
 {
 	public static final MobEffectInstance[] EFFECTS = new MobEffectInstance[]
 			{
@@ -39,16 +39,17 @@ public class InfectedProperty extends SpreadsOnHitProperty
 	@Override
 	public void onInventoryTick(Entity user, ItemStack stack, Level level, int inventorySlot, boolean isCurrentItem)
 	{
-		if(user instanceof Player player)
+		if(!level.isClientSide() && user instanceof Player player)
 		{
-			if(user.getRandom().nextFloat() < 0.01f) {
-				infect(player);
-			}
-
-			if(user.getRandom().nextFloat() < 0.001f && InfusedPropertiesHelper.hasInfusedProperty(stack, AlchemancyProperties.INFECTED))
-			{
-				InfusedPropertiesHelper.removeProperty(stack, AlchemancyProperties.INFECTED);
-				InfusedPropertiesHelper.addProperty(stack, AlchemancyProperties.DEAD);
+			if(user.getRandom().nextFloat() < 0.001f) {
+				{
+					if(user.getRandom().nextBoolean() && InfusedPropertiesHelper.hasInfusedProperty(stack, AlchemancyProperties.INFECTED))
+					{
+						InfusedPropertiesHelper.removeProperty(stack, AlchemancyProperties.INFECTED);
+						InfusedPropertiesHelper.addProperty(stack, AlchemancyProperties.DEAD);
+					}
+					else infect(player);
+				}
 			}
 		}
 	}
@@ -90,7 +91,7 @@ public class InfectedProperty extends SpreadsOnHitProperty
 
 		for (LivingEntity target : entitiesInBounds) {
 
-			if(root.getLevel().getRandom().nextFloat() < 0.05f)
+			if(root.getLevel().getRandom().nextFloat() < 0.005f)
 			{
 				ArrayList<ItemStack> possibleCandidates = new ArrayList<>();
 				for (EquipmentSlot slot : EquipmentSlot.values()) {
@@ -110,6 +111,11 @@ public class InfectedProperty extends SpreadsOnHitProperty
 
 	@Override
 	public int getColor(ItemStack stack) {
-		return 0x6A5D18;
+		return 0xFF6A5D18;
+	}
+
+	@Override
+	public int getTint(ItemStack stack, int tintIndex, int originalTint, int currentTint) {
+		return getColor(stack);
 	}
 }

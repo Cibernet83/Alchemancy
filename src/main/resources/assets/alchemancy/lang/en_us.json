@@ -892,7 +892,7 @@
   "infusion_codex.alchemancy:home_run.modify_damage": "Knocks the target back a great distance if the attack deals at least 80% of the user's {attribute Attack Damage} stat.",
   "infusion_codex.alchemancy:infected.flavor": "You don't want it on your lawn",
   "infusion_codex.alchemancy:infected.on_attack": "Spreads itself onto a random item in the target's inventory.",
-  "infusion_codex.alchemancy:infected.while_in_inventory": "Slowly spreads itself onto other items in the user's inventory. Has a 2% chance every second to turn into {property alchemancy:dead}.",
+  "infusion_codex.alchemancy:infected.while_in_inventory": "Slowly spreads itself onto other items in the user's inventory. Has a 0.01% chance every tick to turn into {property alchemancy:dead}.",
   "infusion_codex.alchemancy:infusion_cleanse.flavor": "The most absorbent material I've ever used",
   "infusion_codex.alchemancy:infusion_cleanse.stacked_over": "Removes all {system Infusions} from the target item.",
   "infusion_codex.alchemancy:infusion_codex.flavor": "Quite the inception",
