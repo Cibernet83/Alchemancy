@@ -211,7 +211,11 @@ public class SparklingProperty extends Property implements IDataHolder<Holder<Pr
 	public Holder<Property> readData(CompoundTag tag) {
 
 		if (tag.contains("stored_property"))
-			return Property.CODEC.parse(CommonUtils.registryAccessStatic().createSerializationContext(NbtOps.INSTANCE), tag.get("stored_property")).getOrThrow();
+		{
+			var data = Property.CODEC.parse(CommonUtils.registryAccessStatic().createSerializationContext(NbtOps.INSTANCE), tag.get("stored_property"));
+			if(data.isSuccess())
+				return data.getOrThrow();
+		}
 		return getDefaultData();
 	}
 
