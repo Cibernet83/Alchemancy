@@ -3,6 +3,7 @@ package net.cibernet.alchemancy.blocks;
 import net.cibernet.alchemancy.client.screen.ChromaTintingScreen;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
+import net.cibernet.alchemancy.util.ClientUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionResult;
@@ -27,7 +28,7 @@ public class ChromachineBlock extends Block {
 			return InteractionResult.PASS;
 
 		if (level.isClientSide())
-			Minecraft.getInstance().setScreen(new ChromaTintingScreen(stack));
+			ClientUtil.openChromachineScreen(stack);
 		return InteractionResult.sidedSuccess(level.isClientSide());
 	}
 }

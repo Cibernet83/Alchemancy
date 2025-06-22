@@ -148,7 +148,6 @@ public class InfusionCodexIndexScreen extends Screen {
 		}
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	class PropertyList extends ObjectSelectionList<PropertyList.LockedEntry> {
 
 		public PropertyList(Minecraft minecraft) {
