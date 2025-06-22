@@ -12,6 +12,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.util.Unit;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -29,6 +30,10 @@ public class InfusedPropertiesHelper
 {
 	public static boolean hasItemWithProperty(LivingEntity user, Holder<Property> property, boolean checkAuxiliary)
 	{
+		return hasItemWithProperty(user, property, checkAuxiliary, EquipmentSlotGroup.ANY);
+	}
+	public static boolean hasItemWithProperty(LivingEntity user, Holder<Property> property, boolean checkAuxiliary, EquipmentSlotGroup equipmentSlots)
+	{
 		if(checkAuxiliary && user instanceof Player player)
 		{
 			Inventory inventory = player.getInventory();
@@ -45,6 +50,8 @@ public class InfusedPropertiesHelper
 		}
 
 		for (EquipmentSlot slot : EquipmentSlot.values()) {
+			if(!equipmentSlots.test(slot))
+				continue;
 			ItemStack stack = user.getItemBySlot(slot);
 			if(InfusedPropertiesHelper.hasProperty(stack, property))
 			{
