@@ -3,17 +3,20 @@ package net.cibernet.alchemancy.properties.entangled;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
+import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -62,7 +65,7 @@ public abstract class AbstractEntangledProperty extends Property implements IDat
 		setData(stack, new EntangledData(value, getData(stack).toggled));
 	}
 
-	public ItemStack shift(ItemStack stack)
+	public ItemStack shift(ItemStack stack, @Nullable Entity user)
 	{
 		EntangledData data = getData(stack);
 		ItemStack storedItem = data.stack;
@@ -71,6 +74,10 @@ public abstract class AbstractEntangledProperty extends Property implements IDat
 
 		setStoredItem(stack, getDefaultData().stack);
 		setData(storedItem, stack, data.toggled);
+
+		if(user != null && user.onGround() && InfusedPropertiesHelper.hasProperty(storedItem, AlchemancyProperties.AIR_WALKER))
+			AlchemancyProperties.AIR_WALKER.value().setData(storedItem, user.getY());
+
 		return storedItem;
 	}
 

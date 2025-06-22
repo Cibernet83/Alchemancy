@@ -58,6 +58,12 @@ public class AirWalkingProperty extends Property implements IDataHolder<Double> 
 
 			if(user.getY() + vec.y <= y)
 			{
+				if(user.getY() < y)
+				{
+					y = user.getY();
+					setData(stack, y);
+				}
+
 				user.resetFallDistance();
 				user.setOnGround(user.getY() <= y);
 				user.setDeltaMovement(new Vec3(vec.x, Math.min(Math.max(y - user.getY(), vec.y), 1), vec.z));

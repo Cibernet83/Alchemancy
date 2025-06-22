@@ -11,6 +11,11 @@ public class PhaseRingProperty extends Property
 {
 
 	@Override
+	public int getPriority() {
+		return Priority.HIGH;
+	}
+
+	@Override
 	public void onEquippedTick(LivingEntity user, EquipmentSlot slot, ItemStack stack)
 	{
 		user.noPhysics = true;

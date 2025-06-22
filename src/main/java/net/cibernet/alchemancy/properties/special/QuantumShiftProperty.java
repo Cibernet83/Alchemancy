@@ -13,7 +13,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -29,7 +28,7 @@ public class QuantumShiftProperty extends Property {
 		InfusedPropertiesHelper.forEachProperty(stackedOnItem, propertyHolder -> {
 			if(cont.get() && propertyHolder.value() instanceof AbstractEntangledProperty entangledProperty)
 			{
-				stackedOnSlot.set(entangledProperty.shift(stackedOnItem));
+				stackedOnSlot.set(entangledProperty.shift(stackedOnItem, player));
 				cont.set(false);
 				isCancelled.set(true);
 			}
@@ -48,7 +47,7 @@ public class QuantumShiftProperty extends Property {
 				InfusedPropertiesHelper.forEachProperty(stackInSlot, propertyHolder -> {
 					if(cont.get() && propertyHolder.value() instanceof AbstractEntangledProperty entangledProperty)
 					{
-						living.setItemSlot(slot, entangledProperty.shift(stackInSlot));
+						living.setItemSlot(slot, entangledProperty.shift(stackInSlot, living));
 						cont.set(false);
 					}
 				});
@@ -61,7 +60,7 @@ public class QuantumShiftProperty extends Property {
 			InfusedPropertiesHelper.forEachProperty(projectile.getItem(), propertyHolder -> {
 				if(cont.get() && propertyHolder.value() instanceof AbstractEntangledProperty entangledProperty)
 				{
-					projectile.setItem(entangledProperty.shift(projectile.getItem()));
+					projectile.setItem(entangledProperty.shift(projectile.getItem(), projectile));
 					cont.set(false);
 				}
 			});

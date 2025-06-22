@@ -26,7 +26,7 @@ public class ActivationEntangledProperty extends AbstractEntangledProperty
 					ItemStack currentStack = inventory.getItem(i);
 					if (stack == currentStack)
 					{
-						inventory.setItem(i, shift(stack));
+						inventory.setItem(i, shift(stack, player));
 						return;
 					}
 				}
@@ -34,7 +34,7 @@ public class ActivationEntangledProperty extends AbstractEntangledProperty
 			case InfusedItemProjectile projectile ->
 			{
 				if(projectile.getItem() == stack)
-					projectile.setItem(shift(stack));
+					projectile.setItem(shift(stack, source));
 			}
 			case null, default -> {}
 		}
@@ -44,6 +44,6 @@ public class ActivationEntangledProperty extends AbstractEntangledProperty
 	public void onActivationByBlock(Level level, BlockPos position, Entity target, ItemStack stack)
 	{
 		if(level.getBlockEntity(position) instanceof ItemStackHolderBlockEntity blockEntity)
-			blockEntity.setItem(shift(stack));
+			blockEntity.setItem(shift(stack, null));
 	}
 }

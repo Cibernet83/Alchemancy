@@ -18,7 +18,7 @@ public class InteractEntangledProperty extends AbstractEntangledProperty {
 		if (!event.isCanceled() && !getData(event.getItemStack()).equals(getDefaultData())) {
 			EquipmentSlot slot = event.getHand() == InteractionHand.MAIN_HAND ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
 			if (event.getItemStack() == event.getEntity().getItemBySlot(slot)) {
-				event.getEntity().setItemSlot(slot, shift(event.getItemStack()));
+				event.getEntity().setItemSlot(slot, shift(event.getItemStack(), event.getEntity()));
 				event.setCancellationResult(InteractionResult.SUCCESS);
 				event.setCanceled(true);
 			}
@@ -28,7 +28,7 @@ public class InteractEntangledProperty extends AbstractEntangledProperty {
 	@Override
 	public void onStackedOverMe(ItemStack carriedItem, ItemStack stack, Player player, ClickAction clickAction, SlotAccess carriedSlot, Slot stackedOnSlot, AtomicBoolean isCancelled) {
 		if (clickAction == ClickAction.SECONDARY && carriedItem.isEmpty() && stack == stackedOnSlot.getItem()) {
-			stackedOnSlot.set(shift(stack));
+			stackedOnSlot.set(shift(stack, player));
 			isCancelled.set(true);
 		} else super.onStackedOverMe(carriedItem, stack, player, clickAction, carriedSlot, stackedOnSlot, isCancelled);
 	}

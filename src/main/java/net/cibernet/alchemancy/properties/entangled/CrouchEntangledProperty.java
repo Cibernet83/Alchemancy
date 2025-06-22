@@ -16,7 +16,7 @@ public class CrouchEntangledProperty extends AbstractEntangledProperty
 		if(user instanceof Player player && user.isShiftKeyDown() != getToggle(stack) && player.getInventory().getItem(inventorySlot) == stack)
 		{
 			setToggle(stack, user.isShiftKeyDown());
-			player.getInventory().setItem(inventorySlot, shift(stack));
+			player.getInventory().setItem(inventorySlot, shift(stack, player));
 		}
 	}
 
@@ -27,7 +27,7 @@ public class CrouchEntangledProperty extends AbstractEntangledProperty
 		if(itemEntity.getItem() == stack && user != null && user.isShiftKeyDown() != getToggle(stack))
 		{
 			setToggle(stack, user.isShiftKeyDown());
-			itemEntity.setItem(shift(stack));
+			itemEntity.setItem(shift(stack, user));
 		}
 	}
 
@@ -40,7 +40,7 @@ public class CrouchEntangledProperty extends AbstractEntangledProperty
 			if(user != null && user.isShiftKeyDown() != getToggle(stack))
 			{
 				setToggle(stack, user.isShiftKeyDown());
-				infusedItemProjectile.setItem(shift(stack));
+				infusedItemProjectile.setItem(shift(stack, user));
 			}
 		}
 	}

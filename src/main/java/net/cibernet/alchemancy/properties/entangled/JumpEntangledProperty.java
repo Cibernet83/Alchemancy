@@ -11,7 +11,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 
 public class JumpEntangledProperty extends AbstractEntangledProperty
 {
@@ -28,7 +27,7 @@ public class JumpEntangledProperty extends AbstractEntangledProperty
 		if(jumping != getToggle(stack) && player.getInventory().getItem(inventorySlot) == stack)
 		{
 			setToggle(stack, jumping);
-			player.getInventory().setItem(inventorySlot, shift(stack));
+			player.getInventory().setItem(inventorySlot, shift(stack, player));
 		}
 	}
 
@@ -42,7 +41,7 @@ public class JumpEntangledProperty extends AbstractEntangledProperty
 			if(jumping != getToggle(stack))
 			{
 				setToggle(stack, jumping);
-				itemEntity.setItem(shift(stack));
+				itemEntity.setItem(shift(stack, living));
 			}
 		}
 	}
@@ -59,7 +58,7 @@ public class JumpEntangledProperty extends AbstractEntangledProperty
 				if(jumping != getToggle(stack))
 				{
 					setToggle(stack, jumping);
-					infusedItemProjectile.setItem(shift(stack));
+					infusedItemProjectile.setItem(shift(stack, living));
 				}
 			}
 		}

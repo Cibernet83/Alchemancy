@@ -16,7 +16,7 @@ public class SprintEntangledProperty extends AbstractEntangledProperty
 		if(user instanceof Player player && user.isSprinting() != getToggle(stack) && player.getInventory().getItem(inventorySlot) == stack)
 		{
 			setToggle(stack, user.isSprinting());
-			player.getInventory().setItem(inventorySlot, shift(stack));
+			player.getInventory().setItem(inventorySlot, shift(stack, player));
 		}
 	}
 
@@ -27,7 +27,7 @@ public class SprintEntangledProperty extends AbstractEntangledProperty
 		if(itemEntity.getItem() == stack && user != null && user.isSprinting() != getToggle(stack))
 		{
 			setToggle(stack, user.isSprinting());
-			itemEntity.setItem(shift(stack));
+			itemEntity.setItem(shift(stack, user));
 		}
 	}
 
@@ -40,7 +40,7 @@ public class SprintEntangledProperty extends AbstractEntangledProperty
 			if(user != null && user.isSprinting() != getToggle(stack))
 			{
 				setToggle(stack, user.isSprinting());
-				infusedItemProjectile.setItem(shift(stack));
+				infusedItemProjectile.setItem(shift(stack, user));
 			}
 		}
 	}
