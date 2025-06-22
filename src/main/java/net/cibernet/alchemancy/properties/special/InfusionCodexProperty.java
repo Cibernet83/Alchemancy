@@ -6,6 +6,7 @@ import net.cibernet.alchemancy.client.screen.InfusionCodexIndexScreen;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
+import net.cibernet.alchemancy.util.ClientUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.world.InteractionResult;
@@ -64,7 +65,7 @@ public class InfusionCodexProperty extends Property {
 		if(clickAction != ClickAction.SECONDARY || stackedOnItem.isEmpty() || ItemStack.isSameItemSameComponents(stackedOnItem, stack)) return;
 
 		if(player.level().isClientSide() && canInspect(player, stackedOnItem))
-			Minecraft.getInstance().setScreen(new InfusionCodexIndexScreen(stackedOnItem));
+			ClientUtil.openCodexScreen(stackedOnItem);
 		isCancelled.set(true);
 	}
 
@@ -73,7 +74,7 @@ public class InfusionCodexProperty extends Property {
 		if(clickAction != ClickAction.SECONDARY || carriedItem.isEmpty() || ItemStack.isSameItemSameComponents(stackedOnItem, carriedItem)) return;
 
 		if(player.level().isClientSide() && canInspect(player, carriedItem))
-			Minecraft.getInstance().setScreen(new InfusionCodexIndexScreen(carriedItem));
+			ClientUtil.openCodexScreen(carriedItem);
 		isCancelled.set(true);
 	}
 
@@ -81,7 +82,7 @@ public class InfusionCodexProperty extends Property {
 	public void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
 		if (!event.isCanceled()) {
 			if (event.getLevel().isClientSide())
-				Minecraft.getInstance().setScreen(new InfusionCodexIndexScreen(event.getItemStack().getDisplayName()));
+				ClientUtil.openCodexScreen(event.getItemStack().getDisplayName());
 			event.setCancellationResult(InteractionResult.SUCCESS);
 			event.setCanceled(true);
 		}

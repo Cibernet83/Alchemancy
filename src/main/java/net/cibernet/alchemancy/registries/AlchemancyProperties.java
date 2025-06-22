@@ -310,7 +310,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, HomeRunProperty> HOME_RUN = REGISTRY.register("home_run", HomeRunProperty::new);
 	public static final DeferredHolder<Property, VaultLockpickingProperty> VAULTPICKING = REGISTRY.register("vaultpicking", VaultLockpickingProperty::new);
 	public static final DeferredHolder<Property, GustJetProperty> GUST_JET = REGISTRY.register("gust_jet", GustJetProperty::new);
-	public static final DeferredHolder<Property, Property> TINTED_LENS = REGISTRY.register("tinted_lens", () -> Property.simple(0x35357A));
+	public static final DeferredHolder<Property, Property> TINTED_LENS = REGISTRY.register("tinted_lens", () -> Property.simple(0xFF35357A));
 
 	//TODO
 	//Tethered: On Right Click leashes the user to the targeted entity or fence block. - Leash
