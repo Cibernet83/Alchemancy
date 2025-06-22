@@ -74,8 +74,7 @@ public class TelekineticProperty extends Property implements IDataHolder<UUID> {
 		target.resetFallDistance();
 		target.setDeltaMovement(newDelta);
 		target.hasImpulse = true;
-
-
+		target.hurtMarked = true;
 
 		level.sendParticles(SparklingProperty.getParticles(stack).orElse(PARTICLES), target.getRandomX(1), target.getRandomY(), target.getRandomZ(1), 3, 0.1, 0.1, 0.1, 0);
 	}
