@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "alchemancy:item/black_hole_perforator"
+  }
+}
