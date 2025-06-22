@@ -29,6 +29,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.client.gui.widget.ExtendedSlider;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 
 import java.awt.*;
@@ -107,6 +108,11 @@ public class ChromaTintingScreen extends Screen {
 
 		if (hexInput == null) {
 			hexInput = new EditBox(font, 48, 20, Component.empty()) {
+
+				@Override
+				public void insertText(@NotNull String textToWrite) {
+					super.insertText(textToWrite.toUpperCase().replaceAll("(?![A-F]|[0-9])[\\s\\S]", ""));
+				}
 
 				@Override
 				public boolean charTyped(char codePoint, int modifiers) {
