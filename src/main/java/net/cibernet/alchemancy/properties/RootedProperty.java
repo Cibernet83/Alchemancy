@@ -47,7 +47,7 @@ public class RootedProperty extends Property
 	{
 		ItemStack stack = root.getItem();
 
-		if(stack.isDamaged() && root.getTickCount() % 100 == 0)
+		if(canRepair(stack) && root.getTickCount() % 100 == 0)
 			repairItem(stack, 1);
 	}
 

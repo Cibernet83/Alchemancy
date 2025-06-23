@@ -315,6 +315,11 @@ public class AlchemancyItems
 				.persistent(Unit.CODEC)
 				.networkSynchronized(StreamCodec.unit(Unit.INSTANCE)).build());
 
+		public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> FE_STORAGE = REGISTRY.register("battery_storage", () ->
+				new DataComponentType.Builder<Integer>()
+						.persistent(ExtraCodecs.NON_NEGATIVE_INT)
+						.networkSynchronized(ByteBufCodecs.INT).build());
+
 
 		/*  TODO
 

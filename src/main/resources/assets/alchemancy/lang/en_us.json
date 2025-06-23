@@ -169,6 +169,7 @@
   "property.crackling_detail": "%s [%s %s]",
   "property.detail.percentage": "%s%%",
   "property.detail.item_count": "%s x%s",
+  "property.detail.fe": "%s/%s FE",
   "property.detail.uses_left": "%s uses",
   "property.detail.needs_refueling": "Needs refueling!",
   "property.detail.global_position": "(%s, %s, %s) in \"%s\"",
@@ -215,6 +216,7 @@
   "property.alchemancy.hellbent": "Hellbent",
   "property.alchemancy.depth_dweller": "Depth Dweller",
   "property.alchemancy.athletic": "Athletic",
+  "property.alchemancy.lazy": "Lazy",
   "property.alchemancy.sparking": "Sparking",
   "property.alchemancy.loose": "Loose",
   "property.alchemancy.hardened": "Hardened",
@@ -415,6 +417,9 @@
   "property.alchemancy.binding": "Binding",
   "property.alchemancy.vaultpicking": "Vault-Picking",
   "property.alchemancy.unmovable": "Unmovable",
+
+  "property.alchemancy.battery_powered": "Battery-Powered",
+  "property.alchemancy.living_battery": "Living Battery",
 
   "property.alchemancy.entangled": "Entangled",
   "property.alchemancy.jump_entangled": "Jump-Entangled",

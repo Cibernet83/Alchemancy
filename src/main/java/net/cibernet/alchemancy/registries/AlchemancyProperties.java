@@ -289,6 +289,9 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, ItemMagnetProperty> ITEM_MAGNET = REGISTRY.register("item_magnet", ItemMagnetProperty::new);
 	public static final DeferredHolder<Property, ChromatizeProperty> CHROMATIZE = REGISTRY.register("chromatize", ChromatizeProperty::new);
 
+	public static final DeferredHolder<Property, BatteryPoweredProperty> BATTERY_POWERED = REGISTRY.register("battery_powered", BatteryPoweredProperty::new);
+	public static final DeferredHolder<Property, LivingBatteryProperty> LIVING_BATTERY = REGISTRY.register("living_battery", LivingBatteryProperty::new);
+
 	public static final DeferredHolder<Property, SoundEffectProperty> BADA_QUIP = REGISTRY.register("bada_quip", () -> new SoundEffectProperty(0x7289DA, AlchemancySoundEvents.BADA_QUIP.value(), true));
 
 	//Innate Properties
@@ -313,6 +316,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, VaultLockpickingProperty> VAULTPICKING = REGISTRY.register("vaultpicking", VaultLockpickingProperty::new);
 	public static final DeferredHolder<Property, GustJetProperty> GUST_JET = REGISTRY.register("gust_jet", GustJetProperty::new);
 	public static final DeferredHolder<Property, Property> TINTED_LENS = REGISTRY.register("tinted_lens", () -> Property.simple(0xFF35357A));
+
 
 	//TODO
 	//Tethered: On Right Click leashes the user to the targeted entity or fence block. - Leash

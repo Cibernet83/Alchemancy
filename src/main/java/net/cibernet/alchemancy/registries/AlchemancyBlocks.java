@@ -19,7 +19,6 @@ import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
 public class AlchemancyBlocks
 {
 	public static final DeferredRegister.Blocks REGISTRY = DeferredRegister.createBlocks(Alchemancy.MODID);
@@ -63,14 +62,4 @@ public class AlchemancyBlocks
 					.sound(AlchemancySoundEvents.GLOWING_ORB)
 					.lightLevel(state -> 15)));
 
-
-	@SubscribeEvent
-	public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-		event.registerBlock(
-			Capabilities.ItemHandler.BLOCK, // capability to register for
-			(level, pos, state, blockEntity, side) -> blockEntity instanceof ItemStackHolderBlockEntity pedestal ? pedestal.wrapper : null,
-			INFUSION_PEDESTAL.get(),
-			ALCHEMANCY_FORGE.get()
-    );
-	}
 }

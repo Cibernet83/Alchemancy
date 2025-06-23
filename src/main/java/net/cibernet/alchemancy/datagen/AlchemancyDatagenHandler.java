@@ -79,11 +79,10 @@ public class AlchemancyDatagenHandler
 			AlchemancyProperties.SMITING,
 			AlchemancyProperties.AUXILIARY,
 			AlchemancyProperties.RANDOM,
-			AlchemancyProperties.ITEM_MAGNET,
 			AlchemancyProperties.UNMOVABLE,
 			AlchemancyProperties.WORLD_OBLITERATOR,
-			AlchemancyProperties.VOIDTOUCH,
-			AlchemancyProperties.CEASELESS_VOID
+			AlchemancyProperties.BATTERY_POWERED,
+			AlchemancyProperties.LIVING_BATTERY
 	);
 
 	public static void getAlchemancyMasterAdvancement(HolderLookup.Provider registries, Consumer<AdvancementHolder> saver, ExistingFileHelper existingFileHelper)

@@ -5,6 +5,7 @@ import net.cibernet.alchemancy.blocks.blockentities.RootedItemBlockEntity;
 import net.cibernet.alchemancy.crafting.ForgePropertyRecipe;
 import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.properties.special.LivingBatteryProperty;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.util.ColorUtils;
 import net.cibernet.alchemancy.util.InfusionPropertyDispenseBehavior;
@@ -50,10 +51,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
-import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
 import net.neoforged.neoforge.event.enchanting.GetEnchantmentLevelEvent;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.item.ItemTossEvent;
@@ -71,6 +72,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -510,13 +512,36 @@ public abstract class Property
 
 	}
 
+	public int onItemRepaired(ItemStack stack, int amount, int originalAmount) {
+		return amount;
+	}
+
 	public boolean onEntityItemBelowWorld(ItemStack stack, ItemEntity itemEntity) {
 		return false;
 	}
 
+	public static boolean canRepair(ItemStack stack) {
+		return canRepair(stack, 1);
+	}
+	public static boolean canRepair(ItemStack stack, int amountToRepair) {
+
+		if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.LIVING_BATTERY)) {
+			var energy = stack.getCapability(Capabilities.EnergyStorage.ITEM);
+			if(energy != null && energy.receiveEnergy(amountToRepair * LivingBatteryProperty.CONVERSION, true) > 0)
+				return true;
+		}
+
+		return stack.isDamageableItem() && stack.getDamageValue() >= amountToRepair;
+	}
+
 	public static void repairItem(ItemStack stack, int amount) {
-		if(stack.isDamaged())
-			stack.setDamageValue(Math.max(0, stack.getDamageValue()-amount));
+
+		AtomicInteger newAmount = new AtomicInteger(amount);
+		InfusedPropertiesHelper.forEachProperty(stack, propertyHolder ->
+				newAmount.set(propertyHolder.value().onItemRepaired(stack, newAmount.get(), amount)));
+
+		if(newAmount.get() > 0 && stack.isDamaged())
+			stack.setDamageValue(Math.max(0, stack.getDamageValue()- newAmount.get()));
 	}
 
 	public final TagKey<Item> getDormantPropertyTag() {

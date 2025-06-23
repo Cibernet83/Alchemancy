@@ -44,7 +44,7 @@ public class AssimilatingProperty extends Property
 
 	public static boolean shouldRepair(ItemStack stack)
 	{
-		return stack.getDamageValue() >= stack.getMaxDamage() - 5;
+		return canRepair(stack, 5);
 	}
 
 	@Override

@@ -118,7 +118,7 @@ public class AbsorbingProperty extends Property
 
 	public static boolean shouldRepair(ItemStack stack)
 	{
-		return stack.isRepairable() && stack.getDamageValue() >= stack.getMaxDamage() / 4;
+		return stack.isRepairable() && (canRepair(stack, stack.getMaxDamage() / 4));
 	}
 
 	@Override

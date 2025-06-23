@@ -14,7 +14,7 @@ public class EnergySapperProperty extends Property
 	@Override
 	public void onEquippedTick(LivingEntity user, EquipmentSlot slot, ItemStack stack)
 	{
-		if(!user.level().isClientSide() && user.getRandom().nextFloat() < 0.01f && stack.getDamageValue() > 10 && user instanceof Player player && player.getFoodData().getFoodLevel() > 0)
+		if(!user.level().isClientSide() && user.getRandom().nextFloat() < 0.01f && canRepair(stack, 10) && user instanceof Player player && player.getFoodData().getFoodLevel() > 0)
 		{
 			player.causeFoodExhaustion(10f);
 			repairItem(stack, 1);

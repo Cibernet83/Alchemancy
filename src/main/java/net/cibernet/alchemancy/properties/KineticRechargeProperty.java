@@ -11,11 +11,11 @@ public class KineticRechargeProperty extends AbstractTimerProperty {
 	@Override
 	public void onEquippedTick(LivingEntity user, EquipmentSlot slot, ItemStack stack) {
 
-		if (user.level().isClientSide() || !stack.isDamageableItem()) return;
+		if (user.level().isClientSide() || !canRepair(stack)) return;
 
 		var vel = Math.max(10, BASE_TIME - (int) Math.ceil(user.getKnownMovement().length() * 100));
 
-		if (!stack.isDamaged() || vel >= BASE_TIME) {
+		if (vel >= BASE_TIME) {
 			removeData(stack);
 			return;
 		}

@@ -18,7 +18,7 @@ public class PhotosyntheticProperty extends Property
 	@Override
 	public void onInventoryTick(Entity user, ItemStack stack, Level level, int inventorySlot, boolean isCurrentItem)
 	{
-		if(stack.isDamaged() && user.tickCount % 600 == 0 && canPhotosynthesize(level, user.blockPosition()))
+		if(canRepair(stack) && user.tickCount % 600 == 0 && canPhotosynthesize(level, user.blockPosition()))
 			repairItem(stack, 1);
 	}
 
@@ -28,7 +28,7 @@ public class PhotosyntheticProperty extends Property
 		Level level = root.getLevel();
 		ItemStack stack = root.getItem();
 
-		if(stack.isDamaged() && root.getTickCount() % 300 == 0 && canPhotosynthesize(level, root.getBlockPos()))
+		if(canRepair(stack) && root.getTickCount() % 300 == 0 && canPhotosynthesize(level, root.getBlockPos()))
 		{
 			repairItem(stack, 1);
 		}
