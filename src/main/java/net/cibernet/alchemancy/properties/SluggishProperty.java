@@ -36,9 +36,4 @@ public class SluggishProperty extends MobEffectOnHitProperty
 	public int modifyUseDuration(ItemStack stack, int original, int result) {
 		return result * 2;
 	}
-
-	@Override
-	public void onProjectileTick(ItemStack stack, Projectile projectile) {
-		projectile.setDeltaMovement(projectile.getDeltaMovement().scale(0.85f));
-	}
 }

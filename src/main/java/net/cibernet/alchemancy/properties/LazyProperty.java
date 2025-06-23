@@ -5,6 +5,7 @@ import net.cibernet.alchemancy.mixin.accessors.ItemEntityAccessor;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.util.TriState;
 import net.neoforged.neoforge.event.entity.player.ItemEntityPickupEvent;
@@ -26,6 +27,11 @@ public class LazyProperty extends Property
 		}
 	}
 
+	@Override
+	public void onProjectileTick(ItemStack stack, Projectile projectile) {
+		projectile.setDeltaMovement(projectile.getDeltaMovement().scale(0.85f));
+	}
+	
 	@Override
 	public int getColor(ItemStack stack) {
 		return 0xB56955;
