@@ -4,6 +4,7 @@
   },
   "functions": [
     "while_in_inventory",
-    "on_attack"
+    "on_attack",
+    "visual"
   ]
 }

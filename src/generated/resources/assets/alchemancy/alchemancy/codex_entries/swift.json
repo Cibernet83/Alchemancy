@@ -4,6 +4,7 @@
   },
   "functions": [
     "while_worn_leggings",
+    "while_held_mainhand",
     "while_using"
   ]
 }

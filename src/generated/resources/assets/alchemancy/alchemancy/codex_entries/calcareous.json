@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:calcareous.flavor"
+  },
+  "functions": [
+    "while_worn_leggings",
+    "activate"
+  ]
+}

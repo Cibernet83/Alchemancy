@@ -157,6 +157,18 @@
       },
       "trigger": "alchemancy:discover_property"
     },
+    "discover_alchemancy:chromatize": {
+      "conditions": {
+        "property": "alchemancy:chromatize"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:cloud_dash": {
+      "conditions": {
+        "property": "alchemancy:cloud_dash"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
     "discover_alchemancy:clueless": {
       "conditions": {
         "property": "alchemancy:clueless"
@@ -211,6 +223,12 @@
       },
       "trigger": "alchemancy:discover_property"
     },
+    "discover_alchemancy:crystal_dash": {
+      "conditions": {
+        "property": "alchemancy:crystal_dash"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
     "discover_alchemancy:dead": {
       "conditions": {
         "property": "alchemancy:dead"
@@ -262,6 +280,12 @@
     "discover_alchemancy:disguised": {
       "conditions": {
         "property": "alchemancy:disguised"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:divine_cleanse": {
+      "conditions": {
+        "property": "alchemancy:divine_cleanse"
       },
       "trigger": "alchemancy:discover_property"
     },
@@ -1015,6 +1039,12 @@
       },
       "trigger": "alchemancy:discover_property"
     },
+    "discover_alchemancy:vacuuming": {
+      "conditions": {
+        "property": "alchemancy:vacuuming"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
     "discover_alchemancy:vampiric": {
       "conditions": {
         "property": "alchemancy:vampiric"
@@ -1469,6 +1499,9 @@
       "discover_alchemancy:kinetic_grab"
     ],
     [
+      "discover_alchemancy:vacuuming"
+    ],
+    [
       "discover_alchemancy:nonlethal"
     ],
     [
@@ -1622,6 +1655,9 @@
       "discover_alchemancy:warped"
     ],
     [
+      "discover_alchemancy:chromatize"
+    ],
+    [
       "discover_alchemancy:bada_quip"
     ],
     [
@@ -1652,6 +1688,9 @@
       "discover_alchemancy:infusion_cleanse"
     ],
     [
+      "discover_alchemancy:divine_cleanse"
+    ],
+    [
       "discover_alchemancy:flame_step"
     ],
     [
@@ -1659,6 +1698,12 @@
     ],
     [
       "discover_alchemancy:blinking"
+    ],
+    [
+      "discover_alchemancy:cloud_dash"
+    ],
+    [
+      "discover_alchemancy:crystal_dash"
     ],
     [
       "discover_alchemancy:home_run"

@@ -230,6 +230,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 
 		addCodexFlavor(AlchemancyProperties.SWIFT, "Run like the wind");
 		addCodexFunction(AlchemancyProperties.SWIFT, PropertyFunction.WHILE_WORN_LEGGINGS, "Increases the user's {attribute Movement Speed} by 55%.");
+		addCodexFunction(AlchemancyProperties.SWIFT, PropertyFunction.WHILE_HELD_MAINHAND, "Increases the user's {attribute Attack Speed} by 25%.");
 		addCodexFunction(AlchemancyProperties.SWIFT, PropertyFunction.WHILE_USING, "Halves the item's use time.");
 
 		addCodexFlavor(AlchemancyProperties.SLUGGISH, ""); //TODO
@@ -325,6 +326,10 @@ public class AlchemancyLangProvider extends LanguageProvider {
 
 		addCodexFlavor(AlchemancyProperties.CRACKLING, "Be the light of the party");
 		addCodexFunction(AlchemancyProperties.CRACKLING, PropertyFunction.ON_CRIT, "Creates a Firework explosion at the target's position, damaging all nearby entities, including the user. The explosion's effects depend on the {item Firework Rocket} or {item Firework Star} used to obtain this {system Infusion}.");
+
+		addCodexFlavor(AlchemancyProperties.CALCAREOUS, "[kal-kair-ee-uhs] Adjective: contains calcium");
+		addCodexFunction(AlchemancyProperties.CALCAREOUS, PropertyFunction.WHILE_WORN_LEGGINGS, "Reduces the user's {attribute Fall Damage} by 50% and increases their {attribute Safe Fall Distance} by 10 blocks.");
+		addCodexFunction(AlchemancyProperties.CALCAREOUS, PropertyFunction.ACTIVATE, "Clears the target's Potion Effects and {property alchemancy:chromatic} tint.");
 
 		addCodexFlavor(AlchemancyProperties.COZY, "Nice and warm");
 		addCodexFunction(AlchemancyProperties.COZY, PropertyFunction.WHILE_WORN, "Increases the rate at which the user thaws out, enough to prevent {item Powder Snow} from having any effect.");
@@ -510,8 +515,9 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.UNDEAD, PropertyFunction.DURABILITY_CONSUMED, "Damaging the item restores durability points instead of consuming them, breaking once the item gets fully repaired.");
 
 		addCodexFlavor(AlchemancyProperties.INFECTED, "You don't want it on your lawn");
-		addCodexFunction(AlchemancyProperties.INFECTED, PropertyFunction.WHILE_IN_INVENTORY, "Slowly spreads itself onto other items in the user's inventory. Has a 2% chance every second to turn into {property alchemancy:dead}.");
+		addCodexFunction(AlchemancyProperties.INFECTED, PropertyFunction.WHILE_IN_INVENTORY, "Slowly spreads itself onto other items in the user's inventory. Has a 0.2% chance every second to turn into {property alchemancy:dead}.");
 		addCodexFunction(AlchemancyProperties.INFECTED, PropertyFunction.ON_ATTACK, "Spreads itself onto a random item in the target's inventory.");
+		addCodexFunction(AlchemancyProperties.INFECTED, PropertyFunction.VISUAL, "Tints the item with an ugly color.");
 
 		addCodexFlavor(AlchemancyProperties.SANITIZED, "Squeaky clean");
 		addCodexFunction(AlchemancyProperties.SANITIZED, PropertyFunction.OTHER, "Prevents the item from becoming {property alchemancy:infected}.");
