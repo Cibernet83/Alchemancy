@@ -110,6 +110,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, Property> DEXTEROUS = REGISTRY.register("dexterous", () -> Property.simple(0x00EAA8));
 	public static final DeferredHolder<Property, WaterWalkingProperty> WAVE_RIDER = REGISTRY.register("wave_rider", WaterWalkingProperty::new);
 	public static final DeferredHolder<Property, AirWalkingProperty> AIR_WALKER = REGISTRY.register("air_walker", AirWalkingProperty::new);
+	public static final DeferredHolder<Property, AthleticProperty> ATHLETIC = REGISTRY.register("athletic", AthleticProperty::new);
 
 	//Tools
 	public static final DeferredHolder<Property, ToolProperty> MINING = REGISTRY.register("mining", () -> new ToolProperty(0x888788, BlockTags.MINEABLE_WITH_PICKAXE, ItemAbilities.DEFAULT_PICKAXE_ACTIONS));
@@ -252,6 +253,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, CompactProperty> COMPACT = REGISTRY.register("compact", CompactProperty::new);
 	public static final DeferredHolder<Property, MagneticProperty> MAGNETIC = REGISTRY.register("magnetic", MagneticProperty::new);
 	public static final DeferredHolder<Property, KineticRechargeProperty> KINETIC_RECHARGE = REGISTRY.register("kinetic_recharge", KineticRechargeProperty::new);
+	public static final DeferredHolder<Property, LazyProperty> LAZY = REGISTRY.register("lazy", LazyProperty::new);
 
 	//Cosmetic
 	public static final DeferredHolder<Property, Property> REVEALED = REGISTRY.register("revealed", () -> Property.simple(0xD6DDFF));

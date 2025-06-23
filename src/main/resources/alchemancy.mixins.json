@@ -32,6 +32,7 @@
     "accessors.AbstractCauldronAccessor",
     "accessors.EntityAccessor",
     "accessors.FallingBlockEntityAccessor",
+    "accessors.ItemEntityAccessor",
     "accessors.LivingEntityAccessor",
     "accessors.ProjectileAccessor",
     "accessors.VaultServerDataAccessor",
