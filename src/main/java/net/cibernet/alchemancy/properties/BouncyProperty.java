@@ -2,18 +2,22 @@ package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.registries.AlchemancySoundEvents;
 import net.cibernet.alchemancy.util.CommonUtils;
+import net.minecraft.core.Direction;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import org.jetbrains.annotations.Nullable;
@@ -98,6 +102,22 @@ public class BouncyProperty extends Property
 			if(!(user instanceof Player) || user.level().isClientSide())
 				BOUNCE_TARGETS.put(user.getUUID(), user.getDeltaMovement());
 		}
+	}
+
+	@Override
+	public void onProjectileImpact(ItemStack stack, Projectile projectile, HitResult rayTraceResult, ProjectileImpactEvent event) {
+
+		if(rayTraceResult.getType() != HitResult.Type.BLOCK || projectile.getDeltaMovement().lengthSqr() < 0.2f) return;
+
+		Direction face = ((BlockHitResult)rayTraceResult).getDirection();
+
+		projectile.setDeltaMovement(projectile.getDeltaMovement().multiply(switch (face.getAxis()) {
+			case X -> new Vec3(-0.5, 1, 1);
+			case Y -> new Vec3(1, -0.5, 1);
+			case Z -> new Vec3(1, 1, -0.5);
+		}));
+
+		event.setCanceled(true);
 	}
 
 	@SubscribeEvent

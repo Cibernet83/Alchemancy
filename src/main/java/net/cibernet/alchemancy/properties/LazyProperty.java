@@ -31,7 +31,7 @@ public class LazyProperty extends Property
 	public void onProjectileTick(ItemStack stack, Projectile projectile) {
 		projectile.setDeltaMovement(projectile.getDeltaMovement().scale(0.85f));
 	}
-	
+
 	@Override
 	public int getColor(ItemStack stack) {
 		return 0xB56955;

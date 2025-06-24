@@ -119,6 +119,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.BOUNCY, PropertyFunction.WHEN_HIT_EQUIPPED, "Bounces the user away from the damage source for a short distance.");
 		addCodexFunction(AlchemancyProperties.BOUNCY, PropertyFunction.ACTIVATE, "Bounces the user away from the target for a short distance.");
 		addCodexFunction(AlchemancyProperties.BOUNCY, PropertyFunction.ON_FALL, "Bounces the user upwards with reduced force of which they hit the ground, nullifying all fall damage.");
+		addCodexFunction(AlchemancyProperties.BOUNCY, PropertyFunction.WHEN_SHOT, "Bounces off of blocks on impact if the Projectile is going at a high enough speed.");
 
 		addCodexFlavor(AlchemancyProperties.SLIPPERY, "Warned you about the stairs");
 		addCodexFunction(AlchemancyProperties.SLIPPERY, PropertyFunction.ON_ATTACK, "Makes the user drop their held item.");
