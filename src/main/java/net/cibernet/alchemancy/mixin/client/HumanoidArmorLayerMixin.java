@@ -6,7 +6,9 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalIntRef;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.client.model.HumanoidModel;
@@ -25,8 +27,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class HumanoidArmorLayerMixin<T extends LivingEntity, M extends HumanoidModel<T>, A extends HumanoidModel<T>>
 {
 
-	@Inject(method = "renderArmorPiece", at = @At("HEAD"), cancellable = true)
-	public void renderArmorPiece(PoseStack poseStack, MultiBufferSource bufferSource, T livingEntity, EquipmentSlot slot, int packedLight, A p_model, CallbackInfo ci, @Local(argsOnly = true, ordinal = 0)LocalIntRef lightRef)
+	@Inject(method = "renderArmorPiece(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/EquipmentSlot;ILnet/minecraft/client/model/HumanoidModel;FFFFFF)V", at = @At("HEAD"), cancellable = true)
+	public void renderArmorPiece(PoseStack poseStack, MultiBufferSource bufferSource, T livingEntity, EquipmentSlot slot, int packedLight, A p_model, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci, @Local(argsOnly = true, ordinal = 0)LocalIntRef lightRef)
 	{
 		ItemStack stack = livingEntity.getItemBySlot(slot);
 		if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.CONCEALED))
@@ -39,7 +41,6 @@ public class HumanoidArmorLayerMixin<T extends LivingEntity, M extends HumanoidM
 		float scale = AlchemancyProperties.RESIZED.value().getData(stack);
 		if(scale != 1)
 			poseStack.scale(scale, scale, scale);
-
 
 		if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.GLOWING_AURA))
 			lightRef.set(LightTexture.FULL_BRIGHT);
@@ -66,8 +67,8 @@ public class HumanoidArmorLayerMixin<T extends LivingEntity, M extends HumanoidM
 		return disguise.isEmpty() ? stack : disguise;
 	}
 
-	@Inject(method = "renderArmorPiece(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/EquipmentSlot;ILnet/minecraft/client/model/HumanoidModel;)V", at = @At("RETURN"))
-	public void renderArmorPieceTail(PoseStack poseStack, MultiBufferSource bufferSource, T livingEntity, EquipmentSlot slot, int packedLight, A p_model, CallbackInfo ci)
+	@Inject(method = "renderArmorPiece(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/entity/EquipmentSlot;ILnet/minecraft/client/model/HumanoidModel;FFFFFF)V", at = @At("RETURN"))
+	public void renderArmorPieceTail(PoseStack poseStack, MultiBufferSource bufferSource, T livingEntity, EquipmentSlot slot, int packedLight, A p_model, float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks, float netHeadYaw, float headPitch, CallbackInfo ci)
 	{
 		poseStack.popPose();
 	}
