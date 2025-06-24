@@ -7,6 +7,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
 import net.cibernet.alchemancy.properties.WayfindingProperty;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.util.CommonUtils;
@@ -126,7 +127,7 @@ public abstract class ItemRendererMixin
 
 				switch (displayContext)
 				{
-					case FIRST_PERSON_LEFT_HAND: case THIRD_PERSON_LEFT_HAND: case FIRST_PERSON_RIGHT_HAND: case THIRD_PERSON_RIGHT_HAND:
+					case FIRST_PERSON_LEFT_HAND, THIRD_PERSON_LEFT_HAND, FIRST_PERSON_RIGHT_HAND, THIRD_PERSON_RIGHT_HAND:
 						poseStack.mulPose(Axis.YN.rotationDegrees(angle + 195));
 						break;
 					case HEAD:
@@ -137,6 +138,21 @@ public abstract class ItemRendererMixin
 				}
 
 
+			}
+		}
+
+		if(InfusedPropertiesHelper.hasInfusedProperty(itemStack, AlchemancyProperties.ROTATING))
+		{
+			float time = PropertyModifierComponent.getOrElse(itemStack, AlchemancyProperties.ROTATING, AlchemancyProperties.Modifiers.ROTATION, 5f);
+			float partialSecond = ((System.currentTimeMillis() % (1000L * (long) time)) / 1000f);
+			float angle = (partialSecond / time) * 360f;
+			switch (displayContext)
+			{
+				case FIRST_PERSON_LEFT_HAND, THIRD_PERSON_LEFT_HAND, FIRST_PERSON_RIGHT_HAND, THIRD_PERSON_RIGHT_HAND, HEAD:
+				poseStack.mulPose(Axis.YN.rotationDegrees(angle));
+				break;
+				default:
+					poseStack.mulPose(Axis.ZN.rotationDegrees(angle));
 			}
 		}
 

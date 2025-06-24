@@ -58,6 +58,7 @@ public class AlchemancyProperties
 		public static final DeferredHolder<PropertyModifierType<?>, PropertyModifierType<Float>> EFFECT_RADIUS = REGISTRY.register("effect_radius", PropertyModifierType.build(1f, Codec.FLOAT, ByteBufCodecs.FLOAT));
 		public static final DeferredHolder<PropertyModifierType<?>, PropertyModifierType<Float>> EFFECT_VALUE = REGISTRY.register("effect_value", PropertyModifierType.build(1f, Codec.FLOAT, ByteBufCodecs.FLOAT));
 		public static final DeferredHolder<PropertyModifierType<?>, PropertyModifierType<Integer>> BONUS_SLOTS = REGISTRY.register("bonus_slots", PropertyModifierType.build(0, Codec.INT, ByteBufCodecs.INT));
+		public static final DeferredHolder<PropertyModifierType<?>, PropertyModifierType<Float>> ROTATION = REGISTRY.register("rotation", PropertyModifierType.build(1f, Codec.FLOAT, ByteBufCodecs.FLOAT));
 
 		public static Holder<PropertyModifierType<?>> asHolder(PropertyModifierType<?> modifierType)
 		{
@@ -288,6 +289,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, Property> UNMOVABLE = REGISTRY.register("unmovable", UnmovableProperty::new);
 	public static final DeferredHolder<Property, ItemMagnetProperty> ITEM_MAGNET = REGISTRY.register("item_magnet", ItemMagnetProperty::new);
 	public static final DeferredHolder<Property, ChromatizeProperty> CHROMATIZE = REGISTRY.register("chromatize", ChromatizeProperty::new);
+	public static final DeferredHolder<Property, RotatingProperty> ROTATING = REGISTRY.register("rotating", RotatingProperty::new);
 
 	public static final DeferredHolder<Property, BatteryPoweredProperty> BATTERY_POWERED = REGISTRY.register("battery_powered", BatteryPoweredProperty::new);
 	public static final DeferredHolder<Property, LivingBatteryProperty> LIVING_BATTERY = REGISTRY.register("living_battery", LivingBatteryProperty::new);
