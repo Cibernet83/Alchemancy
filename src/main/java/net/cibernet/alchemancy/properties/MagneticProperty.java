@@ -247,6 +247,7 @@ public class MagneticProperty extends Property {
 				arrow.setInGround(false);
 
 			target.hasImpulse = true;
+			target.hurtMarked = true;
 			Vec3 vec3 = target.getDeltaMovement();
 			Vec3 vec31 = target.position().subtract(center).normalize().scale(str);
 

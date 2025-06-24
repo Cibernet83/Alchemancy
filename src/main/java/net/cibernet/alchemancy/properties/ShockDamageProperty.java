@@ -4,6 +4,8 @@ import net.cibernet.alchemancy.blocks.blockentities.RootedItemBlockEntity;
 import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.util.ShockUtils;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -16,7 +18,7 @@ public class ShockDamageProperty extends Property
 {
 	public final float power(ItemStack stack)
 	{
-		return PropertyModifierComponent.getOrElse(stack, asHolder(), AlchemancyProperties.Modifiers.ATTACK_DAMAGE, 5f);
+		return PropertyModifierComponent.getOrElse(stack, asHolder(), AlchemancyProperties.Modifiers.ATTACK_DAMAGE, 4f);
 	}
 	
 	@Override
@@ -40,8 +42,13 @@ public class ShockDamageProperty extends Property
 	@Override
 	public void onRootedTick(RootedItemBlockEntity root, List<LivingEntity> entitiesInBounds)
 	{
-		if(root.getLevel().getRandom().nextFloat() < 0.05f)
-			ShockUtils.environmentalShockAttack(root.getLevel(), root.getBlockPos().getCenter(), power(root.getItem()));
+		if(root.getLevel().getRandom().nextFloat() < 0.01f)
+			ShockUtils.environmentalShockAttack(root.getLevel(), root.getBlockPos().getCenter(), PropertyModifierComponent.getOrElse(root.getItem(), asHolder(), AlchemancyProperties.Modifiers.ATTACK_DAMAGE, 3f));
+	}
+
+	@Override
+	public void onRootedAnimateTick(RootedItemBlockEntity root, RandomSource randomSource) {
+		playRootedParticles(root, randomSource, ParticleTypes.ELECTRIC_SPARK);
 	}
 
 	@Override

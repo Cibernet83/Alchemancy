@@ -40,8 +40,8 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.FROSTED, PropertyFunction.WHILE_ROOTED, "Freezes all entities standing inside of the item.");
 
 		addCodexFlavor(AlchemancyProperties.SHOCKING, "A shock to the system");
-		addCodexFunction(AlchemancyProperties.SHOCKING, PropertyFunction.ON_ATTACK, "Deal 5 points of {shock Electric} damage to the target and all other nearby entities.");
-		addCodexFunction(AlchemancyProperties.SHOCKING, PropertyFunction.WHILE_ROOTED, "Constantly emits an electrical field that deals 5 points of {shock Electric} damage to nearby entities.");
+		addCodexFunction(AlchemancyProperties.SHOCKING, PropertyFunction.ON_ATTACK, "Deal 4 points of chaining {shock Electric} damage to the target and nearby entities. The amount of damage dealt decays over distance and for each consecutive hit.");
+		addCodexFunction(AlchemancyProperties.SHOCKING, PropertyFunction.WHILE_ROOTED, "Constantly emits an electrical field that deals 3 points of chaining {shock Electric} damage to nearby entities. The amount of damage dealt decays over distance and for each consecutive hit.");
 
 		addCodexFlavor(AlchemancyProperties.PHOTOSYNTHETIC, "A growing grass boy's favorite meal");
 		addCodexFunction(AlchemancyProperties.PHOTOSYNTHETIC, PropertyFunction.WHILE_IN_INVENTORY, "Repairs the item for 1 durability point every 30 seconds while the user is under direct sunlight.");
