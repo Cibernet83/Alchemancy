@@ -3,7 +3,7 @@
   "criteria": {
     "discover_property": {
       "conditions": {
-        "property": "alchemancy:item_magnet"
+        "property": "alchemancy:item_pull"
       },
       "trigger": "alchemancy:discover_property"
     }
@@ -17,7 +17,7 @@
     "icon": {
       "components": {
         "alchemancy:stored_properties": [
-          "alchemancy:item_magnet"
+          "alchemancy:item_pull"
         ]
       },
       "count": 1,
@@ -25,7 +25,7 @@
     },
     "show_toast": false,
     "title": {
-      "translate": "property.alchemancy.item_magnet"
+      "translate": "property.alchemancy.item_pull"
     }
   },
   "requirements": [

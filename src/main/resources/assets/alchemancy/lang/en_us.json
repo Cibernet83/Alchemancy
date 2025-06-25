@@ -98,6 +98,7 @@
   "item.alchemancy.undying_ring": "Ring of Undying",
   "item.alchemancy.friendship_ring": "Ring of Friendship",
   "item.alchemancy.voidless_ring": "Ring of the Voidless",
+  "item.alchemancy.attraction_ring": "Ring of Attraction",
 
   "item.alchemancy.sparkling_band": "Band of Sparkling",
 
@@ -114,6 +115,7 @@
   "item.alchemancy.divine_cloth": "Divine Cloth",
   "item.alchemancy.vaultpick": "Vault-Pick",
   "item.alchemancy.binding_key": "Key of Binding",
+  "item.alchemancy.spinner_spanner": "Spinner Spanner",
 
   "item.alchemancy.unshaped_clay": "Unshaped Clay",
   "item.alchemancy.unshaped_clay.tooltip": "Smelt or combine with a Clay Ball to restore [%s]",
@@ -384,7 +386,7 @@
   "property.alchemancy.kinetic_grab": "Kinetic Grab",
   "property.alchemancy.vacuuming": "Vacuuming",
   "property.alchemancy.quantum_bind": "Quantum Bind",
-  "property.alchemancy.item_magnet": "Item Vacuum",
+  "property.alchemancy.item_pull": "Item Pull",
 
   "property.alchemancy.infusion_codex": "Infusion Codex",
 

@@ -45,17 +45,7 @@ public class ItemMagnetProperty extends Property
 	}
 
 	@Override
-	public Collection<ItemStack> populateCreativeTab(DeferredItem<Item> capsuleItem, Holder<Property> holder) {
-		return List.of();
-	}
-
-	@Override
-	public boolean hasJournalEntry() {
-		return false;
-	}
-
-	@Override
 	public int getColor(ItemStack stack) {
-		return 0x0094FF;
+		return 0xBE70FF;
 	}
 }
