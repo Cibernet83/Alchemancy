@@ -82,7 +82,7 @@ public class EnderProperty extends Property
 	@Override
 	public void onProjectileImpact(ItemStack stack, Projectile projectile, HitResult rayTraceResult, ProjectileImpactEvent event) 
 	{
-		if(projectile.isRemoved() && InfusedPropertiesHelper.hasInfusedProperty(stack, AlchemancyProperties.SHATTERING))
+		if(projectile.isRemoved() && InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.SHATTERING))
 		{
 			if(rayTraceResult.getType() == HitResult.Type.ENTITY && rayTraceResult instanceof EntityHitResult entityHitResult)
 				onActivation(projectile, entityHitResult.getEntity(), stack);
