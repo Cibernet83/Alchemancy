@@ -1,0 +1,20 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:swift",
+    "alchemancy:leaping",
+    "alchemancy:energized",
+    "alchemancy:conductive",
+    "alchemancy:magnetic"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:iron_boots"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:mechanical_boots"
+  }
+}

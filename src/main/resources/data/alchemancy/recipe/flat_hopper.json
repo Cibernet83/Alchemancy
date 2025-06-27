@@ -1,0 +1,17 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:flattened",
+    "alchemancy:compact"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:hopper"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:flat_hopper"
+  }
+}

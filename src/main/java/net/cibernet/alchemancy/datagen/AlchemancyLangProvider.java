@@ -330,7 +330,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 
 		addCodexFlavor(AlchemancyProperties.CALCAREOUS, "[kal-kair-ee-uhs] Adjective: contains calcium");
 		addCodexFunction(AlchemancyProperties.CALCAREOUS, PropertyFunction.WHILE_WORN_LEGGINGS, "Reduces the user's {attribute Fall Damage} by 50% and increases their {attribute Safe Fall Distance} by 10 blocks.");
-		addCodexFunction(AlchemancyProperties.CALCAREOUS, PropertyFunction.ACTIVATE, "Clears the target's Potion Effects and {property alchemancy:chromatic} tint.");
+		addCodexFunction(AlchemancyProperties.CALCAREOUS, PropertyFunction.ACTIVATE, "Clears the target's Potion Effects and {property alchemancy:chromatize} tint.");
 
 		addCodexFlavor(AlchemancyProperties.COZY, "Nice and warm");
 		addCodexFunction(AlchemancyProperties.COZY, PropertyFunction.WHILE_WORN, "Increases the rate at which the user thaws out, enough to prevent {item Powder Snow} from having any effect.");

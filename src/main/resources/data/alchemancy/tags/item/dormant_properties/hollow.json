@@ -12,6 +12,9 @@
     "minecraft:dispenser",
     "minecraft:dropper",
     "minecraft:chest_minecart",
-    "minecraft:hopper_minecart"
+    "minecraft:hopper_minecart",
+
+    "alchemancy:gust_basket",
+    "alchemancy:ceaseless_void_bag"
   ]
 }

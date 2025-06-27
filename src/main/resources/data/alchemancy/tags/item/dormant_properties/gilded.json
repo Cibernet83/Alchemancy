@@ -4,6 +4,10 @@
     "#alchemancy:materials/gold",
 
     "minecraft:bell",
-    "minecraft:gilded_blackstone"
+    "minecraft:gilded_blackstone",
+
+    "alchemancy:hot_rod",
+    "alchemancy:molten_core_perforator",
+    "alchemancy:flamewakers"
   ]
 }

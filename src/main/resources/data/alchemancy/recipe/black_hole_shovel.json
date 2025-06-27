@@ -1,0 +1,17 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:digging",
+    "alchemancy:vacuuming"
+  ],
+
+  "catalyst": {
+    "item": "alchemancy:pocket_black_hole"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:black_hole_shovel"
+  }
+}

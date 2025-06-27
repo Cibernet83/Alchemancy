@@ -79,18 +79,30 @@ public class AlchemancyCreativeTabs
 				output.accept(PROPERTY_VISOR.get());
 				output.accept(TINTED_GLASSES.get());
 
+				output.accept(NIMBUS_BELT.get());
+				output.accept(CRYSTAL_STORM_BELT.get());
+				output.accept(SHIFTING_LIGHTNING_BELT.get());
+
+				output.accept(FLAMEWAKERS.get());
+				output.accept(TIDEWALKER_TREADS.get());
+				output.accept(HARDLIGHT_STEPS.get());
+				output.accept(MECHANICAL_BOOTS.get());
+
 				output.accept(LEADEN_APPLE.get());
 				output.accept(LEADEN_CLOTH.get());
 				output.accept(DIVINE_CLOTH.get());
 				output.accept(WAYWARD_MEDALLION.get());
 				output.accept(VAULT_LOCKPICK.get());
 				output.accept(BINDING_KEY.get());
+				output.accept(SPINNER_SPANNER.get());
+				output.accept(QUANTUM_SPANNER.get());
 
 				output.accept(GUST_BASKET.get());
 				output.accept(FLAT_HOPPER.get());
 				output.accept(CHROMACHINE.get());
 
 				output.accept(ROCKET_POWERED_HAMMER.get());
+				output.accept(TELEKINETIC_GLOVE.get());
 				output.accept(HOME_RUN_BAT.get());
 				output.accept(FERAL_BLADE.get());
 				output.accept(HOT_ROD.get());

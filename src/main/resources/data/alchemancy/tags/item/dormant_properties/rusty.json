@@ -1,7 +1,8 @@
 {
   "replace": false,
   "values": [
-    "#alchemancy:materials/copper"
+    "#alchemancy:materials/copper",
+    "alchemancy:spinner_spanner"
   ],
   "remove": [
     "#alchemancy:waxed",

@@ -31,6 +31,8 @@
     "minecraft:iron_door",
     "minecraft:iron_trapdoor",
     "minecraft:chain",
-    "minecraft:hopper"
+    "minecraft:hopper",
+
+    "alchemancy:flat_hopper"
   ]
 }

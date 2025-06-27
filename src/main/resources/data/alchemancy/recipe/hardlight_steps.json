@@ -1,8 +1,7 @@
 {
-  "type": "alchemancy:forged_property",
+  "type": "alchemancy:forged_item",
 
   "properties": [
-    "alchemancy:wave_rider",
     "alchemancy:light_seeking",
     "alchemancy:voidborn",
     "alchemancy:antigrav",
@@ -14,6 +13,12 @@
       "item": "alchemancy:glowing_orb"
     }
   ],
+  "catalyst": {
+    "item": "alchemancy:tidewalker_treads"
+  },
 
-  "result": "alchemancy:air_walker"
+  "result": {
+    "count": 1,
+    "id": "alchemancy:hardlight_steps"
+  }
 }

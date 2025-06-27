@@ -1,0 +1,11 @@
+{
+  "type": "alchemancy:forged_property",
+  "properties": [
+    "alchemancy:crystal_dash",
+    "alchemancy:cloud_dash"
+  ],
+
+  "result": [
+    "alchemancy:crystal_dash"
+  ]
+}

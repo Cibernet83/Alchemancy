@@ -105,6 +105,15 @@
   "item.alchemancy.property_visor": "Property Visor",
   "item.alchemancy.tinted_glasses": "Tinted Glasses",
 
+  "item.alchemancy.nimbus_belt": "Nimbus Belt",
+  "item.alchemancy.crystal_storm_belt": "Belt of the Crystal Storm",
+  "item.alchemancy.shifting_lightning_belt": "Belt of the Shifting Lightning",
+
+  "item.alchemancy.flamewakers": "Flamewakers",
+  "item.alchemancy.tidewalker_treads": "Tidewalker Treads",
+  "item.alchemancy.hardlight_steps": "Hardlight Steps",
+  "item.alchemancy.mechanical_boots": "Mechanical Boots",
+
   "item.alchemancy.wayward_medallion": "Wayward Medallion",
   "item.alchemancy.wayward_medallion.bound_to_player": "Bound to: %s",
   "item.alchemancy.wayward_medallion.bound_to_position": "Bound to: (%s, %s, %s)",
@@ -116,6 +125,7 @@
   "item.alchemancy.vaultpick": "Vault-Pick",
   "item.alchemancy.binding_key": "Key of Binding",
   "item.alchemancy.spinner_spanner": "Spinner Spanner",
+  "item.alchemancy.quantum_spanner": "Quantum Spanner",
 
   "item.alchemancy.unshaped_clay": "Unshaped Clay",
   "item.alchemancy.unshaped_clay.tooltip": "Smelt or combine with a Clay Ball to restore [%s]",
@@ -130,6 +140,7 @@
 
   "item.alchemancy.pocket_black_hole": "Pocket Black Hole",
   "item.alchemancy.ceaseless_void_bag": "Bag of the Ceaseless Void",
+  "item.alchemancy.telekinetic_glove": "Telekinetic Glove",
 
   "item.alchemancy.property_capsule": "Property Capsule",
   "item.alchemancy.property_capsule.ingredient": "Infused Property",

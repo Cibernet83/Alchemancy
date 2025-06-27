@@ -1,0 +1,18 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:wayfinding",
+    "alchemancy:ticking",
+    "alchemancy:interactable"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:copper_ingot"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:spinner_spanner"
+  }
+}

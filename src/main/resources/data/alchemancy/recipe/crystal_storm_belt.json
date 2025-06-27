@@ -1,0 +1,28 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:shocking",
+    "alchemancy:levitating"
+  ],
+
+  "infusables": [
+    {
+      "item": "minecraft:amethyst_cluster"
+    },
+    {
+      "item": "minecraft:amethyst_block"
+    },
+    {
+      "item": "minecraft:amethyst_block"
+    }
+  ],
+  "catalyst": {
+    "item": "alchemancy:nimbus_belt"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:crystal_storm_belt"
+  }
+}

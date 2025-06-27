@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "minecraft:painting"
+    "minecraft:painting",
+    "alchemancy:flat_hopper"
   ]
 }

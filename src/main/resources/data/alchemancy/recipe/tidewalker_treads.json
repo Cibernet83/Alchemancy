@@ -1,0 +1,19 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:buoyant",
+    "alchemancy:lightweight",
+    "alchemancy:frosted",
+    "alchemancy:aquatic"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:leather_boots"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:tidewalker_treads"
+  }
+}

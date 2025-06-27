@@ -1,0 +1,18 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:burning",
+    "alchemancy:sparking",
+    "alchemancy:gilded"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:diamond_boots"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:flamewakers"
+  }
+}

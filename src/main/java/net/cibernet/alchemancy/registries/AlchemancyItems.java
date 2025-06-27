@@ -1,6 +1,7 @@
 package net.cibernet.alchemancy.registries;
 
 import net.cibernet.alchemancy.Alchemancy;
+import net.cibernet.alchemancy.item.ArmorInnatePropertyItem;
 import net.cibernet.alchemancy.item.DreamsteelBowItem;
 import net.cibernet.alchemancy.item.InfusionFlaskItem;
 import net.cibernet.alchemancy.item.InnatePropertyItem;
@@ -8,7 +9,6 @@ import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
 import net.cibernet.alchemancy.item.components.PropertyDataComponent;
 import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
 import net.cibernet.alchemancy.properties.FeralProperty;
-import net.cibernet.alchemancy.properties.TintedProperty;
 import net.cibernet.alchemancy.properties.special.ClayMoldProperty;
 import net.cibernet.alchemancy.properties.special.HomeRunProperty;
 import net.cibernet.alchemancy.properties.special.WaywardWarpProperty;
@@ -18,10 +18,10 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.ExtraCodecs;
@@ -115,6 +115,7 @@ public class AlchemancyItems
 	public static final DeferredItem<InnatePropertyItem> PHASING_RING = REGISTRY.register("phasing_ring", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.PHASE_STEP).auxiliary(true).toggleable(true).stacksTo(1).build());
 	public static final DeferredItem<InnatePropertyItem> UNDYING_RING = REGISTRY.register("undying_ring", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.DEATH_WARD).auxiliary(true).stacksTo(1).build());
 	public static final DeferredItem<InnatePropertyItem> FRIENDSHIP_RING = REGISTRY.register("friendship_ring", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.FRIENDLY).auxiliary(true).toggleable(true).stacksTo(1).build());
+	public static final DeferredItem<InnatePropertyItem> ATTRACTION_RING = REGISTRY.register("attraction_ring", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.ITEM_PULL).auxiliary(true).toggleable(true).stacksTo(1).build());
 	public static final DeferredItem<InnatePropertyItem> VOIDLESS_RING = REGISTRY.register("voidless_ring", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.VOIDBORN).auxiliary(true).stacksTo(1).durability(1000).build());
 	public static final DeferredItem<InnatePropertyItem> SPARKLING_BAND = REGISTRY.register("sparkling_band", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.SPARKLING).auxiliary(true)
 			.addModifier(AlchemancyProperties.SPARKLING, AlchemancyProperties.Modifiers.IGNORE_INFUSED, false).infusionSlots(1).stacksTo(1).build());
@@ -129,6 +130,23 @@ public class AlchemancyItems
 			.addModifier(AlchemancyProperties.HEADWEAR, AlchemancyProperties.Modifiers.ON_RIGHT_CLICK, true)
 			.stacksTo(1)
 			.build());
+
+	public static final DeferredItem<ArmorInnatePropertyItem> NIMBUS_BELT = REGISTRY.register("nimbus_belt", () -> new ArmorInnatePropertyItem(
+			Materials.BELT, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(85), AlchemancyProperties.CLOUD_DASH));
+	public static final DeferredItem<ArmorInnatePropertyItem> CRYSTAL_STORM_BELT = REGISTRY.register("crystal_storm_belt", () -> new ArmorInnatePropertyItem(
+			Materials.BELT, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(115), AlchemancyProperties.CRYSTAL_DASH));
+	public static final DeferredItem<ArmorInnatePropertyItem> SHIFTING_LIGHTNING_BELT = REGISTRY.register("shifting_lightning_belt", () -> new ArmorInnatePropertyItem(
+			Materials.BELT, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(125), AlchemancyProperties.BLINKING, AlchemancyProperties.KINETIC_RECHARGE));
+
+	public static final DeferredItem<ArmorInnatePropertyItem> FLAMEWAKERS = REGISTRY.register("flamewakers", () -> new ArmorInnatePropertyItem(
+			Materials.FLAME_EMPEROR_ARMOR, ArmorItem.Type.BOOTS, new Item.Properties().durability(400), AlchemancyProperties.FLAME_STEP, AlchemancyProperties.GILDED));
+	public static final DeferredItem<ArmorInnatePropertyItem> TIDEWALKER_TREADS = REGISTRY.register("tidewalker_treads", () -> new ArmorInnatePropertyItem(
+			Materials.TIDEWALKER_TREADS, ArmorItem.Type.BOOTS, new Item.Properties().durability(85), AlchemancyProperties.WAVE_RIDER));
+	public static final DeferredItem<ArmorInnatePropertyItem> HARDLIGHT_STEPS = REGISTRY.register("hardlight_steps", () -> new ArmorInnatePropertyItem(
+			Materials.HARDLIGHT_STEPS, ArmorItem.Type.BOOTS, new Item.Properties().durability(140), AlchemancyProperties.AIR_WALKER));
+	public static final DeferredItem<ArmorInnatePropertyItem> MECHANICAL_BOOTS = REGISTRY.register("mechanical_boots", () -> new ArmorInnatePropertyItem(
+			Materials.MECHANICAL_BOOTS, ArmorItem.Type.BOOTS, new Item.Properties().durability(165), AlchemancyProperties.ATHLETIC, AlchemancyProperties.KINETIC_RECHARGE));
+
 	public static final DeferredItem<InnatePropertyItem> WAYWARD_MEDALLION = REGISTRY.register("wayward_medallion", () -> new InnatePropertyItem.Builder()
 			.withProperties(AlchemancyProperties.WAYWARD_WARP)
 			.durability(160, Ingredient.of(Items.ENDER_PEARL))
@@ -165,6 +183,12 @@ public class AlchemancyItems
 			.build(new Item.Properties()
 					.rarity(Rarity.EPIC)
 					.attributes(HomeRunProperty.createAttributes())));
+	public static final DeferredItem<InnatePropertyItem> TELEKINETIC_GLOVE = REGISTRY.register("telekinetic_glove", () -> new InnatePropertyItem.Builder()
+			.withProperties(AlchemancyProperties.KINETIC_GRAB)
+			.stacksTo(1)
+			.build(new Item.Properties()
+					.rarity(Rarity.EPIC)
+					.attributes(HomeRunProperty.createAttributes())));
 	public static final DeferredItem<SwordItem> FERAL_BLADE = REGISTRY.register("feral_blade", () -> new SwordItem(Tiers.IRON, new Item.Properties()
 			.attributes(SwordItem.createAttributes(Tiers.IRON, 2, -1.2f).withModifierAdded(Attributes.ATTACK_SPEED, FeralProperty.OFFHAND_BONUS, EquipmentSlotGroup.OFFHAND))));
 	public static final DeferredItem<SwordItem> HOT_ROD = REGISTRY.register("hot_rod", () -> new SwordItem(Materials.FLAME_EMPEROR_TOOLS, new Item.Properties()
@@ -191,6 +215,15 @@ public class AlchemancyItems
 			.build());
 	public static final DeferredItem<InnatePropertyItem> BINDING_KEY = REGISTRY.register("binding_key", () -> new InnatePropertyItem.Builder()
 			.withProperties(AlchemancyProperties.BINDING)
+			.stacksTo(1)
+			.build());
+	public static final DeferredItem<InnatePropertyItem> SPINNER_SPANNER = REGISTRY.register("spinner_spanner", () -> new InnatePropertyItem.Builder()
+			.withProperties(AlchemancyProperties.ROTATING)
+			.stacksTo(1)
+			.build());
+
+	public static final DeferredItem<InnatePropertyItem> QUANTUM_SPANNER = REGISTRY.register("quantum_spanner", () -> new InnatePropertyItem.Builder()
+			.withProperties(AlchemancyProperties.QUANTUM_SHIFT)
 			.stacksTo(1)
 			.build());
 
@@ -249,7 +282,7 @@ public class AlchemancyItems
 
 		public static final DeferredRegister<ArmorMaterial> ARMOR_MATERIAL_REGISTRY = DeferredRegister.create(Registries.ARMOR_MATERIAL, MODID);
 
-		public static final Holder<ArmorMaterial> LEAD_ARMOR = registerArmor("lead", 10, 0, 0.1f,
+		public static final Holder<ArmorMaterial> LEAD_ARMOR = registerArmor("lead", 10, 0, 0.1f, SoundEvents.ARMOR_EQUIP_IRON,
 				() -> Ingredient.of(LEAD_INGOT),
 			Util.make(new EnumMap<>(ArmorItem.Type.class), p_323378_ -> {
 			p_323378_.put(ArmorItem.Type.BOOTS, 2);
@@ -259,9 +292,38 @@ public class AlchemancyItems
 			p_323378_.put(ArmorItem.Type.BODY, 5);
 		}));
 
-		private static Holder<ArmorMaterial> registerArmor(String key, int enchantmentValue, float toughness, float knockbackResistance, Supplier<Ingredient> repairMaterial, Map<ArmorItem.Type, Integer> defenseMap)
+		public static final Holder<ArmorMaterial> BELT = registerArmor("belt", 16, 0, 0f, SoundEvents.ARMOR_EQUIP_LEATHER,
+				() -> Ingredient.of(Items.LEATHER),
+			Util.make(new EnumMap<>(ArmorItem.Type.class), p_323378_ -> {
+			p_323378_.put(ArmorItem.Type.LEGGINGS, 2);
+
+		}));
+		public static final Holder<ArmorMaterial> FLAME_EMPEROR_ARMOR = registerArmor("flame_emperor_armor", 18, 2, 0f, SoundEvents.ARMOR_EQUIP_GOLD,
+				() -> Ingredient.of(Items.BLAZE_POWDER),
+			Util.make(new EnumMap<>(ArmorItem.Type.class), p_323378_ -> {
+			p_323378_.put(ArmorItem.Type.BOOTS, 3);
+		}));
+		public static final Holder<ArmorMaterial> TIDEWALKER_TREADS = registerArmor("tidewalker_treads", 15, 0, 0f, SoundEvents.ARMOR_EQUIP_LEATHER,
+				() -> Ingredient.of(Items.LEATHER),
+			Util.make(new EnumMap<>(ArmorItem.Type.class), p_323378_ -> {
+			p_323378_.put(ArmorItem.Type.BOOTS, 1);
+		}));
+
+		public static final Holder<ArmorMaterial> HARDLIGHT_STEPS = registerArmor("hardlight_steps", 15, 0, 0f, SoundEvents.ARMOR_EQUIP_GOLD,
+				() -> Ingredient.of(GLOWING_ORB),
+			Util.make(new EnumMap<>(ArmorItem.Type.class), p_323378_ -> {
+			p_323378_.put(ArmorItem.Type.BOOTS, 2);
+		}));
+
+		public static final Holder<ArmorMaterial> MECHANICAL_BOOTS = registerArmor("mechanical_boots", 15, 0, 0f, SoundEvents.ARMOR_EQUIP_IRON,
+				() -> Ingredient.EMPTY,
+			Util.make(new EnumMap<>(ArmorItem.Type.class), p_323378_ -> {
+			p_323378_.put(ArmorItem.Type.BOOTS, 2);
+		}));
+
+		private static Holder<ArmorMaterial> registerArmor(String key, int enchantmentValue, float toughness, float knockbackResistance, Holder<SoundEvent> equipSound, Supplier<Ingredient> repairMaterial, Map<ArmorItem.Type, Integer> defenseMap)
 		{
-			return ARMOR_MATERIAL_REGISTRY.register(key, () -> new ArmorMaterial(defenseMap, enchantmentValue, SoundEvents.ARMOR_EQUIP_IRON, repairMaterial, List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, key))),
+			return ARMOR_MATERIAL_REGISTRY.register(key, () -> new ArmorMaterial(defenseMap, enchantmentValue, equipSound, repairMaterial, List.of(new ArmorMaterial.Layer(ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, key))),
 					toughness, knockbackResistance));
 		}
 	}

@@ -1,0 +1,23 @@
+{
+  "type": "alchemancy:forged_property",
+
+  "properties": [
+    "alchemancy:cloud_dash",
+    "alchemancy:shocking",
+    "alchemancy:levitating"
+  ],
+
+  "infusables": [
+    {
+      "item": "minecraft:amethyst_cluster"
+    },
+    {
+      "item": "minecraft:amethyst_block"
+    },
+    {
+      "item": "minecraft:amethyst_block"
+    }
+  ],
+
+  "result": "alchemancy:crystal_dash"
+}

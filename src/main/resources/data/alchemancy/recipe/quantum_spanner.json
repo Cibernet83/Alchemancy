@@ -1,0 +1,21 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:toggleable"
+  ],
+
+  "infusables": [
+    {
+      "item": "alchemancy:entangled_singularity"
+    }
+  ],
+  "catalyst": {
+    "item": "alchemancy:spinner_spanner"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:quantum_spanner"
+  }
+}

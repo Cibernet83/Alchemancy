@@ -1,0 +1,16 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:wind_charged"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:cauldron"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:gust_basket"
+  }
+}

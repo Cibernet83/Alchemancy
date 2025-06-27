@@ -1,0 +1,25 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:wind_charged",
+    "alchemancy:swift"
+  ],
+
+  "infusables": [
+    {
+      "item": "minecraft:leather"
+    },
+    {
+      "item": "minecraft:glass_bottle"
+    }
+  ],
+  "catalyst": {
+    "item": "minecraft:chain"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:nimbus_belt"
+  }
+}
