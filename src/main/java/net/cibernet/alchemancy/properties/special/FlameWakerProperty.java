@@ -5,6 +5,7 @@ import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -32,9 +33,10 @@ public class FlameWakerProperty extends Property {
 			if(fireBlock.hasProperty(FireBlock.AGE))
 				fireBlock = fireBlock.setValue(FireBlock.AGE, 8);
 			level.setBlock(pos, fireBlock, 11);
-		}
 
-		stack.hurtAndBreak(PropertyModifierComponent.getOrElse(stack, asHolder(), AlchemancyProperties.Modifiers.DURABILITY_CONSUMPTION, 1), user, slot);
+			if(user.tickCount % 10 == 0 && PropertyModifierComponent.getOrElse(stack, asHolder(), AlchemancyProperties.Modifiers.PREVENT_CONSUMPTION, stack.isDamageableItem()))
+				stack.hurtAndBreak(PropertyModifierComponent.getOrElse(stack, asHolder(), AlchemancyProperties.Modifiers.DURABILITY_CONSUMPTION, 1), user, EquipmentSlot.MAINHAND);
+		}
 	}
 
 	@Override
