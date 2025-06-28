@@ -3,6 +3,7 @@ package net.cibernet.alchemancy.blocks;
 import com.mojang.serialization.MapCodec;
 import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.events.handler.GeneralEventHandler;
+import net.cibernet.alchemancy.util.VoxelShapeUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -15,19 +16,22 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.TreeMap;
+
 public class FlatHopperBlock extends DirectionalBlock {
 
-	private static final VoxelShape DOWN_AABB = Block.box(0.0D, 15.0D, 0.0D, 16.0D, 16.0D, 16.0D);
-	private static final VoxelShape UP_AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D);
-	private static final VoxelShape EAST_AABB = Block.box(0.0D, 0.0D, 0.0D, 1.0D, 16.0D, 16.0D);
-	private static final VoxelShape WEST_AABB = Block.box(15.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
-	private static final VoxelShape SOUTH_AABB = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 1.0D);
-	private static final VoxelShape NORTH_AABB = Block.box(0.0D, 0.0D, 15.0D, 16.0D, 16.0D, 16.0D);
+	private static final TreeMap<Direction, VoxelShape> SHAPES = VoxelShapeUtils.createDirectionMap(Shapes.or(
+			Block.box(0.0D, 0.0D, 0.0D, 3.0D, 1.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 1.0D, 3.0D),
+			Block.box(13.0D, 0.0D, 0.0D, 16.0D, 1.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 13.0D, 16.0D, 1.0D, 16.0D)
+	));
 
 	public FlatHopperBlock(Properties properties) {
 		super(properties);
@@ -37,15 +41,7 @@ public class FlatHopperBlock extends DirectionalBlock {
 
 	@Override
 	protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-		return switch (state.getValue(FACING))
-		{
-			case UP -> UP_AABB;
-			case DOWN -> DOWN_AABB;
-			case WEST -> WEST_AABB;
-			case EAST -> EAST_AABB;
-			case NORTH -> NORTH_AABB;
-			case SOUTH -> SOUTH_AABB;
-		};
+		return SHAPES.get(state.getValue(FACING));
 	}
 
 

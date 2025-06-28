@@ -8,6 +8,7 @@ import net.cibernet.alchemancy.properties.special.GustJetProperty;
 import net.cibernet.alchemancy.registries.AlchemancyBlocks;
 import net.cibernet.alchemancy.registries.AlchemancySoundEvents;
 import net.cibernet.alchemancy.util.CommonUtils;
+import net.cibernet.alchemancy.util.VoxelShapeUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -20,6 +21,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -29,9 +31,13 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
+
+import java.util.TreeMap;
 
 public class GustBasketBlock extends DirectionalBlock {
 
@@ -39,11 +45,25 @@ public class GustBasketBlock extends DirectionalBlock {
 
 	private static final float DISTANCE = 6;
 
+
+	private static final TreeMap<Direction, VoxelShape> SHAPES = VoxelShapeUtils.createDirectionMap(Shapes.or(
+			Block.box(0.0D, 0.0D, 0.0D, 2.0D, 16.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 2.0D),
+			Block.box(14.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 14.0D, 16.0D, 16.0D, 16.0D),
+			Block.box(0.0D, 0.0D, 0.0D, 16.0D, 2.0D, 16.0D)
+	));
+
 	public GustBasketBlock(Properties properties) {
 		super(properties);
 		this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.UP));
 
 		GeneralEventHandler.registerTickingBlockFunction(this, GustBasketBlock::tick);
+	}
+
+	@Override
+	protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+		return SHAPES.get(state.getValue(FACING));
 	}
 
 	@Override
