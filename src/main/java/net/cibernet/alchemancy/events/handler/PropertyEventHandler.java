@@ -403,6 +403,20 @@ public class PropertyEventHandler
 	}
 
 	@SubscribeEvent
+	public static void onFlyingPlayerFall(PlayerFlyableFallEvent event)
+	{
+		var livingFall = new LivingFallEvent(event.getEntity(), event.getDistance(), event.getMultiplier());
+		for (EquipmentSlot slot : EquipmentSlot.values())
+		{
+			ItemStack stack = event.getEntity().getItemBySlot(slot);
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onFall(event.getEntity(), stack, slot, livingFall));
+		}
+
+		event.setDistance(livingFall.getDistance());
+		event.setMultiplier(livingFall.getDamageMultiplier());
+	}
+
+	@SubscribeEvent
 	public static void onEnchantmentLevel(GetEnchantmentLevelEvent event)
 	{
 		ItemStack stack = event.getStack();
