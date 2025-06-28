@@ -1,0 +1,13 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:shocking",
+    "alchemancy:phasing"
+  ],
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:shifting_lightning_belt"
+  }
+}

@@ -1,8 +1,8 @@
 {
   "replace": false,
   "values": [
-    "minecraft:crossbow",
-    "minecraft:bow",
+    "#c:tools/bow",
+    "#c:tools/crossbow",
     "minecraft:fletching_table"
   ]
 }

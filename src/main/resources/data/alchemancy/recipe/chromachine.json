@@ -1,0 +1,34 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:wise"
+  ],
+
+  "infusables": [
+    {
+      "item": "alchemancy:chroma_lens"
+    },
+    {
+      "tag": "c:dyes/red"
+    },
+    {
+      "tag": "c:dyes/green"
+    },
+    {
+      "tag": "c:dyes/blue"
+    },
+    {
+      "tag": "c:dyes/black"
+    }
+  ],
+
+  "catalyst": {
+    "item": "minecraft:cauldron"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:chromachine"
+  }
+}
