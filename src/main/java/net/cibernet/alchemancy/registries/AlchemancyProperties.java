@@ -159,6 +159,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, HydrophobicProperty> HYDROPHOBIC = REGISTRY.register("hydrophobic", HydrophobicProperty::new);
 	public static final DeferredHolder<Property, AllergicProperty> ALLERGIC = REGISTRY.register("allergic", AllergicProperty::new);
 	public static final DeferredHolder<Property, ArmorPulseProperty> ARMOR_PULSE = REGISTRY.register("armor_pulse", ArmorPulseProperty::new);
+	public static final DeferredHolder<Property, RunningStartProperty> RUNNING_START = REGISTRY.register("running_start", RunningStartProperty::new);
 
 	//Mob Effects
 	public static final DeferredHolder<Property, LevitatingProperty> LEVITATING = REGISTRY.register("levitating", LevitatingProperty::new);
@@ -213,6 +214,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, RelentlessProperty> RELENTLESS = REGISTRY.register("relentless", RelentlessProperty::new);
 	public static final DeferredHolder<Property, SpiritBondProperty> SPIRIT_BOND = REGISTRY.register("spirit_bond", SpiritBondProperty::new);
 	public static final DeferredHolder<Property, PhasingProperty> PHASING = REGISTRY.register("phasing", PhasingProperty::new);
+	public static final DeferredHolder<Property, HungeringProperty> HUNGERING = REGISTRY.register("hungering", HungeringProperty::new);
 
 	//Voidborn
 	public static final DeferredHolder<Property, VoidbornProperty> VOIDBORN = REGISTRY.register("voidborn", VoidbornProperty::new);

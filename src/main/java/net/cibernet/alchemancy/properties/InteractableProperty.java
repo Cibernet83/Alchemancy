@@ -60,10 +60,14 @@ public class InteractableProperty extends Property
 		}
 	}
 
-	protected static void applyCooldown(Player player, ItemStack stack) {
+	public static void applyCooldown(Player player, ItemStack stack, int amount) {
 		var cooldowns = player.getCooldowns();
 		if(!cooldowns.isOnCooldown(stack.getItem()))
-			cooldowns.addCooldown(stack.getItem(), 20);
+			cooldowns.addCooldown(stack.getItem(), amount);
+	}
+
+	protected static void applyCooldown(Player player, ItemStack stack) {
+		applyCooldown(player, stack, 20);
 	}
 
 	@Override

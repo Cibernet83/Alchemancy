@@ -30,6 +30,6 @@ public class EnergySapperProperty extends Property
 
 	@Override
 	public int getColor(ItemStack stack) {
-		return 0xD14A59;
+		return 0xA53B64;
 	}
 }

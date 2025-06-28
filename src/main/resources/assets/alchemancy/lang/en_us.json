@@ -323,6 +323,7 @@
   "property.alchemancy.spirit_bond": "Spirit Bond",
   "property.alchemancy.relentless": "Relentless",
   "property.alchemancy.energy_sapper": "Energy Sapper",
+  "property.alchemancy.hungering": "Hungering",
   "property.alchemancy.cursed": "Cursed",
   "property.alchemancy.vengeful": "Vengeful",
   "property.alchemancy.vampiric": "Vampiric",
@@ -371,6 +372,7 @@
   "property.alchemancy.fungal": "Fungal",
   "property.alchemancy.sporadic": "Sporadic",
   "property.alchemancy.ticking": "Ticking",
+  "property.alchemancy.running_start": "Running Start",
 
   "property.alchemancy.hydrophobic": "Hydrophobic",
   "property.alchemancy.allergic": "Allergic",
