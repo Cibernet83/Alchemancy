@@ -34,7 +34,7 @@ public class FlameWakerProperty extends Property {
 				fireBlock = fireBlock.setValue(FireBlock.AGE, 8);
 			level.setBlock(pos, fireBlock, 11);
 
-			if(user.tickCount % 10 == 0 && PropertyModifierComponent.getOrElse(stack, asHolder(), AlchemancyProperties.Modifiers.PREVENT_CONSUMPTION, stack.isDamageableItem()))
+			if(user.tickCount % 40 == 0 && PropertyModifierComponent.getOrElse(stack, asHolder(), AlchemancyProperties.Modifiers.PREVENT_CONSUMPTION, stack.isDamageableItem()))
 				stack.hurtAndBreak(PropertyModifierComponent.getOrElse(stack, asHolder(), AlchemancyProperties.Modifiers.DURABILITY_CONSUMPTION, 1), user, EquipmentSlot.MAINHAND);
 		}
 	}
