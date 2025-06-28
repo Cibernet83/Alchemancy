@@ -49,9 +49,9 @@ public class AlchemancyBlocks
 	public static final DeferredBlock<RootedItemBlock> ROOTED_ITEM = REGISTRY.register("rooted_item", () -> new RootedItemBlock(BlockBehaviour.Properties.of().sound(SoundType.CROP).noOcclusion().mapColor(MapColor.PLANT)));
 	public static final DeferredBlock<FlattenedItemBlock> FLATTENED_ITEM = REGISTRY.register("flattened_item", () -> new FlattenedItemBlock(BlockBehaviour.Properties.of().noOcclusion()));
 	public static final DeferredBlock<SculkBudBlock> SCULK_BUD = REGISTRY.register("sculk_bud", () -> new SculkBudBlock(BlockBehaviour.Properties.of().sound(SoundType.SCULK).mapColor(MapColor.COLOR_BLACK).strength(0.2F).sound(SoundType.SCULK)));
-	public static final DeferredBlock<GustBasketBlock> GUST_BASKET = REGISTRY.register("gust_basket", () -> new GustBasketBlock(BlockBehaviour.Properties.of().randomTicks().sound(SoundType.SCULK).mapColor(MapColor.COLOR_BLACK).strength(1.5F)));
+	public static final DeferredBlock<GustBasketBlock> GUST_BASKET = REGISTRY.register("gust_basket", () -> new GustBasketBlock(BlockBehaviour.Properties.of().randomTicks().sound(SoundType.METAL).mapColor(MapColor.COLOR_LIGHT_BLUE).strength(1.5F)));
 	public static final DeferredBlock<FlatHopperBlock> FLAT_HOPPER = REGISTRY.register("flat_hopper", () -> new FlatHopperBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.HOPPER)));
-	public static final DeferredBlock<ChromachineBlock> CHROMACHINE = REGISTRY.register("chromachine", () -> new ChromachineBlock(BlockBehaviour.Properties.of().randomTicks().sound(SoundType.METAL).mapColor(MapColor.COLOR_BLACK).strength(1.5F)));
+	public static final DeferredBlock<ChromachineBlock> CHROMACHINE = REGISTRY.register("chromachine", () -> new ChromachineBlock(BlockBehaviour.Properties.of().randomTicks().sound(SoundType.METAL).mapColor(MapColor.METAL).strength(1.5F)));
 
 	public static final DeferredBlock<GlowingOrbBlock> GLOWING_ORB = REGISTRY.register("glowing_orb", () -> new GlowingOrbBlock(
 			BlockBehaviour.Properties.of()

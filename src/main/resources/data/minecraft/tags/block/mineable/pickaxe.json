@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "alchemancy:alchemancy_catalyst",
+    "alchemancy:chromachine",
+    "alchemancy:gust_basket",
+    "alchemancy:flat_hopper"
+  ]
+}

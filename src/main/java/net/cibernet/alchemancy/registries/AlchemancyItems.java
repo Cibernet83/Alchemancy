@@ -139,7 +139,7 @@ public class AlchemancyItems
 			Materials.BELT, ArmorItem.Type.LEGGINGS, new Item.Properties().durability(125), AlchemancyProperties.BLINKING, AlchemancyProperties.KINETIC_RECHARGE));
 
 	public static final DeferredItem<ArmorInnatePropertyItem> FLAMEWAKERS = REGISTRY.register("flamewakers", () -> new ArmorInnatePropertyItem(
-			Materials.FLAME_EMPEROR_ARMOR, ArmorItem.Type.BOOTS, new Item.Properties().durability(400), AlchemancyProperties.FLAME_STEP, AlchemancyProperties.GILDED));
+			Materials.FLAME_EMPEROR_ARMOR, ArmorItem.Type.BOOTS, new Item.Properties().durability(400), AlchemancyProperties.FLAME_STEP));
 	public static final DeferredItem<ArmorInnatePropertyItem> TIDEWALKER_TREADS = REGISTRY.register("tidewalker_treads", () -> new ArmorInnatePropertyItem(
 			Materials.TIDEWALKER_TREADS, ArmorItem.Type.BOOTS, new Item.Properties().durability(85), AlchemancyProperties.WAVE_RIDER));
 	public static final DeferredItem<ArmorInnatePropertyItem> HARDLIGHT_STEPS = REGISTRY.register("hardlight_steps", () -> new ArmorInnatePropertyItem(
