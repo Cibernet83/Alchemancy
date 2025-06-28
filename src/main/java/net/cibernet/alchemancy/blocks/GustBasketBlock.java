@@ -33,12 +33,17 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Vector3f;
 
 import java.util.TreeMap;
 
+@EventBusSubscriber(Dist.CLIENT)
 public class GustBasketBlock extends DirectionalBlock {
 
 	public static final MapCodec<GustBasketBlock> CODEC = simpleCodec(GustBasketBlock::new);
@@ -151,6 +156,13 @@ public class GustBasketBlock extends DirectionalBlock {
 		});
 	}
 
+	private static int gustSounds = 0;
+
+	@SubscribeEvent
+	private static void resetGustSounds(ClientTickEvent.Post event) {
+		gustSounds = 0;
+	}
+
 	public static void playGustEffects(Level level, BlockPos pos, double distance) {
 
 		RandomSource random = level.getRandom();
@@ -169,8 +181,11 @@ public class GustBasketBlock extends DirectionalBlock {
 					facing.getStepX() * speed, facing.getStepY() * speed, facing.getStepZ() * speed);
 		}
 
-		if (random.nextFloat() > 0.05f)
+		if (random.nextFloat() > 0.05f && gustSounds <= 2)
+		{
 			level.playLocalSound(pos, AlchemancySoundEvents.GUST_BASKET.value(), SoundSource.BLOCKS, 0.25f, (float) (distance / DISTANCE), false);
+			gustSounds++;
+		}
 	}
 
 	@Nullable
