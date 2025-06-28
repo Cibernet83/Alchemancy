@@ -171,24 +171,24 @@ public class MagneticProperty extends Property {
 	}
 
 	public static void magnetize(Level level, @Nullable Entity user, Vec3 center, ItemStack stack) {
-		if (!level.isClientSide())
-			forEachInRadius(user, level, center, LivingEntity.class, entity -> true, target ->
-			{
-				for (EquipmentSlot slot : EquipmentSlot.values()) {
-					ItemStack stackInSlot = target.getItemBySlot(slot);
-					if (canBeMagnetized(stackInSlot)) {
-						target.move(MoverType.PLAYER, center.subtract(target.position()).normalize().scale(0.05f));
-						playParticles(target, target.getRandomY(), stack, 1);
+		if (level.isClientSide()) return;
+		 forEachInRadius(user, level, center, LivingEntity.class, entity -> true, target ->
+		{
+			for (EquipmentSlot slot : EquipmentSlot.values()) {
+				ItemStack stackInSlot = target.getItemBySlot(slot);
+				if (canBeMagnetized(stackInSlot)) {
+					target.move(MoverType.PLAYER, center.subtract(target.position()).normalize().scale(0.05f));
+					playParticles(target, target.getRandomY(), stack, 1);
 
-						if (level.getRandom().nextFloat() < 0.005f) {
-							if (target instanceof Player player)
-								player.drop(stackInSlot, true);
-							else HollowProperty.nonPlayerDrop(target, stackInSlot, false, true);
-							target.setItemSlot(slot, ItemStack.EMPTY);
-						}
+					if (level.getRandom().nextFloat() < 0.005f) {
+						if (target instanceof Player player)
+							player.drop(stackInSlot, true);
+						else HollowProperty.nonPlayerDrop(target, stackInSlot, false, true);
+						target.setItemSlot(slot, ItemStack.EMPTY);
 					}
 				}
-			});
+			}
+		});
 		pullEntities(user, stack, level, center, ItemEntity.class, itemEntity -> canBeMagnetized(itemEntity.getItem()), ItemEntity::setNoPickUpDelay);
 		pullEntities(user, stack, level, center, AbstractArrow.class, arrow -> canBeMagnetized(arrow.getPickupItemStackOrigin()), arrow -> {
 			if (!level.isClientSide() && arrow.pickup == AbstractArrow.Pickup.ALLOWED && user instanceof Player player) {
@@ -203,7 +203,9 @@ public class MagneticProperty extends Property {
 			projectile.level().addFreshEntity(droppedItem);
 			projectile.discard();
 		});
-		pullEntities(user, stack, level, center, LivingEntity.class, entity -> entity.getType().is(AlchemancyTags.EntityTypes.PULLED_IN_BY_MAGNETIC), e -> {}, 0.075f);
+		pullEntities(user, stack, level, center, LivingEntity.class, entity -> entity.getType().is(AlchemancyTags.EntityTypes.PULLED_IN_BY_MAGNETIC), e -> {
+		}, 0.075f);
+
 	}
 
 	public static void repelUser(Entity user)
@@ -246,13 +248,14 @@ public class MagneticProperty extends Property {
 			if (target instanceof AbstractArrowAccessor arrow)
 				arrow.setInGround(false);
 
-			target.hasImpulse = true;
-			target.hurtMarked = true;
 			Vec3 vec3 = target.getDeltaMovement();
 			Vec3 vec31 = target.position().subtract(center).normalize().scale(str);
 
 			target.setDeltaMovement(vec3.scale(1 - 0.5 * (1 - distanceTo / RADIUS)).subtract(vec31));
 			playParticles(target, target.getRandomY(), stack, 1);
+
+			target.hasImpulse = true;
+			target.hurtMarked = true;
 		});
 	}
 
