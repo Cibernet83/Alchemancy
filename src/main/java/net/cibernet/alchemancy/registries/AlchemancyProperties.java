@@ -112,6 +112,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, WaterWalkingProperty> WAVE_RIDER = REGISTRY.register("wave_rider", WaterWalkingProperty::new);
 	public static final DeferredHolder<Property, AirWalkingProperty> AIR_WALKER = REGISTRY.register("air_walker", AirWalkingProperty::new);
 	public static final DeferredHolder<Property, AthleticProperty> ATHLETIC = REGISTRY.register("athletic", AthleticProperty::new);
+	public static final DeferredHolder<Property, AnchoredProperty> ANCHORED = REGISTRY.register("anchored", AnchoredProperty::new);
 
 	//Tools
 	public static final DeferredHolder<Property, ToolProperty> MINING = REGISTRY.register("mining", () -> new ToolProperty(0x888788, BlockTags.MINEABLE_WITH_PICKAXE, ItemAbilities.DEFAULT_PICKAXE_ACTIONS));
