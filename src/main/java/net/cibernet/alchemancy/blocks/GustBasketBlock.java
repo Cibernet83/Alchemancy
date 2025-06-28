@@ -126,6 +126,8 @@ public class GustBasketBlock extends DirectionalBlock {
 
 	public static void clientPlayerTick(Player player) {
 
+		if(player.isSpectator()) return;
+
 		Level level = player.level();
 		BlockPos.betweenClosedStream(CommonUtils.boundingBoxAroundPoint(player.position(), player.getBbWidth() * 0.45f).expandTowards(0, -DISTANCE, 0)).forEach(pos -> {
 			BlockState state = level.getBlockState(pos);
