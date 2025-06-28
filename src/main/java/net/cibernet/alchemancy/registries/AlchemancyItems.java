@@ -185,10 +185,7 @@ public class AlchemancyItems
 					.attributes(HomeRunProperty.createAttributes())));
 	public static final DeferredItem<InnatePropertyItem> TELEKINETIC_GLOVE = REGISTRY.register("telekinetic_glove", () -> new InnatePropertyItem.Builder()
 			.withProperties(AlchemancyProperties.KINETIC_GRAB)
-			.stacksTo(1)
-			.build(new Item.Properties()
-					.rarity(Rarity.EPIC)
-					.attributes(HomeRunProperty.createAttributes())));
+			.stacksTo(1).build());
 	public static final DeferredItem<SwordItem> FERAL_BLADE = REGISTRY.register("feral_blade", () -> new SwordItem(Tiers.IRON, new Item.Properties()
 			.attributes(SwordItem.createAttributes(Tiers.IRON, 2, -1.2f).withModifierAdded(Attributes.ATTACK_SPEED, FeralProperty.OFFHAND_BONUS, EquipmentSlotGroup.OFFHAND))));
 	public static final DeferredItem<SwordItem> HOT_ROD = REGISTRY.register("hot_rod", () -> new SwordItem(Materials.FLAME_EMPEROR_TOOLS, new Item.Properties()
