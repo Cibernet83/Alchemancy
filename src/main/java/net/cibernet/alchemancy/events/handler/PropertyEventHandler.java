@@ -111,8 +111,14 @@ public class PropertyEventHandler
 		}
 
 		for (EquipmentSlot slot : EquipmentSlot.values()) {
+
+			var currentDamage = event.getNewDamage();
+
 			ItemStack stack = event.getEntity().getItemBySlot(slot);
 			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().modifyDamageReceived(event.getEntity(), stack, slot, event));
+
+			if(currentDamage >= Integer.MAX_VALUE)
+				event.setNewDamage(currentDamage);
 		}
 	}
 
