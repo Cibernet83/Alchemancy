@@ -11,6 +11,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.CommonHooks;
+import net.neoforged.neoforge.event.EventHooks;
+import net.neoforged.neoforge.event.entity.living.LivingFallEvent;
+
+import java.beans.EventHandler;
 
 public class WaterWalkingProperty extends Property {
 
@@ -21,6 +26,10 @@ public class WaterWalkingProperty extends Property {
 			return;
 
 		if (user.level().getFluidState(user.getBlockPosBelowThatAffectsMyMovement()).is(Fluids.WATER)) {
+
+			if(!user.onGround())
+				CommonHooks.onLivingFall(user, user.fallDistance, 0);
+
 			user.setOnGround(true);
 			var vec = user.getDeltaMovement();
 

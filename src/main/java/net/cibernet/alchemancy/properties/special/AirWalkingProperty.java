@@ -17,6 +17,7 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -67,6 +68,9 @@ public class AirWalkingProperty extends Property implements IDataHolder<Double> 
 					setData(stack, y);
 				}
 
+				if(!user.onGround())
+					CommonHooks.onLivingFall(user, user.fallDistance, 0);
+				
 				user.resetFallDistance();
 				user.setOnGround(user.getY() <= y);
 				user.setDeltaMovement(new Vec3(vec.x, Math.min(Math.max(y - user.getY(), vec.y), 1), vec.z));

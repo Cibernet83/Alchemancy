@@ -125,7 +125,7 @@ public class BouncyProperty extends Property
 	{
 		Entity user = event.getEntity();
 		UUID uuid = user.getUUID();
-		if( BOUNCE_TARGETS.containsKey(uuid))
+		if( BOUNCE_TARGETS.containsKey(uuid) && BOUNCE_TARGETS.get(uuid) != null)
 		{
 			user.hurtMarked = true;
 			user.setDeltaMovement(BOUNCE_TARGETS.get(uuid).multiply(1, -0.8, 1));
