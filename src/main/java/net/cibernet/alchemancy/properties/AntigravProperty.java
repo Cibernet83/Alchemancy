@@ -40,7 +40,7 @@ public class AntigravProperty extends Property
 			if(!targets.isEmpty())
 			{
 				var hitresult = new EntityHitResult(targets.getFirst());
-				if (net.neoforged.neoforge.event.EventHooks.onProjectileImpact(projectile, hitresult))
+				if (!net.neoforged.neoforge.event.EventHooks.onProjectileImpact(projectile, hitresult))
 					((ProjectileAccessor) projectile).invokeOnHit(hitresult);
 			}
 		}
