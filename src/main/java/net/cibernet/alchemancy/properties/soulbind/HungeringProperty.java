@@ -47,6 +47,6 @@ public class HungeringProperty extends Property {
 
 	@Override
 	public int getColor(ItemStack stack) {
-		return 0;
+		return 0xA53B64;
 	}
 }
