@@ -6,6 +6,7 @@ import net.cibernet.alchemancy.properties.AbstractTimerProperty;
 import net.cibernet.alchemancy.properties.special.RocketPoweredProperty;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.util.ColorUtils;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
@@ -55,6 +56,7 @@ public class VoidbornProperty extends AbstractTimerProperty {
 					InfusedPropertiesHelper.hasInnateProperty(stack, asHolder())) {
 				if (isBelowWorld(user))
 				{
+					playEffects(user);
 					resetStartTimestamp(stack);
 					if(stack.isDamageableItem() && user instanceof LivingEntity living)
 						stack.hurtAndBreak(20, living, EquipmentSlot.CHEST);
@@ -63,6 +65,12 @@ public class VoidbornProperty extends AbstractTimerProperty {
 				tickEntity(stack, user);
 			}
 		}
+	}
+
+	public static void playEffects(Entity target) {
+
+		if(target.level() instanceof ServerLevel serverLevel)
+			serverLevel.sendParticles(BlockVacuumProperty.PARTICLES, target.getX(), target.getY(0.5f), target.getZ(), 30, target.getBbWidth() * 0.5f, target.getBbHeight() * 0.25f, target.getBbWidth() * 0.25f, 0);
 	}
 
 	private void tickEntity(ItemStack stack, Entity entity) {
@@ -97,6 +105,7 @@ public class VoidbornProperty extends AbstractTimerProperty {
 
 	@Override
 	public boolean onEntityItemBelowWorld(ItemStack stack, ItemEntity itemEntity) {
+		playEffects(itemEntity);
 		resetStartTimestamp(stack);
 		return true;
 	}

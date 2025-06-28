@@ -79,7 +79,10 @@ public class VoidtouchProperty extends Property {
 
 		if(target.level().isClientSide() ||
 				(target instanceof LivingEntity living && InfusedPropertiesHelper.hasItemWithProperty(living, AlchemancyProperties.VOIDBORN, true)))
+		{
+			VoidbornProperty.playEffects(target);
 			return;
+		}
 
 		switch (target) {
 			case EnderDragon enderDragon -> destroyEnderDragon(enderDragon, user, directSource);
