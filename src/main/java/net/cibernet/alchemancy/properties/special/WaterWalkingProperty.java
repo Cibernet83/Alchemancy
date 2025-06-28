@@ -17,7 +17,8 @@ public class WaterWalkingProperty extends Property {
 	@Override
 	public void onEquippedTick(LivingEntity user, EquipmentSlot slot, ItemStack stack) {
 
-		if (!(slot == EquipmentSlot.FEET || slot == EquipmentSlot.BODY)) return;
+		if (!(slot == EquipmentSlot.FEET || slot == EquipmentSlot.BODY) || user.isShiftKeyDown() || user.isSwimming())
+			return;
 
 		if (user.level().getFluidState(user.getBlockPosBelowThatAffectsMyMovement()).is(Fluids.WATER)) {
 			user.setOnGround(true);
@@ -34,7 +35,7 @@ public class WaterWalkingProperty extends Property {
 
 	public static void playParticles(Entity user, double y, ItemStack stack, int amount) {
 		if (user.level() instanceof ServerLevel serverLevel)
-			serverLevel.sendParticles(SparklingProperty.getParticles(stack).orElse(ParticleTypes.SPLASH), user.getX(), y, user.getZ(), amount, user.getBbWidth() * 0.5f, 0, user.getBbWidth() * 0.5f, 0);
+			serverLevel.sendParticles(SparklingProperty.getParticles(stack).orElse(ParticleTypes.BUBBLE), user.getX(), y, user.getZ(), amount, user.getBbWidth() * 0.4f, 0, user.getBbWidth() * 0.4f, 0);
 	}
 
 	@Override
