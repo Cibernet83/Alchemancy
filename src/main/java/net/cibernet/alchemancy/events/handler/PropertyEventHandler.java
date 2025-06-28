@@ -3,6 +3,7 @@ package net.cibernet.alchemancy.events.handler;
 import net.cibernet.alchemancy.entity.ai.ScareGoal;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.network.S2CInventoryTickPacket;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.properties.special.AuxiliaryProperty;
 import net.cibernet.alchemancy.properties.voidborn.VoidtouchProperty;
@@ -14,6 +15,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
@@ -48,6 +50,7 @@ import net.neoforged.neoforge.event.entity.player.*;
 import net.neoforged.neoforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 import java.util.HashMap;
 import java.util.List;
@@ -173,6 +176,13 @@ public class PropertyEventHandler
 			ItemStack weapon = user.getMainHandItem();
 			InfusedPropertiesHelper.forEachProperty(weapon, propertyHolder -> propertyHolder.value().modifyKnockBackApplied(user, weapon, target, event));
 		}
+	}
+
+	@SubscribeEvent
+	public static void onPlayerTickPost(PlayerTickEvent.Post event)
+	{
+		if(event.getEntity() instanceof ServerPlayer serverPlayer)
+			S2CInventoryTickPacket.sendPacket(serverPlayer);
 	}
 
 	@SubscribeEvent
