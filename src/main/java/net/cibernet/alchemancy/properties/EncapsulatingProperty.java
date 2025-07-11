@@ -1,6 +1,7 @@
 package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.properties.data.IDataHolder;
+import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.cibernet.alchemancy.util.CommonUtils;
 import net.cibernet.alchemancy.util.InfusionPropertyDispenseBehavior;
 import net.minecraft.core.BlockPos;
@@ -108,18 +109,17 @@ public class EncapsulatingProperty extends Property implements IDataHolder<Encap
 		BlockState state = level.getBlockState(pos);
 		BlockEntity blockEntity = level.getBlockEntity(pos);
 
-		if(!state.isAir() && state.getDestroySpeed(level, pos) >= 0)
-		{
-			if(blockEntity != null)
-				level.removeBlockEntity(pos);
-			level.removeBlock(pos, false);
-			setData(stack, state, blockEntity);
+		if(state.isAir() || state.getDestroySpeed(level, pos) < 0 || state.is(AlchemancyTags.Blocks.CANNOT_ENCAPSULATE))
+			return false;
 
-			level.playSound(null, pos, state.getSoundType(level, pos, user).getBreakSound(), SoundSource.BLOCKS, 1.0f, 0.5f);
+		if(blockEntity != null)
+			level.removeBlockEntity(pos);
+		level.removeBlock(pos, false);
+		setData(stack, state, blockEntity);
 
-			return true;
-		}
-		return false;
+		level.playSound(null, pos, state.getSoundType(level, pos, user).getBreakSound(), SoundSource.BLOCKS, 1.0f, 0.5f);
+
+		return true;
 	}
 
 	public boolean attemptPlaceBlock(Level level, BlockPos pos, BlockData data, ItemStack source, @Nullable Entity user)
