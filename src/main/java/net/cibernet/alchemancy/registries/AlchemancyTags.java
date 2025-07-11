@@ -56,6 +56,7 @@ public class AlchemancyTags
 		public static final TagKey<Block> WAYFINDING_TARGETABLE = registerTag(Registries.BLOCK, "wayfinding_targetable");
 		public static final TagKey<Block> BROKEN_BY_HARDENED = registerTag(Registries.BLOCK, "broken_by_hardened");
 		public static final TagKey<Block> MAGNETIC_STICKS_TO = registerTag(Registries.BLOCK, "magnetic_sticks_to");
+		public static final TagKey<Block> CANNOT_ENCAPSULATE = registerTag(Registries.BLOCK, "cannot_encapsulate");
 	}
 
 	public static class DamageTypes
@@ -96,6 +97,7 @@ public class AlchemancyTags
 		public static final TagKey<Property> AFFECTED_BY_DIVINE_CLEANSE = registerTag(AlchemancyProperties.REGISTRY_KEY, "affected_by_divine_cleanse");
 		public static final TagKey<Property> CHANGES_GUST_JET_WIND_COLOR = registerTag(AlchemancyProperties.REGISTRY_KEY, "changes_gust_jet_wind_color");
 		public static final TagKey<Property> PREVENTS_ENDERMAN_AGGRO = registerTag(AlchemancyProperties.REGISTRY_KEY, "prevents_enderman_aggro");
+		public static final TagKey<Property> IGNORED_BY_INFUSION_FLASK = registerTag(AlchemancyProperties.REGISTRY_KEY, "ignored_by_infusion_flask");
 	}
 
 	public static class DataComponents

@@ -7,6 +7,9 @@ import net.cibernet.alchemancy.registries.AlchemancyEntities;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.minecraft.core.Holder;
+import net.minecraft.core.particles.ItemParticleOption;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -19,6 +22,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -46,18 +50,39 @@ public class InfusionFlask extends ThrowableItemProjectile implements ItemSuppli
 	protected void onHit(HitResult result) {
 		super.onHit(result);
 		if (!this.level().isClientSide) {
+
+			this.level().broadcastEntityEvent(this, (byte)3);
+
 			ItemStack itemstack = this.getItem();
-			var infusions = itemstack.is(AlchemancyTags.Items.DISABLES_INFUSION_ABILITIES) ? InfusedPropertiesHelper.getInfusedProperties(itemstack) : InfusedPropertiesHelper.getStoredProperties(itemstack);
+			var infusions = new ArrayList<>(itemstack.is(AlchemancyTags.Items.DISABLES_INFUSION_ABILITIES) ? InfusedPropertiesHelper.getInfusedProperties(itemstack) : InfusedPropertiesHelper.getStoredProperties(itemstack));
+			infusions.removeIf(propertyHolder -> propertyHolder.is(AlchemancyTags.Properties.IGNORED_BY_INFUSION_FLASK));
 
 			if (!infusions.isEmpty()) {
 				this.applySplash(infusions);
+				for (Holder<Property> infusion : infusions) {
+					this.level().levelEvent(2007, this.blockPosition(), infusion.value().getColor(itemstack));
+				}
 			}
 
-			for (Holder<Property> infusion : infusions) {
-				this.level().levelEvent(2007, this.blockPosition(), infusion.value().getColor(itemstack));
-			}
+
 			this.discard();
 		}
+	}
+
+	private ParticleOptions getParticle() {
+		ItemStack itemstack = this.getItem();
+		return new ItemParticleOption(ParticleTypes.ITEM, itemstack.isEmpty() ? getDefaultItem().getDefaultInstance() : itemstack);
+	}
+
+	public void handleEntityEvent(byte id) {
+		if (id == 3) {
+			ParticleOptions particleoptions = this.getParticle();
+
+			for(int i = 0; i < 8; ++i) {
+				this.level().addParticle(particleoptions, this.getX(), this.getY(), this.getZ(), 0.2 * random.nextDouble() - 0.1, random.nextDouble() * 0.2 + 0.05, 0.2 * random.nextDouble() - 0.1);
+			}
+		}
+
 	}
 
 	@Override
