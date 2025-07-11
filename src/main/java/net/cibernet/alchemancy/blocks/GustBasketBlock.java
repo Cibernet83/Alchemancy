@@ -181,7 +181,7 @@ public class GustBasketBlock extends DirectionalBlock {
 					facing.getStepX() * speed, facing.getStepY() * speed, facing.getStepZ() * speed);
 		}
 
-		if (random.nextFloat() > 0.05f && gustSounds <= 2)
+		if (random.nextFloat() < 0.15f && gustSounds <= 2)
 		{
 			level.playLocalSound(pos, AlchemancySoundEvents.GUST_BASKET.value(), SoundSource.BLOCKS, 0.25f, (float) (distance / DISTANCE), false);
 			gustSounds++;
