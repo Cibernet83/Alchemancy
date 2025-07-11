@@ -8,10 +8,8 @@ import net.cibernet.alchemancy.client.render.RootedItemRenderer;
 import net.cibernet.alchemancy.item.InnatePropertyItem;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
 import net.cibernet.alchemancy.properties.IncreaseInfuseSlotsProperty;
-import net.cibernet.alchemancy.registries.AlchemancyBlockEntities;
-import net.cibernet.alchemancy.registries.AlchemancyEntities;
-import net.cibernet.alchemancy.registries.AlchemancyItems;
-import net.cibernet.alchemancy.registries.AlchemancyProperties;
+import net.cibernet.alchemancy.registries.*;
+import net.cibernet.alchemancy.util.ColorUtils;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -83,16 +81,25 @@ public class AlchemancyClient
 	{
 		event.register(((stack, tintIndex) ->
 		{
-			List<Integer> colors = stack.getOrDefault(AlchemancyItems.Components.STORED_PROPERTIES, InfusedPropertiesComponent.EMPTY).properties().stream().map(propertyHolder -> propertyHolder.value().getColor(stack)).toList();
-			return colors.isEmpty() ? -1 : FastColor.ARGB32.color(255, colors.get((int) Math.abs((System.currentTimeMillis() / 2000) % colors.size())));
+			int[] colors = stack.getOrDefault(AlchemancyItems.Components.STORED_PROPERTIES, InfusedPropertiesComponent.EMPTY).properties().stream().map(propertyHolder -> propertyHolder.value().getColor(stack)).mapToInt(Integer::intValue).toArray();
+			return colors.length == 0 ? -1 : FastColor.ARGB32.color(255, ColorUtils.interpolateColorsAndWait(1, 2, colors));
 		}), AlchemancyItems.PROPERTY_CAPSULE);
 
 		event.register(((stack, tintIndex) -> {
 			if(tintIndex != 1)
 				return -1;
-			List<Integer> colors = stack.getOrDefault(AlchemancyItems.Components.INFUSED_PROPERTIES, InfusedPropertiesComponent.EMPTY).properties().stream().filter(p -> !(p.value() instanceof IncreaseInfuseSlotsProperty)).map(propertyHolder -> propertyHolder.value().getColor(stack)).toList();
-			return colors.isEmpty() ? -1 : FastColor.ARGB32.color(255, colors.get((int) Math.abs((System.currentTimeMillis() / 2000) % colors.size())));
-		}), AlchemancyItems.IRON_RING, AlchemancyItems.INFUSION_FLASK);
+			int[] colors = stack.getOrDefault(AlchemancyItems.Components.INFUSED_PROPERTIES, InfusedPropertiesComponent.EMPTY).properties().stream()
+					.filter(p -> !p.is(AlchemancyTags.Properties.SLOTLESS)).map(propertyHolder -> propertyHolder.value().getColor(stack)).mapToInt(Integer::intValue).toArray();
+			return colors.length == 0 ? -1 : FastColor.ARGB32.color(255, ColorUtils.interpolateColorsAndWait(1, 2, colors));
+		}), AlchemancyItems.IRON_RING);
+
+		event.register(((stack, tintIndex) -> {
+			if(tintIndex != 1)
+				return -1;
+			int[] colors = stack.getOrDefault(AlchemancyItems.Components.INFUSED_PROPERTIES, InfusedPropertiesComponent.EMPTY).properties()
+					.stream().filter(p -> !p.is(AlchemancyTags.Properties.IGNORED_BY_INFUSION_FLASK)).map(propertyHolder -> propertyHolder.value().getColor(stack)).mapToInt(Integer::intValue).toArray();
+			return colors.length == 0 ? -1 : FastColor.ARGB32.color(255, ColorUtils.interpolateColorsAndWait(1, 2, colors));
+		}), AlchemancyItems.INFUSION_FLASK);
 
 		event.register(((stack, tintIndex) -> tintIndex == 1 ? AlchemancyProperties.TINTED_LENS.value().getColor(stack) : -1),
 				AlchemancyItems.TINTED_GLASSES);
