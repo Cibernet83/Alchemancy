@@ -1,6 +1,8 @@
 package net.cibernet.alchemancy.properties.special;
 
+import net.cibernet.alchemancy.blocks.blockentities.RootedItemBlockEntity;
 import net.cibernet.alchemancy.properties.Property;
+import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -41,6 +43,13 @@ public class ItemMagnetProperty extends Property
 	public void onEntityItemTick(ItemStack stack, ItemEntity projectile) {
 		for (ItemEntity itemEntity : projectile.level().getEntitiesOfClass(ItemEntity.class, projectile.getBoundingBox().inflate(RADIUS))) {
 			itemEntity.setPos(projectile.position());
+		}
+	}
+
+	@Override
+	public void onRootedTick(RootedItemBlockEntity root, List<LivingEntity> entitiesInBounds) {
+		for (ItemEntity itemEntity : root.getLevel().getEntitiesOfClass(ItemEntity.class, CommonUtils.boundingBoxAroundPoint(root.getBlockPos().getCenter(), (float) RADIUS))) {
+			itemEntity.setPos(root.getBlockPos().getCenter());
 		}
 	}
 
