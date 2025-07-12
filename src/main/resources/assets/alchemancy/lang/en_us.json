@@ -511,6 +511,7 @@
   "dataPack.alchemancy.infused_loot": "Infused Loot",
   "dataPack.alchemancy.infused_loot.description": "Gives a chance for mob equipment and chest loot to have Infused Properties",
 
+  "screen.infusion_codex.unlocked_counter": "  %s/%s",
   "screen.infusion_codex.search_bar": "Search...",
   "screen.infusion_codex.inspecting": "Inspecting Item",
   "screen.infusion_codex.locked_entry": "???",

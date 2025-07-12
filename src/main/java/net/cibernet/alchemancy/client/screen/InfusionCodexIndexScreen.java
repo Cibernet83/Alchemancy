@@ -19,6 +19,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
@@ -40,6 +41,9 @@ public class InfusionCodexIndexScreen extends Screen {
 
 	private SortOrder sortOrder = SortOrder.ALPHABETICAL;
 
+	private int unlockedEntries = 0;
+	private ObjectArrayList<Map.Entry<Holder<Property>, CodexEntryReloadListenener.CodexEntry>> entries;
+
 	public InfusionCodexIndexScreen(Component title) {
 		super(title);
 		inspectedItem = ItemStack.EMPTY;
@@ -60,6 +64,8 @@ public class InfusionCodexIndexScreen extends Screen {
 	@Override
 	protected void init() {
 
+		generateEntries();
+
 		layout = new HeaderAndFooterLayout(this, 48, 32);
 		LinearLayout footer = layout.addToFooter(LinearLayout.vertical()).spacing(5);
 		footer.defaultCellSetting().alignHorizontallyCenter();
@@ -68,9 +74,17 @@ public class InfusionCodexIndexScreen extends Screen {
 		LinearLayout header = layout.addToHeader(LinearLayout.vertical()).spacing(2);
 		if (!inspectedItem.isEmpty())
 			header.addChild(new StringWidget(200, 9, Component.translatable("screen.infusion_codex.inspecting").withStyle(ChatFormatting.GRAY), this.font).alignCenter());
-		header.addChild(new StringWidget(200, inspectedItem.isEmpty() ? 18 : 9, title, this.font).alignCenter());
-		LinearLayout searchDiv = header.addChild(LinearLayout.horizontal());
 
+
+		MutableComponent title = Component.empty().append(this.title);
+		if(inspectedItem.isEmpty() && !InfusionCodexSaveData.bypassesUnlocks())
+			title = title.append(Component.translatable("screen.infusion_codex.unlocked_counter", unlockedEntries, entries.size())
+					.withStyle(unlockedEntries == entries.size() ? ChatFormatting.GOLD : ChatFormatting.WHITE));
+
+		header.addChild(new StringWidget(200, !inspectedItem.isEmpty() ? 18 : 9, title, this.font).alignCenter());
+
+
+		LinearLayout searchDiv = header.addChild(LinearLayout.horizontal());
 		if (searchBar == null) {
 			searchBar = new EditBox(font, 200, 16, Component.translatable("narrator.infusion_codex.search_bar")) {
 				@Override
@@ -91,6 +105,7 @@ public class InfusionCodexIndexScreen extends Screen {
 			};
 			searchBar.setHint(Component.translatable("screen.infusion_codex.search_bar").withStyle(ChatFormatting.ITALIC).withStyle(ChatFormatting.GRAY));
 		}
+
 		searchDiv.addChild(searchBar);
 		searchDiv.addChild(Button.builder(sortOrder.buttonLabel, (button) -> {
 			sortOrder = SortOrder.values()[(sortOrder.ordinal() + 1) % SortOrder.values().length];
@@ -103,6 +118,21 @@ public class InfusionCodexIndexScreen extends Screen {
 
 		updatePropertyList();
 		layout.arrangeElements();
+	}
+
+	private void generateEntries() {
+
+		var entrySet = inspectedItem.isEmpty() ? CodexEntryReloadListenener.getEntries() : InfusionCodexProperty.inspectItem(minecraft.player, inspectedItem);
+
+		var objectarraylist = new ObjectArrayList<>(entrySet.entrySet());
+		objectarraylist.sort(Comparator.comparing(entry -> entry.getKey().getKey()));
+		objectarraylist.sort((o1, o2) -> sortOrder.sortFunction.compare(o1.getKey(), o2.getKey()));
+		objectarraylist.sort(Comparator.comparing(entry -> !InfusionCodexSaveData.isUnlocked(entry.getKey())));
+
+		objectarraylist.removeIf(entry -> !InfusionCodexSaveData.isUnlocked(entry.getKey()) && entry.getKey().is(AlchemancyTags.Properties.CODEX_HIDDEN));
+
+		unlockedEntries = (int) objectarraylist.stream().filter(entry -> InfusionCodexSaveData.isUnlocked(entry.getKey())).count();
+		entries = objectarraylist;
 	}
 
 	private void updatePropertyList() {
@@ -154,22 +184,10 @@ public class InfusionCodexIndexScreen extends Screen {
 		public PropertyList(Minecraft minecraft) {
 			super(minecraft, InfusionCodexIndexScreen.this.width, InfusionCodexIndexScreen.this.height - 33 - 58, 33, 16);
 
-			var entrySet = inspectedItem.isEmpty() ? CodexEntryReloadListenener.getEntries() : InfusionCodexProperty.inspectItem(minecraft.player, inspectedItem);
-
-			var objectarraylist = new ObjectArrayList<>(entrySet.entrySet().stream()
-					.filter(propertyHolder -> propertyHolder.getKey().value().getName().getString().toLowerCase().contains(searchBar.getValue().toLowerCase()))
-					.toList());
-			objectarraylist.sort(Comparator.comparing(entry -> entry.getKey().getKey()));
-			objectarraylist.sort((o1, o2) -> sortOrder.sortFunction.compare(o1.getKey(), o2.getKey()));
-			objectarraylist.sort(Comparator.comparing(entry -> !InfusionCodexSaveData.isUnlocked(entry.getKey())));
-
-			objectarraylist.removeIf(entry -> !InfusionCodexSaveData.isUnlocked(entry.getKey()) && entry.getKey().is(AlchemancyTags.Properties.CODEX_HIDDEN));
-
-			for (Map.Entry<Holder<Property>, CodexEntryReloadListenener.CodexEntry> propertyHolder : objectarraylist) {
-				this.addEntry(InfusionCodexSaveData.isUnlocked(propertyHolder.getKey()) ?
-						new PropertyList.Entry(propertyHolder.getKey(), propertyHolder.getValue()) :
-						new PropertyList.LockedEntry());
-			}
+			entries.stream().filter(propertyHolder -> propertyHolder.getKey().value().getName().getString().toLowerCase().contains(searchBar.getValue().toLowerCase()))
+					.forEach(propertyHolder -> this.addEntry(InfusionCodexSaveData.isUnlocked(propertyHolder.getKey()) ?
+							new Entry(propertyHolder.getKey(), propertyHolder.getValue()) :
+							new LockedEntry()));
 		}
 
 		@Override
