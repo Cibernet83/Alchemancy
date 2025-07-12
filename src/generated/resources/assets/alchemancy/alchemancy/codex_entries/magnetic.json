@@ -1,0 +1,13 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:magnetic.flavor"
+  },
+  "functions": [
+    "while_using",
+    "while_rooted",
+    "while_equipped",
+    "while_worn_boots",
+    "while_worn_middle",
+    "while_worn_helmet"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:world_obliterator.flavor"
+  },
+  "functions": [
+    "while_using",
+    "stacked_on"
+  ],
+  "innate": [
+    "alchemancy:black_hole_pickaxe",
+    "alchemancy:black_hole_axe",
+    "alchemancy:black_hole_shovel",
+    "alchemancy:black_hole_hoe"
+  ]
+}

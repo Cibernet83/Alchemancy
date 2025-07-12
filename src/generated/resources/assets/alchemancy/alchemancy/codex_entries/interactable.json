@@ -1,0 +1,12 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:interactable.flavor"
+  },
+  "functions": [
+    "when_used",
+    "when_used_entity",
+    "while_rooted",
+    "when_shot_from_dispenser",
+    "when_shot"
+  ]
+}

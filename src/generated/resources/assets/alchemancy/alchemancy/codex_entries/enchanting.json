@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:enchanting.flavor"
+  },
+  "functions": [
+    "attribute_modifier",
+    "other_effects"
+  ]
+}

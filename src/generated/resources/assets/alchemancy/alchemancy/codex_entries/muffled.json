@@ -1,0 +1,14 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:muffled.flavor"
+  },
+  "functions": [
+    "while_equipped",
+    "while_held_mainhand",
+    "while_held_offhand",
+    "while_worn_helmet",
+    "while_worn_chestplate",
+    "while_worn_leggings",
+    "while_worn_boots"
+  ]
+}

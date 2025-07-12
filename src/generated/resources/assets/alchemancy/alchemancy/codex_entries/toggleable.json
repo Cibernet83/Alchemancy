@@ -1,0 +1,15 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:toggleable.flavor"
+  },
+  "functions": [
+    "when_used",
+    "stacked_on"
+  ],
+  "innate": [
+    "alchemancy:eternal_glow_ring",
+    "alchemancy:phasing_ring",
+    "alchemancy:friendship_ring",
+    "alchemancy:attraction_ring"
+  ]
+}

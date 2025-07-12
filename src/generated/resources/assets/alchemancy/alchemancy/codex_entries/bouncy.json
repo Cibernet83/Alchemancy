@@ -6,6 +6,7 @@
     "on_attack",
     "when_hit_equipped",
     "activate",
-    "on_fall"
+    "on_fall",
+    "when_shot"
   ]
 }

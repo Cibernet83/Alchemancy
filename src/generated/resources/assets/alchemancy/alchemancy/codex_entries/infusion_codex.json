@@ -5,5 +5,8 @@
   "functions": [
     "when_used",
     "stacked_over"
+  ],
+  "innate": [
+    "alchemancy:infusion_codex"
   ]
 }

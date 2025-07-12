@@ -1,0 +1,13 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:hollow.flavor"
+  },
+  "functions": [
+    "pick_up_while_equipped",
+    "when_used",
+    "stacked_over",
+    "when_shot_from_dispenser",
+    "while_rooted",
+    "other_effects"
+  ]
+}

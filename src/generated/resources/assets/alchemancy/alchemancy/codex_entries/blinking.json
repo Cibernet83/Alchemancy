@@ -5,5 +5,8 @@
   "functions": [
     "while_worn",
     "activate"
+  ],
+  "innate": [
+    "alchemancy:shifting_lightning_belt"
   ]
 }

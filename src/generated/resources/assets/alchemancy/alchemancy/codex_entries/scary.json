@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:scary.flavor"
+  },
+  "functions": [
+    "while_worn_helmet",
+    "while_equipped"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:kinetic_recharge.flavor"
+  },
+  "functions": [
+    "while_equipped"
+  ],
+  "innate": [
+    "alchemancy:shifting_lightning_belt",
+    "alchemancy:mechanical_boots"
+  ]
+}

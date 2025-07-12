@@ -1,0 +1,11 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:vacuuming.flavor"
+  },
+  "functions": [
+    "while_using",
+    "when_shot",
+    "when_dropped",
+    "while_rooted"
+  ]
+}

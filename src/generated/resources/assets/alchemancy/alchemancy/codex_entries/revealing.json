@@ -4,5 +4,8 @@
   },
   "functions": [
     "while_worn_helmet"
+  ],
+  "innate": [
+    "alchemancy:property_visor"
   ]
 }

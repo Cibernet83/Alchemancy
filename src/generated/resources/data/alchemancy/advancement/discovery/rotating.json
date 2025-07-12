@@ -1,0 +1,36 @@
+{
+  "parent": "alchemancy:discovery/root",
+  "criteria": {
+    "discover_property": {
+      "conditions": {
+        "property": "alchemancy:rotating"
+      },
+      "trigger": "alchemancy:discover_property"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "translate": "advancements.alchemancy:discovery.discover.description"
+    },
+    "hidden": true,
+    "icon": {
+      "components": {
+        "alchemancy:stored_properties": [
+          "alchemancy:rotating"
+        ]
+      },
+      "count": 1,
+      "id": "alchemancy:property_capsule"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "property.alchemancy.rotating"
+    }
+  },
+  "requirements": [
+    [
+      "discover_property"
+    ]
+  ]
+}

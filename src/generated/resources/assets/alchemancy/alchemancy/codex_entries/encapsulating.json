@@ -1,0 +1,10 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:encapsulating.flavor"
+  },
+  "functions": [
+    "when_used_block",
+    "when_shot_from_dispenser",
+    "other_effects"
+  ]
+}

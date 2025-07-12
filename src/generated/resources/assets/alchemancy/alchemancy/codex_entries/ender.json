@@ -1,0 +1,10 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:ender.flavor"
+  },
+  "functions": [
+    "while_equipped",
+    "activate",
+    "when_shot"
+  ]
+}

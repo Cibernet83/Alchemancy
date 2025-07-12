@@ -1,0 +1,8 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:undying.flavor"
+  },
+  "functions": [
+    "durability_consumed"
+  ]
+}

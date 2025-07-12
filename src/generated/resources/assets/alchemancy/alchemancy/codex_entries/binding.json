@@ -4,5 +4,8 @@
   },
   "functions": [
     "stacked_over"
+  ],
+  "innate": [
+    "alchemancy:binding_key"
   ]
 }

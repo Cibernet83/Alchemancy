@@ -1,0 +1,8 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:edible.flavor"
+  },
+  "functions": [
+    "when_used"
+  ]
+}

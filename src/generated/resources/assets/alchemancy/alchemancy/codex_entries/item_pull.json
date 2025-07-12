@@ -1,0 +1,14 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:item_pull.flavor"
+  },
+  "functions": [
+    "while_equipped",
+    "when_shot",
+    "when_dropped",
+    "while_rooted"
+  ],
+  "innate": [
+    "alchemancy:attraction_ring"
+  ]
+}

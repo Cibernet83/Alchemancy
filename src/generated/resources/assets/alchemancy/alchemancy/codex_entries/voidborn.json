@@ -1,0 +1,14 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:voidborn.flavor"
+  },
+  "functions": [
+    "while_equipped",
+    "when_dropped",
+    "other_effects"
+  ],
+  "innate": [
+    "alchemancy:void_pearl",
+    "alchemancy:voidless_ring"
+  ]
+}

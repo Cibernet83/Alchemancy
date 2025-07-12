@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:hungering.flavor"
+  },
+  "functions": [
+    "while_held",
+    "while_equipped"
+  ]
+}

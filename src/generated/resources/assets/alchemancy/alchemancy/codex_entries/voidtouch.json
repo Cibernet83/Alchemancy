@@ -1,0 +1,11 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:voidtouch.flavor"
+  },
+  "functions": [
+    "on_attack"
+  ],
+  "innate": [
+    "alchemancy:pocket_black_hole"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:musical.flavor"
+  },
+  "functions": [
+    "when_used",
+    "while_worn_boots"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:auxiliary.flavor"
+  },
+  "functions": [
+    "other_effects"
+  ],
+  "innate": [
+    "alchemancy:pearlescent_ring",
+    "alchemancy:eternal_glow_ring",
+    "alchemancy:phasing_ring",
+    "alchemancy:undying_ring",
+    "alchemancy:friendship_ring",
+    "alchemancy:attraction_ring",
+    "alchemancy:voidless_ring",
+    "alchemancy:sparkling_band"
+  ]
+}

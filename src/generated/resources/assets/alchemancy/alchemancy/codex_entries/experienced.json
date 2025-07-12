@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:experienced.flavor"
+  },
+  "functions": [
+    "durability_consumed",
+    "on_destroy"
+  ]
+}

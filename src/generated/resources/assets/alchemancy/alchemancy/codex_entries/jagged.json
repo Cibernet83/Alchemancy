@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:jagged.flavor"
+  },
+  "functions": [
+    "when_hit_worn_or_using",
+    "pick_up"
+  ]
+}

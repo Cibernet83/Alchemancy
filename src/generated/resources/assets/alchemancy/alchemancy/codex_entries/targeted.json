@@ -1,0 +1,11 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:targeted.flavor"
+  },
+  "functions": [
+    "while_equipped",
+    "when_dropped",
+    "while_rooted",
+    "when_shot"
+  ]
+}

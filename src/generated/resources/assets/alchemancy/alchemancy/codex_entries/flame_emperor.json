@@ -7,5 +7,9 @@
     "modify_damage",
     "on_attack",
     "block_destroyed"
+  ],
+  "innate": [
+    "alchemancy:hot_rod",
+    "alchemancy:molten_core_perforator"
   ]
 }

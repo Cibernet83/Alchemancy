@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:conductive.flavor"
+  },
+  "functions": [
+    "receive_damage_equipped",
+    "while_equipped"
+  ]
+}

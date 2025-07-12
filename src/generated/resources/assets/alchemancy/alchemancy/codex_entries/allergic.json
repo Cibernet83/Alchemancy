@@ -1,0 +1,8 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:allergic.flavor"
+  },
+  "functions": [
+    "while_equipped"
+  ]
+}

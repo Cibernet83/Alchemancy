@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:fungal.flavor"
+  },
+  "functions": [
+    "activate",
+    "receive_damage_equipped"
+  ]
+}

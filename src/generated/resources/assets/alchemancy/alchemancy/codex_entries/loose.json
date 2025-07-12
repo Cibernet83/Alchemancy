@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:loose.flavor"
+  },
+  "functions": [
+    "when_used_block",
+    "other_effects"
+  ]
+}

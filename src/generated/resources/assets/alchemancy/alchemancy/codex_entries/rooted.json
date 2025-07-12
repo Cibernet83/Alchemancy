@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:rooted.flavor"
+  },
+  "functions": [
+    "when_used_block",
+    "while_rooted"
+  ]
+}

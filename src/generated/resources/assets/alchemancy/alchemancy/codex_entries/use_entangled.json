@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:use_entangled.flavor"
+  },
+  "functions": [
+    "when_used",
+    "stacked_on"
+  ]
+}

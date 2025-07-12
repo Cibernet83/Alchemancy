@@ -1,0 +1,8 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:living_battery.flavor"
+  },
+  "functions": [
+    "other_effects"
+  ]
+}

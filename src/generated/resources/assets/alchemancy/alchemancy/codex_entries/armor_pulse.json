@@ -1,0 +1,8 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:armor_pulse.flavor"
+  },
+  "functions": [
+    "when_hit_worn_or_using"
+  ]
+}

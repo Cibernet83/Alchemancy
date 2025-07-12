@@ -1,0 +1,13 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:sticky.flavor"
+  },
+  "functions": [
+    "while_worn_boots",
+    "while_worn_middle",
+    "while_worn_helmet",
+    "when_shot_from_dispenser",
+    "while_rooted",
+    "other_effects"
+  ]
+}

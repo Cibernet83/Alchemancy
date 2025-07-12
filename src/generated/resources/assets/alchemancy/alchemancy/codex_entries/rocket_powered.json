@@ -5,5 +5,9 @@
   "functions": [
     "while_using",
     "while_worn_boots"
+  ],
+  "innate": [
+    "alchemancy:rocket_powered_hammer",
+    "alchemancy:barrels_warhammer"
   ]
 }

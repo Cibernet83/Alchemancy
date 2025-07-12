@@ -5,5 +5,8 @@
   "functions": [
     "when_used",
     "when_shot_from_dispenser"
+  ],
+  "innate": [
+    "alchemancy:pocket_black_hole"
   ]
 }

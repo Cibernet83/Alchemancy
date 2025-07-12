@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:jump_entangled.flavor"
+  },
+  "functions": [
+    "while_equipped",
+    "stacked_on"
+  ]
+}

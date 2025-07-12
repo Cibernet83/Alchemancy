@@ -1,0 +1,8 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:random.flavor"
+  },
+  "functions": [
+    "other_effects"
+  ]
+}

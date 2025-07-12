@@ -1,0 +1,11 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:sparking.flavor"
+  },
+  "functions": [
+    "receive_damage_equipped",
+    "activate",
+    "when_shot",
+    "on_destroy"
+  ]
+}

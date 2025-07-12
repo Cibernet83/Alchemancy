@@ -1,0 +1,8 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:running_start.flavor"
+  },
+  "functions": [
+    "while_equipped"
+  ]
+}

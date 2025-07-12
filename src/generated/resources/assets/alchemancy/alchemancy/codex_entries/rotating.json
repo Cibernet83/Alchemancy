@@ -1,0 +1,12 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:rotating.flavor"
+  },
+  "functions": [
+    "when_used_block",
+    "visual"
+  ],
+  "innate": [
+    "alchemancy:spinner_spanner"
+  ]
+}

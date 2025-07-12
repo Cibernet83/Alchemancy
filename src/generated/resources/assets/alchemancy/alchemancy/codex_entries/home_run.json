@@ -6,5 +6,9 @@
     "modify_damage",
     "activate_by_block",
     "attribute_modifier"
+  ],
+  "innate": [
+    "alchemancy:home_run_bat",
+    "alchemancy:bada_bat"
   ]
 }

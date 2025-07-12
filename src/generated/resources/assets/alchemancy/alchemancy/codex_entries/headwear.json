@@ -5,5 +5,9 @@
   "functions": [
     "other_effects",
     "when_shot_from_dispenser"
+  ],
+  "innate": [
+    "alchemancy:property_visor",
+    "alchemancy:tinted_glasses"
   ]
 }

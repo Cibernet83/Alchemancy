@@ -1,0 +1,11 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:kinetic_grab.flavor"
+  },
+  "functions": [
+    "when_used_entity"
+  ],
+  "innate": [
+    "alchemancy:telekinetic_glove"
+  ]
+}

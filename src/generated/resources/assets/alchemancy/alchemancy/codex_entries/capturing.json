@@ -1,0 +1,11 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:capturing.flavor"
+  },
+  "functions": [
+    "when_used_entity",
+    "when_shot",
+    "when_shot_from_dispenser",
+    "other_effects"
+  ]
+}

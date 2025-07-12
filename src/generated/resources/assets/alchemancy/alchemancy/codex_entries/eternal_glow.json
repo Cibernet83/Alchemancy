@@ -4,5 +4,8 @@
   },
   "functions": [
     "while_equipped"
+  ],
+  "innate": [
+    "alchemancy:eternal_glow_ring"
   ]
 }

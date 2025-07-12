@@ -1,0 +1,11 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:wave_rider.flavor"
+  },
+  "functions": [
+    "while_worn_boots"
+  ],
+  "innate": [
+    "alchemancy:tidewalker_treads"
+  ]
+}

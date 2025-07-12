@@ -1,0 +1,11 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:extended.flavor"
+  },
+  "functions": [
+    "while_held_mainhand",
+    "while_worn_boots",
+    "while_using",
+    "attribute_modifier"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:dripping.flavor"
+  },
+  "functions": [
+    "on_attack",
+    "receive_damage_worn"
+  ]
+}

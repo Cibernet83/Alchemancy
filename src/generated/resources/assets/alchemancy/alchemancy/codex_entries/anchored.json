@@ -1,0 +1,10 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:anchored.flavor"
+  },
+  "functions": [
+    "while_worn",
+    "when_dropped",
+    "when_shot"
+  ]
+}

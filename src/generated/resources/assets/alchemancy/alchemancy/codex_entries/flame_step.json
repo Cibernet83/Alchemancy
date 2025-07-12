@@ -4,5 +4,8 @@
   },
   "functions": [
     "while_worn_boots"
+  ],
+  "innate": [
+    "alchemancy:flamewakers"
   ]
 }

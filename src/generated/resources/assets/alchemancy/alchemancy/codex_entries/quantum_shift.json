@@ -1,0 +1,12 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:quantum_shift.flavor"
+  },
+  "functions": [
+    "activate",
+    "stacked_over"
+  ],
+  "innate": [
+    "alchemancy:quantum_spanner"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:tinted_lens.flavor"
+  },
+  "functions": [
+    "while_worn_helmet"
+  ],
+  "innate": [
+    "alchemancy:tinted_glasses"
+  ]
+}

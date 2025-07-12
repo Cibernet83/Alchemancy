@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:sweet.flavor"
+  },
+  "functions": [
+    "while_equipped",
+    "attribute_modifier"
+  ]
+}

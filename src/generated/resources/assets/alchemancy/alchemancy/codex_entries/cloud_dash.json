@@ -1,0 +1,11 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:cloud_dash.flavor"
+  },
+  "functions": [
+    "while_equipped"
+  ],
+  "innate": [
+    "alchemancy:nimbus_belt"
+  ]
+}

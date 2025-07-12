@@ -4,5 +4,8 @@
   },
   "functions": [
     "when_used_block"
+  ],
+  "innate": [
+    "alchemancy:vaultpick"
   ]
 }

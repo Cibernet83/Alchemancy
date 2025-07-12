@@ -1,0 +1,10 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:wise.flavor"
+  },
+  "functions": [
+    "while_held_mainhand",
+    "while_worn",
+    "attribute_modifier"
+  ]
+}

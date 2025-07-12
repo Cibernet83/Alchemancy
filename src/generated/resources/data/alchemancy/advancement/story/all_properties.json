@@ -19,6 +19,12 @@
       },
       "trigger": "alchemancy:discover_property"
     },
+    "discover_alchemancy:anchored": {
+      "conditions": {
+        "property": "alchemancy:anchored"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
     "discover_alchemancy:antigrav": {
       "conditions": {
         "property": "alchemancy:antigrav"
@@ -55,6 +61,12 @@
       },
       "trigger": "alchemancy:discover_property"
     },
+    "discover_alchemancy:athletic": {
+      "conditions": {
+        "property": "alchemancy:athletic"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
     "discover_alchemancy:awakened": {
       "conditions": {
         "property": "alchemancy:awakened"
@@ -64,12 +76,6 @@
     "discover_alchemancy:awkward": {
       "conditions": {
         "property": "alchemancy:awkward"
-      },
-      "trigger": "alchemancy:discover_property"
-    },
-    "discover_alchemancy:bada_quip": {
-      "conditions": {
-        "property": "alchemancy:bada_quip"
       },
       "trigger": "alchemancy:discover_property"
     },
@@ -142,6 +148,12 @@
     "discover_alchemancy:capturing": {
       "conditions": {
         "property": "alchemancy:capturing"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:ceaseless_void": {
+      "conditions": {
+        "property": "alchemancy:ceaseless_void"
       },
       "trigger": "alchemancy:discover_property"
     },
@@ -523,6 +535,12 @@
       },
       "trigger": "alchemancy:discover_property"
     },
+    "discover_alchemancy:hungering": {
+      "conditions": {
+        "property": "alchemancy:hungering"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
     "discover_alchemancy:hydrophobic": {
       "conditions": {
         "property": "alchemancy:hydrophobic"
@@ -559,6 +577,12 @@
       },
       "trigger": "alchemancy:discover_property"
     },
+    "discover_alchemancy:item_pull": {
+      "conditions": {
+        "property": "alchemancy:item_pull"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
     "discover_alchemancy:jagged": {
       "conditions": {
         "property": "alchemancy:jagged"
@@ -586,6 +610,12 @@
     "discover_alchemancy:launching": {
       "conditions": {
         "property": "alchemancy:launching"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:lazy": {
+      "conditions": {
+        "property": "alchemancy:lazy"
       },
       "trigger": "alchemancy:discover_property"
     },
@@ -790,6 +820,18 @@
     "discover_alchemancy:rooted": {
       "conditions": {
         "property": "alchemancy:rooted"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:rotating": {
+      "conditions": {
+        "property": "alchemancy:rotating"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:running_start": {
+      "conditions": {
+        "property": "alchemancy:running_start"
       },
       "trigger": "alchemancy:discover_property"
     },
@@ -1069,6 +1111,12 @@
       },
       "trigger": "alchemancy:discover_property"
     },
+    "discover_alchemancy:voidtouch": {
+      "conditions": {
+        "property": "alchemancy:voidtouch"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
     "discover_alchemancy:warding": {
       "conditions": {
         "property": "alchemancy:warding"
@@ -1247,6 +1295,12 @@
       "discover_alchemancy:air_walker"
     ],
     [
+      "discover_alchemancy:athletic"
+    ],
+    [
+      "discover_alchemancy:anchored"
+    ],
+    [
       "discover_alchemancy:mining"
     ],
     [
@@ -1362,6 +1416,9 @@
     ],
     [
       "discover_alchemancy:armor_pulse"
+    ],
+    [
+      "discover_alchemancy:running_start"
     ],
     [
       "discover_alchemancy:levitating"
@@ -1493,7 +1550,16 @@
       "discover_alchemancy:phasing"
     ],
     [
+      "discover_alchemancy:hungering"
+    ],
+    [
       "discover_alchemancy:voidborn"
+    ],
+    [
+      "discover_alchemancy:ceaseless_void"
+    ],
+    [
+      "discover_alchemancy:voidtouch"
     ],
     [
       "discover_alchemancy:kinetic_grab"
@@ -1592,6 +1658,9 @@
       "discover_alchemancy:kinetic_recharge"
     ],
     [
+      "discover_alchemancy:lazy"
+    ],
+    [
       "discover_alchemancy:revealed"
     ],
     [
@@ -1655,10 +1724,13 @@
       "discover_alchemancy:warped"
     ],
     [
+      "discover_alchemancy:item_pull"
+    ],
+    [
       "discover_alchemancy:chromatize"
     ],
     [
-      "discover_alchemancy:bada_quip"
+      "discover_alchemancy:rotating"
     ],
     [
       "discover_alchemancy:infusion_codex"

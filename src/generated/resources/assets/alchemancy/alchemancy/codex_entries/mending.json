@@ -1,0 +1,11 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:mending.flavor"
+  },
+  "functions": [
+    "modify_damage",
+    "while_rooted",
+    "while_worn",
+    "receive_damage_worn"
+  ]
+}

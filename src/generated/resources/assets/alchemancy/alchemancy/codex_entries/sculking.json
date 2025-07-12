@@ -1,0 +1,8 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:sculking.flavor"
+  },
+  "functions": [
+    "on_kill"
+  ]
+}

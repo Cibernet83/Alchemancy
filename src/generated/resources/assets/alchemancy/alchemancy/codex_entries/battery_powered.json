@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:battery_powered.flavor"
+  },
+  "functions": [
+    "while_in_inventory",
+    "other_effects"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:divine_cleanse.flavor"
+  },
+  "functions": [
+    "stacked_over"
+  ],
+  "innate": [
+    "alchemancy:divine_cloth"
+  ]
+}

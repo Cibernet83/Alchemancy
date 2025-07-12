@@ -1,0 +1,10 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:sensitive.flavor"
+  },
+  "functions": [
+    "while_equipped",
+    "while_rooted",
+    "when_shot"
+  ]
+}

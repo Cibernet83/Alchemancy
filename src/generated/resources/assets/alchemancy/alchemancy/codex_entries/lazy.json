@@ -1,0 +1,10 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:lazy.flavor"
+  },
+  "functions": [
+    "while_equipped",
+    "when_dropped",
+    "when_shot"
+  ]
+}

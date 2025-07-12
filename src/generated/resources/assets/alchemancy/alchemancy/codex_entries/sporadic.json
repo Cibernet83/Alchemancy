@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:sporadic.flavor"
+  },
+  "functions": [
+    "while_equipped",
+    "while_rooted"
+  ]
+}

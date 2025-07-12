@@ -5,5 +5,9 @@
   "functions": [
     "modify_damage",
     "on_fall"
+  ],
+  "innate": [
+    "alchemancy:rocket_powered_hammer",
+    "alchemancy:barrels_warhammer"
   ]
 }

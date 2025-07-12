@@ -1,0 +1,11 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:air_walker.flavor"
+  },
+  "functions": [
+    "while_worn_boots"
+  ],
+  "innate": [
+    "alchemancy:hardlight_steps"
+  ]
+}

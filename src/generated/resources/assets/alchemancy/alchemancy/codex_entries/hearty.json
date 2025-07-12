@@ -1,0 +1,10 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:hearty.flavor"
+  },
+  "functions": [
+    "while_worn",
+    "after_use",
+    "activate"
+  ]
+}

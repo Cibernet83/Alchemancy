@@ -1,0 +1,11 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:crystal_dash.flavor"
+  },
+  "functions": [
+    "while_equipped"
+  ],
+  "innate": [
+    "alchemancy:crystal_storm_belt"
+  ]
+}
