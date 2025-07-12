@@ -127,15 +127,18 @@ public class TintedProperty extends Property implements IDataHolder<Integer[]>, 
 		return DEFAULT_COLORS;
 	}
 
+	private static final int[] DYE_COLORS = Arrays.stream(DyeColor.values()).mapToInt(DyeColor::getTextureDiffuseColor).toArray();
+
 	@Override
 	public int getColor(ItemStack stack) {
 		var colors = getData(stack);
-		return colors.length == 0 ? 0xFFFFFFFF : ColorUtils.interpolateColorsOverTime(1, Arrays.stream(colors).mapToInt(Integer::valueOf).toArray());
+		return colors.length == 0 ? ColorUtils.interpolateColorsAndWait(1, 1, DYE_COLORS) : ColorUtils.interpolateColorsOverTime(1, Arrays.stream(colors).mapToInt(Integer::valueOf).toArray());
 	}
 
 	private Integer[] toIntegerArray(int... numbers) {
 		return Arrays.stream(numbers).boxed().toArray(Integer[]::new);
 	}
+
 
 	@Override
 	public Component getName(ItemStack stack) {
