@@ -11,7 +11,7 @@ public class SweetProperty extends Property
 	public <T> Object modifyDataComponent(ItemStack stack, DataComponentType<? extends T> dataType, T data)
 	{
 		if(dataType == DataComponents.FOOD && data instanceof FoodProperties foodProperties)
-			return new FoodProperties(foodProperties.nutrition(), foodProperties.saturation() * 1.5f, foodProperties.canAlwaysEat(), foodProperties.eatSeconds(),
+			return new FoodProperties(foodProperties.nutrition(), foodProperties.saturation() * 1.5f, true, foodProperties.eatSeconds(),
 					foodProperties.usingConvertsTo(), foodProperties.effects());
 		return super.modifyDataComponent(stack, dataType, data);
 	}
