@@ -315,8 +315,8 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, FlameWakerProperty> FLAME_STEP = REGISTRY.register("flame_step", FlameWakerProperty::new);
 	public static final DeferredHolder<Property, FlameEmperorProperty> FLAME_EMPEROR = REGISTRY.register("flame_emperor", FlameEmperorProperty::new);
 	public static final DeferredHolder<Property, BlinkingProperty> BLINKING = REGISTRY.register("blinking", BlinkingProperty::new);
-	public static final DeferredHolder<Property, DashingProperty> CLOUD_DASH = REGISTRY.register("cloud_dash", () -> new DashingProperty(1.2f,0x54B4FF, 0xFF6254));
-	public static final DeferredHolder<Property, DashingProperty> CRYSTAL_DASH = REGISTRY.register("crystal_dash", () -> new DashingProperty(1.5f,0xD877FF, 0x54B4FF, 0xFF6254));
+	public static final DeferredHolder<Property, DashingProperty> CLOUD_DASH = REGISTRY.register("cloud_dash", () -> new DashingProperty(1.3f,0x54B4FF, 0xFF6254));
+	public static final DeferredHolder<Property, DashingProperty> CRYSTAL_DASH = REGISTRY.register("crystal_dash", () -> new DashingProperty(1.6f,0xD877FF, 0x54B4FF, 0xFF6254));
 	public static final DeferredHolder<Property, HomeRunProperty> HOME_RUN = REGISTRY.register("home_run", HomeRunProperty::new);
 	public static final DeferredHolder<Property, VaultLockpickingProperty> VAULTPICKING = REGISTRY.register("vaultpicking", VaultLockpickingProperty::new);
 	public static final DeferredHolder<Property, GustJetProperty> GUST_JET = REGISTRY.register("gust_jet", GustJetProperty::new);
