@@ -90,6 +90,8 @@ public class AlchemancyTags
 		public static final TagKey<Property> DISABLES_BLOCK_ATTACK_IN_CREATIVE = registerTag(AlchemancyProperties.REGISTRY_KEY, "disables_block_attack_in_creative");
 		public static final TagKey<Property> SLOTLESS = registerTag(AlchemancyProperties.REGISTRY_KEY, "slotless");
 		public static final TagKey<Property> DISABLED = registerTag(AlchemancyProperties.REGISTRY_KEY, "disabled");
+		public static final TagKey<Property> CODEX_UNOBTAINABLE = registerTag(AlchemancyProperties.REGISTRY_KEY, "codex_unobtainable");
+		public static final TagKey<Property> CODEX_HIDDEN = registerTag(AlchemancyProperties.REGISTRY_KEY, "codex_hidden");
 
 		public static final TagKey<Property> RETAINED_BY_UNSHAPED_CLAY = registerTag(AlchemancyProperties.REGISTRY_KEY, "retained_by_unshaped_clay");
 		public static final TagKey<Property> DISABLES_SPARKLING = registerTag(AlchemancyProperties.REGISTRY_KEY, "disables_sparkling");

@@ -588,8 +588,11 @@
   "screen.infusion_codex.visual": "Visual Changes",
   "screen.infusion_codex.other_effects": "Other Effects",
   "screen.infusion_codex.dormant_properties": "Obtainable From",
-  "screen.infusion_codex.innate_properties": "Innate On",
+  "screen.infusion_codex.innate_properties": "Used By",
   "screen.infusion_codex.related_properties": "Related Infusions",
+  "screen.infusion_codex.slotless": "This Infusion is Slotless and will not consume Infusion Slots",
+  "screen.infusion_codex.unobtainable": "This Infusion is cannot be applied to items in Survival Mode",
+  "screen.infusion_codex.disabled": "This Infusion is disabled and will not provide any effects. It can still be obtained and used in recipes and interactions.",
 
   "narrator.infusion_codex.search_bar": "Search for infusions",
   "narrator.infusion_codex.locked_entry": "This entry is locked",

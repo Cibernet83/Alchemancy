@@ -20,6 +20,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -65,12 +67,13 @@ public class CodexEntryReloadListenener implements ResourceManagerReloadListener
 		return ENTRIES;
 	}
 
-	public record CodexEntry(Component flavor, List<PropertyFunction> functions) {
+	public record CodexEntry(Component flavor, List<PropertyFunction> functions, List<Holder<Item>> innates) {
 
 
 		public static final Codec<CodexEntry> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 				ComponentSerialization.CODEC.optionalFieldOf("flavor", Component.empty()).forGetter(CodexEntry::flavor),
-				PropertyFunction.CODEC.listOf().fieldOf("functions").forGetter(CodexEntry::functions)
+				PropertyFunction.CODEC.listOf().fieldOf("functions").forGetter(CodexEntry::functions),
+				ItemStack.ITEM_NON_AIR_CODEC.listOf().optionalFieldOf("innate", List.of()).forGetter(CodexEntry::innates)
 		).apply(instance, CodexEntry::new));
 	}
 }

@@ -851,7 +851,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 
 		String translationKey = "infusion_codex.%s.flavor".formatted(propertyHolder.getRegisteredName());
 		add(translationKey, text);
-		CodexEntryProvider.ENTRIES.put(propertyHolder, new CodexEntryReloadListenener.CodexEntry(Component.translatable(translationKey), new ArrayList<>()));
+		CodexEntryProvider.ENTRIES.put(propertyHolder, new CodexEntryReloadListenener.CodexEntry(Component.translatable(translationKey), new ArrayList<>(), new ArrayList<>()));
 	}
 
 	protected void addCodexFunction(Holder<Property> propertyHolder, PropertyFunction function, String text) {

@@ -5,13 +5,17 @@ import net.cibernet.alchemancy.client.data.CodexEntryReloadListenener;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.properties.SparklingProperty;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
+import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
@@ -29,6 +33,12 @@ public class CodexEntryProvider implements DataProvider {
 	}
 
 	public void populate() {
+
+		for (Item item : BuiltInRegistries.ITEM) {
+			if(item.components().has(AlchemancyItems.Components.INNATE_PROPERTIES.get()))
+				item.components().get(AlchemancyItems.Components.INNATE_PROPERTIES.get()).forEachProperty(propertyHolder ->
+						addInnateItem(propertyHolder, BuiltInRegistries.ITEM.wrapAsHolder(item)));
+		}
 
 		addRelatedProperties(AlchemancyProperties.FLAMMABLE, List.of(AlchemancyProperties.CHARRED));
 		addRelatedProperties(AlchemancyProperties.ASSIMILATING, List.of(AlchemancyProperties.ASSEMBLING));
@@ -77,6 +87,11 @@ public class CodexEntryProvider implements DataProvider {
 
 	public static void addRelatedProperties(Holder<Property> mainProperty, Collection<Holder<Property>> related) {
 		//TODO
+	}
+
+	public static void addInnateItem(Holder<Property> propertyHolder, Holder<Item> innate) {
+		if(CodexEntryProvider.ENTRIES.containsKey(propertyHolder))
+			CodexEntryProvider.ENTRIES.get(propertyHolder).innates().add(innate);
 	}
 
 	@Override

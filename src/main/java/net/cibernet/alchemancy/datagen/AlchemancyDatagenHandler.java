@@ -45,6 +45,8 @@ public class AlchemancyDatagenHandler
 		generator.addProvider(event.includeClient(), new AlchemancyLangProvider(output));
 		generator.addProvider(event.includeClient(), new CodexEntryProvider(lookupProvider, output));
 
+		generator.addProvider(event.includeClient(), new AlchemancyPropertyTagsProvider(output, lookupProvider, fileHelper));
+
 		//generator.addProvider(event.includeClient(), new PropertyEntryProvider(output, lookupProvider, AlchemancyProperties.WARPED));
 	}
 
@@ -74,15 +76,21 @@ public class AlchemancyDatagenHandler
 		}
 	}
 
-	private static final List<Holder<Property>> UNOBTAINABLE_PROPERTIES = List.of(
+	public static final List<Holder<Property>> UNINFUSABLE_PROPERTIES = List.of(
+			//Always unobtainable
 			AlchemancyProperties.CLAY_MOLD,
-			AlchemancyProperties.SMITING,
-			AlchemancyProperties.AUXILIARY,
+			AlchemancyProperties.BADA_QUIP,
 			AlchemancyProperties.RANDOM,
-			AlchemancyProperties.UNMOVABLE,
 			AlchemancyProperties.WORLD_OBLITERATOR,
+			AlchemancyProperties.AUXILIARY,
+
+			//Obtainable in a later update
+			AlchemancyProperties.SMITING,
 			AlchemancyProperties.BATTERY_POWERED,
-			AlchemancyProperties.LIVING_BATTERY
+			AlchemancyProperties.LIVING_BATTERY,
+
+			//Obtainable but not via the forge
+			AlchemancyProperties.UNMOVABLE
 	);
 
 	public static void getAlchemancyMasterAdvancement(HolderLookup.Provider registries, Consumer<AdvancementHolder> saver, ExistingFileHelper existingFileHelper)
@@ -104,7 +112,7 @@ public class AlchemancyDatagenHandler
 		List<String> requirements = new ArrayList<>();
 		for (DeferredHolder<Property, ? extends Property> property : AlchemancyProperties.REGISTRY.getEntries()) {
 
-			if(UNOBTAINABLE_PROPERTIES.contains(property))
+			if(UNINFUSABLE_PROPERTIES.contains(property))
 				continue;
 
 			String key = "discover_" + property.get().getKey().toString();

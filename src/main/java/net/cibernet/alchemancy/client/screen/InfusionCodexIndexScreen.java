@@ -8,6 +8,7 @@ import net.cibernet.alchemancy.data.save.InfusionCodexSaveData;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.properties.special.InfusionCodexProperty;
+import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -162,6 +163,8 @@ public class InfusionCodexIndexScreen extends Screen {
 			objectarraylist.sort((o1, o2) -> sortOrder.sortFunction.compare(o1.getKey(), o2.getKey()));
 			objectarraylist.sort(Comparator.comparing(entry -> !InfusionCodexSaveData.isUnlocked(entry.getKey())));
 
+			objectarraylist.removeIf(entry -> !InfusionCodexSaveData.isUnlocked(entry.getKey()) && entry.getKey().is(AlchemancyTags.Properties.CODEX_HIDDEN));
+
 			for (Map.Entry<Holder<Property>, CodexEntryReloadListenener.CodexEntry> propertyHolder : objectarraylist) {
 				this.addEntry(InfusionCodexSaveData.isUnlocked(propertyHolder.getKey()) ?
 						new PropertyList.Entry(propertyHolder.getKey(), propertyHolder.getValue()) :
@@ -238,7 +241,7 @@ public class InfusionCodexIndexScreen extends Screen {
 
 				Component name = property.value().getName(propertyCapsule);
 				if (equals(getSelected()))
-					name = name.copy().withColor(0xFFFFFF);
+					name = Component.literal(name.getString()).withColor(0xFFFFFF);
 
 				guiGraphics.renderFakeItem(propertyCapsule, left - 2, i - 4);
 

@@ -7,6 +7,7 @@ import net.cibernet.alchemancy.data.save.InfusionCodexSaveData;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
+import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.cibernet.alchemancy.util.CommonUtils;
 import net.cibernet.alchemancy.util.PropertyFunction;
 import net.minecraft.ChatFormatting;
@@ -26,6 +27,7 @@ import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
@@ -50,6 +52,7 @@ public class InfusionCodexEntryScreen extends Screen {
 	private final CodexEntryReloadListenener.CodexEntry entry;
 	private final ItemStack[] dormantItems;
 	private final int undiscoveredItems;
+	private final boolean unobtainable;
 
 	protected final Screen lastScreen;
 
@@ -76,6 +79,8 @@ public class InfusionCodexEntryScreen extends Screen {
 		undiscoveredItems = undiscovered.get();
 
 		InfusionCodexSaveData.read(property);
+
+		unobtainable = property.is(AlchemancyTags.Properties.CODEX_UNOBTAINABLE) && dormantItems.length == 0;
 	}
 
 	@Override
@@ -183,6 +188,23 @@ public class InfusionCodexEntryScreen extends Screen {
 
 			textYPointer = yPadding - scrollAmount;
 
+			if(unobtainable)
+			{
+				renderTextLine(guiGraphics, Component.translatable("screen.infusion_codex.unobtainable"), 1, 11141120);
+				textYPointer += 10;
+			}
+			else if(property.is(AlchemancyTags.Properties.DISABLED))
+			{
+				renderTextLine(guiGraphics, Component.translatable("screen.infusion_codex.disabled"), 1, 11141120);
+				textYPointer += 10;
+			}
+
+			if(property.is(AlchemancyTags.Properties.SLOTLESS))
+			{
+				renderTextLine(guiGraphics, Component.translatable("screen.infusion_codex.slotless"), 1, 16755200);
+				textYPointer += 10;
+			}
+
 			for (PropertyFunction function : entry.functions()) {
 				renderFunctionParagraph(guiGraphics, function.localizationKey);
 			}
@@ -215,6 +237,29 @@ public class InfusionCodexEntryScreen extends Screen {
 				}
 
 				textYPointer += (((itemCount - 1) / itemsPerRow) * itemSize) + 10;
+			}
+
+			if(unobtainable)
+			{
+				var innates = entry.innates();
+				if (!innates.isEmpty()) {
+					renderTextLine(guiGraphics, Component.translatable("screen.infusion_codex.innate_properties"), 1.25f, 5592575);
+
+					int itemsPerRow = (width - xPadding * 2) / itemSize;
+					int itemCount = innates.size();
+
+					for (int i = 0; i < itemCount; i++) {
+						ItemStack stack = innates.get(i).value().getDefaultInstance();
+						int xx = getX() + xPadding + ((i % itemsPerRow) * itemSize);
+						int yy = getY() + (int) textYPointer + ((i / itemsPerRow) * itemSize);
+						guiGraphics.renderFakeItem(stack, xx, yy);
+
+						if (mouseX >= xx - itemPadding && mouseX < xx - itemPadding + itemSize && mouseY >= yy - itemPadding && mouseY < yy - itemPadding + itemSize)
+							tooltip = new ItemTooltip(stack);
+					}
+
+					textYPointer += (((itemCount - 1) / itemsPerRow) * itemSize) + 10;
+				}
 			}
 
 			guiGraphics.disableScissor();
@@ -286,6 +331,24 @@ public class InfusionCodexEntryScreen extends Screen {
 				case "end" -> Component.literal(value).withStyle(ChatFormatting.DARK_PURPLE);
 				case "activate" -> Component.literal(value).withColor(0xFF6366);
 				case "hint" -> Component.literal(value).withColor(0x00FFFF);
+				case "property_list" -> {
+
+					MutableComponent component = Component.empty();
+					var properties = AlchemancyProperties.REGISTRY.getRegistry().get().getTagOrEmpty(TagKey.create(AlchemancyProperties.REGISTRY_KEY, ResourceLocation.parse(value)));
+					int count = 0;
+					for (Holder<Property> ignored : properties) {
+						count++;
+					}
+
+					int i = 0;
+					for (Holder<Property> propertyHolder : properties) {
+						if(count == 1)
+							component = component.append(propertyHolder.value().getName());
+						else component = component.append(Component.translatable("screen.infusion_codex.inline_list_entry" + (++i == count ? ".last" : ""), propertyHolder.value().getName()));
+					}
+
+					yield  component;
+				}
 				default -> Component.literal(value);
 			};
 		}
