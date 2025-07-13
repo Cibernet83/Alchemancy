@@ -31,9 +31,4 @@ public class LivingBatteryProperty extends Property {
 	public int getColor(ItemStack stack) {
 		return ColorUtils.interpolateColorsOverTime(0.25f, 0xB4EF34, 0xB4EF34, 0xE2FC79);
 	}
-
-	@Override
-	public Collection<ItemStack> populateCreativeTab(DeferredItem<Item> capsuleItem, Holder<Property> holder) {
-		return List.of();
-	}
 }
