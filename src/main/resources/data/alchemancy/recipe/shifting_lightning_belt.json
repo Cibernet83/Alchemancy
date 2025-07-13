@@ -5,6 +5,10 @@
     "alchemancy:shocking",
     "alchemancy:phasing"
   ],
+  "catalyst": {
+    "item": "alchemancy:nimbus_belt"
+  },
+
 
   "result": {
     "count": 1,

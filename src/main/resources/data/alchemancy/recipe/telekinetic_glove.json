@@ -1,0 +1,18 @@
+{
+  "type": "alchemancy:forged_item",
+
+  "properties": [
+    "alchemancy:interactable",
+    "alchemancy:ender",
+    "alchemancy:binding"
+  ],
+
+  "catalyst": {
+    "item": "minecraft:iron_block"
+  },
+
+  "result": {
+    "count": 1,
+    "id": "alchemancy:telekinetic_glove"
+  }
+}
