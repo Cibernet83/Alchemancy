@@ -32,20 +32,24 @@ public class CommonUtils {
 		return new AABB(center.x - radius, center.y - radius, center.z - radius, center.x + radius, center.y + radius, center.z + radius);
 	}
 
+	public static boolean isServerside() {
+		// getThreadGroup is unreliable... figure out a better way to determine if we're on the server, without Level?
+		return Thread.currentThread().getThreadGroup() == SidedThreadGroups.SERVER;
+	}
+
 	public static RegistryAccess registryAccessStatic() {
 		final MinecraftServer currentServer = ServerLifecycleHooks.getCurrentServer();
-		// getThreadGroup is unreliable... figure out a better way to determine if we're on the server, without Level?
-		return currentServer != null && Thread.currentThread().getThreadGroup() == SidedThreadGroups.SERVER ? currentServer.registryAccess() : ClientUtil.registryAccess();
+		return currentServer != null && isServerside() ? currentServer.registryAccess() : ClientUtil.registryAccess();
 	}
 
 	public static LevelData getLevelData() {
 		final MinecraftServer currentServer = ServerLifecycleHooks.getCurrentServer();
-		return currentServer != null ? currentServer.overworld().getLevelData() : ClientUtil.getCurrentLevel().getLevelData();
+		return currentServer != null && isServerside() ? currentServer.overworld().getLevelData() : ClientUtil.getCurrentLevel().getLevelData();
 	}
 
 	public static Optional<Player> getPlayerByUUID(UUID uuid) {
 		final MinecraftServer currentServer = ServerLifecycleHooks.getCurrentServer();
-		return Optional.ofNullable(currentServer != null ? currentServer.overworld().getPlayerByUUID(uuid) : ClientUtil.getCurrentLevel().getPlayerByUUID(uuid));
+		return Optional.ofNullable(currentServer != null && isServerside() ? currentServer.overworld().getPlayerByUUID(uuid) : ClientUtil.getCurrentLevel().getPlayerByUUID(uuid));
 	}
 
 	public static void modifyTint(ItemStack itemStack, int tintIndex, LocalIntRef localTint) {
