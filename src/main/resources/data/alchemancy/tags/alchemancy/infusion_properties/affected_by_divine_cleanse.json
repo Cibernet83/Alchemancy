@@ -4,6 +4,7 @@
     "alchemancy:dead",
     "alchemancy:undead",
     "alchemancy:vampiric",
-    "alchemancy:dirty"
+    "alchemancy:dirty",
+    "alchemancy:seeded"
   ]
 }
