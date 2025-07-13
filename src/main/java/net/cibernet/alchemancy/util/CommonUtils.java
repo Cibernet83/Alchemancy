@@ -18,6 +18,7 @@ import net.minecraft.world.level.storage.LevelData;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.fml.util.thread.SidedThreadGroups;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 import java.util.Optional;
@@ -33,8 +34,8 @@ public class CommonUtils {
 
 	public static RegistryAccess registryAccessStatic() {
 		final MinecraftServer currentServer = ServerLifecycleHooks.getCurrentServer();
-		return currentServer != null ? currentServer.registryAccess() : ClientUtil.registryAccess();
-
+		// getThreadGroup is unreliable... figure out a better way to determine if we're on the server, without Level?
+		return currentServer != null && Thread.currentThread().getThreadGroup() == SidedThreadGroups.SERVER ? currentServer.registryAccess() : ClientUtil.registryAccess();
 	}
 
 	public static LevelData getLevelData() {
