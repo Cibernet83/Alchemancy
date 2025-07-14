@@ -35,7 +35,7 @@ public class LaunchingProperty extends Property implements IDataHolder<Long>
 	@Override
 	public void onActivationByBlock(Level level, BlockPos position, Entity target, ItemStack stack)
 	{
-		launch(null, stack, target, 2f);
+		launch(null, stack, target, 1.2f);
 	}
 
 	public static final DustColorTransitionOptions PARTICLES = new DustColorTransitionOptions(
