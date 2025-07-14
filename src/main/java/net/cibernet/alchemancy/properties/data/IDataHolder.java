@@ -6,6 +6,7 @@ import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
@@ -15,6 +16,18 @@ public interface IDataHolder<T>
 	CompoundTag writeData(T data);
 
 	T getDefaultData();
+
+	default T combineData(@Nullable T currentData, T newData) {
+		return currentData == null ? newData : currentData;
+	}
+
+	default void combineDataAndSet(ItemStack stack, ItemStack from) {
+		setData(stack, hasData(stack) ? combineData(getData(stack), getData(from)) : getData(from));
+	}
+
+	default boolean hasData(ItemStack stack) {
+		return stack.has(AlchemancyItems.Components.PROPERTY_DATA) && (this instanceof Property property) && stack.get(AlchemancyItems.Components.PROPERTY_DATA).getDataNbt(property.asHolder()).isPresent();
+	}
 
 	default T getData(ItemStack stack)
 	{

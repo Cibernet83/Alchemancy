@@ -400,6 +400,18 @@ public class HollowProperty extends Property implements IDataHolder<ItemStack>
 	}
 
 	@Override
+	public ItemStack combineData(@Nullable ItemStack currentData, ItemStack newData) {
+
+		if(currentData == null || currentData.isEmpty())
+			return newData;
+
+		if(ItemStack.matches(currentData, newData))
+			currentData.setCount(Math.min(currentData.getMaxStackSize(), currentData.getCount() + newData.getCount()));
+
+		return currentData;
+	}
+
+	@Override
 	public ItemStack getDefaultData() {
 		return ItemStack.EMPTY;
 	}

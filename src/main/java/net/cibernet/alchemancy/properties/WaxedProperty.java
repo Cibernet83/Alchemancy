@@ -13,6 +13,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -68,6 +69,11 @@ public class WaxedProperty extends Property implements IDataHolder<Integer>
 	@Override
 	public CompoundTag writeData(Integer data) {
 		return new CompoundTag(){{putInt("durability", data);}};
+	}
+
+	@Override
+	public Integer combineData(@Nullable Integer currentData, Integer newData) {
+		return currentData == null ? newData : Math.min(getDefaultData(), currentData + newData);
 	}
 
 	@Override

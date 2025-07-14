@@ -23,6 +23,7 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import net.neoforged.neoforge.event.level.BlockDropsEvent;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.List;
@@ -177,6 +178,11 @@ public class AutosmeltProperty extends Property implements IDataHolder<Integer>
 	@Override
 	public CompoundTag writeData(Integer data) {
 		return new CompoundTag(){{putInt("fuel", data);}};
+	}
+
+	@Override
+	public Integer combineData(@Nullable Integer currentData, Integer newData) {
+		return currentData == null ? newData : currentData + newData;
 	}
 
 	@Override

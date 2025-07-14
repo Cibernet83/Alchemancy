@@ -68,6 +68,11 @@ public class PristineProperty extends Property implements IDataHolder<Integer>, 
 	}
 
 	@Override
+	public Integer combineData(@Nullable Integer currentData, Integer newData) {
+		return currentData == null ? newData : Math.min(getDefaultData(), currentData + newData);
+	}
+
+	@Override
 	public Integer getDefaultData() {
 		return 100;
 	}

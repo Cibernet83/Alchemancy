@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import net.neoforged.neoforge.registries.DeferredItem;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -59,19 +60,12 @@ public class TintedProperty extends Property implements IDataHolder<Integer[]>, 
 		Integer[] colors = getDyeColor(propertySource);
 
 		if (colors.length == 0)
-			return super.onInfusedByDormantProperty(stack, propertySource, grid, propertiesToAdd, consumeItem);
+			return false;
 
-		if (base.length == 0)
-			setData(stack, colors);
-		else {
-			for (int i = 0; i < base.length; i++) {
-				base[i] = base[i] == DEFAULT_COLOR ? FastColor.ARGB32.color(255, colors[Math.min(i, colors.length-1)]) : mixColors(base[i], List.of(colors[Math.min(i, colors.length-1)]));
-			}
-			setData(stack, base);
-		}
-
+		setData(stack, mixColors(base, colors));
 		return true;
 	}
+
 
 	public Integer[] getDyeColor(ItemStack stack) {
 		if (stack.getItem() instanceof DyeItem dyeItem)
@@ -118,6 +112,11 @@ public class TintedProperty extends Property implements IDataHolder<Integer[]>, 
 		}};
 	}
 
+	@Override
+	public Integer[] combineData(Integer @Nullable [] currentData, Integer[] newData) {
+		return mixColors(currentData, newData);
+	}
+
 	public void setData(ItemStack stack, int value) {
 		IDataHolder.super.setData(stack, new Integer[]{value});
 	}
@@ -157,6 +156,21 @@ public class TintedProperty extends Property implements IDataHolder<Integer[]>, 
 		}
 
 		return result;
+	}
+
+	public static Integer[] mixColors(Integer[] base, Integer[] colors) {
+
+		if (colors.length == 0)
+			return base;
+
+		if (base.length == 0)
+			return colors;
+		else {
+			for (int i = 0; i < base.length; i++) {
+				base[i] = base[i] == DEFAULT_COLOR ? FastColor.ARGB32.color(255, colors[Math.min(i, colors.length-1)]) : mixColors(base[i], List.of(colors[Math.min(i, colors.length-1)]));
+			}
+			return base;
+		}
 	}
 
 	public static int mixColors(int base, List<Integer> dyes) {
