@@ -17,6 +17,11 @@ public class SweetProperty extends Property
 	}
 
 	@Override
+	public int getPriority() {
+		return Priority.LOW;
+	}
+
+	@Override
 	public int getColor(ItemStack stack) {
 		return 0xFAC9FF;
 	}
