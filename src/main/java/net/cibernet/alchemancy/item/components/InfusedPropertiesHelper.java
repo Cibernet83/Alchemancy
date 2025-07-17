@@ -102,27 +102,31 @@ public class InfusedPropertiesHelper
 
 	public static boolean hasInfusedProperty(ItemStack stack, Holder<Property> property)
 	{
-		return stack != null && !stack.isEmpty() && !stack.is(AlchemancyTags.Items.DISABLES_INFUSION_ABILITIES)  && stack.has(INFUSED_PROPERTIES.get()) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(property);
+		return stack != null && !stack.isEmpty() && INFUSED_PROPERTIES.isBound() &&
+				!stack.is(AlchemancyTags.Items.DISABLES_INFUSION_ABILITIES)  && stack.has(INFUSED_PROPERTIES.get()) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(property);
 	}
 
 	public static boolean hasInnateProperty(ItemStack stack, Holder<Property> property)
 	{
-		return stack != null &&  !stack.isEmpty() && stack.has(INNATE_PROPERTIES.get()) && stack.get(INNATE_PROPERTIES.get()).hasProperty(property);
+		return stack != null && INNATE_PROPERTIES.isBound() &&
+				!stack.isEmpty() && stack.has(INNATE_PROPERTIES.get()) && stack.get(INNATE_PROPERTIES.get()).hasProperty(property);
 	}
 
 	public static boolean hasDormantProperty(ItemStack stack, Holder<Property> property)
 	{
-		return stack != null &&  !stack.isEmpty() && AlchemancyProperties.getDormantProperties(stack).contains(property);
+		return stack != null && !stack.isEmpty() && AlchemancyProperties.getDormantProperties(stack).contains(property);
 	}
 
 	public static boolean hasInfusedProperty(ItemStack stack, TagKey<Property> propertyTag)
 	{
-		return stack != null && !stack.isEmpty() && !stack.is(AlchemancyTags.Items.DISABLES_INFUSION_ABILITIES) && stack.has(INFUSED_PROPERTIES.get()) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(propertyTag);
+		return stack != null && !stack.isEmpty() && INFUSED_PROPERTIES.isBound() &&
+				!stack.is(AlchemancyTags.Items.DISABLES_INFUSION_ABILITIES) && stack.has(INFUSED_PROPERTIES.get()) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(propertyTag);
 	}
 
 	public static boolean hasInnateProperty(ItemStack stack, TagKey<Property> propertyTag)
 	{
-		return stack != null && !stack.isEmpty() && stack.has(INNATE_PROPERTIES.get()) && stack.get(INNATE_PROPERTIES.get()).hasProperty(propertyTag);
+		return stack != null && !stack.isEmpty() && INNATE_PROPERTIES.isBound() &&
+				stack.has(INNATE_PROPERTIES.get()) && stack.get(INNATE_PROPERTIES.get()).hasProperty(propertyTag);
 	}
 
 	public static boolean hasDormantProperty(ItemStack stack, TagKey<Property> propertyTag)
@@ -145,13 +149,13 @@ public class InfusedPropertiesHelper
 
 		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().getData(stack);
 
-		if (stack.has(INFUSED_PROPERTIES.get()) && !stack.is(AlchemancyTags.Items.DISABLES_INFUSION_ABILITIES))
+		if (INFUSED_PROPERTIES.isBound() && stack.has(INFUSED_PROPERTIES.get()) && !stack.is(AlchemancyTags.Items.DISABLES_INFUSION_ABILITIES))
 		{
 			if(!toggled && hasInfusedProperty(stack, AlchemancyProperties.TOGGLEABLE))
 				consumer.accept(AlchemancyProperties.TOGGLEABLE);
 			else stack.get(INFUSED_PROPERTIES.get()).forEachProperty(consumer);
 		}
-		if (!hasProperty(stack, AlchemancyProperties.DEAD) && stack.has(INNATE_PROPERTIES.get()))
+		if (INNATE_PROPERTIES.isBound() && !hasProperty(stack, AlchemancyProperties.DEAD) && stack.has(INNATE_PROPERTIES.get()))
 		{
 			if(!toggled && hasInnateProperty(stack, AlchemancyProperties.TOGGLEABLE))
 				consumer.accept(AlchemancyProperties.TOGGLEABLE);
@@ -163,7 +167,7 @@ public class InfusedPropertiesHelper
 
 	public static void forEachInnateProperty(ItemStack stack, Consumer<Holder<Property>> consumer)
 	{
-		if(stack == null || stack.isEmpty())
+		if(!INNATE_PROPERTIES.isBound() || stack == null || stack.isEmpty())
 			return;
 
 		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().getData(stack);
@@ -253,14 +257,20 @@ public class InfusedPropertiesHelper
 	}
 
 	public static List<Holder<Property>> getInfusedProperties(ItemStack stack) {
+		if(!INFUSED_PROPERTIES.isBound())
+			return InfusedPropertiesComponent.EMPTY.properties();
 		return stack.getOrDefault(INFUSED_PROPERTIES, InfusedPropertiesComponent.EMPTY).properties();
 	}
 
 	public static List<Holder<Property>> getInnateProperties(ItemStack stack) {
+		if(!INNATE_PROPERTIES.isBound())
+			return InfusedPropertiesComponent.EMPTY.properties();
 		return stack.getOrDefault(INNATE_PROPERTIES, InfusedPropertiesComponent.EMPTY).properties();
 	}
 
 	public static List<Holder<Property>> getStoredProperties(ItemStack stack) {
+		if(!STORED_PROPERTIES.isBound())
+			return InfusedPropertiesComponent.EMPTY.properties();
 		return stack.getOrDefault(STORED_PROPERTIES, InfusedPropertiesComponent.EMPTY).properties();
 	}
 

@@ -41,6 +41,9 @@ public interface DataComponentHolderMixin
 	@Unique
 	default <T> T alchemancy$get(DataComponentType<? extends T> dataComponentType, T original)
 	{
+		if(!AlchemancyItems.Components.INFUSED_PROPERTIES.isBound())
+			return original;
+
 		List<DataComponentType<InfusedPropertiesComponent>> PROPERTIES_TO_SKIP = List.of(AlchemancyItems.Components.INFUSED_PROPERTIES.value(), AlchemancyItems.Components.INNATE_PROPERTIES.value());
 		if(!PROPERTIES_TO_SKIP.contains(dataComponentType) && (Object)this instanceof ItemStack stack)
 		{
