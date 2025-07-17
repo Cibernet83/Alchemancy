@@ -1,6 +1,5 @@
 package net.cibernet.alchemancy.properties;
 
-import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentType;
@@ -11,7 +10,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -20,8 +18,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShearsItem;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.component.Tool;
-import net.minecraft.world.item.context.UseOnContext;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -31,7 +27,6 @@ import net.minecraft.world.phys.HitResult;
 import net.neoforged.neoforge.common.ItemAbilities;
 import net.neoforged.neoforge.common.ItemAbility;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import org.apache.logging.log4j.util.TriConsumer;
 
@@ -41,13 +36,12 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Function;
 
-public class ToolProperty extends Property
-{
+public class ToolProperty extends Property {
 	public final int color;
 	public final List<RuleFunc> rules;
 	public final Set<ItemAbility> abilities;
 
-	private static final HashMap<Tool, Tool> CACHED_TOOLS = new HashMap<>();
+	//private static final HashMap<Tool, Tool> CACHED_TOOLS = new HashMap<>();
 	private final Tool DEFAULT;
 
 	public static final HashMap<ItemAbility, TriConsumer<Player, Level, BlockPos>> INTERACTION_EFFECTS = new HashMap<>() //bit annoying that these're hardcoded into each separate tool class instead of being included with the item abilities but w/e
@@ -78,14 +72,12 @@ public class ToolProperty extends Property
 				level.playSound(player, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, level.getRandom().nextFloat() * 0.4F + 0.8F)));
 
 	}};
-	
-	public ToolProperty(int color, TagKey<Block> allowedBlocks, Set<ItemAbility> abilities)
-	{
+
+	public ToolProperty(int color, TagKey<Block> allowedBlocks, Set<ItemAbility> abilities) {
 		this(color, List.of((miningSpeed) -> Tool.Rule.minesAndDrops(allowedBlocks, miningSpeed)), abilities);
 	}
 
-	public ToolProperty(int color, List<RuleFunc> toolRules, Set<ItemAbility> abilities)
-	{
+	public ToolProperty(int color, List<RuleFunc> toolRules, Set<ItemAbility> abilities) {
 		this.color = color;
 		this.abilities = abilities;
 		rules = toolRules;
@@ -95,8 +87,7 @@ public class ToolProperty extends Property
 		DEFAULT = new Tool(defaultRules, 1, 1);
 	}
 
-	public static List<RuleFunc> getRulesFor(Tool tool)
-	{
+	public static List<RuleFunc> getRulesFor(Tool tool) {
 		ArrayList<RuleFunc> result = new ArrayList<>();
 		for (Tool.Rule rule : tool.rules()) {
 			result.add((miningSpeed) -> rule);
@@ -104,30 +95,24 @@ public class ToolProperty extends Property
 		return result;
 	}
 
-	public static List<RuleFunc> getShearsRules()
-	{
+	public static List<RuleFunc> getShearsRules() {
 		return getRulesFor(ShearsItem.createToolProperties());
 	}
 
-	public static List<RuleFunc> getSwordRules()
-	{
+	public static List<RuleFunc> getSwordRules() {
 		return getRulesFor(SwordItem.createToolProperties());
 	}
 
 	@Override
-	public void onProjectileImpact(ItemStack stack, Projectile projectile, HitResult rayTraceResult, ProjectileImpactEvent event)
-	{
-		if(rayTraceResult.getType() == HitResult.Type.BLOCK && rayTraceResult instanceof BlockHitResult blockHitResult)
-		{
+	public void onProjectileImpact(ItemStack stack, Projectile projectile, HitResult rayTraceResult, ProjectileImpactEvent event) {
+		if (rayTraceResult.getType() == HitResult.Type.BLOCK && rayTraceResult instanceof BlockHitResult blockHitResult) {
 			Level level = projectile.level();
 			Tool tool = stack.get(DataComponents.TOOL);
 			BlockState blockHit = level.getBlockState(blockHitResult.getBlockPos());
 
 			double projectileSpeed = projectile.getKnownMovement().length();
-			if(tool != null && tool.isCorrectForDrops(blockHit) && projectileSpeed > 0.3 && tool.getMiningSpeed(blockHit) / blockHit.getDestroySpeed(level, blockHitResult.getBlockPos()) > 1 / projectileSpeed)
-			{
-				if(!level.isClientSide())
-				{
+			if (tool != null && tool.isCorrectForDrops(blockHit) && projectileSpeed > 0.3 && tool.getMiningSpeed(blockHit) / blockHit.getDestroySpeed(level, blockHitResult.getBlockPos()) > 1 / projectileSpeed) {
+				if (!level.isClientSide()) {
 					level.destroyBlock(blockHitResult.getBlockPos(), false, projectile);
 					Block.dropResources(blockHit, level, blockHitResult.getBlockPos(), level.getBlockEntity(blockHitResult.getBlockPos()), projectile, stack);
 				}
@@ -137,8 +122,7 @@ public class ToolProperty extends Property
 				projectile.setDeltaMovement(projectile.getDeltaMovement().scale(0.5));
 				projectile.hasImpulse = true;
 
-				if(stack.isDamageableItem())
-				{
+				if (stack.isDamageableItem()) {
 					if (projectile.level() instanceof ServerLevel serverLevel)
 						stack.hurtAndBreak(2, serverLevel, null, (item) -> {
 							BrittleProperty.spawnItemParticles(stack, 5, projectile, serverLevel);
@@ -150,10 +134,8 @@ public class ToolProperty extends Property
 //					InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onEntityItemDestroyed(stack, projectile, projectile.damageSources().generic()));
 //					projectile.level().broadcastEntityEvent(projectile, (byte) 3);
 //				}
-			}
-			else for(int i = 0; i < 16; i++)
-			{
-				if(!level.noCollision(projectile, projectile.getBoundingBox().deflate(1.0E-7)))
+			} else for (int i = 0; i < 16; i++) {
+				if (!level.noCollision(projectile, projectile.getBoundingBox().deflate(1.0E-7)))
 					projectile.setPos(projectile.position().subtract(projectile.getKnownMovement()));
 				else break;
 			}
@@ -161,8 +143,7 @@ public class ToolProperty extends Property
 	}
 
 	@Override
-	public void onRightClickBlock(UseItemOnBlockEvent event)
-	{
+	public void onRightClickBlock(UseItemOnBlockEvent event) {
 		Level level = event.getLevel();
 		BlockPos pos = event.getPos();
 		BlockState state = level.getBlockState(pos);
@@ -172,20 +153,20 @@ public class ToolProperty extends Property
 
 			BlockState modifiedState = state.getToolModifiedState(event.getUseOnContext(), ability, false);
 
-			if(modifiedState == null)
+			if (modifiedState == null)
 				continue;
 
 			ItemStack itemstack = event.getItemStack();
 			if (player instanceof ServerPlayer) {
-				CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer)player, pos, itemstack);
+				CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer) player, pos, itemstack);
 			}
 
-			if(INTERACTION_EFFECTS.containsKey(ability))
+			if (INTERACTION_EFFECTS.containsKey(ability))
 				INTERACTION_EFFECTS.get(ability).accept(player, level, pos);
 
 			level.setBlock(pos, modifiedState, 11);
 			level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, modifiedState));
-			if(itemstack.isDamageableItem())
+			if (itemstack.isDamageableItem())
 				itemstack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(event.getHand()));
 
 			event.cancelWithResult(ItemInteractionResult.sidedSuccess(level.isClientSide));
@@ -195,26 +176,21 @@ public class ToolProperty extends Property
 	}
 
 	@Override
-	public <T> Object modifyDataComponent(ItemStack stack, DataComponentType<? extends T> dataType, T data)
-	{
-		if(!this.rules.isEmpty() && dataType == DataComponents.TOOL)
-		{
-			if(data instanceof Tool tool)
-			{
-				if (!CACHED_TOOLS.containsKey(tool)) {
-					float miningSpeed = 1;
+	public <T> Object modifyDataComponent(ItemStack stack, DataComponentType<? extends T> dataType, T data) {
+		if (!this.rules.isEmpty() && dataType == DataComponents.TOOL) {
+			if (data instanceof Tool tool) {
+				float miningSpeed = 1;
 
-					for (Tool.Rule rule : tool.rules()) {
-						if (rule.correctForDrops().isPresent() && rule.correctForDrops().get() && rule.speed().isPresent() && rule.speed().get() > miningSpeed)
-							miningSpeed = rule.speed().get();
-					}
-
-					List<Tool.Rule> rules = new ArrayList<>(tool.rules());
-					final float finalMiningSpeed = miningSpeed;
-					rules.addAll(this.rules.stream().map(ruleFunc -> ruleFunc.apply(finalMiningSpeed)).toList());
-					CACHED_TOOLS.put(tool, new Tool(rules, tool.defaultMiningSpeed(), tool.damagePerBlock()));
+				for (Tool.Rule rule : tool.rules()) {
+					if (rule.correctForDrops().isPresent() && rule.correctForDrops().get() && rule.speed().isPresent() && rule.speed().get() > miningSpeed)
+						miningSpeed = rule.speed().get();
 				}
-				return CACHED_TOOLS.get(tool);
+
+				List<Tool.Rule> rules = new ArrayList<>(tool.rules());
+				final float finalMiningSpeed = miningSpeed;
+				rules.addAll(this.rules.stream().map(ruleFunc -> ruleFunc.apply(finalMiningSpeed)).toList());
+				return new Tool(rules, tool.defaultMiningSpeed(), tool.damagePerBlock());
+
 			} else return DEFAULT;
 		}
 		return super.modifyDataComponent(stack, dataType, data);
@@ -230,5 +206,6 @@ public class ToolProperty extends Property
 		return color;
 	}
 
-	public interface RuleFunc extends Function<Float, Tool.Rule> {}
+	public interface RuleFunc extends Function<Float, Tool.Rule> {
+	}
 }
