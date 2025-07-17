@@ -63,7 +63,7 @@ public class InfusedPropertiesHelper
 
 	public static boolean hasProperty(ItemStack stack, Holder<Property> property)
 	{
-		if(stack == null || stack.isEmpty()|| property == null || property.is(AlchemancyTags.Properties.DISABLED))
+		if(!property.isBound() || stack == null || stack.isEmpty()|| property == null || property.is(AlchemancyTags.Properties.DISABLED))
 			return false;
 
 		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().getData(stack);
@@ -147,7 +147,7 @@ public class InfusedPropertiesHelper
 		if(stack == null || stack.isEmpty())
 			return;
 
-		boolean toggled = AlchemancyProperties.TOGGLEABLE.get().getData(stack);
+		boolean toggled = AlchemancyProperties.TOGGLEABLE.isBound() && AlchemancyProperties.TOGGLEABLE.get().getData(stack);
 
 		if (INFUSED_PROPERTIES.isBound() && stack.has(INFUSED_PROPERTIES.get()) && !stack.is(AlchemancyTags.Items.DISABLES_INFUSION_ABILITIES))
 		{

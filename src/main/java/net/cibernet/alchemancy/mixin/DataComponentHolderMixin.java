@@ -6,6 +6,7 @@ import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
+import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentHolder;
 import net.minecraft.core.component.DataComponentMap;
@@ -16,6 +17,7 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Mixin(DataComponentHolder.class)
 public interface DataComponentHolderMixin
@@ -44,14 +46,22 @@ public interface DataComponentHolderMixin
 		if(!AlchemancyItems.Components.INFUSED_PROPERTIES.isBound())
 			return original;
 
-		List<DataComponentType<InfusedPropertiesComponent>> PROPERTIES_TO_SKIP = List.of(AlchemancyItems.Components.INFUSED_PROPERTIES.value(), AlchemancyItems.Components.INNATE_PROPERTIES.value());
+		List<DataComponentType<?>> PROPERTIES_TO_SKIP = List.of(
+				AlchemancyItems.Components.INFUSED_PROPERTIES.value(),
+				AlchemancyItems.Components.INNATE_PROPERTIES.value(),
+				AlchemancyItems.Components.PROPERTY_DATA.value());
+
 		if(!PROPERTIES_TO_SKIP.contains(dataComponentType) && (Object)this instanceof ItemStack stack)
 		{
-			T result = original;
-			for (Holder<Property> property : InfusedPropertiesHelper.getInfusedProperties(stack)) {
-				result = (T) property.value().modifyDataComponent(stack, dataComponentType, result);
-			}
-			return result;
+			AtomicReference<T> result = new AtomicReference<>(original);
+
+			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder ->
+			{
+				T val = (T) propertyHolder.value().modifyDataComponent(stack, dataComponentType, result.get());
+				result.set(val);
+			});
+
+			return result.get();
 		}
 		return original;
 	}
