@@ -15,9 +15,6 @@ public class ImprovedProperty extends Property {
 	@Override
 	public <T> Object modifyDataComponent(ItemStack stack, DataComponentType<? extends T> dataType, T data) {
 
-		if(dataType != DataComponents.TOOL)
-			return data;
-
 		if (dataType == DataComponents.TOOL && data instanceof Tool tool) {
 
 			List<Tool.Rule> rules = new ArrayList<>();
