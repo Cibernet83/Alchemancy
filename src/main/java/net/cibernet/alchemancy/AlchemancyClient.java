@@ -65,7 +65,16 @@ public class AlchemancyClient
 				((stack, level, entity, seed) -> AlchemancyProperties.WAYWARD_WARP.value().getData(stack).hasTarget() ? 1 : 0));
 
 		registerItemProperties("active", (stack, level, entity, seed) -> entity != null && stack.equals(entity.getUseItem()) ? 1 : 0,
-				AlchemancyItems.ROCKET_POWERED_HAMMER, AlchemancyItems.BARRELS_WARHAMMER);
+				AlchemancyItems.ROCKET_POWERED_HAMMER, AlchemancyItems.BARRELS_WARHAMMER, AlchemancyItems.DREAMSTEEL_BOW);
+
+		registerItemProperties("use_time", (stack, level, entity, seed) -> {
+					if (entity == null) {
+						return 0.0F;
+					} else {
+						return entity.getUseItem() != stack ? 0.0F : (float)(stack.getUseDuration(entity) - entity.getUseItemRemainingTicks()) / 20.0F;
+					}
+				},
+				AlchemancyItems.DREAMSTEEL_BOW);
 	}
 
 	private static void registerItemProperties(String key, ItemPropertyFunction function, DeferredItem<?>... items)
@@ -112,7 +121,9 @@ public class AlchemancyClient
 				AlchemancyItems.DREAMSTEEL_AXE,
 				AlchemancyItems.DREAMSTEEL_SHOVEL,
 				AlchemancyItems.DREAMSTEEL_HOE,
-				AlchemancyItems.DREAMSTEEL_SWORD);
+				AlchemancyItems.DREAMSTEEL_SWORD,
+				AlchemancyItems.DREAMSTEEL_BOW
+		);
 
 		event.register(((stack, tintIndex) -> tintIndex == 0 ? AlchemancyProperties.WAYWARD_WARP.value().getColor(stack) : -1),
 				AlchemancyItems.WAYWARD_MEDALLION);

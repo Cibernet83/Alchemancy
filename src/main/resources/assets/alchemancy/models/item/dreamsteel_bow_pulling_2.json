@@ -1,0 +1,7 @@
+{
+    "parent": "item/bow",
+    "textures": {
+        "layer0": "alchemancy:item/dreamsteel_bow_pulling_2",
+        "layer1": "alchemancy:item/dreamsteel_bow_tint_pulling_2"
+    }
+}
