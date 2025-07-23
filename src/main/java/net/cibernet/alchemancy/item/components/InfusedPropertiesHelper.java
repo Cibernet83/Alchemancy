@@ -144,10 +144,15 @@ public class InfusedPropertiesHelper
 
 	public static void forEachProperty(ItemStack stack, Consumer<Holder<Property>> consumer)
 	{
+		forEachProperty(stack, consumer, true);
+	}
+
+	public static void forEachProperty(ItemStack stack, Consumer<Holder<Property>> consumer, boolean checkToggle)
+	{
 		if(stack == null || stack.isEmpty())
 			return;
 
-		boolean toggled = AlchemancyProperties.TOGGLEABLE.isBound() && AlchemancyProperties.TOGGLEABLE.get().getData(stack);
+		boolean toggled = !checkToggle || (AlchemancyProperties.TOGGLEABLE.isBound() && AlchemancyProperties.TOGGLEABLE.get().getData(stack));
 
 		if (INFUSED_PROPERTIES.isBound() && stack.has(INFUSED_PROPERTIES.get()) && !stack.is(AlchemancyTags.Items.DISABLES_INFUSION_ABILITIES))
 		{

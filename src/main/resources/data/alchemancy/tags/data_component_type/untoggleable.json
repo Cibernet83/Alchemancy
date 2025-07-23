@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:max_damage",
+    "minecraft:max_stack_size"
+  ]
+}
