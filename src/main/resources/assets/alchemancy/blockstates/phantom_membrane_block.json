@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "alchemancy:block/phantom_membrane_block"
+    }
+  }
+}

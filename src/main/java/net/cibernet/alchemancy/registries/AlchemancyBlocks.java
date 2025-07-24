@@ -53,6 +53,12 @@ public class AlchemancyBlocks
 	public static final DeferredBlock<FlatHopperBlock> FLAT_HOPPER = REGISTRY.register("flat_hopper", () -> new FlatHopperBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.HOPPER)));
 	public static final DeferredBlock<ChromachineBlock> CHROMACHINE = REGISTRY.register("chromachine", () -> new ChromachineBlock(BlockBehaviour.Properties.of().randomTicks().sound(SoundType.METAL).mapColor(MapColor.METAL).strength(1.5F)));
 
+	public static final DeferredBlock<PhantomMembraneBlock> PHANTOM_MEMBRANE_BLOCK = REGISTRY.register("phantom_membrane_block", () -> new PhantomMembraneBlock(BlockBehaviour.Properties.of()
+			.noOcclusion()
+			.instabreak()
+			.sound(SoundType.SCULK)
+	));
+
 	public static final DeferredBlock<GlowingOrbBlock> GLOWING_ORB = REGISTRY.register("glowing_orb", () -> new GlowingOrbBlock(
 			BlockBehaviour.Properties.of()
 					.noCollission()

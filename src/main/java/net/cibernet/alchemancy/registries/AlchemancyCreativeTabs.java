@@ -97,6 +97,7 @@ public class AlchemancyCreativeTabs
 				output.accept(SPINNER_SPANNER.get());
 				output.accept(QUANTUM_SPANNER.get());
 
+				output.accept(PHANTOM_MEMBRANE_BLOCK.get());
 				output.accept(GUST_BASKET.get());
 				output.accept(FLAT_HOPPER.get());
 				output.accept(CHROMACHINE.get());

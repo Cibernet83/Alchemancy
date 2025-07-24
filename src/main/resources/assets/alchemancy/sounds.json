@@ -28,6 +28,12 @@
     ],
     "subtitle": "subtitles.block.gust_basket.blow"
   },
+  "block.phantom_membrane_block.pop": {
+    "sounds": [
+      "mob/chicken/plop"
+    ],
+    "subtitle": "subtitles.block.phantom_membrane_block.pop"
+  },
   "property.heavy": {
     "sounds": [
       "random/anvil_land"

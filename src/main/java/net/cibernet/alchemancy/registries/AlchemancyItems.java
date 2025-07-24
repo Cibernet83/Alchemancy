@@ -13,7 +13,9 @@ import net.cibernet.alchemancy.properties.special.ClayMoldProperty;
 import net.cibernet.alchemancy.properties.special.HomeRunProperty;
 import net.cibernet.alchemancy.properties.special.WaywardWarpProperty;
 import net.cibernet.alchemancy.properties.voidborn.BlockVacuumProperty;
+import net.cibernet.alchemancy.util.InfusionPropertyDispenseBehavior;
 import net.minecraft.Util;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.component.DataComponents;
@@ -33,6 +35,9 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.SimpleTier;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -59,6 +64,23 @@ public class AlchemancyItems
 			.withProperties(AlchemancyProperties.INFUSION_CODEX)
 			.build(new Item.Properties().stacksTo(1)));
 
+	public static final DeferredItem<BlockItem> PHANTOM_MEMBRANE_BLOCK = REGISTRY.register("phantom_membrane_block", () -> {
+		BlockItem blockItem = new BlockItem(AlchemancyBlocks.PHANTOM_MEMBRANE_BLOCK.get(), new Item.Properties());
+		DispenserBlock.DISPENSER_REGISTRY.put(blockItem.asItem(), (blockSource, item) -> {
+			Level level = blockSource.level();
+			var direction = blockSource.state().getValue(DispenserBlock.FACING);
+			BlockPos pos = blockSource.pos().relative(direction);
+			BlockState state = AlchemancyBlocks.PHANTOM_MEMBRANE_BLOCK.value().defaultBlockState();
+
+			if (!level.getBlockState(pos).canBeReplaced() || !state.canSurvive(level, pos))
+				return item;
+			level.setBlockAndUpdate(pos, state);
+			InfusionPropertyDispenseBehavior.playDefaultParticles(blockSource, direction);
+			item.shrink(1);
+			return item;
+		});
+		return blockItem;
+	});
 	public static final DeferredItem<BlockItem> GUST_BASKET = REGISTRY.registerSimpleBlockItem("gust_basket", AlchemancyBlocks.GUST_BASKET);
 	public static final DeferredItem<BlockItem> FLAT_HOPPER = REGISTRY.registerSimpleBlockItem("flat_hopper", AlchemancyBlocks.FLAT_HOPPER);
 	public static final DeferredItem<BlockItem> CHROMACHINE = REGISTRY.registerSimpleBlockItem("chromachine", AlchemancyBlocks.CHROMACHINE);

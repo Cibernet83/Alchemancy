@@ -9,6 +9,8 @@
 
     "minecraft:feather",
     "minecraft:light_weighted_pressure_plate",
-    "minecraft:phantom_membrane"
+    "minecraft:phantom_membrane",
+
+    "alchemancy:phantom_membrane_block"
   ]
 }

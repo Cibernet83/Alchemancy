@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "render_type": "translucent",
+  "textures": {
+    "all": "alchemancy:block/phantom_membrane_block"
+  }
+}

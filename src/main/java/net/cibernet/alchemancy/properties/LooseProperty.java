@@ -29,16 +29,18 @@ public class LooseProperty extends Property
 			Level level = event.getLevel();
 			BlockPos pos = event.getPos().relative(event.getFace());
 
-			if(FallingBlock.isFree(level.getBlockState(pos.below())) &&
+			boolean levitating = InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.LEVITATING);
+
+			if(FallingBlock.isFree(level.getBlockState(levitating ? pos.above() : pos.below())) &&
 					blockItem.useOn(event.getUseOnContext()).consumesAction())
 			{
-				CustomFallingBlock fallingBlockEntity = CustomFallingBlock.fall(level, pos, level.getBlockState(pos));
+				CustomFallingBlock fallingBlockEntity = CustomFallingBlock.fall(level, pos, level.getBlockState(pos), stack);
 
 				if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.STURDY))
 					fallingBlockEntity.setHasCollision(true);
 
-				if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.LEVITATING))
-					fallingBlockEntity.setGravity(-0.01f);
+				if(levitating)
+					fallingBlockEntity.setGravity(-0.0075f);
 				else if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.ANTIGRAV))
 					fallingBlockEntity.setGravity(0);
 

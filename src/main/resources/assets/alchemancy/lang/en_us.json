@@ -25,6 +25,7 @@
   "block.alchemancy.lead_block": "Block of Lead",
   "block.alchemancy.dreamsteel_block": "Block of Dreamsteel",
 
+  "block.alchemancy.phantom_membrane_block": "Phantom Membrane Block",
   "block.alchemancy.flat_hopper": "Flat Hopper",
   "block.alchemancy.gust_basket": "Gust Basket",
   "block.alchemancy.chromachine": "Chromachine",
@@ -482,6 +483,7 @@
   "subtitles.block.alchemancy_catalyst.use": "Alchemancy Catalyst fires",
   "subtitles.block.glowing_orb.extinguish": "Glowing Orb extinguished",
   "subtitles.block.gust_basket.blow": "Gust Basket blows",
+  "subtitles.block.phantom_membrane_block.pop": "Phantom Membrane Block pops",
 
   "screen.chromachine.title": "Item Chromatizing",
   "screen.chromachine.apply_hex": "Apply Hex",
