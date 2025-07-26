@@ -100,7 +100,7 @@ public class AlchemancyClient
 			int[] colors = stack.getOrDefault(AlchemancyItems.Components.INFUSED_PROPERTIES, InfusedPropertiesComponent.EMPTY).properties().stream()
 					.filter(p -> !p.is(AlchemancyTags.Properties.SLOTLESS)).map(propertyHolder -> propertyHolder.value().getColor(stack)).mapToInt(Integer::intValue).toArray();
 			return colors.length == 0 ? -1 : FastColor.ARGB32.color(255, ColorUtils.interpolateColorsAndWait(1, 2, colors));
-		}), AlchemancyItems.IRON_RING);
+		}), AlchemancyItems.IRON_RING, AlchemancyItems.SPARKLING_BAND);
 
 		event.register(((stack, tintIndex) -> {
 			if(tintIndex != 1)
