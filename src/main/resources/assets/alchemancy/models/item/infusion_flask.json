@@ -1,7 +1,14 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "item/splash_potion",
-    "layer1": "item/potion_overlay"
-  }
+    "layer0": "alchemancy:item/infusion_flask"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "alchemancy:flask_contents": 1
+      },
+      "model": "alchemancy:item/infusion_flask_full"
+    }
+  ]
 }

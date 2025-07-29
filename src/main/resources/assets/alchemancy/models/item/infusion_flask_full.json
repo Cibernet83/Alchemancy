@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "alchemancy:item/infusion_flask",
+    "layer1": "alchemancy:item/infusion_flask_overlay"
+  }
+}

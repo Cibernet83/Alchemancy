@@ -7,6 +7,7 @@ import net.cibernet.alchemancy.client.render.ItemStackHolderRenderer;
 import net.cibernet.alchemancy.client.render.RootedItemRenderer;
 import net.cibernet.alchemancy.item.InnatePropertyItem;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
+import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.IncreaseInfuseSlotsProperty;
 import net.cibernet.alchemancy.registries.*;
 import net.cibernet.alchemancy.util.ColorUtils;
@@ -75,6 +76,10 @@ public class AlchemancyClient
 					}
 				},
 				AlchemancyItems.DREAMSTEEL_BOW);
+
+		registerItemProperties("flask_contents", ((stack, level, entity, seed) ->
+				InfusedPropertiesHelper.getInfusedProperties(stack).stream().filter(propertyHolder -> !propertyHolder.is(AlchemancyTags.Properties.IGNORED_BY_INFUSION_FLASK)).count()),
+				AlchemancyItems.INFUSION_FLASK);
 	}
 
 	private static void registerItemProperties(String key, ItemPropertyFunction function, DeferredItem<?>... items)
