@@ -41,6 +41,8 @@
   ],
   "client": [
     "LivingEntityRendererMixin",
+    "accessors.ClientLevelAccessor",
+    "accessors.LevelRendererAccessor",
     "client.CreativeScreenMixin",
     "client.CustomHeadLayerMixin",
     "client.ElytraLayerMixin",
