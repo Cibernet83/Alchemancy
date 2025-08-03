@@ -2,7 +2,7 @@
   "type": "alchemancy:forged_item",
 
   "properties": [
-    "alchemancy:rotating"
+    "alchemancy:glowing_aura"
   ],
 
   "infusables": [

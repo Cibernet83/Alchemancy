@@ -2,7 +2,7 @@
   "type": "alchemancy:forged_item",
 
   "properties": [
-    "alchemancy:wise"
+    "alchemancy:glowing_aura"
   ],
 
   "infusables": [
