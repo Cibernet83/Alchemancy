@@ -1,0 +1,15 @@
+{
+  "parent": "minecraft:item/generated",
+  "render_type": "translucent",
+  "textures": {
+    "layer0": "alchemancy:item/attraction_ring"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "alchemancy:toggled": 1
+      },
+      "model": "alchemancy:item/attraction_ring_enabled"
+    }
+  ]
+}
