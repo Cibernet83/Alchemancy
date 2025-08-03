@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "#alchemancy:materials/netherite",
     "minecraft:lodestone"
   ]
 }
