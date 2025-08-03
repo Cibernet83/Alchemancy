@@ -7,6 +7,12 @@
     "alchemancy:binding"
   ],
 
+  "infusables": [
+    {
+      "item": "alchemancy:void_pearl"
+    }
+  ],
+
   "catalyst": {
     "item": "minecraft:iron_block"
   },

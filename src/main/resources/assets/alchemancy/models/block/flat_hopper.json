@@ -1,8 +1,15 @@
 {
-  "parent": "minecraft:block/carpet",
-  "ambientocclusion": false,
-  "render_type": "cutout",
-  "textures": {
-    "wool": "minecraft:block/hopper_top"
-  }
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/carpet",
+	"ambientocclusion": false,
+	"render_type": "cutout",
+	"textures": {
+		"wool": "block/hopper_top"
+	},
+	"display": {
+		"head": {
+			"translation": [0, 12, 0]
+		}
+	}
 }

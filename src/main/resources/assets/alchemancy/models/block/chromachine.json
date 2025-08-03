@@ -1,0 +1,98 @@
+{
+	"format_version": "1.21.6",
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:block/block",
+	"render_type": "minecraft:translucent",
+	"textures": {
+		"1": "alchemancy:block/chromachine_top",
+		"2": "alchemancy:block/chromachine_inner",
+		"3": "alchemancy:block/chromachine_side",
+		"4": "alchemancy:block/chromachine_bottom",
+		"5": "alchemancy:block/chromachine_lens",
+		"particle": "alchemancy:block/chromachine_inner"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 12, 16],
+			"faces": {
+				"north": {"uv": [0, 4, 16, 16], "texture": "#3"},
+				"east": {"uv": [0, 4, 16, 16], "texture": "#3"},
+				"south": {"uv": [0, 4, 16, 16], "texture": "#3"},
+				"west": {"uv": [0, 4, 16, 16], "texture": "#3"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#2"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#4"}
+			}
+		},
+		{
+			"from": [0, 12, 0],
+			"to": [16, 12, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 14, 8]},
+			"faces": {
+				"up": {"uv": [0, 0, 16, 16], "texture": "#1"}
+			}
+		},
+		{
+			"from": [0, 14.5, 0],
+			"to": [16, 14.5, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 14, 8]},
+			"faces": {
+				"up": {"uv": [0, 0, 16, 16], "texture": "#5"},
+				"down": {"uv": [0, 0, 16, 16], "texture": "#5"}
+			}
+		},
+		{
+			"from": [0, 16, 0],
+			"to": [16, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 14, 8]},
+			"faces": {
+				"up": {"uv": [0, 0, 16, 16], "texture": "#1"}
+			}
+		},
+		{
+			"from": [16, 12, 0],
+			"to": [16, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 14, 8]},
+			"faces": {
+				"east": {"uv": [0, 0, 16, 4], "texture": "#3"},
+				"west": {"uv": [0, 0, 16, 4], "texture": "#3"}
+			}
+		},
+		{
+			"from": [0, 12, 0],
+			"to": [0, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 14, 8]},
+			"faces": {
+				"east": {"uv": [0, 0, 16, 4], "texture": "#3"},
+				"west": {"uv": [0, 0, 16, 4], "texture": "#3"}
+			}
+		},
+		{
+			"from": [0, 12, 0],
+			"to": [16, 16, 0],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 14, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 4], "texture": "#3"},
+				"south": {"uv": [0, 0, 16, 4], "texture": "#3"}
+			}
+		},
+		{
+			"from": [0, 12, 16],
+			"to": [16, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 14, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 4], "texture": "#3"},
+				"south": {"uv": [0, 0, 16, 4], "texture": "#3"}
+			}
+		}
+	],
+	"groups": [
+		0,
+		{
+			"name": "lens",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"children": [1, 2, 3, 4, 5, 6, 7]
+		}
+	]
+}
