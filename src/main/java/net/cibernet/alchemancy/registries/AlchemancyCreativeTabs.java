@@ -73,6 +73,7 @@ public class AlchemancyCreativeTabs
 				output.accept(PHASING_RING.get());
 				output.accept(UNDYING_RING.get());
 				output.accept(FRIENDSHIP_RING.get());
+				output.accept(ATTRACTION_RING.get());
 				output.accept(VOIDLESS_RING.get());
 				output.accept(SPARKLING_BAND.get());
 
