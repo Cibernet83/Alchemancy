@@ -47,7 +47,7 @@ public class ItemInfusionRecipeComponent extends IngredientRingComponentBase
 	public void build(int componentX, int componentY, int pageNum)
 	{
 		super.build(componentX, componentY, pageNum);
-		ingredients = new ArrayList<>(recipe.getInfusables());
-		ingredients.addAll(recipe.getInfusedProperties().stream().map(propertyHolder -> Ingredient.of(InfusedPropertiesHelper.createPropertyIngredient(propertyHolder))).toList());
+		ingredients = new ArrayList<>(recipe.getInfusedProperties().stream().map(propertyHolder -> Ingredient.of(InfusedPropertiesHelper.createPropertyIngredient(propertyHolder))).toList());
+		ingredients.addAll(recipe.getInfusables());
 	}
 }

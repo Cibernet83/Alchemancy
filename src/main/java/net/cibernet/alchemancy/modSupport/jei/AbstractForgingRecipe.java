@@ -71,16 +71,17 @@ public abstract class AbstractForgingRecipe<T extends AbstractForgeRecipe<?>> im
 		List<ItemStack> propertyCapsules = recipe.getInfusedProperties().stream().map(InfusedPropertiesHelper::createPropertyIngredient).toList();
 		float totalSize = ingredients.size() + propertyCapsules.size();
 
-		for(int i = 0; i < ingredients.size(); i++)
-			builder.addInputSlot(
-					xOff + (int) (RADIUS * Mth.sin(Mth.PI + Mth.TWO_PI * (i / totalSize))),
-					yOff + (int) (RADIUS * Mth.cos(Mth.PI + Mth.TWO_PI * (i / totalSize))))
-					.addIngredients(ingredients.get(i));
 		for(int i = 0; i < propertyCapsules.size(); i++)
 			builder.addInputSlot(
-					xOff + (int) (RADIUS * Mth.sin(Mth.PI + Mth.TWO_PI * ((i + ingredients.size()) / totalSize))),
-					yOff + (int) (RADIUS * Mth.cos(Mth.PI + Mth.TWO_PI * ((i + ingredients.size()) / totalSize))))
+					xOff - (int) (RADIUS * Mth.sin(Mth.PI + Mth.TWO_PI * ((i) / totalSize))),
+					yOff + (int) (RADIUS * Mth.cos(Mth.PI + Mth.TWO_PI * ((i) / totalSize))))
 					.addItemStack(propertyCapsules.get(i));
+
+		for(int i = 0; i < ingredients.size(); i++)
+			builder.addInputSlot(
+							xOff - (int) (RADIUS * Mth.sin(Mth.PI + Mth.TWO_PI * ((i + propertyCapsules.size()) / totalSize))),
+							yOff + (int) (RADIUS * Mth.cos(Mth.PI + Mth.TWO_PI * ((i + propertyCapsules.size()) / totalSize))))
+					.addIngredients(ingredients.get(i));
 
 		if(recipe.getCatalyst().isPresent())
 			builder.addInputSlot(xOff, yOff).addIngredients(recipe.getCatalyst().get());
