@@ -14,6 +14,7 @@ import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyRecipeTypes;
+import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -102,7 +103,7 @@ public class AlchemancyJeiPlugin implements IModPlugin
 		for (RecipeHolder<AbstractForgeRecipe<?>> recipe : forgeRecipes)
 		{
 			if(
-					addTo(transmutationRecipes, ItemTransmutationRecipe.class, recipe) ||
+					(!isSecretTransmutation(recipe) && addTo(transmutationRecipes, ItemTransmutationRecipe.class, recipe)) ||
 					addToExact(propertyWarpRecipes, PropertyWarpRecipe.class, recipe) ||
 					addToExact(forgeItemRecipes, ForgeItemRecipe.class, recipe) ||
 					addToExact(forgePropertyRecipes, ForgePropertyRecipe.class, recipe)
@@ -138,6 +139,10 @@ public class AlchemancyJeiPlugin implements IModPlugin
 			return true;
 		}
 		return false;
+	}
+
+	private boolean isSecretTransmutation(RecipeHolder<AbstractForgeRecipe<?>> recipe) {
+		return AlchemancyItems.SECRET_TRANSMUTATIONS.stream().anyMatch(itemHolder -> itemHolder.value().equals(recipe.value().getResultItem(CommonUtils.registryAccessStatic()).getItem()));
 	}
 
 	public <T extends AbstractForgeRecipe<?>> boolean addTo(List<T> list, Class<T> clazz, RecipeHolder<AbstractForgeRecipe<?>> holder)

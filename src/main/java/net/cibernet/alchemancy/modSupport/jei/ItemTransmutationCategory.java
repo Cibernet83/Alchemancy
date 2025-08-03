@@ -11,6 +11,7 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.crafting.ItemTransmutationRecipe;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
+import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.component.DataComponents;
@@ -69,10 +70,7 @@ public class ItemTransmutationCategory implements IRecipeCategory<ItemTransmutat
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, ItemTransmutationRecipe recipe, IFocusGroup focuses)
 	{
-		ItemStack output = recipe.getResultItem(Minecraft.getInstance().level.registryAccess());
-		if(AlchemancyItems.SECRET_TRANSMUTATIONS.stream().anyMatch(itemHolder -> itemHolder.value().equals(output.getItem())))
-			return;
-
+		ItemStack output = recipe.getResultItem(CommonUtils.registryAccessStatic());
 		Optional<Ingredient> catalystIngredient = recipe.getCatalyst();
 
 		if(catalystIngredient.isPresent() && recipe.getCatalystName().isPresent())
