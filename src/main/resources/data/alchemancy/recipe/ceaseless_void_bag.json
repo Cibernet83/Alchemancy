@@ -3,6 +3,7 @@
 
   "properties": [
     "alchemancy:hollow",
+    "alchemancy:item_pull",
     "alchemancy:voidborn",
     "alchemancy:vacuuming"
   ],
