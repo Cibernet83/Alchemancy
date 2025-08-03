@@ -1,0 +1,11 @@
+{
+  "type": "alchemancy:forged_property",
+  "properties": [
+    "alchemancy:flimsy",
+    "alchemancy:reaping"
+  ],
+
+  "result": [
+    "alchemancy:flimsy"
+  ]
+}
