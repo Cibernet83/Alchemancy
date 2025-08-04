@@ -218,11 +218,11 @@ public class AlchemancyItems
 			.component(Components.INNATE_PROPERTIES.get(), new InfusedPropertiesComponent(List.of(AlchemancyProperties.FLAME_EMPEROR)))));
 
 	public static final DeferredItem<Item> LEADEN_APPLE = REGISTRY.registerSimpleItem("leaden_apple", new Item.Properties().rarity(Rarity.RARE).food(Foods.LEADEN_APPLE));
-	public static final DeferredItem<InnatePropertyItem> LEADEN_CLOTH = REGISTRY.register("leaden_cloth", () -> new InnatePropertyItem.Builder()
+	public static final DeferredItem<InnatePropertyItem> LEADEN_CLOTH = REGISTRY.register("leaden_sponge", () -> new InnatePropertyItem.Builder()
 			.withProperties(AlchemancyProperties.INFUSION_CLEANSE)
 			.stacksTo(1)
 			.build());
-	public static final DeferredItem<InnatePropertyItem> DIVINE_CLOTH = REGISTRY.register("divine_cloth", () -> new InnatePropertyItem.Builder()
+	public static final DeferredItem<InnatePropertyItem> DIVINE_CLOTH = REGISTRY.register("divine_sponge", () -> new InnatePropertyItem.Builder()
 			.withProperties(AlchemancyProperties.DIVINE_CLEANSE)
 			.stacksTo(1)
 			.build());
