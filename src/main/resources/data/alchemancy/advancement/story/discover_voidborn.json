@@ -1,0 +1,31 @@
+{
+  "parent": "alchemancy:story/apply_property",
+  "criteria": {
+    "discover_property": {
+      "conditions": {
+        "property": "alchemancy:voidborn"
+      },
+      "trigger": "alchemancy:discover_property"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancements.story.alchemancy:discover_voidborn.description"
+    },
+    "hidden": false,
+    "icon": {
+      "count": 1,
+      "id": "alchemancy:void_pearl"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancements.story.alchemancy:discover_voidborn.title"
+    }
+  },
+  "requirements": [
+    [
+      "discover_property"
+    ]
+  ]
+}

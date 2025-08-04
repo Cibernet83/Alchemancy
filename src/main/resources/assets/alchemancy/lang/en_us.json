@@ -479,6 +479,8 @@
   "advancements.story.alchemancy:find_netherite.description": "Perhaps Netherite might have some alchemical applications...",
   "advancements.story.alchemancy:find_mace.title": "Stop, Hammertime!",
   "advancements.story.alchemancy:find_mace.description": "Maces are pretty cool. But with the power of Alchemancy, we can make them much cooler...",
+  "advancements.story.alchemancy:discover_voidborn.title": "Echoes From The Abyss",
+  "advancements.story.alchemancy:discover_voidborn.description": "Discover Voidborn by tossing an item with both Depth Dweller and Undying into the void",
 
   "subtitles.block.alchemancy_catalyst.activate": "Alchemancy Catalyst activates",
   "subtitles.block.alchemancy_catalyst.use": "Alchemancy Catalyst fires",

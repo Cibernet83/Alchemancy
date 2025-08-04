@@ -3,11 +3,15 @@ package net.cibernet.alchemancy.properties;
 import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.network.S2CDiscoverCodexIngredientsPacket;
+import net.cibernet.alchemancy.network.S2CUnlockCodexEntriesPacket;
+import net.cibernet.alchemancy.registries.AlchemancyCriteriaTriggers;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.cibernet.alchemancy.util.ClientUtil;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.dedicated.DedicatedServer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.FastColor;
@@ -24,6 +28,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 @EventBusSubscriber
@@ -103,6 +108,13 @@ public class DepthDwellerProperty extends Property {
 
 			InfusedPropertiesHelper.addProperty(stack, AlchemancyProperties.VOIDBORN);
 			itemEntity.setItem(ForgeRecipeGrid.resolveInteractions(stack, itemEntity.level()));
+
+			if(itemEntity.getOwner() instanceof ServerPlayer serverPlayer)
+			{
+				ItemStack newItem = itemEntity.getItem();
+				AlchemancyCriteriaTriggers.DISCOVER_PROPERTY.get().trigger(serverPlayer, stack);
+				AlchemancyCriteriaTriggers.DISCOVER_PROPERTY.get().trigger(serverPlayer, newItem);
+			}
 
 			LightningBolt lightningbolt = EntityType.LIGHTNING_BOLT.create(itemEntity.level());
 			if (lightningbolt != null) {
