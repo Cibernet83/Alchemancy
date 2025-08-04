@@ -213,7 +213,11 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.GLIDER, PropertyFunction.WHILE_WORN_CHESTPLATE, "Lets the user glide as if they were wearing an {item Elytra} as long as the item is more than 1 point of durability away from breaking.");
 
 		addCodexFlavor(AlchemancyProperties.CRAFTY, "Crafting on the go");
-		addCodexFunction(AlchemancyProperties.CRAFTY, PropertyFunction.WHEN_USED, "Opens the {item Crafting Table} interface");
+		addCodexFunction(AlchemancyProperties.CRAFTY, PropertyFunction.WHEN_USED, "Opens the {item Crafting Table} interface.");
+
+		addCodexFlavor(AlchemancyProperties.STONECUTTING, "To show you the power of Stonecutting, I sawed this rock in half!");
+		addCodexFunction(AlchemancyProperties.STONECUTTING, PropertyFunction.WHEN_USED, "Opens the {item Stonecutter} interface.");
+		addCodexFunction(AlchemancyProperties.STONECUTTING, PropertyFunction.WHEN_USED_BLOCK, "If the user isn't crouching and {property alchemancy:interactable} is present on the item, the targeted block is cut into a random variant obtainable from the {item Stonecutter}.");
 
 		addCodexFlavor(AlchemancyProperties.ASSEMBLING, "Autocrafting on the go");
 		addCodexFunction(AlchemancyProperties.ASSEMBLING, PropertyFunction.WHILE_EQUIPPED, "Attempts to craft as many replicas of the item by consuming resources in the user's inventory until the item reaches its stack limit.");
@@ -833,7 +837,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.RANDOM, PropertyFunction.OTHER, "Triggers the effect of ANY random {system Infusion} when an {function Infusion Function} is triggered.");
 
 		addCodexFlavor(AlchemancyProperties.AUXILIARY, "One ring to rule them all... or maybe 35...");
-		addCodexFunction(AlchemancyProperties.AUXILIARY, PropertyFunction.OTHER, "Effects triggered by {function while_held_mainhand}, {function on_attack}, {function on_kill}, and {function on_death} trigger for this item from anywhere in the user's inventory as if they were holding it in their Main Hand.");
+		addCodexFunction(AlchemancyProperties.AUXILIARY, PropertyFunction.OTHER, "Effects triggered by {function while_held_mainhand}, {function on_attack}, and {function on_kill} trigger for this item from anywhere in the user's inventory as if they were holding it in their Main Hand.");
 
 		addCodexFlavor(AlchemancyProperties.WORLD_OBLITERATOR, "You are no god... but I shall feast upon your essence regardless!");
 		addCodexFunction(AlchemancyProperties.WORLD_OBLITERATOR, PropertyFunction.WHILE_USING, "Rapidly breaks and absorbs blocks within a 5-block radius, consuming 1 durability point for each block destroyed.");

@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:stonecutting.flavor"
+  },
+  "functions": [
+    "when_used",
+    "when_used_block"
+  ]
+}

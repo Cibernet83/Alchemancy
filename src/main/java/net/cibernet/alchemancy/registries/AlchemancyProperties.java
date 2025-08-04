@@ -132,6 +132,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, GliderProperty> GLIDER = REGISTRY.register("glider", GliderProperty::new);
 
 	public static final DeferredHolder<Property, CraftyProperty> CRAFTY = REGISTRY.register("crafty", CraftyProperty::new);
+	public static final DeferredHolder<Property, StonecuttingProperty> STONECUTTING = REGISTRY.register("stonecutting", StonecuttingProperty::new);
 	public static final DeferredHolder<Property, AutosmeltProperty> SMELTING = REGISTRY.register("smelting", AutosmeltProperty::new);
 	public static final DeferredHolder<Property, AssembleProperty> ASSEMBLING = REGISTRY.register("assembling", AssembleProperty::new);
 	public static final DeferredHolder<Property, AssimilatingProperty> ASSIMILATING = REGISTRY.register("assimilating", AssimilatingProperty::new);
