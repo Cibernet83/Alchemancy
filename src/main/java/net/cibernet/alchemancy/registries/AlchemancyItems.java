@@ -280,10 +280,10 @@ public class AlchemancyItems
 					.rarity(Rarity.EPIC)));
 
 	public static final DeferredItem<Item> POCKET_BLACK_HOLE = REGISTRY.register("pocket_black_hole", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.THROWABLE, AlchemancyProperties.VOIDTOUCH).stacksTo(8).build());
-	public static final DeferredItem<Item> CEASELESS_VOID_BAG = REGISTRY.register("ceaseless_void_bag", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.CEASELESS_VOID).stacksTo(1)
-			.use(60, UseAnim.BOW)
-			.durability(16, Ingredient.of(AlchemancyItems.VOID_PEARL))
-			.build());
+//	public static final DeferredItem<Item> CEASELESS_VOID_BAG = REGISTRY.register("ceaseless_void_bag", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.CEASELESS_VOID).stacksTo(1)
+//			.use(60, UseAnim.BOW)
+//			.durability(16, Ingredient.of(AlchemancyItems.VOID_PEARL))
+//			.build());
 
 	public static final DeferredItem<InnatePropertyItem> UNSHAPED_CLAY = REGISTRY.register("unshaped_clay", () -> new InnatePropertyItem.Builder()
 			.withProperties(AlchemancyProperties.CLAY_MOLD)

@@ -88,6 +88,7 @@ public class AlchemancyDatagenHandler
 			AlchemancyProperties.SMITING,
 			AlchemancyProperties.BATTERY_POWERED,
 			AlchemancyProperties.LIVING_BATTERY,
+			AlchemancyProperties.CEASELESS_VOID,
 
 			//Obtainable but not via the forge
 			AlchemancyProperties.UNMOVABLE

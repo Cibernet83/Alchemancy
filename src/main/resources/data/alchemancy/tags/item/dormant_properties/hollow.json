@@ -14,7 +14,6 @@
     "minecraft:chest_minecart",
     "minecraft:hopper_minecart",
 
-    "alchemancy:gust_basket",
-    "alchemancy:ceaseless_void_bag"
+    "alchemancy:gust_basket"
   ]
 }

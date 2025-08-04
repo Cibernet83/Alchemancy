@@ -116,7 +116,6 @@ public class AlchemancyCreativeTabs
 				output.accept(BLACK_HOLE_HOE.get());
 
 				output.accept(POCKET_BLACK_HOLE.get());
-				output.accept(CEASELESS_VOID_BAG.get());
 
 				output.accept(INFUSION_CODEX.get());
 			}).build());

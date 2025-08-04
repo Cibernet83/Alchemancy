@@ -151,12 +151,6 @@
       },
       "trigger": "alchemancy:discover_property"
     },
-    "discover_alchemancy:ceaseless_void": {
-      "conditions": {
-        "property": "alchemancy:ceaseless_void"
-      },
-      "trigger": "alchemancy:discover_property"
-    },
     "discover_alchemancy:charred": {
       "conditions": {
         "property": "alchemancy:charred"
@@ -1554,9 +1548,6 @@
     ],
     [
       "discover_alchemancy:voidborn"
-    ],
-    [
-      "discover_alchemancy:ceaseless_void"
     ],
     [
       "discover_alchemancy:voidtouch"

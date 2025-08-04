@@ -497,8 +497,8 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFlavor(AlchemancyProperties.VOIDTOUCH, "Existence is but an opinion");
 		addCodexFunction(AlchemancyProperties.VOIDTOUCH, PropertyFunction.ON_ATTACK, "Deletes the target from existence, completely destroying the item in the process.");
 
-		addCodexFlavor(AlchemancyProperties.CEASELESS_VOID, "Makes you suck bigly");
-		addCodexFunction(AlchemancyProperties.CEASELESS_VOID, PropertyFunction.AFTER_USE, "Attempts to pick up as many items currently present in the world as the user's inventory allows.");
+		//addCodexFlavor(AlchemancyProperties.CEASELESS_VOID, "Makes you suck bigly");
+		//addCodexFunction(AlchemancyProperties.CEASELESS_VOID, PropertyFunction.AFTER_USE, "Attempts to pick up as many items currently present in the world as the user's inventory allows.");
 
 		addCodexFlavor(AlchemancyProperties.KINETIC_GRAB, "Wanna have a bad time?");
 		addCodexFunction(AlchemancyProperties.KINETIC_GRAB, PropertyFunction.WHEN_USED_ENTITY, "Holds the target entity in front of the user for as long as the item is used.");

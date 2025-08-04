@@ -4,6 +4,7 @@ import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -12,13 +13,18 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.entity.EntityTypeTest;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
+import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Collection;
+import java.util.List;
 
 public class BigSuckProperty extends Property {
 	@Override
@@ -100,6 +106,11 @@ public class BigSuckProperty extends Property {
 		}
 
 		if (pickedUp) projectile.discard();
+	}
+
+	@Override
+	public Collection<ItemStack> populateCreativeTab(DeferredItem<Item> capsuleItem, Holder<Property> holder) {
+		return List.of();
 	}
 
 	@Override
