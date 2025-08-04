@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "alchemancy:item/divine_cloth"
+    "layer0": "alchemancy:item/nimbus_belt"
   }
 }

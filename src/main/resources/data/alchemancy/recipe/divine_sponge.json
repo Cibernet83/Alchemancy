@@ -8,11 +8,11 @@
   ],
 
   "catalyst": {
-    "item": "alchemancy:leaden_cloth"
+    "item": "alchemancy:leaden_sponge"
   },
 
   "result": {
     "count": 1,
-    "id": "alchemancy:divine_cloth"
+    "id": "alchemancy:divine_sponge"
   }
 }

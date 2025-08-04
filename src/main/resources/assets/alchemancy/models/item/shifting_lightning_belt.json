@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "alchemancy:item/leaden_cloth"
+    "layer0": "alchemancy:item/shifting_lightning_belt"
   }
 }

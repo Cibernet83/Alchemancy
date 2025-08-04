@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "#": {
-      "tag": "minecraft:wool"
+      "item": "minecraft:sponge"
     },
     "X": {
       "item": "alchemancy:lead_ingot"
@@ -15,7 +15,7 @@
     "XXX"
   ],
   "result": {
-    "id": "alchemancy:leaden_cloth"
+    "id": "alchemancy:leaden_sponge"
   },
   "show_notification": true
 }
