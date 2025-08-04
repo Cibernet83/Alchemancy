@@ -131,7 +131,13 @@ public class TintedProperty extends Property implements IDataHolder<Integer[]>, 
 	@Override
 	public int getColor(ItemStack stack) {
 		var colors = getData(stack);
-		return colors.length == 0 ? ColorUtils.interpolateColorsAndWait(1, 1, DYE_COLORS) : ColorUtils.interpolateColorsOverTime(1, Arrays.stream(colors).mapToInt(Integer::valueOf).toArray());
+
+		if(colors.length == 0 && InfusedPropertiesHelper.hasDormantProperty(stack, asHolder()))
+			return -1;
+
+		return colors.length == 0 ?
+				ColorUtils.interpolateColorsAndWait(1, 1, DYE_COLORS) :
+				ColorUtils.interpolateColorsOverTime(1, Arrays.stream(colors).mapToInt(Integer::valueOf).toArray());
 	}
 
 	private Integer[] toIntegerArray(int... numbers) {
@@ -141,7 +147,8 @@ public class TintedProperty extends Property implements IDataHolder<Integer[]>, 
 
 	@Override
 	public Component getName(ItemStack stack) {
-		return super.getName(stack).copy().withColor(getColor(stack));
+		int[] colors = Arrays.stream(getDyeColor(stack)).mapToInt(Integer::valueOf).toArray();
+		return colors.length == 0 ? super.getName(stack) : super.getName(stack).copy().withColor(ColorUtils.interpolateColorsOverTime(1, colors));
 	}
 
 	@Override
