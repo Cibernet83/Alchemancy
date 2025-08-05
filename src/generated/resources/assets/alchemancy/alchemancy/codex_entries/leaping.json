@@ -3,6 +3,7 @@
     "translate": "infusion_codex.alchemancy:leaping.flavor"
   },
   "functions": [
-    "while_worn_lower"
+    "while_worn_leggings",
+    "while_worn_boots"
   ]
 }

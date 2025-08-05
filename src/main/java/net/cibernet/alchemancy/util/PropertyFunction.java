@@ -25,8 +25,6 @@ public enum PropertyFunction implements StringRepresentable {
 	WHILE_WORN_CHESTPLATE("while_worn_chestplate"),
 	WHILE_WORN_LEGGINGS("while_worn_leggings"),
 	WHILE_WORN_BOOTS("while_worn_boots"),
-	WHILE_WORN_LOWER("while_worn_lower"),
-	WHILE_WORN_MIDDLE("while_worn_middle"),
 	WHILE_WORN("while_worn"),
 	WHILE_EQUIPPED("while_equipped"),
 	WHILE_HELD("while_held"),
