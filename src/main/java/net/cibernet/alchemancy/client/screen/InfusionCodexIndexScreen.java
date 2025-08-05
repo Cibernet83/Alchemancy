@@ -41,7 +41,7 @@ public class InfusionCodexIndexScreen extends Screen {
 
 	private SortOrder sortOrder = SortOrder.ALPHABETICAL;
 
-	private int unlockedEntries = 0;
+	private int unlockedEntryCount = 0;
 	private ObjectArrayList<Map.Entry<Holder<Property>, CodexEntryReloadListenener.CodexEntry>> entries;
 
 	public InfusionCodexIndexScreen(Component title) {
@@ -78,8 +78,8 @@ public class InfusionCodexIndexScreen extends Screen {
 
 		MutableComponent title = Component.empty().append(this.title);
 		if(inspectedItem.isEmpty() && !InfusionCodexSaveData.bypassesUnlocks())
-			title = title.append(Component.translatable("screen.infusion_codex.unlocked_counter", unlockedEntries, entries.size())
-					.withStyle(unlockedEntries == entries.size() ? ChatFormatting.GOLD : ChatFormatting.WHITE));
+			title = title.append(Component.translatable("screen.infusion_codex.unlocked_counter", unlockedEntryCount, entries.size())
+					.withStyle(unlockedEntryCount == entries.size() ? ChatFormatting.GOLD : ChatFormatting.WHITE));
 
 		header.addChild(new StringWidget(200, !inspectedItem.isEmpty() ? 18 : 9, title, this.font).alignCenter());
 
@@ -125,17 +125,24 @@ public class InfusionCodexIndexScreen extends Screen {
 		var entrySet = inspectedItem.isEmpty() ? CodexEntryReloadListenener.getEntries() : InfusionCodexProperty.inspectItem(minecraft.player, inspectedItem);
 
 		var objectarraylist = new ObjectArrayList<>(entrySet.entrySet());
-		objectarraylist.sort(Comparator.comparing(entry -> entry.getKey().getKey()));
-		objectarraylist.sort((o1, o2) -> sortOrder.sortFunction.compare(o1.getKey(), o2.getKey()));
-		objectarraylist.sort(Comparator.comparing(entry -> !InfusionCodexSaveData.isUnlocked(entry.getKey())));
-
 		objectarraylist.removeIf(entry -> !InfusionCodexSaveData.isUnlocked(entry.getKey()) && entry.getKey().is(AlchemancyTags.Properties.CODEX_HIDDEN));
-
-		unlockedEntries = (int) objectarraylist.stream().filter(entry -> InfusionCodexSaveData.isUnlocked(entry.getKey())).count();
+		unlockedEntryCount = (int) objectarraylist.stream().filter(entry -> InfusionCodexSaveData.isUnlocked(entry.getKey())).count();
+		
 		entries = objectarraylist;
+		sortEntries();
+	}
+
+	private void sortEntries() {
+
+		entries.sort(Comparator.comparing(entry -> entry.getKey().getKey()));
+		entries.sort((o1, o2) -> sortOrder.sortFunction.compare(o1.getKey(), o2.getKey()));
+		entries.sort(Comparator.comparing(entry -> !InfusionCodexSaveData.isUnlocked(entry.getKey())));
 	}
 
 	private void updatePropertyList() {
+
+		sortEntries();
+
 		var scroll = propertyList == null ? 0 : propertyList.getScrollAmount();
 
 		removeWidget(propertyList);
