@@ -43,7 +43,8 @@ public class PlayerHeadTransmutationRecipe extends ItemTransmutationRecipe
 	public ItemStack getResultItem(HolderLookup.Provider registries)
 	{
 		ItemStack result = super.getResultItem(registries).copy();
-		if(ServerLifecycleHooks.getCurrentServer() == null || !(ServerLifecycleHooks.getCurrentServer() instanceof DedicatedServer) && Minecraft.getInstance().player != null)
+		if((ServerLifecycleHooks.getCurrentServer() == null || !(ServerLifecycleHooks.getCurrentServer() instanceof DedicatedServer)) &&
+				Minecraft.getInstance().player != null)
 			result.set(DataComponents.PROFILE, new ResolvableProfile(Minecraft.getInstance().player.getGameProfile()));
 		return result;
 	}
