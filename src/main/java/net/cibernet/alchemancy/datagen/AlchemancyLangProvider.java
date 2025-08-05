@@ -43,7 +43,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.SHOCKING, PropertyFunction.ON_ATTACK, "Deal 4 points of chaining {shock Electric} damage to the target and nearby entities. The amount of damage dealt decays over distance and for each consecutive hit.");
 		addCodexFunction(AlchemancyProperties.SHOCKING, PropertyFunction.WHILE_ROOTED, "Constantly emits an electrical field that deals 3 points of chaining {shock Electric} damage to nearby entities. The amount of damage dealt decays over distance and for each consecutive hit.");
 
-		addCodexFlavor(AlchemancyProperties.PHOTOSYNTHETIC, "A growing grass boy's favorite meal");
+		addCodexFlavor(AlchemancyProperties.PHOTOSYNTHETIC, "PHOTOSINTHESIZE!");
 		addCodexFunction(AlchemancyProperties.PHOTOSYNTHETIC, PropertyFunction.WHILE_IN_INVENTORY, "Repairs the item for 1 durability point every 30 seconds while the user is under direct sunlight.");
 		addCodexFunction(AlchemancyProperties.PHOTOSYNTHETIC, PropertyFunction.WHILE_ROOTED, "Repairs the item for 1 durability point every 15 seconds while under direct sunlight.");
 
@@ -151,7 +151,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.MINING, PropertyFunction.ATTRIBUTE_MODIFIER, "Allows the item to break Pickaxe-related blocks, starting at wooden tier if the item isn't already a tool.");
 		addCodexFunction(AlchemancyProperties.MINING, PropertyFunction.WHEN_SHOT, "Breaks Pickaxe-related blocks on impact. The faster the projectile goes, the more likely it is to continue its trajectory after breaking a block.");
 
-		addCodexFlavor(AlchemancyProperties.CHOPPING, ""); //TODO
+		addCodexFlavor(AlchemancyProperties.CHOPPING, "There must be some trees around here somewhere");
 		addCodexFunction(AlchemancyProperties.CHOPPING, PropertyFunction.ATTRIBUTE_MODIFIER, "Allows the item to break Axe-related blocks, starting at wooden tier if the item isn't already a tool.");
 		addCodexFunction(AlchemancyProperties.CHOPPING, PropertyFunction.WHEN_USED_BLOCK, "Strips {item Logs} and removes wax from {item Copper Blocks}");
 		addCodexFunction(AlchemancyProperties.CHOPPING, PropertyFunction.WHEN_SHOT, "Breaks Axe-related blocks on impact. The faster the projectile goes, the more likely it is to continue its trajectory after breaking a block.");
@@ -161,7 +161,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.DIGGING, PropertyFunction.WHEN_USED_BLOCK, "Can turn {item Dirt} into {item Dirt Path} and put out {item Campfires}");
 		addCodexFunction(AlchemancyProperties.DIGGING, PropertyFunction.WHEN_SHOT, "Breaks Shovel-related blocks on impact. The faster the projectile goes, the more likely it is to continue its trajectory after breaking a block.");
 
-		addCodexFlavor(AlchemancyProperties.REAPING, ""); //TODO
+		addCodexFlavor(AlchemancyProperties.REAPING, "Reap what you sow");
 		addCodexFunction(AlchemancyProperties.REAPING, PropertyFunction.ATTRIBUTE_MODIFIER, "Allows the item to break Hoe-related blocks, starting at wooden tier if the item isn't already a tool.");
 		addCodexFunction(AlchemancyProperties.REAPING, PropertyFunction.WHEN_USED_BLOCK, "Can till {item Dirt} into {item Farmland}");
 		addCodexFunction(AlchemancyProperties.REAPING, PropertyFunction.WHEN_SHOT, "Breaks Hoe-related blocks on impact. The faster the projectile goes, the more likely it is to continue its trajectory after breaking a block.");
@@ -224,8 +224,8 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.ASSEMBLING, PropertyFunction.WHILE_EQUIPPED, "Attempts to craft as many replicas of the item by consuming resources in the user's inventory until the item reaches its stack limit.");
 
 		addCodexFlavor(AlchemancyProperties.ASSIMILATING, ""); //TODO
-		addCodexFunction(AlchemancyProperties.ASSIMILATING, PropertyFunction.WHILE_EQUIPPED, "Automatically absorbs any other items like it in the user's inventory when low on durability, replenishing the item's durability in the process. If {property alchemancy:assembling} is present, the item will be able to absorb ingredients used to craft itself inside of the user's inventory as long as they can all create a new item.");
-		addCodexFunction(AlchemancyProperties.ASSIMILATING, PropertyFunction.STACKED_OVER, "Absorbs similar items stacked over the item to replenish its durability.");
+		addCodexFunction(AlchemancyProperties.ASSIMILATING, PropertyFunction.WHILE_EQUIPPED, "Automatically absorbs any other items like it in the user's inventory when low on durability, replenishing the item's durability in the process and absorbing the assimilated item's {system Infusions} and Enchantments when possible. If {property alchemancy:assembling} is present, the item will be able to absorb ingredients used to craft itself inside of the user's inventory as long as they can all create a new item.");
+		addCodexFunction(AlchemancyProperties.ASSIMILATING, PropertyFunction.STACKED_OVER, "Absorbs similar items stacked over the item to replenish its durability and apply the assimilated item's {system Infusions} and Enchantments when possible.");
 
 		addCodexFlavor(AlchemancyProperties.SMELTING, "Heating up your tools can be a good idea");
 		addCodexFunction(AlchemancyProperties.SMELTING, PropertyFunction.BLOCK_DESTROYED, "Smelts all dropped items at the cost of 1 {fire Fuel} point per item.");
@@ -239,7 +239,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.SWIFT, PropertyFunction.WHILE_HELD_MAINHAND, "Increases the user's {attribute Attack Speed} by 25%.");
 		addCodexFunction(AlchemancyProperties.SWIFT, PropertyFunction.WHILE_USING, "Halves the item's use time.");
 
-		addCodexFlavor(AlchemancyProperties.SLUGGISH, ""); //TODO
+		addCodexFlavor(AlchemancyProperties.SLUGGISH, "Taking it slooooooow");
 		addCodexFunction(AlchemancyProperties.SLUGGISH, PropertyFunction.WHILE_WORN, "Reduces the user's {attribute Movement Speed} by 55%.");
 		addCodexFunction(AlchemancyProperties.SLUGGISH, PropertyFunction.ATTRIBUTE_MODIFIER, "Reduces {attribute Attack Speed} by 55%.");
 		addCodexFunction(AlchemancyProperties.SLUGGISH, PropertyFunction.ON_ATTACK, "Applies Slowness II to the target for 10 seconds.");
@@ -337,7 +337,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFlavor(AlchemancyProperties.WIND_CHARGED, "Do the windy thing");
 		addCodexFunction(AlchemancyProperties.WIND_CHARGED, PropertyFunction.ON_CRIT, "Creates a burst of wind around the target, greatly damaging the item or destroying it in the process.");
 
-		addCodexFlavor(AlchemancyProperties.SMITING, "Behold the God of Thunder!");
+		addCodexFlavor(AlchemancyProperties.SMITING, "Like lightning in a bottle");
 		addCodexFunction(AlchemancyProperties.SMITING, PropertyFunction.ON_CRIT, "Creates a {item Lightning Bolt} at the target's position, greatly damaging the item or destroying it in the process.");
 
 		addCodexFlavor(AlchemancyProperties.CRACKLING, "Be the light of the party");
@@ -351,7 +351,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.COZY, PropertyFunction.WHILE_WORN, "Increases the rate at which the user thaws out, enough to prevent {item Powder Snow} from having any effect.");
 		addCodexFunction(AlchemancyProperties.COZY, PropertyFunction.WHILE_ROOTED, "Swiftly thaws out all entities standing inside of the item.");
 
-		addCodexFlavor(AlchemancyProperties.WAXED, ""); //TODO
+		addCodexFlavor(AlchemancyProperties.WAXED, "Forget sunscreen, we got BEES!");
 		addCodexFunction(AlchemancyProperties.WAXED, PropertyFunction.RECEIVE_DAMAGE_WORN, "Prevents the user from taking {fire Fire} damage up to 50 times before the {system Infusion} is removed.");
 
 		addCodexFlavor(AlchemancyProperties.FIRE_RESISTANT, "Someone remembered to put on sunscreen");
@@ -804,7 +804,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.REPELLED, PropertyFunction.WHEN_DROPPED, "Repels the item from every Entity in an 8-block radius.");
 		addCodexFunction(AlchemancyProperties.REPELLED, PropertyFunction.WHEN_SHOT, "Repels the projectile from every Entity in an 8-block radius.");
 
-		addCodexFlavor(AlchemancyProperties.MAGNETIC, ""); //TODO
+		addCodexFlavor(AlchemancyProperties.MAGNETIC, "Become the master of magnetism!");
 		addCodexFunction(AlchemancyProperties.MAGNETIC, PropertyFunction.WHILE_USING, "Pulls in Iron Golems and attempts to strip all Entities in a 20-block radius from their {property alchemancy:ferrous}{system -Infused} or {system Dormant} equipped items.");
 		addCodexFunction(AlchemancyProperties.MAGNETIC, PropertyFunction.WHILE_ROOTED, "Pulls in Iron Golems and attempts to strip all Entities in a 20-block radius from their {property alchemancy:ferrous}{system -Infused} or {system Dormant} equipped items.");
 		addCodexFunction(AlchemancyProperties.MAGNETIC, PropertyFunction.WHILE_EQUIPPED, "Repels the user from other Entities with {property alchemancy:magnetic} items equipped in a 5-block radius.");
