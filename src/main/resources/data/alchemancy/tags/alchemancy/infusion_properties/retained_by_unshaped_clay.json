@@ -2,6 +2,8 @@
   "values": [
     "alchemancy:absorbent",
     "alchemancy:loyal",
-    "alchemancy:tinted"
+    "alchemancy:item_pull",
+    "alchemancy:tinted",
+    "alchemancy:seethrough"
   ]
 }
