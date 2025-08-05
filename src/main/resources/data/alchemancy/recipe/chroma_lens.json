@@ -2,12 +2,17 @@
   "type": "alchemancy:forged_item",
 
   "properties": [
-    "alchemancy:seethrough",
-    "alchemancy:light_seeking"
+    "alchemancy:scoping"
+  ],
+
+  "infusables": [
+    {
+      "tag": "c:dyes/white"
+    }
   ],
 
   "catalyst": {
-    "item": "alchemancy:blank_pearl"
+    "tag": "c:glass_panes/colorless"
   },
 
   "result": {
