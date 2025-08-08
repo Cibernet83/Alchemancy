@@ -35,6 +35,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
@@ -166,7 +167,10 @@ public class AlchemancyCatalystBlock extends TransparentBlock implements EntityB
 			ItemStackHolderBlockEntity.dropItem(level, forgePos, output);
 
 			if(level.getBlockEntity(catalystPos) instanceof AlchemancyCatalystBlockEntity catalyst)
+			{
 				catalyst.playAnimation(false);
+				level.gameEvent(GameEvent.BLOCK_ACTIVATE, catalystPos, new GameEvent.Context(player, level.getBlockState(catalystPos)));
+			}
 		}
 	}
 
