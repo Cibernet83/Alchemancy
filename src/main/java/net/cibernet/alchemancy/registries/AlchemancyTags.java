@@ -15,8 +15,6 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.dimension.DimensionType;
 
-import java.util.stream.Stream;
-
 public class AlchemancyTags
 {
 	public static class Items
@@ -57,6 +55,7 @@ public class AlchemancyTags
 		public static final TagKey<Block> BROKEN_BY_HARDENED = registerTag(Registries.BLOCK, "broken_by_hardened");
 		public static final TagKey<Block> MAGNETIC_STICKS_TO = registerTag(Registries.BLOCK, "magnetic_sticks_to");
 		public static final TagKey<Block> CANNOT_ENCAPSULATE = registerTag(Registries.BLOCK, "cannot_encapsulate");
+		public static final TagKey<Block> ENCAPSULATING_ALWAYS_PLACES = registerTag(Registries.BLOCK, "encapsulating_always_places");
 	}
 
 	public static class DamageTypes
