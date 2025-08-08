@@ -18,17 +18,25 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BedPart;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.ChestType;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 
 import javax.annotation.Nullable;
@@ -107,33 +115,78 @@ public class EncapsulatingProperty extends Property implements IDataHolder<Encap
 	public boolean pickUpBlock(Level level, BlockPos pos, ItemStack stack, @Nullable Entity user)
 	{
 		BlockState state = level.getBlockState(pos);
-		BlockEntity blockEntity = level.getBlockEntity(pos);
 
 		if(state.isAir() || state.getDestroySpeed(level, pos) < 0 || state.is(AlchemancyTags.Blocks.CANNOT_ENCAPSULATE))
 			return false;
 
+		if(state.hasProperty(BlockStateProperties.DOUBLE_BLOCK_HALF) && state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.UPPER)
+		{
+			pos = pos.below();
+			state = level.getBlockState(pos);
+		}
+		if(state.hasProperty(BlockStateProperties.BED_PART))
+		{
+			if(state.getValue(BlockStateProperties.BED_PART) == BedPart.HEAD)
+				state = level.getBlockState(pos.relative(state.getValue(BedBlock.FACING).getOpposite()));
+			else pos = pos.relative(state.getValue(BedBlock.FACING));
+		}
+
+		BlockEntity blockEntity = level.getBlockEntity(pos);
+
+
 		if(blockEntity != null)
 			level.removeBlockEntity(pos);
-		level.removeBlock(pos, false);
 		setData(stack, state, blockEntity);
+		level.removeBlock(pos, false);
 
+		level.levelEvent(user instanceof Player player ? player : null, 2001, pos, Block.getId(state));
 		level.playSound(null, pos, state.getSoundType(level, pos, user).getBreakSound(), SoundSource.BLOCKS, 1.0f, 0.5f);
 
 		return true;
 	}
 
+	private BlockState fixChestBlockstate(Level level, BlockPos pos, BlockState state)
+	{
+		if(!state.hasProperty(ChestBlock.TYPE))
+			return state;
+		var chestType = state.getValue(ChestBlock.TYPE);
+		if(chestType == ChestType.SINGLE)
+			return state.setValue(ChestBlock.TYPE, ChestType.SINGLE);
+
+		var connectedBlock = level.getBlockState(pos.relative(ChestBlock.getConnectedDirection(state)));
+
+		if(!connectedBlock.is(state.getBlock()))
+			return state.setValue(ChestBlock.TYPE, ChestType.SINGLE);
+
+		if(connectedBlock.getValue(ChestBlock.TYPE) != chestType.getOpposite())
+			return state;
+		else return state.setValue(ChestBlock.TYPE, ChestType.SINGLE);
+	}
+
 	public boolean attemptPlaceBlock(Level level, BlockPos pos, BlockData data, ItemStack source, @Nullable Entity user)
 	{
-		if (!level.getBlockState(pos).canBeReplaced() || !data.blockState.canSurvive(level, pos))
+		var oldState = level.getBlockState(pos);
+		var state = fixChestBlockstate(level, pos, data.blockState());
+		if (!oldState.canBeReplaced() || !state.canSurvive(level, pos))
 			return false;
 
-		level.setBlockAndUpdate(pos, data.blockState);
+		if(state.hasProperty(BlockStateProperties.DOUBLE_BLOCK_HALF) &&
+				!level.getBlockState(pos.relative(state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF).getDirectionToOther())).canBeReplaced())
+			return false;
+		if(state.hasProperty(BlockStateProperties.BED_PART) &&
+				!level.getBlockState(pos.relative(state.getValue(BlockStateProperties.BED_PART) == BedPart.HEAD ?
+						state.getValue(BlockStateProperties.HORIZONTAL_FACING).getOpposite() :
+						state.getValue(BlockStateProperties.HORIZONTAL_FACING))).canBeReplaced())
+			return false;
+
+		level.setBlockAndUpdate(pos, state);
+		state.getBlock().setPlacedBy(level, pos, state, user instanceof LivingEntity living ? living : null, ItemStack.EMPTY);
 
 		BlockEntity blockEntity = createBlockEntity(pos, data);
 		if(blockEntity != null)
 			level.setBlockEntity(blockEntity);
 
-		level.playSound(null, pos, data.blockState.getSoundType(level, pos, user).getPlaceSound(), SoundSource.BLOCKS, 1.0f, 0.5f);
+		level.playSound(null, pos, state.getSoundType(level, pos, user).getPlaceSound(), SoundSource.BLOCKS, 1.0f, 0.5f);
 
 		setData(source, getDefaultData());
 		return true;
