@@ -11,6 +11,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import org.w3c.dom.Attr;
 
 public class ArmorPulseProperty extends Property implements IDataHolder<Boolean>
 {
@@ -19,8 +20,9 @@ public class ArmorPulseProperty extends Property implements IDataHolder<Boolean>
 	{
 		if(!getData(weapon) && (slot.isArmor() || user.getUseItem() == weapon) && !event.getSource().is(DamageTypeTags.BYPASSES_ARMOR) &&
 				event.getSource().getEntity() != null &&
-//				event.getSource().getEntity() != user &&
-				event.getSource().getEntity().distanceTo(user) <= user.getAttributeValue(Attributes.ENTITY_INTERACTION_RANGE))
+				event.getSource().getEntity().distanceTo(user) <= (
+						user.getAttributes().hasAttribute(Attributes.ENTITY_INTERACTION_RANGE) ?
+								user.getAttributeValue(Attributes.ENTITY_INTERACTION_RANGE) : 3))
 		{
 			setData(weapon, true);
 			event.setNewDamage(Math.max(0, event.getNewDamage() - 1));
