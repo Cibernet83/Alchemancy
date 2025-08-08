@@ -31,7 +31,7 @@ public class RocketPoweredProperty extends Property
 	@Override
 	public void onItemUseTick(LivingEntity user, ItemStack stack, LivingEntityUseItemEvent.Tick event)
 	{
-		if(event.getDuration() % 20 == 5)
+		if(event.getDuration() % 20 == 6)
 		{
 			EquipmentSlot slot = user.getUsedItemHand() == InteractionHand.OFF_HAND ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND;
 			if(stack.isDamageableItem())
