@@ -10,6 +10,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
@@ -17,6 +18,7 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
 
 public class EntityPullProperty<E extends Entity> extends Property
 {
@@ -104,6 +106,11 @@ public class EntityPullProperty<E extends Entity> extends Property
 
 			target.setDeltaMovement(vec3.scale(1 - 0.5 * (1 - distanceTo / radius)).subtract(vec31));
 		}
+	}
+
+	@Override
+	public Optional<UseAnim> modifyUseAnimation(ItemStack stack, UseAnim original, Optional<UseAnim> current) {
+		return onUse ? Optional.of(UseAnim.BOW) : current;
 	}
 
 	@Override

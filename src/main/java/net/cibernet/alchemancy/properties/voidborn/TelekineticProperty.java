@@ -17,10 +17,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
+import java.util.Optional;
 import java.util.UUID;
 
 public class TelekineticProperty extends Property implements IDataHolder<UUID> {
@@ -92,6 +94,11 @@ public class TelekineticProperty extends Property implements IDataHolder<UUID> {
 	@Override
 	public int getColor(ItemStack stack) {
 		return ColorUtils.sineColorsOverTime(5f, 0x4BEC13, 0x06672FF);
+	}
+
+	@Override
+	public Optional<UseAnim> modifyUseAnimation(ItemStack stack, UseAnim original, Optional<UseAnim> current) {
+		return Optional.of(UseAnim.BOW);
 	}
 
 	@Override
