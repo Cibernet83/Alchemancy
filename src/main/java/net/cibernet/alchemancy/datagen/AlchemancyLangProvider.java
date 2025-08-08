@@ -111,7 +111,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFlavor(AlchemancyProperties.ENERGIZED, "Need more power");
 		addCodexFunction(AlchemancyProperties.ENERGIZED, PropertyFunction.RECEIVE_DAMAGE_EQUIPPED, "Increases the user's {attribute Movement Speed}, {attribute Mining Speed}, and {attribute Attack Speed} by 35% for 60 seconds after taking {shock Electric} damage.");
 		addCodexFunction(AlchemancyProperties.ENERGIZED, PropertyFunction.WHILE_WORN_BOOTS, "For 60 seconds after taking {shock Electric} damage, {item Redstone} powers blocks the user is standing on for half a second.");
-		addCodexFunction(AlchemancyProperties.ENERGIZED, PropertyFunction.WHEN_USED_BLOCK, "{item Redstone} powers the targeted block for half a second.");
+		addCodexFunction(AlchemancyProperties.ENERGIZED, PropertyFunction.WHEN_USED_BLOCK, "If {property alchemancy:interactable} is present, {item Redstone} powers the targeted block for half a second.");
 		addCodexFunction(AlchemancyProperties.ENERGIZED, PropertyFunction.WHEN_SHOT, "{item Redstone} powers the impacted block for half a second.");
 		addCodexFunction(AlchemancyProperties.ENERGIZED, PropertyFunction.ACTIVATE_BY_BLOCK, "{item Redstone} powers the adjacent blocks for 1 second.");
 
@@ -715,8 +715,8 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFlavor(AlchemancyProperties.ALLERGIC, "Not fond of pollen season");
 		addCodexFunction(AlchemancyProperties.ALLERGIC, PropertyFunction.WHILE_EQUIPPED, "{activate Activates} the item on the user when receiving a potion effect they don't already have.");
 
-		addCodexFlavor(AlchemancyProperties.ARMOR_PULSE, "Right back at ya");
-		addCodexFunction(AlchemancyProperties.ARMOR_PULSE, PropertyFunction.WHEN_HIT_WORN_OR_USING, "Reduces damage taken from blockable attacks within the user's {attribute Entity Interaction Range} by 1 point, {activate Activating} the item on the attacker in the process.");
+		addCodexFlavor(AlchemancyProperties.ARMOR_PULSE, ""); //TODO
+		addCodexFunction(AlchemancyProperties.ARMOR_PULSE, PropertyFunction.WHEN_HIT_WORN_OR_USING, "Reduces damage taken from blockable attacks within the user's {attribute Entity Interaction Range} by 1 point, {activate Activating} the item on the user in the process.");
 
 		addCodexFlavor(AlchemancyProperties.RUNNING_START, "Quick feet, quick trigger");
 		addCodexFunction(AlchemancyProperties.RUNNING_START, PropertyFunction.WHILE_EQUIPPED, "{activate Activates} the item on the user at the start of a sprint.");
