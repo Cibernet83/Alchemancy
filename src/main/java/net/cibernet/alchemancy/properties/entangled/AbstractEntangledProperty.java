@@ -34,8 +34,9 @@ public abstract class AbstractEntangledProperty extends Property implements IDat
 		if(clickAction != ClickAction.SECONDARY || carriedItem.isEmpty() || !data.equals(getDefaultData()) || InfusedPropertiesHelper.getRemainingInfusionSlots(carriedItem) <= 0)
 			return;
 
-		InfusedPropertiesHelper.addProperty(carriedItem, asHolder());
-		setStoredItem(stack, carriedItem.split(1));
+		var entangleTarget = carriedItem.split(1);
+		InfusedPropertiesHelper.addProperty(entangleTarget, asHolder());
+		setStoredItem(stack, entangleTarget);
 
 		isCancelled.set(true);
 	}
