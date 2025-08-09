@@ -1,7 +1,7 @@
 {
   "name": "alchemancy.entry.dreamsteel",
   "sortnum": 6,
-  "advancement": "alchemancy:story/find_netherite",
+  "advancement": "alchemancy:story/dreamsteel_entry",
   "icon": "alchemancy:dreamsteel_ingot",
   "category": "alchemancy:basics",
 
@@ -35,12 +35,17 @@
       "text": "alchemancy.entry.dreamsteel.page3"
     },
     {
-      "type": "patchouli:text",
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:dreamsteel_bow",
       "text": "alchemancy.entry.dreamsteel.page4"
     },
     {
       "type": "patchouli:text",
       "text": "alchemancy.entry.dreamsteel.page5"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.dreamsteel.page6"
     },
     {
       "type": "alchemancy:infusion_double",

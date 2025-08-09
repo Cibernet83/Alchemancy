@@ -1,7 +1,7 @@
 {
   "name": "alchemancy.entry.mace_upgrades",
   "sortnum": 0,
-  "advancement": "alchemancy:story/find_mace",
+  "advancement": "alchemancy:story/trial_chamber_entries",
   "icon": "alchemancy:rocket_powered_hammer",
   "category": "alchemancy:trinkets",
 

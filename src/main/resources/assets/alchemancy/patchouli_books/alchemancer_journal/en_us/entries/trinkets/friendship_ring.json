@@ -1,7 +1,7 @@
 {
   "name": "alchemancy.entry.friendship_ring",
   "sortnum": 0,
-  "advancement": "alchemancy:discovery/nonlethal",
+  "advancement": "alchemancy:story/apply_property",
   "icon": "alchemancy:friendship_ring",
   "category": "alchemancy:trinkets",
 

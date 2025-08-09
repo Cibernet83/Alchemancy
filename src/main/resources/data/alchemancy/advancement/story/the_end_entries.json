@@ -1,0 +1,24 @@
+{
+  "parent": "alchemancy:story/apply_property",
+  "criteria": {
+    "apply_property": {
+      "conditions": {},
+      "trigger": "alchemancy:discover_property"
+    },
+    "entered_end": {
+      "conditions": {
+        "to": "minecraft:the_end"
+      },
+      "trigger": "minecraft:changed_dimension"
+    }
+  },
+  "requirements": [
+    [
+      "apply_property"
+    ],
+    [
+      "entered_end"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

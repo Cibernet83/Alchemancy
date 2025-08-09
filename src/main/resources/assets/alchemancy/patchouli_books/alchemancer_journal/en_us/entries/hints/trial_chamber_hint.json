@@ -1,0 +1,17 @@
+{
+  "advancement": "alchemancy:story/apply_property",
+  "category": "alchemancy:hints",
+  "icon": "minecraft:chiseled_tuff",
+  "priority": true,
+  "name": "alchemancy.entry.trial_chamber_hint",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.trial_chamber_hint.page0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.trial_chamber_hint.page1"
+    }
+  ]
+}

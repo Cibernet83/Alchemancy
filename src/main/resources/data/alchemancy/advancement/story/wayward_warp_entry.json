@@ -7,12 +7,6 @@
       },
       "trigger": "alchemancy:discover_property"
     },
-    "discover_nonlethal": {
-      "conditions": {
-        "property": "alchemancy:nonlethal"
-      },
-      "trigger": "alchemancy:discover_property"
-    },
     "discover_ender": {
       "conditions": {
         "property": "alchemancy:ender"
@@ -21,10 +15,6 @@
     }
   },
   "requirements": [
-    [
-      "discover_nonlethal",
-      "discover_wayward_warp"
-    ],
     [
       "discover_ender",
       "discover_wayward_warp"

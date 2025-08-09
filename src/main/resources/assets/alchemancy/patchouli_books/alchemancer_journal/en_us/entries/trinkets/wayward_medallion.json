@@ -1,7 +1,7 @@
 {
   "name": "alchemancy.entry.wayward_medallion",
   "sortnum": 0,
-  "advancement": "alchemancy:story/wayward_warp_entry",
+  "advancement": "alchemancy:story/apply_property",
   "icon": "alchemancy:wayward_medallion",
   "category": "alchemancy:trinkets",
 

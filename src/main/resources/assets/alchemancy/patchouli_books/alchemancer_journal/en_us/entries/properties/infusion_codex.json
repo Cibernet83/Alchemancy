@@ -1,0 +1,26 @@
+{
+  "advancement": "alchemancy:story/apply_property",
+  "category": "alchemancy:properties",
+  "icon": "alchemancy:infusion_codex",
+  "priority": true,
+  "name": "alchemancy.entry.infusion_codex",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.infusion_codex.page0"
+    },
+    {
+      "type": "alchemancy:transmutation",
+      "recipe": "alchemancy:transmutation/infusion_codex",
+      "text": "alchemancy.entry.infusion_codex.page1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.infusion_codex.page2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.infusion_codex.page3"
+    }
+  ]
+}

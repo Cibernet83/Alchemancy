@@ -1,7 +1,7 @@
 {
   "name": "alchemancy.entry.pearlescent_ring",
   "sortnum": -10,
-  "advancement": "alchemancy:story/alchemancing_time",
+  "advancement": "alchemancy:story/apply_property",
   "icon": "alchemancy:pearlescent_ring",
   "category": "alchemancy:trinkets",
 

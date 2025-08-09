@@ -1,19 +1,11 @@
 {
   "parent": "alchemancy:story/find_netherite",
   "criteria": {
-    "discover_revealing": {
-      "conditions": {
-        "property": "alchemancy:revealing"
-      },
+    "apply_property": {
+      "conditions": {},
       "trigger": "alchemancy:discover_property"
     },
-    "discover_revealed": {
-      "conditions": {
-        "property": "alchemancy:revealed"
-      },
-      "trigger": "alchemancy:discover_property"
-    },
-    "make_dreamsteel": {
+    "has_netherite": {
       "conditions": {
         "items": [
           {
@@ -26,12 +18,10 @@
   },
   "requirements": [
     [
-      "discover_revealed",
-      "discover_revealing"
+      "has_netherite"
     ],
     [
-      "make_dreamsteel",
-      "discover_revealing"
+      "apply_property"
     ]
   ],
   "sends_telemetry_event": false

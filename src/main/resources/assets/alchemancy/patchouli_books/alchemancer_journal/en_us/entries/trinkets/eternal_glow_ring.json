@@ -1,7 +1,7 @@
 {
   "name": "alchemancy.entry.eternal_glow_ring",
   "sortnum": 0,
-  "advancement": "alchemancy:discovery/glowing_aura",
+  "advancement": "alchemancy:story/apply_property",
   "icon": "alchemancy:eternal_glow_ring",
   "category": "alchemancy:trinkets",
 

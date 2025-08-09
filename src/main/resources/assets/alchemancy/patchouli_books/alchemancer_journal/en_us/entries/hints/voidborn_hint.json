@@ -1,0 +1,21 @@
+{
+  "advancement": "alchemancy:story/the_end_entries",
+  "category": "alchemancy:hints",
+  "icon": "minecraft:end_portal_frame",
+  "priority": true,
+  "name": "alchemancy.entry.voidborn_hint",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.voidborn_hint.page0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.voidborn_hint.page1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.voidborn_hint.page2"
+    }
+  ]
+}
