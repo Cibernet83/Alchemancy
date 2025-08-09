@@ -10,6 +10,7 @@ import net.cibernet.alchemancy.network.S2CDiscoverCodexIngredientsPacket;
 import net.cibernet.alchemancy.network.S2CUnlockCodexEntriesPacket;
 import net.cibernet.alchemancy.registries.*;
 import net.cibernet.alchemancy.util.CommonUtils;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -150,10 +151,12 @@ public class AlchemancyCatalystBlock extends TransparentBlock implements EntityB
 
 			if(player instanceof ServerPlayer serverPlayer)
 			{
-				AlchemancyCriteriaTriggers.DISCOVER_PROPERTY.get().trigger(serverPlayer, output);
 				PacketDistributor.sendToPlayer(serverPlayer, new S2CUnlockCodexEntriesPacket(output));
 				if(!itemsToDiscover.isEmpty())
+				{
+					AlchemancyCriteriaTriggers.DISCOVER_PROPERTY.get().trigger(serverPlayer, output);
 					PacketDistributor.sendToPlayer(serverPlayer, new S2CDiscoverCodexIngredientsPacket(itemsToDiscover));
+				}
 			}
 
 			if(grid.shouldConsumeWarped())
