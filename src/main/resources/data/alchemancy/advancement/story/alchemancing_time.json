@@ -1,9 +1,25 @@
 {
   "parent": "alchemancy:story/alchemical_breakthrough",
+
   "criteria": {
     "activate_forge": {
       "conditions": {},
       "trigger": "alchemancy:activate_alchemancy_forge"
+    },
+    "example": {
+      "trigger": "minecraft:default_block_use",
+      "conditions": {
+        "location": [
+          {
+            "condition": "minecraft:location_check",
+            "predicate": {
+              "block": {
+                "blocks": "alchemancy:alchemancy_catalyst"
+              }
+            }
+          }
+        ]
+      }
     }
   },
   "display": {
@@ -20,7 +36,8 @@
   },
   "requirements": [
     [
-      "activate_forge"
+      "activate_forge",
+      "example"
     ]
   ],
   "sends_telemetry_event": false
