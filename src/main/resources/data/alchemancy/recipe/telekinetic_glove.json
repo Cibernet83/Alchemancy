@@ -4,6 +4,7 @@
   "properties": [
     "alchemancy:interactable",
     "alchemancy:ender",
+    "alchemancy:levitating",
     "alchemancy:binding"
   ],
 
