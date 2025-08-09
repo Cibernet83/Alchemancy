@@ -57,7 +57,9 @@ public class VoidtouchProperty extends Property {
 				stack.hurtAndBreak(PropertyModifierComponent.getOrElse(stack, asHolder(), AlchemancyProperties.Modifiers.DURABILITY_CONSUMPTION, DURABILITY_CONSUMED), serverLevel, null, (item) -> {
 					BrittleProperty.spawnItemParticles(stack, 5, projectile, serverLevel);
 				});
-		} else event.setCanceled(false);
+		} //else event.setCanceled(false);
+
+		projectile.discard();
 	}
 
 	public static DamageSource voidDamage(DamageSources damageSources, @Nullable Entity source, @Nullable Entity directEntity, Vec3 position) {
