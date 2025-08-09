@@ -82,6 +82,17 @@ public abstract class AbstractEntangledProperty extends Property implements IDat
 		return storedItem;
 	}
 
+	public void afterShiftingProjectile(ItemStack oldStack, ItemStack newStack, Entity projectile)
+	{
+		if(!InfusedPropertiesHelper.hasProperty(newStack, AlchemancyProperties.PHASING))
+			projectile.noPhysics = false;
+		if(!InfusedPropertiesHelper.hasProperty(newStack, AlchemancyProperties.GLOWING_AURA))
+			projectile.setGlowingTag(false);
+		if(!InfusedPropertiesHelper.hasProperty(newStack, AlchemancyProperties.ANTIGRAV))
+			projectile.setNoGravity(false);
+
+	}
+
 	@Override
 	public <T> Object modifyDataComponent(ItemStack stack, DataComponentType<? extends T> dataType, T data)
 	{

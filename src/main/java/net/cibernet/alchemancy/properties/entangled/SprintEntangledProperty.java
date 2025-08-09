@@ -28,6 +28,7 @@ public class SprintEntangledProperty extends AbstractEntangledProperty
 		{
 			setToggle(stack, user.isSprinting());
 			itemEntity.setItem(shift(stack, user));
+			afterShiftingProjectile(stack, itemEntity.getItem(), itemEntity);
 		}
 	}
 
@@ -41,6 +42,7 @@ public class SprintEntangledProperty extends AbstractEntangledProperty
 			{
 				setToggle(stack, user.isSprinting());
 				infusedItemProjectile.setItem(shift(stack, user));
+				afterShiftingProjectile(stack, infusedItemProjectile.getItem(), infusedItemProjectile);
 			}
 		}
 	}

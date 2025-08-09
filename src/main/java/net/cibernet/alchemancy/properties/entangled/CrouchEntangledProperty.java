@@ -28,6 +28,7 @@ public class CrouchEntangledProperty extends AbstractEntangledProperty
 		{
 			setToggle(stack, user.isShiftKeyDown());
 			itemEntity.setItem(shift(stack, user));
+			afterShiftingProjectile(stack, itemEntity.getItem(), itemEntity);
 		}
 	}
 
@@ -41,6 +42,7 @@ public class CrouchEntangledProperty extends AbstractEntangledProperty
 			{
 				setToggle(stack, user.isShiftKeyDown());
 				infusedItemProjectile.setItem(shift(stack, user));
+				afterShiftingProjectile(stack, infusedItemProjectile.getItem(), projectile);
 			}
 		}
 	}

@@ -42,6 +42,7 @@ public class JumpEntangledProperty extends AbstractEntangledProperty
 			{
 				setToggle(stack, jumping);
 				itemEntity.setItem(shift(stack, living));
+				afterShiftingProjectile(stack, itemEntity.getItem(), itemEntity);
 			}
 		}
 	}
@@ -59,6 +60,7 @@ public class JumpEntangledProperty extends AbstractEntangledProperty
 				{
 					setToggle(stack, jumping);
 					infusedItemProjectile.setItem(shift(stack, living));
+					afterShiftingProjectile(stack, infusedItemProjectile.getItem(), infusedItemProjectile);
 				}
 			}
 		}
