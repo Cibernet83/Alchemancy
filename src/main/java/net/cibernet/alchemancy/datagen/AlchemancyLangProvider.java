@@ -617,7 +617,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.AIR_WALKER, PropertyFunction.WHILE_WORN_BOOTS, "Creates a platform of solid light under the user's feet, preventing them from falling down after walking off of a ledge. Crouching lowers the height of the platform.");
 
 		addCodexFlavor(AlchemancyProperties.ATHLETIC, ""); //TODO
-		addCodexFunction(AlchemancyProperties.ATHLETIC, PropertyFunction.WHILE_WORN_BOOTS, "Increases {attribute Movement Speed} and {attribute Jump Height} by 65% while sprinting.");
+		addCodexFunction(AlchemancyProperties.ATHLETIC, PropertyFunction.WHILE_WORN_BOOTS, "Increases {attribute Movement Speed} and {attribute Jump Height} by 65% and {attribute Safe Fall Distance} by 3 blocks while sprinting.");
 
 		addCodexFlavor(AlchemancyProperties.KINETIC_RECHARGE, "Just keep moving!");
 		addCodexFunction(AlchemancyProperties.KINETIC_RECHARGE, PropertyFunction.WHILE_EQUIPPED, "Restores the item's durability while the user is in motion. The faster the user is going, the faster the item is repaired.");

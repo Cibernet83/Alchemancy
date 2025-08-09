@@ -34,12 +34,14 @@ public class AthleticProperty extends Property
 
 	private static final ResourceLocation MOD_KEY = ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "athletic_property_modifier");
 	private static final AttributeModifier SPEED_MOD = new AttributeModifier(MOD_KEY, 0.65f, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+	private static final AttributeModifier SAFE_FALL_MOD = new AttributeModifier(MOD_KEY, 3f, AttributeModifier.Operation.ADD_VALUE);
 
 	@Override
 	public void modifyAttackDamage(Entity user, ItemStack weapon, LivingDamageEvent.Pre event)
 	{
 		event.setNewDamage(event.getNewDamage() * (1 + getDepthScale(user) * 0.75f));
 	}
+
 
 	@Override
 	public void onEquippedTick(LivingEntity user, EquipmentSlot slot, ItemStack stack)
@@ -60,6 +62,13 @@ public class AthleticProperty extends Property
 				if(user.isSprinting())
 					jumpStrength.addPermanentModifier(SPEED_MOD);
 			}
+			AttributeInstance safeFall = user.getAttributes().getInstance(Attributes.SAFE_FALL_DISTANCE);
+			if(safeFall != null)
+			{
+				safeFall.removeModifier(MOD_KEY);
+				if(user.isSprinting())
+					safeFall.addPermanentModifier(SAFE_FALL_MOD);
+			}
 		}
 	}
 
@@ -73,11 +82,14 @@ public class AthleticProperty extends Property
 
 		AttributeInstance moveSpeed = player.getAttributes().getInstance(Attributes.MOVEMENT_SPEED);
 		AttributeInstance jumpStrength = player.getAttributes().getInstance(Attributes.JUMP_STRENGTH);
-		if((moveSpeed != null && moveSpeed.hasModifier(MOD_KEY)) || (jumpStrength != null && jumpStrength.hasModifier(MOD_KEY)))
+		AttributeInstance safeFall = player.getAttributes().getInstance(Attributes.SAFE_FALL_DISTANCE);
+		if((moveSpeed != null && moveSpeed.hasModifier(MOD_KEY))
+				|| (jumpStrength != null && jumpStrength.hasModifier(MOD_KEY))
+				|| (safeFall != null && safeFall.hasModifier(MOD_KEY)))
 		{
 			boolean equipped = false;
 			for (EquipmentSlot slot : EquipmentSlot.values())
-				if(slot.isArmor() && InfusedPropertiesHelper.hasProperty(player.getItemBySlot(EquipmentSlot.MAINHAND), AlchemancyProperties.DEPTH_DWELLER))
+				if(slot.isArmor() && InfusedPropertiesHelper.hasProperty(player.getItemBySlot(EquipmentSlot.MAINHAND), AlchemancyProperties.ATHLETIC))
 				{
 					equipped = true;
 					break;
@@ -87,6 +99,7 @@ public class AthleticProperty extends Property
 			{
 				if(moveSpeed != null) moveSpeed.removeModifier(MOD_KEY);
 				if(jumpStrength != null) jumpStrength.removeModifier(MOD_KEY);
+				if(safeFall != null) safeFall.removeModifier(MOD_KEY);
 			}
 		}
 	}
