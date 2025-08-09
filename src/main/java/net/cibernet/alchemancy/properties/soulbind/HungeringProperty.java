@@ -33,8 +33,6 @@ public class HungeringProperty extends Property {
 		var foodData = (user instanceof Player player) ? player.getFoodData() : null;
 		var food = stack.getFoodProperties(user);
 
-		if(food == null || foodData == null || !foodData.needsFood()) return false;
-
 		if(foodData == null || (food != null && (food.canAlwaysEat() || (!eatEfficiently ? foodData.needsFood() :
 				foodData.getFoodLevel() <= 0 || foodData.getFoodLevel() <= 20 - food.nutrition()
 		))))
