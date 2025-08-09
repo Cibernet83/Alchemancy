@@ -78,19 +78,37 @@ public class AlchemancyCatalystBlock extends TransparentBlock implements EntityB
 	@Override
 	protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
 	{
-		if(stack.getItem() instanceof DyeItem dye && level.getBlockEntity(pos) instanceof AlchemancyCatalystBlockEntity catalyst)
+		boolean isDye = stack.getItem() instanceof DyeItem;
+
+		if(level.getBlockEntity(pos) instanceof AlchemancyCatalystBlockEntity catalyst && (isDye || stack.is(AlchemancyItems.CHROMA_LENS)))
 		{
 			int[] tint = getTint(stack);
+			boolean success = false;
+			if(tint.length == 0)
+				tint = null;
 
-			if(!catalyst.getCrystalTexture().equals(dye.getDyeColor().getName()) ||
-					catalyst.getTint() != CommonUtils.getPropertyDrivenTint(stack) ||
-					InfusedPropertiesHelper.hasInfusedProperty(stack, AlchemancyProperties.MUFFLED) != catalyst.silent)
+			if(stack.getItem() instanceof DyeItem dye && !catalyst.getCrystalTexture().equals(dye.getDyeColor().getName()))
 			{
 				catalyst.setCrystalTexture(dye.getDyeColor());
-				catalyst.setTint(tint);
-				catalyst.silent = InfusedPropertiesHelper.hasInfusedProperty(stack, AlchemancyProperties.MUFFLED);
+				success = true;
+			}
 
-				stack.consume(1, player);
+			if(!Arrays.equals(catalyst.getTintColors(), tint))
+			{
+				catalyst.setTint(tint);
+				success = true;
+			}
+
+			boolean muffled = InfusedPropertiesHelper.hasInfusedProperty(stack, AlchemancyProperties.MUFFLED);
+			if(muffled != catalyst.silent) {
+				catalyst.silent = muffled;
+				success = true;
+			}
+
+			if(success)
+			{
+				if(isDye)
+					stack.consume(1, player);
 				return ItemInteractionResult.SUCCESS;
 			}
 		}

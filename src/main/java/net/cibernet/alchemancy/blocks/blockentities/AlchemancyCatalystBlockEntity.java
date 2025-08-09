@@ -93,6 +93,11 @@ public class AlchemancyCatalystBlockEntity extends BlockEntity
 
 	}
 
+	public int[] getTintColors()
+	{
+		return tint;
+	}
+
 	public void setCrystalTexture(String crystalTexture) {
 		this.crystalTexture = crystalTexture;
 		notifyColorUpdate();
