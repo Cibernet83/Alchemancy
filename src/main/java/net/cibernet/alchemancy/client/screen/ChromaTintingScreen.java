@@ -33,6 +33,7 @@ import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
 
 import java.awt.*;
+import java.util.Arrays;
 
 public class ChromaTintingScreen extends Screen {
 
@@ -67,7 +68,9 @@ public class ChromaTintingScreen extends Screen {
 		LinearLayout footer = layout.addToFooter(LinearLayout.horizontal()).spacing(5);
 		footer.defaultCellSetting().alignHorizontallyCenter();
 		footer.addChild(Button.builder(CommonComponents.GUI_CANCEL, p_329727_ -> {
-			AlchemancyProperties.TINTED.value().setData(affectedItem, originalTint);
+			if(originalTint == null || originalTint.length == 0)
+				InfusedPropertiesHelper.removeProperty(affectedItem, AlchemancyProperties.TINTED);
+			else AlchemancyProperties.TINTED.value().setData(affectedItem, originalTint);
 			this.onClose();
 		}).width(100).build());
 		footer.addChild(Button.builder(CommonComponents.GUI_DONE, p_329727_ -> {
@@ -181,6 +184,13 @@ public class ChromaTintingScreen extends Screen {
 
 	protected int getColor() {
 		return Color.HSBtoRGB(getHue(), getSaturation(), getBrightness());
+	}
+
+	@Override
+	public void onClose() {
+		super.onClose();
+		if(!Arrays.equals(originalTint, AlchemancyProperties.TINTED.get().getData(affectedItem)))
+			PacketDistributor.sendToServer(new ChromatizeC2SPayload(getColor()));
 	}
 
 	@Override
