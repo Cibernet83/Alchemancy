@@ -56,9 +56,10 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.CHARRED, PropertyFunction.OTHER, "Allows the item to be used as {item Furnace} fuel, letting it smelt 1 item for every 16 durability points it has left. Increases the item's fuel efficiency by 200% if it's aleady a {item Furnace} fuel.");
 
 		addCodexFlavor(AlchemancyProperties.STURDY, "Rock and Stone!");
-		addCodexFunction(AlchemancyProperties.STURDY, PropertyFunction.OTHER, "Increases the item's total durability by 20%.");
+		addCodexFunction(AlchemancyProperties.STURDY, PropertyFunction.ATTRIBUTE_MODIFIER, "Increases the item's total durability by 20%.");
 
 		addCodexFlavor(AlchemancyProperties.BRITTLE, "Shatter me like glass");
+		addCodexFunction(AlchemancyProperties.BRITTLE, PropertyFunction.ATTRIBUTE_MODIFIER, "Reduces the item's total durability by 35%");
 		addCodexFunction(AlchemancyProperties.BRITTLE, PropertyFunction.WHEN_SHOT, "Breaks the item on impact, triggering {function on_destroy} effects.");
 		addCodexFunction(AlchemancyProperties.BRITTLE, PropertyFunction.WHEN_DROPPED, "Breaks the item after hitting the ground with enough force, triggering {function on_destroy} effects.");
 
@@ -445,6 +446,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.WAYWARD_WARP, PropertyFunction.WHEN_USED_BLOCK, "Saves the targeted {item Lodestone}'s position as a destination if none is present.");
 		addCodexFunction(AlchemancyProperties.WAYWARD_WARP, PropertyFunction.WHEN_USED_ENTITY, "Saves the targeted Player as a destination if none is present.");
 		addCodexFunction(AlchemancyProperties.WAYWARD_WARP, PropertyFunction.AFTER_USE, "Teleports the user to the saved destination if on the same dimension, consuming 10 durability points or the item in the process.");
+		addCodexFunction(AlchemancyProperties.WAYWARD_WARP, PropertyFunction.ACTIVATE, "Teleports the target to the saved destination if on the same dimension, consuming 10 durability points or the item in the process.");
 
 		addCodexFlavor(AlchemancyProperties.FLAME_STEP, "Like TRON, but for arsonists");
 		addCodexFunction(AlchemancyProperties.FLAME_STEP, PropertyFunction.WHILE_WORN_BOOTS, "Creates a trail of short-lasting {item Fire} while sprinting. Extends the duration of {item Fire} under the player while standing still.");
@@ -668,6 +670,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.ABSORBING, PropertyFunction.STACKED_OVER, "Absorbs materials stacked over the item that cam be used to repair it to replenish its durability.");
 
 		addCodexFlavor(AlchemancyProperties.EDIBLE, "Mmmm... tasty!");
+		addCodexFunction(AlchemancyProperties.EDIBLE, PropertyFunction.ATTRIBUTE_MODIFIER, "If the item can already be eaten, its Nutrition value is increased by 50% and its saturation gain by 25%.");
 		addCodexFunction(AlchemancyProperties.EDIBLE, PropertyFunction.WHEN_USED, "Allows the item to be eaten, {activate Activating} on the user and consuming 10 durability points or the item in its entirety.");
 
 		addCodexFlavor(AlchemancyProperties.JAGGED, "Quite the thorn on my side");
@@ -719,7 +722,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.ARMOR_PULSE, PropertyFunction.WHEN_HIT_WORN_OR_USING, "Reduces damage taken from blockable attacks within the user's {attribute Entity Interaction Range} by 1 point, {activate Activating} the item on the user in the process.");
 
 		addCodexFlavor(AlchemancyProperties.RUNNING_START, "Quick feet, quick trigger");
-		addCodexFunction(AlchemancyProperties.RUNNING_START, PropertyFunction.WHILE_EQUIPPED, "{activate Activates} the item on the user at the start of a sprint.");
+		addCodexFunction(AlchemancyProperties.RUNNING_START, PropertyFunction.WHILE_EQUIPPED, "{activate Activates} the item on the user at the start of a sprint, going into Cooldown for 4 seconds after doing so.");
 
 		addCodexFlavor(AlchemancyProperties.MENDING, "Gureto desu yo, koitsu wa");
 		addCodexFunction(AlchemancyProperties.MENDING, PropertyFunction.MODIFY_DAMAGE, "Attacks heal the target instead of dealing damage.");
