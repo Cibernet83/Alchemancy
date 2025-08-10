@@ -50,7 +50,7 @@ public record S2CInventoryTickPacket(int entityId, List<SlotEntry> items,
 	private record SlotEntry(int slot, ItemStack stack) {
 		private static final StreamCodec<RegistryFriendlyByteBuf, SlotEntry> STREAM_CODEC = StreamCodec.composite(
 				ByteBufCodecs.VAR_INT, SlotEntry::slot,
-				ItemStack.STREAM_CODEC, SlotEntry::stack,
+				ItemStack.OPTIONAL_STREAM_CODEC, SlotEntry::stack,
 				SlotEntry::new
 		);
 	}
