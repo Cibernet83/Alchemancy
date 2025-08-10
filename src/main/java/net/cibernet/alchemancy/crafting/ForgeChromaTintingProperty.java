@@ -66,6 +66,11 @@ public class ForgeChromaTintingProperty extends AbstractForgeRecipe<Object> {
 	}
 
 	@Override
+	public int getPriority() {
+		return 100;
+	}
+
+	@Override
 	public Object getResult() {
 		return null;
 	}
