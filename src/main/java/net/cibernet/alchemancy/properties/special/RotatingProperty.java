@@ -1,5 +1,6 @@
 package net.cibernet.alchemancy.properties.special;
 
+import net.cibernet.alchemancy.blocks.FlattenedItemBlock;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.util.InfusionPropertyDispenseBehavior;
 import net.minecraft.core.BlockPos;
@@ -15,6 +16,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.RotationSegment;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import org.jetbrains.annotations.Nullable;
@@ -49,7 +51,7 @@ public class RotatingProperty extends Property {
 
 		BlockState state = level.getBlockState(pos);
 		BlockState newState = null;
-		if(state.hasProperty(BlockStateProperties.FACING))
+		if(state.hasProperty(BlockStateProperties.FACING) && state.getValue(BlockStateProperties.FACING) != state.getValue(BlockStateProperties.FACING).getClockWise(face.getAxis()))
 			newState = state.setValue(BlockStateProperties.FACING, state.getValue(BlockStateProperties.FACING).getClockWise(face.getAxis()));
 		else if(state.hasProperty(BlockStateProperties.HORIZONTAL_FACING))
 			newState = state.setValue(BlockStateProperties.HORIZONTAL_FACING, state.getValue(BlockStateProperties.HORIZONTAL_FACING).getClockWise());
@@ -59,6 +61,8 @@ public class RotatingProperty extends Property {
 			newState = state.setValue(BlockStateProperties.AXIS, rotateAxis(state.getValue(BlockStateProperties.AXIS), face.getAxis()));
 		else if(state.hasProperty(BlockStateProperties.HORIZONTAL_AXIS))
 			newState = state.setValue(BlockStateProperties.AXIS, rotateAxis(state.getValue(BlockStateProperties.AXIS), Direction.Axis.Y));
+		else if(state.hasProperty(BlockStateProperties.ROTATION_16))
+			newState = state.setValue(BlockStateProperties.ROTATION_16, (state.getValue(BlockStateProperties.ROTATION_16) + 1) % RotationSegment.getMaxSegmentIndex());
 
 		if(newState != null && newState.canSurvive(level, pos))
 		{
