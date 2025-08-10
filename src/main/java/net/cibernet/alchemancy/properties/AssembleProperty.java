@@ -60,7 +60,7 @@ public class AssembleProperty extends Property
 			List<RecipeHolder<CraftingRecipe>> availableRecipes = getRecipesMatchingOutput(stack, level);
 			for(RecipeHolder<CraftingRecipe> craftingRecipe : availableRecipes)
 			{
-				NonNullList<Integer> acceptedSlots = NonNullList.withSize(player.getInventory().items.size(), 0);
+				NonNullList<Integer> acceptedSlots = NonNullList.withSize(player.getInventory().getContainerSize(), 0);
 
 				if(!(assimilate || craftingRecipe.value().getResultItem(registryAccess).getCount() + stack.getCount() <= stack.getMaxStackSize()))
 					return;
@@ -117,7 +117,7 @@ public class AssembleProperty extends Property
 			{
 				if(assimilate)
 					stack.setDamageValue(0);
-				for(int slotToShrink = 0; slotToShrink < player.getInventory().items.size(); slotToShrink++)
+				for(int slotToShrink = 0; slotToShrink < player.getInventory().getContainerSize(); slotToShrink++)
 				{
 					if(selectedList.get(slotToShrink) > 0 && !AlchemancyProperties.HOLLOW.get().shrinkContents(player.getInventory().getItem(slotToShrink), selectedList.get(slotToShrink)))
 						player.getInventory().removeItem(slotToShrink, selectedList.get(slotToShrink));
