@@ -64,10 +64,11 @@ public class ShockUtils
 		customShockAttack(level, source, position, power, damageSourceSupplier, immune);
 	}
 
-	private static void customShockAttack(Level level, @Nullable Entity source, Vec3 position, float power, Function<LivingEntity, DamageSource> damageSourceSupplier, ArrayList<Entity> immune)
+	private static void customShockAttack(Level level, @Nullable Entity source, Vec3 position, float power, Function<LivingEntity, DamageSource> damageSourceSupplier, ArrayList<Entity> alreadyAffected)
 	{
+		if(alreadyAffected.size() > 8) return;
 
-		var candidates = level.getEntitiesOfClass(LivingEntity.class, CommonUtils.boundingBoxAroundPoint(position, power), EntitySelector.NO_SPECTATORS.and(entity -> !immune.contains(entity)));
+		var candidates = level.getEntitiesOfClass(LivingEntity.class, CommonUtils.boundingBoxAroundPoint(position, Math.min(8, power)), EntitySelector.NO_SPECTATORS.and(entity -> !alreadyAffected.contains(entity)));
 		candidates.sort(Comparator.comparingDouble(target -> target.distanceToSqr(position)));
 
 		for (LivingEntity target : candidates) {
@@ -111,8 +112,8 @@ public class ShockUtils
 				return;
 
 			target.hurt(damageSourceSupplier.apply(target), damage);
-			immune.add(target);
-			customShockAttack(level, source, targetPos, damage, damageSourceSupplier, immune);
+			alreadyAffected.add(target);
+			customShockAttack(level, source, targetPos, damage, damageSourceSupplier, alreadyAffected);
 			break;
 		}
 	}
