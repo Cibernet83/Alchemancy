@@ -24,7 +24,9 @@ public class RunningStartProperty extends Property implements IDataHolder<Boolea
 	public void onEquippedTick(LivingEntity user, EquipmentSlot slot, ItemStack stack) {
 		super.onEquippedTick(user, slot, stack);
 
-		if (user.isSprinting() && !getData(stack) && (!(user instanceof Player player) || player.getCooldowns().isOnCooldown(stack.getItem()))) {
+		if(!user.isSprinting()) return;
+
+		if (user.isSprinting() && !getData(stack) && (!(user instanceof Player player) || !player.getCooldowns().isOnCooldown(stack.getItem()))) {
 			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onActivation(user, user, stack));
 
 			if (user instanceof Player player)
