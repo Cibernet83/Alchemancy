@@ -23,6 +23,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import org.jetbrains.annotations.Nullable;
@@ -73,9 +74,9 @@ public class InfusionCodexSaveData {
 
 	private static void save() {
 
+		JsonElement json = CODEC.encodeStart(JsonOps.INSTANCE, Unit.INSTANCE).getOrThrow();
 		new File(Alchemancy.MODID).mkdirs();
 		try (Writer writer = new FileWriter(FILE_PATH)) {
-			JsonElement json = CODEC.encodeStart(JsonOps.INSTANCE, Unit.INSTANCE).getOrThrow();
 			GSON_INSTANCE.toJson(json, writer);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
@@ -226,7 +227,7 @@ public class InfusionCodexSaveData {
 	}
 
 	@SubscribeEvent
-	private static void onLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
+	private static void onLoggedIn(ClientPlayerNetworkEvent.LoggingIn event) {
 		load();
 	}
 
