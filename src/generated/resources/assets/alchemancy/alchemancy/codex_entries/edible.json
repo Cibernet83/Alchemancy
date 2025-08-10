@@ -3,6 +3,7 @@
     "translate": "infusion_codex.alchemancy:edible.flavor"
   },
   "functions": [
+    "attribute_modifier",
     "when_used"
   ]
 }

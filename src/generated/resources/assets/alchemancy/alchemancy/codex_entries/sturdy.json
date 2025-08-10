@@ -3,6 +3,6 @@
     "translate": "infusion_codex.alchemancy:sturdy.flavor"
   },
   "functions": [
-    "other_effects"
+    "attribute_modifier"
   ]
 }

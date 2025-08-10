@@ -3,6 +3,7 @@
     "translate": "infusion_codex.alchemancy:brittle.flavor"
   },
   "functions": [
+    "attribute_modifier",
     "when_shot",
     "when_dropped"
   ]

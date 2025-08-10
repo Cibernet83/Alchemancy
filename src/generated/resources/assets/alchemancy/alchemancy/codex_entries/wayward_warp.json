@@ -5,7 +5,8 @@
   "functions": [
     "when_used_block",
     "when_used_entity",
-    "after_use"
+    "after_use",
+    "activate"
   ],
   "innate": [
     "alchemancy:wayward_medallion"
