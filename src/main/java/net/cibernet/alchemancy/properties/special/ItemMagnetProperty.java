@@ -23,6 +23,10 @@ public class ItemMagnetProperty extends Property
 	@Override
 	public void onEquippedTick(LivingEntity user, EquipmentSlot slot, ItemStack stack)
 	{
+
+		if(user.tickCount % 10 != 0)
+			return;
+
 		if(user instanceof Player player)
 			for (ItemEntity itemEntity : user.level().getEntitiesOfClass(ItemEntity.class, user.getBoundingBox().inflate(RADIUS), item -> !item.hasPickUpDelay()))
 					itemEntity.playerTouch(player);
@@ -34,23 +38,26 @@ public class ItemMagnetProperty extends Property
 	@Override
 	public void onProjectileTick(ItemStack stack, Projectile projectile)
 	{
-		for (ItemEntity itemEntity : projectile.level().getEntitiesOfClass(ItemEntity.class, projectile.getBoundingBox().inflate(RADIUS))) {
-			itemEntity.setPos(projectile.position());
-		}
+		if(projectile.tickCount % 10 == 0)
+			for (ItemEntity itemEntity : projectile.level().getEntitiesOfClass(ItemEntity.class, projectile.getBoundingBox().inflate(RADIUS))) {
+				itemEntity.setPos(projectile.position());
+			}
 	}
 
 	@Override
 	public void onEntityItemTick(ItemStack stack, ItemEntity projectile) {
-		for (ItemEntity itemEntity : projectile.level().getEntitiesOfClass(ItemEntity.class, projectile.getBoundingBox().inflate(RADIUS))) {
-			itemEntity.setPos(projectile.position());
-		}
+		if(projectile.tickCount % 10 == 0)
+			for (ItemEntity itemEntity : projectile.level().getEntitiesOfClass(ItemEntity.class, projectile.getBoundingBox().inflate(RADIUS))) {
+				itemEntity.setPos(projectile.position());
+			}
 	}
 
 	@Override
 	public void onRootedTick(RootedItemBlockEntity root, List<LivingEntity> entitiesInBounds) {
-		for (ItemEntity itemEntity : root.getLevel().getEntitiesOfClass(ItemEntity.class, CommonUtils.boundingBoxAroundPoint(root.getBlockPos().getCenter(), (float) RADIUS))) {
-			itemEntity.setPos(root.getBlockPos().getCenter());
-		}
+		if(root.getTickCount() % 10 == 0)
+			for (ItemEntity itemEntity : root.getLevel().getEntitiesOfClass(ItemEntity.class, CommonUtils.boundingBoxAroundPoint(root.getBlockPos().getCenter(), (float) RADIUS))) {
+				itemEntity.setPos(root.getBlockPos().getCenter());
+			}
 	}
 
 	@Override
