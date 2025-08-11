@@ -103,7 +103,7 @@ public class InfusedPropertiesHelper
 	public static boolean hasInfusedProperty(ItemStack stack, Holder<Property> property)
 	{
 		return stack != null && !stack.isEmpty() && INFUSED_PROPERTIES.isBound() &&
-				!stack.is(AlchemancyTags.Items.DISABLES_INFUSION_ABILITIES)  && stack.has(INFUSED_PROPERTIES.get()) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(property);
+				(property.equals(AlchemancyProperties.UNMOVABLE) || !stack.is(AlchemancyTags.Items.DISABLES_INFUSION_ABILITIES))  && stack.has(INFUSED_PROPERTIES.get()) && stack.get(INFUSED_PROPERTIES.get()).hasProperty(property);
 	}
 
 	public static boolean hasInnateProperty(ItemStack stack, Holder<Property> property)
