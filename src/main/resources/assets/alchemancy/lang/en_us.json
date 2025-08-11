@@ -1151,7 +1151,6 @@
   "infusion_codex.alchemancy:nonlethal.flavor": "As deadly as a pillow",
   "infusion_codex.alchemancy:nonlethal.modify_damage": "Negates all damage dealt by this item, while still triggering {function on_attack} effects.",
   "infusion_codex.alchemancy:ominous.flavor": "I have a bad feeling about this",
-  "infusion_codex.alchemancy:ominous.on_attack": "Applies Bad Omen to the target for half a second.",
   "infusion_codex.alchemancy:ominous.while_equipped": "Applies Bad Omen to the user for as long as the item is equipped.",
   "infusion_codex.alchemancy:paradoxical.flavor": "Quite the conundrum",
   "infusion_codex.alchemancy:paradoxical.other_effects": "Prevents {system Property Interactions} from affecting the item during the {system Infusion} process.",

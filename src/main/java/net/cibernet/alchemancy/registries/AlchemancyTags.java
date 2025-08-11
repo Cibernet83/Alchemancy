@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -105,6 +106,11 @@ public class AlchemancyTags
 	{
 		public static final TagKey<DataComponentType<?>> DISABLES_COMPACT = registerTag(Registries.DATA_COMPONENT_TYPE, "disables_compact");
 		public static final TagKey<DataComponentType<?>> UNTOGGLEABLE = registerTag(Registries.DATA_COMPONENT_TYPE, "untoggleable");
+	}
+
+	public static class MobEffects
+	{
+		public static final TagKey<MobEffect> BLOCKS_OMINOUS = registerTag(Registries.MOB_EFFECT, "blocks_ominous");
 	}
 
 	public static final class Enchantments

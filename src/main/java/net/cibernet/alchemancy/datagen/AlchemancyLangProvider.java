@@ -285,7 +285,6 @@ public class AlchemancyLangProvider extends LanguageProvider {
 
 		addCodexFlavor(AlchemancyProperties.OMINOUS, "I have a bad feeling about this");
 		addCodexFunction(AlchemancyProperties.OMINOUS, PropertyFunction.WHILE_EQUIPPED, "Applies Bad Omen to the user for as long as the item is equipped.");
-		addCodexFunction(AlchemancyProperties.OMINOUS, PropertyFunction.ON_ATTACK, "Applies Bad Omen to the target for half a second.");
 
 		addCodexFlavor(AlchemancyProperties.HEARTY, "Keeps the doctor away");
 		addCodexFunction(AlchemancyProperties.HEARTY, PropertyFunction.WHILE_WORN, "Increases the user's {attribute Max Health} by 2.");

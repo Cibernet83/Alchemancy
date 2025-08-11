@@ -174,7 +174,7 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, DivingGearProperty> AQUATIC = REGISTRY.register("aquatic", DivingGearProperty::new);
 	public static final DeferredHolder<Property, LeapingProperty> LEAPING = REGISTRY.register("leaping", LeapingProperty::new);
 	public static final DeferredHolder<Property, GlowingProperty> GLOWING_AURA = REGISTRY.register("glowing_aura", GlowingProperty::new);
-	public static final DeferredHolder<Property, MobEffectEquippedAndHitProperty> OMINOUS = REGISTRY.register("ominous", () -> new MobEffectEquippedAndHitProperty(new MobEffectInstance(MobEffects.BAD_OMEN, 10), EquipmentSlotGroup.ANY, false));
+	public static final DeferredHolder<Property, OminousProperty> OMINOUS = REGISTRY.register("ominous", OminousProperty::new);
 	public static final DeferredHolder<Property, HeartyProperty> HEARTY = REGISTRY.register("hearty", HeartyProperty::new);
 
 	//Offensive
