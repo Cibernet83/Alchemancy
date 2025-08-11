@@ -1,6 +1,11 @@
 {
   "replace": false,
   "values": [
-    "alchemancy:lead_boots"
+    "alchemancy:lead_boots",
+
+    "alchemancy:tidewalker_treads",
+    "alchemancy:hardlight_steps",
+    "alchemancy:flamewakers",
+    "alchemancy:mechanical_boots"
   ]
 }
