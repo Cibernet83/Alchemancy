@@ -61,7 +61,7 @@ public class ForgeRecipeGrid implements RecipeInput
 		if(!result.isEmpty())
 			result.setCount(result.getCount() * input.getCount());
 
-		return result;
+		return InfusedPropertiesHelper.truncateProperties(result);
 	}
 
 	private static RecipeManager.CachedCheck<ForgeRecipeGrid, AbstractForgeRecipe<?>> OUT_OF_FORGE_INTERACTIONS_CHECK = (input, level) -> level.getRecipeManager().getRecipesFor(AlchemancyRecipeTypes.ALCHEMANCY_FORGE.get(), input, level).stream().filter(recipe -> recipe.value().matches(input, level) && !recipe.value().isTransmutation())
@@ -179,43 +179,14 @@ public class ForgeRecipeGrid implements RecipeInput
 
 	private HashMap<AbstractForgeRecipe<?>, Integer> CACHED_COMPARE_VALUES = new HashMap<>();
 
-	public int getRecipeCompareValue(AbstractForgeRecipe<?> recipe, List<Ingredient> infusables, List<EssenceContainer> essencesToTest, int priority)
+	public int getRecipeCompareValue(AbstractForgeRecipe<?> recipe, List<Ingredient> infusables, List<Holder<Property>> properties, int priority)
 	{
-		if(CACHED_COMPARE_VALUES.containsKey(recipe))
-			return CACHED_COMPARE_VALUES.get(recipe);
+//		if(CACHED_COMPARE_VALUES.containsKey(recipe))
+//			return CACHED_COMPARE_VALUES.get(recipe);
 
 		int slots = 0;
 		int slotValue = 0;
-
-		//
-		if(!essencesToTest.isEmpty()) {
-			ArrayList<EssenceContainer> essences = new ArrayList<>(this.essences);
-
-			for (EssenceContainer e : essencesToTest) {
-				EssenceContainer testEssence = new EssenceContainer(e.getEssence(), e.getAmount(), 0);
-
-				ArrayList<EssenceContainer> ignoredEssences = new ArrayList<>();
-
-				for (EssenceContainer essence : essences)
-				{
-					if(ignoredEssences.contains(essence))
-						continue;
-
-					if (essence.transferTo(testEssence, testEssence.getLimit(), false, false) > 0)
-					{
-						slots++;
-						slotValue += getSlot(essence);
-
-						if (essence.isEmpty())
-							ignoredEssences.add(essence);
-
-						if (testEssence.isFull())
-							break;
-					}
-				}
-
-			}
-		}
+		int infusionValue = 0;
 
 		//
 		if(!infusables.isEmpty())
@@ -239,8 +210,21 @@ public class ForgeRecipeGrid implements RecipeInput
 			}
 		}
 
+		//
 
-		int result = ((priority - AbstractForgeRecipe.MIN_PRIORITY) << 9) + ((8-slots) << 6) + Mth.clamp(slotValue, 0, 36);
+		if(!properties.isEmpty())
+		{
+			var infusions = InfusedPropertiesHelper.getInfusedProperties(getCurrentOutput()).stream().sorted(Comparator.comparingInt(p -> p.value().getPriority())).toList();
+
+			for (int i = 0; i < infusions.size(); i++) {
+				var infusion = infusions.get(i);
+
+				infusionValue += infusions.size() - ((properties.contains(infusion)) ? i : 0);
+			}
+		}
+
+
+		int result = ((priority - AbstractForgeRecipe.MIN_PRIORITY) << 9) + ((8-slots) << 6) + Mth.clamp(slotValue, 0, 36) - infusionValue;
 
 		//System.out.println(recipe + " slotValue: " + slotValue + " slots: " + slots + " priority: " + priority + " result: " + result);
 

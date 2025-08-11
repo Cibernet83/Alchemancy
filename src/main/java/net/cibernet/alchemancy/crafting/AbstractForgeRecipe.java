@@ -89,7 +89,7 @@ public abstract class AbstractForgeRecipe<RESULT> implements Recipe<ForgeRecipeG
 
 	public int getRecipeCompareValue(ForgeRecipeGrid grid)
 	{
-		return grid.getRecipeCompareValue(this, infusables, essences, getPriority());
+		return grid.getRecipeCompareValue(this, infusables, infusedProperties, getPriority());
 	}
 
 	/** Determines at what point in the infusion process the recipe occurs, the lower the number the higher the priority
