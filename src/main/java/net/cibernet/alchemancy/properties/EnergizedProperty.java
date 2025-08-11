@@ -7,10 +7,12 @@ import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.cibernet.alchemancy.util.CommonUtils;
+import net.cibernet.alchemancy.util.InfusionPropertyDispenseBehavior;
 import net.cibernet.alchemancy.util.RedstoneSources;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.FastColor;
@@ -28,6 +30,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ButtonBlock;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -44,6 +47,23 @@ public class EnergizedProperty extends AbstractTimerProperty
 	private static final ResourceLocation SPEED_MOD_KEY = ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "energized_property_modifier");
 	private static final long ENERGIZED_DURATION = 1200;
 
+
+	@Override
+	public InfusionPropertyDispenseBehavior.DispenseResult onItemDispense(BlockSource blockSource, Direction direction, ItemStack stack, InfusionPropertyDispenseBehavior.DispenseResult currentResult) {
+
+		if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.INTERACTABLE))
+			return InfusionPropertyDispenseBehavior.DispenseResult.PASS;
+
+		Level level = blockSource.level();
+		BlockPos pos = blockSource.pos().relative(direction);
+		BlockState state = level.getBlockState(pos);
+		if(!state.canRedstoneConnectTo(level, pos, direction))
+			return InfusionPropertyDispenseBehavior.DispenseResult.PASS;
+
+		powerBlock(blockSource.level(), pos, 7 / 15f, direction);
+		InfusionPropertyDispenseBehavior.playDefaultEffects(blockSource, direction);
+		return InfusionPropertyDispenseBehavior.DispenseResult.SUCCESS;
+	}
 
 	@SubscribeEvent
 	public static void onPlayerTick(PlayerTickEvent.Pre event)
