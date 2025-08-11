@@ -116,18 +116,4 @@ public class AthleticProperty extends Property
 	{
 		return 0x409DB7;
 	}
-
-	@Override
-	public boolean onEntityItemBelowWorld(ItemStack stack, ItemEntity itemEntity) {
-		if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.UNDYING)) {
-			InfusedPropertiesHelper.removeProperty(stack, AlchemancyProperties.UNDYING);
-			InfusedPropertiesHelper.removeProperty(stack, asHolder());
-			itemEntity.level().playSound(null, itemEntity.position().x, itemEntity.position().y, itemEntity.position().z, SoundEvents.TOTEM_USE, SoundSource.BLOCKS, 0.65f, 0.5f);
-
-			InfusedPropertiesHelper.addProperty(stack, AlchemancyProperties.VOIDBORN);
-			itemEntity.setItem(ForgeRecipeGrid.resolveInteractions(stack, itemEntity.level()));
-			return true;
-		}
-		return false;
-	}
 }
