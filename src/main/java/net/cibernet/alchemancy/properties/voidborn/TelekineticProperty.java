@@ -10,7 +10,10 @@ import net.minecraft.core.particles.DustColorTransitionOptions;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Shulker;
 import net.minecraft.world.entity.player.Player;
@@ -29,6 +32,16 @@ public class TelekineticProperty extends Property implements IDataHolder<UUID> {
 
 
 	public static final ParticleOptions PARTICLES = new DustColorTransitionOptions(Vec3.fromRGB24(0x4BEC13).toVector3f(), Vec3.fromRGB24(0x06672FF).toVector3f(), 1);
+
+	@Override
+	public void onDamageReceived(LivingEntity user, ItemStack weapon, EquipmentSlot slot, DamageSource damageSource) {
+		if(slot.isArmor() || getData(weapon) == getDefaultData()) return;
+
+		if(user instanceof ServerPlayer player)
+			player.getCooldowns().addCooldown(weapon.getItem(), 20);
+		removeData(weapon);
+		user.stopUsingItem();
+	}
 
 	@Override
 	public void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
