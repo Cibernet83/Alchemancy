@@ -1080,7 +1080,7 @@
   "infusion_codex.alchemancy:jump_entangled.stacked_on": "Allows the item to permanently store an additional item within itself as long as it has an additional {system Infusion Slot} to apply this {system Infusion} to it. If either item is destroyed or consumed, the other will also be lost.",
   "infusion_codex.alchemancy:jump_entangled.while_equipped": "Swaps this item with its {property alchemancy:entangled} counterpart while jumping.",
   "infusion_codex.alchemancy:kinetic_grab.flavor": "Wanna have a bad time?",
-  "infusion_codex.alchemancy:kinetic_grab.when_used_entity": "Holds the target entity in front of the user for as long as the item is used.",
+  "infusion_codex.alchemancy:kinetic_grab.when_used_entity": "Holds the target entity in front of the user for as long as the item is used or until the user takes damage.",
   "infusion_codex.alchemancy:kinetic_recharge.flavor": "Just keep moving!",
   "infusion_codex.alchemancy:kinetic_recharge.while_equipped": "Restores the item's durability while the user is in motion. The faster the user is going, the faster the item is repaired.",
   "infusion_codex.alchemancy:launching.flavor": "To the moon",

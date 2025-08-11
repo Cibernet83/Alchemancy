@@ -509,7 +509,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		//addCodexFunction(AlchemancyProperties.CEASELESS_VOID, PropertyFunction.AFTER_USE, "Attempts to pick up as many items currently present in the world as the user's inventory allows.");
 
 		addCodexFlavor(AlchemancyProperties.KINETIC_GRAB, "Wanna have a bad time?");
-		addCodexFunction(AlchemancyProperties.KINETIC_GRAB, PropertyFunction.WHEN_USED_ENTITY, "Holds the target entity in front of the user for as long as the item is used.");
+		addCodexFunction(AlchemancyProperties.KINETIC_GRAB, PropertyFunction.WHEN_USED_ENTITY, "Holds the target entity in front of the user for as long as the item is used or until the user takes damage.");
 
 		addCodexFlavor(AlchemancyProperties.VACUUMING, "An attractive personality");
 		addCodexFunction(AlchemancyProperties.VACUUMING, PropertyFunction.WHILE_USING, "Slowly pulls in ALL entities within an 8-block radius.");
