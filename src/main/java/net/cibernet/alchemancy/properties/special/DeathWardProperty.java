@@ -1,5 +1,6 @@
 package net.cibernet.alchemancy.properties.special;
 
+import net.cibernet.alchemancy.network.S2CDeathWardEffectsPayload;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.util.ColorUtils;
 import net.minecraft.ChatFormatting;
@@ -12,6 +13,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 public class DeathWardProperty extends Property
 {
@@ -31,7 +33,7 @@ public class DeathWardProperty extends Property
 			entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 900, 1));
 			entity.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 100, 1));
 			entity.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 800, 0));
-			entity.level().broadcastEntityEvent(entity, (byte)35);
+			PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, new S2CDeathWardEffectsPayload(entity, stack));
 		}
 	}
 
