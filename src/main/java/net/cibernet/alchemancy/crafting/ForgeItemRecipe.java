@@ -26,9 +26,9 @@ public class ForgeItemRecipe extends AbstractForgeRecipe<ItemStack>
 		return checkParadoxical(input.getCurrentOutput()) && super.matches(input, level);
 	}
 
-	public ForgeItemRecipe(Optional<Ingredient> catalyst, Optional<String> catalystName, List<EssenceContainer> essences, List<Ingredient> infusables, List<Holder<Property>> infusedProperties, ItemStack result)
+	public ForgeItemRecipe(Optional<Ingredient> catalyst, Optional<String> catalystName, List<Ingredient> infusables, List<Holder<Property>> infusedProperties, ItemStack result)
 	{
-		super(catalyst.isPresent() ? catalyst : Optional.of(Ingredient.EMPTY), catalystName, essences, infusables, infusedProperties);
+		super(catalyst.isPresent() ? catalyst : Optional.of(Ingredient.EMPTY), catalystName, infusables, infusedProperties);
 		this.result = result;
 
 	}

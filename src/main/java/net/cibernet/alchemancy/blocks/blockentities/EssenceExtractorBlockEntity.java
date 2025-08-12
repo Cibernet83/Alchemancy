@@ -30,7 +30,7 @@ public class EssenceExtractorBlockEntity extends BaseContainerBlockEntity implem
 	public final EssenceContainer storedEssence = new EssenceContainer(1000);
 
 	public static final int[] SLOTS = new int[] {0};
-	private static final RecipeManager.CachedCheck<EssenceExtractorBlockEntity, EssenceExtractionRecipe> RECIPE_CHECK = RecipeManager.createCheck(AlchemancyRecipeTypes.ESSENCE_EXTRACTION.get());
+	private static final RecipeManager.CachedCheck<EssenceExtractorBlockEntity, EssenceExtractionRecipe> RECIPE_CHECK = null;//RecipeManager.createCheck(AlchemancyRecipeTypes.ESSENCE_EXTRACTION.get());
 
 	public EssenceExtractorBlockEntity(BlockPos pos, BlockState blockState)
 	{

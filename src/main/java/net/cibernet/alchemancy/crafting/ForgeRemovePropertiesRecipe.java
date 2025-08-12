@@ -21,9 +21,9 @@ public class ForgeRemovePropertiesRecipe extends AbstractForgeRecipe<Optional<It
 {
 	final Optional<ItemStack> result;
 
-	public ForgeRemovePropertiesRecipe(Optional<Ingredient> catalyst, Optional<String> catalystName, List<EssenceContainer> essences, List<Ingredient> infusables, List<Holder<Property>> infusedProperties, Optional<ItemStack> result)
+	public ForgeRemovePropertiesRecipe(Optional<Ingredient> catalyst, Optional<String> catalystName, List<Ingredient> infusables, List<Holder<Property>> infusedProperties, Optional<ItemStack> result)
 	{
-		super(catalyst.isPresent() ? catalyst : Optional.of(Ingredient.EMPTY), catalystName, essences, infusables, infusedProperties);
+		super(catalyst.isPresent() ? catalyst : Optional.of(Ingredient.EMPTY), catalystName, infusables, infusedProperties);
 		this.result = result;
 
 	}
@@ -34,7 +34,6 @@ public class ForgeRemovePropertiesRecipe extends AbstractForgeRecipe<Optional<It
 		return  (catalyst.isEmpty() || catalyst.get().isEmpty() || catalyst.get().test(input.getCurrentOutput())) &&
 				(catalystName.isEmpty() || input.getCurrentOutput().getDisplayName().getString().equalsIgnoreCase(catalystName.get())) &&
 				input.testInfusables(infusables, false) &&
-				input.testEssences(essences, false) &&
 				input.testProperties(infusedProperties, false);
 	}
 	@Override

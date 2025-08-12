@@ -29,7 +29,7 @@ public class ForgeLoreRecipe extends AbstractForgeRecipe<Object>
 {
 	protected ForgeLoreRecipe()
 	{
-		super(Optional.empty(), Optional.empty(), List.of(), List.of(), List.of());
+		super(Optional.empty(), Optional.empty(), List.of(), List.of());
 	}
 
 	@Override

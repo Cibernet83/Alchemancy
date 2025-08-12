@@ -30,7 +30,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class ForgeRecipeGrid implements RecipeInput
 {
 	private final ArrayList<ItemStackHolderBlockEntity> items = new ArrayList<>();
-	private final ArrayList<EssenceContainer> essences = new ArrayList<>();
 
 	private final ArrayList<Object> slotOrder = new ArrayList<>();
 
@@ -105,19 +104,13 @@ public class ForgeRecipeGrid implements RecipeInput
 				items.add(pedestal);
 				slotOrder.add(pedestal);
 			}
-			else if(lookupState.is(AlchemancyBlocks.ESSENCE_INJECTOR) && lookupBlockEntity instanceof IEssenceHolder essenceHolder)
-			{
-				EssenceContainer container = essenceHolder.getEssenceContainer();
-				essences.add(container);
-				slotOrder.add(container);
-			}
 		}
 	}
 
 
 	@Override
 	public int size() {
-		return items.size() + essences.size() + (forge.getItem().isEmpty() ? 0 : 1);
+		return items.size() + (forge.getItem().isEmpty() ? 0 : 1);
 	}
 
 	@Override
@@ -128,9 +121,6 @@ public class ForgeRecipeGrid implements RecipeInput
 
 	public boolean areIngredientsEmpty()
 	{
-		for (EssenceContainer essence : essences)
-			if(!essence.isEmpty())
-				return false;
 		for (ItemStackHolderBlockEntity pedestal : items) {
 			if(!pedestal.isEmpty())
 				return false;
@@ -158,19 +148,6 @@ public class ForgeRecipeGrid implements RecipeInput
 		for (ItemStackHolderBlockEntity item : items) {
 			if (infusable.test(item.getItem())) {
 				return getSlot(item);
-			}
-		}
-
-		return -1;
-	}
-
-	public int getSlotFor(EssenceContainer essenceContainer)
-	{
-		EssenceContainer testEssence = new EssenceContainer(essenceContainer.getEssence(), essenceContainer.getAmount(), 0);
-
-		for (EssenceContainer essence : essences) {
-			if (essence.transferTo(testEssence, testEssence.getLimit(), false, false) > 0) {
-
 			}
 		}
 
@@ -237,11 +214,6 @@ public class ForgeRecipeGrid implements RecipeInput
 		return items;
 	}
 
-	public ArrayList<EssenceContainer> getEssenceContainers()
-	{
-		return essences;
-	}
-
 	public boolean consumeItem(ItemStackHolderBlockEntity pedestal)
 	{
 		if(!slotOrder.contains(pedestal))
@@ -289,40 +261,6 @@ public class ForgeRecipeGrid implements RecipeInput
 			if(i >= items.size())
 				return false;
 			else items.remove(i);
-		}
-
-		return true;
-	}
-
-	public boolean testEssences(List<EssenceContainer> essencesToTest, boolean consume)
-	{
-		if(essencesToTest.isEmpty())
-			return true;
-
-		ArrayList<EssenceContainer> essences = new ArrayList<>(this.essences);
-
-		for (EssenceContainer e : essencesToTest)
-		{
-			EssenceContainer testEssence = new EssenceContainer(e.getEssence(), e.getAmount(), 0);
-
-			boolean successful = false;
-			for (EssenceContainer essence : essences)
-			{
-				if(essence.transferTo(testEssence, testEssence.getLimit(), false, consume) > 0)
-				{
-					if(essence.isEmpty())
-						this.essences.remove(essence);
-
-					if(testEssence.isFull())
-					{
-						successful = true;
-						break;
-					}
-				}
-			}
-
-			if(!successful)
-				return false;
 		}
 
 		return true;

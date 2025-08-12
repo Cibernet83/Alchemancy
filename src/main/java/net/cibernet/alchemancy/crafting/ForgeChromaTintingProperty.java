@@ -27,7 +27,7 @@ public class ForgeChromaTintingProperty extends AbstractForgeRecipe<Object> {
 	public final Ingredient ingredient;
 
 	protected ForgeChromaTintingProperty(Ingredient ingredient) {
-		super(Optional.empty(), Optional.empty(), List.of(), List.of(), List.of());
+		super(Optional.empty(), Optional.empty(), List.of(), List.of());
 		this.ingredient = ingredient;
 	}
 

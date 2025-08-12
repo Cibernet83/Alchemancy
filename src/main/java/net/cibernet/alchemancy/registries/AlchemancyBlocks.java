@@ -41,8 +41,6 @@ public class AlchemancyBlocks
 			.lightLevel(state -> 3)
 			.pushReaction(PushReaction.DESTROY)));
 
-	public static final DeferredBlock<EssenceExtractorBlock> ESSENCE_EXTRACTOR = REGISTRY.register("essence_extractor", () -> new EssenceExtractorBlock(BlockBehaviour.Properties.of().strength(1.5f)));
-	public static final DeferredBlock<EssenceInjectorBlock> ESSENCE_INJECTOR = REGISTRY.register("essence_injector", () -> new EssenceInjectorBlock(BlockBehaviour.Properties.of().strength(1.5f)));
 	public static final DeferredBlock<InfusionPedestalBlock> INFUSION_PEDESTAL = REGISTRY.register("infusion_pedestal", () -> new InfusionPedestalBlock(BlockBehaviour.Properties.of().strength(1.5f)));
 	public static final DeferredBlock<AlchemancyForgeBlock> ALCHEMANCY_FORGE = REGISTRY.register("alchemancy_forge", () -> new AlchemancyForgeBlock(BlockBehaviour.Properties.of().strength(1.5f)));
 	public static final DeferredBlock<AlchemancyCatalystBlock> ALCHEMANCY_CATALYST = REGISTRY.register("alchemancy_catalyst", () -> new AlchemancyCatalystBlock(BlockBehaviour.Properties.of().strength(1.5f).sound(SoundType.GLASS).noOcclusion()));

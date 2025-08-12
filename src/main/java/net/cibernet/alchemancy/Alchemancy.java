@@ -33,7 +33,6 @@ public class Alchemancy {
 		AlchemancyItems.Materials.ARMOR_MATERIAL_REGISTRY.register(modEventBus);
 		AlchemancyItems.Components.REGISTRY.register(modEventBus);
 		AlchemancyEntities.REGISTRY.register(modEventBus);
-		AlchemancyEssence.REGISTRY.register(modEventBus);
 		AlchemancyProperties.REGISTRY.register(modEventBus);
 		AlchemancyProperties.Modifiers.REGISTRY.register(modEventBus);
 		AlchemancyCreativeTabs.REGISTRY.register(modEventBus);

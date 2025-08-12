@@ -16,8 +16,8 @@ import static net.cibernet.alchemancy.registries.AlchemancyRecipeTypes.Serialize
 
 public class ItemTransmutationRecipe extends ForgeItemRecipe
 {
-	public ItemTransmutationRecipe(Optional<Ingredient> catalyst, Optional<String> catalystName, List<EssenceContainer> essences, List<Ingredient> infusables, List<Holder<Property>> infusedProperties, ItemStack result) {
-		super(catalyst, catalystName, List.of(), List.of(), List.of(), result);
+	public ItemTransmutationRecipe(Optional<Ingredient> catalyst, Optional<String> catalystName, List<Ingredient> infusables, List<Holder<Property>> infusedProperties, ItemStack result) {
+		super(catalyst, catalystName, List.of(), List.of(), result);
 	}
 
 	@Override

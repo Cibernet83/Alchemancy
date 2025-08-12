@@ -58,12 +58,12 @@ public class EssenceExtractionRecipe implements Recipe<EssenceExtractorBlockEnti
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return AlchemancyRecipeTypes.Serializers.ESSENCE_EXTRACTION.get();
+		return null;
 	}
 
 	@Override
 	public RecipeType<?> getType() {
-		return AlchemancyRecipeTypes.ESSENCE_EXTRACTION.get();
+		return null;
 	}
 
 	public static class Serializer implements RecipeSerializer<EssenceExtractionRecipe>

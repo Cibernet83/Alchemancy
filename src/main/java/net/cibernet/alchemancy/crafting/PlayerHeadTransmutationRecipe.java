@@ -28,7 +28,7 @@ public class PlayerHeadTransmutationRecipe extends ItemTransmutationRecipe
 {
 	public PlayerHeadTransmutationRecipe()
 	{
-		super(Optional.of(Ingredient.of(Items.PLAYER_HEAD)), Optional.empty(), List.of(), List.of(), List.of(), Items.PLAYER_HEAD.getDefaultInstance());
+		super(Optional.of(Ingredient.of(Items.PLAYER_HEAD)), Optional.empty(), List.of(), List.of(), Items.PLAYER_HEAD.getDefaultInstance());
 	}
 
 	@Override

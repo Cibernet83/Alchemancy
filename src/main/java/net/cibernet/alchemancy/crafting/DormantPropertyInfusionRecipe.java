@@ -20,7 +20,7 @@ import java.util.Optional;
 public class DormantPropertyInfusionRecipe extends AbstractForgeRecipe<Object>
 {
 	public DormantPropertyInfusionRecipe() {
-		super(Optional.empty(), Optional.empty(), List.of(), List.of(), List.of());
+		super(Optional.empty(), Optional.empty(), List.of(), List.of());
 	}
 
 	@Override

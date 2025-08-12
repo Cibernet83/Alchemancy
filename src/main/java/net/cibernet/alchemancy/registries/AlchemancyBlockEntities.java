@@ -13,9 +13,9 @@ public class AlchemancyBlockEntities
 	public static final DeferredRegister<BlockEntityType<?>> REGISTRY =  DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, Alchemancy.MODID);
 
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<EssenceExtractorBlockEntity>> ESSENCE_EXTRACTOR = REGISTRY.register(
-			"essence_extractor", () -> BlockEntityType.Builder.of(EssenceExtractorBlockEntity::new, AlchemancyBlocks.ESSENCE_EXTRACTOR.get()).build(null));
+			"essence_extractor", () -> BlockEntityType.Builder.of(EssenceExtractorBlockEntity::new).build(null));
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<EssenceInjectorBlockEntity>> ESSENCE_INJECTOR = REGISTRY.register(
-			"essence_injector", () -> BlockEntityType.Builder.of(EssenceInjectorBlockEntity::new, AlchemancyBlocks.ESSENCE_INJECTOR.get()).build(null));
+			"essence_injector", () -> BlockEntityType.Builder.of(EssenceInjectorBlockEntity::new).build(null));
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ItemStackHolderBlockEntity>> ITEMSTACK_HOLDER = REGISTRY.register(
 			"pedestal", () -> BlockEntityType.Builder.of(ItemStackHolderBlockEntity::new, AlchemancyBlocks.INFUSION_PEDESTAL.get(), AlchemancyBlocks.ALCHEMANCY_FORGE.get(), AlchemancyBlocks.FLATTENED_ITEM.get()).build(null));
 	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AlchemancyCatalystBlockEntity>> ALCHEMANCY_CATALYST = REGISTRY.register(
