@@ -1,0 +1,11 @@
+{
+  "type": "alchemancy:forged_property",
+  "properties": [
+    "alchemancy:dirty",
+    "alchemancy:wealthy"
+  ],
+
+  "result": [
+    "alchemancy:dirty"
+  ]
+}
