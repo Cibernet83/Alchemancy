@@ -25,7 +25,7 @@ public record S2CDeathWardEffectsPayload(int entityId, ItemStack stack) implemen
 	);
 
 	public S2CDeathWardEffectsPayload(Entity entity, ItemStack stack) {
-		this(entity.getId(), stack);
+		this(entity.getId(), stack.copy());
 	}
 
 	public static final Type<S2CDeathWardEffectsPayload> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "s2c/death_ward_effects"));

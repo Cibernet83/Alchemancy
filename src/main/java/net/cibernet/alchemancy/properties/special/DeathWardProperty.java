@@ -22,6 +22,8 @@ public class DeathWardProperty extends Property
 	{
 		if(!event.isCanceled() && CommonHooks.onLivingUseTotem(entity, event.getSource(), stack, slot == EquipmentSlot.OFFHAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND))
 		{
+			PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, new S2CDeathWardEffectsPayload(entity, stack));
+
 			if(stack.isDamageableItem())
 				stack.hurtAndBreak(500, entity, slot);
 			else consumeItem(entity, stack, slot);
@@ -33,7 +35,6 @@ public class DeathWardProperty extends Property
 			entity.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 900, 1));
 			entity.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 100, 1));
 			entity.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 800, 0));
-			PacketDistributor.sendToPlayersTrackingEntityAndSelf(entity, new S2CDeathWardEffectsPayload(entity, stack));
 		}
 	}
 
