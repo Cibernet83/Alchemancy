@@ -52,7 +52,7 @@ public class TelekineticProperty extends Property implements IDataHolder<UUID> {
 		if (user.level().isClientSide) return;
 
 		var hit = ProjectileUtil.getEntityHitResult(user, user.getEyePosition(), user.getEyePosition().add(user.getLookAngle().scale(distance)),
-				CommonUtils.boundingBoxAroundPoint(user.getEyePosition(), (float) distance), e -> true, distance);
+				CommonUtils.boundingBoxAroundPoint(user.getEyePosition(), (float) distance), e -> !e.isSpectator(), distance);
 		if (hit == null) return;
 
 		setData(event.getItemStack(), hit.getEntity().getUUID());
