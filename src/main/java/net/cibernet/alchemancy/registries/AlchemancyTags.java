@@ -28,6 +28,7 @@ public class AlchemancyTags
         public static final TagKey<Item> IMMUNE_TO_INFUSIONS = registerTag(Registries.ITEM, "immune_to_infusions");
         public static final TagKey<Item> REMOVES_INFUSIONS = registerTag(Registries.ITEM, "removes_infusions");
         public static final TagKey<Item> DISABLES_INFUSION_ABILITIES = registerTag(Registries.ITEM, "disables_infusion_abilities");
+        public static final TagKey<Item> IGNORED_BY_INFUSION_FLASK = registerTag(Registries.ITEM, "ignored_by_infusion_flask");
 
         public static final TagKey<Item> INCREASES_SHOCK_DAMAGE_RECEIVED = registerTag(Registries.ITEM, "doubles_shock_damage_received");
 
