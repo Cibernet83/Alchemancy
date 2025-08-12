@@ -3,6 +3,7 @@
   "values": [
     "#minecraft:sand",
     "#c:gravels",
+    "#c:concrete_powders",
     "minecraft:suspicious_gravel",
     "alchemancy:phantom_membrane_block"
   ]
