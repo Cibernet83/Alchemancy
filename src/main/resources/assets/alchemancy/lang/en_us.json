@@ -1177,7 +1177,7 @@
   "infusion_codex.alchemancy:reaping.when_used_block": "Can till {item Dirt} into {item Farmland}",
   "infusion_codex.alchemancy:reinforced.attribute_modifier": "Increases the item's {attribute Armor} value by 3 and its {attribute Armor Toughness} by 1.",
   "infusion_codex.alchemancy:reinforced.flavor": "Tougher than the rest of them",
-  "infusion_codex.alchemancy:relentless.durability_consumed": "Grants a chance to not consume durability relative to how much has been used up, with a maximum chance of 80%.",
+  "infusion_codex.alchemancy:relentless.durability_consumed": "Grants a chance to not consume durability relative to how much health the user has lost, with a maximum chance of 60%.",
   "infusion_codex.alchemancy:relentless.flavor": "Not giving up",
   "infusion_codex.alchemancy:relentless.receive_damage_worn_or_using": "Reduces all incoming damage relative to how much health the user has lost, with a maximum reduction of 20%.",
   "infusion_codex.alchemancy:repelled.flavor": "Not a fan of crowds",

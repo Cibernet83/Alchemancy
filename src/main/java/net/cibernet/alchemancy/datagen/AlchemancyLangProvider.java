@@ -402,7 +402,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.LOYAL, PropertyFunction.WHEN_SHOT, "Floats back to the shooter after impacting a block or an entity.");
 
 		addCodexFlavor(AlchemancyProperties.RELENTLESS, "Not giving up");
-		addCodexFunction(AlchemancyProperties.RELENTLESS, PropertyFunction.DURABILITY_CONSUMED, "Grants a chance to not consume durability relative to how much has been used up, with a maximum chance of 80%.");
+		addCodexFunction(AlchemancyProperties.RELENTLESS, PropertyFunction.DURABILITY_CONSUMED, "Grants a chance to not consume durability relative to how much health the user has lost, with a maximum chance of 60%.");
 		addCodexFunction(AlchemancyProperties.RELENTLESS, PropertyFunction.RECEIVE_DAMAGE_WORN_OR_USING, "Reduces all incoming damage relative to how much health the user has lost, with a maximum reduction of 20%.");
 
 		addCodexFlavor(AlchemancyProperties.VAMPIRIC, "It doesn't suck... it scrapes");

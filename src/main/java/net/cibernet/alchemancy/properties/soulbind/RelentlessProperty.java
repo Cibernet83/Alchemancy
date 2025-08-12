@@ -20,7 +20,7 @@ public class RelentlessProperty extends Property
 	@Override
 	public int modifyDurabilityConsumed(ItemStack stack, ServerLevel level, @Nullable LivingEntity user, int originalAmount, int resultingAmount, RandomSource random)
 	{
-		return user != null && random.nextFloat() <= 1 / (getEffectScale(user) * 0.8f) ? 0 : resultingAmount;
+		return user != null && random.nextFloat() <= 1 / Math.max(0.6f, getEffectScale(user) * 0.6f) ? 0 : resultingAmount;
 	}
 
 	@Override
