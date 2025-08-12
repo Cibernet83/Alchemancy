@@ -8,6 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
@@ -33,6 +34,9 @@ public class ArcaneProperty extends Property
 	{
 		if(!event.getSource().is(AlchemancyTags.DamageTypes.ARCANE_DAMAGE))
 		{
+			if(user instanceof LivingEntity living)
+				weapon.hurtAndBreak(1, living, EquipmentSlot.MAINHAND);
+			
 			event.setCanceled(true);
 			target.hurt(new DamageSource(
 					target.damageSources().damageTypes.getHolderOrThrow(user.equals(event.getSource().getDirectEntity()) ? MELEE_DAMAGE_KEY : PROJECTILE_DAMAGE_KEY),
