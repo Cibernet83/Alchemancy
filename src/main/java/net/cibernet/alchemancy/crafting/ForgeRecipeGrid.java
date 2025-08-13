@@ -163,7 +163,6 @@ public class ForgeRecipeGrid implements RecipeInput
 
 		int slots = 0;
 		int slotValue = 0;
-		int infusionValue = 0;
 
 		//
 		if(!infusables.isEmpty())
@@ -189,6 +188,7 @@ public class ForgeRecipeGrid implements RecipeInput
 
 		//
 
+		int infusionValue = 0;
 		if(!properties.isEmpty())
 		{
 			var infusions = InfusedPropertiesHelper.getInfusedProperties(getCurrentOutput()).stream().sorted(Comparator.comparingInt(p -> p.value().getPriority())).toList();
@@ -196,12 +196,12 @@ public class ForgeRecipeGrid implements RecipeInput
 			for (int i = 0; i < infusions.size(); i++) {
 				var infusion = infusions.get(i);
 
-				infusionValue += infusions.size() - ((properties.contains(infusion)) ? i : 0);
+				infusionValue += ((properties.contains(infusion)) ? 0 : i + 1);
 			}
 		}
 
 
-		int result = ((priority - AbstractForgeRecipe.MIN_PRIORITY) << 9) + ((8-slots) << 6) + Mth.clamp(slotValue, 0, 36) - infusionValue;
+		int result = ((priority - AbstractForgeRecipe.MIN_PRIORITY) << 9) + ((8-slots) << 6) + Mth.clamp(slotValue, 0, 36) + infusionValue;
 
 		//System.out.println(recipe + " slotValue: " + slotValue + " slots: " + slots + " priority: " + priority + " result: " + result);
 
