@@ -1,0 +1,11 @@
+{
+  "type": "alchemancy:forged_property",
+  "properties": [
+    "alchemancy:death_ward",
+    "alchemancy:compact"
+  ],
+
+  "result": [
+    "alchemancy:death_ward"
+  ]
+}

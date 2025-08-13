@@ -3,6 +3,8 @@
     "translate": "infusion_codex.alchemancy:assembling.flavor"
   },
   "functions": [
-    "while_equipped"
+    "stacked_on",
+    "while_rooted",
+    "activate"
   ]
 }

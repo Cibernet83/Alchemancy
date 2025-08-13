@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 public class TickingProperty extends AbstractTimerProperty
 {
 
-	private static final float TIMER_DURATION = 200;
+	private static final float TIMER_DURATION = 100;
 
 	@Override
 	public void onInventoryTick(Entity user, ItemStack stack, Level level, int inventorySlot, boolean isCurrentItem)
@@ -37,6 +37,18 @@ public class TickingProperty extends AbstractTimerProperty
 		}
 	}
 
+	public float getTimerDuration(ItemStack stack) {
+
+		float result = TIMER_DURATION;
+		if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.SWIFT))
+			result *= 0.5f;
+		if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.SLUGGISH))
+			result *= 2f;
+		if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.LAZY))
+			result *= 2f;
+		return result;
+	}
+
 	@Override
 	public void onItemPickedUp(Player player, ItemStack stack, ItemEntity itemEntity)
 	{
@@ -54,7 +66,7 @@ public class TickingProperty extends AbstractTimerProperty
 		if(getData(stack) == 0)
 			return -1;
 
-		return 1 - Math.max(0, getElapsedTime(stack) / TIMER_DURATION);
+		return 1 - Math.max(0, getElapsedTime(stack) / getTimerDuration(stack));
 	}
 
 	@Override

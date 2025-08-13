@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:soul_harvester.flavor"
+  },
+  "functions": [
+    "modify_damage",
+    "on_kill"
+  ]
+}

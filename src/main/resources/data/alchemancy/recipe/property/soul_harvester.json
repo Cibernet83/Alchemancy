@@ -1,0 +1,10 @@
+{
+  "type": "alchemancy:forged_property",
+
+  "properties": [
+    "alchemancy:reaping",
+    "alchemancy:soulbind"
+  ],
+
+  "result": "alchemancy:soul_harvester"
+}

@@ -7,6 +7,7 @@ import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.mixin.accessors.AbstractArrowAccessor;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
+import net.cibernet.alchemancy.util.ColorUtils;
 import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
@@ -295,7 +296,7 @@ public class MagneticProperty extends Property {
 
 	@Override
 	public int getColor(ItemStack stack) {
-		return (System.currentTimeMillis() / 1000) % 2 == 0 ? 0xFF0000 : 0x0000FF;
+		return ColorUtils.flashColorsOverTime(1000,0xFF0000, 0x0000FF);
 	}
 
 }

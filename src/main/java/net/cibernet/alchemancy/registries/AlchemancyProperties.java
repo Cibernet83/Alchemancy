@@ -134,8 +134,10 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, CraftyProperty> CRAFTY = REGISTRY.register("crafty", CraftyProperty::new);
 	public static final DeferredHolder<Property, StonecuttingProperty> STONECUTTING = REGISTRY.register("stonecutting", StonecuttingProperty::new);
 	public static final DeferredHolder<Property, AutosmeltProperty> SMELTING = REGISTRY.register("smelting", AutosmeltProperty::new);
-	public static final DeferredHolder<Property, AssembleProperty> ASSEMBLING = REGISTRY.register("assembling", AssembleProperty::new);
 	public static final DeferredHolder<Property, AssimilatingProperty> ASSIMILATING = REGISTRY.register("assimilating", AssimilatingProperty::new);
+	public static final DeferredHolder<Property, EarlyAssemblingProperty> ASSEMBLING = REGISTRY.register("assembling", EarlyAssemblingProperty::new);
+	public static final DeferredHolder<Property, AssembleProperty> REPLICATING = REGISTRY.register("replicating", AssembleProperty::new);
+	public static final DeferredHolder<Property, FragmentedProperty> FRAGMENTED = REGISTRY.register("fragmented", FragmentedProperty::new);
 
 	//Storage
 	public static final DeferredHolder<Property, HollowProperty> HOLLOW = REGISTRY.register("hollow", HollowProperty::new);
@@ -216,6 +218,8 @@ public class AlchemancyProperties
 	public static final DeferredHolder<Property, SpiritBondProperty> SPIRIT_BOND = REGISTRY.register("spirit_bond", SpiritBondProperty::new);
 	public static final DeferredHolder<Property, PhasingProperty> PHASING = REGISTRY.register("phasing", PhasingProperty::new);
 	public static final DeferredHolder<Property, HungeringProperty> HUNGERING = REGISTRY.register("hungering", HungeringProperty::new);
+	public static final DeferredHolder<Property, ParasiticProperty> PARASITIC = REGISTRY.register("parasitic", ParasiticProperty::new);
+	public static final DeferredHolder<Property, SoulHarvesterProperty> SOUL_HARVESTER = REGISTRY.register("soul_harvester", SoulHarvesterProperty::new);
 
 	//Voidborn
 	public static final DeferredHolder<Property, VoidbornProperty> VOIDBORN = REGISTRY.register("voidborn", VoidbornProperty::new);

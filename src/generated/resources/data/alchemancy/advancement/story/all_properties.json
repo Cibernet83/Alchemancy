@@ -433,6 +433,12 @@
       },
       "trigger": "alchemancy:discover_property"
     },
+    "discover_alchemancy:fragmented": {
+      "conditions": {
+        "property": "alchemancy:fragmented"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
     "discover_alchemancy:friendly": {
       "conditions": {
         "property": "alchemancy:friendly"
@@ -727,6 +733,12 @@
       },
       "trigger": "alchemancy:discover_property"
     },
+    "discover_alchemancy:parasitic": {
+      "conditions": {
+        "property": "alchemancy:parasitic"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
     "discover_alchemancy:phase_step": {
       "conditions": {
         "property": "alchemancy:phase_step"
@@ -784,6 +796,12 @@
     "discover_alchemancy:repelled": {
       "conditions": {
         "property": "alchemancy:repelled"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:replicating": {
+      "conditions": {
+        "property": "alchemancy:replicating"
       },
       "trigger": "alchemancy:discover_property"
     },
@@ -946,6 +964,12 @@
     "discover_alchemancy:smelting": {
       "conditions": {
         "property": "alchemancy:smelting"
+      },
+      "trigger": "alchemancy:discover_property"
+    },
+    "discover_alchemancy:soul_harvester": {
+      "conditions": {
+        "property": "alchemancy:soul_harvester"
       },
       "trigger": "alchemancy:discover_property"
     },
@@ -1355,10 +1379,16 @@
       "discover_alchemancy:smelting"
     ],
     [
+      "discover_alchemancy:assimilating"
+    ],
+    [
       "discover_alchemancy:assembling"
     ],
     [
-      "discover_alchemancy:assimilating"
+      "discover_alchemancy:replicating"
+    ],
+    [
+      "discover_alchemancy:fragmented"
     ],
     [
       "discover_alchemancy:hollow"
@@ -1554,6 +1584,12 @@
     ],
     [
       "discover_alchemancy:hungering"
+    ],
+    [
+      "discover_alchemancy:parasitic"
+    ],
+    [
+      "discover_alchemancy:soul_harvester"
     ],
     [
       "discover_alchemancy:voidborn"

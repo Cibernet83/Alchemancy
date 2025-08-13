@@ -222,7 +222,15 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.STONECUTTING, PropertyFunction.WHEN_USED_BLOCK, "If the user isn't crouching and {property alchemancy:interactable} is present on the item, the targeted block is cut into a random variant obtainable from the {item Stonecutter}.");
 
 		addCodexFlavor(AlchemancyProperties.ASSEMBLING, "Autocrafting on the go");
-		addCodexFunction(AlchemancyProperties.ASSEMBLING, PropertyFunction.WHILE_EQUIPPED, "Attempts to craft as many replicas of the item by consuming resources in the user's inventory until the item reaches its stack limit.");
+		addCodexFunction(AlchemancyProperties.ASSEMBLING, PropertyFunction.STACKED_ON, "If right-clicked from the inventory with an empty cursor, the item will attempt to craft more of itself by consuming resources in the user's inventory. Crafted items will not retain any of the source's item's data.");
+		addCodexFunction(AlchemancyProperties.ASSEMBLING, PropertyFunction.WHILE_ROOTED, "When right-clicked, the item will attempt to craft more of itself by consuming resources in the user's inventory. Crafted items will not retain any of the source's item's data.");
+		addCodexFunction(AlchemancyProperties.ASSEMBLING, PropertyFunction.ACTIVATE, "Attempts to craft more of the item by consuming resources in the user's inventory. Crafted items will not retain any of the source's item's data.");
+
+		addCodexFlavor(AlchemancyProperties.REPLICATING, "Five. Hundred. Sparkling Sticks.");
+		addCodexFunction(AlchemancyProperties.REPLICATING, PropertyFunction.WHILE_EQUIPPED, "Attempts to craft as many replicas of the item by consuming resources in the user's inventory until the item reaches its stack limit.");
+
+		addCodexFlavor(AlchemancyProperties.FRAGMENTED, "Split into two");
+		addCodexFunction(AlchemancyProperties.FRAGMENTED, PropertyFunction.STACKED_ON, "If right-clicked from the inventory with an empty cursor, a copy of the item will be created, splitting the item's durability lost and {attribute Max Durability} between the two. If the item has a {attribute Max Durability} of 1 or less, the item is instead destroyed.");
 
 		addCodexFlavor(AlchemancyProperties.ASSIMILATING, ""); //TODO
 		addCodexFunction(AlchemancyProperties.ASSIMILATING, PropertyFunction.WHILE_EQUIPPED, "Automatically absorbs any other items like it in the user's inventory when low on durability, replenishing the item's durability in the process and absorbing the assimilated item's {system Infusions} and Enchantments when possible. If {property alchemancy:assembling} is present, the item will be able to absorb ingredients used to craft itself inside of the user's inventory as long as they can all create a new item.");
@@ -412,6 +420,14 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFlavor(AlchemancyProperties.ENERGY_SAPPER, "A symbiotic relationship");
 		addCodexFunction(AlchemancyProperties.ENERGY_SAPPER, PropertyFunction.ON_ATTACK, "Consumes a portion of the target player's Hunger.");
 		addCodexFunction(AlchemancyProperties.ENERGY_SAPPER, PropertyFunction.WHILE_EQUIPPED, "Has a 20% chance every second to consume some of the user's Hunger in order to replenish the item's durability by 1 point, as long as the item has 10 or more points of durability consumed.");
+
+		addCodexFlavor(AlchemancyProperties.PARASITIC, "Not so symbiotic after all");
+		addCodexFunction(AlchemancyProperties.PARASITIC, PropertyFunction.ON_ATTACK, "Consumes a portion of the target player's Hunger.");
+		addCodexFunction(AlchemancyProperties.PARASITIC, PropertyFunction.WHILE_EQUIPPED, "Has a 20% chance every second to damage the user by 1 Health Point in order to replenish the item's durability by 10 points, as long as the item has 10 or more points of durability consumed.");
+
+		addCodexFlavor(AlchemancyProperties.SOUL_HARVESTER, "FETCH ME THEIR SOULS!");
+		addCodexFunction(AlchemancyProperties.SOUL_HARVESTER, PropertyFunction.MODIFY_DAMAGE, "Reduces damage dealt by 25%. Increases damage proportional to the target's missing health, with a maximum increase of 55% of the attack's original damage.");
+		addCodexFunction(AlchemancyProperties.SOUL_HARVESTER, PropertyFunction.ON_KILL, "Heals the user for 10% of the target's {attribute Max Health}.");
 
 		addCodexFlavor(AlchemancyProperties.HUNGERING, "Ever-famished");
 		addCodexFunction(AlchemancyProperties.HUNGERING, PropertyFunction.WHILE_HELD, "Instantly consumes the item if it can be eaten.");
@@ -708,7 +724,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.TOGGLEABLE, PropertyFunction.STACKED_ON, "Toggles the item's {system Infusions} on/off when right-clicked with an empty cursor.");
 
 		addCodexFlavor(AlchemancyProperties.TICKING, "Tick tock");
-		addCodexFunction(AlchemancyProperties.TICKING, PropertyFunction.WHILE_IN_INVENTORY, "{activate Activates} the item on the user after 10 seconds of being picked up. The timer is automatically reset if {property alchemancy:interactable} is present on the item.");
+		addCodexFunction(AlchemancyProperties.TICKING, PropertyFunction.WHILE_IN_INVENTORY, "{activate Activates} the item on the user after 10 seconds of being picked up. The timer is automatically reset if {property alchemancy:interactable} is present on the item. Timer length is halved if {property alchemancy:swift} is present. Timer length is doubled if {property alchemancy:sluggish} or {property alchemancy:lazy} is present.");
 
 		addCodexFlavor(AlchemancyProperties.HYDROPHOBIC, "Really doesn't like showers");
 		addCodexFunction(AlchemancyProperties.HYDROPHOBIC, PropertyFunction.WHILE_EQUIPPED, "{activate Activates} the item on the user right after entering {item Water}.");

@@ -4,6 +4,8 @@ import net.cibernet.alchemancy.network.S2CDeathWardEffectsPayload;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.util.ColorUtils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -17,6 +19,14 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 public class DeathWardProperty extends Property
 {
+
+	@Override
+	public <T> Object modifyDataComponent(ItemStack stack, DataComponentType<? extends T> dataType, T data)
+	{
+		return dataType == DataComponents.MAX_STACK_SIZE ? 1 : data;
+	}
+
+
 	@Override
 	public void onUserDeath(LivingEntity entity, ItemStack stack, EquipmentSlot slot, LivingDeathEvent event)
 	{

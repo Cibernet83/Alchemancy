@@ -1,0 +1,10 @@
+{
+  "type": "alchemancy:property_warp",
+  "properties": [
+    "alchemancy:soul_harvester"
+  ],
+
+  "result": [
+    "alchemancy:soulbind"
+  ]
+}

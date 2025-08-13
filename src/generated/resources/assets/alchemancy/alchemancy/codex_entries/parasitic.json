@@ -1,0 +1,9 @@
+{
+  "flavor": {
+    "translate": "infusion_codex.alchemancy:parasitic.flavor"
+  },
+  "functions": [
+    "on_attack",
+    "while_equipped"
+  ]
+}

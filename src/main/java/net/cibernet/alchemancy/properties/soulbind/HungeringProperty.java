@@ -21,7 +21,17 @@ public class HungeringProperty extends Property {
 				(slot.isArmor() || InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.AUXILIARY)) && user instanceof Player player)
 		{
 			Inventory inventory = player.getInventory();
-			for (int i = 0; i < inventory.items.size(); i++) {
+
+			if(InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.HOLLOW))
+			{
+				ItemStack storedStack = AlchemancyProperties.HOLLOW.get().getData(stack);
+				if(!storedStack.isEmpty())
+				{
+					eat(user, storedStack, true);
+					AlchemancyProperties.HOLLOW.get().setData(stack, storedStack);
+				}
+			}
+			else for (int i = 0; i < inventory.items.size(); i++) {
 				if(eat(user, inventory.getItem(i), true))
 					break;
 			}
@@ -38,8 +48,8 @@ public class HungeringProperty extends Property {
 		))))
 		{
 			//TODO eating particles
-			user.eat(user.level(), stack);
-			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onFinishUsingItem(user, user.level(), stack));
+			stack.finishUsingItem(user.level(), user);
+			//InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onFinishUsingItem(user, user.level(), stack));
 			return true;
 		}
 		return false;

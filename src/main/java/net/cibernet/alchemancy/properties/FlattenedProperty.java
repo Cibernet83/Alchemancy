@@ -31,7 +31,7 @@ public class FlattenedProperty extends IncreaseInfuseSlotsProperty
 			pos = pos.relative(event.getFace() == null ? Direction.UP : event.getFace());
 
 		BlockState blockState = AlchemancyBlocks.FLATTENED_ITEM.get().getStateForPlacement(context);
-		if(blockState.canSurvive(event.getLevel(), pos))
+		if(event.getLevel().getBlockState(pos).canBeReplaced(context) && blockState.canSurvive(event.getLevel(), pos))
 		{
 			event.getLevel().setBlock(pos, blockState, 3);
 			ItemStackHolderBlockEntity blockEntity = new ItemStackHolderBlockEntity(pos, blockState);

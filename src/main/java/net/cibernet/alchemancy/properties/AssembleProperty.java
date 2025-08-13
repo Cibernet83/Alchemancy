@@ -79,7 +79,7 @@ public class AssembleProperty extends Property
 						if(!storedItem.isEmpty())
 							inventoryStack = storedItem;
 
-						if(stack == inventoryStack)
+						if(stack == inventoryStack || InfusedPropertiesHelper.hasProperty(inventoryStack, AlchemancyProperties.ASSEMBLING))
 							continue;
 
 						if(acceptedSlots.get(i) < inventoryStack.getCount() && ingredient.test(inventoryStack))
@@ -158,7 +158,7 @@ public class AssembleProperty extends Property
 					if(!storedItem.isEmpty())
 						inventoryStack = storedItem;
 
-					if(stack == inventoryStack)
+					if(stack == inventoryStack || InfusedPropertiesHelper.hasProperty(inventoryStack, AlchemancyProperties.ASSEMBLING))
 						continue;
 
 					if(acceptedSlots.get(i) < inventoryStack.getCount() && ingredient.test(inventoryStack))
@@ -204,6 +204,6 @@ public class AssembleProperty extends Property
 
 	@Override
 	public int getColor(ItemStack stack) {
-		return 0x2BE9FF;
+		return 0xA066C4;
 	}
 }

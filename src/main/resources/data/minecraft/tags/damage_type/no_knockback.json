@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "alchemancy:voidtouch"
+    "alchemancy:voidtouch",
+    "alchemancy:parasitic"
   ]
 }

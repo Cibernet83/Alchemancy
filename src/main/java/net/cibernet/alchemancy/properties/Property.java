@@ -364,12 +364,12 @@ public abstract class Property
 
 	public static ItemStack consumeItem(@Nullable Entity user, ItemStack stack, @Nullable EquipmentSlot brokenOnSlot)
 	{
-		stack.shrink(1);
 		if (brokenOnSlot != null && user instanceof Player player)
 		{
 			player.onEquippedItemBroken(stack.getItem(), brokenOnSlot);
 			player.awardStat(Stats.ITEM_BROKEN.get(stack.getItem()));
 		}
+		stack.shrink(1);
 		return stack;
 	}
 

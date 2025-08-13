@@ -1,0 +1,12 @@
+{
+  "type": "alchemancy:forged_property",
+
+  "properties": [
+    "alchemancy:assembling",
+    "alchemancy:assimilating",
+    "alchemancy:absorbent",
+    "alchemancy:awakened"
+  ],
+
+  "result": "alchemancy:replicating"
+}
