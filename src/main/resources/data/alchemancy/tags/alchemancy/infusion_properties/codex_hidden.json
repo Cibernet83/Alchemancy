@@ -3,6 +3,10 @@
     "alchemancy:random",
     "alchemancy:smiting",
     "alchemancy:battery_powered",
-    "alchemancy:living_battery"
+    "alchemancy:living_battery",
+
+    "alchemancy:auxiliary",
+    "alchemancy:unmovable",
+    "alchemancy:world_obliterator"
   ]
 }
