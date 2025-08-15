@@ -8,6 +8,7 @@ import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.TintedProperty;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyRecipeTypes;
+import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -23,17 +24,17 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-public class ForgeChromaTintingProperty extends AbstractForgeRecipe<Object> {
+public class ForgeChromaTintingRecipe extends AbstractForgeRecipe<Object> {
 	public final Ingredient ingredient;
 
-	protected ForgeChromaTintingProperty(Ingredient ingredient) {
+	protected ForgeChromaTintingRecipe(Ingredient ingredient) {
 		super(Optional.empty(), Optional.empty(), List.of(), List.of());
 		this.ingredient = ingredient;
 	}
 
 	@Override
 	public boolean matches(ForgeRecipeGrid input, Level level) {
-		return !ingredient.isEmpty() && input.testInfusables(List.of(ingredient), false);
+		return !input.getCurrentOutput().is(AlchemancyTags.Items.IMMUNE_TO_INFUSIONS) && !ingredient.isEmpty() && input.testInfusables(List.of(ingredient), false);
 	}
 
 	@Override
@@ -90,22 +91,22 @@ public class ForgeChromaTintingProperty extends AbstractForgeRecipe<Object> {
 		return AlchemancyRecipeTypes.Serializers.ALCHEMANCY_FORGE_CHROMA_TINTING.get();
 	}
 
-	public static class Serializer implements RecipeSerializer<ForgeChromaTintingProperty> {
+	public static class Serializer implements RecipeSerializer<ForgeChromaTintingRecipe> {
 
-		private static final MapCodec<ForgeChromaTintingProperty> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+		private static final MapCodec<ForgeChromaTintingRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
 				Ingredient.CODEC.fieldOf("infusable").forGetter(recipe -> recipe.ingredient)
-		).apply(instance, ForgeChromaTintingProperty::new));
+		).apply(instance, ForgeChromaTintingRecipe::new));
 
-		private static final StreamCodec<RegistryFriendlyByteBuf, ForgeChromaTintingProperty> STREAM_CODEC = StreamCodec.composite(
-				Ingredient.CONTENTS_STREAM_CODEC, recipe -> recipe.ingredient, ForgeChromaTintingProperty::new);
+		private static final StreamCodec<RegistryFriendlyByteBuf, ForgeChromaTintingRecipe> STREAM_CODEC = StreamCodec.composite(
+				Ingredient.CONTENTS_STREAM_CODEC, recipe -> recipe.ingredient, ForgeChromaTintingRecipe::new);
 
 		@Override
-		public MapCodec<ForgeChromaTintingProperty> codec() {
+		public MapCodec<ForgeChromaTintingRecipe> codec() {
 			return CODEC;
 		}
 
 		@Override
-		public StreamCodec<RegistryFriendlyByteBuf, ForgeChromaTintingProperty> streamCodec() {
+		public StreamCodec<RegistryFriendlyByteBuf, ForgeChromaTintingRecipe> streamCodec() {
 			return STREAM_CODEC;
 		}
 	}
