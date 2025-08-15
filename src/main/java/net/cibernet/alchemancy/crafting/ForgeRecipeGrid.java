@@ -260,7 +260,6 @@ public class ForgeRecipeGrid implements RecipeInput
 			}
 			if(i >= items.size())
 				return false;
-			else items.remove(i);
 		}
 
 		return true;
