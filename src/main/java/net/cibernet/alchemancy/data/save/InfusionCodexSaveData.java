@@ -3,11 +3,13 @@ package net.cibernet.alchemancy.data.save;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.client.InfusionCodexToast;
+import net.cibernet.alchemancy.client.screen.InfusionCodexIndexScreen;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
@@ -41,6 +43,7 @@ public class InfusionCodexSaveData {
 	private static int maxRecencyIndex = 0;
 	private static int minRecencyIndex = 0;
 	private static int currentUnlockIndex = 0;
+	private static InfusionCodexIndexScreen.SortOrder sortOrder = InfusionCodexIndexScreen.SortOrder.ALPHABETICAL;
 
 	private static boolean dirty;
 
@@ -50,9 +53,11 @@ public class InfusionCodexSaveData {
 	private static final Codec<Unit> CODEC = RecordCodecBuilder.create(instance -> instance.group(
 			Codec.BOOL.optionalFieldOf("nerd_mode").forGetter(data -> java.util.Optional.of(unlockEverything)),
 			Codec.unboundedMap(ResourceLocation.CODEC, EntryData.CODEC).fieldOf("unlocked_infusions").forGetter(data -> UNLOCKED_INFUSIONS),
-			Codec.list(ResourceLocation.CODEC).fieldOf("discovered_items").forGetter(data -> DISCOVERED_ITEMS)
-	).apply(instance, (nerdMode, unlockedInfusions, discoveredItems) -> {
+			Codec.list(ResourceLocation.CODEC).fieldOf("discovered_items").forGetter(data -> DISCOVERED_ITEMS),
+			InfusionCodexIndexScreen.SortOrder.CODEC.optionalFieldOf("sort_order", InfusionCodexIndexScreen.SortOrder.ALPHABETICAL).forGetter(data -> sortOrder)
+	).apply(instance, (nerdMode, unlockedInfusions, discoveredItems, order) -> {
 
+		sortOrder = order;
 		unlockEverything = nerdMode.orElse(false);
 
 		UNLOCKED_INFUSIONS.clear();
@@ -71,6 +76,31 @@ public class InfusionCodexSaveData {
 
 		return Unit.INSTANCE;
 	}));
+
+	private static void saveSortOrder() {
+
+		JsonObject json = new JsonObject();
+		File file = new File(FILE_PATH);
+		if (file.exists()) {
+			try (Reader reader = new FileReader(file)) {
+
+				json = GSON_INSTANCE.fromJson(reader, JsonObject.class);
+
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		} else new File(Alchemancy.MODID).mkdirs();
+
+		JsonElement sortOrderJson = InfusionCodexIndexScreen.SortOrder.CODEC.encodeStart(JsonOps.INSTANCE, sortOrder).getOrThrow();
+		json.add("sort_order", sortOrderJson);
+
+		new File(Alchemancy.MODID).mkdirs();
+		try (Writer writer = new FileWriter(FILE_PATH)) {
+			GSON_INSTANCE.toJson(json, writer);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	private static void save() {
 
@@ -110,6 +140,15 @@ public class InfusionCodexSaveData {
 
 	private static ResourceLocation getItemKey(ItemStack stack) {
 		return BuiltInRegistries.ITEM.getKey(stack.getItem());
+	}
+
+	public static InfusionCodexIndexScreen.SortOrder getSortOrder() {
+		return sortOrder;
+	}
+
+	public static void setSortOrder(InfusionCodexIndexScreen.SortOrder sortOrder) {
+		InfusionCodexSaveData.sortOrder = sortOrder;
+		saveSortOrder();
 	}
 
 	public static boolean isItemDiscovered(ItemStack stack) {

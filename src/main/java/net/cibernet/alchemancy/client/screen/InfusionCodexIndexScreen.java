@@ -9,6 +9,7 @@ import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.properties.special.InfusionCodexProperty;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
+import net.cibernet.alchemancy.util.PropertyFunction;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -21,6 +22,7 @@ import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -39,7 +41,7 @@ public class InfusionCodexIndexScreen extends Screen {
 	private final ItemStack inspectedItem;
 	private final Screen previousScreen;
 
-	private SortOrder sortOrder = SortOrder.ALPHABETICAL;
+	private SortOrder sortOrder;
 
 	private int unlockedEntryCount = 0;
 	private ObjectArrayList<Map.Entry<Holder<Property>, CodexEntryReloadListenener.CodexEntry>> entries;
@@ -48,12 +50,14 @@ public class InfusionCodexIndexScreen extends Screen {
 		super(title);
 		inspectedItem = ItemStack.EMPTY;
 		this.previousScreen = Minecraft.getInstance().screen;
+		sortOrder = InfusionCodexSaveData.getSortOrder();
 	}
 
 	public InfusionCodexIndexScreen(ItemStack inspectedItem) {
 		super(inspectedItem.getDisplayName());
 		this.inspectedItem = inspectedItem;
 		this.previousScreen = Minecraft.getInstance().screen;
+		sortOrder = InfusionCodexSaveData.getSortOrder();
 	}
 
 	@Override
@@ -109,6 +113,7 @@ public class InfusionCodexIndexScreen extends Screen {
 		searchDiv.addChild(searchBar);
 		searchDiv.addChild(Button.builder(sortOrder.buttonLabel, (button) -> {
 			sortOrder = SortOrder.values()[(sortOrder.ordinal() + 1) % SortOrder.values().length];
+			InfusionCodexSaveData.setSortOrder(sortOrder);
 			button.setMessage(sortOrder.buttonLabel);
 			button.setTooltip(sortOrder.tooltip);
 			updatePropertyList();
@@ -166,23 +171,33 @@ public class InfusionCodexIndexScreen extends Screen {
 		}
 	}
 
-	public enum SortOrder {
+	public enum SortOrder implements StringRepresentable {
 		ALPHABETICAL("alphabetical", (o1, o2) -> 0),
 		RECENCY("recency", Comparator.comparingInt(InfusionCodexSaveData::getRecencyIndex)),
 		UNLOCK("unlock", Comparator.comparingInt(InfusionCodexSaveData::getUnlockIndex)),
 		;
+		final String name;
 		final Component buttonLabel;
 		final Tooltip tooltip;
 		final Comparator<Holder<Property>> sortFunction;
 
-		SortOrder(Component buttonLabel, Component tooltip, Comparator<Holder<Property>> sortFunction) {
+
+		public static final StringRepresentable.EnumCodec<SortOrder> CODEC = StringRepresentable.fromEnum(SortOrder::values);
+
+		SortOrder(String name, Component buttonLabel, Component tooltip, Comparator<Holder<Property>> sortFunction) {
+			this.name = name;
 			this.buttonLabel = buttonLabel;
 			this.tooltip = Tooltip.create(Component.translatable("screen.infusion_codex.sort_order", tooltip));
 			this.sortFunction = sortFunction;
 		}
 
 		SortOrder(String key, Comparator<Holder<Property>> sortFunction) {
-			this(Component.translatable("screen.infusion_codex.sort_button." + key), Component.translatable("screen.infusion_codex.sort_order." + key), sortFunction);
+			this(key, Component.translatable("screen.infusion_codex.sort_button." + key), Component.translatable("screen.infusion_codex.sort_order." + key), sortFunction);
+		}
+
+		@Override
+		public String getSerializedName() {
+			return name;
 		}
 	}
 
