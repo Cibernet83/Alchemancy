@@ -126,7 +126,7 @@ public class AlchemancyItems
 	public static final DeferredItem<Item> PARADOX_PEARL = REGISTRY.registerSimpleItem("paradox_pearl");
 	public static final DeferredItem<Item> ENTANGLED_SINGULARITY = REGISTRY.registerSimpleItem("entangled_singularity");
 	public static final DeferredItem<InnatePropertyItem> VOID_PEARL = REGISTRY.register("void_pearl", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.VOIDBORN).build());
-	public static final DeferredItem<InnatePropertyItem> CHROMA_LENS = REGISTRY.register("chroma_lens", () -> new InnatePropertyItem.Builder().build());
+	public static final DeferredItem<InnatePropertyItem> CHROMA_LENS = REGISTRY.register("chroma_lens", () -> new InnatePropertyItem.Builder().withProperties(AlchemancyProperties.CHROMATIZE).build());
 	public static final DeferredItem<Item> GLOWING_ORB = REGISTRY.register("glowing_orb", () -> new BlockItem(AlchemancyBlocks.GLOWING_ORB.get(), new Item.Properties()));
 
 	public static final DeferredItem<Item> MICROSCOPIC_LENS = REGISTRY.registerSimpleItem("microscopic_lens");
