@@ -1376,7 +1376,7 @@
   "infusion_codex.alchemancy:spiking.on_attack": "Knocks targets down, instead of knocking them back.",
   "infusion_codex.alchemancy:spiking.while_worn_boots": "Sets your movement friction to a constant value. ",
   "infusion_codex.alchemancy:spirit_bond.flavor": "Your souls, unite",
-  "infusion_codex.alchemancy:spirit_bond.on_heal": "While equipped, restores 10 durability points for each health point restored.",
+  "infusion_codex.alchemancy:spirit_bond.on_heal": "While equipped, restores 5 durability points for each health point restored.",
   "infusion_codex.alchemancy:spirit_bond.receive_damage_equipped": "Loses 1 durability point for each health point lost.",
   "infusion_codex.alchemancy:sporadic.flavor": "Wacky and unpredictable",
   "infusion_codex.alchemancy:sporadic.while_equipped": "{activate Activates} the item on the user at random intervals.",

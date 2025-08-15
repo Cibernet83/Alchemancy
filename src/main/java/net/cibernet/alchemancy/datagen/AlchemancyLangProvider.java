@@ -396,7 +396,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.SOULBIND, PropertyFunction.OTHER, "Can be used to create multiple new {system Infusions}.");
 
 		addCodexFlavor(AlchemancyProperties.SPIRIT_BOND, "Your souls, unite");
-		addCodexFunction(AlchemancyProperties.SPIRIT_BOND, PropertyFunction.ON_HEAL, "While equipped, restores 10 durability points for each health point restored.");
+		addCodexFunction(AlchemancyProperties.SPIRIT_BOND, PropertyFunction.ON_HEAL, "While equipped, restores 5 durability points for each health point restored.");
 		addCodexFunction(AlchemancyProperties.SPIRIT_BOND, PropertyFunction.RECEIVE_DAMAGE_EQUIPPED, "Loses 1 durability point for each health point lost.");
 
 		addCodexFlavor(AlchemancyProperties.PHASING, "Might be smart to put a Hopper under your Forge...");
@@ -423,7 +423,6 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.ENERGY_SAPPER, PropertyFunction.WHILE_EQUIPPED, "Has a 20% chance every second to consume some of the user's Hunger in order to replenish the item's durability by 1 point, as long as the item has 10 or more points of durability consumed.");
 
 		addCodexFlavor(AlchemancyProperties.PARASITIC, "Not so symbiotic after all");
-		addCodexFunction(AlchemancyProperties.PARASITIC, PropertyFunction.ON_ATTACK, "Consumes a portion of the target player's Hunger.");
 		addCodexFunction(AlchemancyProperties.PARASITIC, PropertyFunction.WHILE_EQUIPPED, "Has a 20% chance every second to damage the user by 1 Health Point in order to replenish the item's durability by 10 points, as long as the item has 10 or more points of durability consumed.");
 
 		addCodexFlavor(AlchemancyProperties.SOUL_HARVESTER, "FETCH ME THEIR SOULS!");
@@ -616,7 +615,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.STICKY, PropertyFunction.WHILE_ROOTED, "Greatly hinders the movement of all entities standing inside of the item, as if they were walking through {item Cobweb}.");
 		addCodexFunction(AlchemancyProperties.STICKY, PropertyFunction.OTHER, "Prevents the item from being dropped.");
 
-		addCodexFlavor(AlchemancyProperties.DEXTEROUS, "Acrobatics? Sleight of Hand? you got it");
+		addCodexFlavor(AlchemancyProperties.DEXTEROUS, "Acrobatics? Sleight of Hand? You got it");
 		addCodexFunction(AlchemancyProperties.DEXTEROUS, PropertyFunction.WHILE_EQUIPPED, "Negates the {attribute Movement Speed} penalty from using items.");
 
 		addCodexFlavor(AlchemancyProperties.CHROMATIZE, "Taste the rainbow!");
