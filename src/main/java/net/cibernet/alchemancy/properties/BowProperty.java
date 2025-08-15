@@ -83,6 +83,6 @@ public class BowProperty extends Property
 
 	@Override
 	public int getPriority() {
-		return Priority.LOW;
+		return Priority.HIGHER;
 	}
 }
