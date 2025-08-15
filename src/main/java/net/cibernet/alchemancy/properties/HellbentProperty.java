@@ -45,7 +45,13 @@ public class HellbentProperty extends Property implements IDataHolder<Holder<Blo
 	@Override
 	public void modifyCriticalAttack(Player user, ItemStack weapon, CriticalHitEvent event)
 	{
-		event.setCriticalHit(true);
+		if(event.isCriticalHit())
+		{
+			event.setCriticalHit(true);
+			if(weapon.isDamageableItem())
+				weapon.hurtAndBreak(5, user, EquipmentSlot.MAINHAND);
+			else consumeItem(user, weapon, EquipmentSlot.MAINHAND);
+		}
 	}
 
 	@Override
