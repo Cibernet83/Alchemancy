@@ -278,6 +278,8 @@ public class PropertyEventHandler
 				ItemStack item = user.getItemBySlot(slot);
 				InfusedPropertiesHelper.forEachProperty(item, propertyHolder -> propertyHolder.value().modifyLivingExperienceDrops(user, item, slot, event.getEntity(), event));
 			}
+
+			AuxiliaryProperty.triggerAuxiliaryEffects(user, (propertyHolder, stack) -> propertyHolder.value().modifyLivingExperienceDrops(user, stack, EquipmentSlot.MAINHAND, event.getEntity(), event));
 		}
 	}
 
@@ -288,15 +290,9 @@ public class PropertyEventHandler
 		ItemStack tool = event.getBreaker() instanceof LivingEntity living && (!living.getMainHandItem().isEmpty() && ItemStack.isSameItem(event.getTool(), living.getMainHandItem())) ? living.getMainHandItem() : event.getTool(); //ServerPlayerGameMode uses a copied stack instead of the actual stack held by the player
 		InfusedPropertiesHelper.forEachProperty(tool, propertyHolder -> propertyHolder.value().modifyBlockDrops(event.getBreaker(), tool, EquipmentSlot.MAINHAND, event.getDrops(), event));
 
-		if(event.getBreaker() instanceof LivingEntity living)
-			for(EquipmentSlot slot : EquipmentSlot.values())
-			{
-				if(slot == EquipmentSlot.MAINHAND)
-					continue;
+		if(event.getBreaker() instanceof Player player)
+			AuxiliaryProperty.triggerAuxiliaryEffects(player, (propertyHolder, stack) -> propertyHolder.value().modifyBlockDrops(player, stack, EquipmentSlot.MAINHAND, event.getDrops(), event));
 
-				ItemStack item = living.getItemBySlot(slot);
-				InfusedPropertiesHelper.forEachProperty(tool, propertyHolder -> propertyHolder.value().modifyBlockDrops(event.getBreaker(), tool, slot, event.getDrops(), event));
-			}
 	}
 
 	@SubscribeEvent
