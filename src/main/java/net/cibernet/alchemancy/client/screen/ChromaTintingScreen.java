@@ -74,7 +74,8 @@ public class ChromaTintingScreen extends Screen {
 			this.onClose();
 		}).width(100).build());
 		footer.addChild(Button.builder(CommonComponents.GUI_DONE, p_329727_ -> {
-			PacketDistributor.sendToServer(new ChromatizeC2SPayload(getColor()));
+			if(InfusedPropertiesHelper.hasProperty(affectedItem, AlchemancyProperties.TINTED))
+				PacketDistributor.sendToServer(new ChromatizeC2SPayload(getColor()));
 			this.onClose();
 		}).width(100).build());
 
