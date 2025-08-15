@@ -9,11 +9,15 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
 import net.neoforged.neoforge.event.entity.item.ItemEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -26,11 +30,16 @@ import java.util.Arrays;
 public class ChromatizeProperty extends Property {
 
 	@Override
-	public void onAttack(@Nullable Entity user, ItemStack weapon, DamageSource damageSource, LivingEntity target) {
+	public void onActivation(@Nullable Entity source, Entity target, ItemStack stack, DamageSource damageSource) {
+		if(target instanceof LivingEntity living)
+			setLivingColor(living, AlchemancyProperties.TINTED.get().getData(stack));
+	}
 
-		if(InfusedPropertiesHelper.hasProperty(weapon, AlchemancyProperties.CONCEALED))
-			setLivingColor(target, 0);
-		else setLivingColor(target, AlchemancyProperties.TINTED.get().getData(weapon));
+	@Override
+	public void onProjectileImpact(ItemStack stack, Projectile projectile, HitResult rayTraceResult, ProjectileImpactEvent event) {
+
+		if(rayTraceResult instanceof EntityHitResult entityHit && entityHit.getEntity() instanceof LivingEntity living)
+			setLivingColor(living, AlchemancyProperties.TINTED.get().getData(stack));
 	}
 
 	@Override
