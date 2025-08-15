@@ -3,15 +3,22 @@
     "alchemancy:burning",
     "alchemancy:wet",
     "alchemancy:frosted",
-    "alchemancy:grappling",
-    "alchemancy:burning",
+    "alchemancy:shocking",
+    "alchemancy:flammable",
+    "alchemancy:bouncy",
+    "alchemancy:sluggish",
     "alchemancy:poisonous",
     "alchemancy:decaying",
-    "alchemancy:sluggish",
     "alchemancy:tipsy",
     "alchemancy:blinding",
-    "alchemancy:ominous",
-    "alchemancy:nocturnal",
-    "alchemancy:glowing_aura"
+    "alchemancy:glowing_aura",
+    "alchemancy:grappling",
+    "alchemancy:spiking",
+    "alchemancy:energy_sapper",
+    "alchemancy:flame_emperor",
+    "alchemancy:voidtouch",
+    "alchemancy:infected",
+    "alchemancy:dripping",
+    "alchemancy:seeded"
   ]
 }
