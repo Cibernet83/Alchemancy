@@ -61,6 +61,13 @@ public class ChromatizeProperty extends Property {
 			setLivingColor(event.getEntity(), 0xFFFFFFFF);
 	}
 
+	@SubscribeEvent
+	private static void onStartTracking(PlayerEvent.StartTracking event)
+	{
+		if(event.getEntity() instanceof ServerPlayer player && event.getTarget() instanceof LivingEntity target)
+			PacketDistributor.sendToPlayer(player, new EntitySyncTintColorS2CPayload(target));
+	}
+
 	public static void setLivingColor(LivingEntity target, Integer... color) {
 
 		target.setData(AlchemancyDataAttachments.ENTITY_TINT.get(), Arrays.stream(color).toList());
