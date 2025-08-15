@@ -5,6 +5,7 @@
   "functions": [
     "stacked_on",
     "while_rooted",
-    "activate"
+    "activate",
+    "other_effects"
   ]
 }

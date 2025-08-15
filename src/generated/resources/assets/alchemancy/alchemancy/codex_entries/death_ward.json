@@ -3,7 +3,8 @@
     "translate": "infusion_codex.alchemancy:death_ward.flavor"
   },
   "functions": [
-    "while_equipped"
+    "while_equipped",
+    "other_effects"
   ],
   "innate": [
     "alchemancy:undying_ring"

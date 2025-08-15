@@ -3,6 +3,10 @@
     "translate": "infusion_codex.alchemancy:chromatize.flavor"
   },
   "functions": [
-    "on_attack"
+    "activate",
+    "when_shot"
+  ],
+  "innate": [
+    "alchemancy:chroma_lens"
   ]
 }
