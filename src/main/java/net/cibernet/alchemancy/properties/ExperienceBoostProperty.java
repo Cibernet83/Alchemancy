@@ -1,5 +1,7 @@
 package net.cibernet.alchemancy.properties;
 
+import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,7 +26,7 @@ public class ExperienceBoostProperty extends Property
 	@Override
 	public void modifyBlockDrops(Entity breaker, ItemStack tool, EquipmentSlot slot, List<ItemEntity> drops, BlockDropsEvent event)
 	{
-		if(slot == EquipmentSlot.MAINHAND || slot == EquipmentSlot.BODY)
+		if(!InfusedPropertiesHelper.hasProperty(tool, AlchemancyProperties.AUXILIARY) && (slot == EquipmentSlot.MAINHAND || slot == EquipmentSlot.BODY))
 			event.setDroppedExperience(event.getDroppedExperience() * 2);
 		else event.setDroppedExperience((int) Math.floor(event.getDroppedExperience() * 1.1f));
 	}
