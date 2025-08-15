@@ -70,7 +70,7 @@ public class InnatePropertyItem extends Item
 
 	@Override
 	public int getUseDuration(ItemStack stack, LivingEntity entity) {
-		return useTime;
+		return useTime == 0 ? super.getUseDuration(stack, entity) : useTime;
 	}
 
 	@Override
