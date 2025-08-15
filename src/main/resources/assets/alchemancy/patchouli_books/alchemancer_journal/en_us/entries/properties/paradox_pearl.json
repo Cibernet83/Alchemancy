@@ -1,0 +1,40 @@
+{
+  "name": "alchemancy.entry.paradox_pearl",
+  "sortnum": 0,
+  "advancement": "alchemancy:story/dreamsteel_entry",
+  "icon": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:paradoxical\"], alchemancy:ingredient_display={}]",
+  "category": "alchemancy:properties",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.paradox_pearl.page0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.paradox_pearl.page1"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:paradox_pearl",
+      "text": "alchemancy.entry.paradox_pearl.page2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.paradox_pearl.page3"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.paradox_pearl.page4"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.paradox_pearl.page5"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:property/paradox_collapse",
+      "text": "alchemancy.entry.paradox_pearl.page6"
+    }
+  ]
+}

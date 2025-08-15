@@ -1,6 +1,6 @@
 {
   "name": "alchemancy.entry.property_visor",
-  "sortnum": 0,
+  "sortnum": -9,
   "advancement": "alchemancy:story/property_visor_entry",
   "icon": "alchemancy:property_visor",
   "category": "alchemancy:trinkets",

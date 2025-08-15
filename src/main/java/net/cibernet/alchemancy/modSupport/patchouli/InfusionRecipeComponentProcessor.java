@@ -2,6 +2,7 @@ package net.cibernet.alchemancy.modSupport.patchouli;
 
 import net.cibernet.alchemancy.crafting.AbstractForgeRecipe;
 import net.cibernet.alchemancy.crafting.ForgePropertyRecipe;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
@@ -11,17 +12,15 @@ import vazkii.patchouli.api.IVariableProvider;
 
 import java.util.stream.Collectors;
 
-public class InfusionRecipeComponentProcessor implements IComponentProcessor
-{
+public class InfusionRecipeComponentProcessor implements IComponentProcessor {
 	private AbstractForgeRecipe<?> recipe;
 	private boolean hasTitle;
 	//private Optional<Boolean> linkRecipe;
 
 	@Override
-	public void setup(Level level, IVariableProvider variables)
-	{
+	public void setup(Level level, IVariableProvider variables) {
 		String key = variables.get("recipe", level.registryAccess()).asString();
-		if(level.getRecipeManager().byKey(ResourceLocation.parse(key)).orElseThrow(() -> new IllegalArgumentException("recipe " + key + " does not exist")).value() instanceof AbstractForgeRecipe r)
+		if (level.getRecipeManager().byKey(ResourceLocation.parse(key)).orElseThrow(() -> new IllegalArgumentException("recipe " + key + " does not exist")).value() instanceof AbstractForgeRecipe r)
 			this.recipe = r;
 		else throw new IllegalArgumentException(key + " is not a valid infusion recipe");
 		hasTitle = variables.has("title");
@@ -31,11 +30,10 @@ public class InfusionRecipeComponentProcessor implements IComponentProcessor
 
 
 	@Override
-	public IVariable process(Level level, String key)
-	{
-		if(key.equals("catalyst"))
+	public IVariable process(Level level, String key) {
+		if (key.equals("catalyst"))
 			return IVariable.from(recipe.getCatalyst().orElse(Ingredient.EMPTY), level.registryAccess());
-		if(key.equals("output"))
+		if (key.equals("output"))
 			return IVariable.from(recipe.getResultItem(level.registryAccess()), level.registryAccess());
 
 		//WHY DOESN'T PROCESS WORK WITH BOOLS AAAAAAAAAAAAAA
@@ -48,12 +46,15 @@ public class InfusionRecipeComponentProcessor implements IComponentProcessor
 //					});
 //		}
 
-		if(!hasTitle && key.equals("title"))
-		{
-			if(recipe instanceof ForgePropertyRecipe recipe1)
-				return IVariable.wrap(recipe1.getResult().stream()
-						.map(propertyHolder -> propertyHolder.value().getName().getString())
-						.collect(Collectors.joining(" and ")), level.registryAccess());
+		if (!hasTitle && key.equals("title")) {
+			if (recipe instanceof ForgePropertyRecipe recipe1) {
+				var result = recipe1.getResult();
+				return result.isEmpty() ?
+						IVariable.from(Component.translatable("alchemancy.entry.infusion_removal"), level.registryAccess()) :
+						IVariable.wrap(result.stream()
+								.map(propertyHolder -> propertyHolder.value().getName().getString())
+								.collect(Collectors.joining(" and ")), level.registryAccess());
+			}
 
 			return IVariable.from(recipe.getResultItem(level.registryAccess()).getHoverName(), level.registryAccess());
 		}

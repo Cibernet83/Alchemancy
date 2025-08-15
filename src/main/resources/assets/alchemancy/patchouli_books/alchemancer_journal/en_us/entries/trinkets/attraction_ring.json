@@ -1,0 +1,19 @@
+{
+  "name": "alchemancy.entry.attraction_ring",
+  "sortnum": -5,
+  "advancement": "alchemancy:story/apply_property",
+  "icon": "alchemancy:attraction_ring",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.attraction_ring.page0"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:attraction_ring",
+      "text": "alchemancy.entry.attraction_ring.page1"
+    }
+  ]
+}

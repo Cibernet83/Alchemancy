@@ -1,0 +1,19 @@
+{
+  "name": "alchemancy.entry.tinted_glasses",
+  "sortnum": 0,
+  "advancement": "alchemancy:story/apply_property",
+  "icon": "alchemancy:tinted_glasses",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.tinted_glasses.page0"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:tinted_glasses",
+      "text": "alchemancy.entry.tinted_glasses.page1"
+    }
+  ]
+}

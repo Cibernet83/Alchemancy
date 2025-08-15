@@ -1,0 +1,19 @@
+{
+  "name": "alchemancy.entry.binding_key",
+  "sortnum": 0,
+  "advancement": "alchemancy:story/apply_property",
+  "icon": "alchemancy:binding_key",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.binding_key.page0"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:binding_key",
+      "text": "alchemancy.entry.binding_key.page1"
+    }
+  ]
+}

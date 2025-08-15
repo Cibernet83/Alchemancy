@@ -186,16 +186,16 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.FIRESTARTING, PropertyFunction.WHEN_USED_BLOCK, "Creates {item Fire} at the targeted block. Allows the item to light {item Candles} and {item Campfires}.");
 		addCodexFunction(AlchemancyProperties.FIRESTARTING, PropertyFunction.WHEN_SHOT_FROM_DISPENSER, "Creates {item Fire} at the block in front. Light {item Candles} and {item Campfires} in front of the {item Dispenser}.");
 
-		addCodexFlavor(AlchemancyProperties.BRUSHING, ""); //TODO
+		addCodexFlavor(AlchemancyProperties.BRUSHING, "Archaeologist hate it!");
 		addCodexFunction(AlchemancyProperties.BRUSHING, PropertyFunction.WHEN_USED_BLOCK, "Allows the item to brush off {item Suspicious Blocks}.");
 		addCodexFunction(AlchemancyProperties.BRUSHING, PropertyFunction.WHEN_USED_ENTITY, "Can brush Armadillos to obtain {item Armadillo Scute}.");
 		addCodexFunction(AlchemancyProperties.BRUSHING, PropertyFunction.WHEN_SHOT_FROM_DISPENSER, "Brushes an Armadillo in front of the {item Dispenser} to obtain {item Armadillo Scute}.");
 
-		addCodexFlavor(AlchemancyProperties.SCOPING, ""); //TODO
+		addCodexFlavor(AlchemancyProperties.SCOPING, "Zoom in and enhance");
 		addCodexFunction(AlchemancyProperties.SCOPING, PropertyFunction.WHILE_HELD, "Zooms the user's vision in while crouching.");
 		addCodexFunction(AlchemancyProperties.SCOPING, PropertyFunction.WHILE_WORN_HELMET, "Zooms the user's vision in while crouching.");
 
-		addCodexFlavor(AlchemancyProperties.THROWABLE, ""); //TODO
+		addCodexFlavor(AlchemancyProperties.THROWABLE, "For three!");
 		addCodexFunction(AlchemancyProperties.THROWABLE, PropertyFunction.WHEN_USED, "Throws the item like a Projectile, triggering {function when_shot} effects when appropriate. The thrown item takes 10 durability points or is destroyed when it hits a block or an entity.");
 		addCodexFunction(AlchemancyProperties.THROWABLE, PropertyFunction.WHEN_SHOT_FROM_DISPENSER, "Throws the item like a Projectile, triggering {function when_shot} effects when appropriate. The thrown item takes 10 durability points or is destroyed when it hits a block or an entity.");
 
@@ -225,6 +225,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.ASSEMBLING, PropertyFunction.STACKED_ON, "If right-clicked from the inventory with an empty cursor, the item will attempt to craft more of itself by consuming resources in the user's inventory. Crafted items will not retain any of the source's item's data.");
 		addCodexFunction(AlchemancyProperties.ASSEMBLING, PropertyFunction.WHILE_ROOTED, "When right-clicked, the item will attempt to craft more of itself by consuming resources in the user's inventory. Crafted items will not retain any of the source's item's data.");
 		addCodexFunction(AlchemancyProperties.ASSEMBLING, PropertyFunction.ACTIVATE, "Attempts to craft more of the item by consuming resources in the user's inventory. Crafted items will not retain any of the source's item's data.");
+		addCodexFunction(AlchemancyProperties.ASSEMBLING, PropertyFunction.OTHER, "Makes the item non-stackable.");
 
 		addCodexFlavor(AlchemancyProperties.REPLICATING, "Five. Hundred. Sparkling Sticks.");
 		addCodexFunction(AlchemancyProperties.REPLICATING, PropertyFunction.WHILE_EQUIPPED, "Attempts to craft as many replicas of the item by consuming resources in the user's inventory until the item reaches its stack limit.");
@@ -232,7 +233,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFlavor(AlchemancyProperties.FRAGMENTED, "Split into two");
 		addCodexFunction(AlchemancyProperties.FRAGMENTED, PropertyFunction.STACKED_ON, "If right-clicked from the inventory with an empty cursor, a copy of the item will be created, splitting the item's durability lost and {attribute Max Durability} between the two. If the item has a {attribute Max Durability} of 1 or less, the item is instead destroyed.");
 
-		addCodexFlavor(AlchemancyProperties.ASSIMILATING, ""); //TODO
+		addCodexFlavor(AlchemancyProperties.ASSIMILATING, "All for one");
 		addCodexFunction(AlchemancyProperties.ASSIMILATING, PropertyFunction.WHILE_EQUIPPED, "Automatically absorbs any other items like it in the user's inventory when low on durability, replenishing the item's durability in the process and absorbing the assimilated item's {system Infusions} and Enchantments when possible. If {property alchemancy:assembling} is present, the item will be able to absorb ingredients used to craft itself inside of the user's inventory as long as they can all create a new item.");
 		addCodexFunction(AlchemancyProperties.ASSIMILATING, PropertyFunction.STACKED_OVER, "Absorbs similar items stacked over the item to replenish its durability and apply the assimilated item's {system Infusions} and Enchantments when possible.");
 
@@ -254,7 +255,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.SLUGGISH, PropertyFunction.ON_ATTACK, "Applies Slowness II to the target for 10 seconds.");
 		addCodexFunction(AlchemancyProperties.SLUGGISH, PropertyFunction.WHILE_USING, "Doubles the item's use time.");
 
-		addCodexFlavor(AlchemancyProperties.POISONOUS, "Not venomous");
+		addCodexFlavor(AlchemancyProperties.POISONOUS, "Could also be venomous");
 		addCodexFunction(AlchemancyProperties.POISONOUS, PropertyFunction.ON_ATTACK, "Applies Poison to the target for 5 seconds.");
 
 		addCodexFlavor(AlchemancyProperties.DECAYING, "Withering away");
@@ -415,7 +416,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 
 		addCodexFlavor(AlchemancyProperties.VAMPIRIC, "It doesn't suck... it scrapes");
 		addCodexFunction(AlchemancyProperties.VAMPIRIC, PropertyFunction.MODIFY_DAMAGE, "Heals the user for 20% of the damage dealt.");
-		addCodexFunction(AlchemancyProperties.VAMPIRIC, PropertyFunction.WHILE_EQUIPPED, "has a 40% chance every second of consuming 1 point of durability under broad daylight, with a 10% chance on top of that of instead setting the user ablaze for 4 seconds.");
+		addCodexFunction(AlchemancyProperties.VAMPIRIC, PropertyFunction.WHILE_EQUIPPED, "Has a 40% chance every second of consuming 1 point of durability under broad daylight, with a 10% chance on top of that of instead setting the user ablaze for 4 seconds.");
 
 		addCodexFlavor(AlchemancyProperties.ENERGY_SAPPER, "A symbiotic relationship");
 		addCodexFunction(AlchemancyProperties.ENERGY_SAPPER, PropertyFunction.ON_ATTACK, "Consumes a portion of the target player's Hunger.");
@@ -452,6 +453,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 
 		addCodexFlavor(AlchemancyProperties.DEATH_WARD, "Born again!");
 		addCodexFunction(AlchemancyProperties.DEATH_WARD, PropertyFunction.WHILE_EQUIPPED, "Saves the user from dying at the cost of 500 durability points, or the item itself.");
+		addCodexFunction(AlchemancyProperties.DEATH_WARD, PropertyFunction.OTHER, "Makes the item non-stackable.");
 
 		addCodexFlavor(AlchemancyProperties.ROCKET_POWERED, "Pchooooo!");
 		addCodexFunction(AlchemancyProperties.ROCKET_POWERED, PropertyFunction.WHILE_USING, "Propels the user forwards at high speeds, consuming 2 durability points or the item itself every second.");
@@ -496,8 +498,8 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.VAULTPICKING, PropertyFunction.WHEN_USED_BLOCK, "Resets a {item Trial Vault}'s inner mechanisms at the cost of 50 durability points or the item, allowing only the user to insert another key and gather additional loot.");
 
 		addCodexFlavor(AlchemancyProperties.HOME_RUN, "And the crowd goes wild!");
-		addCodexFunction(AlchemancyProperties.HOME_RUN, PropertyFunction.MODIFY_DAMAGE, "Knocks the target back a great distance if the attack deals at least 80% of the user's {attribute Attack Damage} stat.");
-		addCodexFunction(AlchemancyProperties.HOME_RUN, PropertyFunction.ACTIVATE_BY_BLOCK, "Knocks the target back a great distance away from the item.");
+		addCodexFunction(AlchemancyProperties.HOME_RUN, PropertyFunction.MODIFY_DAMAGE, "Knocks the target back a great distance if the attack deals at least 80% of the user's {attribute Attack Damage} stat, consuming 10 durability points or the item itself.");
+		addCodexFunction(AlchemancyProperties.HOME_RUN, PropertyFunction.ACTIVATE, "Knocks the target back a great distance away from the item, consuming 10 durability points or the item itself.");
 		addCodexFunction(AlchemancyProperties.HOME_RUN, PropertyFunction.ATTRIBUTE_MODIFIER, "Sets the item's base {attribute Attack Speed} to 0.2");
 
 		addCodexFlavor(AlchemancyProperties.ITEM_PULL, "Great for mob farms and loot goblins");
@@ -506,10 +508,10 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.ITEM_PULL, PropertyFunction.WHEN_DROPPED, "Teleports all dropped items in a 5-block radius to itself.");
 		addCodexFunction(AlchemancyProperties.ITEM_PULL, PropertyFunction.WHILE_ROOTED, "Teleports all dropped items in a 5-block radius to itself.");
 
-		addCodexFlavor(AlchemancyProperties.CLOUD_DASH, ""); //TODO
+		addCodexFlavor(AlchemancyProperties.CLOUD_DASH, "Great for climbing mountains");
 		addCodexFunction(AlchemancyProperties.CLOUD_DASH, PropertyFunction.WHILE_EQUIPPED, "Allows the user to dash forwards in the direction they're facing at the start of a sprint, consuming 2 points of durability. Dash distance is influenced by the user's {attribute Movement Speed}. Only one dash can be performed before touching the ground.");
 
-		addCodexFlavor(AlchemancyProperties.CRYSTAL_DASH, ""); //TODO
+		addCodexFlavor(AlchemancyProperties.CRYSTAL_DASH, "Fully realized");
 		addCodexFunction(AlchemancyProperties.CRYSTAL_DASH, PropertyFunction.WHILE_EQUIPPED, "Allows the user to dash forwards with great speed in the direction they're facing at the start of a sprint, consuming 2 points of durability. Dash distance is influenced by the user's {attribute Movement Speed}. Only 2 dashes can be performed in succession before touching the ground.");
 
 		addCodexFlavor(AlchemancyProperties.VOIDBORN, "The abyss stares back");
@@ -605,7 +607,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFlavor(AlchemancyProperties.SANITIZED, "Squeaky clean");
 		addCodexFunction(AlchemancyProperties.SANITIZED, PropertyFunction.OTHER, "Prevents the item from becoming {property alchemancy:infected}.");
 
-		addCodexFlavor(AlchemancyProperties.STICKY, ""); //TODO
+		addCodexFlavor(AlchemancyProperties.STICKY, "It just won't come off");
 		addCodexFunction(AlchemancyProperties.STICKY, PropertyFunction.WHILE_WORN_BOOTS, "Grants full knockback immunity while grounded. Reduces {attribute Movement Speed} by 25%. Greatly reduces the user's ability to jump while grounded.");
 		addCodexFunction(AlchemancyProperties.STICKY, PropertyFunction.WHILE_WORN_CHESTPLATE, "Allows the user to stick to walls.");
 		addCodexFunction(AlchemancyProperties.STICKY, PropertyFunction.WHILE_WORN_LEGGINGS, "Allows the user to stick to walls.");
@@ -614,16 +616,17 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.STICKY, PropertyFunction.WHILE_ROOTED, "Greatly hinders the movement of all entities standing inside of the item, as if they were walking through {item Cobweb}.");
 		addCodexFunction(AlchemancyProperties.STICKY, PropertyFunction.OTHER, "Prevents the item from being dropped.");
 
-		addCodexFlavor(AlchemancyProperties.DEXTEROUS, ""); //TODO
+		addCodexFlavor(AlchemancyProperties.DEXTEROUS, "Acrobatics? Sleight of Hand? you got it");
 		addCodexFunction(AlchemancyProperties.DEXTEROUS, PropertyFunction.WHILE_EQUIPPED, "Negates the {attribute Movement Speed} penalty from using items.");
 
 		addCodexFlavor(AlchemancyProperties.CHROMATIZE, "Taste the rainbow!");
-		addCodexFunction(AlchemancyProperties.CHROMATIZE, PropertyFunction.ON_ATTACK, "Applies a colored tint to the target equal to the item's {property alchemancy:tinted} color.");
+		addCodexFunction(AlchemancyProperties.CHROMATIZE, PropertyFunction.ACTIVATE, "Applies a colored tint to the target equal to the item's {property alchemancy:tinted} color.");
+		addCodexFunction(AlchemancyProperties.CHROMATIZE, PropertyFunction.WHEN_SHOT, "When hitting an entity, applies a colored tint to the target equal to the item's {property alchemancy:tinted} color.");
 
 		addCodexFlavor(AlchemancyProperties.TINTED_LENS, "Rose-colored glasses");
 		addCodexFunction(AlchemancyProperties.TINTED_LENS, PropertyFunction.WHILE_WORN_HELMET, "Applies a colored tint to the user's vision equal to the item's {property alchemancy:tinted} color.");
 
-		addCodexFlavor(AlchemancyProperties.ROTATING, "You spin me right round baby");
+		addCodexFlavor(AlchemancyProperties.ROTATING, "Get rotated, idiot");
 		addCodexFunction(AlchemancyProperties.ROTATING, PropertyFunction.WHEN_USED_BLOCK, "Rotates the facing direction of the targeted block if possible.");
 		addCodexFunction(AlchemancyProperties.ROTATING, PropertyFunction.VISUAL, "Makes the item rotate constantly.");
 
@@ -633,7 +636,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFlavor(AlchemancyProperties.AIR_WALKER, "Think coyote time but without a time limit");
 		addCodexFunction(AlchemancyProperties.AIR_WALKER, PropertyFunction.WHILE_WORN_BOOTS, "Creates a platform of solid light under the user's feet, preventing them from falling down after walking off of a ledge. Crouching lowers the height of the platform.");
 
-		addCodexFlavor(AlchemancyProperties.ATHLETIC, ""); //TODO
+		addCodexFlavor(AlchemancyProperties.ATHLETIC, "Faster than a speeding bullet. Able to leap tall buildings in a single bound.");
 		addCodexFunction(AlchemancyProperties.ATHLETIC, PropertyFunction.WHILE_WORN_BOOTS, "Increases {attribute Movement Speed} and {attribute Jump Height} by 65% and {attribute Safe Fall Distance} by 3 blocks while sprinting.");
 
 		addCodexFlavor(AlchemancyProperties.KINETIC_RECHARGE, "Just keep moving!");
@@ -724,7 +727,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.TOGGLEABLE, PropertyFunction.STACKED_ON, "Toggles the item's {system Infusions} on/off when right-clicked with an empty cursor.");
 
 		addCodexFlavor(AlchemancyProperties.TICKING, "Tick tock");
-		addCodexFunction(AlchemancyProperties.TICKING, PropertyFunction.WHILE_IN_INVENTORY, "{activate Activates} the item on the user after 10 seconds of being picked up. The timer is automatically reset if {property alchemancy:interactable} is present on the item. Timer length is halved if {property alchemancy:swift} is present. Timer length is doubled if {property alchemancy:sluggish} or {property alchemancy:lazy} is present.");
+		addCodexFunction(AlchemancyProperties.TICKING, PropertyFunction.WHILE_IN_INVENTORY, "{activate Activates} the item on the user after 5 seconds of being picked up. The timer is automatically reset if {property alchemancy:interactable} is present on the item. Timer length is halved if {property alchemancy:swift} is present. Timer length is doubled if {property alchemancy:sluggish} or {property alchemancy:lazy} is present.");
 
 		addCodexFlavor(AlchemancyProperties.HYDROPHOBIC, "Really doesn't like showers");
 		addCodexFunction(AlchemancyProperties.HYDROPHOBIC, PropertyFunction.WHILE_EQUIPPED, "{activate Activates} the item on the user right after entering {item Water}.");
@@ -733,7 +736,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFlavor(AlchemancyProperties.ALLERGIC, "Not fond of pollen season");
 		addCodexFunction(AlchemancyProperties.ALLERGIC, PropertyFunction.WHILE_EQUIPPED, "{activate Activates} the item on the user when receiving a potion effect they don't already have.");
 
-		addCodexFlavor(AlchemancyProperties.ARMOR_PULSE, ""); //TODO
+		addCodexFlavor(AlchemancyProperties.ARMOR_PULSE, "Bounce them back... Or bounce yourself back instead");
 		addCodexFunction(AlchemancyProperties.ARMOR_PULSE, PropertyFunction.WHEN_HIT_WORN_OR_USING, "Reduces damage taken from blockable attacks within the user's {attribute Entity Interaction Range} by 1 point, {activate Activating} the item on the user in the process.");
 
 		addCodexFlavor(AlchemancyProperties.RUNNING_START, "Quick feet, quick trigger");
@@ -751,7 +754,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFlavor(AlchemancyProperties.UNDYING, "A second wind");
 		addCodexFunction(AlchemancyProperties.UNDYING, PropertyFunction.DURABILITY_CONSUMED, "Restores 60% of the item's durability before breaking, removing the {system Infusion} in the process.");
 
-		addCodexFlavor(AlchemancyProperties.SWEET, ""); //TODO
+		addCodexFlavor(AlchemancyProperties.SWEET, "Might give you a sugar rush");
 		addCodexFunction(AlchemancyProperties.SWEET, PropertyFunction.WHILE_EQUIPPED, "Makes Animals, Spiders, and Allays follow the user.");
 		addCodexFunction(AlchemancyProperties.SWEET, PropertyFunction.ATTRIBUTE_MODIFIER, "If the item can be eaten, it's saturation gain is increased by 50%, and it can be eaten even if the user isn't hungry.");
 
@@ -763,7 +766,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.SEEDED, PropertyFunction.ON_ATTACK, "Spreads {property alchemancy:seeded} to the target's armor.");
 		addCodexFunction(AlchemancyProperties.SEEDED, PropertyFunction.WHILE_WORN, "Causes Chickens to become hostile towards the user.");
 
-		addCodexFlavor(AlchemancyProperties.CONDUCTIVE, ""); //TODO
+		addCodexFlavor(AlchemancyProperties.CONDUCTIVE, "Would be good to stay away from livewires for a while");
 		addCodexFunction(AlchemancyProperties.CONDUCTIVE, PropertyFunction.RECEIVE_DAMAGE_EQUIPPED, "Emits a chaining {shock Electric} attack onto nearby entities for half of the damage received after taking {shock Electric} damage.");
 		addCodexFunction(AlchemancyProperties.CONDUCTIVE, PropertyFunction.WHILE_EQUIPPED, "Makes the user prone to Lightning strikes during thunderstorms.");
 
@@ -775,7 +778,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.WISE, PropertyFunction.WHILE_WORN, "Increases the experience yield from Mobs and blocks by 10%.");
 		addCodexFunction(AlchemancyProperties.WISE, PropertyFunction.ATTRIBUTE_MODIFIER, "Increases the item's {attribute Enchantability} by 5.");
 
-		addCodexFlavor(AlchemancyProperties.EXPERIENCED, ""); //TODO
+		addCodexFlavor(AlchemancyProperties.EXPERIENCED, "Very good at what it does");
 		addCodexFunction(AlchemancyProperties.EXPERIENCED, PropertyFunction.DURABILITY_CONSUMED, "Has a 30% chance to grant the user a random amount of Experience Points between 1 and the amount of durability consumed.");
 		addCodexFunction(AlchemancyProperties.EXPERIENCED, PropertyFunction.ON_DESTROYED, "Drops Experience Points proportional to the amount of durability left on the item.");
 
@@ -795,7 +798,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.LOOSE, PropertyFunction.WHEN_USED_BLOCK, "Causes blocks to fall like {item Sand} when placed for the first time.");
 		addCodexFunction(AlchemancyProperties.LOOSE, PropertyFunction.OTHER, "Prevents items from being worn in any armor slot.");
 
-		addCodexFlavor(AlchemancyProperties.SPARKING, ""); //TODO
+		addCodexFlavor(AlchemancyProperties.SPARKING, "The perfect match for your stick");
 		addCodexFunction(AlchemancyProperties.SPARKING, PropertyFunction.RECEIVE_DAMAGE_EQUIPPED, "Creates a block of {item Fire} at the user's position when taking Physical damage.");
 		addCodexFunction(AlchemancyProperties.SPARKING, PropertyFunction.ACTIVATE, "Creates a block of {item Fire} at the target's position.");
 		addCodexFunction(AlchemancyProperties.SPARKING, PropertyFunction.WHEN_SHOT, "Creates a block of {item Fire} at the projectile's position on impact.");
@@ -811,7 +814,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.MUSICAL, PropertyFunction.WHEN_USED, "Makes the item play a musical note. The note's pitch is determined by the user's looking pitch, and the instrument used is determined by the item being used.");
 		addCodexFunction(AlchemancyProperties.MUSICAL, PropertyFunction.WHILE_WORN_BOOTS, "Makes the user play a musical note when moving on the ground. The note's pitch is determined by the user's horizontal movement speed, and the instrument used is determined by the block they're standing on.");
 
-		addCodexFlavor(AlchemancyProperties.TARGETED, ""); //TODO
+		addCodexFlavor(AlchemancyProperties.TARGETED, "Like having an apple on your head");
 		addCodexFunction(AlchemancyProperties.TARGETED, PropertyFunction.WHILE_EQUIPPED, "Causes all Projectiles in a 16-block radius to home in on the user.");
 		addCodexFunction(AlchemancyProperties.TARGETED, PropertyFunction.WHEN_DROPPED, "Causes all Projectiles in a 16-block radius to home in on the item.");
 		addCodexFunction(AlchemancyProperties.TARGETED, PropertyFunction.WHILE_ROOTED, "Causes all Projectiles in a 16-block radius to home in on the item.");

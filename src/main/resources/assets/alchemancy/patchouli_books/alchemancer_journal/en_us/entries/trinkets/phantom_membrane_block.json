@@ -1,0 +1,27 @@
+{
+  "name": "alchemancy.entry.phantom_membrane_block",
+  "sortnum": 10,
+  "advancement": "alchemancy:story/apply_property",
+  "icon": "alchemancy:phantom_membrane_block",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.phantom_membrane_block.page0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.phantom_membrane_block.page1"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "alchemancy:phantom_membrane_block",
+      "text": "alchemancy.entry.phantom_membrane_block.page2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.phantom_membrane_block.page3"
+    }
+  ]
+}

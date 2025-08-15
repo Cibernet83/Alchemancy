@@ -1,6 +1,6 @@
 {
   "name": "alchemancy.entry.undying_ring",
-  "sortnum": 0,
+  "sortnum": -5,
   "advancement": "alchemancy:discovery/undying",
   "icon": "alchemancy:undying_ring",
   "category": "alchemancy:trinkets",

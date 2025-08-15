@@ -1,0 +1,40 @@
+{
+  "name": "alchemancy.entry.color_manipulation",
+  "sortnum": -7,
+  "advancement": "alchemancy:story/apply_property",
+  "icon": "alchemancy:chroma_lens",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.color_manipulation.page0"
+    },
+    {
+      "type": "alchemancy:tinted_example",
+      "text": "alchemancy.entry.color_manipulation.page1"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:chroma_lens",
+      "text": "alchemancy.entry.color_manipulation.page2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.color_manipulation.page3"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.color_manipulation.page4"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:chromachine",
+      "text": "alchemancy.entry.color_manipulation.page5"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.color_manipulation.page6"
+    }
+  ]
+}

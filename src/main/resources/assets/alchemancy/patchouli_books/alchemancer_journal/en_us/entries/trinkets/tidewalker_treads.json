@@ -1,0 +1,23 @@
+{
+  "name": "alchemancy.entry.tidewalker_treads",
+  "sortnum": -2,
+  "advancement": "alchemancy:story/apply_property",
+  "icon": "alchemancy:tidewalker_treads",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.tidewalker_treads.page0"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:tidewalker_treads",
+      "text": "alchemancy.entry.tidewalker_treads.page1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.tidewalker_treads.page2"
+    }
+  ]
+}

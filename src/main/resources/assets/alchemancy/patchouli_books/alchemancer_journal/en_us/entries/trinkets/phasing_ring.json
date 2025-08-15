@@ -1,6 +1,6 @@
 {
   "name": "alchemancy.entry.phasing_ring",
-  "sortnum": 0,
+  "sortnum": -5,
   "advancement": "alchemancy:story/the_end_entries",
   "icon": "alchemancy:phasing_ring",
   "category": "alchemancy:trinkets",

@@ -1,0 +1,27 @@
+{
+  "name": "alchemancy.entry.sparkling_band",
+  "sortnum": 0,
+  "advancement": "alchemancy:story/apply_property",
+  "icon": "alchemancy:sparkling_band",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.sparkling_band.page0"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:sparkling_band",
+      "text": "alchemancy.entry.sparkling_band.page1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.sparkling_band.page2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.sparkling_band.page3"
+    }
+  ]
+}

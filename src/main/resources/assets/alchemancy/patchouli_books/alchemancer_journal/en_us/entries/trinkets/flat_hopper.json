@@ -1,0 +1,23 @@
+{
+  "name": "alchemancy.entry.flat_hopper",
+  "sortnum": 0,
+  "advancement": "alchemancy:story/apply_property",
+  "icon": "alchemancy:flat_hopper",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.flat_hopper.page0"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:flat_hopper",
+      "text": "alchemancy.entry.flat_hopper.page1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.flat_hopper.page2"
+    }
+  ]
+}

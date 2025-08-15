@@ -1,0 +1,19 @@
+{
+  "name": "alchemancy.entry.spinner_spanner",
+  "sortnum": 0,
+  "advancement": "alchemancy:story/apply_property",
+  "icon": "alchemancy:spinner_spanner",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.spinner_spanner.page0"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:spinner_spanner",
+      "text": "alchemancy.entry.spinner_spanner.page1"
+    }
+  ]
+}

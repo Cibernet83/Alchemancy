@@ -1,0 +1,21 @@
+{
+  "advancement": "alchemancy:story/apply_property",
+  "category": "alchemancy:properties",
+  "priority": true,
+  "icon": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:interactable\"], alchemancy:ingredient_display={}]",
+  "name": "alchemancy.entry.property_activation",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.property_activation.page0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.property_activation.page1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.property_activation.page2"
+    }
+  ]
+}

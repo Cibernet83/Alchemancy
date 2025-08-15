@@ -1,0 +1,19 @@
+{
+  "name": "alchemancy.entry.leaden_sponge",
+  "sortnum": -8,
+  "advancement": "alchemancy:story/apply_property",
+  "icon": "alchemancy:leaden_sponge",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:crafting",
+      "recipe": "alchemancy:leaden_sponge",
+      "text": "alchemancy.entry.leaden_sponge.page0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.leaden_sponge.page1"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "alchemancy.entry.infusion_flask",
+  "sortnum": -9,
+  "advancement": "alchemancy:story/dreamsteel_entry",
+  "icon": "alchemancy:infusion_flask",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.infusion_flask.page0"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:infusion_flask",
+      "text": "alchemancy.entry.infusion_flask.page1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.infusion_flask.page2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.infusion_flask.page3"
+    }
+  ]
+}
