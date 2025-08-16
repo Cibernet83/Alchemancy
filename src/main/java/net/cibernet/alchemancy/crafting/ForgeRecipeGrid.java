@@ -331,7 +331,7 @@ public class ForgeRecipeGrid implements RecipeInput
 			AtomicBoolean consumeItem = new AtomicBoolean(true);
 			for (Holder<Property> property : List.copyOf(properties))
 			{
-				if(property.value().onInfusedByDormantProperty(target, stack, this, properties, consumeItem))
+				if(InfusedPropertiesHelper.canInfuseWithProperty(currentOutput, property) && property.value().onInfusedByDormantProperty(target, stack, this, properties, consumeItem))
 					perform = true;
 			}
 
@@ -339,6 +339,7 @@ public class ForgeRecipeGrid implements RecipeInput
 			{
 				if(consume)
 				{
+					properties.removeIf(propertyHolder -> !InfusedPropertiesHelper.canInfuseWithProperty(currentOutput, propertyHolder));
 					InfusedPropertiesHelper.addProperties(target, properties);
 					if(consumeItem.get())
 					{

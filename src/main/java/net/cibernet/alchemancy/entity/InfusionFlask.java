@@ -210,11 +210,13 @@ public class InfusionFlask extends ThrowableItemProjectile implements ItemSuppli
 		var grid = new ForgeRecipeGrid(itemStack);
 
 		for (Holder<Property> property : List.copyOf(infusions)) {
-			if (property.value().onInfusedByDormantProperty(itemStack, getItem(), grid, infusions, new AtomicBoolean(false)))
+			if (InfusedPropertiesHelper.canInfuseWithProperty(itemStack, property) && property.value().onInfusedByDormantProperty(itemStack, getItem(), grid, infusions, new AtomicBoolean(false)))
 				perform = true;
 		}
 
 		if (perform) {
+			ItemStack finalItemStack = itemStack;
+			infusions.removeIf(propertyHolder -> !InfusedPropertiesHelper.canInfuseWithProperty(finalItemStack, propertyHolder));
 			InfusedPropertiesHelper.addProperties(itemStack, infusions);
 			itemStack = ForgeRecipeGrid.resolveInteractions(itemStack, level());
 			successful.set(true);

@@ -1,6 +1,7 @@
 package net.cibernet.alchemancy.item.components;
 
 import net.cibernet.alchemancy.properties.Property;
+import net.cibernet.alchemancy.properties.SparklingProperty;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
@@ -185,6 +186,13 @@ public class InfusedPropertiesHelper
 		}
 		if(hasInnateProperty(stack, AlchemancyProperties.AWAKENED))
 			AlchemancyProperties.getDormantProperties(stack).forEach(consumer);
+	}
+
+	public static boolean canInfuseWithProperty(ItemStack stack, Holder<Property> propertyHolder) {
+
+		if(stack.is(AlchemancyItems.SPARKLING_BAND))
+			return SparklingProperty.hasParticles(propertyHolder);
+		return true; //TODO mod event for people to do stuff with addons
 	}
 
 	public static ItemStack addProperty(ItemStack stack, Holder<Property> property)

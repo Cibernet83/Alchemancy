@@ -57,7 +57,17 @@ public class ForgePropertyRecipe extends AbstractForgeRecipe<List<Holder<Propert
 
 	@Override
 	public boolean matches(ForgeRecipeGrid input, Level level) {
-		return checkParadoxical(input.getCurrentOutput()) && super.matches(input, level);
+
+		if(checkParadoxical(input.getCurrentOutput()) && super.matches(input, level))
+		{
+			for (Holder<Property> propertyHolder : result) {
+				if(!InfusedPropertiesHelper.canInfuseWithProperty(input.getCurrentOutput(), propertyHolder))
+					return false;
+			}
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
@@ -80,6 +90,7 @@ public class ForgePropertyRecipe extends AbstractForgeRecipe<List<Holder<Propert
 		return (input, registries, resultItem) ->
 		{
 			for (Holder<Property> propertyHolder : result) {
+				propertyHolder.value().onInfusedByForgeRecipe(resultItem, this, input);
 				InfusedPropertiesHelper.addProperty(resultItem, propertyHolder);
 			}
 			return resultItem;
