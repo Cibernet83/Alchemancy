@@ -13,6 +13,8 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.FastColor;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -24,18 +26,21 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
-public class BlinkingProperty extends Property implements IDataHolder<Boolean> {
+public class BlinkingProperty extends Property implements IDataHolder<Tuple<Boolean, Integer>> {
 
 	public static final ParticleOptions PARTICLES = new SparkParticle.Options(Vec3.fromRGB24(0x00FFFF).toVector3f(), 1);
+	private static final int MAX_DASHES = 3;
 
 	@Override
 	public void onEquippedTick(LivingEntity user, EquipmentSlot slot, ItemStack stack) {
 		super.onEquippedTick(user, slot, stack);
 
-		if (user.isSprinting() && !getData(stack) && !(!slot.isArmor() && InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.INTERACTABLE)))
+		if (user.isSprinting() && !getSprinting(stack) && !(!slot.isArmor() && InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.INTERACTABLE)))
 			blink(user, stack, slot);
+		else if (user.onGround())
+			setDashCount(stack, 0);
 
-		setData(stack, user.isSprinting());
+		setSprinting(stack, user.isSprinting());
 	}
 
 	@Override
@@ -52,6 +57,11 @@ public class BlinkingProperty extends Property implements IDataHolder<Boolean> {
 	}
 
 	public void blink(LivingEntity user, ItemStack stack, EquipmentSlot slot) {
+
+		var dashes = getDashCount(stack);
+		if(dashes >= MAX_DASHES) return;
+		setDashCount(stack, dashes + 1);
+
 		float range = 10 * (InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.EXTENDED) ? 2 : 1);
 
 		for (int i = 0; i < range; i++) {
@@ -90,7 +100,7 @@ public class BlinkingProperty extends Property implements IDataHolder<Boolean> {
 
 	@Override
 	public int getColor(ItemStack stack) {
-		return ColorUtils.interpolateColorsOverTime(0.5f, 0x00FFFF, 0x8CFFFF);
+		return FastColor.ARGB32.lerp((float) getDashCount(stack) / (MAX_DASHES - 1), ColorUtils.interpolateColorsOverTime(0.5f, 0x00FFFF, 0x8CFFFF), 0x0080A0);
 	}
 
 	@Override
@@ -98,20 +108,40 @@ public class BlinkingProperty extends Property implements IDataHolder<Boolean> {
 		return super.getDisplayText(stack).copy().withStyle(ChatFormatting.BOLD);
 	}
 
-	@Override
-	public Boolean readData(CompoundTag tag) {
-		return tag.getBoolean("sprinting");
+
+	private void setDashCount(ItemStack stack, int count) {
+		setData(stack, new Tuple<>(getData(stack).getA(), count));
+	}
+
+	private int getDashCount(ItemStack stack) {
+		return getData(stack).getB();
+	}
+
+	private void setSprinting(ItemStack stack, boolean sprinting) {
+		setData(stack, new Tuple<>(sprinting, getData(stack).getB()));
+	}
+
+	private boolean getSprinting(ItemStack stack) {
+		return getData(stack).getA();
 	}
 
 	@Override
-	public CompoundTag writeData(Boolean data) {
+	public Tuple<Boolean, Integer> readData(CompoundTag tag) {
+		return new Tuple<>(tag.getBoolean("sprinting"), Math.clamp(tag.getInt("dash_count"), 0, MAX_DASHES));
+	}
+
+	@Override
+	public CompoundTag writeData(Tuple<Boolean, Integer> data) {
 		return new CompoundTag() {{
-			putBoolean("sprinting", data);
+			putBoolean("sprinting", data.getA());
+			putInt("dash_count", data.getB());
 		}};
 	}
 
+	private static final Tuple<Boolean, Integer> DEFAULT = new Tuple<>(false, 0);
+
 	@Override
-	public Boolean getDefaultData() {
-		return false;
+	public Tuple<Boolean, Integer> getDefaultData() {
+		return DEFAULT;
 	}
 }

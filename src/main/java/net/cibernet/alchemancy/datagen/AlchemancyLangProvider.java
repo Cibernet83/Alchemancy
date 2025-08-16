@@ -490,8 +490,8 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.GUST_JET, PropertyFunction.WHILE_WORN_BOOTS, "Blows the user a moderate distance away from the ground.. Knocks all entities under the user back, with a 20% chance every tick of triggering {function on_attack} effects on them. Consumes 1 durability point or the item itself every 2 seconds.");
 
 		addCodexFlavor(AlchemancyProperties.BLINKING, "Quick on our feet, hard to defeat!");
-		addCodexFunction(AlchemancyProperties.BLINKING, PropertyFunction.WHILE_WORN, "Phase up to 10 blocks forward after initiating a sprint, consuming 5 durability points or the item itself.");
-		addCodexFunction(AlchemancyProperties.BLINKING, PropertyFunction.ACTIVATE, "The user phases up to 10 blocks in the direction they're looking, consuming 5 durability points or the item itself.");
+		addCodexFunction(AlchemancyProperties.BLINKING, PropertyFunction.WHILE_WORN, "Phase up to 10 blocks forward after initiating a sprint, consuming 5 durability points or the item itself. Up to 3 blinks can be performed in succession before touching the ground.");
+		addCodexFunction(AlchemancyProperties.BLINKING, PropertyFunction.ACTIVATE, "The user phases up to 10 blocks in the direction they're looking, consuming 5 durability points or the item itself. Up to 3 blinks can be performed in succession before touching the ground.");
 
 		addCodexFlavor(AlchemancyProperties.VAULTPICKING, "Hack the system");
 		addCodexFunction(AlchemancyProperties.VAULTPICKING, PropertyFunction.WHEN_USED_BLOCK, "Resets a {item Trial Vault}'s inner mechanisms at the cost of 50 durability points or the item, allowing only the user to insert another key and gather additional loot.");
@@ -511,7 +511,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.CLOUD_DASH, PropertyFunction.WHILE_EQUIPPED, "Allows the user to dash forwards in the direction they're facing at the start of a sprint, consuming 2 points of durability. Dash distance is influenced by the user's {attribute Movement Speed}. Only one dash can be performed before touching the ground.");
 
 		addCodexFlavor(AlchemancyProperties.CRYSTAL_DASH, "Fully realized");
-		addCodexFunction(AlchemancyProperties.CRYSTAL_DASH, PropertyFunction.WHILE_EQUIPPED, "Allows the user to dash forwards with great speed in the direction they're facing at the start of a sprint, consuming 2 points of durability. Dash distance is influenced by the user's {attribute Movement Speed}. Only 2 dashes can be performed in succession before touching the ground.");
+		addCodexFunction(AlchemancyProperties.CRYSTAL_DASH, PropertyFunction.WHILE_EQUIPPED, "Allows the user to dash forwards with great speed in the direction they're facing at the start of a sprint, consuming 2 points of durability. Dash distance is influenced by the user's {attribute Movement Speed}. Up to 2 dashes can be performed in succession before touching the ground.");
 
 		addCodexFlavor(AlchemancyProperties.VOIDBORN, "The abyss stares back");
 		addCodexFunction(AlchemancyProperties.VOIDBORN, PropertyFunction.WHILE_EQUIPPED, "Grants immunity to Void damage and {property alchemancy:voidtouch}. Levitates the user upwards for a short period of time after falling into the void.");
