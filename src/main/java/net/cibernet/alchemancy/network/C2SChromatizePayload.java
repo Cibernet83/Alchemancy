@@ -12,11 +12,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record ChromatizeC2SPayload(int tintColor) implements CustomPacketPayload {
-	public static final Type<ChromatizeC2SPayload> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "c2s/chromatize"));
-	public static final StreamCodec<ByteBuf, ChromatizeC2SPayload> STREAM_CODEC = StreamCodec.composite(
-			ByteBufCodecs.VAR_INT, ChromatizeC2SPayload::tintColor,
-			ChromatizeC2SPayload::new
+public record C2SChromatizePayload(int tintColor) implements CustomPacketPayload {
+	public static final Type<C2SChromatizePayload> TYPE = new Type<>(ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "c2s/chromatize"));
+	public static final StreamCodec<ByteBuf, C2SChromatizePayload> STREAM_CODEC = StreamCodec.composite(
+			ByteBufCodecs.VAR_INT, C2SChromatizePayload::tintColor,
+			C2SChromatizePayload::new
 	);
 
 
@@ -25,7 +25,7 @@ public record ChromatizeC2SPayload(int tintColor) implements CustomPacketPayload
 		return TYPE;
 	}
 
-	public static void handleDataOnMain(ChromatizeC2SPayload payload, IPayloadContext context) {
+	public static void handleDataOnMain(C2SChromatizePayload payload, IPayloadContext context) {
 
 		ItemStack stack = context.player().getMainHandItem();
 		if (!InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.TINTED))

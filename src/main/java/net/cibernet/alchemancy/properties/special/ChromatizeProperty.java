@@ -1,7 +1,6 @@
 package net.cibernet.alchemancy.properties.special;
 
-import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
-import net.cibernet.alchemancy.network.EntitySyncTintColorS2CPayload;
+import net.cibernet.alchemancy.network.S2CEntitySyncTintColorPayload;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.registries.AlchemancyDataAttachments;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
@@ -11,14 +10,12 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.entity.ProjectileImpactEvent;
-import net.neoforged.neoforge.event.entity.item.ItemEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -51,7 +48,7 @@ public class ChromatizeProperty extends Property {
 	private static void onLogIn(PlayerEvent.PlayerLoggedInEvent event) {
 
 		if(!event.getEntity().level().isClientSide())
-			PacketDistributor.sendToPlayer((ServerPlayer) event.getEntity(), new EntitySyncTintColorS2CPayload(event.getEntity()));
+			PacketDistributor.sendToPlayer((ServerPlayer) event.getEntity(), new S2CEntitySyncTintColorPayload(event.getEntity()));
 	}
 
 	@SubscribeEvent
@@ -65,13 +62,13 @@ public class ChromatizeProperty extends Property {
 	private static void onStartTracking(PlayerEvent.StartTracking event)
 	{
 		if(event.getEntity() instanceof ServerPlayer player && event.getTarget() instanceof LivingEntity target)
-			PacketDistributor.sendToPlayer(player, new EntitySyncTintColorS2CPayload(target));
+			PacketDistributor.sendToPlayer(player, new S2CEntitySyncTintColorPayload(target));
 	}
 
 	public static void setLivingColor(LivingEntity target, Integer... color) {
 
 		target.setData(AlchemancyDataAttachments.ENTITY_TINT.get(), Arrays.stream(color).toList());
 		if(!target.level().isClientSide())
-			PacketDistributor.sendToPlayersTrackingEntityAndSelf(target, new EntitySyncTintColorS2CPayload(target));
+			PacketDistributor.sendToPlayersTrackingEntityAndSelf(target, new S2CEntitySyncTintColorPayload(target));
 	}
 }

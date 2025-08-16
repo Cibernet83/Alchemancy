@@ -12,15 +12,15 @@ import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.List;
 
-public record EntitySyncTintColorS2CPayload(int entityId, List<Integer> tintColor) implements CustomPacketPayload {
-	public static final Type<EntitySyncTintColorS2CPayload> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "s2c/attachment/entity_sync_tint_color"));
-	public static final StreamCodec<ByteBuf, EntitySyncTintColorS2CPayload> STREAM_CODEC = StreamCodec.composite(
-			ByteBufCodecs.VAR_INT, EntitySyncTintColorS2CPayload::entityId,
-			ByteBufCodecs.VAR_INT.apply(ByteBufCodecs.list()), EntitySyncTintColorS2CPayload::tintColor,
-			EntitySyncTintColorS2CPayload::new
+public record S2CEntitySyncTintColorPayload(int entityId, List<Integer> tintColor) implements CustomPacketPayload {
+	public static final Type<S2CEntitySyncTintColorPayload> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "s2c/attachment/entity_sync_tint_color"));
+	public static final StreamCodec<ByteBuf, S2CEntitySyncTintColorPayload> STREAM_CODEC = StreamCodec.composite(
+			ByteBufCodecs.VAR_INT, S2CEntitySyncTintColorPayload::entityId,
+			ByteBufCodecs.VAR_INT.apply(ByteBufCodecs.list()), S2CEntitySyncTintColorPayload::tintColor,
+			S2CEntitySyncTintColorPayload::new
 	);
 
-	public EntitySyncTintColorS2CPayload(Entity entity) {
+	public S2CEntitySyncTintColorPayload(Entity entity) {
 		this(entity.getId(), entity.getData(AlchemancyDataAttachments.ENTITY_TINT));
 	}
 
@@ -29,7 +29,7 @@ public record EntitySyncTintColorS2CPayload(int entityId, List<Integer> tintColo
 		return TYPE;
 	}
 
-	public static void handleDataOnMain(EntitySyncTintColorS2CPayload payload, IPayloadContext context) {
+	public static void handleDataOnMain(S2CEntitySyncTintColorPayload payload, IPayloadContext context) {
 		var entity = context.player().level().getEntity(payload.entityId());
 		if (entity == null) {
 			return;

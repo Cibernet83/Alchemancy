@@ -1,12 +1,8 @@
 package net.cibernet.alchemancy.network;
 
-import io.netty.buffer.ByteBuf;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-import net.neoforged.neoforge.network.handling.IPayloadHandler;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 @EventBusSubscriber(bus = EventBusSubscriber.Bus.MOD)
@@ -17,17 +13,17 @@ public class AlchemancyPayloads
 	{
 		PayloadRegistrar registrar = event.registrar("1");
 
-		registrar.playToClient(S2CPlayFireworksPacket.TYPE, S2CPlayFireworksPacket.STREAM_CODEC, S2CPlayFireworksPacket::handleDataOnMain);
-		registrar.playToClient(S2CPlayGustBasketEffectsPacket.TYPE, S2CPlayGustBasketEffectsPacket.STREAM_CODEC, S2CPlayGustBasketEffectsPacket::handleDataOnMain);
-		registrar.playToClient(S2CAddPlayerMovementPacket.TYPE, S2CAddPlayerMovementPacket.STREAM_CODEC, S2CAddPlayerMovementPacket::handleDataOnMain);
-		registrar.playToClient(S2CUnlockCodexEntriesPacket.TYPE, S2CUnlockCodexEntriesPacket.STREAM_CODEC, S2CUnlockCodexEntriesPacket::handleDataOnMain);
-		registrar.playToClient(S2CDiscoverCodexIngredientsPacket.TYPE, S2CDiscoverCodexIngredientsPacket.STREAM_CODEC, S2CDiscoverCodexIngredientsPacket::handleDataOnMain);
-		registrar.playToClient(EntitySyncTintColorS2CPayload.TYPE, EntitySyncTintColorS2CPayload.STREAM_CODEC, EntitySyncTintColorS2CPayload::handleDataOnMain);
-		registrar.playToClient(S2CInventoryTickPacket.TYPE, S2CInventoryTickPacket.STREAM_CODEC, S2CInventoryTickPacket::handleDataOnMain);
+		registrar.playToClient(S2CPlayFireworksPayload.TYPE, S2CPlayFireworksPayload.STREAM_CODEC, S2CPlayFireworksPayload::handleDataOnMain);
+		registrar.playToClient(S2CPlayGustBasketEffectsPayload.TYPE, S2CPlayGustBasketEffectsPayload.STREAM_CODEC, S2CPlayGustBasketEffectsPayload::handleDataOnMain);
+		registrar.playToClient(S2CAddPlayerMovementPayload.TYPE, S2CAddPlayerMovementPayload.STREAM_CODEC, S2CAddPlayerMovementPayload::handleDataOnMain);
+		registrar.playToClient(S2CUnlockCodexEntriesPayload.TYPE, S2CUnlockCodexEntriesPayload.STREAM_CODEC, S2CUnlockCodexEntriesPayload::handleDataOnMain);
+		registrar.playToClient(S2CDiscoverCodexIngredientsPayload.TYPE, S2CDiscoverCodexIngredientsPayload.STREAM_CODEC, S2CDiscoverCodexIngredientsPayload::handleDataOnMain);
+		registrar.playToClient(S2CEntitySyncTintColorPayload.TYPE, S2CEntitySyncTintColorPayload.STREAM_CODEC, S2CEntitySyncTintColorPayload::handleDataOnMain);
+		registrar.playToClient(S2CInventoryTickPayload.TYPE, S2CInventoryTickPayload.STREAM_CODEC, S2CInventoryTickPayload::handleDataOnMain);
 		registrar.playToClient(S2CDeathWardEffectsPayload.TYPE, S2CDeathWardEffectsPayload.STREAM_CODEC, S2CDeathWardEffectsPayload::handleDataOnMain);
 		registrar.playToClient(S2CRidePlayerPayload.TYPE, S2CRidePlayerPayload.STREAM_CODEC, S2CRidePlayerPayload::handleDataOnMain);
 
-		registrar.playToServer(ChromatizeC2SPayload.TYPE, ChromatizeC2SPayload.STREAM_CODEC, ChromatizeC2SPayload::handleDataOnMain);
-		registrar.playToServer(ResetItemTintC2SPayload.TYPE, ResetItemTintC2SPayload.STREAM_CODEC, ResetItemTintC2SPayload::handleDataOnMain);
+		registrar.playToServer(C2SChromatizePayload.TYPE, C2SChromatizePayload.STREAM_CODEC, C2SChromatizePayload::handleDataOnMain);
+		registrar.playToServer(C2SResetItemTintPayload.TYPE, C2SResetItemTintPayload.STREAM_CODEC, C2SResetItemTintPayload::handleDataOnMain);
 	}
 }

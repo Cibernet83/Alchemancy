@@ -6,11 +6,10 @@ import net.cibernet.alchemancy.blocks.blockentities.ItemStackHolderBlockEntity;
 import net.cibernet.alchemancy.crafting.AbstractForgeRecipe;
 import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
-import net.cibernet.alchemancy.network.S2CDiscoverCodexIngredientsPacket;
-import net.cibernet.alchemancy.network.S2CUnlockCodexEntriesPacket;
+import net.cibernet.alchemancy.network.S2CDiscoverCodexIngredientsPayload;
+import net.cibernet.alchemancy.network.S2CUnlockCodexEntriesPayload;
 import net.cibernet.alchemancy.registries.*;
 import net.cibernet.alchemancy.util.CommonUtils;
-import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -169,11 +168,11 @@ public class AlchemancyCatalystBlock extends TransparentBlock implements EntityB
 
 			if(player instanceof ServerPlayer serverPlayer)
 			{
-				PacketDistributor.sendToPlayer(serverPlayer, new S2CUnlockCodexEntriesPacket(output));
+				PacketDistributor.sendToPlayer(serverPlayer, new S2CUnlockCodexEntriesPayload(output));
 				if(!itemsToDiscover.isEmpty())
 				{
 					AlchemancyCriteriaTriggers.DISCOVER_PROPERTY.get().trigger(serverPlayer, output);
-					PacketDistributor.sendToPlayer(serverPlayer, new S2CDiscoverCodexIngredientsPacket(itemsToDiscover));
+					PacketDistributor.sendToPlayer(serverPlayer, new S2CDiscoverCodexIngredientsPayload(itemsToDiscover));
 				}
 			}
 

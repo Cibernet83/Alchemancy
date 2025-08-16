@@ -2,8 +2,8 @@ package net.cibernet.alchemancy.blocks;
 
 import com.mojang.serialization.MapCodec;
 import net.cibernet.alchemancy.events.handler.GeneralEventHandler;
-import net.cibernet.alchemancy.network.S2CAddPlayerMovementPacket;
-import net.cibernet.alchemancy.network.S2CPlayGustBasketEffectsPacket;
+import net.cibernet.alchemancy.network.S2CAddPlayerMovementPayload;
+import net.cibernet.alchemancy.network.S2CPlayGustBasketEffectsPayload;
 import net.cibernet.alchemancy.properties.special.GustJetProperty;
 import net.cibernet.alchemancy.registries.AlchemancyBlocks;
 import net.cibernet.alchemancy.registries.AlchemancySoundEvents;
@@ -12,7 +12,6 @@ import net.cibernet.alchemancy.util.VoxelShapeUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -39,7 +38,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
-import org.joml.Vector3f;
 
 import java.util.TreeMap;
 
@@ -117,7 +115,7 @@ public class GustBasketBlock extends DirectionalBlock {
 			var movement = facingStep.scale((1 - target.position().distanceTo(pos.getCenter()) / DISTANCE) * 0.25f);
 
 			if (facing != Direction.UP && target instanceof ServerPlayer player) {
-				PacketDistributor.sendToPlayer(player, new S2CAddPlayerMovementPacket(movement));
+				PacketDistributor.sendToPlayer(player, new S2CAddPlayerMovementPayload(movement));
 			}
 			target.setDeltaMovement(target.getDeltaMovement().add(movement));
 
@@ -126,7 +124,7 @@ public class GustBasketBlock extends DirectionalBlock {
 		}
 
 		if (playEffects)
-			PacketDistributor.sendToPlayersTrackingChunk(level, level.getChunk(pos).getPos(), new S2CPlayGustBasketEffectsPacket(pos, distance));
+			PacketDistributor.sendToPlayersTrackingChunk(level, level.getChunk(pos).getPos(), new S2CPlayGustBasketEffectsPayload(pos, distance));
 	}
 
 	public static void clientPlayerTick(Player player) {

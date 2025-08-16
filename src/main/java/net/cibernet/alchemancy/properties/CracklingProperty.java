@@ -4,7 +4,7 @@ import it.unimi.dsi.fastutil.ints.IntList;
 import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
-import net.cibernet.alchemancy.network.S2CPlayFireworksPacket;
+import net.cibernet.alchemancy.network.S2CPlayFireworksPayload;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.util.ColorUtils;
@@ -44,12 +44,12 @@ public class CracklingProperty extends Property implements IDataHolder<Fireworks
 			float damage = 2.0F;
 
 			if (fireworks != null) {
-				PacketDistributor.sendToPlayersTrackingEntityAndSelf(target, new S2CPlayFireworksPacket(fireworks, targetPos));
+				PacketDistributor.sendToPlayersTrackingEntityAndSelf(target, new S2CPlayFireworksPayload(fireworks, targetPos));
 				List<FireworkExplosion> list = fireworks.explosions();
 				if (!list.isEmpty()) {
 					damage = 5.0F + (float) (list.size() * 2);
 				}
-			} else PacketDistributor.sendToPlayersTrackingEntityAndSelf(target, new S2CPlayFireworksPacket(DEFAULT, targetPos));
+			} else PacketDistributor.sendToPlayersTrackingEntityAndSelf(target, new S2CPlayFireworksPayload(DEFAULT, targetPos));
 
 			for (LivingEntity livingentity : level.getEntitiesOfClass(LivingEntity.class, CommonUtils.boundingBoxAroundPoint(targetPos, 5))) {
 				if (target != user && !(targetPos.distanceToSqr(livingentity.position()) > 25.0)) {

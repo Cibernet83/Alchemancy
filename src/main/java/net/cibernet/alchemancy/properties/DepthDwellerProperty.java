@@ -3,8 +3,6 @@ package net.cibernet.alchemancy.properties;
 import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.crafting.ForgeRecipeGrid;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
-import net.cibernet.alchemancy.network.S2CDiscoverCodexIngredientsPacket;
-import net.cibernet.alchemancy.network.S2CUnlockCodexEntriesPacket;
 import net.cibernet.alchemancy.registries.AlchemancyCriteriaTriggers;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
@@ -28,7 +26,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 
 @EventBusSubscriber

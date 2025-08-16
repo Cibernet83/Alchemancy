@@ -10,25 +10,25 @@ import net.minecraft.world.item.component.Fireworks;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record S2CPlayFireworksPacket(Fireworks fireworks, double x, double y, double z) implements CustomPacketPayload
+public record S2CPlayFireworksPayload(Fireworks fireworks, double x, double y, double z) implements CustomPacketPayload
 {
-	public static final StreamCodec<ByteBuf, S2CPlayFireworksPacket> STREAM_CODEC = StreamCodec.composite(
+	public static final StreamCodec<ByteBuf, S2CPlayFireworksPayload> STREAM_CODEC = StreamCodec.composite(
 			Fireworks.STREAM_CODEC,
-			S2CPlayFireworksPacket::fireworks,
+			S2CPlayFireworksPayload::fireworks,
 			ByteBufCodecs.DOUBLE,
-			S2CPlayFireworksPacket::x,
+			S2CPlayFireworksPayload::x,
 			ByteBufCodecs.DOUBLE,
-			S2CPlayFireworksPacket::y,
+			S2CPlayFireworksPayload::y,
 			ByteBufCodecs.DOUBLE,
-			S2CPlayFireworksPacket::z,
-			S2CPlayFireworksPacket::new
+			S2CPlayFireworksPayload::z,
+			S2CPlayFireworksPayload::new
 	);
 
-	public S2CPlayFireworksPacket(Fireworks fireworks, Vec3 position) {
+	public S2CPlayFireworksPayload(Fireworks fireworks, Vec3 position) {
 		this(fireworks, position.x(), position.y(), position.z());
 	}
 
-	public static final CustomPacketPayload.Type<S2CPlayFireworksPacket> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "s2c/play_fireworks"));
+	public static final CustomPacketPayload.Type<S2CPlayFireworksPayload> TYPE = new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "s2c/play_fireworks"));
 
 	public  void handleDataOnMain(final IPayloadContext context) {
 		// Do something with the data, on the main thread
@@ -36,7 +36,7 @@ public record S2CPlayFireworksPacket(Fireworks fireworks, double x, double y, do
 	}
 
 	@Override
-	public Type<S2CPlayFireworksPacket> type() {
+	public Type<S2CPlayFireworksPayload> type() {
 		return TYPE;
 	}
 }

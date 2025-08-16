@@ -3,7 +3,7 @@ package net.cibernet.alchemancy.events.handler;
 import net.cibernet.alchemancy.entity.ai.ScareGoal;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
-import net.cibernet.alchemancy.network.S2CInventoryTickPacket;
+import net.cibernet.alchemancy.network.S2CInventoryTickPayload;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.properties.special.AuxiliaryProperty;
 import net.cibernet.alchemancy.properties.voidborn.VoidtouchProperty;
@@ -12,7 +12,6 @@ import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.ChatFormatting;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -30,12 +29,10 @@ import net.minecraft.world.entity.projectile.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ComputeFovModifierEvent;
-import net.neoforged.neoforge.client.event.sound.PlaySoundSourceEvent;
 import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import net.neoforged.neoforge.event.ItemStackedOnOtherEvent;
@@ -188,7 +185,7 @@ public class PropertyEventHandler
 	public static void onPlayerTickPost(PlayerTickEvent.Post event)
 	{
 		if(event.getEntity() instanceof ServerPlayer serverPlayer)
-			S2CInventoryTickPacket.sendPacket(serverPlayer);
+			S2CInventoryTickPayload.sendPacket(serverPlayer);
 	}
 
 	@SubscribeEvent

@@ -4,8 +4,8 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.cibernet.alchemancy.Alchemancy;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
-import net.cibernet.alchemancy.network.ChromatizeC2SPayload;
-import net.cibernet.alchemancy.network.ResetItemTintC2SPayload;
+import net.cibernet.alchemancy.network.C2SChromatizePayload;
+import net.cibernet.alchemancy.network.C2SResetItemTintPayload;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.util.ColorUtils;
 import net.cibernet.alchemancy.util.CommonUtils;
@@ -75,7 +75,7 @@ public class ChromaTintingScreen extends Screen {
 		}).width(100).build());
 		footer.addChild(Button.builder(CommonComponents.GUI_DONE, p_329727_ -> {
 			if(InfusedPropertiesHelper.hasProperty(affectedItem, AlchemancyProperties.TINTED))
-				PacketDistributor.sendToServer(new ChromatizeC2SPayload(getColor()));
+				PacketDistributor.sendToServer(new C2SChromatizePayload(getColor()));
 			this.onClose();
 		}).width(100).build());
 
@@ -150,7 +150,7 @@ public class ChromaTintingScreen extends Screen {
 			saturationSlider.setValue(0);
 			brightnessSlider.setValue(MAX_SB);
 
-			PacketDistributor.sendToServer(new ResetItemTintC2SPayload());
+			PacketDistributor.sendToServer(new C2SResetItemTintPayload());
 			InfusedPropertiesHelper.removeProperty(affectedItem, AlchemancyProperties.TINTED);
 		}).width(64).build());
 
@@ -191,7 +191,7 @@ public class ChromaTintingScreen extends Screen {
 	public void onClose() {
 		super.onClose();
 		if(!Arrays.equals(originalTint, AlchemancyProperties.TINTED.get().getData(affectedItem)))
-			PacketDistributor.sendToServer(new ChromatizeC2SPayload(getColor()));
+			PacketDistributor.sendToServer(new C2SChromatizePayload(getColor()));
 	}
 
 	@Override
