@@ -1,0 +1,45 @@
+{
+  "name": "alchemancy.entry.name_customization",
+  "sortnum": 10,
+  "advancement": "alchemancy:story/apply_property",
+  "icon": "minecraft:name_tag",
+  "category": "alchemancy:basics",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.name_customization.page0"
+    },
+    {
+      "type": "alchemancy:infusion_example",
+      "text": "alchemancy.entry.name_customization.page1",
+
+      "example_type": "name_tag",
+      "name": "Name Tag Infusion",
+      "result": "minecraft:iron_sword[minecraft:custom_name='{\"extra\":[{\"bold\":false,\"italic\":false,\"obfuscated\":false,\"strikethrough\":false,\"text\":\"Cool Sword\",\"underlined\":false}],\"text\":\"\"}']"
+
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.name_customization.page2"
+    },
+    {
+      "type": "alchemancy:infusion_example",
+      "text": "alchemancy.entry.name_customization.page3",
+
+      "example_type": "name_tag_multiple",
+      "name": "Name Tag Infusion",
+      "result": "minecraft:iron_sword[minecraft:custom_name='{\"extra\":[{\"bold\":true,\"color\":\"#B02E26\",\"italic\":false,\"obfuscated\":false,\"strikethrough\":false,\"text\":\"The \",\"underlined\":false},{\"bold\":false,\"color\":\"#3AB3DA\",\"italic\":true,\"obfuscated\":false,\"strikethrough\":false,\"text\":\"Coolest \",\"underlined\":false},{\"bold\":false,\"color\":\"#FED83D\",\"italic\":false,\"obfuscated\":false,\"strikethrough\":true,\"text\":\"Sword \",\"underlined\":false},{\"bold\":true,\"color\":\"#80C71F\",\"italic\":false,\"obfuscated\":false,\"strikethrough\":false,\"text\":\"Ever\",\"underlined\":true}],\"text\":\"\"}']"
+
+    },
+    {
+      "type": "alchemancy:infusion_example",
+      "text": "alchemancy.entry.name_customization.page4",
+
+      "example_type": "lore",
+      "name": "Lore Infusion",
+      "result": "minecraft:iron_sword[minecraft:lore=['\"The first page of a book I wrote has been transferred to my sword, giving it a pretty neat description.\"'], minecraft:enchantment_glint_override=true]"
+
+    }
+  ]
+}

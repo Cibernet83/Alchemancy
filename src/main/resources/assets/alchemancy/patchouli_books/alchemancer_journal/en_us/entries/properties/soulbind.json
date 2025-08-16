@@ -1,0 +1,53 @@
+{
+  "advancement": "alchemancy:discovery/soulbind",
+  "category": "alchemancy:properties",
+  "icon": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:soulbind\"], alchemancy:ingredient_display={}]",
+  "name": "property.alchemancy.soulbind",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:soulbind\"], alchemancy:ingredient_display={}]",
+      "text": "alchemancy.entry.infusion_property.soulbind.page0",
+      "title": "property.alchemancy.soulbind"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.infusion_property.soulbind.page1"
+    },
+    {
+      "type": "alchemancy:infusion_double_unlinked",
+      "link_recipe1": "false",
+      "link_recipe2": "false",
+      "recipe1": "alchemancy:property/spirit_bond",
+      "recipe2": "alchemancy:property/energy_sapper"
+    },
+    {
+      "type": "alchemancy:infusion_double_unlinked",
+      "link_recipe1": "false",
+      "link_recipe2": "false",
+      "recipe1": "alchemancy:property/loyal",
+      "recipe2": "alchemancy:property/light_seeking"
+    },
+    {
+      "type": "alchemancy:infusion_double_unlinked",
+      "link_recipe1": "false",
+      "link_recipe2": "false",
+      "recipe1": "alchemancy:property/vengeful",
+      "recipe2": "alchemancy:property/vampiric"
+    },
+    {
+      "type": "alchemancy:infusion_double_unlinked",
+      "link_recipe1": "false",
+      "link_recipe2": "false",
+      "recipe1": "alchemancy:property/soul_harvester",
+      "recipe2": "alchemancy:property/relentless"
+    },
+    {
+      "type": "alchemancy:infusion_double_unlinked",
+      "link_recipe1": "false",
+      "link_recipe2": "false",
+      "recipe1": "alchemancy:property/capturing",
+      "recipe2": "alchemancy:property/phasing"
+    }
+  ]
+}

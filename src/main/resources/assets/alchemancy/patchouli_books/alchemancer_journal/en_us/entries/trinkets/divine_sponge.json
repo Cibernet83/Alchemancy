@@ -1,0 +1,23 @@
+{
+  "name": "alchemancy.entry.divine_sponge",
+  "sortnum": 0,
+  "advancement": "alchemancy:discovery/infected",
+  "icon": "alchemancy:divine_sponge",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.divine_sponge.page0"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:divine_sponge",
+      "text": "alchemancy.entry.divine_sponge.page1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.divine_sponge.page2"
+    }
+  ]
+}

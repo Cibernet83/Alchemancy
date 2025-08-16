@@ -26,18 +26,19 @@
     },
     {
       "type": "patchouli:header",
-      "text": "Tinted",
+      "text": "#name",
       "x": -1
     },
     {
       "type": "patchouli:custom",
-      "class": "net.cibernet.alchemancy.modSupport.patchouli.TintedExampleRecipeComponent",
+      "class": "net.cibernet.alchemancy.modSupport.patchouli.ExampleRecipeComponent",
+      "example_type": "#example_type",
       "x": -2,
       "y": 8
     },
     {
       "type": "patchouli:item",
-      "item": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:tinted\"], alchemancy:property_data={\"alchemancy:tinted\":{color:11359128}}]",
+      "item": "#result",
       "framed": "true",
       "link_recipe": "false",
       "x": 96,

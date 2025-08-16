@@ -11,8 +11,13 @@
       "text": "alchemancy.entry.color_manipulation.page0"
     },
     {
-      "type": "alchemancy:tinted_example",
-      "text": "alchemancy.entry.color_manipulation.page1"
+      "type": "alchemancy:infusion_example",
+      "text": "alchemancy.entry.color_manipulation.page1",
+
+      "example_type": "tinted",
+      "name": "Tinted",
+      "result": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:tinted\"], alchemancy:property_data={\"alchemancy:tinted\":{color:11359128}}]"
+
     },
     {
       "type": "alchemancy:infusion",

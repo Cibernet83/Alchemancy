@@ -1,0 +1,19 @@
+{
+  "name": "alchemancy.entry.pocket_black_hole",
+  "sortnum": 1,
+  "advancement": "alchemancy:discovery/voidborn",
+  "icon": "alchemancy:pocket_black_hole",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.pocket_black_hole.page0"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:pocket_black_hole",
+      "text": "alchemancy.entry.pocket_black_hole.page1"
+    }
+  ]
+}

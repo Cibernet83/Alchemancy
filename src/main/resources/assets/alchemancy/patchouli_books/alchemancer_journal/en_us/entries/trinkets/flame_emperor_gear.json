@@ -1,0 +1,33 @@
+{
+  "name": "alchemancy.entry.flame_emperor_gear",
+  "sortnum": -6,
+  "advancement": "alchemancy:story/apply_property",
+  "icon": "alchemancy:hot_rod",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.flame_emperor_gear.page0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.flame_emperor_gear.page1"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:hot_rod",
+      "text": "alchemancy.entry.flame_emperor_gear.page2"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:molten_core_perforator",
+      "text": "alchemancy.entry.flame_emperor_gear.page3"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:flamewakers",
+      "text": "alchemancy.entry.flame_emperor_gear.page4"
+    }
+  ]
+}

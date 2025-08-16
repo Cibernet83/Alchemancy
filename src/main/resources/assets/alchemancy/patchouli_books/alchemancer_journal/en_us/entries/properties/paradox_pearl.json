@@ -7,7 +7,8 @@
 
   "pages": [
     {
-      "type": "patchouli:text",
+      "type": "patchouli:spotlight",
+      "item": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:paradoxical\"], alchemancy:ingredient_display={}]",
       "text": "alchemancy.entry.paradox_pearl.page0"
     },
     {

@@ -1,0 +1,36 @@
+{
+  "advancement": "alchemancy:discovery/voidborn",
+  "category": "alchemancy:properties",
+  "icon": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:voidborn\"], alchemancy:ingredient_display={}]",
+  "name": "property.alchemancy.voidborn",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "alchemancy:property_capsule[alchemancy:stored_properties=[\"alchemancy:voidborn\"], alchemancy:ingredient_display={}]",
+      "text": "alchemancy.entry.infusion_property.voidborn.page0",
+      "title": "property.alchemancy.voidborn"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.infusion_property.voidborn.page1"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:void_pearl",
+      "text": "alchemancy.entry.infusion_property.voidborn.page2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.infusion_property.voidborn.page3"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:voidless_ring",
+      "text": "alchemancy.entry.infusion_property.voidborn.page4"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.infusion_property.voidborn.page5"
+    }
+  ]
+}

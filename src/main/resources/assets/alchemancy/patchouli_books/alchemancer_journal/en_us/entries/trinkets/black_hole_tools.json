@@ -1,0 +1,28 @@
+{
+  "name": "alchemancy.entry.black_hole_tools",
+  "sortnum": 2,
+  "advancement": "alchemancy:discovery/voidborn",
+  "icon": "alchemancy:black_hole_pickaxe",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.black_hole_tools.page0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.black_hole_tools.page1"
+    },
+    {
+      "type": "alchemancy:infusion_double",
+      "recipe1": "alchemancy:black_hole_pickaxe",
+      "recipe2": "alchemancy:black_hole_axe"
+    },
+    {
+      "type": "alchemancy:infusion_double",
+      "recipe1": "alchemancy:black_hole_shovel",
+      "recipe2": "alchemancy:black_hole_hoe"
+    }
+  ]
+}
