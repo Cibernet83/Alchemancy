@@ -16,6 +16,7 @@ import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyRecipeTypes;
 import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -31,6 +32,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @JeiPlugin
 public class AlchemancyJeiPlugin implements IModPlugin
@@ -123,8 +125,14 @@ public class AlchemancyJeiPlugin implements IModPlugin
 			TagKey<Item> tagKey = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Alchemancy.MODID, "dormant_properties/" + propertyHolder.getKey().location().getPath()));
 			Optional<HolderSet.Named<Item>> tag = BuiltInRegistries.ITEM.getTag(tagKey);
 
-
-			if(tag.isPresent() && tag.get().size() > 0)
+			if(propertyHolder.equals(AlchemancyProperties.VOIDBORN))
+			{
+				List<ItemStack> voidbornItems = new ArrayList<>();
+				voidbornItems.add(InfusedPropertiesHelper.createPropertyIngredient(propertyHolder));
+				tag.ifPresent(holders -> voidbornItems.addAll(holders.stream().filter(Holder::isBound).map(itemHolder -> itemHolder.value().getDefaultInstance()).collect(Collectors.toSet())));
+				registration.addItemStackInfo(voidbornItems, Component.translatable("recipe.alchemancy.voidborn.info"));
+			}
+			else if(tag.isPresent() && tag.get().size() > 0)
 				dormantPropertyCapsules.add(InfusedPropertiesHelper.createPropertyIngredient(propertyHolder));
 		}
 

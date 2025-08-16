@@ -160,6 +160,7 @@
   "recipe.alchemancy.property_interactions": "Property Interactions",
   "recipe.alchemancy.dormant_properties": "Dormant Properties",
   "recipe.alchemancy.dormant_properties.info": "This property can be obtained through the infusion of an unknown item.",
+  "recipe.alchemancy.voidborn.info": "The §5Voidborn§r property can be obtained by tossing an item infused with §2Undying§r and §2Depth Dweller§r into the void.",
 
   "commands.alchemancy:infuse.failed": "Nothing changed. Targets either have no item in their hands or the infusion could not be applied",
   "commands.alchemancy:infuse.failed.entity": "%s is not a valid entity for this command",
