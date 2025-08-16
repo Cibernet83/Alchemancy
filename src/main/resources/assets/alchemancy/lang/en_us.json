@@ -30,6 +30,7 @@
   "block.alchemancy.gust_basket": "Gust Basket",
   "block.alchemancy.chromachine": "Chromachine",
 
+  "block.alchemancy.chromachine.cannot_tint": "This item does not support tinting!",
   "block.alchemancy.chromachine.cannot_infuse": "You cannot tint uninfusable items!",
   "block.alchemancy.chromachine.cannot_tint_disguised": "You cannot tint disguised items, tint the disguise source instead!",
 

@@ -37,6 +37,7 @@ public class AlchemancyTags
         public static final TagKey<Item> INCREASES_RESIZED = registerTag(Registries.ITEM, "increases_resized");
         public static final TagKey<Item> DECREASES_RESIZED = registerTag(Registries.ITEM, "decreases_resized");
 		public static final TagKey<Item> INFUSION_REMOVES_GLINT = registerTag(Registries.ITEM, "infusion_removes_glint");
+		public static final TagKey<Item> CANNOT_TINT = registerTag(Registries.ITEM, "cannot_tint");
 
 		public static final TagKey<Item> DISABLES_COMPACT = registerTag(Registries.ITEM, "disables_compact");
 		public static final TagKey<Item> TRIGGERS_HEARTY = registerTag(Registries.ITEM, "triggers_hearty_on_use");

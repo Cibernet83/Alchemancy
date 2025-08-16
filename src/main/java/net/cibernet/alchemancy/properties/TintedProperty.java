@@ -56,6 +56,9 @@ public class TintedProperty extends Property implements IDataHolder<Integer[]>, 
 
 	@Override
 	public boolean onInfusedByDormantProperty(ItemStack stack, ItemStack propertySource, ForgeRecipeGrid grid, List<Holder<Property>> propertiesToAdd, AtomicBoolean consumeItem) {
+
+		if(stack.is(AlchemancyTags.Items.CANNOT_TINT)) return false;
+
 		Integer[] base = getData(stack);
 		Integer[] colors = getDyeColor(propertySource);
 

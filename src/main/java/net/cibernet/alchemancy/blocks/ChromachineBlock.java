@@ -2,6 +2,7 @@ package net.cibernet.alchemancy.blocks;
 
 import net.cibernet.alchemancy.client.screen.ChromaTintingScreen;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.cibernet.alchemancy.util.ClientUtil;
@@ -28,6 +29,11 @@ public class ChromachineBlock extends Block {
 
 		if(stack.isEmpty())
 			return InteractionResult.PASS;
+		if(stack.is(AlchemancyTags.Items.CANNOT_TINT))
+		{
+			player.displayClientMessage(Component.translatable("block.alchemancy.chromachine.cannot_tint"), true);
+			return InteractionResult.PASS;
+		}
 		if(stack.is(AlchemancyTags.Items.IMMUNE_TO_INFUSIONS))
 		{
 			player.displayClientMessage(Component.translatable("block.alchemancy.chromachine.cannot_infuse"), true);
