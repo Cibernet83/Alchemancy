@@ -427,7 +427,7 @@ public abstract class Property
 		return !InfusedPropertiesHelper.hasInfusedProperty(stack, asHolder());
 	}
 
-	public void onInfusedByForgeRecipe(ItemStack stack, RecipeHolder<ForgePropertyRecipe> recipe, ForgeRecipeGrid grid)
+	public void onInfusedByForgeRecipe(ItemStack stack, ForgePropertyRecipe recipe, ForgeRecipeGrid grid)
 	{
 
 	}

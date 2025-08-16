@@ -75,7 +75,7 @@ public class WaywardWarpProperty extends Property implements IDataHolder<Wayfind
 	};
 
 	@Override
-	public void onInfusedByForgeRecipe(ItemStack stack, RecipeHolder<ForgePropertyRecipe> recipe, ForgeRecipeGrid grid)
+	public void onInfusedByForgeRecipe(ItemStack stack, ForgePropertyRecipe recipe, ForgeRecipeGrid grid)
 	{
 		super.onInfusedByForgeRecipe(stack, recipe, grid);
 

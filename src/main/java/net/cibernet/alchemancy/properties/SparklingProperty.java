@@ -79,7 +79,7 @@ public class SparklingProperty extends Property implements IDataHolder<Holder<Pr
 		put(AlchemancyProperties.WIND_CHARGED, () -> ParticleTypes.SMALL_GUST);
 		put(AlchemancyProperties.FLOURISH, () -> ParticleTypes.CHERRY_LEAVES);
 		put(AlchemancyProperties.CRACKLING, () -> ParticleTypes.FIREWORK);
-		put(AlchemancyProperties.GLOWING_AURA, () -> ParticleTypes.END_ROD);
+		put(AlchemancyProperties.GLOWING_AURA, () -> ParticleTypes.GLOW);
 
 		put(AlchemancyProperties.ETERNAL_GLOW, () -> GlowRingProperty.PARTICLES);
 		put(AlchemancyProperties.GUST_JET, () -> GustJetProperty.PARTICLES);
@@ -137,7 +137,7 @@ public class SparklingProperty extends Property implements IDataHolder<Holder<Pr
 			return true;
 		}
 		else for (Holder<Property> infusedProperty : InfusedPropertiesHelper.getInfusedProperties(propertySource)) {
-			if (PARTICLE_MAP.containsKey(infusedProperty)) {
+			if (hasParticles(infusedProperty)) {
 				setData(stack, infusedProperty);
 				return true;
 			}
@@ -180,10 +180,13 @@ public class SparklingProperty extends Property implements IDataHolder<Holder<Pr
 		playRootedParticles(root, randomSource, getParticles(root.getItem()).orElse(ParticleTypes.END_ROD));
 	}
 
+	public static boolean hasParticles(Holder<Property> propertyHolder) {
+		return PARTICLE_MAP.containsKey(propertyHolder);
+	}
+
 	public static Optional<ParticleOptions> getParticles(ItemStack stack) {
 		if (!InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.SPARKLING))
 			return Optional.empty();
-
 
 		Holder<Property> result;
 		if(PropertyModifierComponent.getOrElse(stack, AlchemancyProperties.SPARKLING, AlchemancyProperties.Modifiers.IGNORE_INFUSED, true))
@@ -193,7 +196,7 @@ public class SparklingProperty extends Property implements IDataHolder<Holder<Pr
 			result = infusions.isEmpty() ? null : infusions.getFirst();
 		}
 
-		return result == null || !PARTICLE_MAP.containsKey(result) ? Optional.empty() : Optional.of(PARTICLE_MAP.get(result).get());
+		return result == null || !PARTICLE_MAP.containsKey(result) ? Optional.of(ParticleTypes.END_ROD) : Optional.of(PARTICLE_MAP.get(result).get());
 	}
 
 	public static List<ParticleOptions> getAllParticlesForProperties(ItemStack stack) {
