@@ -25,6 +25,7 @@ public class AlchemancyPayloads
 		registrar.playToClient(EntitySyncTintColorS2CPayload.TYPE, EntitySyncTintColorS2CPayload.STREAM_CODEC, EntitySyncTintColorS2CPayload::handleDataOnMain);
 		registrar.playToClient(S2CInventoryTickPacket.TYPE, S2CInventoryTickPacket.STREAM_CODEC, S2CInventoryTickPacket::handleDataOnMain);
 		registrar.playToClient(S2CDeathWardEffectsPayload.TYPE, S2CDeathWardEffectsPayload.STREAM_CODEC, S2CDeathWardEffectsPayload::handleDataOnMain);
+		registrar.playToClient(S2CRidePlayerPayload.TYPE, S2CRidePlayerPayload.STREAM_CODEC, S2CRidePlayerPayload::handleDataOnMain);
 
 		registrar.playToServer(ChromatizeC2SPayload.TYPE, ChromatizeC2SPayload.STREAM_CODEC, ChromatizeC2SPayload::handleDataOnMain);
 		registrar.playToServer(ResetItemTintC2SPayload.TYPE, ResetItemTintC2SPayload.STREAM_CODEC, ResetItemTintC2SPayload::handleDataOnMain);
