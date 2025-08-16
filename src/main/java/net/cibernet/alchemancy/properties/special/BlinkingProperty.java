@@ -51,16 +51,18 @@ public class BlinkingProperty extends Property implements IDataHolder<Tuple<Bool
 			blink(user, stack, EquipmentSlot.MAINHAND);
 	}
 
+
 	@Override
 	public void onInventoryTick(Entity user, ItemStack stack, Level level, int inventorySlot, boolean isCurrentItem) {
-		if (!isCurrentItem && (inventorySlot < 36 || inventorySlot > 40)) removeData(stack);
+		if (!isCurrentItem && (inventorySlot < 36 || inventorySlot > 40) && !InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.AUXILIARY))
+			removeData(stack);
 	}
 
 	public void blink(LivingEntity user, ItemStack stack, EquipmentSlot slot) {
 
-		var dashes = getDashCount(stack);
+		var dashes = getDashCount(stack) + 1;
 		if(dashes >= MAX_DASHES) return;
-		setDashCount(stack, dashes + 1);
+		setDashCount(stack, dashes);
 
 		float range = 10 * (InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.EXTENDED) ? 2 : 1);
 
@@ -100,7 +102,7 @@ public class BlinkingProperty extends Property implements IDataHolder<Tuple<Bool
 
 	@Override
 	public int getColor(ItemStack stack) {
-		return FastColor.ARGB32.lerp((float) getDashCount(stack) / (MAX_DASHES - 1), ColorUtils.interpolateColorsOverTime(0.5f, 0x00FFFF, 0x8CFFFF), 0x0080A0);
+		return FastColor.ARGB32.lerp((float) getDashCount(stack) / (MAX_DASHES), ColorUtils.interpolateColorsOverTime(0.5f, 0x00FFFF, 0x8CFFFF), 0x0080A0);
 	}
 
 	@Override
