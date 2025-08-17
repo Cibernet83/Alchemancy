@@ -1,5 +1,6 @@
 package net.cibernet.alchemancy.properties;
 
+import net.cibernet.alchemancy.blocks.blockentities.RootedItemBlockEntity;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.util.ColorUtils;
@@ -21,9 +22,11 @@ import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -31,6 +34,13 @@ import java.util.function.BiFunction;
 
 public class StonecuttingProperty extends Property {
 	private static final Component CONTAINER_TITLE = Component.translatable("container.stonecutter");
+
+	@Override
+	public @Nullable ItemInteractionResult onRootedRightClick(RootedItemBlockEntity root, Player user, InteractionHand hand, BlockHitResult hitResult) {
+
+		openStonecuttingMenu(user, root.getItem());
+		return ItemInteractionResult.SUCCESS;
+	}
 
 	@Override
 	public void onRightClickItem(PlayerInteractEvent.RightClickItem event) {

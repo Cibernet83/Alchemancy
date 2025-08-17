@@ -216,9 +216,11 @@ public class AlchemancyLangProvider extends LanguageProvider {
 
 		addCodexFlavor(AlchemancyProperties.CRAFTY, "Crafting on the go");
 		addCodexFunction(AlchemancyProperties.CRAFTY, PropertyFunction.WHEN_USED, "Opens the {item Crafting Table} interface.");
+		addCodexFunction(AlchemancyProperties.CRAFTY, PropertyFunction.WHILE_ROOTED, "When right-clicked, opens the {item Crafting Table} interface.");
 
 		addCodexFlavor(AlchemancyProperties.STONECUTTING, "To show you the power of Stonecutting, I sawed this rock in half!");
 		addCodexFunction(AlchemancyProperties.STONECUTTING, PropertyFunction.WHEN_USED, "Opens the {item Stonecutter} interface.");
+		addCodexFunction(AlchemancyProperties.STONECUTTING, PropertyFunction.WHILE_ROOTED, "When right-clicked, opens the {item Stonecutter} interface.");
 		addCodexFunction(AlchemancyProperties.STONECUTTING, PropertyFunction.WHEN_USED_BLOCK, "If the user isn't crouching and {property alchemancy:interactable} is present on the item, the targeted block is cut into a random variant obtainable from the {item Stonecutter}.");
 
 		addCodexFlavor(AlchemancyProperties.ASSEMBLING, "Autocrafting on the go");
@@ -623,7 +625,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.CHROMATIZE, PropertyFunction.WHEN_SHOT, "When hitting an entity, applies a colored tint to the target equal to the item's {property alchemancy:tinted} color.");
 
 		addCodexFlavor(AlchemancyProperties.TINTED_LENS, "Rose-colored glasses");
-		addCodexFunction(AlchemancyProperties.TINTED_LENS, PropertyFunction.WHILE_WORN_HELMET, "Applies a colored tint to the user's vision equal to the item's {property alchemancy:tinted} color.");
+		addCodexFunction(AlchemancyProperties.TINTED_LENS, PropertyFunction.WHILE_WORN_HELMET, "Applies a colored tint to the user's vision equal to the item's {property alchemancy:tinted} color. Prevents Endermen from attack the user after being looked at in the eyes.");
 
 		addCodexFlavor(AlchemancyProperties.ROTATING, "Get rotated, idiot");
 		addCodexFunction(AlchemancyProperties.ROTATING, PropertyFunction.WHEN_USED_BLOCK, "Rotates the facing direction of the targeted block if possible.");
