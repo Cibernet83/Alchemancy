@@ -3,6 +3,7 @@
     "translate": "infusion_codex.alchemancy:crafty.flavor"
   },
   "functions": [
-    "when_used"
+    "when_used",
+    "while_rooted"
   ]
 }

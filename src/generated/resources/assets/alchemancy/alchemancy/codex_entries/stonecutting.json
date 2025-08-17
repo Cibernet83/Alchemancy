@@ -4,6 +4,7 @@
   },
   "functions": [
     "when_used",
+    "while_rooted",
     "when_used_block"
   ]
 }
