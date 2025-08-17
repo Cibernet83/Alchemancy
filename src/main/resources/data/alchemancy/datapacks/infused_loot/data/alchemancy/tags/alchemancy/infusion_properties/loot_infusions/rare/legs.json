@@ -1,5 +1,7 @@
 {
   "values": [
-    "#alchemancy:loot_infusions/rare/armor"
+    "#alchemancy:loot_infusions/rare/armor",
+    "alchemancy:cloud_dash",
+    "alchemancy:athletic"
   ]
 }

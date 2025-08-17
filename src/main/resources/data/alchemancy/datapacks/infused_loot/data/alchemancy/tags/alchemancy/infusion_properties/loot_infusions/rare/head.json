@@ -2,6 +2,7 @@
   "values": [
     "#alchemancy:loot_infusions/rare/generic",
 
-    "alchemancy:nocturnal"
+    "alchemancy:nocturnal",
+    "alchemancy:tinted_lens"
   ]
 }

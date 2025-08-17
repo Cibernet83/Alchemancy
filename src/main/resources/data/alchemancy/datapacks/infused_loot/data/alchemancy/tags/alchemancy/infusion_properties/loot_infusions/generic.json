@@ -36,6 +36,10 @@
     "alchemancy:photosynthetic",
     "alchemancy:sanitized",
     "alchemancy:undead",
-    "alchemancy:shattering"
+    "alchemancy:shattering",
+    "alchemancy:crafty",
+    "alchemancy:stonecutting",
+    "alchemancy:rotating",
+    "alchemancy:lazy"
   ]
 }

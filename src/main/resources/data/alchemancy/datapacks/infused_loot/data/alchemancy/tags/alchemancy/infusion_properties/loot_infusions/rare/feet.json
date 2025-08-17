@@ -2,6 +2,9 @@
   "values": [
     "#alchemancy:loot_infusions/rare/armor",
 
-    "alchemancy:dense"
+    "alchemancy:dense",
+    "alchemancy:wave_rider",
+    "alchemancy:flame_step",
+    "alchemancy:athletic"
   ]
 }
