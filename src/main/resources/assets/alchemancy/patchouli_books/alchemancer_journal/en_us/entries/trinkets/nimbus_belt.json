@@ -1,0 +1,24 @@
+{
+  "name": "alchemancy.entry.nimbus_belt",
+  "sortnum": -3,
+  "advancement": "alchemancy:story/trial_chamber_entries",
+  "icon": "alchemancy:nimbus_belt",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.nimbus_belt.page0"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:nimbus_belt",
+      "text": "alchemancy.entry.nimbus_belt.page1"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:gust_basket",
+      "text": "alchemancy.entry.nimbus_belt.page2"
+    }
+  ]
+}

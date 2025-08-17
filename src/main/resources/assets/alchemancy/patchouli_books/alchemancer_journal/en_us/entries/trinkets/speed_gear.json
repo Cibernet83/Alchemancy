@@ -1,0 +1,28 @@
+{
+  "name": "alchemancy.entry.speed_gear",
+  "sortnum": -2,
+  "advancement": "alchemancy:story/apply_property",
+  "icon": "alchemancy:mechanical_boots",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.speed_gear.page0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.speed_gear.page1"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:mechanical_boots",
+      "text": "alchemancy.entry.speed_gear.page2"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:feral_blade",
+      "text": "alchemancy.entry.speed_gear.page3"
+    }
+  ]
+}

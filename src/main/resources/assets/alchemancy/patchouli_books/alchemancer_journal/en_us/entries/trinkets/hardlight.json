@@ -1,0 +1,23 @@
+{
+  "name": "alchemancy.entry.hardlight",
+  "sortnum": 2,
+  "advancement": "alchemancy:discovery/voidborn",
+  "icon": "alchemancy:hardlight_steps",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.hardlight.page0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.hardlight.page1"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:hardlight_steps",
+      "text": "alchemancy.entry.hardlight.page2"
+    }
+  ]
+}

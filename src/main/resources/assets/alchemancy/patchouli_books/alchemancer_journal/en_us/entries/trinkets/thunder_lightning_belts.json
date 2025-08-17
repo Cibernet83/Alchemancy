@@ -1,0 +1,28 @@
+{
+  "name": "alchemancy.entry.thunder_lightning_belts",
+  "sortnum": -2,
+  "advancement": "alchemancy:story/trials_and_end_entries",
+  "icon": "alchemancy:shifting_lightning_belt",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.thunder_lightning_belts.page0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.thunder_lightning_belts.page1"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:crystal_storm_belt",
+      "text": "alchemancy.entry.thunder_lightning_belts.page2"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:shifting_lightning_belt",
+      "text": "alchemancy.entry.thunder_lightning_belts.page3"
+    }
+  ]
+}

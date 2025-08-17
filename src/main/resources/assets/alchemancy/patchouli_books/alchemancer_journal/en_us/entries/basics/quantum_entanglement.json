@@ -1,0 +1,47 @@
+{
+  "name": "alchemancy.entry.quantum_entanglement",
+  "sortnum": 7,
+  "advancement": "alchemancy:discovery/voidborn",
+  "icon": "alchemancy:entangled_singularity",
+  "category": "alchemancy:basics",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.quantum_entanglement.page0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.quantum_entanglement.page1"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:entangled_singularity",
+      "text": "alchemancy.entry.quantum_entanglement.page2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.quantum_entanglement.page3"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:quantum_spanner",
+      "text": "alchemancy.entry.quantum_entanglement.page4"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.quantum_entanglement.page5"
+    },
+    {
+      "type": "alchemancy:infusion_double",
+      "recipe1": "alchemancy:property/use_entangled",
+      "recipe2": "alchemancy:property/jump_entangled"
+    },
+    {
+      "type": "alchemancy:infusion_double",
+      "recipe1": "alchemancy:property/crouch_entangled",
+      "recipe2": "alchemancy:property/sprint_entangled"
+    }
+
+  ]
+}

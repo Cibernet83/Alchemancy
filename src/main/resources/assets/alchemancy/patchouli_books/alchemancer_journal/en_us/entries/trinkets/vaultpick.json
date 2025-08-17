@@ -1,0 +1,23 @@
+{
+  "name": "alchemancy.entry.vaultpick",
+  "sortnum": 0,
+  "advancement": "alchemancy:story/trial_chamber_entries",
+  "icon": "alchemancy:vaultpick",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.vaultpick.page0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.vaultpick.page1"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:vaultpick",
+      "text": "alchemancy.entry.vaultpick.page2"
+    }
+  ]
+}

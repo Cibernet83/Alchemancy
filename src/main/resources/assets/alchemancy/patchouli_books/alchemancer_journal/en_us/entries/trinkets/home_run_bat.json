@@ -1,0 +1,19 @@
+{
+  "name": "alchemancy.entry.home_run_bat",
+  "sortnum": -6,
+  "advancement": "alchemancy:story/trials_and_end_entries",
+  "icon": "alchemancy:home_run_bat",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.home_run_bat.page0"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:home_run_bat",
+      "text": "alchemancy.entry.home_run_bat.page1"
+    }
+  ]
+}

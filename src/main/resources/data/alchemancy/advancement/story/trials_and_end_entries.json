@@ -1,0 +1,43 @@
+{
+  "parent": "alchemancy:story/find_mace",
+  "criteria": {
+    "apply_property": {
+      "conditions": {},
+      "trigger": "alchemancy:discover_property"
+    },
+    "entered_end": {
+      "conditions": {
+        "to": "minecraft:the_end"
+      },
+      "trigger": "minecraft:changed_dimension"
+    },
+    "find_trial_chamber": {
+      "conditions": {
+        "player": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "location": {
+                "structures": "minecraft:trial_chambers"
+              }
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:location"
+    }
+  },
+  "requirements": [
+    [
+      "apply_property"
+    ],
+    [
+      "find_trial_chamber"
+    ],
+    [
+      "entered_end"
+    ]
+  ],
+  "sends_telemetry_event": false
+}

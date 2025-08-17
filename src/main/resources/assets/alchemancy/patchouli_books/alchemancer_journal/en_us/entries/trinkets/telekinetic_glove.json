@@ -1,0 +1,19 @@
+{
+  "name": "alchemancy.entry.telekinetic_glove",
+  "sortnum": 2,
+  "advancement": "alchemancy:discovery/voidborn",
+  "icon": "alchemancy:telekinetic_glove",
+  "category": "alchemancy:trinkets",
+
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "alchemancy.entry.telekinetic_glove.page0"
+    },
+    {
+      "type": "alchemancy:infusion",
+      "recipe": "alchemancy:telekinetic_glove",
+      "text": "alchemancy.entry.telekinetic_glove.page1"
+    }
+  ]
+}
