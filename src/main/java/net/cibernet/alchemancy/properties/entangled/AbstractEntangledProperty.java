@@ -30,6 +30,8 @@ public abstract class AbstractEntangledProperty extends Property implements IDat
 	@Override
 	public void onStackedOverMe(ItemStack carriedItem, ItemStack stack, Player player, ClickAction clickAction, SlotAccess carriedSlot, Slot stackedOnSlot, AtomicBoolean isCancelled)
 	{
+		if(isCancelled.get()) return;
+
 		EntangledData data = getData(stack);
 		if(clickAction != ClickAction.SECONDARY || carriedItem.isEmpty() || !data.equals(getDefaultData()) || InfusedPropertiesHelper.getRemainingInfusionSlots(carriedItem) <= 0)
 			return;
