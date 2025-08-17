@@ -62,7 +62,8 @@ public class AlchemancyItems
 
 	public static final DeferredItem<InnatePropertyItem> INFUSION_CODEX = REGISTRY.register("infusion_codex", () -> new InnatePropertyItem.Builder()
 			.withProperties(AlchemancyProperties.INFUSION_CODEX)
-			.build(new Item.Properties().stacksTo(1)));
+			.stacksTo(1)
+			.build());
 
 	public static final DeferredItem<BlockItem> PHANTOM_MEMBRANE_BLOCK = REGISTRY.register("phantom_membrane_block", () -> {
 		BlockItem blockItem = new BlockItem(AlchemancyBlocks.PHANTOM_MEMBRANE_BLOCK.get(), new Item.Properties());
