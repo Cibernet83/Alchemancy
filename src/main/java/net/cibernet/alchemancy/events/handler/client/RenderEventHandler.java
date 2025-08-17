@@ -100,7 +100,7 @@ public class RenderEventHandler {
 	private static Vector3f getScreenTintColor() {
 		Player player = Minecraft.getInstance().player;
 
-		if (player == null)
+		if (player == null || !Minecraft.getInstance().options.getCameraType().isFirstPerson())
 			return null;
 		var stack = player.getItemBySlot(EquipmentSlot.HEAD);
 		if (!InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.TINTED_LENS))
