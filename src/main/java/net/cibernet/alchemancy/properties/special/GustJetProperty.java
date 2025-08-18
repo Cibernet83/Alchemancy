@@ -10,10 +10,7 @@ import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancySoundEvents;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.cibernet.alchemancy.util.CommonUtils;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.network.protocol.game.ServerboundPlayerInputPacket;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -29,7 +26,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.event.entity.living.LivingEntityUseItemEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import org.joml.Vector3f;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -79,21 +75,19 @@ public class GustJetProperty extends Property {
 
 		float maxDistance = getMaxDistance(stack);
 
-		boolean jumping = ((LivingEntityAccessor) user).isJumping();
-		if (user.level().isClientSide() && user instanceof LocalPlayer localPlayer) //Dumbest way to check for jump input serverside
-			localPlayer.connection.send(new ServerboundPlayerInputPacket(localPlayer.xxa, localPlayer.zza, jumping, localPlayer.isShiftKeyDown()));
-		else if (jumping) {
-			if (user.tickCount % 20 == 0) {
-				if (stack.isDamageableItem())
-					stack.hurtAndBreak(2, user, slot);
-				else consumeItem(user, stack, slot);
-			}
-		}
+		if (((LivingEntityAccessor) user).isJumping()) {
 
-		if (jumping) {
 			Level level = user.level();
 			Vec3 pos = user.position();
 			Vec3 down = new Vec3(0, -1, 0);
+
+			if (!level.isClientSide()) {
+				if (user.tickCount % 20 == 0) {
+					if (stack.isDamageableItem())
+						stack.hurtAndBreak(2, user, slot);
+					else consumeItem(user, stack, slot);
+				}
+			}
 
 			var distance = level.clip(new ClipContext(pos, pos
 							.add(down.scale(maxDistance)), ClipContext.Block.COLLIDER, ClipContext.Fluid.ANY, user)).getLocation()

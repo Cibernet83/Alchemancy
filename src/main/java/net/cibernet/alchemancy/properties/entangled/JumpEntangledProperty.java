@@ -21,9 +21,6 @@ public class JumpEntangledProperty extends AbstractEntangledProperty
 			return;
 
 		boolean jumping = ((LivingEntityAccessor) user).isJumping();
-		if (user.level().isClientSide() && user instanceof LocalPlayer localPlayer) //Dumbest way to check for jump input serverside
-			localPlayer.connection.send(new ServerboundPlayerInputPacket(localPlayer.xxa, localPlayer.zza, jumping, localPlayer.isShiftKeyDown()));
-
 		if(jumping != getToggle(stack) && player.getInventory().getItem(inventorySlot) == stack)
 		{
 			setToggle(stack, jumping);
@@ -38,7 +35,7 @@ public class JumpEntangledProperty extends AbstractEntangledProperty
 		if(itemEntity.getItem() == stack && user instanceof LivingEntity living)
 		{
 			boolean jumping = ((LivingEntityAccessor) living).isJumping();
-			if(jumping != getToggle(stack))
+ 			if(jumping != getToggle(stack))
 			{
 				setToggle(stack, jumping);
 				itemEntity.setItem(shift(stack, living));

@@ -3,6 +3,7 @@ package net.cibernet.alchemancy.events.handler;
 import net.cibernet.alchemancy.entity.ai.ScareGoal;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesComponent;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
+import net.cibernet.alchemancy.mixin.accessors.LivingEntityAccessor;
 import net.cibernet.alchemancy.network.S2CInventoryTickPayload;
 import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.properties.special.AuxiliaryProperty;
@@ -12,8 +13,10 @@ import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.cibernet.alchemancy.util.CommonUtils;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.game.ServerboundPlayerInputPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.InteractionResult;
@@ -191,17 +194,21 @@ public class PropertyEventHandler
 	@SubscribeEvent
 	public static void onEntityTick(EntityTickEvent.Pre event)
 	{
-		if(event.getEntity() instanceof LivingEntity living && !(living instanceof Player))
+		var user = event.getEntity();
+		if (user.level().isClientSide() && user instanceof LocalPlayer localPlayer)
+			localPlayer.connection.send(new ServerboundPlayerInputPacket(localPlayer.xxa, localPlayer.zza, ((LivingEntityAccessor) user).isJumping(), localPlayer.isShiftKeyDown()));
+
+		if(user instanceof LivingEntity living && !(living instanceof Player))
 			for (EquipmentSlot slot : EquipmentSlot.values()) {
 				ItemStack stack = living.getItemBySlot(slot);
 				InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onEquippedTick(living, slot, stack));
 			}
-		else if(event.getEntity() instanceof ItemEntity itemEntity)
+		else if(user instanceof ItemEntity itemEntity)
 		{
 			ItemStack stack = itemEntity.getItem();
 			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder -> propertyHolder.value().onEntityItemTick(stack, itemEntity));
 		}
-		else if(event.getEntity() instanceof Projectile projectile)
+		else if(user instanceof Projectile projectile)
 		{
 			ItemStack stack = getProjectileItemStack(projectile);
 			if(stack != null && !stack.isEmpty())
