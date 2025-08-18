@@ -27,7 +27,7 @@ public class InteractEntangledProperty extends AbstractEntangledProperty {
 
 	@Override
 	public void onStackedOverMe(ItemStack carriedItem, ItemStack stack, Player player, ClickAction clickAction, SlotAccess carriedSlot, Slot stackedOnSlot, AtomicBoolean isCancelled) {
-		if (clickAction == ClickAction.SECONDARY && carriedItem.isEmpty() && stack == stackedOnSlot.getItem()) {
+		if (!isCancelled.get() && clickAction == ClickAction.SECONDARY && carriedItem.isEmpty() && stack == stackedOnSlot.getItem()) {
 			stackedOnSlot.set(shift(stack, player));
 			isCancelled.set(true);
 		} else super.onStackedOverMe(carriedItem, stack, player, clickAction, carriedSlot, stackedOnSlot, isCancelled);

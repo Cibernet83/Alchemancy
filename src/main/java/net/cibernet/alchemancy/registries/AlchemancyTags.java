@@ -102,6 +102,7 @@ public class AlchemancyTags
 		public static final TagKey<Property> CHANGES_GUST_JET_WIND_COLOR = registerTag(AlchemancyProperties.REGISTRY_KEY, "changes_gust_jet_wind_color");
 		public static final TagKey<Property> PREVENTS_ENDERMAN_AGGRO = registerTag(AlchemancyProperties.REGISTRY_KEY, "prevents_enderman_aggro");
 		public static final TagKey<Property> IGNORED_BY_INFUSION_FLASK = registerTag(AlchemancyProperties.REGISTRY_KEY, "ignored_by_infusion_flask");
+		public static final TagKey<Property> FRAGMENTED_DOES_NOT_CLONE_DATA = registerTag(AlchemancyProperties.REGISTRY_KEY, "fragmented_does_not_clone_data");
 	}
 
 	public static class DataComponents

@@ -1,0 +1,13 @@
+{
+  "values": [
+    "alchemancy:hollow",
+    "alchemancy:encapsulating",
+    "alchemancy:bucketing",
+    "alchemancy:capturing",
+    "alchemancy:entangled",
+    "alchemancy:use_entangled",
+    "alchemancy:crouch_entangled",
+    "alchemancy:jump_entangled",
+    "alchemancy:sprint_entangled"
+  ]
+}

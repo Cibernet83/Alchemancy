@@ -144,4 +144,9 @@ public abstract class AbstractEntangledProperty extends Property implements IDat
 			return stack.equals(data.stack);
 		}
 	}
+
+	@Override
+	public int getPriority() {
+		return Priority.LOWEST;
+	}
 }

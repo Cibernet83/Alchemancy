@@ -3,7 +3,8 @@
 
   "properties": [
     "alchemancy:reaping",
-    "alchemancy:soulbind"
+    "alchemancy:soulbind",
+    "alchemancy:vampiric"
   ],
 
   "result": "alchemancy:soul_harvester"

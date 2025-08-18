@@ -43,7 +43,7 @@ public class DrippingProperty extends Property
 		drip(user.level(), user, user, weapon);
 	}
 
-	public boolean drip(@Nullable Level level, Entity user, @Nullable Entity target, ItemStack stack)
+	public static boolean drip(@Nullable Level level, Entity user, @Nullable Entity target, ItemStack stack)
 	{
 		if(target == null && user == null)
 			return false;
@@ -53,7 +53,8 @@ public class DrippingProperty extends Property
 
 		return AlchemancyProperties.BUCKETING.get().placeLiquid(level, target.blockPosition(), stack, target instanceof Player player ? player : null, null) ||
 				(user != null && AlchemancyProperties.HOLLOW.get().dropItems(stack, user)) ||
-				AlchemancyProperties.CAPTURING.get().releaseMob(level, stack, target.position(), null);
+				AlchemancyProperties.CAPTURING.get().releaseMob(level, stack, target.position(), null) ||
+				AlchemancyProperties.ENCAPSULATING.get().attemptPlaceBlock(level, target.blockPosition(), stack, user);
 	}
 
 	@Override

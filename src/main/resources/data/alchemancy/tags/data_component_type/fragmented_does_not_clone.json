@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "alchemancy:battery_storage",
+    "minecraft:bees",
+    "minecraft:block_entity_data",
+    "minecraft:bucket_entity_data",
+    "minecraft:bundle_contents",
+    "minecraft:charged_projectiles",
+    "minecraft:container"
+  ]
+}

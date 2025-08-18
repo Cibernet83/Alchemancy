@@ -141,7 +141,7 @@ public class EncapsulatingProperty extends Property implements IDataHolder<Encap
 		return true;
 	}
 
-	private BlockState fixChestBlockstate(Level level, BlockPos pos, BlockState state)
+	private static BlockState fixChestBlockstate(Level level, BlockPos pos, BlockState state)
 	{
 		if(!state.hasProperty(ChestBlock.TYPE))
 			return state;
@@ -157,6 +157,11 @@ public class EncapsulatingProperty extends Property implements IDataHolder<Encap
 		if(connectedBlock.getValue(ChestBlock.TYPE) != chestType.getOpposite())
 			return state;
 		else return state.setValue(ChestBlock.TYPE, ChestType.SINGLE);
+	}
+
+	public boolean attemptPlaceBlock(Level level, BlockPos pos, ItemStack source, @Nullable Entity user)
+	{
+		return attemptPlaceBlock(level, pos, getData(source), source, user);
 	}
 
 	public boolean attemptPlaceBlock(Level level, BlockPos pos, BlockData data, ItemStack source, @Nullable Entity user)

@@ -106,7 +106,7 @@ public class HollowProperty extends Property implements IDataHolder<ItemStack>
 	@Override
 	public void onStackedOverItem(ItemStack hollowItem, ItemStack carriedItem, Player player, ClickAction clickAction, SlotAccess carriedSlot, Slot stackedOnSlot, AtomicBoolean isCancelled)
 	{
-		if(clickAction != ClickAction.SECONDARY)
+		if(isCancelled.get() || clickAction != ClickAction.SECONDARY)
 			return;
 
 		ItemStack storedStack = getData(hollowItem);
@@ -142,7 +142,7 @@ public class HollowProperty extends Property implements IDataHolder<ItemStack>
 	@Override
 	public void onStackedOverMe(ItemStack carriedItem, ItemStack stackedOnItem, Player player, ClickAction clickAction, SlotAccess carriedSlot, Slot stackedOnSlot, AtomicBoolean isCancelled)
 	{
-		if(clickAction != ClickAction.SECONDARY)
+		if(isCancelled.get() || clickAction != ClickAction.SECONDARY)
 			return;
 
 		ItemStack storedStack = getData(stackedOnItem);
