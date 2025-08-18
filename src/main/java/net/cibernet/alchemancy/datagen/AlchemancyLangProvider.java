@@ -516,8 +516,8 @@ public class AlchemancyLangProvider extends LanguageProvider {
 		addCodexFunction(AlchemancyProperties.CRYSTAL_DASH, PropertyFunction.WHILE_EQUIPPED, "Allows the user to dash forwards with great speed in the direction they're facing at the start of a sprint, consuming 2 points of durability. Dash distance is influenced by the user's {attribute Movement Speed}. Up to 2 dashes can be performed in succession before touching the ground.");
 
 		addCodexFlavor(AlchemancyProperties.VOIDBORN, "The abyss stares back");
-		addCodexFunction(AlchemancyProperties.VOIDBORN, PropertyFunction.WHILE_EQUIPPED, "Grants immunity to Void damage and {property alchemancy:voidtouch}. Levitates the user upwards for a short period of time after falling into the void.");
-		addCodexFunction(AlchemancyProperties.VOIDBORN, PropertyFunction.WHEN_DROPPED, "Levitates the item upwards for a short period of time after falling into the void.");
+		addCodexFunction(AlchemancyProperties.VOIDBORN, PropertyFunction.WHILE_EQUIPPED, "Grants immunity to Void damage and {property alchemancy:voidtouch}. Levitates the user upwards for 10 seconds after falling into the void.");
+		addCodexFunction(AlchemancyProperties.VOIDBORN, PropertyFunction.WHEN_DROPPED, "Levitates the item upwards for for 10 seconds after falling into the void.");
 		addCodexFunction(AlchemancyProperties.VOIDBORN, PropertyFunction.OTHER, "This {system Infusion} can be obtained by tossing an item with {property alchemancy:depth_dweller} and {property alchemancy:undying} into the void.");
 
 		addCodexFlavor(AlchemancyProperties.VOIDTOUCH, "Existence is but an opinion");
