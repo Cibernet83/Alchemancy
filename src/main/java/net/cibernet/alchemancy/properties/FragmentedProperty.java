@@ -46,7 +46,7 @@ public class FragmentedProperty extends Property {
 			}, false);
 
 			for (DataComponentType<?> dataComponentType : List.copyOf(newStack.getComponents().keySet())) {
-				if(BuiltInRegistries.DATA_COMPONENT_TYPE.wrapAsHolder(dataComponentType).is(AlchemancyTags.DataComponents.DISABLES_COMPACT))
+				if(BuiltInRegistries.DATA_COMPONENT_TYPE.wrapAsHolder(dataComponentType).is(AlchemancyTags.DataComponents.FRAGMENTED_DOES_NOT_CLONE))
 					newStack.remove(dataComponentType);
 			}
 

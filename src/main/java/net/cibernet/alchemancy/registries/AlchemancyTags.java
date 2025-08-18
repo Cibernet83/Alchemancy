@@ -109,6 +109,7 @@ public class AlchemancyTags
 	{
 		public static final TagKey<DataComponentType<?>> DISABLES_COMPACT = registerTag(Registries.DATA_COMPONENT_TYPE, "disables_compact");
 		public static final TagKey<DataComponentType<?>> UNTOGGLEABLE = registerTag(Registries.DATA_COMPONENT_TYPE, "untoggleable");
+		public static final TagKey<DataComponentType<?>> FRAGMENTED_DOES_NOT_CLONE = registerTag(Registries.DATA_COMPONENT_TYPE, "fragmented_does_not_clone");
 	}
 
 	public static class MobEffects
