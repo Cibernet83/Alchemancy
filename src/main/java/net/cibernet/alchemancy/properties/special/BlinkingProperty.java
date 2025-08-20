@@ -1,6 +1,6 @@
 package net.cibernet.alchemancy.properties.special;
 
-import net.cibernet.alchemancy.client.particle.SparkParticle;
+import net.cibernet.alchemancy.client.particle.options.SparkParticleOptions;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
 import net.cibernet.alchemancy.properties.Property;
@@ -28,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class BlinkingProperty extends Property implements IDataHolder<Tuple<Boolean, Integer>> {
 
-	public static final ParticleOptions PARTICLES = new SparkParticle.Options(Vec3.fromRGB24(0x00FFFF).toVector3f(), 1);
+	public static final ParticleOptions PARTICLES = new SparkParticleOptions(Vec3.fromRGB24(0x00FFFF).toVector3f(), 1);
 	private static final int MAX_DASHES = 3;
 
 	@Override
@@ -61,7 +61,7 @@ public class BlinkingProperty extends Property implements IDataHolder<Tuple<Bool
 	public void blink(LivingEntity user, ItemStack stack, EquipmentSlot slot) {
 
 		var dashes = getDashCount(stack) + 1;
-		if(dashes >= MAX_DASHES) return;
+		if (dashes >= MAX_DASHES) return;
 		setDashCount(stack, dashes);
 
 		float range = 10 * (InfusedPropertiesHelper.hasProperty(stack, AlchemancyProperties.EXTENDED) ? 2 : 1);
@@ -77,7 +77,7 @@ public class BlinkingProperty extends Property implements IDataHolder<Tuple<Bool
 				user.moveTo(verticalHit.getLocation());
 				user.setDeltaMovement(user.getLookAngle().normalize().scale(user.getDeltaMovement().length()));
 
-				if(PropertyModifierComponent.getOrElse(stack, asHolder(), AlchemancyProperties.Modifiers.PREVENT_CONSUMPTION, stack.isDamageableItem()))
+				if (PropertyModifierComponent.getOrElse(stack, asHolder(), AlchemancyProperties.Modifiers.PREVENT_CONSUMPTION, stack.isDamageableItem()))
 					stack.hurtAndBreak(PropertyModifierComponent.getOrElse(stack, asHolder(), AlchemancyProperties.Modifiers.DURABILITY_CONSUMPTION, 5), user, slot);
 				else consumeItem(user, stack, slot);
 

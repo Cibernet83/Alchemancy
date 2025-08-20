@@ -1,6 +1,6 @@
 package net.cibernet.alchemancy.properties.special;
 
-import net.cibernet.alchemancy.client.particle.SparkParticle;
+import net.cibernet.alchemancy.client.particle.options.SparkParticleOptions;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.item.components.PropertyModifierComponent;
 import net.cibernet.alchemancy.properties.Property;
@@ -8,10 +8,8 @@ import net.cibernet.alchemancy.properties.SparklingProperty;
 import net.cibernet.alchemancy.properties.data.IDataHolder;
 import net.cibernet.alchemancy.registries.AlchemancyParticles;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
 import net.minecraft.util.Tuple;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -28,8 +26,8 @@ public class DashingProperty extends Property implements IDataHolder<Tuple<Boole
 	private final int[] colors;
 	private final float dashStrength;
 
-	public static final ParticleOptions CRYSTAL_PARTICLES = new SparkParticle.Options(AlchemancyParticles.CLOUD_SMOKE.get(), Vec3.fromRGB24(0xD877FF).toVector3f(), 2f, false);
-	public static final ParticleOptions CLOUD_PARTICLES = new SparkParticle.Options(AlchemancyParticles.CLOUD_SMOKE.get(), Vec3.fromRGB24(0x54B4FF).toVector3f(), 2f, false);
+	public static final ParticleOptions CRYSTAL_PARTICLES = new SparkParticleOptions(AlchemancyParticles.CLOUD_SMOKE.get(), Vec3.fromRGB24(0xD877FF).toVector3f(), 2f, false);
+	public static final ParticleOptions CLOUD_PARTICLES = new SparkParticleOptions(AlchemancyParticles.CLOUD_SMOKE.get(), Vec3.fromRGB24(0x54B4FF).toVector3f(), 2f, false);
 
 	public DashingProperty(float dashStrength, int... colors) {
 		this.maxDashes = colors.length - 1;

@@ -1,6 +1,6 @@
 package net.cibernet.alchemancy.properties;
 
-import net.cibernet.alchemancy.client.particle.SparkParticle;
+import net.cibernet.alchemancy.client.particle.options.SparkParticleOptions;
 import net.cibernet.alchemancy.registries.AlchemancyBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -20,7 +20,7 @@ import net.minecraft.world.phys.Vec3;
 
 public class GlowRingProperty extends Property {
 
-	public static final ParticleOptions PARTICLES = new SparkParticle.Options(Vec3.fromRGB24(0xFFFFBA).toVector3f(), 0.85f);
+	public static final ParticleOptions PARTICLES = new SparkParticleOptions(Vec3.fromRGB24(0xFFFFBA).toVector3f(), 0.85f);
 
 	@Override
 	public void onEquippedTick(LivingEntity user, EquipmentSlot slot, ItemStack stack) {

@@ -1,7 +1,7 @@
 package net.cibernet.alchemancy.properties;
 
 import net.cibernet.alchemancy.blocks.blockentities.RootedItemBlockEntity;
-import net.cibernet.alchemancy.client.particle.SparkParticle;
+import net.cibernet.alchemancy.client.particle.options.SparkParticleOptions;
 import net.cibernet.alchemancy.events.handler.PropertyEventHandler;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.mixin.accessors.AbstractArrowAccessor;
@@ -47,8 +47,8 @@ public class MagneticProperty extends Property {
 	private static final float ARMOR_RANGE = 0.25f;
 
 
-	public static final ParticleOptions PARTICLE_A = new SparkParticle.Options(Vec3.fromRGB24(0xFF8484).toVector3f(), 0.65f);
-	public static final ParticleOptions PARTICLE_B = new SparkParticle.Options(Vec3.fromRGB24(0x8484FF).toVector3f(), 0.65f);
+	public static final ParticleOptions PARTICLE_A = new SparkParticleOptions(Vec3.fromRGB24(0xFF8484).toVector3f(), 0.65f);
+	public static final ParticleOptions PARTICLE_B = new SparkParticleOptions(Vec3.fromRGB24(0x8484FF).toVector3f(), 0.65f);
 
 	@Override
 	public void modifyKnockBackReceived(LivingEntity user, ItemStack stack, EquipmentSlot slot, LivingKnockBackEvent event) {
@@ -124,8 +124,7 @@ public class MagneticProperty extends Property {
 
 		magnetize(user.level(), user, user.getEyePosition(), stack);
 
-		if (user.level() instanceof ServerLevel serverLevel)
-		{
+		if (user.level() instanceof ServerLevel serverLevel) {
 			serverLevel.sendParticles(SparklingProperty.getParticles(stack).orElse(PARTICLE_A), user.getX(), user.getY(0.5f), user.getZ(), 1, user.getBbWidth() * 0.5f, user.getBbHeight() * 0.25f, user.getBbWidth() * 0.5f, 0);
 			serverLevel.sendParticles(SparklingProperty.getParticles(stack).orElse(PARTICLE_B), user.getX(), user.getY(0.5f), user.getZ(), 1, user.getBbWidth() * 0.5f, user.getBbHeight() * 0.25f, user.getBbWidth() * 0.5f, 0);
 		}
@@ -142,14 +141,12 @@ public class MagneticProperty extends Property {
 		playRootedParticles(root, randomSource, PARTICLE_B);
 	}
 
-	private static <E extends Entity> void repelUser(Entity user, Class<E> targetEntities, float strength, Predicate<E> predicate)
-	{
+	private static <E extends Entity> void repelUser(Entity user, Class<E> targetEntities, float strength, Predicate<E> predicate) {
 		float radius = RADIUS * 0.25f;
 		int count = 0;
 
-		for(E target : user.level().getEntitiesOfClass(targetEntities, CommonUtils.boundingBoxAroundPoint(user.position(), radius), predicate))
-		{
-			if(target.equals(user))
+		for (E target : user.level().getEntitiesOfClass(targetEntities, CommonUtils.boundingBoxAroundPoint(user.position(), radius), predicate)) {
+			if (target.equals(user))
 				continue;
 
 			double distanceTo = target.position().distanceTo(user.position());
@@ -162,23 +159,24 @@ public class MagneticProperty extends Property {
 
 			user.setDeltaMovement(vec3.subtract(vec31));
 
-			if(target.level() instanceof ServerLevel serverLevel)
+			if (target.level() instanceof ServerLevel serverLevel)
 				serverLevel.sendParticles(PARTICLE_B, target.getX(), target.getY(0.5f), target.getZ(), 1, target.getBbWidth() * 0.5f, target.getBbHeight() * 0.25f, target.getBbWidth() * 0.25f, 0);
 			count++;
 		}
 
-		if(count > 0 && user.level() instanceof ServerLevel serverLevel)
+		if (count > 0 && user.level() instanceof ServerLevel serverLevel)
 			serverLevel.sendParticles(PARTICLE_B, user.getX(), user.getY(0.5f), user.getZ(), count, user.getBbWidth() * 0.5f, user.getBbHeight() * 0.25f, user.getBbWidth() * 0.25f, 0);
 	}
 
 	public static void magnetize(Level level, @Nullable Entity user, Vec3 center, ItemStack stack) {
 		if (level.isClientSide()) return;
-		 forEachInRadius(user, level, center, LivingEntity.class, entity -> true, target ->
+		forEachInRadius(user, level, center, LivingEntity.class, entity -> true, target ->
 		{
 			for (EquipmentSlot slot : EquipmentSlot.values()) {
 				ItemStack stackInSlot = target.getItemBySlot(slot);
 				if (canBeMagnetized(stackInSlot)) {
-					target.move(MoverType.PLAYER, center.subtract(target.position()).normalize().scale(0.05f));
+					if (!(target instanceof Player))
+						target.move(MoverType.PLAYER, center.subtract(target.position()).normalize().scale(0.05f));
 					playParticles(target, target.getRandomY(), stack, 1);
 
 					if (level.getRandom().nextFloat() < 0.005f) {
@@ -209,11 +207,10 @@ public class MagneticProperty extends Property {
 
 	}
 
-	public static void repelUser(Entity user)
-	{
+	public static void repelUser(Entity user) {
 		repelUser(user, LivingEntity.class, 0.5f, target -> {
 			for (EquipmentSlot slot : EquipmentSlot.values()) {
-				if(InfusedPropertiesHelper.hasProperty(target.getItemBySlot(slot), AlchemancyProperties.MAGNETIC))
+				if (InfusedPropertiesHelper.hasProperty(target.getItemBySlot(slot), AlchemancyProperties.MAGNETIC))
 					return true;
 			}
 			return false;
@@ -272,7 +269,7 @@ public class MagneticProperty extends Property {
 
 	@Override
 	public Component getName(ItemStack stack) {
-		return Component.translatable(getLanguageKey()+".format", Component.translatable(getLanguageKey()+".a").withColor(0xFF0000), Component.translatable(getLanguageKey()+".b").withColor(0x0000FF));
+		return Component.translatable(getLanguageKey() + ".format", Component.translatable(getLanguageKey() + ".a").withColor(0xFF0000), Component.translatable(getLanguageKey() + ".b").withColor(0x0000FF));
 	}
 
 	@Override
@@ -296,7 +293,7 @@ public class MagneticProperty extends Property {
 
 	@Override
 	public int getColor(ItemStack stack) {
-		return ColorUtils.flashColorsOverTime(1000,0xFF0000, 0x0000FF);
+		return ColorUtils.flashColorsOverTime(1000, 0xFF0000, 0x0000FF);
 	}
 
 }

@@ -2,11 +2,12 @@ package net.cibernet.alchemancy.registries;
 
 import com.mojang.serialization.MapCodec;
 import net.cibernet.alchemancy.Alchemancy;
-import net.cibernet.alchemancy.client.particle.GlowingOrbParticle;
 import net.cibernet.alchemancy.client.particle.SparkParticle;
-import net.minecraft.client.particle.DustParticle;
+import net.cibernet.alchemancy.client.particle.options.SparkParticleOptions;
 import net.minecraft.client.particle.FlameParticle;
-import net.minecraft.core.particles.*;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -24,9 +25,9 @@ public class AlchemancyParticles
 	public static final DeferredRegister<ParticleType<?>> REGISTRY = DeferredRegister.create(Registries.PARTICLE_TYPE, Alchemancy.MODID);
 
 	public static final DeferredHolder<ParticleType<?>, SimpleParticleType> WARHAMMER_FLAME = REGISTRY.register("warhammer_flame", () -> new SimpleParticleType(true));
-	public static final DeferredHolder<ParticleType<?>, ParticleType<SparkParticle.Options>> SPARK = register("spark", true, SparkParticle.Options::codec, SparkParticle.Options::streamCodec);
-	public static final DeferredHolder<ParticleType<?>, ParticleType<SparkParticle.Options>> GUST_DUST = register("gust_dust", true, SparkParticle.Options::codec, SparkParticle.Options::streamCodec);
-	public static final DeferredHolder<ParticleType<?>, ParticleType<SparkParticle.Options>> CLOUD_SMOKE = register("cloud_smoke", true, SparkParticle.Options::codec, SparkParticle.Options::streamCodec);
+	public static final DeferredHolder<ParticleType<?>, ParticleType<SparkParticleOptions>> SPARK = register("spark", true, SparkParticleOptions::codec, SparkParticleOptions::streamCodec);
+	public static final DeferredHolder<ParticleType<?>, ParticleType<SparkParticleOptions>> GUST_DUST = register("gust_dust", true, SparkParticleOptions::codec, SparkParticleOptions::streamCodec);
+	public static final DeferredHolder<ParticleType<?>, ParticleType<SparkParticleOptions>> CLOUD_SMOKE = register("cloud_smoke", true, SparkParticleOptions::codec, SparkParticleOptions::streamCodec);
 
 	@SubscribeEvent
 	public static void registerParticles(RegisterParticleProvidersEvent event)

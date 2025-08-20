@@ -1,6 +1,6 @@
 package net.cibernet.alchemancy.properties.special;
 
-import net.cibernet.alchemancy.client.particle.SparkParticle;
+import net.cibernet.alchemancy.client.particle.options.SparkParticleOptions;
 import net.cibernet.alchemancy.item.components.InfusedPropertiesHelper;
 import net.cibernet.alchemancy.mixin.accessors.LivingEntityAccessor;
 import net.cibernet.alchemancy.properties.Property;
@@ -33,7 +33,7 @@ import java.util.Optional;
 public class GustJetProperty extends Property {
 
 	private static final float PARTICLE_SCALE = 1.2f;
-	public static final ParticleOptions PARTICLES = new SparkParticle.Options(AlchemancyParticles.GUST_DUST.get(), Vec3.fromRGB24(0xE0E6FF).toVector3f(), PARTICLE_SCALE, false);
+	public static final ParticleOptions PARTICLES = new SparkParticleOptions(AlchemancyParticles.GUST_DUST.get(), Vec3.fromRGB24(0xE0E6FF).toVector3f(), PARTICLE_SCALE, false);
 	//private static final float DISTANCE = 6;
 
 	@Override
@@ -159,7 +159,7 @@ public class GustJetProperty extends Property {
 			InfusedPropertiesHelper.forEachProperty(stack, propertyHolder ->
 			{
 				if (!propertyHolder.is(AlchemancyTags.Properties.CHANGES_GUST_JET_WIND_COLOR)) return;
-				propertyParticles.add(new SparkParticle.Options(AlchemancyParticles.GUST_DUST.get(), Vec3.fromRGB24(propertyHolder.value().getColor(stack)).toVector3f(), PARTICLE_SCALE, false));
+				propertyParticles.add(new SparkParticleOptions(AlchemancyParticles.GUST_DUST.get(), Vec3.fromRGB24(propertyHolder.value().getColor(stack)).toVector3f(), PARTICLE_SCALE, false));
 			});
 
 			for (int i = 0; i < random.nextInt(3) + 1; i++) {
