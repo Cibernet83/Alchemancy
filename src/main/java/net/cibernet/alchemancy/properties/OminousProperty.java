@@ -29,11 +29,10 @@ public class OminousProperty extends MobEffectEquippedAndHitProperty
 	@Override
 	public void onRootedTick(RootedItemBlockEntity root, List<LivingEntity> entitiesInBounds)
 	{
-		if(root.getTickCount() % 20 == 0)
-			for (LivingEntity entity : entitiesInBounds) {
-				if(!entity.hasEffect(effect.getEffect().getDelegate()) && canApplyOminous(entity))
-					entity.addEffect(new MobEffectInstance(effect));
-			}
+		for (LivingEntity entity : entitiesInBounds) {
+			if(canApplyOminous(entity))
+				entity.addEffect(new MobEffectInstance(effect));
+		}
 	}
 
 	@Override
@@ -44,4 +43,6 @@ public class OminousProperty extends MobEffectEquippedAndHitProperty
 	public boolean canApplyOminous(LivingEntity target) {
 		return target.getActiveEffects().stream().noneMatch(effectInstance -> effectInstance.getEffect().is(AlchemancyTags.MobEffects.BLOCKS_OMINOUS));
 	}
+
+
 }
