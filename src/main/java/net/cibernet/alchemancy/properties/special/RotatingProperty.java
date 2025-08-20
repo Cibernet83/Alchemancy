@@ -101,13 +101,13 @@ public class RotatingProperty extends Property {
 
 	@Override
 	public void onRightClickEntity(PlayerInteractEvent.EntityInteract event) {
-
-		rotateEntity(event.getTarget());
+		//FIXME
+		//rotateEntity(event.getTarget());
 	}
 
 	@Override
 	public void onActivation(@Nullable Entity source, Entity target, ItemStack stack, DamageSource damageSource) {
-		rotateEntity(target);
+		//rotateEntity(target);
 	}
 
 	private void rotateEntity(Entity target) {
