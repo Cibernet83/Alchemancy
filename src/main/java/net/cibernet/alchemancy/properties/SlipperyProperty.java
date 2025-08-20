@@ -25,13 +25,15 @@ public class SlipperyProperty extends Property
 	{
 		if(user instanceof Player player)
 		{
-			player.drop(weapon, true);
-			player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+			player.drop(weapon.copy(), true);
+			weapon.setCount(0);
+			//player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
 		}
 		else if (user instanceof LivingEntity entity)
 		{
-			HollowProperty.nonPlayerDrop(user, weapon, false, true);
-			entity.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+			HollowProperty.nonPlayerDrop(user, weapon.copy(), false, true);
+			weapon.setCount(0);
+			//entity.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
 		}
 	}
 
