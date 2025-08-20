@@ -93,8 +93,8 @@ public class SparklingProperty extends Property implements IDataHolder<Holder<Pr
 		put(AlchemancyProperties.ROCKET_POWERED, AlchemancyParticles.WARHAMMER_FLAME::get);
 
 		put(AlchemancyProperties.SWIFT, () -> MobEffects.MOVEMENT_SPEED.value().createParticleOptions(new MobEffectInstance(MobEffects.MOVEMENT_SPEED)));
-		put(AlchemancyProperties.SLUGGISH, () -> MobEffects.MOVEMENT_SPEED.value().createParticleOptions(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN)));
-		put(AlchemancyProperties.POISONOUS, () -> MobEffects.MOVEMENT_SPEED.value().createParticleOptions(new MobEffectInstance(MobEffects.POISON)));
+		put(AlchemancyProperties.SLUGGISH, () -> MobEffects.MOVEMENT_SLOWDOWN.value().createParticleOptions(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN)));
+		put(AlchemancyProperties.POISONOUS, () -> MobEffects.POISON.value().createParticleOptions(new MobEffectInstance(MobEffects.POISON)));
 		put(AlchemancyProperties.DECAYING, () -> MobEffects.WITHER.value().createParticleOptions(new MobEffectInstance(MobEffects.WITHER)));
 		put(AlchemancyProperties.TIPSY, () -> MobEffects.CONFUSION.value().createParticleOptions(new MobEffectInstance(MobEffects.CONFUSION)));
 
