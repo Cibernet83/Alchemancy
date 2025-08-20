@@ -15,6 +15,7 @@ import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.registries.AlchemancyItems;
 import net.cibernet.alchemancy.registries.AlchemancyProperties;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
+import net.cibernet.alchemancy.util.SortOrder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -43,7 +44,7 @@ public class InfusionCodexSaveData {
 	private static int maxRecencyIndex = 0;
 	private static int minRecencyIndex = 0;
 	private static int currentUnlockIndex = 0;
-	private static InfusionCodexIndexScreen.SortOrder sortOrder = InfusionCodexIndexScreen.SortOrder.ALPHABETICAL;
+	private static SortOrder sortOrder = SortOrder.ALPHABETICAL;
 
 	private static boolean dirty;
 
@@ -54,7 +55,7 @@ public class InfusionCodexSaveData {
 			Codec.BOOL.optionalFieldOf("nerd_mode").forGetter(data -> java.util.Optional.of(unlockEverything)),
 			Codec.unboundedMap(ResourceLocation.CODEC, EntryData.CODEC).fieldOf("unlocked_infusions").forGetter(data -> UNLOCKED_INFUSIONS),
 			Codec.list(ResourceLocation.CODEC).fieldOf("discovered_items").forGetter(data -> DISCOVERED_ITEMS),
-			InfusionCodexIndexScreen.SortOrder.CODEC.optionalFieldOf("sort_order", InfusionCodexIndexScreen.SortOrder.ALPHABETICAL).forGetter(data -> sortOrder)
+			SortOrder.CODEC.optionalFieldOf("sort_order", SortOrder.ALPHABETICAL).forGetter(data -> sortOrder)
 	).apply(instance, (nerdMode, unlockedInfusions, discoveredItems, order) -> {
 
 		sortOrder = order;
@@ -91,7 +92,7 @@ public class InfusionCodexSaveData {
 			}
 		} else new File(Alchemancy.MODID).mkdirs();
 
-		JsonElement sortOrderJson = InfusionCodexIndexScreen.SortOrder.CODEC.encodeStart(JsonOps.INSTANCE, sortOrder).getOrThrow();
+		JsonElement sortOrderJson = SortOrder.CODEC.encodeStart(JsonOps.INSTANCE, sortOrder).getOrThrow();
 		json.add("sort_order", sortOrderJson);
 
 		new File(Alchemancy.MODID).mkdirs();
@@ -142,11 +143,11 @@ public class InfusionCodexSaveData {
 		return BuiltInRegistries.ITEM.getKey(stack.getItem());
 	}
 
-	public static InfusionCodexIndexScreen.SortOrder getSortOrder() {
+	public static SortOrder getSortOrder() {
 		return sortOrder;
 	}
 
-	public static void setSortOrder(InfusionCodexIndexScreen.SortOrder sortOrder) {
+	public static void setSortOrder(SortOrder sortOrder) {
 		InfusionCodexSaveData.sortOrder = sortOrder;
 		saveSortOrder();
 	}

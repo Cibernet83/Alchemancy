@@ -10,6 +10,7 @@ import net.cibernet.alchemancy.properties.Property;
 import net.cibernet.alchemancy.properties.special.InfusionCodexProperty;
 import net.cibernet.alchemancy.registries.AlchemancyTags;
 import net.cibernet.alchemancy.util.PropertyFunction;
+import net.cibernet.alchemancy.util.SortOrder;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -150,7 +151,8 @@ public class InfusionCodexIndexScreen extends Screen {
 
 		var scroll = propertyList == null ? 0 : propertyList.getScrollAmount();
 
-		removeWidget(propertyList);
+		if(propertyList != null)
+			removeWidget(propertyList);
 		this.propertyList = new PropertyList(minecraft);
 		propertyList.setScrollAmount(scroll);
 
@@ -168,36 +170,6 @@ public class InfusionCodexIndexScreen extends Screen {
 		if (tooltip != null) {
 			guiGraphics.renderTooltip(font, tooltip, mouseX, mouseY);
 			tooltip = null;
-		}
-	}
-
-	public enum SortOrder implements StringRepresentable {
-		ALPHABETICAL("alphabetical", (o1, o2) -> 0),
-		RECENCY("recency", Comparator.comparingInt(InfusionCodexSaveData::getRecencyIndex)),
-		UNLOCK("unlock", Comparator.comparingInt(InfusionCodexSaveData::getUnlockIndex)),
-		;
-		final String name;
-		final Component buttonLabel;
-		final Tooltip tooltip;
-		final Comparator<Holder<Property>> sortFunction;
-
-
-		public static final StringRepresentable.EnumCodec<SortOrder> CODEC = StringRepresentable.fromEnum(SortOrder::values);
-
-		SortOrder(String name, Component buttonLabel, Component tooltip, Comparator<Holder<Property>> sortFunction) {
-			this.name = name;
-			this.buttonLabel = buttonLabel;
-			this.tooltip = Tooltip.create(Component.translatable("screen.infusion_codex.sort_order", tooltip));
-			this.sortFunction = sortFunction;
-		}
-
-		SortOrder(String key, Comparator<Holder<Property>> sortFunction) {
-			this(key, Component.translatable("screen.infusion_codex.sort_button." + key), Component.translatable("screen.infusion_codex.sort_order." + key), sortFunction);
-		}
-
-		@Override
-		public String getSerializedName() {
-			return name;
 		}
 	}
 
