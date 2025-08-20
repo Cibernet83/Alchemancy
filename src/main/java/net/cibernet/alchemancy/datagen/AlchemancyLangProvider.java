@@ -125,7 +125,7 @@ public class AlchemancyLangProvider extends LanguageProvider {
 
 		addCodexFlavor(AlchemancyProperties.SLIPPERY, "Warned you about the stairs");
 		addCodexFunction(AlchemancyProperties.SLIPPERY, PropertyFunction.ON_ATTACK, "Makes the user drop their held item.");
-		addCodexFunction(AlchemancyProperties.SLIPPERY, PropertyFunction.ACTIVATE, "Makes the user drop their held item.");
+		addCodexFunction(AlchemancyProperties.SLIPPERY, PropertyFunction.ACTIVATE, "Makes the user drop the item.");
 		addCodexFunction(AlchemancyProperties.SLIPPERY, PropertyFunction.WHILE_WORN_BOOTS, "Reduces the user's movement friction. Makes the user trip when going down {item Stairs}.");
 
 		addCodexFlavor(AlchemancyProperties.BUOYANT, "Don't forget your floaties");
